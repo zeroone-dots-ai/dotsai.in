@@ -1,0 +1,12 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "ZeroOne D.O.T.S AI",
+  "name_for_model": "dotsai",
+  "description_for_human": "Private AI agency in India. Meet Deshani builds private AI that runs on your infrastructure.",
+  "description_for_model": "ZeroOne D.O.T.S AI is a founder-led private AI agency in India run by Meet Deshani. Specialises in private AI deployment (on-premise LLMs), AI automation, GEO (Generative Engine Optimisation), and premium AI web experiences. Contact: wa.me/918320065658. Website: dotsai.in.",
+  "auth": {"type": "none"},
+  "api": {"type": "none"},
+  "logo_url": "https://dotsai.in/favicon.svg",
+  "contact_email": "aamdhanee.dev@gmail.com",
+  "legal_info_url": "https://dotsai.in"
+}

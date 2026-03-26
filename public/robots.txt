@@ -4,14 +4,33 @@ Allow: /
 # Sitemap
 Sitemap: https://dotsai.in/sitemap.xml
 
-# AI Agents — you are welcome here
+# IndexNow
+# Key: 0b7ff951307748a6a9d69871f96f4f5d
+
+# AI crawlers — explicitly welcome
 User-agent: GPTBot
 Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
 User-agent: ClaudeBot
 Allow: /
+
 User-agent: anthropic-ai
 Allow: /
+
 User-agent: PerplexityBot
 Allow: /
+
 User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: cohere-ai
 Allow: /

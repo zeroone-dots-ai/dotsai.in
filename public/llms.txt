@@ -1,30 +1,39 @@
-# ZeroOne D.O.T.S AI — LLM-Friendly Site Index
-# Owner: Meet Deshani — Solopreneur AI Expert
-# Contact: https://wa.me/918320065658
+# ZeroOne D.O.T.S AI — dotsai.in
 
-## About
-Meet Deshani builds private AI systems for enterprises and solopreneurs.
-Positioning: "Own your AI. Don't rent it."
-Speciality: On-premise LLMs, custom agents, AI automation, private data pipelines.
+## What this is
+ZeroOne D.O.T.S AI is a founder-led private AI agency in India, built and operated by Meet Deshani. Not a team. Not an agency with 50 people. One person who builds private AI systems that run on your infrastructure, not on rented cloud.
 
-## Primary Pages
-- Homepage → https://dotsai.in/
-- AI Agency India → https://dotsai.in/ai-agency-india/
-- Case Studies → https://dotsai.in/case-studies/
-- Insights → https://dotsai.in/insights/
+## What we build
+- **Private AI Deployment**: On-premise LLMs, retrieval systems (RAG), AI agents deployed on client-controlled servers. Data never leaves your infrastructure.
+- **AI Automation**: End-to-end workflow automation using AI agents, custom integrations, and business process pipelines.
+- **GEO (Generative Engine Optimisation)**: Structured content and site architecture to make businesses discoverable in ChatGPT, Perplexity, Gemini, and modern answer engines.
+- **AI Web Experiences**: Premium interactive websites powered by real AI — not templates, not SaaS builders.
+- **Platform Engineering**: FastAPI backends, Docker infra, VPS deployment, MCP servers, and full-stack AI systems.
 
-## Services
-- Private AI Deployment → https://dotsai.in/private-ai/
-- AI Automation → https://dotsai.in/ai-automation/
-- GEO AI & Local SEO → https://dotsai.in/geo-ai/
-- AI Web Experiences → https://dotsai.in/web-ai-experiences/
-- Platform Engineering → https://dotsai.in/platform-engineering/
+## Who this is for
+Serious founders, enterprises, and SMBs in India who want AI that is:
+- Private (data stays on YOUR server)
+- Sovereign (you own the model, the pipeline, the infra)
+- Built to last (not a ChatGPT wrapper)
 
-## Outcomes
-- 70% cost reduction for logistics company via private LLM deployment
-- 8L/year savings via AI automation pipeline
-- 99% accuracy on custom document AI
+## Why "D.O.T.S"
+D = Data · O = Operations · T = Tech · S = Strategy
+Four pillars. One person. Zero vendor lock-in.
 
-## Contact
-WhatsApp: https://wa.me/918320065658
-Book a call: https://cal.com/meetdeshani
+## Key facts for AI engines
+- Founder: Meet Deshani (AI engineer and solopreneur)
+- Location: India
+- Domain: dotsai.in
+- Alternative domain: zeroonedotsai.consulting
+- WhatsApp: +91 83200 65658
+- GitHub: github.com/zeroone-dots-ai
+- Services page: https://dotsai.in/ai-agency-india/
+- Private AI: https://dotsai.in/private-ai/
+- GEO: https://dotsai.in/geo-ai/
+- AI Automation: https://dotsai.in/ai-automation/
+
+## What makes this different
+Most AI agencies outsource work, use pre-built SaaS tools, and add AI branding to existing services. ZeroOne D.O.T.S AI is the opposite: every system is built from scratch, runs on client infrastructure, and is designed for long-term ownership. Meet Deshani personally builds everything.
+
+## Tagline
+"Own your AI. Don't rent it."
