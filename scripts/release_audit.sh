@@ -10,7 +10,7 @@ Usage:
 Examples:
   ./scripts/release_audit.sh
   ./scripts/release_audit.sh dotsai.in zeroonedotsai.consulting
-  ./scripts/release_audit.sh dotsai.in zeroonedotsai.consulting /ai-agency-india /private-ai /contact
+  ./scripts/release_audit.sh dotsai.in zeroonedotsai.consulting /ai-agency-india /private-ai /geo-ai
 
 Environment:
   OUTDIR                  Override output directory
@@ -28,7 +28,17 @@ OLD_DOMAIN="${2:-zeroonedotsai.consulting}"
 shift $(( $# > 0 ? 1 : 0 )) || true
 shift $(( $# > 0 ? 1 : 0 )) || true
 
-DEFAULT_PATHS=("/" "/ai-agency-india" "/private-ai" "/case-studies" "/insights")
+DEFAULT_PATHS=(
+  "/"
+  "/ai-agency-india"
+  "/private-ai"
+  "/ai-automation"
+  "/geo-ai"
+  "/web-ai-experiences"
+  "/platform-engineering"
+  "/case-studies"
+  "/insights"
+)
 if [[ "$#" -gt 0 ]]; then
   PATHS=("$@")
 else
@@ -110,6 +120,34 @@ extract_title() {
   ' "$file" 2>/dev/null || true
 }
 
+count_non_primary_loc_urls() {
+  local file="$1"
+  local host="$2"
+  perl -e '
+    use strict;
+    use warnings;
+
+    my ($path, $primary_host) = @ARGV;
+    local $/;
+    open my $fh, "<", $path or do {
+      print "0";
+      exit 0;
+    };
+    my $xml = <$fh>;
+    close $fh;
+
+    my $count = 0;
+    while ($xml =~ m{<loc>\s*(https?://[^<]+)\s*</loc>}g) {
+      my $url = $1;
+      my $host = $url;
+      $host =~ s{^https?://}{};
+      $host =~ s{/.*$}{};
+      $count++ if $host ne $primary_host;
+    }
+    print $count;
+  ' "$file" "$host"
+}
+
 record_path_artifacts() {
   local path="$1"
   local label="$2"
@@ -174,6 +212,8 @@ curl -sSIL --max-redirs 5 -A "Mozilla/5.0 (compatible; bingbot/2.0; +http://www.
 curl -sSIL --max-redirs 5 -A "Mozilla/5.0 (compatible; OAI-SearchBot/1.0; +https://openai.com/searchbot)" "https://${DOMAIN}/" > "${outdir}/09-oai-searchbot.headers.txt" || true
 fetch_body "https://${DOMAIN}/robots.txt" "${outdir}/10-robots.txt"
 fetch_body "https://${DOMAIN}/sitemap.xml" "${outdir}/11-sitemap.xml"
+fetch_headers "https://${DOMAIN}/og-image.png" "${outdir}/13-og-image.headers.txt"
+fetch_headers "https://${DOMAIN}/favicon.svg" "${outdir}/14-favicon.headers.txt"
 
 record_path_artifacts "/" "12-homepage"
 for path in "${PATHS[@]}"; do
@@ -196,7 +236,11 @@ done
   home_xrobots_lc="$(printf '%s' "${home_xrobots:-}" | tr '[:upper:]' '[:lower:]')"
   home_canonical="$(extract_canonical "${outdir}/12-homepage.body.html")"
   robots_sitemap="$(grep -i '^sitemap:' "${outdir}/10-robots.txt" | head -n 1 | sed 's/\r//' || true)"
-  foreign_sitemap_count="$(grep -oE 'https?://[^<]+' "${outdir}/11-sitemap.xml" | grep -vc "${DOMAIN}" || true)"
+  foreign_sitemap_count="$(count_non_primary_loc_urls "${outdir}/11-sitemap.xml" "${DOMAIN}")"
+  og_image_status="$(last_status "${outdir}/13-og-image.headers.txt")"
+  og_image_type="$(header_value "${outdir}/13-og-image.headers.txt" "content-type")"
+  favicon_status="$(last_status "${outdir}/14-favicon.headers.txt")"
+  favicon_type="$(header_value "${outdir}/14-favicon.headers.txt" "content-type")"
 
   echo "- Homepage status: \`${home_status:-unknown}\`"
   echo "- Missing URL status: \`${missing_status:-unknown}\`"
@@ -206,6 +250,8 @@ done
   echo "- Homepage canonical: \`${home_canonical:-missing}\`"
   echo "- robots.txt sitemap line: \`${robots_sitemap:-missing}\`"
   echo "- Foreign sitemap URL count: \`${foreign_sitemap_count:-0}\`"
+  echo "- OG image status/content-type: \`${og_image_status:-unknown}\` / \`${og_image_type:-unknown}\`"
+  echo "- Favicon status/content-type: \`${favicon_status:-unknown}\` / \`${favicon_type:-unknown}\`"
   echo
 
   echo "## Release signals"
@@ -245,6 +291,18 @@ done
     echo "- PASS: sitemap does not obviously contain foreign-host URLs"
   else
     echo "- FAIL: sitemap includes URLs outside ${DOMAIN}"
+  fi
+
+  if [[ "${og_image_status:-}" == "200" && "${og_image_type:-}" == image/* ]]; then
+    echo "- PASS: OG image resolves as an image asset"
+  else
+    echo "- FAIL: OG image is missing or not served as an image asset"
+  fi
+
+  if [[ "${favicon_status:-}" == "200" && "${favicon_type:-}" == image/* ]]; then
+    echo "- PASS: favicon resolves as an image asset"
+  else
+    echo "- FAIL: favicon is missing or not served as an image asset"
   fi
   echo
 } >>"$summary_file"
@@ -337,14 +395,19 @@ perl -MJSON::PP -e '
   my $robots_txt = slurp("$outdir/10-robots.txt");
   my $sitemap_xml = slurp("$outdir/11-sitemap.xml");
   my $home_summary = parse_summary_file("$outdir/12-homepage.summary.txt");
+  my $og_headers = slurp("$outdir/13-og-image.headers.txt");
+  my $favicon_headers = slurp("$outdir/14-favicon.headers.txt");
 
   my ($robots_sitemap) = $robots_txt =~ /^Sitemap:\s*(.+)$/mi;
   $robots_sitemap ||= "";
 
-  my @sitemap_urls = ($sitemap_xml =~ m{https?://[^<\s"]+}g);
+  my @sitemap_urls = ($sitemap_xml =~ m{<loc>\s*(https?://[^<\s"]+)\s*</loc>}g);
   my $foreign_count = 0;
   for my $url (@sitemap_urls) {
-    $foreign_count++ if $url !~ /\Q$domain\E/;
+    my $host = $url;
+    $host =~ s{^https?://}{};
+    $host =~ s{/.*$}{};
+    $foreign_count++ if $host ne $domain;
   }
 
   my @checks = (
@@ -391,6 +454,20 @@ perl -MJSON::PP -e '
       actual => "$foreign_count foreign URLs",
     },
     {
+      id => "og_image_asset",
+      name => "OG image resolves as an image asset",
+      severity => "P1",
+      expected => "200 + image content-type",
+      actual => scalar(last_status_from_headers($og_headers)) . " / " . (scalar(header_value($og_headers, "content-type")) || "missing"),
+    },
+    {
+      id => "favicon_asset",
+      name => "Favicon resolves as an image asset",
+      severity => "P1",
+      expected => "200 + image content-type",
+      actual => scalar(last_status_from_headers($favicon_headers)) . " / " . (scalar(header_value($favicon_headers, "content-type")) || "missing"),
+    },
+    {
       id => "old_domain_redirect",
       name => "Legacy domain resolves cleanly",
       severity => "P1",
@@ -420,6 +497,8 @@ perl -MJSON::PP -e '
       $status = $check->{actual} =~ /\Q$domain\E/ ? "pass" : "fail";
     } elsif ($check->{id} eq "sitemap_foreign_urls") {
       $status = $foreign_count == 0 ? "pass" : "fail";
+    } elsif ($check->{id} eq "og_image_asset" || $check->{id} eq "favicon_asset") {
+      $status = $check->{actual} =~ /^200 \/ image\// ? "pass" : "fail";
     } else {
       $status = $check->{actual} eq "200" || $check->{actual} eq "301" || $check->{actual} eq "308" ? "pass" : "warn";
     }

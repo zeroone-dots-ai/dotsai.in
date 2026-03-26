@@ -1,13 +1,12 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useCallback, type CSSProperties, type ReactNode } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplashIntro from "@/app/components/SplashIntro";
 import Nav from "@/app/components/Nav";
-import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,12 +17,13 @@ const QuantumCursor      = dynamic(() => import("@/app/components/QuantumCursor"
 
 /* ─── Magnetic Button ─── */
 function MagneticButton({
-  children, href, className, external = false,
+  children, href, className, external = false, style,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   href: string;
   className?: string;
   external?: boolean;
+  style?: CSSProperties;
 }) {
   const ref = useRef<HTMLAnchorElement>(null);
   const onMove = (e: React.MouseEvent) => {
@@ -39,6 +39,7 @@ function MagneticButton({
   return (
     <a
       ref={ref} href={href} className={`magnetic ${className ?? ""}`}
+      style={style}
       onMouseMove={onMove} onMouseLeave={onLeave}
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
     >
@@ -71,7 +72,7 @@ const SERVICES = [
     headline: "Your LLM. Your server. Your rules.",
     body: "I deploy open-source LLMs (Llama, Mistral, Gemma) directly on your infrastructure. Air-gapped, sovereign, zero data leakage. Your proprietary data trains your model — not OpenAI's next version.",
     color: "#D7CFF0",
-    href: "https://private.dotsai.in",
+    href: "/private-ai/",
   },
   {
     tag: "02", pillar: "O — Operations",
@@ -79,7 +80,7 @@ const SERVICES = [
     headline: "Agents that work while you sleep.",
     body: "Custom AI agents for your exact workflow — sales, compliance, customer ops, finance. Each agent has memory, tools, and escalation logic. Built on your stack, owned by you forever.",
     color: "#C9DED4",
-    href: "https://wa.me/918320065658",
+    href: "/ai-automation/",
   },
   {
     tag: "03", pillar: "T — Tech",
@@ -87,7 +88,7 @@ const SERVICES = [
     headline: "Full-stack web products built with AI inside.",
     body: "Not just a website — an intelligent system. AI-powered search, recommendations, dynamic content. Built fast with Next.js + AI. Deployed on your VPS or mine.",
     color: "#F1C6AE",
-    href: "https://web.dotsai.in",
+    href: "/web-ai-experiences/",
   },
   {
     tag: "04", pillar: "S — Strategy",
@@ -95,7 +96,7 @@ const SERVICES = [
     headline: "Be the answer AI gives your customers.",
     body: "Generative Engine Optimization — getting Claude, ChatGPT, and Perplexity to recommend your business. Structured data, llms.txt, AI-cited content architecture. The SEO of 2025.",
     color: "#BFD6EC",
-    href: "https://geo.dotsai.in",
+    href: "/geo-ai/",
   },
 ];
 
@@ -302,9 +303,8 @@ export default function Home() {
                     <p className="text-white/40 text-sm leading-relaxed mb-8">{s.body}</p>
                     <MagneticButton
                       href={s.href}
-                      external
                       className="service-link inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-medium border transition-all hover:bg-white/[0.05]"
-                      style={{ borderColor: s.color + "40", color: s.color } as React.CSSProperties}
+                      style={{ borderColor: s.color + "40", color: s.color }}
                     >
                       Explore → {s.title}
                     </MagneticButton>
@@ -313,7 +313,7 @@ export default function Home() {
                   {/* Visual card */}
                   <div
                     className={`glass rounded-2xl p-8 aspect-square max-w-sm mx-auto w-full flex items-center justify-center ${i % 2 === 1 ? "md:col-start-1 md:row-start-1" : ""}`}
-                    style={{ borderColor: s.color + "20" } as React.CSSProperties}
+                    style={{ borderColor: s.color + "20" }}
                   >
                     <div className="text-center">
                       <div className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center"
