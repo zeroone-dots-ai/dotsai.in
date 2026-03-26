@@ -1,0 +1,11 @@
+## DNS
+
+```text
+A/AAAA for dotsai.in:
+72.62.229.16
+
+A/AAAA for www.dotsai.in:
+dotsai.in.
+72.62.229.16
+```
+

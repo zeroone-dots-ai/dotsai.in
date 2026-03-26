@@ -1,0 +1,33 @@
+<svg id="logo-circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="200" height="200" style="border: 1px solid #2A2A3C; border-radius: 50%;">
+    <defs>
+      <clipPath id="circle-clip">
+        <circle cx="200" cy="200" r="200"/>
+      </clipPath>
+      <radialGradient id="circ-glow" cx="50%" cy="40%" r="60%">
+        <stop offset="0%" stop-color="#2D1B4E" stop-opacity="0.4"/>
+        <stop offset="100%" stop-color="#191924" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <g clip-path="url(#circle-clip)">
+      <rect width="400" height="400" fill="#191924"/>
+      <rect width="400" height="400" fill="url(#circ-glow)"/>
+      <!-- 3x3 Dot Matrix (centered, tight) -->
+      <circle cx="150" cy="140" r="28" fill="#C8B6FF"/>
+      <circle cx="200" cy="140" r="28" fill="rgba(255,255,255,0.08)"/>
+      <circle cx="250" cy="140" r="28" fill="rgba(255,255,255,0.08)"/>
+      <circle cx="150" cy="190" r="28" fill="rgba(255,255,255,0.08)"/>
+      <circle cx="200" cy="190" r="28" fill="#B8E0D2"/>
+      <circle cx="250" cy="190" r="28" fill="rgba(255,255,255,0.08)"/>
+      <circle cx="150" cy="240" r="28" fill="rgba(255,255,255,0.08)"/>
+      <circle cx="200" cy="240" r="28" fill="rgba(255,255,255,0.08)"/>
+      <circle cx="250" cy="240" r="28" fill="#FFCDB2"/>
+      <!-- Wordmark -->
+      <text x="200" y="310" text-anchor="middle" font-family="'Space Mono', 'Courier New', monospace" font-weight="700" font-size="30" letter-spacing="3" fill="#FFFFFF">ZEROONE</text>
+      <text x="200" y="345" text-anchor="middle" font-family="'Space Mono', 'Courier New', monospace" font-weight="700" font-size="20" letter-spacing="2">
+        <tspan fill="#C8B6FF">D</tspan><tspan fill="rgba(255,255,255,0.25)">·</tspan><tspan fill="#B8E0D2">O</tspan><tspan fill="rgba(255,255,255,0.25)">·</tspan><tspan fill="#FFCDB2">T</tspan><tspan fill="rgba(255,255,255,0.25)">·</tspan><tspan fill="#A2D2FF">S</tspan>
+        <tspan fill="#FFFFFF" dx="6">AI</tspan>
+      </text>
+    </g>
+    <!-- Visible circle border -->
+    <circle cx="200" cy="200" r="198" fill="none" stroke="#2A2A3C" stroke-width="2"/>
+  </svg>

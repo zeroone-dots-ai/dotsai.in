@@ -1,0 +1,3108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/favicon.svg">
+<title>ZeroOne D.O.T.S AI — Private AI Built for You | Meet Deshani</title>
+<meta name="description" content="Meet Deshani builds private AI for enterprises and solopreneurs. On-premise LLMs, custom agents, AI automation. Own your AI. Don't rent it.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:title" content="ZeroOne D.O.T.S AI — Private AI Built for You">
+<meta property="og:description" content="Meet Deshani builds private AI systems for enterprises and solopreneurs. Own your AI. Don't rent it.">
+<meta property="og:url" content="https://dotsai.in">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://dotsai.in/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ZeroOne D.O.T.S AI — Private AI Built for You">
+<meta name="twitter:description" content="Own your AI. Don't rent it. Meet Deshani builds private AI on your infrastructure.">
+<link rel="canonical" href="https://dotsai.in">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Meet Deshani",
+  "jobTitle": "AI Engineer & Solopreneur",
+  "description": "I build private AI for enterprises and solopreneurs. On-premise LLMs, custom agents, AI automation.",
+  "url": "https://dotsai.in",
+  "sameAs": ["https://zeroonedotsai.consulting"],
+  "worksFor": {
+    "@type": "Organization",
+    "name": "ZeroOne D.O.T.S AI",
+    "url": "https://dotsai.in"
+  },
+  "offers": [
+    {"@type": "Offer", "name": "Private AI Deployment", "url": "https://private.dotsai.in"},
+    {"@type": "Offer", "name": "AI Web Presence", "url": "https://web.dotsai.in"},
+    {"@type": "Offer", "name": "GEO AI", "url": "https://geo.dotsai.in"},
+    {"@type": "Offer", "name": "Infinity Platform", "url": "https://platform.dotsai.in"}
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<style>
+/* ───────────────────────────────────────────────
+   CSS CUSTOM PROPERTIES — Brand System
+─────────────────────────────────────────────── */
+:root {
+  --bg:           #FDFCFA;
+  --paper:        #F7F3ED;
+  --bone:         #ECE5DB;
+  --ink:          #171722;
+  --smoke:        #6E675F;
+  --plum:         #43305F;
+  --lavender:     #D7CFF0;
+  --gold:         #B28743;
+  --hero-bg:      #06060a;
+  --dots-data:    #C8B6FF;
+  --dots-ops:     #B8E0D2;
+  --dots-tech:    #FFCDB2;
+  --dots-strategy:#A2D2FF;
+  --hero-dark-start: #171722;
+  --hero-dark-mid:   #241D33;
+}
+
+/* ───────────────────────────────────────────────
+   RESET & BASE
+─────────────────────────────────────────────── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body.splash-active {
+  overflow: hidden;
+}
+
+/* Film grain overlay for entire page */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* ───────────────────────────────────────────────
+   SPLASH OVERLAY
+─────────────────────────────────────────────── */
+#splash-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #06060a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  transition: opacity 0.8s ease;
+}
+
+#splash-overlay.hiding {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Splash skip button */
+#splash-skip {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 10000;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.35);
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  padding: 7px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+#splash-skip:hover { color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.25); }
+
+/* Splash galaxy canvas */
+#s-galaxy { position: absolute; inset: 0; z-index: 1; display: none; }
+
+/* Splash scan line */
+#s-scanline {
+  position: absolute;
+  width: 2px; height: 100%;
+  background: linear-gradient(180deg, transparent 0%, rgba(200,182,255,0.6) 50%, transparent 100%);
+  left: -10px; top: 0;
+  pointer-events: none;
+  opacity: 0; z-index: 10;
+  box-shadow: 0 0 20px 4px rgba(200,182,255,0.3);
+  display: none;
+}
+
+/* Splash glow bg */
+.s-glow-bg {
+  position: absolute;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(67,48,95,0.5) 0%, transparent 70%);
+  pointer-events: none; opacity: 0; z-index: 1;
+  display: none;
+}
+
+/* Splash orbit rings */
+.s-orbit-ring {
+  position: absolute; border-radius: 50%;
+  border: 1px solid rgba(200,182,255,0.0);
+  pointer-events: none; display: none;
+}
+.s-ring-1 { width: 120px; height: 120px; }
+.s-ring-2 { width: 180px; height: 180px; }
+
+/* Splash brackets */
+.s-bracket { position: absolute; width: 16px; height: 16px; opacity: 0; display: none; }
+.s-bracket.tl { top: -8px; left: -8px;
+  border-top: 1px solid rgba(200,182,255,0.4);
+  border-left: 1px solid rgba(200,182,255,0.4); }
+.s-bracket.tr { top: -8px; right: -8px;
+  border-top: 1px solid rgba(200,182,255,0.4);
+  border-right: 1px solid rgba(200,182,255,0.4); }
+.s-bracket.bl { bottom: -8px; left: -8px;
+  border-bottom: 1px solid rgba(200,182,255,0.4);
+  border-left: 1px solid rgba(200,182,255,0.4); }
+.s-bracket.br { bottom: -8px; right: -8px;
+  border-bottom: 1px solid rgba(200,182,255,0.4);
+  border-right: 1px solid rgba(200,182,255,0.4); }
+
+/* Splash divider */
+.s-divider {
+  width: 0px; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+  display: none;
+}
+
+/* Splash content */
+.s-content {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 32px;
+}
+
+/* Splash logo wrap */
+.s-logo-wrap {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 28px;
+  position: relative; z-index: 2;
+}
+
+/* Splash dot grid */
+.s-dot-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.s-dot {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  opacity: 0; transform: scale(0);
+  position: relative;
+}
+.s-dot.ghost { background: rgba(255,255,255,0.07); }
+.s-dot[data-key="D"] { background: #C8B6FF; }
+.s-dot[data-key="O"] { background: #B8E0D2; }
+.s-dot[data-key="T"] { background: #FFCDB2; }
+
+.s-dot::after {
+  content: '';
+  position: absolute; inset: -6px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  opacity: 0; transform: scale(0.6);
+}
+.s-dot[data-key="D"]::after { color: #C8B6FF; }
+.s-dot[data-key="O"]::after { color: #B8E0D2; }
+.s-dot[data-key="T"]::after { color: #FFCDB2; }
+
+/* Splash wordmark */
+.s-wordmark {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 7px;
+  opacity: 0;
+}
+.s-brand-name {
+  font-family: 'Space Mono', monospace;
+  font-size: 22px; font-weight: 700;
+  letter-spacing: 0.18em; color: #fff;
+  opacity: 0; transform: scale(0.9);
+  text-shadow: 0 0 40px rgba(200,182,255,0.4);
+  overflow: hidden; white-space: nowrap;
+}
+.s-brand-name .s-char { display: inline-block; opacity: 0; transform: translateY(-10px); }
+
+.s-brand-sub {
+  font-family: 'Space Mono', monospace;
+  font-size: 16px; font-weight: 700;
+  letter-spacing: 0.12em;
+  display: flex; gap: 1px; align-items: baseline;
+}
+.s-brand-sub span { display: inline-block; opacity: 0; }
+.s-cd { color: #C8B6FF; } .s-co { color: #B8E0D2; }
+.s-ct { color: #FFCDB2; } .s-cs { color: #A2D2FF; }
+.s-csep { color: rgba(255,255,255,0.2); }
+.s-cai { color: rgba(255,255,255,0.9); margin-left: 10px; }
+
+.s-tagline {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  opacity: 0;
+}
+
+/* ───────────────────────────────────────────────
+   MAIN PAGE (hidden until splash done)
+─────────────────────────────────────────────── */
+#main-page {
+  opacity: 0;
+  transition: opacity 0.6s ease 0.2s;
+}
+#main-page.visible {
+  opacity: 1;
+}
+
+/* ───────────────────────────────────────────────
+   NAV
+─────────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 20px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  mix-blend-mode: normal;
+}
+
+nav.dark {
+  /* on hero section */
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.nav-dot-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+
+.nav-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+}
+.nav-dot.ghost { background: rgba(255,255,255,0.15); }
+.nav-dot.data  { background: #C8B6FF; }
+.nav-dot.ops   { background: #B8E0D2; }
+.nav-dot.tech  { background: #FFCDB2; }
+
+.nav-logo-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.9);
+}
+
+.nav-cta {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  padding: 8px 20px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+.nav-cta:hover {
+  color: #fff;
+  border-color: rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.05);
+}
+
+/* ───────────────────────────────────────────────
+   SECTION 1: HERO
+─────────────────────────────────────────────── */
+#hero {
+  min-height: 100vh;
+  background: var(--hero-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 120px 48px 80px;
+}
+
+/* Subtle radial glow behind text */
+#hero::before {
+  content: '';
+  position: absolute;
+  top: 30%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px; height: 400px;
+  background: radial-gradient(ellipse, rgba(67,48,95,0.35) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-content {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+}
+
+.hero-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(200,182,255,0.5);
+  margin-bottom: 32px;
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.hero-h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(64px, 10vw, 120px);
+  font-weight: 400;
+  line-height: 1.0;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: 28px;
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.hero-h1 em {
+  font-style: italic;
+  color: var(--lavender);
+}
+
+.hero-sub {
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(16px, 2vw, 19px);
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.45);
+  max-width: 560px;
+  margin: 0 auto 48px;
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  background: #fff;
+  padding: 14px 28px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.25s;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary:hover {
+  background: var(--lavender);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: rgba(255,255,255,0.75);
+  background: transparent;
+  padding: 14px 28px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.25s;
+  border: 1px solid rgba(255,255,255,0.15);
+  cursor: pointer;
+}
+.btn-secondary:hover {
+  color: #fff;
+  border-color: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.05);
+  transform: translateY(-1px);
+}
+
+/* Hero dot grid logo at bottom */
+.hero-logo-bottom {
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+}
+
+.hero-dot-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+.hero-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+}
+.hero-dot.ghost { background: rgba(255,255,255,0.08); }
+.hero-dot.data  { background: #C8B6FF; box-shadow: 0 0 6px 2px rgba(200,182,255,0.4); }
+.hero-dot.ops   { background: #B8E0D2; box-shadow: 0 0 6px 2px rgba(184,224,210,0.4); }
+.hero-dot.tech  { background: #FFCDB2; box-shadow: 0 0 6px 2px rgba(255,205,178,0.4); }
+
+.hero-logo-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.15);
+  text-transform: uppercase;
+}
+
+/* Scroll hint */
+.scroll-hint {
+  position: absolute;
+  bottom: 44px;
+  right: 48px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+}
+.scroll-hint-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.3), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+.scroll-hint-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.2);
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+/* ───────────────────────────────────────────────
+   SECTION 2: MANIFESTO
+─────────────────────────────────────────────── */
+#manifesto {
+  background: var(--paper);
+  padding: clamp(80px, 12vw, 160px) clamp(24px, 6vw, 120px);
+  position: relative;
+  overflow: hidden;
+}
+
+#manifesto::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--bone), transparent);
+}
+
+.manifesto-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.manifesto-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--smoke);
+  opacity: 0.6;
+  margin-bottom: 56px;
+}
+
+.manifesto-text {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(32px, 5.5vw, 68px);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.manifesto-word {
+  display: inline;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.manifesto-word.yours {
+  color: var(--plum);
+  font-style: italic;
+}
+
+.manifesto-word.highlight {
+  color: var(--plum);
+}
+
+/* ───────────────────────────────────────────────
+   SECTION 3: SERVICES
+─────────────────────────────────────────────── */
+#services {
+  background: var(--bg);
+  padding: clamp(80px, 10vw, 140px) 0;
+  position: relative;
+}
+
+#services::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--bone), transparent);
+}
+
+.services-header {
+  padding: 0 clamp(24px, 6vw, 120px);
+  margin-bottom: 72px;
+}
+
+.services-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--smoke);
+  opacity: 0.6;
+  margin-bottom: 16px;
+}
+
+.services-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(36px, 5vw, 58px);
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+/* Service row */
+.service-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--bone);
+  padding: 56px clamp(24px, 6vw, 120px);
+  position: relative;
+  transition: background 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.service-row:last-child {
+  border-bottom: 1px solid var(--bone);
+}
+
+.service-row:hover {
+  background: var(--paper);
+}
+
+.service-row:hover .service-arrow {
+  transform: translateX(8px) translateY(-2px);
+  opacity: 1;
+}
+
+.service-accent-bar {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.service-row:hover .service-accent-bar {
+  opacity: 1;
+}
+
+.service-left {
+  padding-right: 48px;
+}
+
+.service-number {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--smoke);
+  opacity: 0.4;
+  margin-bottom: 20px;
+}
+
+.service-name {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(26px, 3.5vw, 42px);
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+
+.service-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 2px;
+}
+
+.service-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 4px;
+}
+
+.service-desc {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--smoke);
+  max-width: 420px;
+  margin-bottom: 24px;
+}
+
+.service-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--smoke);
+  text-decoration: none;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+.service-row:hover .service-link {
+  opacity: 0.9;
+}
+
+.service-arrow {
+  display: inline-block;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0.5;
+}
+
+/* ───────────────────────────────────────────────
+   SECTION 4: PROOF
+─────────────────────────────────────────────── */
+#proof {
+  background: linear-gradient(180deg, var(--hero-dark-start) 0%, var(--hero-dark-mid) 100%);
+  padding: clamp(80px, 12vw, 160px) clamp(24px, 6vw, 120px);
+  position: relative;
+  overflow: hidden;
+}
+
+#proof::before {
+  content: '';
+  position: absolute;
+  top: -100px; left: 50%;
+  transform: translateX(-50%);
+  width: 500px; height: 300px;
+  background: radial-gradient(ellipse, rgba(67,48,95,0.4) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.proof-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  margin-bottom: 64px;
+}
+
+.proof-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-bottom: 80px;
+}
+
+.proof-metric {
+  padding: 40px 0;
+  border-right: 1px solid rgba(255,255,255,0.06);
+  padding-right: 40px;
+}
+.proof-metric:first-child { padding-left: 0; }
+.proof-metric:last-child { border-right: none; padding-right: 0; padding-left: 40px; }
+.proof-metric:nth-child(2) { padding-left: 40px; }
+
+.metric-number {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(56px, 8vw, 96px);
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.metric-number .metric-suffix {
+  font-size: 0.5em;
+  opacity: 0.7;
+  vertical-align: super;
+}
+
+.metric-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.5;
+}
+
+.metric-source {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.2);
+  margin-top: 8px;
+}
+
+/* Case study cards */
+.proof-cases {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.case-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 4px;
+  padding: 24px;
+  transition: background 0.2s;
+}
+
+.case-card:hover {
+  background: rgba(255,255,255,0.07);
+}
+
+.case-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  margin-bottom: 12px;
+}
+
+.case-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.case-outcome {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.5;
+}
+
+.case-highlight {
+  color: var(--gold);
+  font-weight: 500;
+}
+
+/* ───────────────────────────────────────────────
+   SECTION 5: CONTACT
+─────────────────────────────────────────────── */
+#contact {
+  background: var(--paper);
+  padding: clamp(100px, 14vw, 180px) clamp(24px, 6vw, 120px) clamp(60px, 8vw, 100px);
+  position: relative;
+  overflow: hidden;
+}
+
+#contact::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--bone), transparent);
+}
+
+.contact-inner {
+  max-width: 800px;
+}
+
+.contact-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--smoke);
+  opacity: 0.5;
+  margin-bottom: 32px;
+}
+
+.contact-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(48px, 7vw, 88px);
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin-bottom: 20px;
+}
+
+.contact-title em {
+  font-style: italic;
+  color: var(--plum);
+}
+
+.contact-sub {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--smoke);
+  margin-bottom: 52px;
+  line-height: 1.6;
+}
+
+.contact-buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #fff;
+  background: var(--plum);
+  padding: 16px 32px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+.btn-wa:hover {
+  background: #5a4080;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(67,48,95,0.3);
+}
+
+.btn-cal {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  background: transparent;
+  padding: 16px 32px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.25s;
+  border: 1px solid var(--bone);
+}
+.btn-cal:hover {
+  background: var(--bone);
+  transform: translateY(-2px);
+}
+
+/* ───────────────────────────────────────────────
+   FOOTER
+─────────────────────────────────────────────── */
+footer {
+  background: var(--ink);
+  padding: 32px clamp(24px, 6vw, 120px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-dot-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+}
+.footer-dot {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+}
+.footer-dot.ghost { background: rgba(255,255,255,0.1); }
+.footer-dot.data  { background: rgba(200,182,255,0.6); }
+.footer-dot.ops   { background: rgba(184,224,210,0.6); }
+.footer-dot.tech  { background: rgba(255,205,178,0.6); }
+
+.footer-brand {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.3);
+}
+
+.footer-copy {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  color: rgba(255,255,255,0.2);
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-link {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.2);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-link:hover { color: rgba(255,255,255,0.5); }
+
+/* ───────────────────────────────────────────────
+   RESPONSIVE
+─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  nav {
+    padding: 16px 24px;
+  }
+
+  .nav-logo-text {
+    font-size: 10px;
+  }
+
+  .nav-cta {
+    font-size: 12px;
+    padding: 6px 14px;
+  }
+
+  .hero-ctas {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .scroll-hint {
+    display: none;
+  }
+
+  .service-row {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .service-left {
+    padding-right: 0;
+  }
+
+  .proof-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .proof-metric {
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 24px 0;
+  }
+  .proof-metric:last-child { border-bottom: none; }
+  .proof-metric:nth-child(2) { padding-left: 0; }
+
+  .proof-cases {
+    grid-template-columns: 1fr;
+  }
+
+  footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .manifesto-text {
+    font-size: 28px;
+  }
+
+  .hero-h1 {
+    font-size: 52px;
+  }
+}
+
+/* ───────────────────────────────────────────────
+   SCROLL ANIMATIONS — initial states
+─────────────────────────────────────────────── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+.fade-in {
+  opacity: 0;
+}
+
+.service-row {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.proof-metric {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.case-card {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+/* ───────────────────────────────────────────────
+   GSAP WILL HANDLE — override initial opacity 0
+   on elements that need it from above
+─────────────────────────────────────────────── */
+
+/* ── Hero Galaxy Canvas ── */
+#hero-physics {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  display: block;
+}
+#hero .hero-content { position: relative; z-index: 3; }
+#hero .hero-logo-bottom { position: relative; z-index: 3; }
+#hero .scroll-hint { position: relative; z-index: 3; }
+
+/* ── Particle Mesh Canvas (infinity orbit layer) ── */
+#particle-mesh {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  display: block;
+}
+
+/* Cursor glow overlay */
+
+#hero:hover ~ #cursor-glow,
+#hero 
+#hero { cursor: crosshair; }
+
+
+/* ══════════════════════════════════════════════
+   QUANTUM FIELD CURSOR — innovative custom cursor
+══════════════════════════════════════════════ */
+*, *::before, *::after { cursor: none !important; }
+
+#cursor-dot {
+  position: fixed;
+  width: 6px; height: 6px;
+  background: rgb(200,182,255);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  left: -999px; top: -999px;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 8px rgba(200,182,255,0.95), 0 0 24px rgba(200,182,255,0.5);
+  mix-blend-mode: screen;
+  transition: width 0.15s ease, height 0.15s ease, background 0.2s ease;
+  will-change: transform, left, top;
+}
+#cursor-dot.hovering {
+  width: 10px; height: 10px;
+  background: rgb(255,255,255);
+  box-shadow: 0 0 12px rgba(255,255,255,0.9), 0 0 30px rgba(200,182,255,0.6);
+}
+#cursor-dot.clicking {
+  width: 4px; height: 4px;
+  background: rgb(255,255,255);
+}
+
+#cursor-ring {
+  position: fixed;
+  width: 44px; height: 44px;
+  border: 1.5px solid rgba(200,182,255,0.35);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  left: -999px; top: -999px;
+  transform: translate(-50%, -50%);
+  transition: width 0.35s cubic-bezier(0.22,0.68,0,1.2),
+              height 0.35s cubic-bezier(0.22,0.68,0,1.2),
+              border-color 0.25s ease,
+              box-shadow 0.25s ease;
+  will-change: left, top, width, height;
+}
+#cursor-ring.hovering {
+  width: 68px; height: 68px;
+  border-color: rgba(200,182,255,0.75);
+  box-shadow: 0 0 18px rgba(200,182,255,0.15), inset 0 0 16px rgba(200,182,255,0.06);
+}
+#cursor-ring.clicking {
+  width: 22px; height: 22px;
+  border-color: rgba(255,255,255,0.95);
+  box-shadow: 0 0 28px rgba(255,255,255,0.45);
+  transition: width 0.08s ease, height 0.08s ease, border-color 0.08s ease, box-shadow 0.08s ease;
+}
+
+#cursor-trail {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 99997;
+}
+/* Remove old cursor glow - replaced */
+
+#hero { cursor: none !important; }
+
+</style>
+</head>
+
+<body class="splash-active">
+
+<!-- ═══════════════════════════════════════════════
+     SPLASH SCREEN
+════════════════════════════════════════════════ -->
+<div id="splash-overlay">
+  <canvas id="s-galaxy"></canvas>
+  <div id="s-scanline"></div>
+  <div class="s-glow-bg" id="s-glowBg"></div>
+
+  <div class="s-orbit-ring s-ring-1" id="s-ring1"></div>
+  <div class="s-orbit-ring s-ring-2" id="s-ring2"></div>
+
+  <div class="s-content">
+    <div class="s-logo-wrap" id="s-logoWrap">
+      <div class="s-bracket tl"></div>
+      <div class="s-bracket tr"></div>
+      <div class="s-bracket bl"></div>
+      <div class="s-bracket br"></div>
+
+      <div class="s-dot-grid" id="s-dotGrid">
+        <div class="s-dot" data-key="D"></div>
+        <div class="s-dot ghost"></div>
+        <div class="s-dot ghost"></div>
+        <div class="s-dot ghost"></div>
+        <div class="s-dot" data-key="O"></div>
+        <div class="s-dot ghost"></div>
+        <div class="s-dot ghost"></div>
+        <div class="s-dot ghost"></div>
+        <div class="s-dot" data-key="T"></div>
+      </div>
+
+      <div class="s-divider" id="s-divider"></div>
+
+      <div class="s-wordmark" id="s-wordmark">
+        <div class="s-brand-name" id="s-brandName">
+          <span class="s-char">Z</span><span class="s-char">E</span><span class="s-char">R</span>
+          <span class="s-char">O</span><span class="s-char">O</span><span class="s-char">N</span><span class="s-char">E</span>
+        </div>
+        <div class="s-brand-sub">
+          <span class="s-cd">D</span><span class="s-csep">·</span>
+          <span class="s-co">O</span><span class="s-csep">·</span>
+          <span class="s-ct">T</span><span class="s-csep">·</span>
+          <span class="s-cs">S</span>
+          <span class="s-cai">AI</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="s-tagline" id="s-tagline">Private AI · Built for You</div>
+  </div>
+</div>
+
+<button id="splash-skip">SKIP ↓</button>
+
+<!-- ═══════════════════════════════════════════════
+     MAIN PAGE
+════════════════════════════════════════════════ -->
+<div id="main-page">
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">
+      <div class="nav-dot-grid">
+        <div class="nav-dot data"></div>
+        <div class="nav-dot ghost"></div>
+        <div class="nav-dot ghost"></div>
+        <div class="nav-dot ghost"></div>
+        <div class="nav-dot ops"></div>
+        <div class="nav-dot ghost"></div>
+        <div class="nav-dot ghost"></div>
+        <div class="nav-dot ghost"></div>
+        <div class="nav-dot tech"></div>
+      </div>
+      <span class="nav-logo-text">ZEROONE D.O.T.S AI</span>
+    </a>
+    <a href="https://wa.me/918320065658" target="_blank" rel="noopener" class="nav-cta">↗ Let's Talk</a>
+  </nav>
+
+  <!-- ─── HERO ─── -->
+  <section id="hero">
+  <canvas id="particle-mesh" aria-hidden="true"></canvas>
+  <canvas id="hero-physics" aria-hidden="true"></canvas>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Meet Deshani · ZeroOne D.O.T.S AI</p>
+
+      <h1 class="hero-h1">
+        Own Your AI.<br>
+        <em>Don't Rent It.</em>
+      </h1>
+
+      <p class="hero-sub">
+        Built by one expert. Deployed on your server.<br>
+        Never leaves your control.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#services" class="btn-primary">→ See What I Build</a>
+        <a href="https://wa.me/918320065658" target="_blank" rel="noopener" class="btn-secondary">↗ Let's Talk</a>
+      </div>
+    </div>
+
+    <div class="hero-logo-bottom" id="hero-logo-bottom">
+      <div class="hero-dot-grid">
+        <div class="hero-dot data"></div>
+        <div class="hero-dot ghost"></div>
+        <div class="hero-dot ghost"></div>
+        <div class="hero-dot ghost"></div>
+        <div class="hero-dot ops"></div>
+        <div class="hero-dot ghost"></div>
+        <div class="hero-dot ghost"></div>
+        <div class="hero-dot ghost"></div>
+        <div class="hero-dot tech"></div>
+      </div>
+      <span class="hero-logo-label">D.O.T.S AI</span>
+    </div>
+
+    <div class="scroll-hint" id="scroll-hint">
+      <div class="scroll-hint-line"></div>
+      <span class="scroll-hint-text">Scroll</span>
+    </div>
+  </section>
+
+  <!-- ─── MANIFESTO ─── -->
+  <section id="manifesto">
+    <div class="manifesto-inner">
+      <p class="manifesto-label">// manifesto</p>
+      <p class="manifesto-text" id="manifesto-text">
+        <!-- Words injected by JS for scroll-triggered reveal -->
+      </p>
+    </div>
+  </section>
+
+  <!-- ─── SERVICES ─── -->
+  <section id="services">
+    <div class="services-header fade-up">
+      <p class="services-label">// what I build</p>
+      <h2 class="services-title">Four ways I work.</h2>
+    </div>
+
+    <!-- Service 1: Private AI -->
+    <a href="https://private.dotsai.in" target="_blank" rel="noopener" class="service-row" data-service="1">
+      <div class="service-accent-bar" style="background: #C8B6FF;"></div>
+      <div class="service-left">
+        <p class="service-number">01 ·</p>
+        <h3 class="service-name">Private AI<br>Deployment</h3>
+        <span class="service-tag" style="background: rgba(200,182,255,0.1); color: #C8B6FF;">
+          <span style="width:6px;height:6px;border-radius:50%;background:#C8B6FF;display:inline-block;"></span>
+          Data Sovereignty
+        </span>
+      </div>
+      <div class="service-right">
+        <p class="service-desc">
+          On-premise LLMs, vector databases, agent systems — running on your infrastructure. Your data never touches OpenAI. Full control, zero dependency.
+        </p>
+        <span class="service-link">
+          private.dotsai.in
+          <span class="service-arrow">↗</span>
+        </span>
+      </div>
+    </a>
+
+    <!-- Service 2: AI Web -->
+    <a href="https://web.dotsai.in" target="_blank" rel="noopener" class="service-row" data-service="2">
+      <div class="service-accent-bar" style="background: #FFCDB2;"></div>
+      <div class="service-left">
+        <p class="service-number">02 ·</p>
+        <h3 class="service-name">AI Web<br>Presence</h3>
+        <span class="service-tag" style="background: rgba(255,205,178,0.1); color: #FFCDB2;">
+          <span style="width:6px;height:6px;border-radius:50%;background:#FFCDB2;display:inline-block;"></span>
+          Tech
+        </span>
+      </div>
+      <div class="service-right">
+        <p class="service-desc">
+          Full-stack web products built with AI. From idea to deployed in days, not months. Modern stack, production-grade architecture, your brand.
+        </p>
+        <span class="service-link">
+          web.dotsai.in
+          <span class="service-arrow">↗</span>
+        </span>
+      </div>
+    </a>
+
+    <!-- Service 3: GEO AI -->
+    <a href="https://geo.dotsai.in" target="_blank" rel="noopener" class="service-row" data-service="3">
+      <div class="service-accent-bar" style="background: #A2D2FF;"></div>
+      <div class="service-left">
+        <p class="service-number">03 ·</p>
+        <h3 class="service-name">GEO AI &amp;<br>Local SEO</h3>
+        <span class="service-tag" style="background: rgba(162,210,255,0.1); color: #A2D2FF;">
+          <span style="width:6px;height:6px;border-radius:50%;background:#A2D2FF;display:inline-block;"></span>
+          Strategy
+        </span>
+      </div>
+      <div class="service-right">
+        <p class="service-desc">
+          Get found by AI assistants, not just Google. I optimize your business for the new search era — ChatGPT, Perplexity, Gemini, and beyond.
+        </p>
+        <span class="service-link">
+          geo.dotsai.in
+          <span class="service-arrow">↗</span>
+        </span>
+      </div>
+    </a>
+
+    <!-- Service 4: Platform -->
+    <a href="https://platform.dotsai.in" target="_blank" rel="noopener" class="service-row" data-service="4">
+      <div class="service-accent-bar" style="background: #B8E0D2;"></div>
+      <div class="service-left">
+        <p class="service-number">04 ·</p>
+        <h3 class="service-name">Infinity<br>Platform</h3>
+        <span class="service-tag" style="background: rgba(184,224,210,0.1); color: #B8E0D2;">
+          <span style="width:6px;height:6px;border-radius:50%;background:#B8E0D2;display:inline-block;"></span>
+          Operations
+        </span>
+      </div>
+      <div class="service-right">
+        <p class="service-desc">
+          The private AI operating system for your team. CRM, notes, docs, automation — all running on your server. No SaaS subscriptions, no data leaks.
+        </p>
+        <span class="service-link">
+          platform.dotsai.in
+          <span class="service-arrow">↗</span>
+        </span>
+      </div>
+    </a>
+  </section>
+
+  <!-- ─── PROOF ─── -->
+  <section id="proof">
+    <p class="proof-label">// outcomes</p>
+
+    <div class="proof-metrics">
+      <div class="proof-metric">
+        <div class="metric-number">
+          <span class="metric-count" data-target="70">0</span><span class="metric-suffix">%</span>
+        </div>
+        <p class="metric-label">Cost reduction for a<br>logistics operation</p>
+        <p class="metric-source">Private LLM deployment · 2024</p>
+      </div>
+
+      <div class="proof-metric">
+        <div class="metric-number">
+          <span class="metric-count" data-target="8">0</span><span class="metric-suffix">L/yr</span>
+        </div>
+        <p class="metric-label">Annual savings unlocked<br>via AI automation</p>
+        <p class="metric-source">Operations platform · 2024</p>
+      </div>
+
+      <div class="proof-metric">
+        <div class="metric-number">
+          <span class="metric-count" data-target="99">0</span><span class="metric-suffix">%</span>
+        </div>
+        <p class="metric-label">Accuracy on custom<br>document AI pipeline</p>
+        <p class="metric-source">Document processing · 2025</p>
+      </div>
+    </div>
+
+    <div class="proof-cases">
+      <div class="case-card">
+        <p class="case-tag">Case Study · 01</p>
+        <p class="case-title">Logistics Co. — Private LLM Deployment</p>
+        <p class="case-outcome">Replaced cloud AI with on-premise Llama deployment. <span class="case-highlight">70% ops cost saved.</span> Data never left their DC.</p>
+      </div>
+
+      <div class="case-card">
+        <p class="case-tag">Case Study · 02</p>
+        <p class="case-title">NBFC — AI Document Pipeline</p>
+        <p class="case-outcome">Custom OCR + LLM pipeline for loan document processing. <span class="case-highlight">99% accuracy</span> at 40x human speed.</p>
+      </div>
+
+      <div class="case-card">
+        <p class="case-tag">Case Study · 03</p>
+        <p class="case-title">Compliance Team — AI Audit System</p>
+        <p class="case-outcome">Private call audit system with custom scoring model. <span class="case-highlight">₹8L/year saved</span> vs manual review cost.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CONTACT ─── -->
+  <section id="contact">
+    <div class="contact-inner">
+      <p class="contact-label">// start here</p>
+      <h2 class="contact-title">Let's build<br><em>your AI.</em></h2>
+      <p class="contact-sub">No forms. No sales calls. Just a conversation.</p>
+      <div class="contact-buttons">
+        <a href="https://wa.me/918320065658" target="_blank" rel="noopener" class="btn-wa">
+          ↗ WhatsApp Me
+        </a>
+        <a href="https://cal.com/meetdeshani" target="_blank" rel="noopener" class="btn-cal">
+          → Book a Call
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-logo">
+      <div class="footer-dot-grid">
+        <div class="footer-dot data"></div>
+        <div class="footer-dot ghost"></div>
+        <div class="footer-dot ghost"></div>
+        <div class="footer-dot ghost"></div>
+        <div class="footer-dot ops"></div>
+        <div class="footer-dot ghost"></div>
+        <div class="footer-dot ghost"></div>
+        <div class="footer-dot ghost"></div>
+        <div class="footer-dot tech"></div>
+      </div>
+      <span class="footer-brand">ZEROONE D.O.T.S AI</span>
+    </div>
+
+    <span class="footer-copy">© 2025 ZeroOne D.O.T.S AI · dotsai.in</span>
+
+    <div class="footer-links">
+      <a href="https://private.dotsai.in" class="footer-link" target="_blank" rel="noopener">Private AI</a>
+      <a href="https://web.dotsai.in" class="footer-link" target="_blank" rel="noopener">AI Web</a>
+      <a href="https://geo.dotsai.in" class="footer-link" target="_blank" rel="noopener">GEO AI</a>
+      <a href="https://platform.dotsai.in" class="footer-link" target="_blank" rel="noopener">Platform</a>
+    </div>
+  </footer>
+
+</div><!-- #main-page -->
+
+<!-- ═══════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════════ -->
+<script>
+// ─────────────────────────────────────────────────────────────────
+//  SPLASH ANIMATION — all 6 variants (ported from logo-splash-v5)
+// ─────────────────────────────────────────────────────────────────
+
+const sDotsAll = [...document.querySelectorAll('.s-dot')]
+const sD = sDotsAll[0], sO = sDotsAll[4], sT = sDotsAll[8]
+const sGhosts = [sDotsAll[1], sDotsAll[2], sDotsAll[3], sDotsAll[5], sDotsAll[6], sDotsAll[7]]
+
+let sCurrent = -1
+let sGalaxyAnimId = null
+let sGalaxyParticles = []
+let sGalaxyPhase = 'idle'
+let sAmbientInterval = null
+
+const SPLASH_NAMES = ['SEQUENTIAL', 'ORBIT', 'SCAN', 'GALAXY BURST', 'CONSTELLATION', 'GLITCH BOOT']
+
+// ── Galaxy canvas setup ──
+const sCanvas = document.getElementById('s-galaxy')
+const sCtx = sCanvas.getContext('2d')
+const SPCOLORS = ['#C8B6FF', '#B8E0D2', '#FFCDB2', '#A2D2FF', 'rgba(255,255,255,0.8)']
+
+function resizeSCanvas() {
+  sCanvas.width = window.innerWidth
+  sCanvas.height = window.innerHeight
+}
+resizeSCanvas()
+window.addEventListener('resize', resizeSCanvas)
+
+function sCreateParticle(x, y, burst = false) {
+  const angle = Math.random() * Math.PI * 2
+  const speed = burst ? (Math.random() * 3 + 1) : (Math.random() * 0.4 + 0.05)
+  return {
+    x, y,
+    vx: Math.cos(angle) * speed,
+    vy: Math.sin(angle) * speed,
+    r: burst ? (Math.random() * 2 + 0.5) : (Math.random() * 1.5 + 0.3),
+    alpha: burst ? (Math.random() * 0.8 + 0.2) : (Math.random() * 0.5 + 0.1),
+    decay: burst ? (Math.random() * 0.015 + 0.008) : 0,
+    color: SPCOLORS[Math.floor(Math.random() * SPCOLORS.length)],
+  }
+}
+
+function sSpawnBurst(count = 120) {
+  const cx = sCanvas.width / 2, cy = sCanvas.height / 2
+  for (let i = 0; i < count; i++) sGalaxyParticles.push(sCreateParticle(cx, cy, true))
+}
+
+function sSpawnAmbient() {
+  if (sGalaxyPhase !== 'idle') return
+  const cx = sCanvas.width / 2, cy = sCanvas.height / 2
+  for (let i = 0; i < 2; i++) {
+    sGalaxyParticles.push(sCreateParticle(
+      cx + (Math.random() - 0.5) * 160,
+      cy + (Math.random() - 0.5) * 160,
+      false
+    ))
+  }
+}
+
+function sDrawGalaxyParticles() {
+  sCtx.clearRect(0, 0, sCanvas.width, sCanvas.height)
+  sGalaxyParticles = sGalaxyParticles.filter(p => p.alpha > 0.01)
+  for (const p of sGalaxyParticles) {
+    sCtx.globalAlpha = Math.max(0, p.alpha)
+    sCtx.fillStyle = p.color
+    sCtx.beginPath()
+    sCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
+    sCtx.fill()
+    p.x += p.vx; p.y += p.vy
+    p.vy += 0.01
+    p.alpha -= p.decay
+    if (!p.decay) p.alpha -= 0.001
+  }
+  sCtx.globalAlpha = 1
+  sGalaxyAnimId = requestAnimationFrame(sDrawGalaxyParticles)
+}
+
+function sAddRipple(dot, color) {
+  const ripple = document.createElement('div')
+  ripple.style.cssText = `position:fixed;pointer-events:none;border-radius:50%;border:1px solid ${color};opacity:0.8;z-index:10005;`
+  const rect = dot.getBoundingClientRect()
+  const size = rect.width
+  ripple.style.width = ripple.style.height = size + 'px'
+  ripple.style.left = rect.left + 'px'
+  ripple.style.top = rect.top + 'px'
+  document.body.appendChild(ripple)
+  gsap.to(ripple, {
+    width: size * 4, height: size * 4,
+    left: rect.left - size * 1.5, top: rect.top - size * 1.5,
+    opacity: 0, duration: 0.8, ease: 'power2.out',
+    onComplete: () => ripple.remove()
+  })
+}
+
+function sResetAll() {
+  if (sGalaxyAnimId) { cancelAnimationFrame(sGalaxyAnimId); sGalaxyAnimId = null }
+  clearInterval(sAmbientInterval)
+  sGalaxyParticles = []
+  sGalaxyPhase = 'idle'
+
+  gsap.killTweensOf('.s-dot, #s-wordmark, #s-brandName, .s-brand-sub span, #s-tagline, #s-divider, .s-bracket, #s-glowBg, #s-scanline, #s-ring1, #s-ring2, .s-char')
+  gsap.set(sDotsAll, { opacity: 0, scale: 0, rotation: 0, x: 0, y: 0, filter: 'none', boxShadow: 'none' })
+  document.querySelectorAll('div[style*="position:fixed"][style*="10005"]').forEach(el => el.remove())
+  document.querySelectorAll('canvas:not(#s-galaxy)').forEach(el => el.remove())
+
+  gsap.set('#s-wordmark', { opacity: 0, y: 0 })
+  gsap.set('#s-brandName', { opacity: 0, scale: 0.9, y: 0 })
+  gsap.set('.s-brand-sub span', { opacity: 0, y: 0 })
+  gsap.set('#s-tagline', { opacity: 0 })
+  gsap.set('#s-divider', { width: 0 })
+  gsap.set('.s-bracket', { opacity: 0 })
+  gsap.set('#s-glowBg', { opacity: 0 })
+  gsap.set('#s-scanline', { left: -10, opacity: 0 })
+  gsap.set('#s-ring1,#s-ring2', { borderColor: 'rgba(200,182,255,0)', scale: 0.6, opacity: 0 })
+  gsap.set('.s-char', { opacity: 0, y: -10 })
+
+  document.getElementById('s-galaxy').style.display = 'none'
+  document.getElementById('s-scanline').style.display = 'none'
+  document.getElementById('s-glowBg').style.display = 'none'
+  document.querySelectorAll('.s-orbit-ring').forEach(el => el.style.display = 'none')
+  document.querySelectorAll('.s-bracket').forEach(el => el.style.display = 'none')
+  document.getElementById('s-divider').style.display = 'none'
+
+  const sc = document.getElementById('s-galaxy')
+  sc.getContext('2d').clearRect(0, 0, sc.width, sc.height)
+}
+
+// ── V1: Sequential ──
+function sRunV1() {
+  gsap.set('#s-brandName', { opacity: 0, scale: 0.9 })
+  gsap.set(sDotsAll, { scale: 0.4, opacity: 0 })
+  const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
+  tl.to(sGhosts, { scale: 1, opacity: 1, duration: 0.5, stagger: 0.05, ease: 'back.out(1.2)' }, 0.1)
+  tl.to(sD, { scale: 1.25, opacity: 1, duration: 0.2, ease: 'power4.out' }, 0.5)
+  tl.to(sD, { scale: 1, duration: 0.3 }, 0.7)
+  tl.to(sD, { boxShadow: '0 0 20px 6px rgba(200,182,255,0.7), 0 0 40px 12px rgba(200,182,255,0.3)', duration: 0.3 }, 0.5)
+  tl.to(sO, { scale: 1.25, opacity: 1, duration: 0.2, ease: 'power4.out' }, 0.85)
+  tl.to(sO, { scale: 1, duration: 0.3 }, 1.05)
+  tl.to(sO, { boxShadow: '0 0 20px 6px rgba(184,224,210,0.7), 0 0 40px 12px rgba(184,224,210,0.3)', duration: 0.3 }, 0.85)
+  tl.to(sT, { scale: 1.25, opacity: 1, duration: 0.2, ease: 'power4.out' }, 1.2)
+  tl.to(sT, { scale: 1, duration: 0.3 }, 1.4)
+  tl.to(sT, { boxShadow: '0 0 20px 6px rgba(255,205,178,0.7), 0 0 40px 12px rgba(255,205,178,0.3)', duration: 0.3 }, 1.2)
+  tl.to('#s-wordmark', { opacity: 1, duration: 0.3 }, 1.5)
+  tl.to('#s-brandName', { opacity: 1, scale: 1, duration: 0.5, ease: 'power2.inOut' }, 1.6)
+  const subSpans = [...document.querySelectorAll('.s-brand-sub span')]
+  subSpans.forEach((s, i) => { tl.to(s, { opacity: 1, duration: 0.2 }, 2.2 + i * 0.09) })
+  tl.to('#s-tagline', { opacity: 1, duration: 0.5 }, 3.0)
+  tl.to([sD, sO, sT], { scale: 1.15, duration: 0.4, ease: 'power1.inOut', stagger: 0.05, yoyo: true, repeat: 1 }, 3.5)
+}
+
+// ── V2: Orbit ──
+function sRunV2() {
+  document.querySelectorAll('.s-orbit-ring').forEach(el => el.style.display = 'block')
+  gsap.set(sDotsAll, { scale: 0, rotation: 180, opacity: 0 })
+  gsap.set('#s-wordmark', { opacity: 0, y: 16 })
+  gsap.set('#s-brandName', { opacity: 0, scale: 1 })
+  const tl = gsap.timeline({ defaults: { ease: 'back.out(1.4)' } })
+  tl.to('#s-ring1', { scale: 1, opacity: 1, borderColor: 'rgba(200,182,255,0.12)', duration: 0.6, ease: 'power2.out' }, 0)
+  tl.to('#s-ring2', { scale: 1, opacity: 1, borderColor: 'rgba(184,224,210,0.08)', duration: 0.8, ease: 'power2.out' }, 0.1)
+  tl.to(sGhosts, { opacity: 1, scale: 1, rotation: 0, duration: 0.4, stagger: 0.06 }, 0.2)
+  tl.fromTo(sD, { scale: 0, rotation: -90, opacity: 0 }, { scale: 1.3, rotation: 0, opacity: 1, duration: 0.3, ease: 'back.out(2)' }, 0.7)
+  tl.to(sD, { scale: 1, duration: 0.2 }, 1.0)
+  tl.to(sD, { boxShadow: '0 0 24px 8px rgba(200,182,255,0.6)', duration: 0.4 }, 0.9)
+  tl.fromTo(sO, { scale: 0, rotation: -90, opacity: 0 }, { scale: 1.3, rotation: 0, opacity: 1, duration: 0.3, ease: 'back.out(2)' }, 1.1)
+  tl.to(sO, { scale: 1, duration: 0.2 }, 1.4)
+  tl.to(sO, { boxShadow: '0 0 24px 8px rgba(184,224,210,0.6)', duration: 0.4 }, 1.3)
+  tl.fromTo(sT, { scale: 0, rotation: -90, opacity: 0 }, { scale: 1.3, rotation: 0, opacity: 1, duration: 0.3, ease: 'back.out(2)' }, 1.5)
+  tl.to(sT, { scale: 1, duration: 0.2 }, 1.8)
+  tl.to(sT, { boxShadow: '0 0 24px 8px rgba(255,205,178,0.6)', duration: 0.4 }, 1.7)
+  tl.to('#s-ring1,#s-ring2', { scale: 1.3, opacity: 0, duration: 0.6, ease: 'power2.in' }, 1.9)
+  tl.to('#s-wordmark', { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }, 2.0)
+  tl.to('#s-brandName', { opacity: 1, duration: 0.55 }, 2.1)
+  const subSpans = [...document.querySelectorAll('.s-brand-sub span')]
+  subSpans.forEach((s, i) => { tl.to(s, { opacity: 1, duration: 0.2 }, 2.6 + i * 0.08) })
+  tl.to('#s-tagline', { opacity: 1, duration: 0.5 }, 3.2)
+  tl.to([sD, sO, sT], { scale: 1.12, duration: 0.3, yoyo: true, repeat: 1, stagger: 0.07 }, 3.8)
+}
+
+// ── V3: Scan ──
+function sRunV3() {
+  document.getElementById('s-scanline').style.display = 'block'
+  document.getElementById('s-glowBg').style.display = 'block'
+  document.querySelectorAll('.s-bracket').forEach(el => el.style.display = 'block')
+  document.getElementById('s-divider').style.display = 'block'
+  gsap.set('#s-brandName', { opacity: 1, scale: 1 })
+  gsap.set(sDotsAll, { opacity: 0, scale: 0.6 })
+  const W = window.innerWidth
+  const tl = gsap.timeline()
+  tl.to('#s-glowBg', { opacity: 1, duration: 0.8, ease: 'power2.out' }, 0)
+  tl.to('.s-bracket', { opacity: 1, duration: 0.3, stagger: 0.06 }, 0.2)
+  tl.to(sDotsAll, { opacity: 1, scale: 1, duration: 0.4, stagger: 0.04, ease: 'power2.out' }, 0.4)
+  tl.to('#s-scanline', { opacity: 1, duration: 0.1 }, 0.75)
+  tl.to('#s-scanline', { left: W + 10, duration: 0.55, ease: 'none' }, 0.8)
+  tl.to('#s-scanline', { opacity: 0, duration: 0.1 }, 1.3)
+  tl.to(sD, { boxShadow: '0 0 20px 6px rgba(200,182,255,0.7)', duration: 0.3 }, 0.9)
+  tl.to(sO, { boxShadow: '0 0 20px 6px rgba(184,224,210,0.7)', duration: 0.3 }, 1.0)
+  tl.to(sT, { boxShadow: '0 0 20px 6px rgba(255,205,178,0.7)', duration: 0.3 }, 1.1)
+  tl.to('#s-divider', { width: 120, duration: 0.4, ease: 'power2.inOut' }, 1.35)
+  tl.to('#s-wordmark', { opacity: 1, duration: 0.1 }, 1.5)
+  tl.to('.s-char', { opacity: 1, y: 0, duration: 0.25, stagger: 0.06, ease: 'power3.out' }, 1.55)
+  const subSpans = [...document.querySelectorAll('.s-brand-sub span')]
+  subSpans.forEach((s, i) => { tl.to(s, { opacity: 1, y: 0, duration: 0.2 }, 2.1 + i * 0.07) })
+  tl.to('#s-tagline', { opacity: 1, duration: 0.5 }, 2.8)
+  tl.to([sD, sO, sT], {
+    boxShadow: (i) => {
+      const c = ['rgba(200,182,255,0.8)', 'rgba(184,224,210,0.8)', 'rgba(255,205,178,0.8)']
+      return `0 0 28px 10px ${c[i]}, 0 0 50px 18px ${c[i].replace('0.8)', '0.3)')}`
+    },
+    duration: 0.4, yoyo: true, repeat: 1, stagger: 0.08
+  }, 3.3)
+}
+
+// ── V4: Galaxy Burst ──
+function sRunV4() {
+  document.getElementById('s-galaxy').style.display = 'block'
+  sGalaxyPhase = 'idle'
+  gsap.set('#s-brandName', { opacity: 0, scale: 0.9 })
+  sAmbientInterval = setInterval(sSpawnAmbient, 80)
+  sDrawGalaxyParticles()
+  const tl = gsap.timeline()
+  tl.to(sGhosts, { opacity: 1, scale: 1, duration: 0.5, stagger: { amount: 0.3, from: 'center' }, ease: 'back.out(1.5)' }, 0.4)
+  tl.call(() => { sSpawnBurst(80); sAddRipple(sD, '#C8B6FF') }, [], 0.9)
+  tl.to(sD, { opacity: 1, scale: 1.4, duration: 0.15, ease: 'power4.out' }, 0.9)
+  tl.to(sD, { scale: 1, duration: 0.3, ease: 'elastic.out(1,0.5)' }, 1.05)
+  tl.to(sD, { boxShadow: '0 0 24px 8px rgba(200,182,255,0.7)', duration: 0.4 }, 1.0)
+  tl.call(() => { sSpawnBurst(70); sAddRipple(sO, '#B8E0D2') }, [], 1.2)
+  tl.to(sO, { opacity: 1, scale: 1.4, duration: 0.15, ease: 'power4.out' }, 1.2)
+  tl.to(sO, { scale: 1, duration: 0.3, ease: 'elastic.out(1,0.5)' }, 1.35)
+  tl.to(sO, { boxShadow: '0 0 24px 8px rgba(184,224,210,0.7)', duration: 0.4 }, 1.3)
+  tl.call(() => { sSpawnBurst(70); sAddRipple(sT, '#FFCDB2') }, [], 1.5)
+  tl.to(sT, { opacity: 1, scale: 1.4, duration: 0.15, ease: 'power4.out' }, 1.5)
+  tl.to(sT, { scale: 1, duration: 0.3, ease: 'elastic.out(1,0.5)' }, 1.65)
+  tl.to(sT, { boxShadow: '0 0 24px 8px rgba(255,205,178,0.7)', duration: 0.4 }, 1.6)
+  tl.call(() => sSpawnBurst(200), [], 1.85)
+  tl.call(() => { clearInterval(sAmbientInterval); sGalaxyPhase = 'hold' }, [], 2.0)
+  tl.to('#s-wordmark', { opacity: 1, duration: 0.1 }, 2.0)
+  tl.to('#s-brandName', { opacity: 1, scale: 1, duration: 0.5, ease: 'power3.out' }, 2.0)
+  const subSpans = [...document.querySelectorAll('.s-brand-sub span')]
+  subSpans.forEach((s, i) => { tl.to(s, { opacity: 1, duration: 0.15 }, 2.4 + i * 0.08) })
+  tl.to('#s-tagline', { opacity: 1, duration: 0.5 }, 3.0)
+  tl.call(() => sSpawnBurst(50), [], 3.5)
+  tl.to([sD, sO, sT], { scale: 1.2, duration: 0.25, yoyo: true, repeat: 1, stagger: 0.07 }, 3.5)
+}
+
+// ── V5: Constellation ──
+function sRunV5() {
+  const W = window.innerWidth, H = window.innerHeight
+  sDotsAll.forEach(dot => {
+    const rx = (Math.random() - 0.5) * W * 0.8
+    const ry = (Math.random() - 0.5) * H * 0.8
+    gsap.set(dot, { opacity: 0, scale: 0.4, x: rx, y: ry })
+  })
+  gsap.set('#s-brandName', { opacity: 0, scale: 0.9 })
+
+  const overlay = document.createElement('canvas')
+  overlay.style.cssText = 'position:fixed;inset:0;z-index:10003;pointer-events:none'
+  overlay.width = W; overlay.height = H
+  document.body.appendChild(overlay)
+  const octx = overlay.getContext('2d')
+
+  const tl = gsap.timeline()
+  tl.to(sDotsAll, {
+    opacity: 1, scale: 1, duration: 0.25,
+    stagger: { amount: 0.5, from: 'random' }, ease: 'power2.out'
+  }, 0)
+
+  tl.call(() => {
+    const positions = [sD, sO, sT].map(el => {
+      const r = el.getBoundingClientRect()
+      return { x: r.left + r.width/2 + (Math.random()-0.5)*W*0.3, y: r.top + r.height/2 + (Math.random()-0.5)*H*0.3 }
+    })
+    let prog = 0
+    const lineAnim = setInterval(() => {
+      octx.clearRect(0, 0, W, H)
+      prog = Math.min(prog + 0.04, 1)
+      octx.strokeStyle = 'rgba(200,182,255,0.3)'
+      octx.lineWidth = 0.8
+      for (let i = 0; i < positions.length - 1; i++) {
+        const a = positions[i], b = positions[i+1]
+        octx.beginPath(); octx.moveTo(a.x, a.y)
+        octx.lineTo(a.x + (b.x - a.x) * prog, a.y + (b.y - a.y) * prog)
+        octx.stroke()
+      }
+      if (prog >= 1) clearInterval(lineAnim)
+    }, 16)
+    setTimeout(() => { octx.clearRect(0, 0, W, H) }, 1200)
+  }, [], 0.8)
+
+  tl.to(sDotsAll, {
+    x: 0, y: 0, duration: 0.6,
+    stagger: { amount: 0.25, from: 'random' }, ease: 'back.out(1.8)'
+  }, 1.2)
+
+  tl.to(sD, { scale: 1.3, boxShadow: '0 0 24px 8px rgba(200,182,255,0.7)', duration: 0.3, ease: 'power4.out' }, 1.8)
+  tl.to(sD, { scale: 1, duration: 0.25 }, 2.1)
+  tl.to(sO, { scale: 1.3, boxShadow: '0 0 24px 8px rgba(184,224,210,0.7)', duration: 0.3, ease: 'power4.out' }, 1.95)
+  tl.to(sO, { scale: 1, duration: 0.25 }, 2.25)
+  tl.to(sT, { scale: 1.3, boxShadow: '0 0 24px 8px rgba(255,205,178,0.7)', duration: 0.3, ease: 'power4.out' }, 2.1)
+  tl.to(sT, { scale: 1, duration: 0.25 }, 2.4)
+
+  tl.to('#s-wordmark', { opacity: 1, duration: 0.1 }, 2.3)
+  tl.to('#s-brandName', { opacity: 1, scale: 1, duration: 0.5, ease: 'power3.out' }, 2.3)
+  const subSpans = [...document.querySelectorAll('.s-brand-sub span')]
+  subSpans.forEach((s, i) => { tl.to(s, { opacity: 1, duration: 0.15 }, 2.8 + i * 0.08) })
+  tl.to('#s-tagline', { opacity: 1, duration: 0.5 }, 3.5)
+  tl.call(() => overlay.remove(), [], 2.2)
+  tl.to([sD, sO, sT], { scale: 1.15, duration: 0.3, yoyo: true, repeat: 1, stagger: 0.07 }, 4.0)
+}
+
+// ── V6: Glitch Boot ──
+function sRunV6() {
+  gsap.set(sDotsAll, { opacity: 0, scale: 0 })
+  gsap.set('#s-brandName', { opacity: 0 })
+
+  const gc = document.createElement('canvas')
+  gc.style.cssText = 'position:fixed;inset:0;z-index:10003;pointer-events:none'
+  gc.width = window.innerWidth; gc.height = window.innerHeight
+  document.body.appendChild(gc)
+  const gctx = gc.getContext('2d')
+
+  let glitchTimer = null
+  function drawGlitch(intensity = 1) {
+    gctx.clearRect(0, 0, gc.width, gc.height)
+    const bars = Math.floor(4 * intensity)
+    for (let i = 0; i < bars; i++) {
+      const y = Math.random() * gc.height
+      const h = Math.random() * 4 + 1
+      const x = (Math.random() - 0.5) * 60 * intensity
+      const colors = ['rgba(200,182,255,0.4)', 'rgba(184,224,210,0.4)', 'rgba(255,205,178,0.3)']
+      gctx.fillStyle = colors[i % colors.length]
+      gctx.fillRect(x, y, gc.width, h)
+    }
+  }
+
+  const tl = gsap.timeline()
+  tl.call(() => {
+    gsap.set(sDotsAll, { opacity: 1, scale: 1 })
+    glitchTimer = setInterval(() => drawGlitch(1), 60)
+    sDotsAll.forEach(dot => {
+      gsap.set(dot, {
+        x: (Math.random()-0.5)*24,
+        y: (Math.random()-0.5)*24,
+        filter: `hue-rotate(${Math.random()*180}deg)`
+      })
+    })
+  }, [], 0.1)
+
+  for (let i = 0; i < 5; i++) {
+    tl.call(() => {
+      sDotsAll.forEach(dot => {
+        gsap.to(dot, { x: (Math.random()-0.5)*30, y: (Math.random()-0.5)*30, duration: 0.08, ease: 'none' })
+      })
+    }, [], 0.1 + i * 0.15)
+  }
+
+  tl.call(() => {
+    clearInterval(glitchTimer)
+    gctx.clearRect(0, 0, gc.width, gc.height)
+    gsap.to(sDotsAll, { x: 0, y: 0, filter: 'hue-rotate(0deg)', duration: 0.05, ease: 'none' })
+  }, [], 1.0)
+
+  tl.call(() => {
+    gctx.fillStyle = 'rgba(255,255,255,0.08)'
+    gctx.fillRect(0, 0, gc.width, gc.height)
+    setTimeout(() => gctx.clearRect(0, 0, gc.width, gc.height), 80)
+  }, [], 1.0)
+
+  tl.to(sD, { boxShadow: '0 0 24px 8px rgba(200,182,255,0.8)', duration: 0.2 }, 1.1)
+  tl.to(sO, { boxShadow: '0 0 24px 8px rgba(184,224,210,0.8)', duration: 0.2 }, 1.3)
+  tl.to(sT, { boxShadow: '0 0 24px 8px rgba(255,205,178,0.8)', duration: 0.2 }, 1.5)
+
+  tl.call(() => {
+    drawGlitch(0.4)
+    setTimeout(() => gctx.clearRect(0, 0, gc.width, gc.height), 120)
+  }, [], 1.7)
+
+  tl.to('#s-wordmark', { opacity: 1, duration: 0.05 }, 1.9)
+  tl.to('#s-brandName', { opacity: 1, duration: 0.1 }, 1.9)
+  const subSpans = [...document.querySelectorAll('.s-brand-sub span')]
+  subSpans.forEach((s, i) => {
+    tl.call(() => {
+      gsap.fromTo(s, { opacity: 0, x: (Math.random()-0.5)*8 }, { opacity: 1, x: 0, duration: 0.12 })
+    }, [], 2.0 + i * 0.1)
+  })
+
+  tl.to('#s-tagline', { opacity: 1, duration: 0.4 }, 3.0)
+  tl.call(() => {
+    sDotsAll.forEach(dot => {
+      gsap.to(dot, { x: (Math.random()-0.5)*3, y: (Math.random()-0.5)*3, duration: 0.06, yoyo: true, repeat: 3, ease: 'none' })
+    })
+  }, [], 3.5)
+  tl.call(() => gc.remove(), [], 3.8)
+  tl.to([sD, sO, sT], { scale: 1.1, duration: 0.2, yoyo: true, repeat: 1, stagger: 0.06 }, 3.6)
+}
+
+// ── Splash dismiss ──
+var _splashDismissed = false;
+function dismissSplash() {
+  if (_splashDismissed) return;
+  _splashDismissed = true;
+  const overlay = document.getElementById('splash-overlay')
+  const skipBtn = document.getElementById('splash-skip')
+  const mainPage = document.getElementById('main-page')
+
+  if (overlay) overlay.classList.add('hiding')
+  if (skipBtn) skipBtn.style.display = 'none'
+
+  setTimeout(() => {
+    if (overlay) overlay.remove()
+    if (skipBtn) skipBtn.remove()
+    document.body.classList.remove('splash-active')
+    window.scrollTo(0, 0)
+    mainPage.classList.add('visible')
+    initMainPage()
+  }, 800)
+}
+
+// ── Run random splash variant ──
+const sRunners = [sRunV1, sRunV2, sRunV3, sRunV4, sRunV5, sRunV6]
+function runSplash() {
+  const v = Math.floor(Math.random() * sRunners.length)
+  sCurrent = v
+  sRunners[v]()
+}
+
+// ── Auto-dismiss after 5s ──
+let splashTimer = setTimeout(dismissSplash, 5000)
+
+document.getElementById('splash-skip').addEventListener('click', () => {
+  clearTimeout(splashTimer)
+  dismissSplash()
+})
+
+// Start splash immediately
+runSplash()
+
+
+// ─────────────────────────────────────────────────────────────────
+//  MAIN PAGE — Manifesto + Scroll Animations
+// ─────────────────────────────────────────────────────────────────
+
+function initMainPage() {
+  gsap.registerPlugin(ScrollTrigger)
+
+  // ── Hero entrance ──
+  gsap.set('.hero-eyebrow', { opacity: 0, y: 12 })
+  gsap.set('.hero-h1',      { opacity: 0, y: 24 })
+  gsap.set('.hero-sub',     { opacity: 0, y: 16 })
+  gsap.set('.hero-ctas',    { opacity: 0, y: 12 })
+  gsap.set('#hero-logo-bottom', { opacity: 0 })
+  gsap.set('#scroll-hint',  { opacity: 0 })
+  gsap.timeline({ delay: 0.2 })
+    .to('.hero-eyebrow',     { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' })
+    .to('.hero-h1',          { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, '-=0.5')
+    .to('.hero-sub',         { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6')
+    .to('.hero-ctas',        { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.5')
+    .to('#hero-logo-bottom', { opacity: 1, duration: 0.6, ease: 'power2.out' }, '-=0.3')
+    .to('#scroll-hint',      { opacity: 1, duration: 0.5 }, '-=0.2')
+
+  // ── Manifesto word-by-word reveal ──
+  const manifestoRaw = "I am one person. I build AI that lives on YOUR server. Your data never leaves. Your competitors never see it. This is private AI — and it changes everything."
+
+  // Parse into word spans, highlight special words
+  const specialYours = ['YOUR', 'Your', 'your']
+  const specialHighlight = ['private AI']
+  const words = manifestoRaw.split(' ')
+  const container = document.getElementById('manifesto-text')
+
+  words.forEach((word, i) => {
+    const span = document.createElement('span')
+    span.className = 'manifesto-word'
+
+    const cleanWord = word.replace(/[^a-zA-Z]/g, '')
+    if (specialYours.includes(cleanWord) || word.toUpperCase() === 'YOUR') {
+      span.className += ' yours'
+    }
+
+    span.textContent = word + (i < words.length - 1 ? ' ' : '')
+    container.appendChild(span)
+  })
+
+  // Highlight "private AI" — find index of "private" and "AI" adjacent
+  const wordSpans = [...container.querySelectorAll('.manifesto-word')]
+  wordSpans.forEach((span, i) => {
+    const text = span.textContent.trim()
+    if (text === 'private') {
+      span.classList.add('highlight')
+      if (wordSpans[i+1]) wordSpans[i+1].classList.add('highlight')
+    }
+  })
+
+  // Scroll-triggered word reveal
+  ScrollTrigger.create({
+    trigger: '#manifesto',
+    start: 'top 80%',
+    end: 'bottom 30%',
+    onUpdate: (self) => {
+      const progress = self.progress
+      const totalWords = wordSpans.length
+      const wordsToShow = Math.floor(progress * totalWords * 1.4)
+      wordSpans.forEach((span, i) => {
+        if (i <= wordsToShow) {
+          gsap.to(span, { opacity: 1, duration: 0.3, ease: 'power2.out', overwrite: 'auto' })
+        }
+      })
+    }
+  })
+
+  // ── Services fade-up ──
+  gsap.to('.services-header.fade-up', {
+    opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+    scrollTrigger: {
+      trigger: '#services',
+      start: 'top 75%',
+    }
+  })
+
+  document.querySelectorAll('.service-row').forEach((row, i) => {
+    gsap.to(row, {
+      opacity: 1, y: 0, duration: 0.7, ease: 'power3.out',
+      delay: i * 0.08,
+      scrollTrigger: {
+        trigger: row,
+        start: 'top 82%',
+      }
+    })
+  })
+
+  // ── Proof metrics count-up ──
+  document.querySelectorAll('.proof-metric').forEach((metric, i) => {
+    gsap.to(metric, {
+      opacity: 1, y: 0, duration: 0.7, ease: 'power3.out',
+      delay: i * 0.12,
+      scrollTrigger: {
+        trigger: '#proof',
+        start: 'top 70%',
+        onEnter: () => {
+          // Trigger count-up for this metric
+          const counter = metric.querySelector('.metric-count')
+          if (counter && !counter.dataset.counted) {
+            counter.dataset.counted = 'true'
+            const target = parseInt(counter.dataset.target)
+            const duration = 1.8
+            const start = performance.now()
+            function update(now) {
+              const elapsed = (now - start) / 1000
+              const progress = Math.min(elapsed / duration, 1)
+              const eased = 1 - Math.pow(1 - progress, 3)
+              counter.textContent = Math.round(eased * target)
+              if (progress < 1) requestAnimationFrame(update)
+            }
+            requestAnimationFrame(update)
+          }
+        }
+      }
+    })
+  })
+
+  // ── Case cards ──
+  document.querySelectorAll('.case-card').forEach((card, i) => {
+    gsap.to(card, {
+      opacity: 1, y: 0, duration: 0.6, ease: 'power3.out',
+      delay: i * 0.1,
+      scrollTrigger: {
+        trigger: '.proof-cases',
+        start: 'top 80%',
+      }
+    })
+  })
+
+  // ── Contact fade-up ──
+  gsap.timeline({
+    scrollTrigger: {
+      trigger: '#contact',
+      start: 'top 75%',
+    }
+  })
+  .from('.contact-label', { opacity: 0, y: 20, duration: 0.6, ease: 'power3.out' })
+  .from('.contact-title', { opacity: 0, y: 30, duration: 0.8, ease: 'power3.out' }, '-=0.3')
+  .from('.contact-sub', { opacity: 0, y: 20, duration: 0.6, ease: 'power3.out' }, '-=0.4')
+  .from('.contact-buttons', { opacity: 0, y: 16, duration: 0.6, ease: 'power3.out' }, '-=0.3')
+
+  // ── Nav appearance on scroll ──
+  const nav = document.getElementById('nav')
+  ScrollTrigger.create({
+    trigger: '#hero',
+    start: 'bottom top',
+    onEnter: () => {
+      nav.style.backdropFilter = ''
+      nav.style.borderBottom = ''
+      nav.style.transition = 'background 0.3s ease'
+    }
+  })
+}
+
+</script>
+
+<script>
+/* ══════════════════════════════════════════════════
+   HERO GALAXY v3
+   - 4000 stars, 3 depth layers, sorted far→near
+   - Nebulae spread across all 4 quadrants
+   - Galactic core subtle — text floats free
+   - D.O.T.S planet orbits BOTTOM-RIGHT away from text
+   - Shield + physics — always springs back
+══════════════════════════════════════════════════ */
+(function () {
+  var canvas = document.getElementById('hero-physics');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var heroEl = document.getElementById('hero');
+
+  var PALETTE = [
+    { r:200, g:182, b:255 },
+    { r:184, g:224, b:210 },
+    { r:255, g:205, b:178 },
+    { r:162, g:210, b:255 },
+    { r:255, g:181, b:194 },
+  ];
+
+  /* D.O.T.S planet — orbits bottom-right quadrant */
+  var DOTS = {
+    x:0, y:0, baseX:0, baseY:0, vx:0, vy:0,
+    orbitAngle: 0.4,
+    orbitCx:0, orbitCy:0, orbitRx:0, orbitRy:0,
+    shieldGlow:0, ripples:[],
+    dots:[
+      { r:215, g:207, b:240, ox:-14, oy:-9  },
+      { r:184, g:224, b:210, ox: 14, oy:-9  },
+      { r:241, g:198, b:174, ox:  0, oy: 14 },
+      { r:191, g:214, b:236, ox:  0, oy:-18 },
+    ]
+  };
+
+  var W, H, stars=[], nebulae=[], rafId, time=0;
+  var dpr = Math.min(window.devicePixelRatio||1, 2);
+  var mouse = { x:-9999, y:-9999 };
+  var clickData = null;
+
+  function resize() {
+    W = heroEl.offsetWidth; H = heroEl.offsetHeight;
+    if (!W||!H) { setTimeout(resize,100); return; }
+    canvas.width=W*dpr; canvas.height=H*dpr;
+    canvas.style.width=W+'px'; canvas.style.height=H+'px';
+    ctx.setTransform(1,0,0,1,0,0); ctx.scale(dpr,dpr);
+    buildGalaxy();
+  }
+
+  function buildGalaxy() {
+    var isMobile = W<768;
+    var COUNT = isMobile ? 1600 : 4000;
+    stars = [];
+
+    /* Galaxy core is slightly off-center — upper-left of center */
+    var GCX = W*0.18, GCY = H*0.50;
+
+    /* D.O.T.S orbit: bottom-right quadrant, far from text */
+    DOTS.orbitCx = W*0.76; DOTS.orbitCy = H*0.72;
+    DOTS.orbitRx = W*0.09; DOTS.orbitRy = H*0.07;
+    DOTS.baseX = DOTS.orbitCx + Math.cos(DOTS.orbitAngle)*DOTS.orbitRx;
+    DOTS.baseY = DOTS.orbitCy + Math.sin(DOTS.orbitAngle)*DOTS.orbitRy;
+    DOTS.x = DOTS.baseX; DOTS.y = DOTS.baseY;
+
+    /* Nebulae — one per quadrant + very subtle center */
+    nebulae = [
+      /* Galactic core — LEFT side, anchors the galaxy origin */
+      { x:GCX,    y:GCY,    rx:W*0.16, ry:H*0.22, r:255,g:255,b:255, a:0.055 },
+      /* Left arm glow — lavender sweeping from core */
+      { x:W*0.10, y:H*0.28, rx:W*0.18, ry:H*0.18, r:215,g:207,b:240, a:0.040 },
+      /* Bottom-left — mint dust lane */
+      { x:W*0.14, y:H*0.75, rx:W*0.16, ry:H*0.15, r:184,g:224,b:210, a:0.030 },
+      /* Far right mid — faint sky arm tip (where text breathes) */
+      { x:W*0.88, y:H*0.45, rx:W*0.14, ry:H*0.12, r:162,g:210,b:255, a:0.018 },
+      /* Bottom-right — peach glow around DOTS planet */
+      { x:W*0.76, y:H*0.72, rx:W*0.16, ry:H*0.14, r:255,g:205,b:178, a:0.030 },
+    ];
+
+    for (var i=0; i<COUNT; i++) {
+      var z = Math.pow(Math.random(), 0.62);
+      var x, y, color, size, isBig;
+      var type = Math.random();
+
+      if (type < 0.60) {
+        /* Spiral arm — 3 arms wrapping around the whole canvas */
+        var arm = i%3, armOff = (arm/3)*Math.PI*2;
+        var t2  = Math.pow(Math.random(), 0.52);
+        var rad = t2 * Math.max(W,H) * 0.95;
+        var ang = t2*Math.PI*10 + armOff;
+        var spr = rad*0.18;
+        x = GCX + Math.cos(ang)*rad + (Math.random()-0.5)*spr*2;
+        y = GCY + Math.sin(ang)*rad*0.44 + (Math.random()-0.5)*spr;
+      } else if (type < 0.78) {
+        /* Core cluster — near galaxy center but NOT dead center of canvas */
+        var cr2 = Math.pow(Math.random(),2.5)*Math.min(W,H)*0.15;
+        var ca2 = Math.random()*Math.PI*2;
+        x = GCX + Math.cos(ca2)*cr2;
+        y = GCY + Math.sin(ca2)*cr2*0.5;
+        z = Math.max(z, 0.5);
+      } else {
+        /* Scattered halo stars — fill edges */
+        x = Math.random()*W;
+        y = Math.random()*H;
+        z = Math.random()*0.35;
+      }
+
+      x = Math.max(2, Math.min(W-2,x));
+      y = Math.max(2, Math.min(H-2,y));
+
+      isBig = z>0.73 && Math.random()<0.12;
+      if (isBig)        size = 2.0+Math.random()*3.8;
+      else if (z>0.50)  size = 0.6+Math.random()*1.5;
+      else if (z>0.30)  size = 0.32+Math.random()*0.8;
+      else              size = 0.15+Math.random()*0.42;
+
+      if (z<0.26) {
+        var w2 = 210+Math.random()*38;
+        color = { r:w2, g:w2+5, b:Math.min(255,w2+32) };
+      } else {
+        color = PALETTE[Math.floor(Math.random()*PALETTE.length)];
+      }
+
+      var brightness = Math.min(0.12+z*0.68+Math.random()*0.20, 1.0);
+      stars.push({
+        x,y, baseX:x, baseY:y, vx:0, vy:0,
+        size, color, brightness,
+        phase:Math.random()*Math.PI*2,
+        isBig, z,
+        mass: isBig ? 3+Math.random()*3 : 0.4+Math.random()*0.7,
+        twinkleRate: 0.005+z*0.02+Math.random()*0.012,
+      });
+    }
+
+    stars.sort(function(a,b){ return a.z-b.z; });
+    cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(draw);
+  }
+
+  function draw() {
+    ctx.clearRect(0,0,W,H);
+    time += 0.004;
+    var mx=mouse.x, my=mouse.y;
+
+    /* 1. Nebulae */
+    for (var ni=0; ni<nebulae.length; ni++) {
+      var n=nebulae[ni];
+      ctx.save(); ctx.translate(n.x,n.y); ctx.scale(1,n.ry/n.rx);
+      var ng=ctx.createRadialGradient(0,0,0,0,0,n.rx);
+      ng.addColorStop(0,   'rgba('+n.r+','+n.g+','+n.b+','+n.a+')');
+      ng.addColorStop(0.45,'rgba('+n.r+','+n.g+','+n.b+','+(n.a*0.4)+')');
+      ng.addColorStop(1,   'rgba('+n.r+','+n.g+','+n.b+',0)');
+      ctx.fillStyle=ng; ctx.beginPath(); ctx.arc(0,0,n.rx,0,Math.PI*2); ctx.fill();
+      ctx.restore();
+    }
+
+    /* 2. Stars (far→near) */
+    for (var i=0; i<stars.length; i++) {
+      var s=stars[i];
+      var hdx=s.x-mx, hdy=s.y-my, hd=Math.sqrt(hdx*hdx+hdy*hdy);
+      if (hd<130&&hd>0) {
+        var ha=Math.atan2(hdy,hdx), hf=((130-hd)/130)*0.26*(0.3+s.z*0.7);
+        s.vx+=Math.cos(ha)*hf/s.mass; s.vy+=Math.sin(ha)*hf/s.mass;
+      }
+      s.vx+=(s.baseX-s.x)*0.003; s.vy+=(s.baseY-s.y)*0.003;
+      s.vx*=0.96; s.vy*=0.96;
+      s.x+=s.vx; s.y+=s.vy;
+      s.phase+=s.twinkleRate;
+      var tw=0.45+0.55*Math.sin(time*1.8+s.phase);
+      var alpha=s.brightness*(0.38+0.62*tw);
+      var r=Math.round(s.color.r), g=Math.round(s.color.g), b=Math.round(s.color.b);
+
+      if (s.isBig) {
+        var hR=s.size*4.8;
+        var gr=ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,hR);
+        gr.addColorStop(0,'rgba('+r+','+g+','+b+','+(alpha*0.28).toFixed(3)+')');
+        gr.addColorStop(0.4,'rgba('+r+','+g+','+b+','+(alpha*0.08).toFixed(3)+')');
+        gr.addColorStop(1,'rgba('+r+','+g+','+b+',0)');
+        ctx.fillStyle=gr; ctx.beginPath(); ctx.arc(s.x,s.y,hR,0,Math.PI*2); ctx.fill();
+        /* Cross spikes */
+        ctx.save(); ctx.translate(s.x,s.y);
+        var spLen=s.size*3.8;
+        for (var sp=0;sp<4;sp++) {
+          ctx.rotate(Math.PI/2);
+          var sg=ctx.createLinearGradient(0,0,0,spLen);
+          sg.addColorStop(0,'rgba('+r+','+g+','+b+','+(alpha*0.55).toFixed(3)+')');
+          sg.addColorStop(1,'rgba('+r+','+g+','+b+',0)');
+          ctx.strokeStyle=sg; ctx.lineWidth=s.size*0.32;
+          ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(0,spLen); ctx.stroke();
+        }
+        ctx.restore();
+        ctx.fillStyle='rgba('+r+','+g+','+b+','+alpha.toFixed(3)+')';
+        ctx.fillRect(s.x-s.size/2,s.y-s.size/2,s.size,s.size);
+      } else {
+        ctx.fillStyle='rgba('+r+','+g+','+b+','+(alpha*(0.35+s.z*0.65)).toFixed(3)+')';
+        ctx.beginPath(); ctx.arc(s.x,s.y,s.size,0,Math.PI*2); ctx.fill();
+      }
+    }
+
+    /* 3. D.O.T.S planet */
+    DOTS.orbitAngle+=0.00008;
+    DOTS.baseX=DOTS.orbitCx+Math.cos(DOTS.orbitAngle)*DOTS.orbitRx;
+    DOTS.baseY=DOTS.orbitCy+Math.sin(DOTS.orbitAngle)*DOTS.orbitRy;
+    DOTS.vx+=(DOTS.baseX-DOTS.x)*0.014; DOTS.vy+=(DOTS.baseY-DOTS.y)*0.014;
+    DOTS.vx*=0.80; DOTS.vy*=0.80;
+    DOTS.x+=DOTS.vx; DOTS.y+=DOTS.vy;
+    DOTS.shieldGlow*=0.955;
+    var dm=Math.sqrt(Math.pow(mx-DOTS.x,2)+Math.pow(my-DOTS.y,2));
+    if (dm<90) DOTS.shieldGlow=Math.min(DOTS.shieldGlow+0.07,1.0);
+    drawDOTS();
+
+    /* 4. Click ripple */
+    if (clickData) {
+      var age=(performance.now()-clickData.time)/1000;
+      if (age<0.7) {
+        var rr=age*290, ra=(1-age/0.7)*0.17;
+        ctx.beginPath(); ctx.arc(clickData.x,clickData.y,rr,0,Math.PI*2);
+        ctx.strokeStyle='rgba(200,182,255,'+ra.toFixed(3)+')';
+        ctx.lineWidth=1.5; ctx.stroke();
+      } else clickData=null;
+    }
+    rafId=requestAnimationFrame(draw);
+  }
+
+  function drawDOTS() {
+    var cx=DOTS.x, cy=DOTS.y, shR=44;
+    var pulse=0.20+0.12*Math.sin(time*1.6);
+    var sa=DOTS.shieldGlow*0.55+pulse;
+
+    /* Atmospheric halo */
+    var halo=ctx.createRadialGradient(cx,cy,0,cx,cy,shR*3.0);
+    halo.addColorStop(0,'rgba(215,207,240,'+(sa*0.14).toFixed(3)+')');
+    halo.addColorStop(0.35,'rgba(184,224,210,'+(sa*0.07).toFixed(3)+')');
+    halo.addColorStop(0.7,'rgba(162,210,255,'+(sa*0.03).toFixed(3)+')');
+    halo.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=halo; ctx.beginPath(); ctx.arc(cx,cy,shR*3.0,0,Math.PI*2); ctx.fill();
+
+    /* Outer rotating dashed ring */
+    ctx.save(); ctx.translate(cx,cy); ctx.rotate(time*0.22);
+    ctx.beginPath(); ctx.arc(0,0,shR,0,Math.PI*2);
+    ctx.setLineDash([6,10]);
+    ctx.strokeStyle='rgba(215,207,240,'+(sa*0.70).toFixed(3)+')';
+    ctx.lineWidth=1.1; ctx.stroke(); ctx.setLineDash([]); ctx.restore();
+
+    /* Inner counter-rotating ring */
+    ctx.save(); ctx.translate(cx,cy); ctx.rotate(-time*0.38);
+    ctx.beginPath(); ctx.arc(0,0,shR*0.65,0,Math.PI*2);
+    ctx.setLineDash([3,14]);
+    ctx.strokeStyle='rgba(184,224,210,'+(sa*0.48).toFixed(3)+')';
+    ctx.lineWidth=0.8; ctx.stroke(); ctx.setLineDash([]); ctx.restore();
+
+    /* Planet body fill */
+    var planet=ctx.createRadialGradient(cx,cy,0,cx,cy,shR*0.36);
+    planet.addColorStop(0,'rgba(215,207,240,'+(sa*0.18).toFixed(3)+')');
+    planet.addColorStop(0.6,'rgba(184,224,210,'+(sa*0.07).toFixed(3)+')');
+    planet.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=planet; ctx.beginPath(); ctx.arc(cx,cy,shR*0.36,0,Math.PI*2); ctx.fill();
+
+    /* Impact ripples */
+    for (var ri=DOTS.ripples.length-1; ri>=0; ri--) {
+      var rip=DOTS.ripples[ri];
+      rip.r+=2.5; rip.a*=0.90;
+      if (rip.a<0.012) { DOTS.ripples.splice(ri,1); continue; }
+      ctx.beginPath(); ctx.arc(cx,cy,rip.r,0,Math.PI*2);
+      ctx.strokeStyle='rgba(215,207,240,'+rip.a.toFixed(3)+')';
+      ctx.lineWidth=1.5; ctx.stroke();
+    }
+
+    /* 4 dots — slow rotation */
+    var rot=time*0.055;
+    var pos=[];
+    for (var di=0; di<DOTS.dots.length; di++) {
+      var dot=DOTS.dots[di];
+      var cosR=Math.cos(rot), sinR=Math.sin(rot);
+      var px=cx+dot.ox*cosR-dot.oy*sinR;
+      var py=cy+dot.ox*sinR+dot.oy*cosR;
+      pos.push({x:px,y:py,r:dot.r,g:dot.g,b:dot.b});
+      var dg=ctx.createRadialGradient(px,py,0,px,py,12);
+      dg.addColorStop(0,'rgba('+dot.r+','+dot.g+','+dot.b+',0.65)');
+      dg.addColorStop(1,'rgba('+dot.r+','+dot.g+','+dot.b+',0)');
+      ctx.fillStyle=dg; ctx.beginPath(); ctx.arc(px,py,12,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle='rgba('+dot.r+','+dot.g+','+dot.b+',1)';
+      ctx.beginPath(); ctx.arc(px,py,4.2,0,Math.PI*2); ctx.fill();
+    }
+
+    /* Constellation lines */
+    var la=(sa*0.28).toFixed(3);
+    for (var di2=0;di2<pos.length;di2++) for (var dj=di2+1;dj<pos.length;dj++) {
+      var lg=ctx.createLinearGradient(pos[di2].x,pos[di2].y,pos[dj].x,pos[dj].y);
+      lg.addColorStop(0,'rgba('+pos[di2].r+','+pos[di2].g+','+pos[di2].b+','+la+')');
+      lg.addColorStop(1,'rgba('+pos[dj].r+','+pos[dj].g+','+pos[dj].b+','+la+')');
+      ctx.strokeStyle=lg; ctx.lineWidth=0.55;
+      ctx.beginPath(); ctx.moveTo(pos[di2].x,pos[di2].y); ctx.lineTo(pos[dj].x,pos[dj].y); ctx.stroke();
+    }
+  }
+
+  function getPos(e) {
+    var rect=heroEl.getBoundingClientRect();
+    return {x:e.clientX-rect.left, y:e.clientY-rect.top};
+  }
+
+  function kick(x,y) {
+    clickData={x,y,time:performance.now()};
+    var ddx=DOTS.x-x, ddy=DOTS.y-y, ddist=Math.sqrt(ddx*ddx+ddy*ddy);
+    if (ddist<95) {
+      DOTS.shieldGlow=1.0;
+      DOTS.ripples.push({r:28,a:0.85}); DOTS.ripples.push({r:44,a:0.55});
+      var pa=Math.atan2(ddy,ddx);
+      DOTS.vx+=Math.cos(pa)*4.5; DOTS.vy+=Math.sin(pa)*4.5;
+    }
+    for (var i=0;i<stars.length;i++) {
+      var s=stars[i], dx=s.x-x, dy=s.y-y, dist=Math.sqrt(dx*dx+dy*dy);
+      if (dist<260&&dist>0) {
+        var ang=Math.atan2(dy,dx), f=Math.pow((260-dist)/260,2)*12/s.mass;
+        s.vx+=Math.cos(ang)*f; s.vy+=Math.sin(ang)*f;
+      }
+    }
+  }
+
+  heroEl.addEventListener('mousemove',function(e){var p=getPos(e);mouse.x=p.x;mouse.y=p.y;});
+  heroEl.addEventListener('mouseleave',function(){mouse.x=-9999;mouse.y=-9999;});
+  heroEl.addEventListener('click',function(e){var p=getPos(e);kick(p.x,p.y);});
+  heroEl.addEventListener('touchstart',function(e){var t=e.touches[0],p=getPos(t);mouse.x=p.x;mouse.y=p.y;kick(p.x,p.y);},{passive:true});
+  heroEl.addEventListener('touchmove',function(e){var t=e.touches[0],p=getPos(t);mouse.x=p.x;mouse.y=p.y;},{passive:true});
+  heroEl.addEventListener('touchend',function(){mouse.x=-9999;mouse.y=-9999;});
+  window.addEventListener('resize',function(){cancelAnimationFrame(rafId);resize();});
+
+  var mp=document.getElementById('main-page');
+  if (mp&&mp.classList.contains('visible')) resize();
+  else if (mp) new MutationObserver(function(m,o){
+    if(mp.classList.contains('visible')){o.disconnect();setTimeout(resize,80);}
+  }).observe(mp,{attributes:true,attributeFilter:['class']});
+})();
+</script>
+<script>
+/* ══════════════════════════════════════════════════
+   PARTICLE MESH — Infinity ∞ Orbit + Ambient Layer
+   Ported from web.dotsai.cloud ParticleMesh.tsx
+   - 70 particles orbiting an infinity (lemniscate) path
+   - Orbit particles connect with glowing lines (dist < 120)
+   - 50 ambient floating particles with sine drift
+   - Mouse repulsion on all particles
+   - Scroll fade (opacity → 0 at 70% scroll past hero)
+══════════════════════════════════════════════════ */
+(function () {
+  const COLORS = [
+    [200, 182, 255],
+    [184, 224, 210],
+    [255, 205, 178],
+    [162, 210, 255],
+    [255, 181, 194],
+  ];
+
+  function infinityPoint(t, cx, cy, scale) {
+    var denom = 1 + Math.sin(t) * Math.sin(t);
+    return {
+      x: cx + (scale * Math.cos(t)) / denom,
+      y: cy + (scale * Math.sin(t) * Math.cos(t)) / denom,
+    };
+  }
+
+  function initMesh() {
+    var canvas = document.getElementById('particle-mesh');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var heroEl = document.getElementById('hero');
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var W, H, cx, cy, scale;
+    var mx = -1000, my = -1000;
+    var scrollY = 0;
+    var time = 0;
+    var raf;
+
+    function resize() {
+      W = heroEl.offsetWidth;
+      H = heroEl.offsetHeight;
+      if (!W || !H) { setTimeout(resize, 100); return; }
+      canvas.width  = W * dpr;
+      canvas.height = H * dpr;
+      canvas.style.width  = W + 'px';
+      canvas.style.height = H + 'px';
+      ctx.setTransform(1,0,0,1,0,0);
+      ctx.scale(dpr, dpr);
+      cx = W * 0.74; cy = H * 0.10;
+      scale = Math.min(W, H) * 0.14;
+      buildParticles();
+    }
+
+    var particles = [];
+    function buildParticles() {
+      particles = [];
+      var isMobile = W < 768;
+      var orbitCount   = isMobile ? 40 : 70;
+      var ambientCount = isMobile ? 25 : 50;
+
+      for (var i = 0; i < orbitCount; i++) {
+        var phase = (i / orbitCount) * Math.PI * 2;
+        var pt = infinityPoint(phase, cx, cy, scale);
+        particles.push({
+          x: pt.x + (Math.random()-0.5)*20,
+          y: pt.y + (Math.random()-0.5)*20,
+          vx: 0, vy: 0,
+          targetX: pt.x, targetY: pt.y,
+          phase: phase,
+          color: COLORS[i % COLORS.length],
+          radius: 1.5 + Math.random() * 1,
+          glow: Math.random(),
+          type: 'orbit'
+        });
+      }
+      for (var j = 0; j < ambientCount; j++) {
+        particles.push({
+          x: Math.random()*W, y: Math.random()*H,
+          vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3,
+          targetX: 0, targetY: 0,
+          phase: Math.random()*Math.PI*2,
+          color: COLORS[j % COLORS.length],
+          radius: 0.8 + Math.random()*0.6,
+          glow: Math.random(),
+          type: 'ambient'
+        });
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      time += 0.008;
+
+      var scrollFade = Math.max(0, 1 - scrollY / (H * 0.7));
+      ctx.globalAlpha = scrollFade;
+
+      var orbitPs = [];
+      for (var i = 0; i < particles.length; i++) {
+        var p = particles[i];
+
+        if (p.type === 'orbit') {
+          p.phase += 0.002;
+          var target = infinityPoint(p.phase, cx, cy, scale);
+          p.targetX = target.x; p.targetY = target.y;
+          var dx = p.targetX - p.x, dy = p.targetY - p.y;
+          p.vx += dx * 0.012; p.vy += dy * 0.012;
+          p.vx *= 0.94; p.vy *= 0.94;
+          orbitPs.push(p);
+        } else {
+          p.vx += Math.sin(time*1.2+p.phase)*0.008;
+          p.vy += Math.cos(time*0.8+p.phase)*0.008;
+          p.vx *= 0.98; p.vy *= 0.98;
+          if (p.x < 0 || p.x > W) p.vx *= -1;
+          if (p.y < 0 || p.y > H) p.vy *= -1;
+        }
+
+        // Mouse repulsion
+        var mdx = p.x - mx, mdy = p.y - my;
+        var mDist = Math.sqrt(mdx*mdx + mdy*mdy);
+        if (mDist < 140 && mDist > 0) {
+          var force = (140 - mDist) / 140;
+          p.vx += (mdx/mDist)*force*0.8;
+          p.vy += (mdy/mDist)*force*0.8;
+        }
+
+        p.x += p.vx; p.y += p.vy;
+        p.glow = 0.4 + 0.6*Math.abs(Math.sin(time*2.2+p.phase));
+      }
+
+      // Draw orbit connections
+      for (var a = 0; a < orbitPs.length; a++) {
+        for (var b = a+1; b < orbitPs.length; b++) {
+          var adx = orbitPs[a].x - orbitPs[b].x;
+          var ady = orbitPs[a].y - orbitPs[b].y;
+          var dist = Math.sqrt(adx*adx + ady*ady);
+          if (dist < 120) {
+            var alpha = ((120 - dist)/120) * 0.08;
+            ctx.strokeStyle = 'rgba(200,182,255,'+alpha.toFixed(3)+')';
+            ctx.lineWidth = 0.6;
+            ctx.beginPath();
+            ctx.moveTo(orbitPs[a].x, orbitPs[a].y);
+            ctx.lineTo(orbitPs[b].x, orbitPs[b].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw particles
+      for (var k = 0; k < particles.length; k++) {
+        var p = particles[k];
+        var c = p.color;
+        var r = c[0], g = c[1], bv = c[2];
+        var palpha = p.type==='orbit' ? 0.6+p.glow*0.4 : 0.3+p.glow*0.2;
+
+        if (p.glow > 0.6 && p.type==='orbit') {
+          var grad = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.radius*6);
+          grad.addColorStop(0,'rgba('+r+','+g+','+bv+','+(palpha*0.15).toFixed(3)+')');
+          grad.addColorStop(1,'rgba('+r+','+g+','+bv+',0)');
+          ctx.fillStyle = grad;
+          ctx.beginPath(); ctx.arc(p.x,p.y,p.radius*6,0,Math.PI*2); ctx.fill();
+        }
+        ctx.fillStyle='rgba('+r+','+g+','+bv+','+palpha.toFixed(3)+')';
+        ctx.beginPath(); ctx.arc(p.x,p.y,p.radius,0,Math.PI*2); ctx.fill();
+      }
+
+      ctx.globalAlpha = 1;
+      raf = requestAnimationFrame(draw);
+    }
+
+    // Events
+    heroEl.addEventListener('mousemove', function(e) {
+      var rect = heroEl.getBoundingClientRect();
+      mx = e.clientX - rect.left; my = e.clientY - rect.top;
+    }, { passive: true });
+    heroEl.addEventListener('mouseleave', function() { mx=-1000; my=-1000; });
+    window.addEventListener('scroll', function() { scrollY = window.scrollY; }, { passive: true });
+    window.addEventListener('resize', function() { cancelAnimationFrame(raf); resize(); });
+
+    resize();
+    raf = requestAnimationFrame(draw);
+  }
+
+  // Init after splash dismissed
+  var mainPage = document.getElementById('main-page');
+  if (mainPage && mainPage.classList.contains('visible')) {
+    setTimeout(initMesh, 50);
+  } else if (mainPage) {
+    var obs = new MutationObserver(function(muts) {
+      for (var m of muts) {
+        if (m.target.classList.contains('visible')) {
+          obs.disconnect(); setTimeout(initMesh, 150); break;
+        }
+      }
+    });
+    obs.observe(mainPage, { attributes: true, attributeFilter: ['class'] });
+  }
+})();
+</script>
+
+<!-- ── QUANTUM FIELD CURSOR ── -->
+<canvas id="cursor-trail" aria-hidden="true"></canvas>
+<div id="cursor-dot" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
+
+<script>
+/* ══════════════════════════════════════════════════
+   QUANTUM FIELD CURSOR
+   - Dot: follows instantly (actual cursor position)
+   - Ring: spring-lagged 44px circle
+   - Trail: 28 comet particles in D.O.T.S. palette
+   - Hover: ring expands + dot brightens (magnetic)
+   - Click: ring shrinks + 12-particle burst explosion
+══════════════════════════════════════════════════ */
+(function () {
+  if ('ontouchstart' in window || !window.matchMedia) return;
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+
+  const dot   = document.getElementById('cursor-dot');
+  const ring  = document.getElementById('cursor-ring');
+  const tc    = document.getElementById('cursor-trail');
+  const ctx   = tc.getContext('2d');
+
+  const PALETTE = [
+    [200, 182, 255],
+    [184, 224, 210],
+    [255, 205, 178],
+    [162, 210, 255],
+    [255, 181, 194],
+  ];
+
+  const TRAIL = 28;
+  const hist  = [];
+  let mx = -999, my = -999;
+  let rx = -999, ry = -999;
+  let bursts = [];
+
+  function resize() {
+    tc.width  = window.innerWidth;
+    tc.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  /* ── Mouse tracking ── */
+  document.addEventListener('mousemove', function (e) {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px';
+    dot.style.top  = my + 'px';
+    hist.unshift({ x: mx, y: my });
+    if (hist.length > TRAIL) hist.pop();
+  }, { passive: true });
+
+  /* ── Hover on interactive elements ── */
+  document.addEventListener('mouseover', function (e) {
+    if (e.target && e.target.closest('a,button,[role="button"],input,textarea,select,.btn-primary,.btn-secondary,.service-link')) {
+      dot.classList.add('hovering');
+      ring.classList.add('hovering');
+    }
+  });
+  document.addEventListener('mouseout', function (e) {
+    if (e.target && e.target.closest('a,button,[role="button"],input,textarea,select,.btn-primary,.btn-secondary,.service-link')) {
+      dot.classList.remove('hovering');
+      ring.classList.remove('hovering');
+    }
+  });
+
+  /* ── Click burst ── */
+  document.addEventListener('mousedown', function () {
+    dot.classList.add('clicking');
+    ring.classList.add('clicking');
+    var ps = [];
+    for (var i = 0; i < 14; i++) {
+      var a = (i / 14) * Math.PI * 2 + Math.random() * 0.3;
+      var sp = 1.5 + Math.random() * 5;
+      ps.push({
+        x: mx, y: my,
+        vx: Math.cos(a) * sp, vy: Math.sin(a) * sp,
+        color: PALETTE[i % PALETTE.length],
+        size: 1.5 + Math.random() * 2.5
+      });
+    }
+    bursts.push({ t: performance.now(), ps: ps });
+  });
+  document.addEventListener('mouseup', function () {
+    dot.classList.remove('clicking');
+    ring.classList.remove('clicking');
+  });
+
+  /* ── Animation loop ── */
+  function draw() {
+    ctx.clearRect(0, 0, tc.width, tc.height);
+
+    /* Spring ring */
+    rx += (mx - rx) * 0.10;
+    ry += (my - ry) * 0.10;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+
+    /* Comet trail */
+    for (var i = 0; i < hist.length; i++) {
+      var p   = hist[i];
+      var t   = i / TRAIL;
+      var alp = (1 - t) * 0.55;
+      var sz  = (1 - t) * 5;
+      if (sz < 0.2 || alp < 0.01) continue;
+      var ci  = Math.floor(i * PALETTE.length / TRAIL) % PALETTE.length;
+      var c   = PALETTE[ci];
+      var g   = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, sz * 2.5);
+      g.addColorStop(0, 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + alp.toFixed(3) + ')');
+      g.addColorStop(1, 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',0)');
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, sz * 2.5, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    /* Click bursts */
+    var now = performance.now();
+    bursts = bursts.filter(function (b) {
+      var age = (now - b.t) / 800;
+      if (age > 1) return false;
+      for (var j = 0; j < b.ps.length; j++) {
+        var p = b.ps[j];
+        p.x += p.vx; p.y += p.vy;
+        p.vx *= 0.91; p.vy *= 0.91;
+        var al = (1 - age) * 0.85;
+        var c  = p.color;
+        ctx.fillStyle = 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + al.toFixed(3) + ')';
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size * (1 - age * 0.6), 0, Math.PI * 2);
+        ctx.fill();
+      }
+      return true;
+    });
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+
+
+<style>
+/* ── Quantum Dot Cursor ── */
+body { cursor: none !important; }
+a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .service-row { cursor: none !important; }
+#qc-canvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 999999; pointer-events: none; }
+</style>
+
+<canvas id="qc-canvas" aria-hidden="true"></canvas>
+
+<script>
+/* ══════════════════════════════════════════════════
+   QUANTUM DOT CURSOR
+   Brand-aware interactive cursor system for dotsai.in
+   - Inner dot: exact pos, D.O.T.S color pulse
+   - Outer ring: spring-physics lag, velocity stretch
+   - Nebula trail: 14-point comet tail
+   - Hover: ring morphs + label rotates around ring
+   - Click: nova burst of 12 particles
+══════════════════════════════════════════════════ */
+(function () {
+  var canvas = document.getElementById('qc-canvas');
+  var ctx = canvas.getContext('2d');
+
+  // D.O.T.S brand palette
+  var PALETTE = [
+    [200, 182, 255], // lavender (Data)
+    [184, 224, 210], // mint (Operations)
+    [255, 205, 178], // peach (Tech)
+    [162, 210, 255], // sky (Strategy)
+  ];
+
+  var W = window.innerWidth, H = window.innerHeight;
+  canvas.width  = W; canvas.height = H;
+  canvas.style.width  = W + 'px';
+  canvas.style.height = H + 'px';
+
+  window.addEventListener('resize', function () {
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width = W; canvas.height = H;
+    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+  });
+
+  // --- State ---
+  var mx = -200, my = -200;         // raw mouse
+  var rx = -200, ry = -200;          // ring pos (lagged)
+  var rvx = 0,   rvy = 0;            // ring velocity
+  var trail = [];                     // [{ x, y, t }]
+  var burstParticles = [];            // click nova
+  var isHover = false;
+  var hoverLabel = '';
+  var colorT = 0;                     // palette cycle time
+  var TRAIL_LEN = 14;
+  var RING_R = 22;                    // ring radius at rest
+  var DOT_R  = 3.5;
+
+  // --- Mouse tracking ---
+  document.addEventListener('mousemove', function (e) {
+    mx = e.clientX; my = e.clientY;
+    trail.push({ x: mx, y: my, t: performance.now() });
+    if (trail.length > TRAIL_LEN) trail.shift();
+  }, { passive: true });
+
+  document.addEventListener('mouseleave', function () {
+    mx = -300; my = -300;
+  });
+
+  // Hover detection
+  document.addEventListener('mouseover', function (e) {
+    var el = e.target;
+    if (el.closest('a, button, [role="button"], .btn-primary, .btn-secondary, .service-row, .nav-cta')) {
+      isHover = true;
+      var found = el.closest('a, button, [role="button"]');
+      hoverLabel = found ? (found.textContent || '').trim().slice(0, 12).toUpperCase() : '';
+    }
+  });
+  document.addEventListener('mouseout', function (e) {
+    var el = e.target;
+    if (el.closest('a, button, [role="button"], .btn-primary, .btn-secondary, .service-row, .nav-cta')) {
+      isHover = false; hoverLabel = '';
+    }
+  });
+
+  // Click nova
+  document.addEventListener('click', function (e) {
+    var px = e.clientX, py = e.clientY;
+    for (var i = 0; i < 12; i++) {
+      var angle = (i / 12) * Math.PI * 2;
+      var speed = 3 + Math.random() * 5;
+      var ci = Math.floor(Math.random() * PALETTE.length);
+      burstParticles.push({
+        x: px, y: py,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        life: 1.0,
+        r: PALETTE[ci][0], g: PALETTE[ci][1], b: PALETTE[ci][2],
+        size: 1.5 + Math.random() * 2.5,
+      });
+    }
+  });
+
+  // --- Draw loop ---
+  var lastT = performance.now();
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  function draw() {
+    requestAnimationFrame(draw);
+    var now = performance.now();
+    var dt = Math.min((now - lastT) / 16.67, 3); // normalized to 60fps
+    lastT = now;
+
+    ctx.clearRect(0, 0, W, H);
+
+    colorT += 0.008 * dt;
+    var cIdx   = Math.floor(colorT) % PALETTE.length;
+    var cNext  = (cIdx + 1) % PALETTE.length;
+    var cFrac  = colorT % 1;
+    var cr = lerp(PALETTE[cIdx][0], PALETTE[cNext][0], cFrac);
+    var cg = lerp(PALETTE[cIdx][1], PALETTE[cNext][1], cFrac);
+    var cb = lerp(PALETTE[cIdx][2], PALETTE[cNext][2], cFrac);
+
+    // Spring physics for ring
+    var stiffness = isHover ? 0.14 : 0.10;
+    var damping   = isHover ? 0.70 : 0.74;
+    rvx += (mx - rx) * stiffness * dt;
+    rvy += (my - ry) * stiffness * dt;
+    rvx *= Math.pow(damping, dt);
+    rvy *= Math.pow(damping, dt);
+    rx += rvx * dt;
+    ry += rvy * dt;
+
+    // Velocity magnitude for stretch
+    var speed = Math.sqrt(rvx * rvx + rvy * rvy);
+    var stretch = Math.min(speed * 0.06, 0.9); // how much to stretch
+    var angle   = Math.atan2(rvy, rvx);
+
+    // ── 1. Nebula trail ──
+    var now2 = performance.now();
+    for (var i = 0; i < trail.length; i++) {
+      var pt = trail[i];
+      var frac = i / trail.length;        // 0 = oldest, 1 = newest
+      var age  = (now2 - pt.t) / 350;    // age in 0-1 over 350ms
+      var a    = frac * (1 - Math.min(age, 1)) * 0.35;
+      if (a <= 0) continue;
+      var sz   = DOT_R * 0.5 * frac;
+      ctx.beginPath();
+      ctx.arc(pt.x, pt.y, Math.max(sz, 0.5), 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(' + Math.round(cr) + ',' + Math.round(cg) + ',' + Math.round(cb) + ',' + a.toFixed(3) + ')';
+      ctx.fill();
+    }
+
+    // Draw trail connecting line (subtle)
+    if (trail.length > 2) {
+      ctx.beginPath();
+      ctx.moveTo(trail[0].x, trail[0].y);
+      for (var i = 1; i < trail.length; i++) {
+        var frac = i / trail.length;
+        ctx.lineTo(trail[i].x, trail[i].y);
+      }
+      ctx.strokeStyle = 'rgba(' + Math.round(cr) + ',' + Math.round(cg) + ',' + Math.round(cb) + ',0.06)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+
+    // ── 2. Outer ring (stretched oval) ──
+    var ringAlpha = isHover ? 0.9 : 0.55;
+    ctx.save();
+    ctx.translate(rx, ry);
+    ctx.rotate(angle);
+    ctx.scale(1 + stretch, 1 - stretch * 0.4);
+    ctx.rotate(-angle);
+
+    // Ring glow
+    var grad = ctx.createRadialGradient(0, 0, RING_R - 4, 0, 0, RING_R + 10);
+    grad.addColorStop(0, 'rgba(' + Math.round(cr) + ',' + Math.round(cg) + ',' + Math.round(cb) + ',' + (ringAlpha * 0.15).toFixed(3) + ')');
+    grad.addColorStop(1, 'rgba(' + Math.round(cr) + ',' + Math.round(cg) + ',' + Math.round(cb) + ',0)');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(0, 0, RING_R + 10, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Ring stroke
+    ctx.beginPath();
+    ctx.arc(0, 0, RING_R, 0, Math.PI * 2);
+    if (isHover) {
+      ctx.fillStyle = 'rgba(' + Math.round(cr) + ',' + Math.round(cg) + ',' + Math.round(cb) + ',0.12)';
+      ctx.fill();
+    }
+    ctx.strokeStyle = 'rgba(' + Math.round(cr) + ',' + Math.round(cg) + ',' + Math.round(cb) + ',' + ringAlpha.toFixed(3) + ')';
+    ctx.lineWidth = isHover ? 1.5 : 1;
+    ctx.stroke();
+
+    // Hover: rotating text around ring
+    if (isHover && hoverLabel) {
+      var labelAngle = (now * 0.001) % (Math.PI * 2);
+      var chars = hoverLabel.split('');
+      ctx.font = '7px "Space Mono", monospace';
+      ctx.fillStyle = 'rgba(' + Math.round(cr) + ',' + Math.round(cg) + ',' + Math.round(cb) + ',0.7)';
+      for (var i = 0; i < chars.length; i++) {
+        var ca = labelAngle + (i / chars.length) * Math.PI * 2;
+        var cx2 = Math.cos(ca) * (RING_R + 10);
+        var cy2 = Math.sin(ca) * (RING_R + 10);
+        ctx.save();
+        ctx.translate(cx2, cy2);
+        ctx.rotate(ca + Math.PI / 2);
+        ctx.fillText(chars[i], -3, 3);
+        ctx.restore();
+      }
+    }
+    ctx.restore();
+
+    // ── 3. Inner dot ──
+    var dotGrad = ctx.createRadialGradient(mx, my, 0, mx, my, DOT_R * 3);
+    dotGrad.addColorStop(0, 'rgba(' + Math.round(cr) + ',' + Math.round(cg) + ',' + Math.round(cb) + ',1)');
+    dotGrad.addColorStop(0.4, 'rgba(' + Math.round(cr) + ',' + Math.round(cg) + ',' + Math.round(cb) + ',0.6)');
+    dotGrad.addColorStop(1, 'rgba(' + Math.round(cr) + ',' + Math.round(cg) + ',' + Math.round(cb) + ',0)');
+    ctx.fillStyle = dotGrad;
+    ctx.beginPath();
+    ctx.arc(mx, my, DOT_R * 3, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Solid core
+    ctx.fillStyle = 'rgb(' + Math.round(cr) + ',' + Math.round(cg) + ',' + Math.round(cb) + ')';
+    ctx.beginPath();
+    ctx.arc(mx, my, DOT_R, 0, Math.PI * 2);
+    ctx.fill();
+
+    // ── 4. Click nova burst ──
+    for (var i = burstParticles.length - 1; i >= 0; i--) {
+      var p = burstParticles[i];
+      p.x  += p.vx; p.y  += p.vy;
+      p.vx *= 0.92; p.vy *= 0.92;
+      p.life -= 0.04 * dt;
+      if (p.life <= 0) { burstParticles.splice(i, 1); continue; }
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(' + p.r + ',' + p.g + ',' + p.b + ',' + (p.life * 0.9).toFixed(3) + ')';
+      ctx.fill();
+    }
+  }
+
+  draw();
+})();
+</script>
+
+</body>
+</html>

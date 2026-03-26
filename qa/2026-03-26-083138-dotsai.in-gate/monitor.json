@@ -1,0 +1,144 @@
+{
+   "artifacts" : [
+      "SUMMARY.md",
+      "01-dns.txt",
+      "02-tls.txt",
+      "10-robots.txt",
+      "11-sitemap.xml"
+   ],
+   "checks" : [
+      {
+         "actual" : "200",
+         "expected" : "200",
+         "id" : "home_status",
+         "name" : "Homepage returns 200",
+         "severity" : "P0",
+         "status" : "pass"
+      },
+      {
+         "actual" : "200",
+         "expected" : "404 or 410",
+         "id" : "missing_status",
+         "name" : "Missing URL returns 404 or 410",
+         "severity" : "P0",
+         "status" : "fail"
+      },
+      {
+         "actual" : "none",
+         "expected" : "no noindex header",
+         "id" : "noindex_header",
+         "name" : "Homepage is not noindex",
+         "severity" : "P0",
+         "status" : "pass"
+      },
+      {
+         "actual" : "https://zeroonedotsai.consulting/",
+         "expected" : "https://dotsai.in/",
+         "id" : "home_canonical",
+         "name" : "Homepage canonical points to primary domain",
+         "severity" : "P0",
+         "status" : "fail"
+      },
+      {
+         "actual" : "https://zeroonedotsai.consulting/sitemap.xml",
+         "expected" : "sitemap on dotsai.in",
+         "id" : "robots_sitemap",
+         "name" : "robots.txt points to primary sitemap",
+         "severity" : "P0",
+         "status" : "fail"
+      },
+      {
+         "actual" : "33 foreign URLs",
+         "expected" : "0 foreign URLs",
+         "id" : "sitemap_foreign_urls",
+         "name" : "Sitemap contains only primary-domain URLs",
+         "severity" : "P0",
+         "status" : "fail"
+      },
+      {
+         "actual" : "200",
+         "expected" : "final public target on dotsai.in",
+         "id" : "old_domain_redirect",
+         "name" : "Legacy domain resolves cleanly",
+         "severity" : "P1",
+         "status" : "pass"
+      },
+      {
+         "actual" : "200",
+         "expected" : "final public target on dotsai.in",
+         "id" : "www_domain_redirect",
+         "name" : "www host resolves cleanly",
+         "severity" : "P1",
+         "status" : "pass"
+      }
+   ],
+   "counts" : {
+      "checks" : 8,
+      "p0_failures" : 4,
+      "p1_failures" : 0,
+      "pages" : 5,
+      "sitemap_foreign_urls" : 33,
+      "sitemap_urls" : 33
+   },
+   "domain" : "dotsai.in",
+   "generated_at" : "2026-03-26-083139",
+   "old_domain" : "zeroonedotsai.consulting",
+   "output_dir" : "qa/2026-03-26-083138-dotsai.in-gate",
+   "pages" : [
+      {
+         "cache-control" : "",
+         "canonical" : "https://zeroonedotsai.consulting/",
+         "content-type" : "text/html",
+         "file" : "qa/2026-03-26-083138-dotsai.in-gate/12-homepage.summary.txt",
+         "path" : "/",
+         "status" : "200",
+         "title" : "ZeroOne D.O.T.S AI \u00e2\u0080\u0094 Smart AI Tools That Help Your Business Make More Money",
+         "url" : "https://dotsai.in/",
+         "x-robots-tag" : ""
+      },
+      {
+         "cache-control" : "",
+         "canonical" : "https://zeroonedotsai.consulting/",
+         "content-type" : "text/html",
+         "file" : "qa/2026-03-26-083138-dotsai.in-gate/path-ai-agency-india.summary.txt",
+         "path" : "/ai-agency-india",
+         "status" : "200",
+         "title" : "ZeroOne D.O.T.S AI \u00e2\u0080\u0094 Smart AI Tools That Help Your Business Make More Money",
+         "url" : "https://dotsai.in/ai-agency-india",
+         "x-robots-tag" : ""
+      },
+      {
+         "cache-control" : "",
+         "canonical" : "https://zeroonedotsai.consulting/",
+         "content-type" : "text/html",
+         "file" : "qa/2026-03-26-083138-dotsai.in-gate/path-case-studies.summary.txt",
+         "path" : "/case-studies",
+         "status" : "200",
+         "title" : "ZeroOne D.O.T.S AI \u00e2\u0080\u0094 Smart AI Tools That Help Your Business Make More Money",
+         "url" : "https://dotsai.in/case-studies",
+         "x-robots-tag" : ""
+      },
+      {
+         "cache-control" : "",
+         "canonical" : "https://zeroonedotsai.consulting/",
+         "content-type" : "text/html",
+         "file" : "qa/2026-03-26-083138-dotsai.in-gate/path-insights.summary.txt",
+         "path" : "/insights",
+         "status" : "200",
+         "title" : "ZeroOne D.O.T.S AI \u00e2\u0080\u0094 Smart AI Tools That Help Your Business Make More Money",
+         "url" : "https://dotsai.in/insights",
+         "x-robots-tag" : ""
+      },
+      {
+         "cache-control" : "",
+         "canonical" : "https://zeroonedotsai.consulting/",
+         "content-type" : "text/html",
+         "file" : "qa/2026-03-26-083138-dotsai.in-gate/path-private-ai.summary.txt",
+         "path" : "/private-ai",
+         "status" : "200",
+         "title" : "ZeroOne D.O.T.S AI \u00e2\u0080\u0094 Smart AI Tools That Help Your Business Make More Money",
+         "url" : "https://dotsai.in/private-ai",
+         "x-robots-tag" : ""
+      }
+   ]
+}

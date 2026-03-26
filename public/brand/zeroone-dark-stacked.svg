@@ -1,0 +1,23 @@
+<svg id="logo-stacked" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" width="200" height="220">
+    <rect width="200" height="220" fill="#191924"/>
+    <!-- 3x3 Dot Matrix (centered) -->
+    <!-- Row 1 -->
+    <circle cx="70" cy="30" r="14" fill="#C8B6FF"/>
+    <circle cx="100" cy="30" r="14" fill="rgba(255,255,255,0.08)"/>
+    <circle cx="130" cy="30" r="14" fill="rgba(255,255,255,0.08)"/>
+    <!-- Row 2 -->
+    <circle cx="70" cy="60" r="14" fill="rgba(255,255,255,0.08)"/>
+    <circle cx="100" cy="60" r="14" fill="#B8E0D2"/>
+    <circle cx="130" cy="60" r="14" fill="rgba(255,255,255,0.08)"/>
+    <!-- Row 3 -->
+    <circle cx="70" cy="90" r="14" fill="rgba(255,255,255,0.08)"/>
+    <circle cx="100" cy="90" r="14" fill="rgba(255,255,255,0.08)"/>
+    <circle cx="130" cy="90" r="14" fill="#FFCDB2"/>
+
+    <!-- Wordmark (centered below) -->
+    <text x="100" y="140" text-anchor="middle" font-family="'Space Mono', 'Courier New', monospace" font-weight="700" font-size="18" letter-spacing="3" fill="#FFFFFF">ZEROONE</text>
+    <text x="100" y="166" text-anchor="middle" font-family="'Space Mono', 'Courier New', monospace" font-weight="700" font-size="18" letter-spacing="3">
+      <tspan fill="#C8B6FF">D</tspan><tspan fill="rgba(255,255,255,0.25)">·</tspan><tspan fill="#B8E0D2">O</tspan><tspan fill="rgba(255,255,255,0.25)">·</tspan><tspan fill="#FFCDB2">T</tspan><tspan fill="rgba(255,255,255,0.25)">·</tspan><tspan fill="#A2D2FF">S</tspan>
+      <tspan fill="#FFFFFF" dx="8">AI</tspan>
+    </text>
+  </svg>
