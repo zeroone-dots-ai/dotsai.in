@@ -3,7 +3,7 @@
 node_modules/
 out/
 
-# Env
+# Env & secrets
 .env
 .env.local
 .env.*.local
@@ -12,8 +12,27 @@ out/
 .DS_Store
 Thumbs.db
 
+# Editor
+*.swp
+*.swo
+
 # Logs
 *.log
+npm-debug.log*
+
+# Large binaries (stored separately, not in git)
 public/brand/logos/*.mp4
 public/brand/logos/*.png
 public/logo-render.png
+
+# Auto-generated / temp
+.axon/
+public/monitor-data/
+
+# Old splash dev files (keep v5-random as it's the canonical one)
+public/logo-splash-preview.html
+public/logo-splash-record.html
+public/logo-splash-v2.html
+public/logo-splash-v3.html
+public/logo-splash-v4.html
+public/site-monitor.html

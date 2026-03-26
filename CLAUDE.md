@@ -1,18 +1,135 @@
 # dotsai.in — CLAUDE.md
 
-> **Project:** Premium single-page solopreneur AI agency website
-> **Owner:** Meet Deshani — ZeroOne D.O.T.S AI
-> **Status:** Revamp in progress (previously served zeroonedotsai.consulting content)
+> **Project:** ZeroOne D.O.T.S AI — Premium solopreneur AI agency website
+> **Owner:** Meet Deshani · ZeroOne D.O.T.S AI
+> **Live:** https://dotsai.in
+> **Repo:** https://github.com/zeroone-dots-ai/dotsai.in
 > **Last updated:** 2026-03-26
 
 ---
 
-## Who This Site Is For
+## Quick Start (New Teammate)
 
-**Meet Deshani** — solopreneur AI expert. Not a big agency, not a SaaS product. One person who is deeply expert at building private AI systems for enterprises and solopreneurs.
+```bash
+# Clone
+git clone https://github.com/zeroone-dots-ai/dotsai.in.git
+cd dotsai.in
 
-**Tagline direction:** "I build private AI that your business owns."
-**Positioning:** The goto expert when a business wants AI that lives on their infrastructure, works offline, and never sends data to OpenAI.
+# NEVER work directly on main — create your branch
+git checkout -b feat/your-feature-name
+
+# The live site is ONE file: public/index.html
+# Edit it, open in browser to preview locally
+open public/index.html
+
+# When done — commit and push YOUR branch
+git add public/index.html
+git commit -m "feat: what you changed"
+git push origin feat/your-feature-name
+
+# Open a PR on GitHub → Meet reviews → merges to main → auto-deploys in ~30s
+```
+
+---
+
+## Git Workflow
+
+### Branch Strategy
+| Branch | Purpose | Who touches it |
+|--------|---------|----------------|
+| `main` | **Production** — auto-deploys to dotsai.in | Meet only (via PR merge) |
+| `dev` | Staging / integration | Team |
+| `feat/*` | New features | Anyone |
+| `fix/*` | Bug fixes | Anyone |
+| `content/*` | Copy/text changes | Anyone |
+
+### Rules
+- **Never commit directly to `main`** — always PR
+- One PR = one logical change
+- PR title format: `feat: galaxy improvements` / `fix: cursor on mobile` / `content: update hero copy`
+- Meet approves and merges → deploy happens automatically
+
+### Auto-Deploy Pipeline
+```
+Push/merge to main
+      ↓
+GitHub Actions fires (.github/workflows/deploy.yml)
+      ↓
+SCP → copies public/ files to VPS
+      ↓
+nginx reload
+      ↓
+dotsai.in live ✅  (~30 seconds total)
+```
+
+---
+
+## What's Actually Built
+
+### Live Site: `public/index.html`
+Single static HTML file. **This is the source of truth for what's live.**
+
+#### Sections (in order)
+1. **Splash** — 6-variant random logo animation (GSAP). Auto-dismisses after 5s or SKIP button.
+2. **Hero** — Dark galaxy scene. "Own Your AI. Don't Rent It."
+3. **Manifesto** — Word-by-word scroll reveal. "I am one person. I build AI that lives on YOUR server."
+4. **Services** — 4 service rows with GSAP entrance. Links to service subdomains.
+5. **Proof** — 3 case study cards + animated metrics (70%, 8L/yr, 99%)
+6. **Contact** — WhatsApp + Cal.com CTAs. No form — direct contact only.
+
+#### Interactive Elements (all in `public/index.html`)
+| System | File section | What it does |
+|--------|-------------|-------------|
+| **Splash animation** | `sRunV1`–`sRunV6` | 6 GSAP logo variants, random on each load |
+| **Galaxy** | `HERO GALAXY v3` | 4000 stars, 3 depth layers, nebulae across 4 quadrants |
+| **D.O.T.S Planet** | Inside galaxy script | 4 brand dots orbiting bottom-right, physics shield |
+| **Infinity orbit** | `PARTICLE MESH` | Lemniscate particle orbit, top-right of hero |
+| **Quantum Cursor** | `QUANTUM DOT CURSOR` | Spring-physics cursor, color cycles D.O.T.S palette |
+| **Scroll animations** | `initMainPage()` | GSAP ScrollTrigger on all sections |
+
+#### Physics behaviour
+- **Hover over galaxy** → stars repel from cursor (120px radius)
+- **Click galaxy** → stars explode outward + ripple rings
+- **Hover near D.O.T.S planet** → shield glows up
+- **Click near D.O.T.S planet** → shield ripple, dots bounce back (spring physics)
+- **Cursor** → inner dot exact pos, outer ring lags (spring), nova burst on click
+
+---
+
+## File Structure
+
+```
+dotsai.in/
+├── public/                    ← DEPLOYED FILES (what goes live)
+│   ├── index.html             ← THE SITE — edit this
+│   ├── robots.txt             ← SEO: allows all AI crawlers
+│   ├── sitemap.xml            ← SEO: dotsai.in + 4 subdomains
+│   ├── llms.txt               ← LLM-friendly plain text description
+│   ├── brand/                 ← SVG logos (zeroone-dark-*.svg)
+│   └── logo-splash-v5-random.html  ← standalone splash preview
+│
+├── app/                       ← Future Next.js build (not deployed yet)
+│   ├── components/
+│   │   ├── GalaxyBackground.tsx   ← Galaxy logic (React version)
+│   │   ├── SplashIntro.tsx        ← Splash (React version)
+│   │   ├── QuantumCursor.tsx      ← Cursor (React version)
+│   │   └── InfinityCompanion.tsx  ← Infinity orbit (React version)
+│   ├── page.tsx               ← Main page
+│   └── globals.css            ← CSS vars + Tailwind
+│
+├── .github/
+│   └── workflows/
+│       └── deploy.yml         ← CI/CD: push to main → VPS deploy
+│
+├── .planning/                 ← Research docs (NotebookLM outputs)
+├── research/                  ← Detailed strategy docs
+├── scripts/                   ← release_audit.sh, release_gate.sh
+├── sql/                       ← Analytics schema (future)
+├── qa/                        ← QA run logs
+│
+├── CLAUDE.md                  ← This file
+└── README.md                  ← GitHub-facing docs
+```
 
 ---
 
@@ -20,185 +137,135 @@
 
 ### Identity
 - **Company:** ZeroOne D.O.T.S AI
-- **Domain:** dotsai.in (India-facing) / zeroonedotsai.consulting (global)
+- **Person:** Meet Deshani
+- **Domain:** dotsai.in (India) · zeroonedotsai.consulting (global)
 - **Pillars:** D = Data · O = Operations · T = Tech · S = Strategy
 
-### Colors
+### Colors (use these everywhere)
 ```css
-/* Base */
---bg:           #FDFCFA;   /* cream white — main body */
---text:         #191924;   /* near black */
---text-muted:   #5e586e;
+/* Dark Hero */
+--hero-bg:     #06060a;   /* deep black */
+--ink:         #171722;   /* dark sections */
+--plum-dark:   #241D33;   /* hero gradient end */
 
-/* Hero section (dark contrast) */
---hero-bg:      #06060a;   /* deep black for 3D galaxy hero */
-
-/* Paper / Ink / Plum — Primary (80% of site) */
---paper:       #F7F3ED;   /* primary light bg — warmer than flat white */
---bone:        #ECE5DB;   /* secondary light bg */
---ink:         #171722;   /* text + dark sections */
+/* Light Body */
+--paper:       #F7F3ED;   /* warm cream — primary bg */
+--bone:        #ECE5DB;   /* secondary bg */
 --smoke:       #6E675F;   /* muted text */
 
-/* Brand Accents (15%) */
+/* Brand Accents */
 --plum:        #43305F;   /* primary accent */
 --lavender:    #D7CFF0;   /* light accent */
---gold:        #B28743;   /* premium signal */
+--gold:        #B28743;   /* premium signal — use sparingly */
 
-/* D.O.T.S. Utility Accents (5% — signal use only) */
---dots-data:       #D7CFF0;  /* soft lavender — Data / Private AI */
---dots-operations: #C9DED4;  /* dust mint — Operations / Platform */
---dots-tech:       #F1C6AE;  /* warm peach — Tech / AI Web */
---dots-strategy:   #BFD6EC;  /* fog blue — Strategy / GEO AI */
-
-/* Hero Gradients */
---hero-dark-start: #171722;
---hero-dark-mid:   #241D33;  /* plum-dark */
---gradient-hero:   linear-gradient(180deg, #171722 0%, #241D33 100%);
---gradient-shimmer: linear-gradient(135deg, #B28743 0%, #D8C39C 45%, #8F6A35 100%);
---hero-glow:       radial-gradient(circle at 50% 35%, rgba(215, 207, 240, 0.55), rgba(247, 243, 237, 0) 55%);
+/* D.O.T.S Palette (galaxy + cursor colors) */
+--dots-data:       #D7CFF0;  /* lavender — Data */
+--dots-operations: #C9DED4;  /* mint    — Operations */
+--dots-tech:       #F1C6AE;  /* peach   — Tech */
+--dots-strategy:   #BFD6EC;  /* sky     — Strategy */
 ```
 
 ### Typography
-- **Display (H1/H2):** Instrument Serif — large, editorial, elegant
-- **Body:** DM Sans — clean, readable, modern
-- **Mono/Labels:** Space Mono — technical accents, timestamps, code
-- **Scale:** Hero H1 at 100-140px (desktop), 48-64px (mobile)
+- **H1/H2:** Instrument Serif (Google Fonts) — editorial, elegant
+- **Body:** DM Sans — clean, modern
+- **Labels/mono:** Space Mono — technical accents, timestamps
 
-### Visual Language
-**Direction: "Paper / Ink / Plum"** — editorial technology atelier (see `research/04-design-direction.md`)
-- **Light body:** warm paper (`#F7F3ED`) NOT cold white — more premium
-- **Dark hero:** plum-dark gradient (`#171722 → #241D33`) with lavender glow bloom
-- **3D White Milky Way** — Three.js spiral galaxy, white/silver particles
-- Cinematic film grain overlay (SVG turbulence, opacity ~0.018)
-- Compartment scroll — GSAP ScrollTrigger pin+scrub per section
-- No bento, no neon, no cyberpunk — "editorial technology atelier"
-- Gold (`#B28743`) used very sparingly as premium signal in proof section
-- Deep Plum (`#43305F`) as primary accent (not the pastel D.O.T.S. colors)
-
-### ⚠️ SEO Note: Subdomains vs Subfolders
-**User requested:** service subdomains (geo.dotsai.in, private.dotsai.in, etc.)
-**SEO research recommends:** subfolders (/services/private-ai, etc.) for authority concentration
-**Decision:** Use subdomains as requested — they are better for branding and clean service separation. Compensate SEO via strong internal links from main page + individual subdomain SEO work.
+### Visual Rules
+- Dark hero (#06060a) → light cream body (#F7F3ED) — NOT the other way
+- Galaxy stars use D.O.T.S palette colors only
+- No bento grids · No neon · No cyberpunk · No glassmorphism
+- Gold used ONLY in proof/metrics section
+- All CTAs: direct contact (WhatsApp/Cal) — NO forms
 
 ---
 
-## Site Architecture
+## VPS & Server
 
-### This Page (dotsai.in)
-Single-page gateway. Premium first impression. Links out to service subdomains.
+| Item | Value |
+|------|-------|
+| IP | 72.62.229.16 (Hostinger VPS) |
+| Server | Nginx in Docker |
+| Site root | `/opt/services/nginx/html/dotsai.in/` |
+| Nginx config | `/opt/services/nginx/conf.d/default.conf` |
+| SSL | Let's Encrypt (auto-renews) |
+| Deploy user | `root` |
 
-### Subdomain Map
-| Subdomain | Service | Description |
-|-----------|---------|-------------|
-| `geo.dotsai.in` | GEO AI & Local SEO | AI-optimized local visibility, GEO targeting |
-| `private.dotsai.in` | Private AI Deployment | On-premise LLM, data sovereignty, enterprise |
-| `platform.dotsai.in` | Infinity Platform | SaaS → redirects to platform.dotsai.cloud |
-| `web.dotsai.in` | AI Web Presence | Full-stack web products built with AI |
-| *(TBD from research)* | | |
-
----
-
-## Page Sections (Compartment Scroll)
-
+### Manual deploy (if GitHub Actions fails)
+```bash
+# SSH to VPS and copy manually
+scp public/index.html root@72.62.229.16:/opt/services/nginx/html/dotsai.in/index.html
+ssh root@72.62.229.16 "docker exec nginx nginx -s reload"
 ```
-┌─────────────────────────────────────────────┐
-│  SECTION 1: HERO (dark)                     │
-│  Three.js white milky way galaxy (3D)       │
-│  Headline: "Own Your AI. Don't Rent It."    │
-│  Sub: Position as solopreneur expert        │
-│  Camera zooms/rotates as user scrolls       │
-└─────────────────────────────────────────────┘
-┌─────────────────────────────────────────────┐
-│  SECTION 2: MANIFESTO (light cream)         │
-│  Large type reveals word-by-word            │
-│  "I am one person. I build AI that..."      │
-│  Instrument Serif at max scale              │
-└─────────────────────────────────────────────┘
-┌─────────────────────────────────────────────┐
-│  SECTION 3: SERVICES                        │
-│  Each service slides in on scroll           │
-│  Full-width, editorial, no cards            │
-│  Links to service subdomains                │
-└─────────────────────────────────────────────┘
-┌─────────────────────────────────────────────┐
-│  SECTION 4: PROOF / OUTCOMES                │
-│  Case study reveals (Logistics, etc.)       │
-│  Numbers animate in on scroll               │
-│  "70% cost reduction · 8L/year saved"       │
-└─────────────────────────────────────────────┘
-┌─────────────────────────────────────────────┐
-│  SECTION 5: SUBDOMAIN GATEWAY               │
-│  Each subdomain orbits in                   │
-│  Click → navigate to service site           │
-└─────────────────────────────────────────────┘
-┌─────────────────────────────────────────────┐
-│  SECTION 6: CONTACT CTA (free scroll)       │
-│  Direct: "Let's talk" → WhatsApp/Cal        │
-│  No form — solopreneur direct contact       │
-└─────────────────────────────────────────────┘
+
+### Check what's live
+```bash
+curl -sk https://dotsai.in | grep '<title>'
 ```
 
 ---
 
-## Tech Stack
+## GitHub Secrets (already configured)
+| Secret | Value |
+|--------|-------|
+| `VPS_HOST` | 72.62.229.16 |
+| `VPS_USER` | root |
+| `VPS_SSH_KEY` | ed25519 deploy key (in GitHub → Settings → Secrets) |
 
-| Layer | Technology | Notes |
-|-------|-----------|-------|
-| Framework | Next.js 15 | App router, TypeScript |
-| UI | React 19 | Latest concurrent features |
-| Styling | Tailwind CSS 4 | Utility-first |
-| Scroll | **GSAP + ScrollTrigger** | Pinned compartment scroll |
-| 3D | **Three.js** | White milky way hero scene |
-| Animations | Framer Motion | Secondary micro-animations |
-| Deployment | Docker → VPS | 72.62.229.16 (Hostinger) |
-| Reverse Proxy | Nginx + SSL | Let's Encrypt |
+Do NOT add these to any file — they live in GitHub Secrets only.
 
 ---
 
-## Reference Codebases
+## Subdomain Map
 
-### web.dotsai.cloud — `/Users/meetdeshani/Desktop/Web-App/web.dotsai.cloud`
-Assets to inherit/reuse:
-- `src/app/globals.css` — CSS custom properties (D.O.T.S. color system)
-- `src/lib/motion.ts` — Framer Motion animation presets
-- `src/components/GalaxyBackground.tsx` — Canvas particle logic (adapt to Three.js milky way)
-- `public/brand/` — Logo SVGs (zeroone-dark-icon.svg, zeroone-dark-horizontal.svg, etc.)
+| Subdomain | Status | Purpose |
+|-----------|--------|---------|
+| `geo.dotsai.in` | Planned | GEO AI & Local SEO |
+| `private.dotsai.in` | Planned | Private AI Deployment |
+| `platform.dotsai.in` | Planned | → redirects to platform.dotsai.cloud |
+| `web.dotsai.in` | Planned | AI Web Presence |
 
-### Current Live Site (zeroonedotsai.consulting = dotsai.in)
-- Sections: Hero, Our Promise, Private AI Platform, How Private AI Grows Your Business, Use Cases, Case Studies
-- Content to migrate/adapt into new compartment-scroll format
-- Copy reference: "Own Your AI. Don't Rent It." — keep this as hero headline
+Each subdomain = separate nginx config + separate deploy.
 
 ---
 
-## Planning Files
-
-All research and specs live in `.planning/`:
-
-| File | Purpose |
-|------|---------|
-| `.planning/RESEARCH.md` | NotebookLM research findings |
-| `.planning/ARCHITECTURE.md` | Detailed component tree + subdomain map |
-| `.planning/DESIGN-SYSTEM.md` | Full design tokens + animation spec |
-| `.planning/COPY.md` | Final copy for all sections |
-| `.planning/SCROLL-SPEC.md` | Per-section GSAP ScrollTrigger config |
-
----
-
-## Deployment
-
-- **Domain:** dotsai.in (DNS → VPS 72.62.229.16)
-- **Port:** 3025 (separate from web.dotsai.cloud on 3020)
-- **Container:** `dotsai-in` Docker container
-- **Nginx config:** `/etc/nginx/sites-available/dotsai.in`
-- **SSL:** Let's Encrypt via Certbot
+## Contact Links (use exact URLs)
+- **WhatsApp:** `https://wa.me/918320065658`
+- **Cal.com:** `https://cal.com/meetdeshani` ← verify this is live before using
+- **Email:** aamdhanee.dev@gmail.com
 
 ---
 
 ## DO NOT
 
-- Do NOT use bento box / card grid layouts
-- Do NOT use dark space galaxy (web.dotsai.cloud style) — use WHITE milky way
-- Do NOT build multi-page — single page only, services on subdomains
-- Do NOT add a contact form — direct WhatsApp/Cal link only (solopreneur = direct)
-- Do NOT copy the Infinity Platform SaaS messaging — this is the person, not the product
+- ❌ Commit directly to `main` — always PR
+- ❌ Bento box / card grid layouts
+- ❌ Dark neon / cyberpunk / glassmorphism aesthetics
+- ❌ Contact forms — direct WhatsApp/Cal only
+- ❌ Multi-page routing — single page, subdomains for services
+- ❌ Copy Infinity Platform SaaS messaging — this is Meet the person, not the product
+- ❌ Change the galaxy to Three.js — it's Canvas 2D (faster, better click interaction)
+- ❌ Push `.env` files or credentials to git
+- ❌ Edit files directly on VPS — always go through git → auto-deploy
+
+---
+
+## Editing Tips
+
+### Editing the splash animation
+Search for `sRunV1` through `sRunV6` in `public/index.html`.
+Each is a self-contained GSAP timeline. Add a `sRunV7` and register it in the `sRunners` array.
+
+### Editing the galaxy
+Search for `HERO GALAXY v3` comment block. Key vars:
+- `COUNT` — star count (4000 desktop, 1600 mobile)
+- `GCX/GCY` — galaxy core position (currently left side: 18% x, 50% y)
+- `DOTS.orbitCx/Cy` — D.O.T.S planet orbit center (76% x, 72% y)
+- `nebulae[]` — glow cloud positions per quadrant
+
+### Editing copy
+All copy is in the HTML directly. Sections labelled with `<!-- ─── HERO ─── -->` comments.
+
+### Adding a section
+1. Add HTML between existing section divs
+2. Add GSAP ScrollTrigger animation in `initMainPage()` function
+3. Add CSS in the `<style>` block at top of file
