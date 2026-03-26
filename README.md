@@ -16,6 +16,7 @@ Workflow: `.github/workflows/deploy.yml`
 - Copies the full `public/` bundle to VPS
 - Updates the production Nginx config from `deploy/nginx/default.conf`
 - Validates Nginx before reload
+- Runs the post-deploy release gate and publishes `/monitor-data/latest.json`
 
 ## Local Edit → Deploy
 ```bash

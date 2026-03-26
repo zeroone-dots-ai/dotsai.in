@@ -11,6 +11,7 @@ GitHub Actions: .github/workflows/deploy.yml
   ↓  (~10s: checkout + scp)
 VPS: /opt/services/nginx/html/dotsai.in/
   ↓  (~5s: nginx config validation + reload)
+Post-deploy release gate + monitor snapshot publish
 https://dotsai.in  LIVE ✅
 ```
 
@@ -20,6 +21,7 @@ https://dotsai.in  LIVE ✅
 ```
 public/*                  → /opt/services/nginx/html/dotsai.in/
 deploy/nginx/default.conf → /opt/services/nginx/conf.d/default.conf
+public/monitor-data/*     → /opt/services/nginx/html/dotsai.in/monitor-data/
 ```
 
 ## GitHub Secrets
