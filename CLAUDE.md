@@ -249,6 +249,99 @@ Each subdomain = separate nginx config + separate deploy.
 
 ---
 
+## Full Workflow — Step by Step
+
+This is the **exact process** for every change, big or small:
+
+```
+1. BRANCH      git checkout -b feat/your-feature-name
+                  (from main — always pull main first)
+
+2. EDIT        Edit public/index.html locally
+               Preview: open public/index.html in browser
+
+3. COMMIT      git add public/index.html
+               git commit -m "feat: what exactly you changed"
+               (short, clear message — these are your revert points)
+
+4. PUSH BRANCH git push origin feat/your-feature-name
+
+5. OPEN PR     Go to github.com/zeroone-dots-ai/dotsai.in
+               Click "Compare & Pull Request"
+               Write what you changed and why
+
+6. MEET MERGES Meet reviews → clicks "Merge pull request" on GitHub
+
+7. AUTO DEPLOY GitHub Actions runs automatically (~30-40 seconds):
+               → copies public/index.html to VPS
+               → nginx reloads
+               → dotsai.in is live with your changes ✅
+```
+
+### Which GitHub Account
+- **Org:** `zeroone-dots-ai` (not personal account)
+- **Repo:** `github.com/zeroone-dots-ai/dotsai.in`
+- Ask Meet to add you as a collaborator on the repo
+- Clone with: `git clone https://github.com/zeroone-dots-ai/dotsai.in.git`
+
+### Check Deploy Succeeded
+```bash
+# Watch GitHub Actions in real-time:
+# github.com/zeroone-dots-ai/dotsai.in/actions
+
+# Or verify live site content:
+curl -sk https://dotsai.in | grep '<title>'
+```
+
+---
+
+## Reverting — How to Undo a Bad Deploy
+
+Every commit on `main` is a rollback point. Here's how to revert:
+
+### Option A — Revert one commit (safest, keeps full history)
+```bash
+git checkout main
+git pull origin main
+
+# Find the bad commit hash
+git log --oneline -10
+
+# Revert it (creates a new "undo" commit)
+git revert <commit-hash>
+git push origin main
+# → GitHub Actions auto-deploys the reverted version ✅
+```
+
+### Option B — Roll back to a specific good version
+```bash
+git checkout main
+git pull origin main
+
+# See all commits (find the last good one)
+git log --oneline
+
+# Hard reset to that good commit (⚠️ rewrites history — only Meet should do this)
+git reset --hard <good-commit-hash>
+git push --force origin main
+```
+
+### Option C — Emergency manual rollback (if CI/CD is broken)
+```bash
+# SSH to VPS and restore previous backup
+ssh root@72.62.229.16
+cp /opt/services/nginx/html/dotsai.in/index.html.bak /opt/services/nginx/html/dotsai.in/index.html
+docker exec nginx nginx -s reload
+```
+
+### Why branches + PRs protect you
+- Every merge to `main` appears in `git log` with author, date, and message
+- You can always see exactly WHAT changed and WHO changed it
+- `git revert` undoes a single change without touching others
+- Never lose work — even deleted branches are recoverable for 30 days on GitHub
+
+---
+
 ## Editing Tips
 
 ### Editing the splash animation
