@@ -7,11 +7,18 @@ Meet Deshani builds private AI systems for enterprises and solopreneurs.
 Positioning: "Own your AI. Don't rent it."
 Speciality: On-premise LLMs, custom agents, AI automation, private data pipelines.
 
+## Primary Pages
+- Homepage → https://dotsai.in/
+- AI Agency India → https://dotsai.in/ai-agency-india/
+- Case Studies → https://dotsai.in/case-studies/
+- Insights → https://dotsai.in/insights/
+
 ## Services
-- Private AI Deployment → https://private.dotsai.in
-- AI Web Presence → https://web.dotsai.in
-- GEO AI & Local SEO → https://geo.dotsai.in
-- Infinity Platform (SaaS) → https://platform.dotsai.in
+- Private AI Deployment → https://dotsai.in/private-ai/
+- AI Automation → https://dotsai.in/ai-automation/
+- GEO AI & Local SEO → https://dotsai.in/geo-ai/
+- AI Web Experiences → https://dotsai.in/web-ai-experiences/
+- Platform Engineering → https://dotsai.in/platform-engineering/
 
 ## Outcomes
 - 70% cost reduction for logistics company via private LLM deployment

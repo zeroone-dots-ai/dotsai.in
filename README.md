@@ -10,21 +10,27 @@ Single-page premium landing site for Meet Deshani · ZeroOne D.O.T.S AI
 - Nginx on VPS @ 72.62.229.16
 
 ## Auto-Deploy
-**Push to `main` → GitHub Actions → VPS in ~30 seconds**
+**Feature branch → PR → merge to `main` → GitHub Actions → VPS**
 
 Workflow: `.github/workflows/deploy.yml`
-- Copies `public/index.html`, `robots.txt`, `sitemap.xml`, `llms.txt` to VPS
-- Reloads Nginx
+- Copies the full `public/` bundle to VPS
+- Updates the production Nginx config from `deploy/nginx/default.conf`
+- Validates Nginx before reload
 
 ## Local Edit → Deploy
 ```bash
+# Start a branch
+git checkout -b feat/your-change
+
 # Edit the site
 code public/index.html
 
-# Commit & push → auto-deploys
-git add public/index.html
+# Commit and push the branch
+git add .
 git commit -m "feat: your change"
-git push origin main
+git push origin feat/your-change
+
+# Open PR, review, merge to main
 ```
 
 ## Branch Strategy
@@ -32,7 +38,7 @@ git push origin main
 |--------|---------|
 | `main` | Production — auto-deploys to dotsai.in |
 | `dev` | Staging / WIP |
-| `feat/*` | Feature branches |
+| `feat/*` / `codex/*` | Feature branches for review before merge |
 
 ## Secrets (in GitHub → Settings → Secrets)
 - `VPS_HOST` — 72.62.229.16

@@ -14,10 +14,10 @@
 ## Services
 | # | Title | Sub | Link |
 |---|-------|-----|------|
-| 1 | Private AI Deployment | On-premise LLMs your team actually uses | private.dotsai.in |
-| 2 | AI Web Presence | Sites that work as hard as you do | web.dotsai.in |
-| 3 | GEO & Local AI | Show up everywhere your clients search | geo.dotsai.in |
-| 4 | Infinity Platform | Run your whole operation on one AI OS | platform.dotsai.in |
+| 1 | Private AI Deployment | On-premise LLMs your team actually uses | /private-ai/ |
+| 2 | AI Web Presence | Sites that work as hard as you do | /web-ai-experiences/ |
+| 3 | GEO & Local AI | Show up everywhere your clients search | /geo-ai/ |
+| 4 | Infinity Platform | Run your whole operation on one AI OS | /platform-engineering/ |
 
 ## Proof / Metrics
 | Metric | Value | Label |

@@ -28,6 +28,7 @@ public/logo-render.png
 # Auto-generated / temp
 .axon/
 public/monitor-data/
+qa/20*-dotsai.in*/
 
 # Old splash dev files (keep v5-random as it's the canonical one)
 public/logo-splash-preview.html
@@ -35,4 +36,3 @@ public/logo-splash-record.html
 public/logo-splash-v2.html
 public/logo-splash-v3.html
 public/logo-splash-v4.html
-public/site-monitor.html

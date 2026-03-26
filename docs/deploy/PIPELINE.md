@@ -5,12 +5,12 @@
 ```
 Local edit (public/index.html)
   ↓
-git commit + push to main branch
+feature branch → commit → push branch → PR merge to main
   ↓
 GitHub Actions: .github/workflows/deploy.yml
   ↓  (~10s: checkout + scp)
 VPS: /opt/services/nginx/html/dotsai.in/
-  ↓  (~5s: nginx reload)
+  ↓  (~5s: nginx config validation + reload)
 https://dotsai.in  LIVE ✅
 ```
 
@@ -18,10 +18,8 @@ https://dotsai.in  LIVE ✅
 
 ## Files Deployed
 ```
-public/index.html   → /opt/services/nginx/html/dotsai.in/index.html
-public/robots.txt   → /opt/services/nginx/html/dotsai.in/robots.txt
-public/sitemap.xml  → /opt/services/nginx/html/dotsai.in/sitemap.xml
-public/llms.txt     → /opt/services/nginx/html/dotsai.in/llms.txt
+public/*                  → /opt/services/nginx/html/dotsai.in/
+deploy/nginx/default.conf → /opt/services/nginx/conf.d/default.conf
 ```
 
 ## GitHub Secrets
@@ -44,8 +42,9 @@ curl -sk https://dotsai.in | grep '<title>'
 
 ## Manual Fallback (if Actions fails)
 ```bash
-scp public/index.html root@72.62.229.16:/opt/services/nginx/html/dotsai.in/index.html
-ssh root@72.62.229.16 "docker exec nginx nginx -s reload"
+scp -r public/* root@72.62.229.16:/opt/services/nginx/html/dotsai.in/
+scp deploy/nginx/default.conf root@72.62.229.16:/opt/services/nginx/conf.d/default.conf
+ssh root@72.62.229.16 "docker exec nginx nginx -t && docker exec nginx nginx -s reload"
 ```
 
 ## VPS Nginx Config
@@ -57,6 +56,7 @@ server {
     root /usr/share/nginx/html/dotsai.in;
     index index.html;
     gzip on;
-    location / { try_files $uri $uri/ /index.html; }
+    location / { try_files $uri $uri/ $uri/index.html =404; }
+    error_page 404 /404.html;
 }
 ```
