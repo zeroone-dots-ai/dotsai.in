@@ -10,28 +10,28 @@ See: .planning/PROJECT.md (updated 2026-03-27)
 ## Current Position
 
 Phase: 1 of 5 (VPS Pre-Flight + PostgreSQL Foundation)
-Plan: 0 of 2 in current phase
-Status: Ready to plan
-Last activity: 2026-03-27 — ROADMAP.md and STATE.md initialised
+Plan: 1 of 2 in current phase
+Status: Executing (awaiting human verification for 01-01)
+Last activity: 2026-03-27 — Plan 01-01 executed (VPS audit + PostgreSQL secured)
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [█░░░░░░░░░] 10%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 0
-- Average duration: -
-- Total execution time: 0 hours
+- Total plans completed: 1
+- Average duration: 6min
+- Total execution time: 0.1 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| - | - | - | - |
+| 01 | 1 | 6min | 6min |
 
 **Recent Trend:**
-- Last 5 plans: -
-- Trend: -
+- Last 5 plans: 01-01 (6min)
+- Trend: baseline
 
 *Updated after each plan completion*
 
@@ -46,6 +46,9 @@ Recent decisions affecting current work:
 - [Pre-phase]: FastAPI analytics API on VPS over Cloudflare D1 — single DB queryable from anywhere
 - [Pre-phase]: PostgreSQL over SQLite — concurrent writes from multiple sites, proper analytics queries
 - [Pre-phase]: Gateway as section in index.html (not separate page) — single file, simpler deploy
+- [01-01]: Kept existing user 'dotsai' instead of plan's 'dotsai_admin' — 10+ services depend on it
+- [01-01]: Used existing password in Docker secrets instead of generating new one — avoids breaking dependent services
+- [01-01]: Kept docker-compose.yml naming (not compose.yaml) — matches existing VPS convention
 
 ### Pending Todos
 
@@ -61,5 +64,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-27
-Stopped at: Roadmap created — project initialised, ready to plan Phase 1
+Stopped at: Completed 01-01-PLAN.md — awaiting human verification (checkpoint)
 Resume file: None
