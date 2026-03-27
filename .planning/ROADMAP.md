@@ -58,13 +58,13 @@ Plans:
 4. `window.dotsTrack('cta_click', {target: 'test'})` called from browser devtools produces a row in analytics.events
 5. A POST to `https://api.dotsai.in/events` without a Bearer token returns HTTP 401; a POST from a bot UA string returns HTTP 204 (silently dropped)
 
-**Plans**: 2 plans
+**Plans**: 4 plans
 
 Plans:
-- [ ] 02-01: FastAPI service scaffold — Dockerfile, docker-compose service, Alembic migrations for analytics.visitors and analytics.events
-- [ ] 02-02: POST /events endpoint — Bearer auth, BackgroundTasks DB write, slowapi rate limiting, bot filtering middleware
-- [ ] 02-03: nginx server block for api.dotsai.in — SSL via Let's Encrypt (staging first), resolver directive, CORS via FastAPI only
-- [ ] 02-04: Browser tracking snippet in public/index.html — page_view, session_start, window.dotsTrack(); add snippet to zeroonedotsai.consulting
+- [ ] 02-01-PLAN.md — FastAPI service scaffold: project structure, SQLAlchemy models, Alembic async migrations, Dockerfile, health endpoint
+- [ ] 02-02-PLAN.md — POST /events endpoint: Bearer auth, bot filtering middleware, rate limiting, CORS, BackgroundTasks DB write
+- [ ] 02-03-PLAN.md — VPS deployment: docker-compose service, nginx server block for api.dotsai.in, Let's Encrypt SSL (staging first)
+- [ ] 02-04-PLAN.md — Browser tracking snippet in public/index.html: page_view, session_start, window.dotsTrack(); CSP check on zeroonedotsai.consulting
 
 ---
 
