@@ -10,29 +10,29 @@ See: .planning/PROJECT.md (updated 2026-03-27)
 ## Current Position
 
 Phase: 2 of 5 (FastAPI Analytics API)
-Plan: 1 of 4 in current phase — COMPLETE (02-01 scaffold)
-Status: Plan 02-01 complete — analytics/ scaffold with models, Alembic migration, Dockerfile. Ready for Plan 02-02 (endpoints).
-Last activity: 2026-03-27 — Plan 02-01 complete (FastAPI analytics scaffold)
+Plan: 2 of 4 in current phase — COMPLETE (02-02 endpoints)
+Status: Plan 02-02 complete — POST /events with auth, bot filter, rate limit, CORS, fingerprinting. Ready for Plan 02-03 (VPS deploy).
+Last activity: 2026-03-27 — Plan 02-02 complete (POST /events endpoint + middleware)
 
-Progress: [███░░░░░░░] 28% (Phase 1 complete, Phase 2 plan 1/4 done)
+Progress: [████░░░░░░] 33% (Phase 1 complete, Phase 2 plan 2/4 done)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 4
-- Average duration: 9min
-- Total execution time: 0.62 hours
+- Total plans completed: 5
+- Average duration: 8min
+- Total execution time: 0.67 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01 | 3 | 17min | 6min |
-| 02 | 1 | 20min | 20min |
+| 02 | 2 | 23min | 12min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (6min), 01-02 (8min), 01-03 (3min), 02-01 (20min)
-- Trend: 02-01 longer due to full project scaffold (13 new files)
+- Last 5 plans: 01-01 (6min), 01-02 (8min), 01-03 (3min), 02-01 (20min), 02-02 (3min)
+- Trend: 02-02 fast -- endpoints and middleware on existing scaffold
 
 *Updated after each plan completion*
 
@@ -57,6 +57,9 @@ Recent decisions affecting current work:
 - [02-01]: Used Optional[str] type hints for Python 3.9 local compat (Docker target is 3.12)
 - [02-01]: Alembic version table in analytics schema (version_table_schema="analytics")
 - [02-01]: Conditional engine creation — None when DATABASE_URL empty, avoids startup crash
+- [02-02]: Extracted limiter to app/rate_limit.py — avoids circular import between main.py and events.py
+- [02-02]: 30 bot UA signatures including modern headless browsers and social crawlers
+- [02-02]: Bot filter scoped to POST /events only — monitoring bots can still health-check
 
 ### Pending Todos
 
@@ -72,5 +75,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-27
-Stopped at: Completed 02-01-PLAN.md — FastAPI analytics scaffold complete, ready for 02-02 (endpoints)
+Stopped at: Completed 02-02-PLAN.md — POST /events endpoint complete, ready for 02-03 (VPS deploy)
 Resume file: None
