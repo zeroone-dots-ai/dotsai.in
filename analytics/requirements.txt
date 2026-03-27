@@ -1,0 +1,6 @@
+fastapi[standard]>=0.135.0
+sqlalchemy[asyncio]>=2.0.46
+asyncpg>=0.30.0,<0.32.0
+alembic>=1.18.0
+slowapi>=0.1.9
+pydantic-settings>=2.0
