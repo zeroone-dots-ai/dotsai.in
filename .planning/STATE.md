@@ -5,33 +5,34 @@
 See: .planning/PROJECT.md (updated 2026-03-27)
 
 **Core value:** Every visitor, click, and booking captured in Meet's own PostgreSQL — zero third-party analytics dependency, connected from anywhere.
-**Current focus:** Phase 1 — VPS Pre-Flight + PostgreSQL Foundation
+**Current focus:** Phase 2 — FastAPI Analytics API
 
 ## Current Position
 
-Phase: 1 of 5 (VPS Pre-Flight + PostgreSQL Foundation) — COMPLETE
-Plan: 3 of 3 in current phase — COMPLETE (01-03 gap closure)
-Status: Phase 1 done — all 5 criteria satisfied, ready to begin Phase 2 (FastAPI Analytics API)
-Last activity: 2026-03-27 — Plan 01-03 complete (named volume migration, gap closed)
+Phase: 2 of 5 (FastAPI Analytics API)
+Plan: 1 of 4 in current phase — COMPLETE (02-01 scaffold)
+Status: Plan 02-01 complete — analytics/ scaffold with models, Alembic migration, Dockerfile. Ready for Plan 02-02 (endpoints).
+Last activity: 2026-03-27 — Plan 02-01 complete (FastAPI analytics scaffold)
 
-Progress: [██░░░░░░░░] 20% (Phase 1 complete — all 3 plans done)
+Progress: [███░░░░░░░] 28% (Phase 1 complete, Phase 2 plan 1/4 done)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 3
-- Average duration: 6min
-- Total execution time: 0.28 hours
+- Total plans completed: 4
+- Average duration: 9min
+- Total execution time: 0.62 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01 | 3 | 17min | 6min |
+| 02 | 1 | 20min | 20min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (6min), 01-02 (8min), 01-03 (3min)
-- Trend: baseline
+- Last 5 plans: 01-01 (6min), 01-02 (8min), 01-03 (3min), 02-01 (20min)
+- Trend: 02-01 longer due to full project scaffold (13 new files)
 
 *Updated after each plan completion*
 
@@ -53,6 +54,9 @@ Recent decisions affecting current work:
 - [01-02]: 7-day retention via find -mtime — bounded storage growth, matches ROADMAP requirement
 - [01-03]: Added external: true to dotsai_pgdata volume declaration — volume pre-existed compose, external: true suppresses warning and correctly models independent volume lifecycle
 - [01-03]: Preserved /opt/services/postgres-data/ bind-mount as 7-day rollback — safe to remove after 2026-04-03
+- [02-01]: Used Optional[str] type hints for Python 3.9 local compat (Docker target is 3.12)
+- [02-01]: Alembic version table in analytics schema (version_table_schema="analytics")
+- [02-01]: Conditional engine creation — None when DATABASE_URL empty, avoids startup crash
 
 ### Pending Todos
 
@@ -63,10 +67,10 @@ None yet.
 - ~~[Pre-phase]: VPS RAM headroom unconfirmed~~ RESOLVED in 01-01: 31GB total, 24GB available, 8GB swap
 - [Pre-phase]: DNS A records for cal.dotsai.in, api.dotsai.in, meet.dotsai.in must point to 72.62.229.16 before certbot runs in Phases 2, 3, 5.
 - [Pre-phase]: Cal.com exact semver image tag unconfirmed — check hub.docker.com/r/calcom/cal.com/tags before Phase 3 begins.
-- [Pre-phase]: asyncpg 0.29.0 pin is MEDIUM confidence — verify `create_async_engine` works on fresh setup in Phase 2 before committing to version.
+- ~~[Pre-phase]: asyncpg 0.29.0 pin is MEDIUM confidence~~ RESOLVED in 02-01: pinned asyncpg>=0.30.0,<0.32.0 per research (0.31.0 confirmed working with SQLAlchemy 2.0.48)
 
 ## Session Continuity
 
 Last session: 2026-03-27
-Stopped at: Completed 01-03-PLAN.md — Phase 1 gap closed (named volume), all 5 criteria satisfied, ready for Phase 2
+Stopped at: Completed 02-01-PLAN.md — FastAPI analytics scaffold complete, ready for 02-02 (endpoints)
 Resume file: None
