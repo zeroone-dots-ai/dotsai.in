@@ -9,28 +9,28 @@ See: .planning/PROJECT.md (updated 2026-03-27)
 
 ## Current Position
 
-Phase: 1 of 5 (VPS Pre-Flight + PostgreSQL Foundation)
-Plan: 2 of 2 in current phase
-Status: Ready to execute 01-02
-Last activity: 2026-03-27 — Plan 01-01 complete (checkpoint approved)
+Phase: 1 of 5 (VPS Pre-Flight + PostgreSQL Foundation) — COMPLETE
+Plan: 2 of 2 in current phase — COMPLETE
+Status: Phase 1 done — ready to begin Phase 2 (FastAPI Analytics API)
+Last activity: 2026-03-27 — Plan 01-02 complete (checkpoint approved)
 
-Progress: [█░░░░░░░░░] 10% (01-01 done, 01-02 next)
+Progress: [██░░░░░░░░] 20% (Phase 1 complete — both plans done)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 1
-- Average duration: 6min
-- Total execution time: 0.1 hours
+- Total plans completed: 2
+- Average duration: 7min
+- Total execution time: 0.23 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01 | 1 | 6min | 6min |
+| 01 | 2 | 14min | 7min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (6min)
+- Last 5 plans: 01-01 (6min), 01-02 (8min)
 - Trend: baseline
 
 *Updated after each plan completion*
@@ -49,6 +49,8 @@ Recent decisions affecting current work:
 - [01-01]: Kept existing user 'dotsai' instead of plan's 'dotsai_admin' — 10+ services depend on it
 - [01-01]: Used existing password in Docker secrets instead of generating new one — avoids breaking dependent services
 - [01-01]: Kept docker-compose.yml naming (not compose.yaml) — matches existing VPS convention
+- [01-02]: Used docker exec pg_dump (database-scoped, not pg_dumpall) — dotsai DB only, simpler restore
+- [01-02]: 7-day retention via find -mtime — bounded storage growth, matches ROADMAP requirement
 
 ### Pending Todos
 
@@ -64,5 +66,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-27
-Stopped at: Completed 01-01-PLAN.md — checkpoint approved, ready for 01-02
+Stopped at: Completed 01-02-PLAN.md — Phase 1 fully done, ready for Phase 2
 Resume file: None
