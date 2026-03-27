@@ -35,7 +35,7 @@ Milestone 1 transforms dotsai.in from a standalone static site into a fully self
 4. A named Docker volume exists and survives `docker compose stop && docker compose start` without data loss
 5. `pg_dump` backup cron fires at 3 AM and a `.sql.gz` file appears in the backup volume; files older than 7 days are pruned automatically
 
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
 - [ ] 01-01: VPS RAM audit, swap configuration, and Docker Compose scaffold with postgres:17 service
@@ -58,7 +58,7 @@ Plans:
 4. `window.dotsTrack('cta_click', {target: 'test'})` called from browser devtools produces a row in analytics.events
 5. A POST to `https://api.dotsai.in/events` without a Bearer token returns HTTP 401; a POST from a bot UA string returns HTTP 204 (silently dropped)
 
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
 - [ ] 02-01: FastAPI service scaffold — Dockerfile, docker-compose service, Alembic migrations for analytics.visitors and analytics.events
@@ -83,7 +83,7 @@ Plans:
 4. `docker inspect calcom` shows the container connects to the shared PostgreSQL service with `?schema=calcom` in the connection string — no separate database container
 5. `docker ps` shows the calcom container with `restart: always` policy and `running` status after a `docker restart calcom`
 
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
 - [ ] 03-01: Build Cal.com Docker image with NEXT_PUBLIC_WEBAPP_URL=https://cal.dotsai.in; add service to docker-compose connecting to calcom schema
@@ -106,7 +106,7 @@ Plans:
 3. `POST /webhooks/calcom` with an invalid HMAC signature returns HTTP 403 — the endpoint is not publicly callable without the shared secret
 4. The webhook URL in Cal.com admin shows `http://analytics:8000/webhooks/calcom` (internal network) — not the public `api.dotsai.in` URL
 
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
 - [ ] 04-01: Alembic migration for analytics.bookings table; POST /webhooks/calcom endpoint with HMAC-SHA256 verification
@@ -129,7 +129,7 @@ Plans:
 4. `curl -I https://meet.dotsai.in` returns HTTP 200 with a valid SSL certificate and correct OpenGraph meta tags in the HTML
 5. Running the E2E health check script returns `PASS` for all five services: `api.dotsai.in/health`, `cal.dotsai.in`, `meet.dotsai.in`, dotsai.in gateway section links, and `docker ps` showing all containers healthy
 
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
 - [ ] 05-01: Gateway section in public/index.html — three destination cards, GSAP ScrollTrigger entrance, gateway_click events, ≥44px tap targets
