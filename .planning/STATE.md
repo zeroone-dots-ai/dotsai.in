@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-03-27)
 
 **Core value:** Every visitor, click, and booking captured in Meet's own PostgreSQL — zero third-party analytics dependency, connected from anywhere.
-**Current focus:** Phase 3 — Cal.com at cal.dotsai.in
+**Current focus:** Phase 4 — Cal.com Webhook Bridge (SLIM: SaaS webhooks to api.dotsai.in)
 
 ## Current Position
 
-Phase: 2 of 5 — COMPLETE (FastAPI Analytics API)
-Plan: 4 of 4 in Phase 2 — COMPLETE (02-04 browser snippet + E2E verify)
-Status: Phase 2 complete — all 5 success criteria verified. Analytics pipeline operational: browser -> api.dotsai.in -> PostgreSQL. Ready for Phase 3 (Cal.com).
-Last activity: 2026-03-28 — Plan 02-04 complete (browser snippet + human-verify passed)
+Phase: 4 of 5 — PLANNING (Cal.com Webhook Bridge)
+Plan: 0 of 2 in Phase 4 — Plans created, not yet executed
+Status: Phase 4 planned (SLIM variant — Cal.com SaaS webhooks to api.dotsai.in, no self-hosted Cal.com). Phase 3 SKIPPED — using Cal.com SaaS at cal.com/meetdeshani instead of self-hosting.
+Last activity: 2026-03-28 — Phase 4 plans created (04-01: migration + endpoint, 04-02: webhook config + E2E)
 
-Progress: [████████░░] 50% (Phases 1-2 complete, ready for Phase 3)
+Progress: [████████░░] 50% (Phases 1-2 complete, Phase 3 skipped, Phase 4 planned)
 
 ## Performance Metrics
 
@@ -44,6 +44,7 @@ Decisions are logged in PROJECT.md Key Decisions table.
 Recent decisions affecting current work:
 
 - [Pre-phase]: Cal.com self-hosted (MIT, Docker) over SaaS — eliminates third-party booking dependency
+- [Phase 4 OVERRIDE]: Using Cal.com SaaS (cal.com/meetdeshani) with webhooks to api.dotsai.in — skips Phase 3 self-hosting entirely. HMAC-SHA256 verification via X-Cal-Signature-256 header.
 - [Pre-phase]: FastAPI analytics API on VPS over Cloudflare D1 — single DB queryable from anywhere
 - [Pre-phase]: PostgreSQL over SQLite — concurrent writes from multiple sites, proper analytics queries
 - [Pre-phase]: Gateway as section in index.html (not separate page) — single file, simpler deploy
@@ -76,12 +77,12 @@ None yet.
 
 - ~~[Pre-phase]: VPS RAM headroom unconfirmed~~ RESOLVED in 01-01: 31GB total, 24GB available, 8GB swap
 - ~~[Pre-phase]: DNS A record for api.dotsai.in~~ RESOLVED in 02-03: api.dotsai.in -> 72.62.229.16 confirmed, SSL cert issued
-- [Pre-phase]: DNS A records for cal.dotsai.in, meet.dotsai.in must point to 72.62.229.16 before certbot runs in Phases 3, 5.
-- [Pre-phase]: Cal.com exact semver image tag unconfirmed — check hub.docker.com/r/calcom/cal.com/tags before Phase 3 begins.
+- ~~[Pre-phase]: DNS A records for cal.dotsai.in, meet.dotsai.in must point to 72.62.229.16 before certbot runs in Phases 3, 5.~~ PARTIALLY RESOLVED: Phase 3 skipped (using Cal.com SaaS). meet.dotsai.in DNS still needed for Phase 5.
+- ~~[Pre-phase]: Cal.com exact semver image tag unconfirmed~~ NO LONGER NEEDED: Phase 3 skipped, using Cal.com SaaS.
 - ~~[Pre-phase]: asyncpg 0.29.0 pin is MEDIUM confidence~~ RESOLVED in 02-01: pinned asyncpg>=0.30.0,<0.32.0 per research (0.31.0 confirmed working with SQLAlchemy 2.0.48)
 
 ## Session Continuity
 
 Last session: 2026-03-28
-Stopped at: Completed 02-04-PLAN.md — Phase 2 complete. All analytics pipeline verified E2E. Ready for Phase 3 (Cal.com).
+Stopped at: Phase 4 plans created (04-01-PLAN.md, 04-02-PLAN.md). Ready to execute with /gsd:execute-phase 04-calcom-webhook.
 Resume file: None
