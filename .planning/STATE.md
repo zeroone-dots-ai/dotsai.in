@@ -9,19 +9,19 @@ See: .planning/PROJECT.md (updated 2026-03-27)
 
 ## Current Position
 
-Phase: 4 of 5 — PLANNING (Cal.com Webhook Bridge)
-Plan: 0 of 2 in Phase 4 — Plans created, not yet executed
-Status: Phase 4 planned (SLIM variant — Cal.com SaaS webhooks to api.dotsai.in, no self-hosted Cal.com). Phase 3 SKIPPED — using Cal.com SaaS at cal.com/meetdeshani instead of self-hosting.
-Last activity: 2026-03-28 — Phase 4 plans created (04-01: migration + endpoint, 04-02: webhook config + E2E)
+Phase: 4 of 5 — IN PROGRESS (Cal.com Webhook Bridge)
+Plan: 1 of 2 in Phase 4 — 04-01 complete, 04-02 remaining
+Status: Phase 4 executing. Plan 04-01 deployed: POST /webhooks/calcom live with HMAC-SHA256 verification, analytics.bookings table created.
+Last activity: 2026-03-28 — Plan 04-01 executed and deployed (webhook endpoint + booking model + migration)
 
-Progress: [████████░░] 50% (Phases 1-2 complete, Phase 3 skipped, Phase 4 planned)
+Progress: [█████████░] 60% (Phases 1-2 complete, Phase 3 skipped, Phase 4 plan 1/2 done)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 7
+- Total plans completed: 8
 - Average duration: 7min
-- Total execution time: 0.80 hours
+- Total execution time: 0.93 hours
 
 **By Phase:**
 
@@ -29,10 +29,11 @@ Progress: [████████░░] 50% (Phases 1-2 complete, Phase 3 ski
 |-------|-------|-------|----------|
 | 01 | 3 | 17min | 6min |
 | 02 | 4 | 31min | 8min |
+| 04 | 1 | 8min | 8min |
 
 **Recent Trend:**
-- Last 5 plans: 01-03 (3min), 02-01 (20min), 02-02 (3min), 02-03 (3min), 02-04 (5min)
-- Trend: Phase 2 complete -- 4 plans in 31min, analytics pipeline fully operational
+- Last 5 plans: 02-01 (20min), 02-02 (3min), 02-03 (3min), 02-04 (5min), 04-01 (8min)
+- Trend: Phase 4 started -- webhook endpoint deployed in 8min, booking pipeline live
 
 *Updated after each plan completion*
 
@@ -68,6 +69,9 @@ Recent decisions affecting current work:
 - [02-04]: sessionStorage gate (_ds key) for session_start dedup -- natural session boundary on tab close
 - [02-04]: fetch with keepalive over sendBeacon -- allows custom Authorization header
 - [02-04]: zeroonedotsai.consulting has no CSP -- snippet can be added in separate PR to that repo
+- [04-01]: ISO datetime strings parsed to datetime objects before DB insert -- asyncpg requires native datetime
+- [04-01]: HMAC verification uses raw body bytes, not parsed JSON -- ensures signature matches exact payload
+- [04-01]: Field extraction with fallback paths for Cal.com payload structure variations
 
 ### Pending Todos
 
@@ -84,5 +88,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-28
-Stopped at: Phase 4 plans created (04-01-PLAN.md, 04-02-PLAN.md). Ready to execute with /gsd:execute-phase 04-calcom-webhook.
+Stopped at: Completed 04-01-PLAN.md (Cal.com webhook endpoint deployed). Next: 04-02-PLAN.md (Cal.com webhook config + E2E verification).
 Resume file: None
