@@ -1,22 +1,15 @@
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
-from slowapi.util import get_remote_address
 
 from app.database import engine
 from app.middleware.bot_filter import BotFilterMiddleware
+from app.rate_limit import limiter
+from app.routes.events import router as events_router
 from app.routes.health import router as health_router
-
-
-def get_real_ip(request: Request) -> str:
-    """Extract real client IP from X-Real-IP (set by nginx) or fall back to remote address."""
-    return request.headers.get("x-real-ip") or get_remote_address(request)
-
-
-limiter = Limiter(key_func=get_real_ip)
 
 
 @asynccontextmanager
@@ -51,6 +44,4 @@ app.add_middleware(BotFilterMiddleware)
 
 # Routers
 app.include_router(health_router)
-
-# Events router imported here to avoid circular import (events.py imports limiter from main)
-# Will be added in Task 2
+app.include_router(events_router)
