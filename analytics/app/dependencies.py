@@ -1,0 +1,12 @@
+from typing import AsyncGenerator
+
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.database import async_session_factory
+
+
+async def get_db() -> AsyncGenerator[AsyncSession, None]:
+    if async_session_factory is None:
+        raise RuntimeError("Database not configured — set DATABASE_URL")
+    async with async_session_factory() as session:
+        yield session
