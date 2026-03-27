@@ -10,27 +10,27 @@ See: .planning/PROJECT.md (updated 2026-03-27)
 ## Current Position
 
 Phase: 1 of 5 (VPS Pre-Flight + PostgreSQL Foundation) — COMPLETE
-Plan: 2 of 2 in current phase — COMPLETE
-Status: Phase 1 done — ready to begin Phase 2 (FastAPI Analytics API)
-Last activity: 2026-03-27 — Plan 01-02 complete (checkpoint approved)
+Plan: 3 of 3 in current phase — COMPLETE (01-03 gap closure)
+Status: Phase 1 done — all 5 criteria satisfied, ready to begin Phase 2 (FastAPI Analytics API)
+Last activity: 2026-03-27 — Plan 01-03 complete (named volume migration, gap closed)
 
-Progress: [██░░░░░░░░] 20% (Phase 1 complete — both plans done)
+Progress: [██░░░░░░░░] 20% (Phase 1 complete — all 3 plans done)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 2
-- Average duration: 7min
-- Total execution time: 0.23 hours
+- Total plans completed: 3
+- Average duration: 6min
+- Total execution time: 0.28 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01 | 2 | 14min | 7min |
+| 01 | 3 | 17min | 6min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (6min), 01-02 (8min)
+- Last 5 plans: 01-01 (6min), 01-02 (8min), 01-03 (3min)
 - Trend: baseline
 
 *Updated after each plan completion*
@@ -51,6 +51,8 @@ Recent decisions affecting current work:
 - [01-01]: Kept docker-compose.yml naming (not compose.yaml) — matches existing VPS convention
 - [01-02]: Used docker exec pg_dump (database-scoped, not pg_dumpall) — dotsai DB only, simpler restore
 - [01-02]: 7-day retention via find -mtime — bounded storage growth, matches ROADMAP requirement
+- [01-03]: Added external: true to dotsai_pgdata volume declaration — volume pre-existed compose, external: true suppresses warning and correctly models independent volume lifecycle
+- [01-03]: Preserved /opt/services/postgres-data/ bind-mount as 7-day rollback — safe to remove after 2026-04-03
 
 ### Pending Todos
 
@@ -66,5 +68,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-27
-Stopped at: Completed 01-02-PLAN.md — Phase 1 fully done, ready for Phase 2
+Stopped at: Completed 01-03-PLAN.md — Phase 1 gap closed (named volume), all 5 criteria satisfied, ready for Phase 2
 Resume file: None
