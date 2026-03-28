@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-03-27)
 
 **Core value:** Every visitor, click, and booking captured in Meet's own PostgreSQL — zero third-party analytics dependency, connected from anywhere.
-**Current focus:** Phase 4 COMPLETE. Next: Phase 5 (if planned) or project wrap-up.
+**Current focus:** Phase 5 PLANNED. Gateway section + meet.dotsai.in personal page + E2E health check.
 
 ## Current Position
 
-Phase: 4 of 5 — COMPLETE (Cal.com Webhook Bridge)
-Plan: 2 of 2 in Phase 4 — all plans complete
-Status: Phase 4 COMPLETE. Cal.com SaaS webhook configured and E2E verified. Real bookings flowing into analytics.bookings.
-Last activity: 2026-03-28 — Plan 04-02 verified: Cal.com webhook -> api.dotsai.in -> analytics.bookings pipeline confirmed with real booking (cal_booking_id: 17636688)
+Phase: 5 of 5 — PLANNED (Gateway Section + meet.dotsai.in)
+Plan: 0 of 3 in Phase 5 — ready to execute
+Status: Phase 5 plans created. 3 plans in 2 waves: Wave 1 (05-01 gateway section, 05-02 meet page + deploy — parallel), Wave 2 (05-03 health check + cleanup — depends on both).
+Last activity: 2026-03-28 — Phase 5 plans created
 
-Progress: [██████████] 80% (Phases 1-2 complete, Phase 3 skipped, Phase 4 complete)
+Progress: [██████████] 85% (Phases 1-2 complete, Phase 3 skipped, Phase 4 complete, Phase 5 planned)
 
 ## Performance Metrics
 
@@ -33,7 +33,7 @@ Progress: [██████████] 80% (Phases 1-2 complete, Phase 3 ski
 
 **Recent Trend:**
 - Last 5 plans: 02-02 (3min), 02-03 (3min), 02-04 (5min), 04-01 (8min), 04-02 (2min)
-- Trend: Phase 4 COMPLETE -- Cal.com webhook pipeline fully operational, E2E verified with real booking
+- Trend: Phase 4 COMPLETE -- Phase 5 planned, ready to execute
 
 *Updated after each plan completion*
 
@@ -74,21 +74,24 @@ Recent decisions affecting current work:
 - [04-01]: Field extraction with fallback paths for Cal.com payload structure variations
 - [04-02]: Cal.com webhook triggers: BOOKING_CREATED, BOOKING_CANCELLED, BOOKING_RESCHEDULED all configured
 - [04-02]: E2E verified with real booking (cal_booking_id 17636688) -- production pipeline confirmed
+- [Phase 5 planning]: Analytics snippet was lost from index.html during SEO auto-optimisation runs — 05-01 restores it
+- [Phase 5 planning]: meet.dotsai.in DNS A record -> 72.62.229.16 confirmed per user (DNS screenshot provided)
+- [Phase 5 planning]: NO self-hosted Cal.com — cal.dotsai.in does NOT exist. All booking CTAs point to cal.com/meetdeshani (SaaS)
 
 ### Pending Todos
 
-None yet.
+- Execute Phase 5: `/gsd:execute-phase 05-gateway-meet`
 
 ### Blockers/Concerns
 
 - ~~[Pre-phase]: VPS RAM headroom unconfirmed~~ RESOLVED in 01-01: 31GB total, 24GB available, 8GB swap
 - ~~[Pre-phase]: DNS A record for api.dotsai.in~~ RESOLVED in 02-03: api.dotsai.in -> 72.62.229.16 confirmed, SSL cert issued
-- ~~[Pre-phase]: DNS A records for cal.dotsai.in, meet.dotsai.in must point to 72.62.229.16 before certbot runs in Phases 3, 5.~~ PARTIALLY RESOLVED: Phase 3 skipped (using Cal.com SaaS). meet.dotsai.in DNS still needed for Phase 5.
+- ~~[Pre-phase]: DNS A records for cal.dotsai.in, meet.dotsai.in must point to 72.62.229.16 before certbot runs in Phases 3, 5.~~ RESOLVED: Phase 3 skipped (Cal.com SaaS). meet.dotsai.in DNS confirmed per user.
 - ~~[Pre-phase]: Cal.com exact semver image tag unconfirmed~~ NO LONGER NEEDED: Phase 3 skipped, using Cal.com SaaS.
 - ~~[Pre-phase]: asyncpg 0.29.0 pin is MEDIUM confidence~~ RESOLVED in 02-01: pinned asyncpg>=0.30.0,<0.32.0 per research (0.31.0 confirmed working with SQLAlchemy 2.0.48)
 
 ## Session Continuity
 
 Last session: 2026-03-28
-Stopped at: Completed 04-02-PLAN.md — Phase 4 COMPLETE. Cal.com webhook pipeline E2E verified. Next: Phase 5 (if planned).
+Stopped at: Phase 5 plans created (05-01, 05-02, 05-03). Next: execute Phase 5.
 Resume file: None

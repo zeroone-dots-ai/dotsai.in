@@ -13,7 +13,7 @@ Milestone 1 transforms dotsai.in from a standalone static site into a fully self
 - [x] **Phase 1: VPS Pre-Flight + PostgreSQL Foundation** - Provision the database layer; nothing else can start without it
 - [x] **Phase 2: FastAPI Analytics API** - Self-contained analytics ingest service, proves Docker networking before Cal.com
 - [~] **Phase 3: Cal.com at cal.dotsai.in** - SKIPPED (using Cal.com SaaS at cal.com/meetdeshani instead of self-hosting)
-- [ ] **Phase 4: Cal.com Webhook Bridge to Analytics** - Wire Cal.com SaaS booking events into PostgreSQL via HMAC-verified webhook
+- [x] **Phase 4: Cal.com Webhook Bridge to Analytics** - Wire Cal.com SaaS booking events into PostgreSQL via HMAC-verified webhook
 - [ ] **Phase 5: Gateway Section + meet.dotsai.in** - Frontend layer completing the hub — navigation and personal page
 
 ## Phase Details
@@ -89,11 +89,11 @@ Plans:
 3. `POST /webhooks/calcom` with an invalid HMAC signature returns HTTP 403 — the endpoint is not publicly callable without the shared secret
 4. The webhook URL in Cal.com admin shows `https://api.dotsai.in/webhooks/calcom`
 
-**Plans**: 2 plans
+**Plans**: 2 plans (COMPLETE)
 
 Plans:
-- [ ] 04-01-PLAN.md — Alembic migration for analytics.bookings table; POST /webhooks/calcom endpoint with HMAC-SHA256 verification; deploy to VPS
-- [ ] 04-02-PLAN.md — Configure Cal.com SaaS webhook in admin; E2E test with real booking creation and cancellation
+- [x] 04-01-PLAN.md — Alembic migration for analytics.bookings table; POST /webhooks/calcom endpoint with HMAC-SHA256 verification; deploy to VPS
+- [x] 04-02-PLAN.md — Configure Cal.com SaaS webhook in admin; E2E test with real booking creation and cancellation
 
 ---
 
@@ -107,17 +107,17 @@ Plans:
 
 **Success Criteria** (what must be TRUE when this phase completes):
 1. The gateway section renders in dotsai.in with three cards (dotsai.cloud, zeroonedotsai.consulting, meet.dotsai.in) — each is an `<a href>` element visible in page source with no JS required to render
-2. Clicking a gateway card fires a `gateway_click` event visible in `analytics.events` within 30 seconds; tap targets measure ≥ 44px on mobile
+2. Clicking a gateway card fires a `gateway_click` event visible in `analytics.events` within 30 seconds; tap targets measure >= 44px on mobile
 3. `https://meet.dotsai.in` loads a page with name, photo, one-liner, short bio, and a "Book a Call" link pointing to `cal.com/meetdeshani`; the page fires a `page_view` event to the analytics API
 4. `curl -I https://meet.dotsai.in` returns HTTP 200 with a valid SSL certificate and correct OpenGraph meta tags in the HTML
 5. Running the E2E health check script returns `PASS` for all services: `api.dotsai.in/health`, `meet.dotsai.in`, dotsai.in gateway section links, and `docker ps` showing all containers healthy
 
-**Plans**: 3 plans
+**Plans**: 3 plans in 2 waves
 
 Plans:
-- [ ] 05-01: Gateway section in public/index.html — three destination cards, GSAP ScrollTrigger entrance, gateway_click events, >=44px tap targets
-- [ ] 05-02: meet.dotsai.in — static HTML page, brand-consistent, OpenGraph tags, analytics snippet, nginx server block with SSL
-- [ ] 05-03: E2E health check script validating all services; remove old cal.com/meetdeshani link from dotsai.in after verification
+- [ ] 05-01-PLAN.md — Gateway section in public/index.html: restore analytics snippet, three destination cards, GSAP ScrollTrigger entrance, gateway_click events, >=44px tap targets
+- [ ] 05-02-PLAN.md — meet.dotsai.in: static HTML personal page, brand-consistent, OpenGraph tags, analytics snippet, nginx server block with SSL, deploy to VPS
+- [ ] 05-03-PLAN.md — E2E health check script (scripts/health-check.sh) validating all services; audit and clean up cal.com/meetdeshani links in index.html
 
 ---
 
@@ -130,8 +130,8 @@ Plans:
 | 1. VPS Pre-Flight + PostgreSQL Foundation | 3/3 | Complete | 2026-03-27 |
 | 2. FastAPI Analytics API | 4/4 | Complete | 2026-03-28 |
 | 3. Cal.com at cal.dotsai.in | - | SKIPPED | - |
-| 4. Cal.com Webhook Bridge (SLIM) | 0/2 | Planned | - |
-| 5. Gateway Section + meet.dotsai.in | 0/3 | Not started | - |
+| 4. Cal.com Webhook Bridge (SLIM) | 2/2 | Complete | 2026-03-28 |
+| 5. Gateway Section + meet.dotsai.in | 0/3 | Planned | - |
 
 ---
 
@@ -140,8 +140,8 @@ Plans:
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | REQ-01 (R01.1-R01.5) -- PostgreSQL Foundation | Phase 1 | Complete |
-| REQ-02 (R02.1-R02.6) -- Analytics Tables | Phase 2 (R02.1-R02.2, R02.4-R02.6), Phase 4 (R02.3) | Partial |
-| REQ-03 (R03.1-R03.9) -- FastAPI Analytics API | Phase 2 (R03.1-R03.3, R03.5-R03.9), Phase 4 (R03.4) | Partial |
+| REQ-02 (R02.1-R02.6) -- Analytics Tables | Phase 2 (R02.1-R02.2, R02.4-R02.6), Phase 4 (R02.3) | Complete |
+| REQ-03 (R03.1-R03.9) -- FastAPI Analytics API | Phase 2 (R03.1-R03.3, R03.5-R03.9), Phase 4 (R03.4) | Complete |
 | REQ-04 (R04.1-R04.10) -- Cal.com | Phase 3 SKIPPED (using SaaS), Phase 4 (R04.7 webhook) | Partial |
 | REQ-05 (R05.1-R05.7) -- Gateway Section | Phase 5 | Pending |
 | REQ-06 (R06.1-R06.6) -- Browser Tracking Snippet | Phase 2 | Complete |
