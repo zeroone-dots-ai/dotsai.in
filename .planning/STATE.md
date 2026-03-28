@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-03-27)
 ## Current Position
 
 Phase: 5 of 5 — PLANNED (Gateway Section + meet.dotsai.in)
-Plan: 1 of 3 in Phase 5 — 05-02 complete (awaiting human-verify), 05-01 + 05-03 remaining
-Status: 05-02 (meet.dotsai.in) deployed and live. Awaiting human verification checkpoint.
-Last activity: 2026-03-28 — 05-02 meet.dotsai.in deployed
+Plan: 2 of 3 in Phase 5 — 05-01 + 05-02 complete, 05-03 remaining
+Status: 05-01 (gateway section + analytics) deployed and live. 05-02 (meet.dotsai.in) deployed. 05-03 remaining.
+Last activity: 2026-03-28 — 05-01 gateway section deployed to dotsai.in
 
-Progress: [███████████] 90% (Phases 1-2 complete, Phase 3 skipped, Phase 4 complete, Phase 5 in progress — 05-02 done)
+Progress: [███████████] 93% (Phases 1-2 complete, Phase 3 skipped, Phase 4 complete, Phase 5: 2/3 done)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 10
-- Average duration: 7min
-- Total execution time: 0.98 hours
+- Total plans completed: 11
+- Average duration: 6min
+- Total execution time: 1.05 hours
 
 **By Phase:**
 
@@ -30,16 +30,17 @@ Progress: [███████████] 90% (Phases 1-2 complete, Phase 3 
 | 01 | 3 | 17min | 6min |
 | 02 | 4 | 31min | 8min |
 | 04 | 2 | 10min | 5min |
-| 05 | 1 | 3min | 3min |
+| 05 | 2 | 7min | 4min |
 
 **Recent Trend:**
-- Last 5 plans: 02-03 (3min), 02-04 (5min), 04-01 (8min), 04-02 (2min), 05-02 (3min)
-- Trend: Phase 5 in progress -- 05-02 complete, 05-01 and 05-03 remaining
+- Last 5 plans: 02-04 (5min), 04-01 (8min), 04-02 (2min), 05-02 (3min), 05-01 (4min)
+- Trend: Phase 5 in progress -- 05-01 + 05-02 complete, 05-03 remaining
 
 *Updated after each plan completion*
 | Phase | Plan | Duration | Tasks | Files |
 |-------|------|----------|-------|-------|
 | 05 | 02 | 3min | 2 | 1 |
+| 05 | 01 | 4min | 1 | 1 |
 
 ## Accumulated Context
 
@@ -83,6 +84,8 @@ Recent decisions affecting current work:
 - [Phase 5 planning]: NO self-hosted Cal.com — cal.dotsai.in does NOT exist. All booking CTAs point to cal.com/meetdeshani (SaaS)
 - [05-02]: SSL cert already provisioned for meet.dotsai.in -- skipped certbot issuance, reused existing cert
 - [05-02]: Security headers on meet.dotsai.in: X-Frame-Options SAMEORIGIN, X-Content-Type-Options nosniff, Referrer-Policy strict-origin-when-cross-origin
+- [05-01]: Analytics snippet uses internal track() function, exposes only window.dotsTrack -- minimal global footprint
+- [05-01]: VPS deploy requires cp from git repo to nginx html dir -- auto-deploy only triggers on main branch merge
 
 ### Pending Todos
 
@@ -99,5 +102,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-03-28
-Stopped at: Completed 05-02-PLAN.md (meet.dotsai.in deployed). Awaiting human-verify checkpoint. Next: 05-01 (gateway section) and 05-03 (health check).
+Stopped at: Completed 05-01-PLAN.md (gateway section + analytics deployed). Next: 05-03 (health check + cleanup).
 Resume file: None
