@@ -1035,6 +1035,131 @@ nav.light .nav-cta:hover {
 }
 
 /* ───────────────────────────────────────────────
+   SECTION 4b: GATEWAY
+─────────────────────────────────────────────── */
+#gateway {
+  background: var(--paper);
+  padding: 120px 8% 100px;
+  position: relative;
+}
+
+#gateway::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--bone), transparent);
+}
+
+.gateway-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--smoke);
+  margin-bottom: 24px;
+}
+
+.gateway-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+
+.gateway-sub {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.1rem;
+  color: var(--smoke);
+  margin-bottom: 56px;
+}
+
+.gateway-cards {
+  display: flex;
+  gap: 24px;
+}
+
+.gateway-card {
+  flex: 1;
+  min-width: 0;
+  background: var(--bg);
+  border: 1px solid var(--bone);
+  border-radius: 12px;
+  padding: 36px 28px;
+  text-decoration: none;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 48px;
+  transition: border-color 200ms ease-out, transform 200ms ease-out;
+}
+
+.gateway-card:active {
+  transform: scale(0.98);
+}
+
+.gateway-card-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.gateway-card-name {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.35rem;
+  color: var(--ink);
+}
+
+.gateway-card-desc {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  color: var(--smoke);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.gateway-card-url {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--plum);
+  margin-top: 16px;
+  letter-spacing: 0.5px;
+}
+
+.gateway-arrow {
+  display: inline-block;
+  transition: transform 150ms ease-out;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .gateway-card:hover {
+    border-color: var(--plum);
+    transform: translateY(-2px);
+  }
+  .gateway-card:hover .gateway-arrow {
+    transform: translate(2px, -2px);
+  }
+}
+
+@media (max-width: 768px) {
+  .gateway-cards {
+    flex-direction: column;
+  }
+  .gateway-card {
+    min-height: 44px;
+  }
+}
+
+/* Gateway GSAP initial state */
+.gateway-label, .gateway-title, .gateway-sub, .gateway-card {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+/* ───────────────────────────────────────────────
    SECTION 5: CONTACT
 ─────────────────────────────────────────────── */
 #contact {
@@ -1399,6 +1524,19 @@ footer {
 #hero { cursor: none !important; }
 
 </style>
+
+<script>
+(function(){
+  var API="https://api.dotsai.in/events";
+  var TOKEN="8ad6b8017639f8b248ccb25609f9112e14472e932169567948b554aa16a03b02";
+  function track(name,props){
+    try{fetch(API,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+TOKEN},body:JSON.stringify({event:name,properties:props||{},url:location.href,referrer:document.referrer,timestamp:new Date().toISOString()}),keepalive:true})}catch(e){}
+  }
+  track("page_view");
+  if(!sessionStorage.getItem("_ds")){sessionStorage.setItem("_ds","1");track("session_start")}
+  window.dotsTrack=track;
+})();
+</script>
 </head>
 
 <body class="splash-active">
@@ -1678,6 +1816,33 @@ footer {
         <p class="case-title">Compliance Team — AI Audit System</p>
         <p class="case-outcome">Private call audit system with custom scoring model. <span class="case-highlight">₹8L/year saved</span> vs manual review cost.</p>
       </div>
+    </div>
+  </section>
+
+  <!-- ─── GATEWAY ─── -->
+  <section id="gateway">
+    <p class="gateway-label">// explore</p>
+    <h2 class="gateway-title">The Hub</h2>
+    <p class="gateway-sub">Three doors. One ecosystem.</p>
+    <div class="gateway-cards">
+      <a href="https://dotsai.cloud" target="_blank" rel="noopener" class="gateway-card" onclick="window.dotsTrack&&window.dotsTrack('gateway_click',{destination:'dotsai.cloud'})">
+        <span class="gateway-card-dot" style="background: var(--dots-ops);"></span>
+        <h3 class="gateway-card-name">Infinity Platform</h3>
+        <p class="gateway-card-desc">Your private AI operating system. CRM, docs, automation — on your server.</p>
+        <span class="gateway-card-url">dotsai.cloud <span class="gateway-arrow">&nearr;</span></span>
+      </a>
+      <a href="https://zeroonedotsai.consulting" target="_blank" rel="noopener" class="gateway-card" onclick="window.dotsTrack&&window.dotsTrack('gateway_click',{destination:'zeroonedotsai.consulting'})">
+        <span class="gateway-card-dot" style="background: var(--dots-strategy);"></span>
+        <h3 class="gateway-card-name">Global Consulting</h3>
+        <p class="gateway-card-desc">AI strategy and deployment for teams worldwide. Enterprise-grade, founder-delivered.</p>
+        <span class="gateway-card-url">zeroonedotsai.consulting <span class="gateway-arrow">&nearr;</span></span>
+      </a>
+      <a href="https://meet.dotsai.in" target="_blank" rel="noopener" class="gateway-card" onclick="window.dotsTrack&&window.dotsTrack('gateway_click',{destination:'meet.dotsai.in'})">
+        <span class="gateway-card-dot" style="background: var(--dots-tech);"></span>
+        <h3 class="gateway-card-name">Meet Deshani</h3>
+        <p class="gateway-card-desc">The person behind ZeroOne. Book a call, see the work, start a conversation.</p>
+        <span class="gateway-card-url">meet.dotsai.in <span class="gateway-arrow">&nearr;</span></span>
+      </a>
     </div>
   </section>
 
@@ -2298,6 +2463,27 @@ function initMainPage() {
         trigger: '.proof-cases',
         start: 'top 80%',
       }
+    })
+  })
+
+  // ── Gateway cards fade-up ──
+  gsap.to('.gateway-label', {
+    opacity: 1, y: 0, duration: 0.6, ease: 'power3.out',
+    scrollTrigger: { trigger: '#gateway', start: 'top 75%' }
+  })
+  gsap.to('.gateway-title', {
+    opacity: 1, y: 0, duration: 0.7, ease: 'power3.out',
+    scrollTrigger: { trigger: '#gateway', start: 'top 75%' }
+  })
+  gsap.to('.gateway-sub', {
+    opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', delay: 0.1,
+    scrollTrigger: { trigger: '#gateway', start: 'top 75%' }
+  })
+  document.querySelectorAll('.gateway-card').forEach(function(card, i) {
+    gsap.to(card, {
+      opacity: 1, y: 0, duration: 0.6, ease: 'power3.out',
+      delay: i * 0.08,
+      scrollTrigger: { trigger: '.gateway-cards', start: 'top 82%' }
     })
   })
 
