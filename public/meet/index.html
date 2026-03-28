@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="https://dotsai.in/favicon.svg">
+<title>Meet Deshani | AI Engineer & Founder — ZeroOne D.O.T.S AI</title>
+<meta name="description" content="Meet Deshani — AI engineer and founder of ZeroOne D.O.T.S AI. I build private AI systems that live on your server. Book a call.">
+<meta name="robots" content="index, follow">
+
+<!-- OpenGraph -->
+<meta property="og:title" content="Meet Deshani | AI Engineer & Founder">
+<meta property="og:description" content="I build AI that lives on your server. Founder of ZeroOne D.O.T.S AI — India's most direct AI agency.">
+<meta property="og:url" content="https://meet.dotsai.in">
+<meta property="og:type" content="profile">
+<meta property="og:image" content="https://dotsai.in/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Meet Deshani | AI Engineer & Founder">
+<meta name="twitter:description" content="I build AI that lives on your server. Founder of ZeroOne D.O.T.S AI.">
+<link rel="canonical" href="https://meet.dotsai.in">
+
+<!-- Fonts (same as dotsai.in) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Meet Deshani",
+  "jobTitle": "AI Engineer & Founder",
+  "url": "https://meet.dotsai.in",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "ZeroOne D.O.T.S AI",
+    "url": "https://dotsai.in"
+  }
+}
+</script>
+
+<!-- Analytics -->
+<script>
+(function(){
+  var API="https://api.dotsai.in/events";
+  var TOKEN="8ad6b8017639f8b248ccb25609f9112e14472e932169567948b554aa16a03b02";
+  var SITE=location.hostname;
+  function track(n,p){
+    var d=JSON.stringify({site:SITE,page:location.pathname,event_name:n,properties:p||{},referrer:document.referrer||null,screen_width:screen.width});
+    if(typeof fetch!=="undefined"){fetch(API,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+TOKEN},body:d,keepalive:true}).catch(function(){});}
+  }
+  track("page_view");
+  try{if(!sessionStorage.getItem("_ds")){sessionStorage.setItem("_ds","1");track("session_start");}}catch(e){}
+  window.dotsTrack=track;
+})();
+</script>
+
+<style>
+:root {
+  --paper:     #F7F3ED;
+  --bone:      #ECE5DB;
+  --ink:       #171722;
+  --smoke:     #6E675F;
+  --plum:      #43305F;
+  --lavender:  #D7CFF0;
+  --gold:      #B28743;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── NAV ─── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 8%;
+  background: var(--paper);
+  border-bottom: 1px solid var(--bone);
+  z-index: 100;
+}
+
+.nav-brand {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.nav-link {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  color: var(--plum);
+  text-decoration: none;
+}
+
+/* ─── MAIN ─── */
+.main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 80px 24px;
+  padding-top: 120px;
+}
+
+/* ─── PHOTO PLACEHOLDER ─── */
+.photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--bone);
+  border: 2px solid var(--lavender);
+  margin: 0 auto;
+  display: block;
+}
+/* Replace with actual photo: <img src="/meet/photo.jpg" alt="Meet Deshani" class="photo" /> */
+
+/* ─── NAME ─── */
+.name {
+  font-family: 'Instrument Serif', serif;
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: var(--ink);
+  text-align: center;
+  margin-top: 24px;
+  line-height: 1.2;
+}
+
+/* ─── ONE-LINER ─── */
+.oneliner {
+  font-size: 1.15rem;
+  color: var(--smoke);
+  text-align: center;
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+/* ─── ROLE TAG ─── */
+.role-wrap {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.role {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--plum);
+  background: rgba(67, 48, 95, 0.06);
+  padding: 6px 14px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+/* ─── BIO ─── */
+.bio {
+  font-size: 1rem;
+  color: var(--smoke);
+  line-height: 1.7;
+  margin-top: 40px;
+  text-align: left;
+}
+
+/* ─── CTA ─── */
+.cta-wrap {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 48px;
+}
+
+.cta-primary,
+.cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  text-decoration: none;
+  min-height: 48px;
+  transition: transform 160ms ease-out;
+}
+
+.cta-primary {
+  background: var(--plum);
+  color: #fff;
+}
+
+.cta-secondary {
+  border: 1px solid var(--bone);
+  color: var(--ink);
+  padding: 14px 28px;
+  background: transparent;
+}
+
+.cta-primary:active,
+.cta-secondary:active {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cta-primary:hover {
+    opacity: 0.92;
+  }
+  .cta-secondary:hover {
+    background: var(--bone);
+  }
+}
+
+/* ─── BACK LINK ─── */
+.back {
+  display: block;
+  text-align: center;
+  margin-top: 56px;
+  font-size: 0.9rem;
+  color: var(--plum);
+  text-decoration: none;
+}
+
+/* ─── FOOTER ─── */
+.footer {
+  margin-top: 80px;
+  border-top: 1px solid var(--bone);
+  padding-top: 24px;
+  text-align: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--smoke);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 480px) {
+  .name {
+    font-size: 2rem;
+  }
+
+  .main {
+    padding: 60px 20px;
+    padding-top: 100px;
+  }
+
+  .cta-wrap {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cta-primary,
+  .cta-secondary {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav class="nav">
+  <span class="nav-brand">ZEROONE D.O.T.S AI</span>
+  <a href="https://dotsai.in" class="nav-link" target="_blank" rel="noopener">dotsai.in</a>
+</nav>
+
+<!-- ─── MAIN ─── -->
+<main class="main">
+
+  <!-- Photo placeholder -->
+  <div class="photo" role="img" aria-label="Meet Deshani photo placeholder"></div>
+  <!-- Replace with actual photo: <img src="/meet/photo.jpg" alt="Meet Deshani" class="photo" /> -->
+
+  <h1 class="name">Meet Deshani</h1>
+
+  <p class="oneliner">I build AI that lives on your server.</p>
+
+  <div class="role-wrap">
+    <span class="role">AI Engineer & Founder · ZeroOne D.O.T.S AI</span>
+  </div>
+
+  <p class="bio">
+    I am one person running an AI agency. No teams, no overhead — just focused
+    engineering. I deploy private LLMs, build automation systems, and create
+    AI-powered web experiences for businesses across India. Everything runs on
+    your infrastructure. Your data stays with you.
+  </p>
+
+  <!-- CTA -->
+  <div class="cta-wrap">
+    <a href="https://cal.com/meetdeshani" target="_blank" rel="noopener" class="cta-primary"
+       onclick="window.dotsTrack&&window.dotsTrack('cta_click',{target:'cal.com/meetdeshani',page:'meet'})">
+      Book a Call &rarr;
+    </a>
+    <a href="https://wa.me/918320065658" target="_blank" rel="noopener" class="cta-secondary"
+       onclick="window.dotsTrack&&window.dotsTrack('cta_click',{target:'whatsapp',page:'meet'})">
+      WhatsApp
+    </a>
+  </div>
+
+  <a href="https://dotsai.in" class="back">&larr; dotsai.in</a>
+
+  <footer class="footer">&copy; 2026 ZeroOne D.O.T.S AI</footer>
+
+</main>
+
+</body>
+</html>
