@@ -717,8 +717,332 @@ nav.light .nav-cta:hover {
 }
 
 /* ───────────────────────────────────────────────
-   SECTION 2: MANIFESTO
+   HERO SLIDES — 3-panel scroll transition
 ─────────────────────────────────────────────── */
+.hero-slides {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 48px;
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+.hero-slide:first-child {
+  opacity: 1;
+}
+
+.hero-slide-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(200,182,255,0.5);
+  margin-bottom: 28px;
+}
+
+.hero-slide-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(48px, 8vw, 100px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+  max-width: 900px;
+}
+
+.hero-slide-title em {
+  font-style: italic;
+  color: var(--lavender);
+}
+
+.hero-slide-sub {
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(16px, 2vw, 19px);
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.45);
+  max-width: 540px;
+  margin-bottom: 40px;
+}
+
+.hero-slide-tags {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hero-slide-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 2px;
+  border: 1px solid rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.5);
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.hero-slide-ctas {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+/* Hero progress dots (right side) */
+.hero-progress {
+  position: absolute;
+  right: 48px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.hero-pip {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  cursor: pointer;
+}
+
+.hero-pip.active {
+  background: rgba(200,182,255,0.85);
+  box-shadow: 0 0 10px rgba(200,182,255,0.4);
+  transform: scale(1.6);
+}
+
+.hero-pip-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.0);
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  transition: color 0.3s ease;
+  margin-top: 8px;
+}
+
+.hero-progress:hover .hero-pip-label {
+  color: rgba(255,255,255,0.2);
+}
+
+/* ───────────────────────────────────────────────
+   BRIEF REDIRECT SECTIONS (Platform & Consulting)
+─────────────────────────────────────────────── */
+.brief-section {
+  padding: clamp(64px, 8vw, 120px) clamp(24px, 6vw, 120px);
+  position: relative;
+}
+
+.brief-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--bone), transparent);
+}
+
+.brief-section-dark {
+  background: linear-gradient(180deg, #0a0a12 0%, #0f0f1a 100%);
+}
+
+.brief-section-dark::before {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+}
+
+.brief-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.brief-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.brief-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--smoke);
+  opacity: 0.6;
+}
+
+.brief-section-dark .brief-label {
+  color: rgba(255,255,255,0.35);
+}
+
+.brief-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(32px, 4.5vw, 52px);
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.brief-section-dark .brief-title {
+  color: rgba(255,255,255,0.92);
+}
+
+.brief-desc {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--smoke);
+  max-width: 440px;
+}
+
+.brief-section-dark .brief-desc {
+  color: rgba(255,255,255,0.4);
+}
+
+.brief-services {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.brief-service-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.brief-section-dark .brief-service-item {
+  color: rgba(255,255,255,0.7);
+}
+
+.brief-service-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.brief-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  margin-top: 8px;
+  transition: all 0.25s ease;
+}
+
+.brief-cta-light {
+  color: var(--plum);
+}
+
+.brief-cta-light:hover {
+  color: var(--ink);
+  transform: translateX(4px);
+}
+
+.brief-cta-dark {
+  color: var(--lavender);
+}
+
+.brief-cta-dark:hover {
+  color: #fff;
+  transform: translateX(4px);
+}
+
+.meet-redirect {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--plum);
+  text-decoration: none;
+  margin-top: 32px;
+  padding: 10px 20px;
+  border: 1px solid var(--bone);
+  border-radius: 4px;
+  transition: all 0.25s ease;
+}
+
+.meet-redirect:hover {
+  background: var(--bone);
+  color: var(--ink);
+  transform: translateY(-1px);
+}
+
+/* Testimony button (disabled state) */
+.btn-testimony {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--smoke);
+  background: transparent;
+  padding: 16px 32px;
+  border-radius: 4px;
+  text-decoration: none;
+  border: 1px solid var(--bone);
+  opacity: 0.5;
+  cursor: default;
+  position: relative;
+}
+
+.btn-testimony-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--smoke);
+  background: var(--bone);
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+  .hero-progress { display: none; }
+  .brief-inner { grid-template-columns: 1fr; gap: 32px; }
+  .hero-slide { padding: 0 24px; }
+  .hero-slide-tags { gap: 8px; }
+}
+
 /* ───────────────────────────────────────────────
    SECTION 2: MEET (Who Am I?)
 ─────────────────────────────────────────────── */
@@ -1642,27 +1966,74 @@ footer {
     <a href="https://wa.me/918320065658" target="_blank" rel="noopener" class="nav-cta">↗ Let's Talk</a>
   </nav>
 
-  <!-- ─── HERO ─── -->
+  <!-- ─── HERO (3-panel scroll) ─── -->
   <section id="hero">
   <canvas id="particle-mesh" aria-hidden="true"></canvas>
   <canvas id="hero-physics" aria-hidden="true"></canvas>
-    <div class="hero-content">
-      <p class="hero-eyebrow">Meet Deshani · ZeroOne D.O.T.S AI</p>
 
-      <h1 class="hero-h1">
-        Own Your AI.<br>
-        <em>Don't Rent It.</em>
-      </h1>
-
-      <p class="hero-sub">
-        Built by one expert. Deployed on your server.<br>
-        Never leaves your control.
-      </p>
-
-      <div class="hero-ctas">
-        <a href="#consulting" class="btn-primary">→ See What I Build</a>
-        <a href="https://wa.me/918320065658" target="_blank" rel="noopener" class="btn-secondary">↗ Let's Talk</a>
+    <div class="hero-slides">
+      <!-- SLIDE 1: Private AI -->
+      <div class="hero-slide" data-slide="0">
+        <p class="hero-slide-eyebrow">01 · Private AI</p>
+        <h1 class="hero-slide-title">
+          Own Your AI.<br>
+          <em>Don't Rent It.</em>
+        </h1>
+        <p class="hero-slide-sub">
+          Patent it. Build on it. Integrate with your systems.<br>
+          Your data never leaves your infrastructure.
+        </p>
+        <div class="hero-slide-tags">
+          <span class="hero-slide-tag" style="border-color: rgba(200,182,255,0.2); color: #C8B6FF;">Own Your AI</span>
+          <span class="hero-slide-tag" style="border-color: rgba(184,224,210,0.2); color: #B8E0D2;">Integrate</span>
+          <span class="hero-slide-tag" style="border-color: rgba(255,205,178,0.2); color: #FFCDB2;">Build Systems</span>
+          <span class="hero-slide-tag" style="border-color: rgba(162,210,255,0.2); color: #A2D2FF;">Improve</span>
+        </div>
       </div>
+
+      <!-- SLIDE 2: Recover Business Margins -->
+      <div class="hero-slide" data-slide="1">
+        <p class="hero-slide-eyebrow">02 · Consulting</p>
+        <h1 class="hero-slide-title">
+          Recover Business<br>
+          <em>Margins.</em>
+        </h1>
+        <p class="hero-slide-sub">
+          AI consulting that cuts cost, raises productivity,<br>
+          and automates what slows you down.
+        </p>
+        <div class="hero-slide-tags">
+          <span class="hero-slide-tag">Productivity</span>
+          <span class="hero-slide-tag">Efficiency</span>
+          <span class="hero-slide-tag">Cost Reduction</span>
+          <span class="hero-slide-tag">Automation</span>
+        </div>
+      </div>
+
+      <!-- SLIDE 3: Platform -->
+      <div class="hero-slide" data-slide="2">
+        <p class="hero-slide-eyebrow">03 · Platform</p>
+        <h1 class="hero-slide-title">
+          Give Your Team<br>
+          <em>Their Own AI.</em>
+        </h1>
+        <p class="hero-slide-sub">
+          Every employee gets their own agents.<br>
+          Universal SaaS — built on your infrastructure.
+        </p>
+        <div class="hero-slide-ctas">
+          <a href="https://dotsai.cloud" target="_blank" rel="noopener" class="btn-primary">→ Explore Platform</a>
+          <a href="https://wa.me/918320065658" target="_blank" rel="noopener" class="btn-secondary">↗ Let's Talk</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Progress dots -->
+    <div class="hero-progress" id="hero-progress">
+      <div class="hero-pip active" data-pip="0"></div>
+      <div class="hero-pip" data-pip="1"></div>
+      <div class="hero-pip" data-pip="2"></div>
+      <span class="hero-pip-label">Scroll</span>
     </div>
 
     <div class="hero-logo-bottom" id="hero-logo-bottom">
@@ -1714,139 +2085,83 @@ footer {
           <span class="credential-text">Middlemen. You talk to the builder.</span>
         </div>
       </div>
+
+      <a href="https://meet.dotsai.in" class="meet-redirect fade-up">
+        Full story → meet.dotsai.in <span class="service-arrow">↗</span>
+      </a>
     </div>
   </section>
 
-  <!-- ─── HUB: CONSULTING + PLATFORM ─── -->
-  <section id="hub">
-
-    <!-- CONSULTING PILLAR -->
-    <div id="consulting" class="pillar">
-      <div class="pillar-header fade-up">
-        <p class="pillar-label">// hire me for</p>
-        <h2 class="pillar-title">Consulting</h2>
-        <p class="pillar-desc">Hands-on AI consulting. I design, build, and deploy — not just advise. Private AI, digital marketing, automation, and full-service agency work.</p>
+  <!-- ─── PLATFORM (brief redirect) ─── -->
+  <section id="platform" class="brief-section brief-section-dark fade-up">
+    <div class="brief-inner">
+      <div class="brief-content">
+        <p class="brief-label">// products to use</p>
+        <h2 class="brief-title">Platform</h2>
+        <p class="brief-desc">
+          AI products built by ZeroOne. Give your employees their own agents. Universal SaaS — on your infrastructure, not ours.
+        </p>
+        <div class="brief-services">
+          <div class="brief-service-item">
+            <span class="brief-service-dot" style="background: #C8B6FF;"></span>
+            Infinity Nexus — Private AI operating system
+          </div>
+          <div class="brief-service-item">
+            <span class="brief-service-dot" style="background: #B8E0D2;"></span>
+            CRM, Notes, Docs, Automation — all on your server
+          </div>
+          <div class="brief-service-item">
+            <span class="brief-service-dot" style="background: #FFCDB2;"></span>
+            More products shipping soon
+          </div>
+        </div>
+        <a href="https://dotsai.cloud" target="_blank" rel="noopener" class="brief-cta brief-cta-dark">
+          Explore dotsai.cloud <span class="service-arrow">↗</span>
+        </a>
       </div>
-
-      <a href="/private-ai/" class="service-row" data-service="1">
-        <div class="service-accent-bar" style="background: #C8B6FF;"></div>
-        <div class="service-left">
-          <p class="service-number">01 ·</p>
-          <h3 class="service-name">Private AI<br>Deployment</h3>
-          <span class="service-tag" style="background: rgba(200,182,255,0.1); color: #C8B6FF;">
-            <span style="width:6px;height:6px;border-radius:50%;background:#C8B6FF;display:inline-block;"></span>
-            Data Sovereignty
-          </span>
-        </div>
-        <div class="service-right">
-          <p class="service-desc">
-            On-premise LLMs, vector databases, agent systems — running on your infrastructure. Your data never touches OpenAI. Full control, zero dependency.
-          </p>
-          <span class="service-link">
-            /private-ai/
-            <span class="service-arrow">↗</span>
-          </span>
-        </div>
-      </a>
-
-      <a href="/geo-ai/" class="service-row" data-service="2">
-        <div class="service-accent-bar" style="background: #A2D2FF;"></div>
-        <div class="service-left">
-          <p class="service-number">02 ·</p>
-          <h3 class="service-name">SEO, GEO &amp;<br>Digital Marketing</h3>
-          <span class="service-tag" style="background: rgba(162,210,255,0.1); color: #A2D2FF;">
-            <span style="width:6px;height:6px;border-radius:50%;background:#A2D2FF;display:inline-block;"></span>
-            Strategy
-          </span>
-        </div>
-        <div class="service-right">
-          <p class="service-desc">
-            Get found by AI assistants and search engines alike. Generative Engine Optimization, local SEO, and AI-first digital marketing for the new era.
-          </p>
-          <span class="service-link">
-            /geo-ai/
-            <span class="service-arrow">↗</span>
-          </span>
-        </div>
-      </a>
-
-      <a href="/ai-automation/" class="service-row" data-service="3">
-        <div class="service-accent-bar" style="background: #B8E0D2;"></div>
-        <div class="service-left">
-          <p class="service-number">03 ·</p>
-          <h3 class="service-name">AI Automation<br>&amp; Agents</h3>
-          <span class="service-tag" style="background: rgba(184,224,210,0.1); color: #B8E0D2;">
-            <span style="width:6px;height:6px;border-radius:50%;background:#B8E0D2;display:inline-block;"></span>
-            Operations
-          </span>
-        </div>
-        <div class="service-right">
-          <p class="service-desc">
-            Custom AI agents and workflow automation. Inbox triage, document processing, audit systems — reducing manual work by 70%+ across your operations.
-          </p>
-          <span class="service-link">
-            /ai-automation/
-            <span class="service-arrow">↗</span>
-          </span>
-        </div>
-      </a>
-
-      <a href="/web-ai-experiences/" class="service-row" data-service="4">
-        <div class="service-accent-bar" style="background: #FFCDB2;"></div>
-        <div class="service-left">
-          <p class="service-number">04 ·</p>
-          <h3 class="service-name">AI Web &amp;<br>Digital Agency</h3>
-          <span class="service-tag" style="background: rgba(255,205,178,0.1); color: #FFCDB2;">
-            <span style="width:6px;height:6px;border-radius:50%;background:#FFCDB2;display:inline-block;"></span>
-            Tech
-          </span>
-        </div>
-        <div class="service-right">
-          <p class="service-desc">
-            Full-stack AI-powered web products. From idea to deployed in days, not months. Modern stack, production-grade architecture, your brand.
-          </p>
-          <span class="service-link">
-            /web-ai-experiences/
-            <span class="service-arrow">↗</span>
-          </span>
-        </div>
-      </a>
-    </div>
-
-    <!-- PLATFORM PILLAR -->
-    <div id="platform" class="pillar pillar-dark">
-      <div class="pillar-header fade-up">
-        <p class="pillar-label">// products to use</p>
-        <h2 class="pillar-title">Platform</h2>
-        <p class="pillar-desc">AI products built by ZeroOne. Use them directly — no consulting engagement needed.</p>
-      </div>
-
-      <a href="https://dotsai.cloud" target="_blank" rel="noopener" class="service-row service-row-dark" data-service="5">
-        <div class="service-accent-bar" style="background: #C8B6FF;"></div>
-        <div class="service-left">
-          <p class="service-number">01 ·</p>
-          <h3 class="service-name">Infinity<br>Nexus</h3>
-          <span class="service-tag" style="background: rgba(200,182,255,0.15); color: #C8B6FF;">
-            <span style="width:6px;height:6px;border-radius:50%;background:#C8B6FF;display:inline-block;"></span>
-            AI Platform
-          </span>
-        </div>
-        <div class="service-right">
-          <p class="service-desc service-desc-dark">
-            The private AI operating system. CRM, notes, docs, automation — all running on your server. No SaaS subscriptions, no data leaks.
-          </p>
-          <span class="service-link service-link-dark">
-            dotsai.cloud
-            <span class="service-arrow">↗</span>
-          </span>
-        </div>
-      </a>
-
-      <div class="platform-coming">
-        <p class="platform-coming-text">More products shipping soon. Building in public.</p>
+      <div class="brief-content" style="text-align: center;">
+        <div style="font-family: 'Instrument Serif', serif; font-size: clamp(56px, 7vw, 80px); color: rgba(255,255,255,0.06); line-height: 1; letter-spacing: -0.02em;">∞</div>
+        <p style="font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.18em; color: rgba(255,255,255,0.2); text-transform: uppercase;">Infinity Nexus</p>
       </div>
     </div>
+  </section>
 
+  <!-- ─── CONSULTING (brief redirect) ─── -->
+  <section id="consulting" class="brief-section fade-up">
+    <div class="brief-inner">
+      <div class="brief-content">
+        <p class="brief-label">// hire me for</p>
+        <h2 class="brief-title">Consulting</h2>
+        <p class="brief-desc">
+          Hands-on AI consulting. I design, build, and deploy — not just advise. Recover your margins through AI.
+        </p>
+        <div class="brief-services">
+          <div class="brief-service-item">
+            <span class="brief-service-dot" style="background: #C8B6FF;"></span>
+            Private AI Deployment
+          </div>
+          <div class="brief-service-item">
+            <span class="brief-service-dot" style="background: #A2D2FF;"></span>
+            SEO, GEO &amp; Digital Marketing
+          </div>
+          <div class="brief-service-item">
+            <span class="brief-service-dot" style="background: #B8E0D2;"></span>
+            AI Automation &amp; Agents
+          </div>
+          <div class="brief-service-item">
+            <span class="brief-service-dot" style="background: #FFCDB2;"></span>
+            AI Web &amp; Digital Agency
+          </div>
+        </div>
+        <a href="/ai-agency-india/" class="brief-cta brief-cta-light">
+          View all services → <span class="service-arrow">↗</span>
+        </a>
+      </div>
+      <div class="brief-content" style="text-align: center;">
+        <div style="font-family: 'Instrument Serif', serif; font-size: clamp(56px, 7vw, 80px); color: var(--bone); line-height: 1; letter-spacing: -0.02em;">4</div>
+        <p style="font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.18em; color: var(--smoke); opacity: 0.4; text-transform: uppercase;">Services</p>
+      </div>
+    </div>
   </section>
 
   <!-- ─── PROOF ─── -->
@@ -1905,7 +2220,7 @@ footer {
     <div class="contact-inner">
       <p class="contact-label">// start here</p>
       <h2 class="contact-title">Let's build<br><em>your AI.</em></h2>
-      <p class="contact-sub">No forms. No sales calls. Just a conversation.</p>
+      <p class="contact-sub">No forms. No sales funnels. Pick what works for you.</p>
       <div class="contact-buttons">
         <a href="https://wa.me/918320065658" target="_blank" rel="noopener" class="btn-wa">
           ↗ WhatsApp Me
@@ -1913,6 +2228,10 @@ footer {
         <a href="https://cal.com/meetdeshani" target="_blank" rel="noopener" class="btn-cal">
           → Book a Call
         </a>
+        <span class="btn-testimony" aria-disabled="true">
+          Read Testimony
+          <span class="btn-testimony-badge">Coming Soon</span>
+        </span>
       </div>
     </div>
   </section>
@@ -1938,11 +2257,10 @@ footer {
 
     <div class="footer-links">
       <a href="#meet" class="footer-link">Meet</a>
-      <a href="/private-ai/" class="footer-link">Private AI</a>
-      <a href="/geo-ai/" class="footer-link">GEO & SEO</a>
-      <a href="/ai-automation/" class="footer-link">Automation</a>
-      <a href="/web-ai-experiences/" class="footer-link">AI Web</a>
-      <a href="https://dotsai.cloud" target="_blank" rel="noopener" class="footer-link">Platform ↗</a>
+      <a href="#platform" class="footer-link">Platform</a>
+      <a href="#consulting" class="footer-link">Consulting</a>
+      <a href="#proof" class="footer-link">Outcomes</a>
+      <a href="https://dotsai.cloud" target="_blank" rel="noopener" class="footer-link">dotsai.cloud ↗</a>
     </div>
   </footer>
 
@@ -2396,44 +2714,86 @@ runSplash()
 function initMainPage() {
   gsap.registerPlugin(ScrollTrigger)
 
-  // ── Hero entrance ──
-  gsap.set('.hero-eyebrow', { opacity: 0, y: 12 })
-  gsap.set('.hero-h1',      { opacity: 0, y: 24 })
-  gsap.set('.hero-sub',     { opacity: 0, y: 16 })
-  gsap.set('.hero-ctas',    { opacity: 0, y: 12 })
-  gsap.set('#hero-logo-bottom', { opacity: 0 })
-  gsap.set('#scroll-hint',  { opacity: 0 })
-  gsap.timeline({ delay: 0.2 })
-    .to('.hero-eyebrow',     { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' })
-    .to('.hero-h1',          { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, '-=0.5')
-    .to('.hero-sub',         { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6')
-    .to('.hero-ctas',        { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.5')
-    .to('#hero-logo-bottom', { opacity: 1, duration: 0.6, ease: 'power2.out' }, '-=0.3')
-    .to('#scroll-hint',      { opacity: 1, duration: 0.5 }, '-=0.2')
+  // ══════════════════════════════════════════
+  //  3-PANEL HERO SCROLL (pin + crossfade)
+  // ══════════════════════════════════════════
+  const slides = document.querySelectorAll('.hero-slide')
+  const pips = document.querySelectorAll('.hero-pip')
+  const slideCount = slides.length
 
-  // ── Manifesto word-by-word reveal ──
+  // First slide visible immediately
+  gsap.set(slides[0], { opacity: 1, y: 0 })
+  for (let i = 1; i < slideCount; i++) {
+    gsap.set(slides[i], { opacity: 0, y: 40 })
+  }
+
+  // Entrance animation for first slide content
+  gsap.set('#hero-logo-bottom', { opacity: 0 })
+  gsap.set('#scroll-hint', { opacity: 0 })
+
+  const firstSlide = slides[0]
+  gsap.timeline({ delay: 0.2 })
+    .from(firstSlide.querySelector('.hero-slide-eyebrow'), { opacity: 0, y: 12, duration: 0.7, ease: 'power3.out' })
+    .from(firstSlide.querySelector('.hero-slide-title'),   { opacity: 0, y: 24, duration: 0.8, ease: 'power3.out' }, '-=0.4')
+    .from(firstSlide.querySelector('.hero-slide-sub'),     { opacity: 0, y: 16, duration: 0.7, ease: 'power3.out' }, '-=0.5')
+    .from(firstSlide.querySelector('.hero-slide-tags') || firstSlide.querySelector('.hero-slide-ctas'), { opacity: 0, y: 12, duration: 0.6, ease: 'power3.out' }, '-=0.4')
+    .to('#hero-logo-bottom', { opacity: 1, duration: 0.5 }, '-=0.2')
+    .to('#scroll-hint', { opacity: 1, duration: 0.4 }, '-=0.1')
+
+  // Scroll-driven hero transitions
+  const heroTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#hero',
+      start: 'top top',
+      end: '+=' + (window.innerHeight * 2),
+      pin: true,
+      scrub: 0.6,
+      onUpdate: (self) => {
+        // Update progress pips
+        const progress = self.progress
+        let activeIdx = 0
+        if (progress > 0.66) activeIdx = 2
+        else if (progress > 0.33) activeIdx = 1
+        pips.forEach((pip, i) => {
+          pip.classList.toggle('active', i === activeIdx)
+        })
+      }
+    }
+  })
+
+  // Slide 1 → Slide 2
+  heroTl
+    .to(slides[0], { opacity: 0, y: -50, duration: 0.45, ease: 'power2.in' }, 0.05)
+    .to(slides[1], { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' }, 0.08)
+  // Slide 2 → Slide 3
+  heroTl
+    .to(slides[1], { opacity: 0, y: -50, duration: 0.45, ease: 'power2.in' }, 0.55)
+    .to(slides[2], { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' }, 0.58)
+
+  // Fade logo-bottom and scroll-hint as we scroll past hero
+  heroTl.to('#hero-logo-bottom', { opacity: 0, duration: 0.2 }, 0.02)
+  heroTl.to('#scroll-hint', { opacity: 0, duration: 0.2 }, 0.02)
+
+  // ══════════════════════════════════════════
+  //  MANIFESTO WORD-BY-WORD REVEAL
+  // ══════════════════════════════════════════
   const manifestoRaw = "I am one person. I build AI that lives on YOUR server. Your data never leaves. Your competitors never see it. This is private AI — and it changes everything."
 
-  // Parse into word spans, highlight special words
   const specialYours = ['YOUR', 'Your', 'your']
-  const specialHighlight = ['private AI']
   const words = manifestoRaw.split(' ')
   const container = document.getElementById('manifesto-text')
 
   words.forEach((word, i) => {
     const span = document.createElement('span')
     span.className = 'manifesto-word'
-
     const cleanWord = word.replace(/[^a-zA-Z]/g, '')
     if (specialYours.includes(cleanWord) || word.toUpperCase() === 'YOUR') {
       span.className += ' yours'
     }
-
     span.textContent = word + (i < words.length - 1 ? ' ' : '')
     container.appendChild(span)
   })
 
-  // Highlight "private AI" — find index of "private" and "AI" adjacent
   const wordSpans = [...container.querySelectorAll('.manifesto-word')]
   wordSpans.forEach((span, i) => {
     const text = span.textContent.trim()
@@ -2443,13 +2803,12 @@ function initMainPage() {
     }
   })
 
-  // ── Meet credentials fade-up ──
-  gsap.to('.meet-credentials.fade-up', {
-    opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '.meet-credentials',
-      start: 'top 85%',
-    }
+  // ── Meet credentials + redirect fade-up ──
+  document.querySelectorAll('#meet .fade-up').forEach((el) => {
+    gsap.to(el, {
+      opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+      scrollTrigger: { trigger: el, start: 'top 85%' }
+    })
   })
 
   // Scroll-triggered word reveal
@@ -2469,28 +2828,11 @@ function initMainPage() {
     }
   })
 
-  // ── Pillar headers fade-up ──
-  document.querySelectorAll('.pillar-header.fade-up').forEach((header) => {
-    gsap.to(header, {
-      opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
-      scrollTrigger: {
-        trigger: header,
-        start: 'top 75%',
-      }
-    })
-  })
-
-  // ── Service rows fade-up (per pillar) ──
-  document.querySelectorAll('.pillar').forEach((pillar) => {
-    pillar.querySelectorAll('.service-row').forEach((row, i) => {
-      gsap.to(row, {
-        opacity: 1, y: 0, duration: 0.7, ease: 'power3.out',
-        delay: i * 0.08,
-        scrollTrigger: {
-          trigger: row,
-          start: 'top 82%',
-        }
-      })
+  // ── Brief sections fade-up ──
+  document.querySelectorAll('.brief-section.fade-up').forEach((section) => {
+    gsap.to(section, {
+      opacity: 1, y: 0, duration: 0.9, ease: 'power3.out',
+      scrollTrigger: { trigger: section, start: 'top 78%' }
     })
   })
 
@@ -2548,27 +2890,57 @@ function initMainPage() {
   .from('.contact-sub', { opacity: 0, y: 20, duration: 0.6, ease: 'power3.out' }, '-=0.4')
   .from('.contact-buttons', { opacity: 0, y: 16, duration: 0.6, ease: 'power3.out' }, '-=0.3')
 
-  // ── Nav contrast: dark on hero, light on cream, dark on platform/proof ──
+  // ── Nav contrast: dark on hero, light on cream, dark on dark sections ──
   const nav = document.getElementById('nav')
 
-  // Hero → Meet/Consulting (dark → light)
+  // Hero ends → Meet begins (dark nav → light nav)
+  ScrollTrigger.create({
+    trigger: '#meet',
+    start: 'top 64px',
+    onEnter: () => nav.classList.add('light'),
+    onEnterBack: () => nav.classList.add('light'),
+  })
+
+  // Hero (keep nav dark)
   ScrollTrigger.create({
     trigger: '#hero',
-    start: 'bottom 64px',
-    onLeave: () => nav.classList.add('light'),
+    start: 'top top',
+    end: 'bottom 64px',
+    onEnter: () => nav.classList.remove('light'),
     onEnterBack: () => nav.classList.remove('light'),
   })
 
-  // Platform pillar (light → dark)
-  const platformPillar = document.querySelector('.pillar-dark')
-  if (platformPillar) {
-    ScrollTrigger.create({
-      trigger: platformPillar,
-      start: 'top 64px',
-      onEnter: () => nav.classList.remove('light'),
-      onLeaveBack: () => nav.classList.add('light'),
-    })
-  }
+  // Platform section (dark bg → dark nav)
+  ScrollTrigger.create({
+    trigger: '#platform',
+    start: 'top 64px',
+    onEnter: () => nav.classList.remove('light'),
+    onLeaveBack: () => nav.classList.add('light'),
+  })
+
+  // Consulting section (light bg → light nav)
+  ScrollTrigger.create({
+    trigger: '#consulting',
+    start: 'top 64px',
+    onEnter: () => nav.classList.add('light'),
+    onLeaveBack: () => nav.classList.remove('light'),
+  })
+
+  // Proof section (dark bg → dark nav)
+  ScrollTrigger.create({
+    trigger: '#proof',
+    start: 'top 64px',
+    onEnter: () => nav.classList.remove('light'),
+    onLeaveBack: () => nav.classList.add('light'),
+  })
+
+  // Contact section (light bg → light nav)
+  ScrollTrigger.create({
+    trigger: '#contact',
+    start: 'top 64px',
+    onEnter: () => nav.classList.add('light'),
+    onLeaveBack: () => nav.classList.remove('light'),
+  })
 }
 
 </script>
