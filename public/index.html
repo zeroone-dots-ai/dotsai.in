@@ -2737,10 +2737,10 @@ function initMainPage() {
   const pips = document.querySelectorAll('.hero-pip')
   const slideCount = slides.length
 
-  // First slide visible immediately
-  gsap.set(slides[0], { opacity: 1, y: 0 })
+  // First slide visible, others fully hidden (autoAlpha = opacity + visibility)
+  gsap.set(slides[0], { autoAlpha: 1, y: 0 })
   for (let i = 1; i < slideCount; i++) {
-    gsap.set(slides[i], { opacity: 0, y: 40 })
+    gsap.set(slides[i], { autoAlpha: 0, y: 50 })
   }
 
   // Entrance animation for first slide content
@@ -2757,19 +2757,21 @@ function initMainPage() {
     .to('#scroll-hint', { opacity: 1, duration: 0.4 }, '-=0.1')
 
   // Scroll-driven hero transitions
+  // Sequential: one exits COMPLETELY, then the next enters. No overlap.
+  // Emil principle: exit fast (ease-in), enter responsive (ease-out)
+  // Using autoAlpha (opacity + visibility) to prevent ghost text
   const heroTl = gsap.timeline({
     scrollTrigger: {
       trigger: '#hero',
       start: 'top top',
-      end: '+=' + (window.innerHeight * 2),
+      end: '+=' + (window.innerHeight * 2.5),
       pin: true,
-      scrub: 0.6,
+      scrub: 0.5,
       onUpdate: (self) => {
-        // Update progress pips
         const progress = self.progress
         let activeIdx = 0
-        if (progress > 0.66) activeIdx = 2
-        else if (progress > 0.33) activeIdx = 1
+        if (progress > 0.55) activeIdx = 2
+        else if (progress > 0.15) activeIdx = 1
         pips.forEach((pip, i) => {
           pip.classList.toggle('active', i === activeIdx)
         })
@@ -2777,18 +2779,23 @@ function initMainPage() {
     }
   })
 
-  // Slide 1 → Slide 2
+  // Phase 1: Slide 1 exits (0.00 → 0.18), then Slide 2 enters (0.20 → 0.42)
   heroTl
-    .to(slides[0], { opacity: 0, y: -50, duration: 0.45, ease: 'power2.in' }, 0.05)
-    .to(slides[1], { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' }, 0.08)
-  // Slide 2 → Slide 3
-  heroTl
-    .to(slides[1], { opacity: 0, y: -50, duration: 0.45, ease: 'power2.in' }, 0.55)
-    .to(slides[2], { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' }, 0.58)
+    .to(slides[0], { autoAlpha: 0, y: -60, duration: 0.18, ease: 'power2.in' }, 0.0)
+    .fromTo(slides[1],
+      { autoAlpha: 0, y: 50 },
+      { autoAlpha: 1, y: 0, duration: 0.22, ease: 'power3.out' }, 0.20)
 
-  // Fade logo-bottom and scroll-hint as we scroll past hero
-  heroTl.to('#hero-logo-bottom', { opacity: 0, duration: 0.2 }, 0.02)
-  heroTl.to('#scroll-hint', { opacity: 0, duration: 0.2 }, 0.02)
+  // Phase 2: Slide 2 exits (0.50 → 0.68), then Slide 3 enters (0.70 → 0.92)
+  heroTl
+    .to(slides[1], { autoAlpha: 0, y: -60, duration: 0.18, ease: 'power2.in' }, 0.50)
+    .fromTo(slides[2],
+      { autoAlpha: 0, y: 50 },
+      { autoAlpha: 1, y: 0, duration: 0.22, ease: 'power3.out' }, 0.70)
+
+  // Fade logo-bottom and scroll-hint immediately on first scroll
+  heroTl.to('#hero-logo-bottom', { autoAlpha: 0, duration: 0.08 }, 0.0)
+  heroTl.to('#scroll-hint', { autoAlpha: 0, duration: 0.08 }, 0.0)
 
   // ══════════════════════════════════════════
   //  MANIFESTO WORD-BY-WORD REVEAL
