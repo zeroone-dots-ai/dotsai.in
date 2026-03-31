@@ -486,15 +486,19 @@ nav.dark {
   text-decoration: none;
   transition: color 0.25s ease;
 }
-.nav-link:hover {
-  color: rgba(255,255,255,0.85);
+@media (hover: hover) and (pointer: fine) {
+  .nav-link:hover {
+    color: rgba(255,255,255,0.85);
+  }
 }
 
 nav.light .nav-link {
   color: rgba(23,23,34,0.45);
 }
-nav.light .nav-link:hover {
-  color: rgba(23,23,34,0.85);
+@media (hover: hover) and (pointer: fine) {
+  nav.light .nav-link:hover {
+    color: rgba(23,23,34,0.85);
+  }
 }
 
 .nav-cta {
@@ -507,12 +511,15 @@ nav.light .nav-link:hover {
   padding: 8px 20px;
   border: 1px solid rgba(255,255,255,0.12);
   border-radius: 4px;
-  transition: color 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+  transition: color 0.2s ease-out, border-color 0.2s ease-out, background 0.2s ease-out, transform 0.16s ease-out;
 }
 .nav-cta:hover {
   color: #fff;
   border-color: rgba(255,255,255,0.3);
   background: rgba(255,255,255,0.05);
+}
+.nav-cta:active {
+  transform: scale(0.97);
 }
 
 /* ── Nav light variant (cream/light sections) ── */
@@ -631,13 +638,16 @@ nav.light .nav-cta:hover {
   padding: 14px 28px;
   border-radius: 4px;
   text-decoration: none;
-  transition: all 0.25s;
+  transition: transform 0.2s ease-out, background 0.2s ease-out, color 0.2s ease-out;
   border: none;
   cursor: pointer;
 }
 .btn-primary:hover {
   background: var(--lavender);
   transform: translateY(-1px);
+}
+.btn-primary:active {
+  transform: scale(0.97);
 }
 
 .btn-secondary {
@@ -653,7 +663,7 @@ nav.light .nav-cta:hover {
   padding: 14px 28px;
   border-radius: 4px;
   text-decoration: none;
-  transition: all 0.25s;
+  transition: transform 0.2s ease-out, color 0.2s ease-out, border-color 0.2s ease-out, background 0.2s ease-out;
   border: 1px solid rgba(255,255,255,0.15);
   cursor: pointer;
 }
@@ -662,6 +672,9 @@ nav.light .nav-cta:hover {
   border-color: rgba(255,255,255,0.4);
   background: rgba(255,255,255,0.05);
   transform: translateY(-1px);
+}
+.btn-secondary:active {
+  transform: scale(0.97);
 }
 
 /* Hero dot grid logo at bottom */
@@ -810,7 +823,7 @@ nav.light .nav-cta:hover {
   border-radius: 2px;
   border: 1px solid rgba(255,255,255,0.08);
   color: rgba(255,255,255,0.5);
-  transition: border-color 0.3s ease, color 0.3s ease;
+  transition: border-color 0.2s ease-out, color 0.2s ease-out;
 }
 
 .hero-slide-ctas {
@@ -839,7 +852,7 @@ nav.light .nav-cta:hover {
   height: 6px;
   border-radius: 50%;
   background: rgba(255,255,255,0.15);
-  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), background 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   cursor: pointer;
 }
 
@@ -978,7 +991,7 @@ nav.light .nav-cta:hover {
   font-weight: 500;
   text-decoration: none;
   margin-top: 8px;
-  transition: all 0.25s ease;
+  transition: color 0.2s ease-out, transform 0.2s ease-out;
 }
 
 .brief-cta-light {
@@ -1012,13 +1025,16 @@ nav.light .nav-cta:hover {
   padding: 10px 20px;
   border: 1px solid var(--bone);
   border-radius: 4px;
-  transition: all 0.25s ease;
+  transition: transform 0.2s ease-out, background 0.2s ease-out, color 0.2s ease-out;
 }
 
 .meet-redirect:hover {
   background: var(--bone);
   color: var(--ink);
   transform: translateY(-1px);
+}
+.meet-redirect:active {
+  transform: scale(0.97);
 }
 
 /* Testimony button (disabled state) */
@@ -1592,12 +1608,16 @@ nav.light .nav-cta:hover {
   padding: 16px 32px;
   border-radius: 4px;
   text-decoration: none;
-  transition: all 0.25s;
+  transition: transform 0.2s ease-out, background 0.2s ease-out, box-shadow 0.2s ease-out;
 }
 .btn-wa:hover {
   background: #5a4080;
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(67,48,95,0.3);
+}
+.btn-wa:active {
+  transform: scale(0.97);
+  box-shadow: none;
 }
 
 .btn-cal {
@@ -1613,12 +1633,15 @@ nav.light .nav-cta:hover {
   padding: 16px 32px;
   border-radius: 4px;
   text-decoration: none;
-  transition: all 0.25s;
+  transition: transform 0.2s ease-out, background 0.2s ease-out, border-color 0.2s ease-out;
   border: 1px solid var(--bone);
 }
 .btn-cal:hover {
   background: var(--bone);
   transform: translateY(-2px);
+}
+.btn-cal:active {
+  transform: scale(0.97);
 }
 
 /* ───────────────────────────────────────────────
@@ -2019,10 +2042,10 @@ footer {
           and automates what slows you down.
         </p>
         <div class="hero-slide-tags">
-          <span class="hero-slide-tag">Productivity</span>
-          <span class="hero-slide-tag">Efficiency</span>
-          <span class="hero-slide-tag">Cost Reduction</span>
-          <span class="hero-slide-tag">Automation</span>
+          <span class="hero-slide-tag" style="border-color: rgba(200,182,255,0.2); color: #C8B6FF;">Productivity</span>
+          <span class="hero-slide-tag" style="border-color: rgba(184,224,210,0.2); color: #B8E0D2;">Efficiency</span>
+          <span class="hero-slide-tag" style="border-color: rgba(255,205,178,0.2); color: #FFCDB2;">Cost Reduction</span>
+          <span class="hero-slide-tag" style="border-color: rgba(162,210,255,0.2); color: #A2D2FF;">Automation</span>
         </div>
       </div>
 
@@ -2031,7 +2054,7 @@ footer {
         <p class="hero-slide-eyebrow">03 · Platform</p>
         <h1 class="hero-slide-title">
           Give Your Team<br>
-          <em>Their Own AI.</em>
+          <em>Their Own Agents.</em>
         </h1>
         <p class="hero-slide-sub">
           Every employee gets their own agents.<br>
