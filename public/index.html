@@ -455,6 +455,32 @@ nav.dark {
   transition: color 0.35s ease;
 }
 
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-link {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: rgba(255,255,255,0.45);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+.nav-link:hover {
+  color: rgba(255,255,255,0.85);
+}
+
+nav.light .nav-link {
+  color: rgba(23,23,34,0.45);
+}
+nav.light .nav-link:hover {
+  color: rgba(23,23,34,0.85);
+}
+
 .nav-cta {
   font-family: 'DM Sans', sans-serif;
   font-size: 13px;
@@ -693,14 +719,17 @@ nav.light .nav-cta:hover {
 /* ───────────────────────────────────────────────
    SECTION 2: MANIFESTO
 ─────────────────────────────────────────────── */
-#manifesto {
+/* ───────────────────────────────────────────────
+   SECTION 2: MEET (Who Am I?)
+─────────────────────────────────────────────── */
+#meet {
   background: var(--paper);
   padding: clamp(80px, 12vw, 160px) clamp(24px, 6vw, 120px);
   position: relative;
   overflow: hidden;
 }
 
-#manifesto::before {
+#meet::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
@@ -708,12 +737,12 @@ nav.light .nav-cta:hover {
   background: linear-gradient(90deg, transparent, var(--bone), transparent);
 }
 
-.manifesto-inner {
+.meet-inner {
   max-width: 1000px;
   margin: 0 auto;
 }
 
-.manifesto-label {
+.meet-label {
   font-family: 'Space Mono', monospace;
   font-size: 10px;
   letter-spacing: 0.22em;
@@ -721,6 +750,46 @@ nav.light .nav-cta:hover {
   color: var(--smoke);
   opacity: 0.6;
   margin-bottom: 56px;
+}
+
+.meet-credentials {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  margin-top: 64px;
+  padding-top: 48px;
+  border-top: 1px solid var(--bone);
+}
+
+.meet-credential {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.credential-number {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+
+.credential-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--smoke);
+  line-height: 1.5;
+}
+
+.credential-divider {
+  width: 1px;
+  height: 48px;
+  background: var(--bone);
+  flex-shrink: 0;
+  margin-top: 8px;
 }
 
 .manifesto-text {
@@ -748,15 +817,20 @@ nav.light .nav-cta:hover {
 }
 
 /* ───────────────────────────────────────────────
-   SECTION 3: SERVICES
+   SECTION 3: HUB (Consulting + Platform)
 ─────────────────────────────────────────────── */
-#services {
+#hub {
+  position: relative;
+}
+
+/* Pillar block */
+.pillar {
   background: var(--bg);
   padding: clamp(80px, 10vw, 140px) 0;
   position: relative;
 }
 
-#services::before {
+.pillar::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
@@ -764,12 +838,20 @@ nav.light .nav-cta:hover {
   background: linear-gradient(90deg, transparent, var(--bone), transparent);
 }
 
-.services-header {
+.pillar-dark {
+  background: linear-gradient(180deg, #0a0a12 0%, #0f0f1a 100%);
+}
+
+.pillar-dark::before {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+}
+
+.pillar-header {
   padding: 0 clamp(24px, 6vw, 120px);
   margin-bottom: 72px;
 }
 
-.services-label {
+.pillar-label {
   font-family: 'Space Mono', monospace;
   font-size: 10px;
   letter-spacing: 0.22em;
@@ -779,15 +861,37 @@ nav.light .nav-cta:hover {
   margin-bottom: 16px;
 }
 
-.services-title {
+.pillar-dark .pillar-label {
+  color: rgba(255,255,255,0.35);
+}
+
+.pillar-title {
   font-family: 'Instrument Serif', serif;
   font-size: clamp(36px, 5vw, 58px);
   font-weight: 400;
   color: var(--ink);
   letter-spacing: -0.01em;
+  margin-bottom: 16px;
 }
 
-/* Service row */
+.pillar-dark .pillar-title {
+  color: rgba(255,255,255,0.92);
+}
+
+.pillar-desc {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--smoke);
+  max-width: 560px;
+}
+
+.pillar-dark .pillar-desc {
+  color: rgba(255,255,255,0.4);
+}
+
+/* Service row (shared between pillars) */
 .service-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -810,6 +914,39 @@ nav.light .nav-cta:hover {
 .service-row:hover .service-arrow {
   transform: translateX(8px) translateY(-2px);
   opacity: 1;
+}
+
+/* Dark service rows (Platform pillar) */
+.service-row-dark {
+  border-top-color: rgba(255,255,255,0.06);
+}
+
+.service-row-dark:last-child {
+  border-bottom-color: rgba(255,255,255,0.06);
+}
+
+.service-row-dark:hover {
+  background: rgba(255,255,255,0.03);
+}
+
+.service-row-dark .service-number {
+  color: rgba(255,255,255,0.25);
+}
+
+.service-row-dark .service-name {
+  color: rgba(255,255,255,0.92);
+}
+
+.service-desc-dark {
+  color: rgba(255,255,255,0.4) !important;
+}
+
+.service-link-dark {
+  color: rgba(255,255,255,0.35) !important;
+}
+
+.service-row-dark:hover .service-link-dark {
+  opacity: 0.9;
 }
 
 .service-accent-bar {
@@ -897,6 +1034,20 @@ nav.light .nav-cta:hover {
   display: inline-block;
   transition: transform 0.3s ease, opacity 0.3s ease;
   opacity: 0.5;
+}
+
+/* Platform coming soon */
+.platform-coming {
+  padding: 48px clamp(24px, 6vw, 120px);
+  text-align: center;
+}
+
+.platform-coming-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 0.02em;
 }
 
 /* ───────────────────────────────────────────────
@@ -1203,9 +1354,23 @@ footer {
     font-size: 10px;
   }
 
+  .nav-links {
+    display: none;
+  }
+
   .nav-cta {
     font-size: 12px;
     padding: 6px 14px;
+  }
+
+  .meet-credentials {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .credential-divider {
+    width: 100%;
+    height: 1px;
   }
 
   .hero-ctas {
@@ -1469,6 +1634,11 @@ footer {
       </div>
       <span class="nav-logo-text">ZEROONE D.O.T.S AI</span>
     </a>
+    <div class="nav-links">
+      <a href="#meet" class="nav-link">Meet</a>
+      <a href="#consulting" class="nav-link">Consulting</a>
+      <a href="#platform" class="nav-link">Platform</a>
+    </div>
     <a href="https://wa.me/918320065658" target="_blank" rel="noopener" class="nav-cta">↗ Let's Talk</a>
   </nav>
 
@@ -1490,7 +1660,7 @@ footer {
       </p>
 
       <div class="hero-ctas">
-        <a href="#services" class="btn-primary">→ See What I Build</a>
+        <a href="#consulting" class="btn-primary">→ See What I Build</a>
         <a href="https://wa.me/918320065658" target="_blank" rel="noopener" class="btn-secondary">↗ Let's Talk</a>
       </div>
     </div>
@@ -1516,110 +1686,162 @@ footer {
     </div>
   </section>
 
-  <!-- ─── MANIFESTO ─── -->
-  <section id="manifesto">
-    <div class="manifesto-inner">
-      <p class="manifesto-label">// manifesto</p>
+  <!-- ─── MEET ─── -->
+  <section id="meet">
+    <div class="meet-inner">
+      <p class="meet-label">// who am I</p>
       <p class="manifesto-text" id="manifesto-text">
         <!-- Words injected by JS for scroll-triggered reveal -->
       </p>
+      <div class="meet-credentials fade-up">
+        <div class="meet-credential">
+          <span class="credential-number">5+</span>
+          <span class="credential-text">Years building AI systems</span>
+        </div>
+        <div class="credential-divider"></div>
+        <div class="meet-credential">
+          <span class="credential-number">1</span>
+          <span class="credential-text">Person. Full stack. Idea to deploy.</span>
+        </div>
+        <div class="credential-divider"></div>
+        <div class="meet-credential">
+          <span class="credential-number">0</span>
+          <span class="credential-text">Middlemen. You talk to the builder.</span>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ─── SERVICES ─── -->
-  <section id="services">
-    <div class="services-header fade-up">
-      <p class="services-label">// what I build</p>
-      <h2 class="services-title">Four ways I work.</h2>
+  <!-- ─── HUB: CONSULTING + PLATFORM ─── -->
+  <section id="hub">
+
+    <!-- CONSULTING PILLAR -->
+    <div id="consulting" class="pillar">
+      <div class="pillar-header fade-up">
+        <p class="pillar-label">// hire me for</p>
+        <h2 class="pillar-title">Consulting</h2>
+        <p class="pillar-desc">Hands-on AI consulting. I design, build, and deploy — not just advise. Private AI, digital marketing, automation, and full-service agency work.</p>
+      </div>
+
+      <a href="/private-ai/" class="service-row" data-service="1">
+        <div class="service-accent-bar" style="background: #C8B6FF;"></div>
+        <div class="service-left">
+          <p class="service-number">01 ·</p>
+          <h3 class="service-name">Private AI<br>Deployment</h3>
+          <span class="service-tag" style="background: rgba(200,182,255,0.1); color: #C8B6FF;">
+            <span style="width:6px;height:6px;border-radius:50%;background:#C8B6FF;display:inline-block;"></span>
+            Data Sovereignty
+          </span>
+        </div>
+        <div class="service-right">
+          <p class="service-desc">
+            On-premise LLMs, vector databases, agent systems — running on your infrastructure. Your data never touches OpenAI. Full control, zero dependency.
+          </p>
+          <span class="service-link">
+            /private-ai/
+            <span class="service-arrow">↗</span>
+          </span>
+        </div>
+      </a>
+
+      <a href="/geo-ai/" class="service-row" data-service="2">
+        <div class="service-accent-bar" style="background: #A2D2FF;"></div>
+        <div class="service-left">
+          <p class="service-number">02 ·</p>
+          <h3 class="service-name">SEO, GEO &amp;<br>Digital Marketing</h3>
+          <span class="service-tag" style="background: rgba(162,210,255,0.1); color: #A2D2FF;">
+            <span style="width:6px;height:6px;border-radius:50%;background:#A2D2FF;display:inline-block;"></span>
+            Strategy
+          </span>
+        </div>
+        <div class="service-right">
+          <p class="service-desc">
+            Get found by AI assistants and search engines alike. Generative Engine Optimization, local SEO, and AI-first digital marketing for the new era.
+          </p>
+          <span class="service-link">
+            /geo-ai/
+            <span class="service-arrow">↗</span>
+          </span>
+        </div>
+      </a>
+
+      <a href="/ai-automation/" class="service-row" data-service="3">
+        <div class="service-accent-bar" style="background: #B8E0D2;"></div>
+        <div class="service-left">
+          <p class="service-number">03 ·</p>
+          <h3 class="service-name">AI Automation<br>&amp; Agents</h3>
+          <span class="service-tag" style="background: rgba(184,224,210,0.1); color: #B8E0D2;">
+            <span style="width:6px;height:6px;border-radius:50%;background:#B8E0D2;display:inline-block;"></span>
+            Operations
+          </span>
+        </div>
+        <div class="service-right">
+          <p class="service-desc">
+            Custom AI agents and workflow automation. Inbox triage, document processing, audit systems — reducing manual work by 70%+ across your operations.
+          </p>
+          <span class="service-link">
+            /ai-automation/
+            <span class="service-arrow">↗</span>
+          </span>
+        </div>
+      </a>
+
+      <a href="/web-ai-experiences/" class="service-row" data-service="4">
+        <div class="service-accent-bar" style="background: #FFCDB2;"></div>
+        <div class="service-left">
+          <p class="service-number">04 ·</p>
+          <h3 class="service-name">AI Web &amp;<br>Digital Agency</h3>
+          <span class="service-tag" style="background: rgba(255,205,178,0.1); color: #FFCDB2;">
+            <span style="width:6px;height:6px;border-radius:50%;background:#FFCDB2;display:inline-block;"></span>
+            Tech
+          </span>
+        </div>
+        <div class="service-right">
+          <p class="service-desc">
+            Full-stack AI-powered web products. From idea to deployed in days, not months. Modern stack, production-grade architecture, your brand.
+          </p>
+          <span class="service-link">
+            /web-ai-experiences/
+            <span class="service-arrow">↗</span>
+          </span>
+        </div>
+      </a>
     </div>
 
-    <!-- Service 1: Private AI -->
-    <a href="/private-ai/" class="service-row" data-service="1">
-      <div class="service-accent-bar" style="background: #C8B6FF;"></div>
-      <div class="service-left">
-        <p class="service-number">01 ·</p>
-        <h3 class="service-name">Private AI<br>Deployment</h3>
-        <span class="service-tag" style="background: rgba(200,182,255,0.1); color: #C8B6FF;">
-          <span style="width:6px;height:6px;border-radius:50%;background:#C8B6FF;display:inline-block;"></span>
-          Data Sovereignty
-        </span>
+    <!-- PLATFORM PILLAR -->
+    <div id="platform" class="pillar pillar-dark">
+      <div class="pillar-header fade-up">
+        <p class="pillar-label">// products to use</p>
+        <h2 class="pillar-title">Platform</h2>
+        <p class="pillar-desc">AI products built by ZeroOne. Use them directly — no consulting engagement needed.</p>
       </div>
-      <div class="service-right">
-        <p class="service-desc">
-          On-premise LLMs, vector databases, agent systems — running on your infrastructure. Your data never touches OpenAI. Full control, zero dependency.
-        </p>
-        <span class="service-link">
-          /private-ai/
-          <span class="service-arrow">↗</span>
-        </span>
-      </div>
-    </a>
 
-    <!-- Service 2: AI Web -->
-    <a href="/web-ai-experiences/" class="service-row" data-service="2">
-      <div class="service-accent-bar" style="background: #FFCDB2;"></div>
-      <div class="service-left">
-        <p class="service-number">02 ·</p>
-        <h3 class="service-name">AI Web<br>Presence</h3>
-        <span class="service-tag" style="background: rgba(255,205,178,0.1); color: #FFCDB2;">
-          <span style="width:6px;height:6px;border-radius:50%;background:#FFCDB2;display:inline-block;"></span>
-          Tech
-        </span>
-      </div>
-      <div class="service-right">
-        <p class="service-desc">
-          Full-stack web products built with AI. From idea to deployed in days, not months. Modern stack, production-grade architecture, your brand.
-        </p>
-        <span class="service-link">
-          /web-ai-experiences/
-          <span class="service-arrow">↗</span>
-        </span>
-      </div>
-    </a>
+      <a href="https://dotsai.cloud" target="_blank" rel="noopener" class="service-row service-row-dark" data-service="5">
+        <div class="service-accent-bar" style="background: #C8B6FF;"></div>
+        <div class="service-left">
+          <p class="service-number">01 ·</p>
+          <h3 class="service-name">Infinity<br>Nexus</h3>
+          <span class="service-tag" style="background: rgba(200,182,255,0.15); color: #C8B6FF;">
+            <span style="width:6px;height:6px;border-radius:50%;background:#C8B6FF;display:inline-block;"></span>
+            AI Platform
+          </span>
+        </div>
+        <div class="service-right">
+          <p class="service-desc service-desc-dark">
+            The private AI operating system. CRM, notes, docs, automation — all running on your server. No SaaS subscriptions, no data leaks.
+          </p>
+          <span class="service-link service-link-dark">
+            dotsai.cloud
+            <span class="service-arrow">↗</span>
+          </span>
+        </div>
+      </a>
 
-    <!-- Service 3: GEO AI -->
-    <a href="/geo-ai/" class="service-row" data-service="3">
-      <div class="service-accent-bar" style="background: #A2D2FF;"></div>
-      <div class="service-left">
-        <p class="service-number">03 ·</p>
-        <h3 class="service-name">GEO AI &amp;<br>Local SEO</h3>
-        <span class="service-tag" style="background: rgba(162,210,255,0.1); color: #A2D2FF;">
-          <span style="width:6px;height:6px;border-radius:50%;background:#A2D2FF;display:inline-block;"></span>
-          Strategy
-        </span>
+      <div class="platform-coming">
+        <p class="platform-coming-text">More products shipping soon. Building in public.</p>
       </div>
-      <div class="service-right">
-        <p class="service-desc">
-          Get found by AI assistants, not just Google. I optimize your business for the new search era — ChatGPT, Perplexity, Gemini, and beyond.
-        </p>
-        <span class="service-link">
-          /geo-ai/
-          <span class="service-arrow">↗</span>
-        </span>
-      </div>
-    </a>
+    </div>
 
-    <!-- Service 4: Platform -->
-    <a href="/platform-engineering/" class="service-row" data-service="4">
-      <div class="service-accent-bar" style="background: #B8E0D2;"></div>
-      <div class="service-left">
-        <p class="service-number">04 ·</p>
-        <h3 class="service-name">Infinity<br>Platform</h3>
-        <span class="service-tag" style="background: rgba(184,224,210,0.1); color: #B8E0D2;">
-          <span style="width:6px;height:6px;border-radius:50%;background:#B8E0D2;display:inline-block;"></span>
-          Operations
-        </span>
-      </div>
-      <div class="service-right">
-        <p class="service-desc">
-          The private AI operating system for your team. CRM, notes, docs, automation — all running on your server. No SaaS subscriptions, no data leaks.
-        </p>
-        <span class="service-link">
-          /platform-engineering/
-          <span class="service-arrow">↗</span>
-        </span>
-      </div>
-    </a>
   </section>
 
   <!-- ─── PROOF ─── -->
@@ -1710,10 +1932,12 @@ footer {
     <span class="footer-copy">© 2025 ZeroOne D.O.T.S AI · dotsai.in</span>
 
     <div class="footer-links">
+      <a href="#meet" class="footer-link">Meet</a>
       <a href="/private-ai/" class="footer-link">Private AI</a>
+      <a href="/geo-ai/" class="footer-link">GEO & SEO</a>
+      <a href="/ai-automation/" class="footer-link">Automation</a>
       <a href="/web-ai-experiences/" class="footer-link">AI Web</a>
-      <a href="/geo-ai/" class="footer-link">GEO AI</a>
-      <a href="/platform-engineering/" class="footer-link">Platform</a>
+      <a href="https://dotsai.cloud" target="_blank" rel="noopener" class="footer-link">Platform ↗</a>
     </div>
   </footer>
 
@@ -2214,9 +2438,18 @@ function initMainPage() {
     }
   })
 
+  // ── Meet credentials fade-up ──
+  gsap.to('.meet-credentials.fade-up', {
+    opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+    scrollTrigger: {
+      trigger: '.meet-credentials',
+      start: 'top 85%',
+    }
+  })
+
   // Scroll-triggered word reveal
   ScrollTrigger.create({
-    trigger: '#manifesto',
+    trigger: '#meet',
     start: 'top 80%',
     end: 'bottom 30%',
     onUpdate: (self) => {
@@ -2231,23 +2464,28 @@ function initMainPage() {
     }
   })
 
-  // ── Services fade-up ──
-  gsap.to('.services-header.fade-up', {
-    opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '#services',
-      start: 'top 75%',
-    }
+  // ── Pillar headers fade-up ──
+  document.querySelectorAll('.pillar-header.fade-up').forEach((header) => {
+    gsap.to(header, {
+      opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+      scrollTrigger: {
+        trigger: header,
+        start: 'top 75%',
+      }
+    })
   })
 
-  document.querySelectorAll('.service-row').forEach((row, i) => {
-    gsap.to(row, {
-      opacity: 1, y: 0, duration: 0.7, ease: 'power3.out',
-      delay: i * 0.08,
-      scrollTrigger: {
-        trigger: row,
-        start: 'top 82%',
-      }
+  // ── Service rows fade-up (per pillar) ──
+  document.querySelectorAll('.pillar').forEach((pillar) => {
+    pillar.querySelectorAll('.service-row').forEach((row, i) => {
+      gsap.to(row, {
+        opacity: 1, y: 0, duration: 0.7, ease: 'power3.out',
+        delay: i * 0.08,
+        scrollTrigger: {
+          trigger: row,
+          start: 'top 82%',
+        }
+      })
     })
   })
 
@@ -2305,20 +2543,27 @@ function initMainPage() {
   .from('.contact-sub', { opacity: 0, y: 20, duration: 0.6, ease: 'power3.out' }, '-=0.4')
   .from('.contact-buttons', { opacity: 0, y: 16, duration: 0.6, ease: 'power3.out' }, '-=0.3')
 
-  // ── Nav contrast: dark on hero, light on cream sections ──
+  // ── Nav contrast: dark on hero, light on cream, dark on platform/proof ──
   const nav = document.getElementById('nav')
+
+  // Hero → Meet/Consulting (dark → light)
   ScrollTrigger.create({
     trigger: '#hero',
-    start: 'bottom 64px',   // when hero bottom passes nav height
-    onLeave: () => {
-      // scrolled past hero → now on cream bg
-      nav.classList.add('light')
-    },
-    onEnterBack: () => {
-      // scrolled back into hero → dark bg again
-      nav.classList.remove('light')
-    }
+    start: 'bottom 64px',
+    onLeave: () => nav.classList.add('light'),
+    onEnterBack: () => nav.classList.remove('light'),
   })
+
+  // Platform pillar (light → dark)
+  const platformPillar = document.querySelector('.pillar-dark')
+  if (platformPillar) {
+    ScrollTrigger.create({
+      trigger: platformPillar,
+      start: 'top 64px',
+      onEnter: () => nav.classList.remove('light'),
+      onLeaveBack: () => nav.classList.add('light'),
+    })
+  }
 }
 
 </script>

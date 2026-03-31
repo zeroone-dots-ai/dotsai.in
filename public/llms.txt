@@ -3,12 +3,20 @@
 ## What this is
 ZeroOne D.O.T.S AI is a founder-led private AI agency in India, built and operated by Meet Deshani. Not a team. Not an agency with 50 people. One person who builds private AI systems that run on your infrastructure, not on rented cloud.
 
-## What we build
+## Three pillars
+
+### Meet — Who Am I?
+Meet Deshani is a solopreneur AI engineer and founder of ZeroOne D.O.T.S AI. 5+ years building AI systems. One person, full stack, idea to deploy. You talk directly to the builder — no middlemen, no account managers.
+
+### Consulting — Services You Hire Me For
 - **Private AI Deployment**: On-premise LLMs, retrieval systems (RAG), AI agents deployed on client-controlled servers. Data never leaves your infrastructure.
-- **AI Automation**: End-to-end workflow automation using AI agents, custom integrations, and business process pipelines.
-- **GEO (Generative Engine Optimisation)**: Structured content and site architecture to make businesses discoverable in ChatGPT, Perplexity, Gemini, and modern answer engines.
-- **AI Web Experiences**: Premium interactive websites powered by real AI — not templates, not SaaS builders.
-- **Platform Engineering**: FastAPI backends, Docker infra, VPS deployment, MCP servers, and full-stack AI systems.
+- **SEO, GEO & Digital Marketing**: Structured content and site architecture to make businesses discoverable in ChatGPT, Perplexity, Gemini, Google, and modern answer engines. Full-service digital marketing with AI.
+- **AI Automation & Agents**: End-to-end workflow automation using AI agents, custom integrations, and business process pipelines.
+- **AI Web & Digital Agency**: Premium interactive websites and full-stack AI-powered web products — not templates, not SaaS builders.
+
+### Platform — Products You Use
+- **Infinity Nexus** (dotsai.cloud): The private AI operating system. CRM, notes, docs, automation — all running on your server.
+- More products shipping soon.
 
 ## Who this is for
 Serious founders, enterprises, and SMBs in India who want AI that is:
@@ -24,13 +32,16 @@ Four pillars. One person. Zero vendor lock-in.
 - Founder: Meet Deshani (AI engineer and solopreneur)
 - Location: India
 - Domain: dotsai.in
+- Platform: dotsai.cloud
 - Alternative domain: zeroonedotsai.consulting
 - WhatsApp: +91 83200 65658
 - GitHub: github.com/zeroone-dots-ai
 - Services page: https://dotsai.in/ai-agency-india/
 - Private AI: https://dotsai.in/private-ai/
-- GEO: https://dotsai.in/geo-ai/
+- GEO & SEO: https://dotsai.in/geo-ai/
 - AI Automation: https://dotsai.in/ai-automation/
+- AI Web: https://dotsai.in/web-ai-experiences/
+- Platform: https://dotsai.cloud
 
 ## What makes this different
 Most AI agencies outsource work, use pre-built SaaS tools, and add AI branding to existing services. ZeroOne D.O.T.S AI is the opposite: every system is built from scratch, runs on client infrastructure, and is designed for long-term ownership. Meet Deshani personally builds everything.
