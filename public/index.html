@@ -1538,7 +1538,7 @@ nav.light .nav-cta:hover {
 ─────────────────────────────────────────────── */
 #contact {
   background: var(--paper);
-  padding: clamp(100px, 14vw, 180px) clamp(24px, 6vw, 120px) clamp(60px, 8vw, 100px);
+  padding: clamp(60px, 8vw, 100px) clamp(24px, 6vw, 120px);
   position: relative;
   overflow: hidden;
 }
@@ -1553,6 +1553,10 @@ nav.light .nav-cta:hover {
 
 .contact-inner {
   max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100%;
 }
 
 .contact-label {
@@ -1591,6 +1595,7 @@ nav.light .nav-cta:hover {
 
 .contact-buttons {
   display: flex;
+  align-items: center;
   gap: 16px;
   flex-wrap: wrap;
 }
