@@ -6,7 +6,7 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/favicon.svg">
 <title>ZeroOne D.O.T.S AI | AI Automation Agency & Private AI Systems India</title>
-<meta name="description" content="Founder-led AI automation agency in India by Meet Deshani. Custom AI solutions for solopreneurs, startups and enterprises — private AI deployment, zero vendor lock-in.">
+<meta name="description" content="AI automation agency & private AI deployment in India by Meet Deshani. Custom AI solutions for startups and enterprises — built on your own infrastructure, zero vendor lock-in.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta property="og:title" content="ZeroOne D.O.T.S AI | AI Automation Agency & Private AI Systems India">
 <meta property="og:description" content="Custom AI automation agency in India. Private AI deployment, AI web systems, and GEO for serious businesses and startups — founded and built by Meet Deshani.">
@@ -167,22 +167,6 @@
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Yes. ZeroOne D.O.T.S AI is specifically built for founders, startups, and lean teams in India who need enterprise-quality AI without enterprise overhead. There are no account managers or junior developers — Meet Deshani designs and builds everything directly, which means faster delivery and lower cost than traditional AI agencies."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is ZeroOne D.O.T.S AI a solopreneur AI agency?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. ZeroOne D.O.T.S AI is India's only dedicated solopreneur AI agency — one expert, one point of contact, zero hand-offs. Meet Deshani handles strategy, implementation, and deployment personally. This model gives solopreneurs and growing businesses the same quality of AI systems that large enterprises get, at a fraction of the cost and timeline."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Which cities and regions in India does ZeroOne D.O.T.S AI serve?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "ZeroOne D.O.T.S AI works with businesses across India, including Gurugram, Delhi NCR, Mumbai, Bangalore, Hyderabad, Pune, and Chennai — as well as fully remote engagements anywhere in India. Private AI deployment and AI automation systems are delivered remotely with no location dependency."
       }
     }
   ]
@@ -629,7 +613,7 @@
       <span class="footer-brand">ZEROONE D.O.T.S AI</span>
     </div>
 
-    <span class="footer-copy">© 2026 ZeroOne D.O.T.S AI · dotsai.in</span>
+    <span class="footer-copy">© 2025 ZeroOne D.O.T.S AI · dotsai.in</span>
 
     <div class="footer-links">
       <a href="#meet" class="footer-link">Meet</a>
@@ -2098,6 +2082,301 @@ function initMainPage() {
 
 
 <style>
+/* ───────────────────────────────────────────────
+   LABS TEASER SECTION
+─────────────────────────────────────────────── */
+#labs-teaser {
+  position: relative;
+  background: var(--hero-bg, #06060a);
+  color: #f3f0ff;
+  padding: 100px 48px 80px;
+  overflow: hidden;
+}
+
+#labs-teaser::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 25% 30%, rgba(215,207,240,0.08), transparent 35%),
+    radial-gradient(circle at 80% 70%, rgba(191,214,236,0.06), transparent 30%);
+}
+
+.labs-teaser-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(243,240,255,0.25);
+  margin-bottom: 14px;
+  position: relative;
+}
+
+.labs-teaser-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(36px, 5vw, 58px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin: 0 0 12px;
+  position: relative;
+}
+
+.labs-teaser-sub {
+  font-size: 16px;
+  line-height: 1.65;
+  color: rgba(243,240,255,0.55);
+  margin: 0 0 40px;
+  position: relative;
+}
+
+.labs-teaser-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1120px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.labs-teaser-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s cubic-bezier(0.23,1,0.32,1), box-shadow 0.3s cubic-bezier(0.23,1,0.32,1), border-color 0.3s ease;
+}
+
+.labs-teaser-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(215,207,240,0.2);
+  border-color: rgba(215,207,240,0.25);
+}
+
+.labs-teaser-card:active {
+  transform: translateY(-2px) scale(0.99);
+}
+
+.labs-teaser-visual {
+  height: 100px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.labs-teaser-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: rgba(243,240,255,0.3);
+}
+
+.labs-teaser-card h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 22px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.labs-teaser-card p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(243,240,255,0.55);
+  margin: 0;
+}
+
+.labs-teaser-cta {
+  font-size: 13px;
+  font-weight: 500;
+  color: #D7CFF0;
+  margin-top: auto;
+  transition: letter-spacing 0.2s ease;
+}
+
+.labs-teaser-card:hover .labs-teaser-cta {
+  letter-spacing: 0.04em;
+}
+
+.labs-teaser-all {
+  display: inline-block;
+  margin-top: 32px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(243,240,255,0.5);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.labs-teaser-all:hover {
+  color: rgba(243,240,255,0.85);
+}
+
+/* ── Mini card visualizations ── */
+.ltv-chat {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px;
+  width: 100%;
+}
+
+.ltv-bubble {
+  height: 8px;
+  border-radius: 4px;
+}
+
+.ltv-bubble.ltv-user {
+  width: 55%;
+  align-self: flex-end;
+  background: rgba(200,182,255,0.2);
+}
+
+.ltv-bubble.ltv-ai {
+  width: 65%;
+  align-self: flex-start;
+  background: rgba(255,255,255,0.08);
+}
+
+.ltv-typing {
+  display: flex;
+  gap: 3px;
+  align-self: flex-start;
+  padding: 6px 10px;
+}
+
+.ltv-typing span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(200,182,255,0.4);
+  animation: ltTypePulse 1.4s ease-in-out infinite;
+}
+.ltv-typing span:nth-child(2) { animation-delay: 0.15s; }
+.ltv-typing span:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes ltTypePulse {
+  0%, 60%, 100% { opacity: 0.3; transform: scale(0.85); }
+  30% { opacity: 1; transform: scale(1); }
+}
+
+.ltv-doc {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 20px;
+  width: 100%;
+}
+
+.ltv-line {
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(255,255,255,0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.ltv-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(200,182,255,0.25), transparent);
+  animation: ltScan 3s ease-in-out infinite;
+}
+
+.ltv-line:nth-child(2)::after { animation-delay: 0.3s; }
+.ltv-line:nth-child(3)::after { animation-delay: 0.6s; }
+.ltv-line:nth-child(4)::after { animation-delay: 0.9s; }
+
+@keyframes ltScan {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: 100%; }
+}
+
+.ltv-wf {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 14px;
+}
+
+.ltv-node {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ltv-nd {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  animation: ltNodePulse 2s ease-in-out infinite;
+}
+
+.ltv-node:nth-child(3) .ltv-nd { animation-delay: 0.5s; }
+.ltv-node:nth-child(5) .ltv-nd { animation-delay: 1s; }
+
+@keyframes ltNodePulse {
+  0%, 100% { opacity: 0.5; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+.ltv-conn {
+  width: 24px;
+  height: 2px;
+  background: rgba(255,255,255,0.08);
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.ltv-conn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(200,182,255,0.5), transparent);
+  animation: ltFlow 2s linear infinite;
+}
+
+.ltv-conn:nth-child(4)::after { animation-delay: 0.5s; }
+
+@keyframes ltFlow {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+@media (max-width: 900px) {
+  #labs-teaser {
+    padding: 72px 20px 60px;
+  }
+  .labs-teaser-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ── Quantum Dot Cursor ── */
 body { cursor: none !important; }
 a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .service-row { cursor: none !important; }
