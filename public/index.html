@@ -1814,6 +1814,10 @@ footer {
   transform: translateY(16px);
 }
 
+/* ── Pinned section helpers ── */
+.meet-credential { opacity: 0; transform: translateY(20px); }
+.brief-service-item { opacity: 0; transform: translateY(14px); }
+
 /* ───────────────────────────────────────────────
    GSAP WILL HANDLE — override initial opacity 0
    on elements that need it from above
@@ -2849,141 +2853,235 @@ function initMainPage() {
     }
   })
 
-  // ── Meet credentials + redirect fade-up ──
-  document.querySelectorAll('#meet .fade-up').forEach((el) => {
-    gsap.to(el, {
-      opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
-      scrollTrigger: { trigger: el, start: 'top 85%' }
-    })
-  })
+  // ══════════════════════════════════════════
+  //  MEET — Pinned (3 scroll phases, like hero)
+  //  Scroll 1: manifesto word-by-word → completes
+  //  Scroll 2: "5+" and "2+" credentials
+  //  Scroll 3: "1" and "0" credentials + CTA
+  // ══════════════════════════════════════════
+  const EASE_OUT = 'cubic-bezier(0.23, 1, 0.32, 1)'
+  const isMobile = window.innerWidth < 768
 
-  // Scroll-triggered word reveal
-  ScrollTrigger.create({
-    trigger: '#meet',
-    start: 'top 80%',
-    end: 'bottom 30%',
-    onUpdate: (self) => {
-      const progress = self.progress
-      const totalWords = wordSpans.length
-      const wordsToShow = Math.floor(progress * totalWords * 1.4)
-      wordSpans.forEach((span, i) => {
-        if (i <= wordsToShow) {
-          gsap.to(span, { opacity: 1, duration: 0.3, ease: 'power2.out', overwrite: 'auto' })
-        }
-      })
-    }
-  })
+  const credentials = document.querySelectorAll('.meet-credential')
+  const credentialDividers = document.querySelectorAll('.credential-divider')
+  const meetRedirect = document.querySelector('.meet-redirect')
+  const meetSection = document.getElementById('meet')
 
-  // ── Brief sections fade-up ──
-  document.querySelectorAll('.brief-section.fade-up').forEach((section) => {
-    gsap.to(section, {
-      opacity: 1, y: 0, duration: 0.9, ease: 'power3.out',
-      scrollTrigger: { trigger: section, start: 'top 78%' }
-    })
-  })
+  // Set meet to viewport height for clean pinning
+  meetSection.style.height = '100vh'
+  meetSection.style.overflow = 'hidden'
+  meetSection.style.padding = 'clamp(48px, 6vw, 80px) clamp(24px, 6vw, 120px)'
 
-  // ── Proof metrics count-up ──
-  document.querySelectorAll('.proof-metric').forEach((metric, i) => {
-    gsap.to(metric, {
-      opacity: 1, y: 0, duration: 0.7, ease: 'power3.out',
-      delay: i * 0.12,
-      scrollTrigger: {
-        trigger: '#proof',
-        start: 'top 70%',
-        onEnter: () => {
-          // Trigger count-up for this metric
-          const counter = metric.querySelector('.metric-count')
-          if (counter && !counter.dataset.counted) {
-            counter.dataset.counted = 'true'
-            const target = parseInt(counter.dataset.target)
-            const duration = 1.8
-            const start = performance.now()
-            function update(now) {
-              const elapsed = (now - start) / 1000
-              const progress = Math.min(elapsed / duration, 1)
-              const eased = 1 - Math.pow(1 - progress, 3)
-              counter.textContent = Math.round(eased * target)
-              if (progress < 1) requestAnimationFrame(update)
-            }
-            requestAnimationFrame(update)
-          }
-        }
-      }
-    })
-  })
+  // Initial hidden states (override .fade-up)
+  gsap.set('.meet-credentials', { opacity: 1, y: 0 })
+  gsap.set(credentials, { opacity: 0, y: 24 })
+  gsap.set(credentialDividers, { opacity: 0, scaleY: 0 })
+  gsap.set(meetRedirect, { opacity: 0, y: 16 })
 
-  // ── Case cards ──
-  document.querySelectorAll('.case-card').forEach((card, i) => {
-    gsap.to(card, {
-      opacity: 1, y: 0, duration: 0.6, ease: 'power3.out',
-      delay: i * 0.1,
-      scrollTrigger: {
-        trigger: '.proof-cases',
-        start: 'top 80%',
-      }
-    })
-  })
-
-  // ── Contact fade-up ──
-  gsap.timeline({
+  const meetTl = gsap.timeline({
     scrollTrigger: {
-      trigger: '#contact',
-      start: 'top 75%',
+      trigger: '#meet',
+      start: 'top top',
+      end: isMobile ? '+=200%' : '+=300%',
+      pin: true,
+      scrub: 0.5,
+      anticipatePin: 1,
+      onUpdate: (self) => {
+        // Scroll 1 (0%–33%): word reveal
+        const p = self.progress
+        const wp = Math.min(p / 0.33, 1)
+        const show = Math.floor(wp * wordSpans.length)
+        wordSpans.forEach((s, i) => {
+          if (i <= show) gsap.to(s, { opacity: 1, duration: 0.15, ease: 'power2.out', overwrite: 'auto' })
+        })
+      }
     }
   })
-  .from('.contact-label', { opacity: 0, y: 20, duration: 0.6, ease: 'power3.out' })
-  .from('.contact-title', { opacity: 0, y: 30, duration: 0.8, ease: 'power3.out' }, '-=0.3')
-  .from('.contact-sub', { opacity: 0, y: 20, duration: 0.6, ease: 'power3.out' }, '-=0.4')
-  .from('.contact-buttons', { opacity: 0, y: 16, duration: 0.6, ease: 'power3.out' }, '-=0.3')
+  // Scroll 2 (33%–66%): first 2 credentials
+  meetTl.to(credentials[0], { opacity: 1, y: 0, duration: 0.06, ease: EASE_OUT }, 0.35)
+  meetTl.to(credentialDividers[0], { opacity: 1, scaleY: 1, duration: 0.04, ease: EASE_OUT }, 0.37)
+  meetTl.to(credentials[1], { opacity: 1, y: 0, duration: 0.06, ease: EASE_OUT }, 0.42)
+  meetTl.to(credentialDividers[1], { opacity: 1, scaleY: 1, duration: 0.04, ease: EASE_OUT }, 0.44)
+  // Scroll 3 (66%–100%): last 2 credentials + CTA
+  meetTl.to(credentials[2], { opacity: 1, y: 0, duration: 0.06, ease: EASE_OUT }, 0.68)
+  meetTl.to(credentialDividers[2], { opacity: 1, scaleY: 1, duration: 0.04, ease: EASE_OUT }, 0.70)
+  meetTl.to(credentials[3], { opacity: 1, y: 0, duration: 0.06, ease: EASE_OUT }, 0.75)
+  meetTl.to(meetRedirect, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.82)
+  meetTl.set({}, {}, 1)
+
+  // ══════════════════════════════════════════
+  //  PLATFORM — Pinned (3 phases)
+  // ══════════════════════════════════════════
+  const platformEl = document.getElementById('platform')
+  const pLabel = platformEl.querySelector('.brief-label')
+  const pTitle = platformEl.querySelector('.brief-title')
+  const pDesc = platformEl.querySelector('.brief-desc')
+  const pServices = platformEl.querySelectorAll('.brief-service-item')
+  const pCta = platformEl.querySelector('.brief-cta')
+  const pRight = platformEl.querySelectorAll('.brief-content')[1]
+
+  platformEl.style.height = '100vh'
+  platformEl.style.overflow = 'hidden'
+  gsap.set(platformEl, { opacity: 1, y: 0 })
+  gsap.set([pLabel, pTitle, pDesc], { opacity: 0, y: 20 })
+  gsap.set(pServices, { opacity: 0, y: 14 })
+  gsap.set(pCta, { opacity: 0, y: 12 })
+  gsap.set(pRight, { opacity: 0, scale: 0.95 })
+
+  const platformTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#platform', start: 'top top',
+      end: isMobile ? '+=150%' : '+=200%',
+      pin: true, scrub: 0.5, anticipatePin: 1,
+    }
+  })
+  platformTl.to(pLabel, { opacity: 0.6, y: 0, duration: 0.06, ease: EASE_OUT }, 0.02)
+  platformTl.to(pTitle, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.06)
+  platformTl.to(pDesc, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.12)
+  pServices.forEach((item, i) => {
+    platformTl.to(item, { opacity: 1, y: 0, duration: 0.06, ease: EASE_OUT }, 0.35 + i * 0.06)
+  })
+  platformTl.to(pCta, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.65)
+  platformTl.to(pRight, { opacity: 1, scale: 1, duration: 0.10, ease: EASE_OUT }, 0.70)
+  platformTl.set({}, {}, 1)
+
+  // ══════════════════════════════════════════
+  //  CONSULTING — Pinned (3 phases)
+  // ══════════════════════════════════════════
+  const consultEl = document.getElementById('consulting')
+  const cLabel = consultEl.querySelector('.brief-label')
+  const cTitle = consultEl.querySelector('.brief-title')
+  const cDesc = consultEl.querySelector('.brief-desc')
+  const cServices = consultEl.querySelectorAll('.brief-service-item')
+  const cCta = consultEl.querySelector('.brief-cta')
+  const cRight = consultEl.querySelectorAll('.brief-content')[1]
+
+  consultEl.style.height = '100vh'
+  consultEl.style.overflow = 'hidden'
+  gsap.set(consultEl, { opacity: 1, y: 0 })
+  gsap.set([cLabel, cTitle, cDesc], { opacity: 0, y: 20 })
+  gsap.set(cServices, { opacity: 0, y: 14 })
+  gsap.set(cCta, { opacity: 0, y: 12 })
+  gsap.set(cRight, { opacity: 0, scale: 0.95 })
+
+  const consultTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#consulting', start: 'top top',
+      end: isMobile ? '+=150%' : '+=200%',
+      pin: true, scrub: 0.5, anticipatePin: 1,
+    }
+  })
+  consultTl.to(cLabel, { opacity: 0.6, y: 0, duration: 0.06, ease: EASE_OUT }, 0.02)
+  consultTl.to(cTitle, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.06)
+  consultTl.to(cDesc, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.12)
+  cServices.forEach((item, i) => {
+    consultTl.to(item, { opacity: 1, y: 0, duration: 0.06, ease: EASE_OUT }, 0.35 + i * 0.05)
+  })
+  consultTl.to(cCta, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.65)
+  consultTl.to(cRight, { opacity: 1, scale: 1, duration: 0.10, ease: EASE_OUT }, 0.70)
+  consultTl.set({}, {}, 1)
+
+  // ══════════════════════════════════════════
+  //  PROOF — Pinned (2 phases: metrics + cases)
+  // ══════════════════════════════════════════
+  const proofEl = document.getElementById('proof')
+  const proofLabel = proofEl.querySelector('.proof-label')
+  const proofMetrics = proofEl.querySelectorAll('.proof-metric')
+  const caseCards = proofEl.querySelectorAll('.case-card')
+  let countersStarted = false
+
+  proofEl.style.height = '100vh'
+  proofEl.style.overflow = 'hidden'
+  gsap.set(proofLabel, { opacity: 0, y: 16 })
+
+  const proofTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#proof', start: 'top top',
+      end: isMobile ? '+=150%' : '+=200%',
+      pin: true, scrub: 0.5, anticipatePin: 1,
+      onUpdate: (self) => {
+        if (self.progress > 0.08 && !countersStarted) {
+          countersStarted = true
+          proofMetrics.forEach((metric) => {
+            const counter = metric.querySelector('.metric-count')
+            if (counter && !counter.dataset.counted) {
+              counter.dataset.counted = 'true'
+              const target = parseInt(counter.dataset.target)
+              const dur = 1.8, st = performance.now()
+              function tick(now) {
+                const p = Math.min((now - st) / 1000 / dur, 1)
+                counter.textContent = Math.round((1 - Math.pow(1 - p, 3)) * target)
+                if (p < 1) requestAnimationFrame(tick)
+              }
+              requestAnimationFrame(tick)
+            }
+          })
+        }
+      }
+    }
+  })
+  proofTl.to(proofLabel, { opacity: 0.25, y: 0, duration: 0.05, ease: EASE_OUT }, 0.02)
+  proofMetrics.forEach((m, i) => {
+    proofTl.to(m, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.08 + i * 0.07)
+  })
+  caseCards.forEach((c, i) => {
+    proofTl.to(c, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.45 + i * 0.07)
+  })
+  proofTl.set({}, {}, 1)
+
+  // ══════════════════════════════════════════
+  //  CONTACT — Pinned (3 phases)
+  // ══════════════════════════════════════════
+  const contactEl = document.getElementById('contact')
+  contactEl.style.height = '100vh'
+  contactEl.style.overflow = 'hidden'
+
+  const contactTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#contact', start: 'top top',
+      end: isMobile ? '+=120%' : '+=150%',
+      pin: true, scrub: 0.5, anticipatePin: 1,
+    }
+  })
+  contactTl.from('.contact-label', { opacity: 0, y: 20, duration: 0.08, ease: EASE_OUT }, 0.02)
+  contactTl.from('.contact-title', { opacity: 0, y: 30, duration: 0.10, ease: EASE_OUT }, 0.10)
+  contactTl.from('.contact-sub', { opacity: 0, y: 16, duration: 0.08, ease: EASE_OUT }, 0.35)
+  const ctaBtns = document.querySelectorAll('.contact-buttons a, .contact-buttons .btn-testimony')
+  ctaBtns.forEach((btn, i) => {
+    contactTl.from(btn, { opacity: 0, y: 14, duration: 0.07, ease: EASE_OUT }, 0.55 + i * 0.06)
+  })
+  contactTl.set({}, {}, 1)
 
   // ── Nav contrast: dark on hero, light on cream, dark on dark sections ──
   const nav = document.getElementById('nav')
 
-  // Hero ends → Meet begins (dark nav → light nav)
   ScrollTrigger.create({
-    trigger: '#meet',
-    start: 'top 64px',
+    trigger: '#meet', start: 'top 64px',
     onEnter: () => nav.classList.add('light'),
     onEnterBack: () => nav.classList.add('light'),
   })
-
-  // Hero (keep nav dark)
   ScrollTrigger.create({
-    trigger: '#hero',
-    start: 'top top',
-    end: 'bottom 64px',
+    trigger: '#hero', start: 'top top', end: 'bottom 64px',
     onEnter: () => nav.classList.remove('light'),
     onEnterBack: () => nav.classList.remove('light'),
   })
-
-  // Platform section (dark bg → dark nav)
   ScrollTrigger.create({
-    trigger: '#platform',
-    start: 'top 64px',
+    trigger: '#platform', start: 'top 64px',
     onEnter: () => nav.classList.remove('light'),
     onLeaveBack: () => nav.classList.add('light'),
   })
-
-  // Consulting section (light bg → light nav)
   ScrollTrigger.create({
-    trigger: '#consulting',
-    start: 'top 64px',
+    trigger: '#consulting', start: 'top 64px',
     onEnter: () => nav.classList.add('light'),
     onLeaveBack: () => nav.classList.remove('light'),
   })
-
-  // Proof section (dark bg → dark nav)
   ScrollTrigger.create({
-    trigger: '#proof',
-    start: 'top 64px',
+    trigger: '#proof', start: 'top 64px',
     onEnter: () => nav.classList.remove('light'),
     onLeaveBack: () => nav.classList.add('light'),
   })
-
-  // Contact section (light bg → light nav)
   ScrollTrigger.create({
-    trigger: '#contact',
-    start: 'top 64px',
+    trigger: '#contact', start: 'top 64px',
     onEnter: () => nav.classList.add('light'),
     onLeaveBack: () => nav.classList.remove('light'),
   })
