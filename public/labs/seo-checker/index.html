@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEO &amp; GEO Analyzer Demo | ZeroOne D.O.T.S AI Labs</title>
+<meta name="description" content="Free SEO and GEO analyzer demo by ZeroOne D.O.T.S AI. Check your site's readiness for AI search engines.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --hero: #06060a;
+  --plum: #43305f;
+  --plum-deep: #241d33;
+  --lavender: #d7cff0;
+  --mint: #c9ded4;
+  --peach: #f1c6ae;
+  --sky: #bfd6ec;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--hero);
+  color: #e8e4ef;
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  position: sticky; top: 0; z-index: 100;
+  backdrop-filter: blur(20px);
+  background: rgba(6,6,10,0.85);
+  border-bottom: 1px solid rgba(215,207,240,0.08);
+}
+.topbar-inner {
+  max-width: 1120px; width: calc(100% - 32px); height: 64px;
+  margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.brand-lockup { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.brand-word { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(215,207,240,0.7); }
+.nav-links { display: flex; align-items: center; gap: 20px; }
+.nav-links a { font-size: 13px; color: rgba(215,207,240,0.5); text-decoration: none; transition: color 200ms var(--ease-out); }
+.nav-links a:hover { color: var(--lavender); }
+.nav-links a.active { color: var(--lavender); }
+
+.demo-banner {
+  background: linear-gradient(90deg, var(--plum-deep), rgba(67,48,95,0.6));
+  text-align: center; padding: 10px 16px; font-size: 13px;
+  color: rgba(215,207,240,0.8); border-bottom: 1px solid rgba(215,207,240,0.06);
+}
+
+.main { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 32px 16px; }
+.page-title {
+  font-family: 'Instrument Serif', serif; font-size: 32px; font-weight: 400;
+  color: var(--lavender); text-align: center; margin-bottom: 8px;
+}
+.page-sub {
+  font-size: 14px; color: rgba(215,207,240,0.45); text-align: center; margin-bottom: 32px;
+}
+
+/* Search input */
+.search-bar {
+  width: 100%; max-width: 560px;
+  display: flex; gap: 10px; margin-bottom: 32px;
+}
+.search-input {
+  flex: 1;
+  background: rgba(215,207,240,0.06);
+  border: 1px solid rgba(215,207,240,0.12);
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14.5px;
+  color: #e8e4ef;
+  outline: none;
+  transition: border-color 200ms var(--ease-out), box-shadow 200ms var(--ease-out);
+}
+.search-input::placeholder { color: rgba(215,207,240,0.3); }
+.search-input:focus {
+  border-color: rgba(215,207,240,0.3);
+  box-shadow: 0 0 20px rgba(215,207,240,0.08);
+}
+.analyze-btn {
+  font-family: 'DM Sans', sans-serif; font-size: 14.5px; font-weight: 500;
+  padding: 14px 24px; border-radius: 12px; border: none;
+  background: var(--plum); color: var(--lavender);
+  cursor: pointer; white-space: nowrap;
+  transition: transform 160ms var(--ease-out), background 200ms var(--ease-out);
+}
+.analyze-btn:active { transform: scale(0.97); }
+.analyze-btn:hover { background: #503b70; }
+
+/* Loading */
+.loading-wrap {
+  display: none; width: 100%; max-width: 560px; text-align: center;
+}
+.loading-text {
+  font-family: 'Space Mono', monospace; font-size: 12px;
+  color: var(--mint); letter-spacing: 0.08em; margin-bottom: 12px;
+}
+.scan-bar {
+  width: 100%; height: 3px; border-radius: 2px;
+  background: rgba(215,207,240,0.08); overflow: hidden; position: relative;
+}
+.scan-dot {
+  position: absolute; top: 0; left: 0;
+  width: 60px; height: 3px; border-radius: 2px;
+  background: linear-gradient(90deg, transparent, var(--lavender), transparent);
+  animation: scanMove 1.5s ease-in-out infinite;
+}
+@keyframes scanMove {
+  0% { left: -60px; }
+  100% { left: 100%; }
+}
+
+/* Results */
+.results { display: none; width: 100%; max-width: 800px; }
+
+/* Overall score gauge */
+.gauge-section {
+  text-align: center; margin-bottom: 36px;
+}
+.gauge-wrap {
+  position: relative; width: 160px; height: 160px; margin: 0 auto 16px;
+}
+.gauge-svg { width: 160px; height: 160px; transform: rotate(-90deg); }
+.gauge-bg {
+  fill: none; stroke: rgba(215,207,240,0.08); stroke-width: 10;
+}
+.gauge-fill {
+  fill: none; stroke-width: 10; stroke-linecap: round;
+  stroke-dasharray: 408; stroke-dashoffset: 408;
+  transition: stroke-dashoffset 1.5s var(--ease-out), stroke 0.5s;
+}
+.gauge-score {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  font-family: 'Space Mono', monospace; font-size: 36px; font-weight: 700;
+  color: #e8e4ef;
+}
+.gauge-label {
+  font-family: 'Space Mono', monospace; font-size: 11px;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: rgba(215,207,240,0.4);
+}
+.gauge-url {
+  font-size: 13px; color: rgba(215,207,240,0.5); margin-top: 4px;
+}
+
+/* Category cards */
+.cards-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px;
+}
+@media (max-width: 600px) { .cards-grid { grid-template-columns: 1fr; } }
+
+.score-card {
+  background: rgba(215,207,240,0.04);
+  border: 1px solid rgba(215,207,240,0.1);
+  border-radius: 14px; padding: 22px;
+  border-left: 3px solid transparent;
+  opacity: 0; transform: translateY(10px);
+}
+.score-card.visible {
+  animation: cardIn 500ms var(--ease-out) forwards;
+}
+@keyframes cardIn { to { opacity: 1; transform: translateY(0); } }
+
+.score-card.green { border-left-color: var(--mint); }
+.score-card.yellow { border-left-color: #e0c76a; }
+.score-card.red { border-left-color: var(--peach); }
+
+.card-header {
+  display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;
+}
+.card-title { font-size: 15px; font-weight: 500; color: #e8e4ef; }
+.card-score {
+  font-family: 'Space Mono', monospace; font-size: 20px; font-weight: 700;
+}
+.card-score.green { color: var(--mint); }
+.card-score.yellow { color: #e0c76a; }
+.card-score.red { color: var(--peach); }
+.card-score span {
+  font-size: 12px; font-weight: 400; color: rgba(215,207,240,0.4);
+}
+
+.card-detail {
+  font-size: 13px; color: rgba(215,207,240,0.55); line-height: 1.5;
+}
+
+/* Score bar */
+.score-bar-wrap { margin-top: 12px; }
+.score-bar-bg {
+  width: 100%; height: 4px; border-radius: 2px;
+  background: rgba(215,207,240,0.08);
+}
+.score-bar-fill {
+  height: 100%; border-radius: 2px; width: 0;
+  transition: width 1.2s var(--ease-out);
+}
+.score-bar-fill.green { background: var(--mint); }
+.score-bar-fill.yellow { background: #e0c76a; }
+.score-bar-fill.red { background: var(--peach); }
+
+/* CTA */
+.cta-row { text-align: center; }
+.cta-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500;
+  padding: 14px 28px; border-radius: 12px; border: none;
+  background: var(--plum); color: var(--lavender);
+  cursor: pointer; text-decoration: none;
+  transition: transform 160ms var(--ease-out), background 200ms var(--ease-out);
+}
+.cta-btn:active { transform: scale(0.97); }
+.cta-btn:hover { background: #503b70; }
+
+/* Footer */
+.page-footer {
+  text-align: center; padding: 24px 16px;
+  border-top: 1px solid rgba(215,207,240,0.06);
+}
+.page-footer a { color: var(--lavender); text-decoration: none; font-size: 13px; opacity: 0.6; transition: opacity 200ms var(--ease-out); }
+.page-footer a:hover { opacity: 1; }
+.page-footer .copy { font-size: 11px; color: rgba(215,207,240,0.3); margin-top: 8px; font-family: 'Space Mono', monospace; }
+
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  .page-title { font-size: 24px; }
+  .search-bar { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="/" class="brand-lockup"><span class="brand-word">ZeroOne D.O.T.S AI</span></a>
+    <nav class="nav-links">
+      <a href="/">Home</a>
+      <a href="/labs/" class="active">Labs</a>
+      <a href="https://wa.me/918320065658" target="_blank" rel="noopener">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="demo-banner">This is a demo &mdash; results are simulated, not real audits</div>
+
+<div class="main">
+  <h1 class="page-title">SEO &amp; GEO Analyzer</h1>
+  <p class="page-sub">Check how your site performs for traditional search and AI search engines</p>
+
+  <div class="search-bar" id="search-bar">
+    <input type="text" class="search-input" id="url-input" placeholder="https://example.com" value="">
+    <button class="analyze-btn" id="analyze-btn">Analyze</button>
+  </div>
+
+  <div class="loading-wrap" id="loading">
+    <div class="loading-text" id="loading-text">Scanning site structure...</div>
+    <div class="scan-bar"><div class="scan-dot"></div></div>
+  </div>
+
+  <div class="results" id="results">
+    <div class="gauge-section">
+      <div class="gauge-wrap">
+        <svg class="gauge-svg" viewBox="0 0 140 140">
+          <circle class="gauge-bg" cx="70" cy="70" r="65"/>
+          <circle class="gauge-fill" id="gauge-fill" cx="70" cy="70" r="65"/>
+        </svg>
+        <div class="gauge-score" id="gauge-score">0</div>
+      </div>
+      <div class="gauge-label">Overall Score</div>
+      <div class="gauge-url" id="gauge-url"></div>
+    </div>
+
+    <div class="cards-grid" id="cards-grid"></div>
+
+    <div class="cta-row">
+      <a href="https://wa.me/918320065658?text=I%20want%20a%20full%20AI%20audit%20for%20my%20site" target="_blank" rel="noopener" class="cta-btn">
+        Get a full AI audit &#8594;
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer class="page-footer">
+  <a href="/labs/">&#8592; Back to Labs</a>
+  <div class="copy">&copy; 2026 ZeroOne D.O.T.S AI</div>
+</footer>
+
+<script>
+(function() {
+  var urlInput = document.getElementById('url-input');
+  var analyzeBtn = document.getElementById('analyze-btn');
+  var loadingEl = document.getElementById('loading');
+  var loadingText = document.getElementById('loading-text');
+  var searchBar = document.getElementById('search-bar');
+  var resultsEl = document.getElementById('results');
+  var gaugeFill = document.getElementById('gauge-fill');
+  var gaugeScore = document.getElementById('gauge-score');
+  var gaugeUrl = document.getElementById('gauge-url');
+  var cardsGrid = document.getElementById('cards-grid');
+  var running = false;
+
+  var categories = [
+    {
+      title: 'Technical SEO',
+      score: 72,
+      detail: 'Missing meta descriptions on 3 pages. Sitemap needs updating. robots.txt is properly configured.',
+      color: 'yellow'
+    },
+    {
+      title: 'Content Quality',
+      score: 85,
+      detail: 'Strong keyword density and natural language. Add more internal links between related pages.',
+      color: 'green'
+    },
+    {
+      title: 'AI Readiness (GEO)',
+      score: 61,
+      detail: 'Not optimized for AI search engines yet. Add structured data, FAQ schema, and llms.txt file.',
+      color: 'red'
+    },
+    {
+      title: 'Performance',
+      score: 78,
+      detail: 'LCP 2.4s \u2014 optimize hero images. CLS is good at 0.05. TTFB could improve with edge caching.',
+      color: 'yellow'
+    }
+  ];
+
+  var loadingSteps = [
+    'Scanning site structure...',
+    'Analyzing meta tags...',
+    'Checking AI readiness...',
+    'Measuring performance...',
+    'Generating report...'
+  ];
+
+  function getScoreColor(score) {
+    if (score >= 80) return 'green';
+    if (score >= 60) return 'yellow';
+    return 'red';
+  }
+
+  function getStrokeColor(score) {
+    if (score >= 80) return '#c9ded4';
+    if (score >= 60) return '#e0c76a';
+    return '#f1c6ae';
+  }
+
+  function animateCount(el, target, duration) {
+    var start = 0;
+    var startTime = null;
+    function step(ts) {
+      if (!startTime) startTime = ts;
+      var progress = Math.min((ts - startTime) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(eased * target);
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function showResults(url) {
+    loadingEl.style.display = 'none';
+    resultsEl.style.display = 'block';
+    searchBar.style.display = 'flex';
+
+    // Randomize scores slightly for variety
+    var seed = url.length;
+    var overallBase = 74;
+    var jitter = (seed % 10) - 5;
+    var overall = Math.max(45, Math.min(95, overallBase + jitter));
+
+    var cats = categories.map(function(c, i) {
+      var j = ((seed + i * 7) % 15) - 7;
+      var s = Math.max(35, Math.min(98, c.score + j));
+      return {
+        title: c.title,
+        score: s,
+        detail: c.detail,
+        color: getScoreColor(s)
+      };
+    });
+
+    // Overall gauge
+    gaugeUrl.textContent = url;
+    var circumference = 2 * Math.PI * 65; // ~408
+    var offset = circumference - (overall / 100) * circumference;
+    gaugeFill.style.stroke = getStrokeColor(overall);
+    setTimeout(function() {
+      gaugeFill.style.strokeDashoffset = offset;
+    }, 50);
+    animateCount(gaugeScore, overall, 1500);
+
+    // Category cards
+    cardsGrid.innerHTML = '';
+    cats.forEach(function(cat, idx) {
+      var card = document.createElement('div');
+      card.className = 'score-card ' + cat.color;
+      card.style.animationDelay = (idx * 60) + 'ms';
+      card.innerHTML =
+        '<div class="card-header">' +
+          '<div class="card-title">' + cat.title + '</div>' +
+          '<div class="card-score ' + cat.color + '"><span id="cs-' + idx + '">0</span><span>/100</span></div>' +
+        '</div>' +
+        '<div class="card-detail">' + cat.detail + '</div>' +
+        '<div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill ' + cat.color + '" id="sb-' + idx + '"></div></div></div>';
+      cardsGrid.appendChild(card);
+
+      setTimeout(function() {
+        card.classList.add('visible');
+        var scoreEl = document.getElementById('cs-' + idx);
+        var barEl = document.getElementById('sb-' + idx);
+        animateCount(scoreEl, cat.score, 1200);
+        barEl.style.width = cat.score + '%';
+      }, idx * 60 + 200);
+    });
+
+    running = false;
+  }
+
+  function startAnalysis() {
+    if (running) return;
+    var url = urlInput.value.trim();
+    if (!url) url = 'https://example.com';
+    if (!url.startsWith('http')) url = 'https://' + url;
+    urlInput.value = url;
+    running = true;
+
+    resultsEl.style.display = 'none';
+    cardsGrid.innerHTML = '';
+    gaugeFill.style.strokeDashoffset = 408;
+    gaugeScore.textContent = '0';
+    searchBar.style.display = 'none';
+    loadingEl.style.display = 'block';
+
+    var stepIdx = 0;
+    var interval = setInterval(function() {
+      stepIdx++;
+      if (stepIdx < loadingSteps.length) {
+        loadingText.textContent = loadingSteps[stepIdx];
+      } else {
+        clearInterval(interval);
+        setTimeout(function() { showResults(url); }, 400);
+      }
+    }, 400);
+  }
+
+  analyzeBtn.addEventListener('click', startAnalysis);
+  urlInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') startAnalysis();
+  });
+})();
+</script>
+</body>
+</html>

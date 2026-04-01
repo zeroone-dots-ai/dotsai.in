@@ -24,10 +24,12 @@ const spaceMono = Space_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://dotsai.in"),
-  title: "ZeroOne D.O.T.S AI | Private AI Agency in India",
+  title: "ZeroOne D.O.T.S AI | Best AI Agency in Gurugram, India",
   description:
-    "Private AI agency in India by Meet Deshani. Founder-led private AI deployment, AI automation, GEO, and premium AI web systems for enterprises and solopreneurs.",
+    "Best AI agency in Gurugram by Meet Deshani. Founder-led private AI deployment, AI automation, GEO, and premium AI web systems for enterprises in Gurugram, Delhi NCR and across India.",
   keywords: [
+    "AI agency Gurugram", "best AI agency Gurugram", "best AI agency in Gurugram",
+    "AI automation Gurugram", "AI consultant Gurugram", "AI consultant Gurgaon",
     "AI agency India", "private AI agency", "private AI", "on-premise AI",
     "AI deployment", "custom AI agents", "enterprise AI", "AI consultant India",
     "ZeroOne DOTS AI", "Meet Deshani", "local LLM", "private LLM deployment",
@@ -36,9 +38,9 @@ export const metadata: Metadata = {
   authors: [{ name: "Meet Deshani", url: "https://dotsai.in" }],
   creator: "Meet Deshani",
   openGraph: {
-    title: "ZeroOne D.O.T.S AI | Private AI Agency in India",
+    title: "ZeroOne D.O.T.S AI | Best AI Agency in Gurugram, India",
     description:
-      "Founder-led private AI deployment, AI automation, GEO, and premium AI web systems for serious businesses in India.",
+      "Best AI agency in Gurugram. Founder-led private AI deployment, AI automation, GEO, and premium AI web systems for businesses in Gurugram, Delhi NCR and India.",
     url: "https://dotsai.in",
     siteName: "ZeroOne D.O.T.S AI",
     type: "website",
@@ -47,8 +49,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "ZeroOne D.O.T.S AI | Private AI Agency in India",
-    description: "Private AI deployment, AI automation, GEO, and premium AI web systems by Meet Deshani.",
+    title: "ZeroOne D.O.T.S AI | Best AI Agency in Gurugram, India",
+    description: "Best AI agency in Gurugram. Private AI deployment, AI automation, GEO, and premium AI web systems by Meet Deshani.",
     images: ["/og-image.png"],
   },
   robots: {
@@ -80,8 +82,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   url: "https://dotsai.in",
                   logo: "https://dotsai.in/favicon.svg",
                   description:
-                    "Founder-led private AI agency in India focused on private AI systems, AI automation, GEO, and AI-enabled web experiences.",
-                  areaServed: "IN",
+                    "Best AI agency in Gurugram, India. Founder-led private AI agency focused on private AI systems, AI automation, GEO, and AI-enabled web experiences.",
+                  areaServed: [
+                    { "@type": "City", name: "Gurugram" },
+                    { "@type": "City", name: "New Delhi" },
+                    { "@type": "Country", name: "India" },
+                  ],
                   founder: {
                     "@type": "Person",
                     "@id": "https://dotsai.in/#meet",
@@ -158,6 +164,43 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                       },
                     },
                   ],
+                },
+                {
+                  "@type": ["LocalBusiness", "ProfessionalService"],
+                  "@id": "https://dotsai.in/#localbusiness",
+                  name: "ZeroOne D.O.T.S AI",
+                  url: "https://dotsai.in",
+                  logo: "https://dotsai.in/favicon.svg",
+                  image: "https://dotsai.in/og-image.png",
+                  description:
+                    "Best AI agency in Gurugram. Founder-led private AI deployment, AI automation, GEO, and AI web systems by Meet Deshani.",
+                  telephone: "+918320065658",
+                  founder: { "@id": "https://dotsai.in/#meet" },
+                  address: {
+                    "@type": "PostalAddress",
+                    addressLocality: "Gurugram",
+                    addressRegion: "Haryana",
+                    addressCountry: "IN",
+                    postalCode: "122001",
+                  },
+                  geo: {
+                    "@type": "GeoCoordinates",
+                    latitude: 28.4595,
+                    longitude: 77.0266,
+                  },
+                  areaServed: [
+                    { "@type": "City", name: "Gurugram" },
+                    { "@type": "City", name: "New Delhi" },
+                    { "@type": "Country", name: "India" },
+                  ],
+                  priceRange: "$$",
+                  openingHoursSpecification: {
+                    "@type": "OpeningHoursSpecification",
+                    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                    opens: "10:00",
+                    closes: "19:00",
+                  },
+                  sameAs: ["https://github.com/zeroone-dots-ai"],
                 },
               ],
             }),

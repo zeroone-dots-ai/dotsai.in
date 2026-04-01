@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document Intelligence Demo | ZeroOne D.O.T.S AI Labs</title>
+<meta name="description" content="AI-powered document parsing demo. See how ZeroOne extracts structured data from invoices and business documents.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --hero: #06060a;
+  --plum: #43305f;
+  --plum-deep: #241d33;
+  --lavender: #d7cff0;
+  --mint: #c9ded4;
+  --peach: #f1c6ae;
+  --sky: #bfd6ec;
+  --paper: #f7f3ed;
+  --ink: #171722;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--hero);
+  color: #e8e4ef;
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Topbar */
+.topbar {
+  position: sticky; top: 0; z-index: 100;
+  backdrop-filter: blur(20px);
+  background: rgba(6, 6, 10, 0.85);
+  border-bottom: 1px solid rgba(215, 207, 240, 0.08);
+}
+.topbar-inner {
+  max-width: 1120px; width: calc(100% - 32px); height: 64px;
+  margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.brand-lockup { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.brand-word { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(215,207,240,0.7); }
+.nav-links { display: flex; align-items: center; gap: 20px; }
+.nav-links a { font-size: 13px; color: rgba(215,207,240,0.5); text-decoration: none; transition: color 200ms var(--ease-out); }
+.nav-links a:hover { color: var(--lavender); }
+.nav-links a.active { color: var(--lavender); }
+
+/* Demo banner */
+.demo-banner {
+  background: linear-gradient(90deg, var(--plum-deep), rgba(67,48,95,0.6));
+  text-align: center; padding: 10px 16px; font-size: 13px;
+  color: rgba(215,207,240,0.8); border-bottom: 1px solid rgba(215,207,240,0.06);
+}
+
+/* Main content */
+.main { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 32px 16px; }
+.page-title {
+  font-family: 'Instrument Serif', serif; font-size: 32px; font-weight: 400;
+  color: var(--lavender); text-align: center; margin-bottom: 8px;
+}
+.page-sub {
+  font-size: 14px; color: rgba(215,207,240,0.45); text-align: center; margin-bottom: 36px;
+}
+
+/* Drop zone */
+.drop-zone {
+  width: 100%; max-width: 640px;
+  border: 2px dashed rgba(215,207,240,0.2);
+  border-radius: 16px;
+  padding: 56px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 200ms var(--ease-out), background 200ms var(--ease-out);
+}
+.drop-zone:hover {
+  border-color: rgba(215,207,240,0.4);
+  background: rgba(215,207,240,0.03);
+}
+.drop-zone.active { border-color: var(--lavender); background: rgba(215,207,240,0.05); }
+.drop-icon {
+  font-size: 40px; margin-bottom: 12px; opacity: 0.5;
+}
+.drop-text { font-size: 15px; color: rgba(215,207,240,0.7); margin-bottom: 6px; }
+.drop-hint { font-size: 12px; color: rgba(215,207,240,0.35); }
+
+/* Progress */
+.progress-wrap {
+  width: 100%; max-width: 640px; margin-top: 24px; display: none;
+}
+.progress-label {
+  font-family: 'Space Mono', monospace; font-size: 11px;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--mint); margin-bottom: 10px;
+}
+.progress-bar {
+  width: 100%; height: 4px; border-radius: 2px;
+  background: rgba(215,207,240,0.1); overflow: hidden;
+}
+.progress-fill {
+  height: 100%; width: 0; border-radius: 2px;
+  background: linear-gradient(90deg, var(--lavender), var(--mint));
+  transition: width 100ms linear;
+}
+
+/* Results panel */
+.results {
+  width: 100%; max-width: 900px; margin-top: 32px; display: none;
+}
+.results-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+}
+@media (max-width: 700px) { .results-grid { grid-template-columns: 1fr; } }
+
+/* Fake document preview */
+.doc-preview {
+  background: rgba(215,207,240,0.04);
+  border: 1px solid rgba(215,207,240,0.1);
+  border-radius: 12px; padding: 24px; min-height: 380px;
+}
+.doc-preview-title {
+  font-family: 'Space Mono', monospace; font-size: 10px;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: rgba(215,207,240,0.4); margin-bottom: 16px;
+}
+.doc-line {
+  height: 10px; border-radius: 3px; margin-bottom: 10px;
+  background: rgba(215,207,240,0.08);
+}
+.doc-line.short { width: 40%; }
+.doc-line.med { width: 65%; }
+.doc-line.long { width: 90%; }
+.doc-line.full { width: 100%; }
+.doc-line.header { height: 16px; width: 50%; background: rgba(215,207,240,0.14); margin-bottom: 16px; }
+.doc-line.spacer { height: 20px; background: transparent; }
+.doc-table-row {
+  display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 8px; margin-bottom: 8px;
+}
+.doc-table-cell {
+  height: 10px; border-radius: 3px; background: rgba(215,207,240,0.08);
+}
+
+/* Extracted data */
+.data-panel {
+  background: rgba(215,207,240,0.04);
+  border: 1px solid rgba(215,207,240,0.1);
+  border-radius: 12px; padding: 24px;
+}
+.data-panel-title {
+  font-family: 'Space Mono', monospace; font-size: 10px;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: rgba(215,207,240,0.4); margin-bottom: 16px;
+}
+
+.field-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(215,207,240,0.06);
+  opacity: 0; transform: translateY(8px);
+}
+.field-row.visible {
+  animation: fieldIn 400ms var(--ease-out) forwards;
+}
+@keyframes fieldIn { to { opacity: 1; transform: translateY(0); } }
+
+.field-label {
+  font-size: 12px; color: rgba(215,207,240,0.5);
+  font-family: 'Space Mono', monospace; text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.field-value { font-size: 14px; color: #e8e4ef; font-weight: 500; }
+.field-conf {
+  font-family: 'Space Mono', monospace; font-size: 11px;
+  padding: 3px 8px; border-radius: 6px;
+  margin-left: 12px; white-space: nowrap;
+}
+.conf-high { background: rgba(201,222,212,0.15); color: var(--mint); }
+.conf-med { background: rgba(191,214,236,0.15); color: var(--sky); }
+.conf-low { background: rgba(241,198,174,0.15); color: var(--peach); }
+
+/* Line items table */
+.line-items { margin-top: 16px; }
+.line-items-title {
+  font-family: 'Space Mono', monospace; font-size: 10px;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: rgba(215,207,240,0.4); margin-bottom: 10px;
+}
+.li-table { width: 100%; border-collapse: collapse; }
+.li-table th {
+  font-family: 'Space Mono', monospace; font-size: 10px;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  color: rgba(215,207,240,0.35); text-align: left;
+  padding: 8px 6px; border-bottom: 1px solid rgba(215,207,240,0.1);
+}
+.li-table td {
+  font-size: 13px; padding: 10px 6px;
+  border-bottom: 1px solid rgba(215,207,240,0.05);
+  color: rgba(215,207,240,0.8);
+}
+.li-row {
+  opacity: 0; transform: translateY(8px);
+}
+.li-row.visible { animation: fieldIn 400ms var(--ease-out) forwards; }
+
+/* Badge */
+.powered-badge {
+  text-align: center; margin-top: 32px;
+  font-family: 'Space Mono', monospace; font-size: 11px;
+  color: rgba(215,207,240,0.3); letter-spacing: 0.08em;
+}
+
+/* Footer */
+.page-footer {
+  text-align: center; padding: 24px 16px;
+  border-top: 1px solid rgba(215,207,240,0.06);
+}
+.page-footer a { color: var(--lavender); text-decoration: none; font-size: 13px; opacity: 0.6; transition: opacity 200ms var(--ease-out); }
+.page-footer a:hover { opacity: 1; }
+.page-footer .copy { font-size: 11px; color: rgba(215,207,240,0.3); margin-top: 8px; font-family: 'Space Mono', monospace; }
+
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  .page-title { font-size: 24px; }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="/" class="brand-lockup"><span class="brand-word">ZeroOne D.O.T.S AI</span></a>
+    <nav class="nav-links">
+      <a href="/">Home</a>
+      <a href="/labs/" class="active">Labs</a>
+      <a href="https://wa.me/918320065658" target="_blank" rel="noopener">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="demo-banner">This is a demo &mdash; no files are uploaded or stored</div>
+
+<div class="main">
+  <h1 class="page-title">Document Intelligence</h1>
+  <p class="page-sub">AI-powered document parsing, extraction, and understanding</p>
+
+  <div class="drop-zone" id="drop-zone">
+    <div class="drop-icon">&#128196;</div>
+    <div class="drop-text">Drop a PDF or click to upload</div>
+    <div class="drop-hint">Supports invoices, receipts, contracts, and more</div>
+  </div>
+
+  <div class="progress-wrap" id="progress-wrap">
+    <div class="progress-label" id="progress-label">Analyzing document...</div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+  </div>
+
+  <div class="results" id="results">
+    <div class="results-grid">
+      <div class="doc-preview">
+        <div class="doc-preview-title">Original Document</div>
+        <div class="doc-line header"></div>
+        <div class="doc-line long"></div>
+        <div class="doc-line med"></div>
+        <div class="doc-line spacer"></div>
+        <div class="doc-line short"></div>
+        <div class="doc-line full"></div>
+        <div class="doc-line long"></div>
+        <div class="doc-line spacer"></div>
+        <div class="doc-table-row"><div class="doc-table-cell"></div><div class="doc-table-cell"></div><div class="doc-table-cell"></div></div>
+        <div class="doc-table-row"><div class="doc-table-cell"></div><div class="doc-table-cell"></div><div class="doc-table-cell"></div></div>
+        <div class="doc-table-row"><div class="doc-table-cell"></div><div class="doc-table-cell"></div><div class="doc-table-cell"></div></div>
+        <div class="doc-table-row"><div class="doc-table-cell"></div><div class="doc-table-cell"></div><div class="doc-table-cell"></div></div>
+        <div class="doc-line spacer"></div>
+        <div class="doc-line short"></div>
+        <div class="doc-line med"></div>
+      </div>
+
+      <div class="data-panel">
+        <div class="data-panel-title">Extracted Data</div>
+        <div id="fields"></div>
+        <div class="line-items" id="line-items" style="display:none">
+          <div class="line-items-title">Line Items</div>
+          <table class="li-table">
+            <thead><tr><th>Description</th><th>Qty</th><th>Amount</th></tr></thead>
+            <tbody id="li-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="powered-badge">Powered by ZeroOne Document AI</div>
+  </div>
+</div>
+
+<footer class="page-footer">
+  <a href="/labs/">&#8592; Back to Labs</a>
+  <div class="copy">&copy; 2026 ZeroOne D.O.T.S AI</div>
+</footer>
+
+<script>
+(function() {
+  var dropZone = document.getElementById('drop-zone');
+  var progressWrap = document.getElementById('progress-wrap');
+  var progressFill = document.getElementById('progress-fill');
+  var progressLabel = document.getElementById('progress-label');
+  var resultsEl = document.getElementById('results');
+  var fieldsEl = document.getElementById('fields');
+  var lineItemsEl = document.getElementById('line-items');
+  var liBody = document.getElementById('li-body');
+  var running = false;
+
+  var sampleFields = [
+    { label: 'Invoice #', value: 'INV-2026-04871', conf: 98, level: 'high' },
+    { label: 'Date', value: '28 March 2026', conf: 99, level: 'high' },
+    { label: 'Vendor', value: 'Acme Corp Pvt. Ltd.', conf: 95, level: 'high' },
+    { label: 'GSTIN', value: '27AABCA1234F1ZP', conf: 92, level: 'high' },
+    { label: 'Subtotal', value: '\u20b91,42,500.00', conf: 97, level: 'high' },
+    { label: 'GST (18%)', value: '\u20b925,650.00', conf: 96, level: 'high' },
+    { label: 'Total', value: '\u20b91,68,150.00', conf: 98, level: 'high' },
+    { label: 'Due Date', value: '15 April 2026', conf: 87, level: 'med' },
+    { label: 'PO Reference', value: 'PO-2026-0339', conf: 74, level: 'med' }
+  ];
+
+  var sampleItems = [
+    { desc: 'AI Model Fine-tuning (40 hrs)', qty: '1', amount: '\u20b972,000' },
+    { desc: 'RAG Pipeline Setup', qty: '1', amount: '\u20b945,000' },
+    { desc: 'API Integration & Testing', qty: '1', amount: '\u20b918,500' },
+    { desc: 'Documentation & Training', qty: '2', amount: '\u20b97,000' }
+  ];
+
+  function confClass(level) {
+    return 'conf-' + level;
+  }
+
+  function startParsing() {
+    if (running) return;
+    running = true;
+    dropZone.style.display = 'none';
+    progressWrap.style.display = 'block';
+    resultsEl.style.display = 'none';
+    fieldsEl.innerHTML = '';
+    liBody.innerHTML = '';
+    lineItemsEl.style.display = 'none';
+    progressFill.style.width = '0%';
+
+    var steps = [
+      { pct: 15, label: 'Detecting document type...' },
+      { pct: 35, label: 'Running OCR extraction...' },
+      { pct: 55, label: 'Identifying fields...' },
+      { pct: 75, label: 'Validating data...' },
+      { pct: 90, label: 'Building confidence scores...' },
+      { pct: 100, label: 'Complete' }
+    ];
+
+    var i = 0;
+    var interval = setInterval(function() {
+      if (i < steps.length) {
+        progressFill.style.width = steps[i].pct + '%';
+        progressLabel.textContent = steps[i].label;
+        i++;
+      } else {
+        clearInterval(interval);
+        setTimeout(showResults, 300);
+      }
+    }, 500);
+  }
+
+  function showResults() {
+    progressWrap.style.display = 'none';
+    resultsEl.style.display = 'block';
+
+    sampleFields.forEach(function(f, idx) {
+      var row = document.createElement('div');
+      row.className = 'field-row';
+      row.style.animationDelay = (idx * 50) + 'ms';
+      row.innerHTML =
+        '<div><div class="field-label">' + f.label + '</div><div class="field-value">' + f.value + '</div></div>' +
+        '<span class="field-conf ' + confClass(f.level) + '">' + f.conf + '%</span>';
+      fieldsEl.appendChild(row);
+      setTimeout(function() { row.classList.add('visible'); }, idx * 50);
+    });
+
+    setTimeout(function() {
+      lineItemsEl.style.display = 'block';
+      sampleItems.forEach(function(item, idx) {
+        var tr = document.createElement('tr');
+        tr.className = 'li-row';
+        tr.style.animationDelay = (idx * 60) + 'ms';
+        tr.innerHTML = '<td>' + item.desc + '</td><td>' + item.qty + '</td><td>' + item.amount + '</td>';
+        liBody.appendChild(tr);
+        setTimeout(function() { tr.classList.add('visible'); }, idx * 60);
+      });
+    }, sampleFields.length * 50 + 200);
+
+    running = false;
+  }
+
+  dropZone.addEventListener('click', startParsing);
+  dropZone.addEventListener('dragover', function(e) {
+    e.preventDefault();
+    dropZone.classList.add('active');
+  });
+  dropZone.addEventListener('dragleave', function() {
+    dropZone.classList.remove('active');
+  });
+  dropZone.addEventListener('drop', function(e) {
+    e.preventDefault();
+    dropZone.classList.remove('active');
+    startParsing();
+  });
+})();
+</script>
+</body>
+</html>
