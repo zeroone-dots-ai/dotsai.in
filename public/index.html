@@ -3058,10 +3058,7 @@ function initMainPage() {
   contactTl.from('.contact-label', { opacity: 0, y: 20, duration: 0.08, ease: EASE_OUT }, 0.02)
   contactTl.from('.contact-title', { opacity: 0, y: 30, duration: 0.10, ease: EASE_OUT }, 0.10)
   contactTl.from('.contact-sub', { opacity: 0, y: 16, duration: 0.08, ease: EASE_OUT }, 0.35)
-  const ctaBtns = document.querySelectorAll('.contact-buttons a, .contact-buttons .btn-testimony')
-  ctaBtns.forEach((btn, i) => {
-    contactTl.from(btn, { opacity: 0, y: 14, duration: 0.07, ease: EASE_OUT }, 0.55 + i * 0.06)
-  })
+  contactTl.from('.contact-buttons', { opacity: 0, y: 14, duration: 0.12, ease: EASE_OUT }, 0.55)
   contactTl.set({}, {}, 1)
 
   // ── Nav contrast: dark on hero, light on cream, dark on dark sections ──
