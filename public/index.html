@@ -753,10 +753,6 @@ nav.light .nav-cta:hover {
   width: 100%;
   height: 100%;
   z-index: 3;
-  pointer-events: none;
-}
-.hero-slides * {
-  pointer-events: auto;
 }
 
 .hero-slide {
@@ -1415,11 +1411,9 @@ nav.light .nav-cta:hover {
 ─────────────────────────────────────────────── */
 #proof {
   background: linear-gradient(180deg, var(--hero-dark-start) 0%, var(--hero-dark-mid) 100%);
+  padding: clamp(80px, 12vw, 160px) clamp(24px, 6vw, 120px);
   position: relative;
   overflow: hidden;
-}
-#proof.compartment {
-  padding: 0;
 }
 
 #proof::before {
@@ -1820,333 +1814,6 @@ footer {
   transform: translateY(16px);
 }
 
-/* ── Compartment Scroll System ── */
-.compartment {
-  position: relative;
-}
-
-.compartment-sticky {
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  position: relative;
-}
-
-.compartment-dark {
-  background: linear-gradient(180deg, rgba(23,23,34,0.98) 0%, rgba(36,29,51,0.98) 100%);
-  color: #f3f0ff;
-}
-
-[class*="-phase"] {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: clamp(80px, 12vw, 160px) clamp(24px, 6vw, 120px);
-  max-width: 1000px;
-  margin: 0 auto;
-  width: 100%;
-}
-
-/* ── Meet Compartment ── */
-#meet.compartment {
-  background: var(--paper);
-}
-
-.meet-phase-2,
-.meet-phase-3 {
-  visibility: hidden;
-  opacity: 0;
-}
-
-.meet-phase-2,
-.meet-phase-3 {
-  gap: 32px;
-}
-
-.meet-phase .meet-credential {
-  display: flex;
-  align-items: baseline;
-  gap: 16px;
-}
-
-.meet-phase .credential-number {
-  font-family: 'Instrument Serif', serif;
-  font-size: clamp(48px, 6vw, 72px);
-  line-height: 1;
-  letter-spacing: -0.03em;
-  color: var(--ink);
-}
-
-.meet-phase .credential-text {
-  font-family: 'DM Sans', sans-serif;
-  font-size: clamp(15px, 2vw, 18px);
-  color: var(--smoke);
-  line-height: 1.5;
-}
-
-.meet-phase .credential-divider {
-  width: 48px;
-  height: 1px;
-  background: var(--bone);
-}
-
-.meet-redirect {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--plum);
-  text-decoration: none;
-  margin-top: 32px;
-  transition: color 0.2s cubic-bezier(0.23,1,0.32,1), transform 0.2s cubic-bezier(0.23,1,0.32,1);
-}
-.meet-redirect:hover { color: var(--ink); transform: translateX(4px); }
-
-/* ── Platform Compartment ── */
-.platform-phase-2,
-.platform-phase-3 {
-  visibility: hidden;
-  opacity: 0;
-}
-
-.platform-label,
-.consult-label {
-  font-family: 'Space Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--smoke);
-  opacity: 0.6;
-  margin-bottom: 16px;
-}
-
-.compartment-dark .platform-label {
-  color: rgba(255,255,255,0.35);
-}
-
-.platform-title,
-.consult-title {
-  font-family: 'Instrument Serif', serif;
-  font-size: clamp(32px, 4.5vw, 52px);
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  line-height: 1.1;
-  margin-bottom: 12px;
-}
-
-.platform-desc,
-.consult-desc {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 16px;
-  font-weight: 300;
-  line-height: 1.7;
-  color: var(--smoke);
-  max-width: 480px;
-  margin-bottom: 24px;
-}
-
-.compartment-dark .platform-desc {
-  color: rgba(255,255,255,0.5);
-}
-
-.platform-feature,
-.consult-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 20px 24px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 12px;
-  margin-top: 16px;
-}
-
-#consulting .consult-card {
-  background: rgba(23,23,34,0.03);
-  border-color: var(--bone);
-}
-
-.platform-dot,
-.consult-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  margin-top: 6px;
-}
-
-.platform-feat-name,
-.consult-card-title {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 17px;
-  font-weight: 500;
-  margin-bottom: 4px;
-}
-
-.compartment-dark .platform-feat-name {
-  color: rgba(255,255,255,0.88);
-}
-
-.platform-feat-sub,
-.consult-card-sub {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 14px;
-  font-weight: 300;
-  line-height: 1.6;
-  color: var(--smoke);
-}
-
-.compartment-dark .platform-feat-sub {
-  color: rgba(255,255,255,0.4);
-}
-
-.platform-infinity {
-  font-family: 'Instrument Serif', serif;
-  font-size: clamp(56px, 7vw, 80px);
-  color: rgba(255,255,255,0.06);
-  line-height: 1;
-  margin: 24px 0;
-}
-
-.platform-cta,
-.consult-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 15px;
-  font-weight: 500;
-  text-decoration: none;
-  margin-top: 24px;
-  transition: color 0.2s cubic-bezier(0.23,1,0.32,1), transform 0.2s cubic-bezier(0.23,1,0.32,1);
-}
-
-.platform-cta { color: var(--lavender); }
-.platform-cta:hover { color: #fff; transform: translateX(4px); }
-.consult-cta { color: var(--plum); }
-.consult-cta:hover { color: var(--ink); transform: translateX(4px); }
-
-/* ── Consulting Compartment ── */
-.consult-phase-2,
-.consult-phase-3 {
-  visibility: hidden;
-  opacity: 0;
-}
-
-.consult-card-title {
-  color: var(--ink);
-}
-
-.consult-card-sub {
-  color: var(--smoke);
-}
-
-/* ── Proof/Outcomes Compartment ── */
-.proof-phase-2,
-.proof-phase-3 {
-  visibility: hidden;
-  opacity: 0;
-}
-
-#proof.compartment .proof-metrics {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-}
-
-#proof.compartment .proof-metric {
-  opacity: 1;
-  transform: none;
-  text-align: center;
-}
-
-.proof-closing {
-  font-family: 'Instrument Serif', serif;
-  font-size: clamp(24px, 3vw, 36px);
-  font-weight: 400;
-  color: rgba(255,255,255,0.55);
-  margin-top: 40px;
-  letter-spacing: -0.01em;
-}
-
-.proof-cases-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-#proof.compartment .case-card {
-  opacity: 1;
-  transform: none;
-}
-
-/* ── Contact Compartment ── */
-.contact-phase-2,
-.contact-phase-3 {
-  visibility: hidden;
-  opacity: 0;
-}
-
-.contact-title-echo,
-.contact-title-final {
-  font-family: 'Instrument Serif', serif;
-  font-size: clamp(32px, 4vw, 52px);
-  font-weight: 400;
-  color: var(--ink);
-  letter-spacing: -0.02em;
-  line-height: 1.05;
-  margin-bottom: 20px;
-  opacity: 0.3;
-}
-
-.contact-title-echo em,
-.contact-title-final em {
-  font-style: italic;
-  color: var(--plum);
-}
-
-.contact-promise {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 15px;
-  font-weight: 300;
-  color: var(--smoke);
-  line-height: 1.6;
-  margin-top: 12px;
-}
-
-/* ── Compartment Responsive ── */
-@media (max-width: 768px) {
-  [class*="-phase"] {
-    padding: 60px 24px;
-  }
-
-  .meet-phase-2,
-  .meet-phase-3 {
-    gap: 20px;
-  }
-
-  #proof.compartment .proof-metrics {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .proof-cases-row {
-    grid-template-columns: 1fr;
-  }
-
-  .contact-buttons {
-    flex-direction: column;
-    align-items: stretch;
-  }
-}
-
 /* ───────────────────────────────────────────────
    GSAP WILL HANDLE — override initial opacity 0
    on elements that need it from above
@@ -2343,21 +2010,6 @@ footer {
   <canvas id="particle-mesh" aria-hidden="true"></canvas>
   <canvas id="hero-physics" aria-hidden="true"></canvas>
 
-  <!-- D.O.T.S Planet Tooltip (shown on click) -->
-  <div id="dots-tooltip" class="dots-tooltip" aria-hidden="true" style="display:none">
-    <div class="dots-tooltip-inner">
-      <div class="dots-tooltip-accent">
-        <span style="background:var(--lavender)"></span>
-        <span style="background:var(--mint)"></span>
-        <span style="background:var(--peach)"></span>
-        <span style="background:var(--sky)"></span>
-      </div>
-      <p class="dots-tooltip-msg">
-        <strong>Private AI.</strong> Your data never leaves your server.
-      </p>
-    </div>
-  </div>
-
     <div class="hero-slides">
       <!-- SLIDE 1: Private AI -->
       <div class="hero-slide" data-slide="0">
@@ -2445,241 +2097,180 @@ footer {
   </section>
 
   <!-- ─── MEET ─── -->
-  <!-- ─── MEET COMPARTMENT ─── -->
-  <section id="meet" class="compartment">
-    <div class="compartment-sticky">
-      <!-- Phase 1: Manifesto word-by-word reveal -->
-      <div class="meet-phase meet-phase-1">
-        <p class="meet-label">// who am I</p>
-        <p class="manifesto-text" id="manifesto-text">
-          <!-- Words injected by JS for scroll-triggered reveal -->
-        </p>
-      </div>
-
-      <!-- Phase 2: First two credentials -->
-      <div class="meet-phase meet-phase-2">
-        <div class="meet-credential meet-cred-1">
+  <section id="meet">
+    <div class="meet-inner">
+      <p class="meet-label">// who am I</p>
+      <p class="manifesto-text" id="manifesto-text">
+        <!-- Words injected by JS for scroll-triggered reveal -->
+      </p>
+      <div class="meet-credentials fade-up">
+        <div class="meet-credential">
           <span class="credential-number">5+</span>
           <span class="credential-text">Years building systems</span>
         </div>
-        <div class="credential-divider meet-cred-divider-1"></div>
-        <div class="meet-credential meet-cred-2">
+        <div class="credential-divider"></div>
+        <div class="meet-credential">
           <span class="credential-number">2+</span>
           <span class="credential-text">Years building AI</span>
         </div>
-      </div>
-
-      <!-- Phase 3: Last two credentials + CTA -->
-      <div class="meet-phase meet-phase-3">
-        <div class="meet-credential meet-cred-3">
+        <div class="credential-divider"></div>
+        <div class="meet-credential">
           <span class="credential-number">1</span>
           <span class="credential-text">Person. Full stack. Idea to deploy.</span>
         </div>
-        <div class="credential-divider meet-cred-divider-2"></div>
-        <div class="meet-credential meet-cred-4">
+        <div class="credential-divider"></div>
+        <div class="meet-credential">
           <span class="credential-number">0</span>
           <span class="credential-text">Middlemen. You talk to the builder.</span>
         </div>
-        <a href="https://meet.dotsai.in" class="meet-redirect">
-          Full story → meet.dotsai.in <span class="service-arrow">↗</span>
-        </a>
       </div>
+
+      <a href="https://meet.dotsai.in" class="meet-redirect fade-up">
+        Full story → meet.dotsai.in <span class="service-arrow">↗</span>
+      </a>
     </div>
   </section>
 
-  <!-- ─── PLATFORM COMPARTMENT ─── -->
-  <section id="platform" class="compartment compartment-dark">
-    <div class="compartment-sticky">
-      <!-- Phase 1: Intro + Infinity Nexus -->
-      <div class="platform-phase platform-phase-1">
-        <p class="platform-label">// products to use</p>
-        <h2 class="platform-title">Platform</h2>
-        <p class="platform-desc">AI products built by ZeroOne. Universal SaaS — on your infrastructure, not ours.</p>
-        <div class="platform-feature platform-feat-1">
-          <span class="platform-dot" style="background: #C8B6FF;"></span>
-          <div class="platform-feat-content">
-            <h3 class="platform-feat-name">Infinity Nexus</h3>
-            <p class="platform-feat-sub">Private AI operating system. Every employee gets their own agents. Deploy on your server.</p>
+  <!-- ─── PLATFORM (brief redirect) ─── -->
+  <section id="platform" class="brief-section brief-section-dark fade-up">
+    <div class="brief-inner">
+      <div class="brief-content">
+        <p class="brief-label">// products to use</p>
+        <h2 class="brief-title">Platform</h2>
+        <p class="brief-desc">
+          AI products built by ZeroOne. Give your employees their own agents. Universal SaaS — on your infrastructure, not ours.
+        </p>
+        <div class="brief-services">
+          <div class="brief-service-item">
+            <span class="brief-service-dot" style="background: #C8B6FF;"></span>
+            Infinity Nexus — Private AI operating system
+          </div>
+          <div class="brief-service-item">
+            <span class="brief-service-dot" style="background: #B8E0D2;"></span>
+            CRM, Notes, Docs, Automation — all on your server
+          </div>
+          <div class="brief-service-item">
+            <span class="brief-service-dot" style="background: #FFCDB2;"></span>
+            More products shipping soon
           </div>
         </div>
-      </div>
-
-      <!-- Phase 2: CRM + AI Agents -->
-      <div class="platform-phase platform-phase-2">
-        <div class="platform-feature platform-feat-2">
-          <span class="platform-dot" style="background: #B8E0D2;"></span>
-          <div class="platform-feat-content">
-            <h3 class="platform-feat-name">CRM, Notes, Docs, Automation</h3>
-            <p class="platform-feat-sub">All tools on your own server. No vendor lock-in. Export everything anytime.</p>
-          </div>
-        </div>
-        <div class="platform-feature platform-feat-3">
-          <span class="platform-dot" style="background: #FFCDB2;"></span>
-          <div class="platform-feat-content">
-            <h3 class="platform-feat-name">AI Agents for Every Role</h3>
-            <p class="platform-feat-sub">HR, Finance, Legal, Engineering — each role gets AI that knows their workflow.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Phase 3: More + CTA -->
-      <div class="platform-phase platform-phase-3">
-        <div class="platform-feature platform-feat-4">
-          <span class="platform-dot" style="background: #A2D2FF;"></span>
-          <div class="platform-feat-content">
-            <h3 class="platform-feat-name">More Products Shipping</h3>
-            <p class="platform-feat-sub">New tools launching quarterly. Built from real client needs.</p>
-          </div>
-        </div>
-        <div class="platform-infinity" aria-hidden="true">∞</div>
-        <a href="https://dotsai.cloud" target="_blank" rel="noopener" class="platform-cta">
+        <a href="https://dotsai.cloud" target="_blank" rel="noopener" class="brief-cta brief-cta-dark">
           Explore dotsai.cloud <span class="service-arrow">↗</span>
         </a>
       </div>
+      <div class="brief-content" style="text-align: center;">
+        <div style="font-family: 'Instrument Serif', serif; font-size: clamp(56px, 7vw, 80px); color: rgba(255,255,255,0.06); line-height: 1; letter-spacing: -0.02em;">∞</div>
+        <p style="font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.18em; color: rgba(255,255,255,0.2); text-transform: uppercase;">Infinity Nexus</p>
+      </div>
     </div>
   </section>
 
-  <!-- ─── CONSULTING COMPARTMENT ─── -->
-  <section id="consulting" class="compartment">
-    <div class="compartment-sticky">
-      <!-- Phase 1: Intro + Private AI -->
-      <div class="consult-phase consult-phase-1">
-        <p class="consult-label">// hire me for</p>
-        <h2 class="consult-title">Consulting</h2>
-        <p class="consult-desc">Hands-on AI consulting. I design, build, and deploy — not just advise.</p>
-        <div class="consult-card consult-card-1">
-          <span class="consult-dot" style="background: #C8B6FF;"></span>
-          <div>
-            <h3 class="consult-card-title">Private AI Deployment</h3>
-            <p class="consult-card-sub">On-premise LLMs. Your data stays on your server. Zero vendor lock-in. Full ownership.</p>
+  <!-- ─── CONSULTING (brief redirect) ─── -->
+  <section id="consulting" class="brief-section fade-up">
+    <div class="brief-inner">
+      <div class="brief-content">
+        <p class="brief-label">// hire me for</p>
+        <h2 class="brief-title">Consulting</h2>
+        <p class="brief-desc">
+          Hands-on AI consulting. I design, build, and deploy — not just advise. Recover your margins through AI.
+        </p>
+        <div class="brief-services">
+          <div class="brief-service-item">
+            <span class="brief-service-dot" style="background: #C8B6FF;"></span>
+            Private AI Deployment
+          </div>
+          <div class="brief-service-item">
+            <span class="brief-service-dot" style="background: #A2D2FF;"></span>
+            SEO, GEO &amp; Digital Marketing
+          </div>
+          <div class="brief-service-item">
+            <span class="brief-service-dot" style="background: #B8E0D2;"></span>
+            AI Automation &amp; Agents
+          </div>
+          <div class="brief-service-item">
+            <span class="brief-service-dot" style="background: #FFCDB2;"></span>
+            AI Web &amp; Digital Agency
           </div>
         </div>
-      </div>
-
-      <!-- Phase 2: Automation + GEO -->
-      <div class="consult-phase consult-phase-2">
-        <div class="consult-card consult-card-2">
-          <span class="consult-dot" style="background: #B8E0D2;"></span>
-          <div>
-            <h3 class="consult-card-title">AI Automation &amp; Agents</h3>
-            <p class="consult-card-sub">Workflow automation for CRM, HR, finance, legal. Custom agents that handle real work.</p>
-          </div>
-        </div>
-        <div class="consult-card consult-card-3">
-          <span class="consult-dot" style="background: #A2D2FF;"></span>
-          <div>
-            <h3 class="consult-card-title">GEO &amp; AI Search Visibility</h3>
-            <p class="consult-card-sub">Generative Engine Optimization. Get your brand into ChatGPT, Gemini, Perplexity answers.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Phase 3: Web + CTA -->
-      <div class="consult-phase consult-phase-3">
-        <div class="consult-card consult-card-4">
-          <span class="consult-dot" style="background: #FFCDB2;"></span>
-          <div>
-            <h3 class="consult-card-title">AI Web &amp; Digital Experiences</h3>
-            <p class="consult-card-sub">Next.js, real-time dashboards, AI-native UX. Internal tools, APIs, data pipelines.</p>
-          </div>
-        </div>
-        <a href="/ai-agency-india/" class="consult-cta">
-          View all services &amp; case studies → <span class="service-arrow">↗</span>
+        <a href="/ai-agency-india/" class="brief-cta brief-cta-light">
+          View all services → <span class="service-arrow">↗</span>
         </a>
       </div>
-    </div>
-  </section>
-
-  <!-- ─── OUTCOMES COMPARTMENT ─── -->
-  <section id="proof" class="compartment compartment-dark">
-    <div class="compartment-sticky">
-      <!-- Phase 1: Metrics with counter animation -->
-      <div class="proof-phase proof-phase-1">
-        <p class="proof-label">// outcomes</p>
-        <div class="proof-metrics">
-          <div class="proof-metric proof-metric-1">
-            <div class="metric-number">
-              <span class="metric-count" data-target="70">0</span><span class="metric-suffix">%</span>
-            </div>
-            <p class="metric-label">Cost reduction for a<br>logistics operation</p>
-            <p class="metric-source">Private LLM deployment · 2024</p>
-          </div>
-          <div class="proof-metric proof-metric-2">
-            <div class="metric-number">
-              <span class="metric-count" data-target="8">0</span><span class="metric-suffix">L/yr</span>
-            </div>
-            <p class="metric-label">Annual savings unlocked<br>via AI automation</p>
-            <p class="metric-source">Operations platform · 2024</p>
-          </div>
-          <div class="proof-metric proof-metric-3">
-            <div class="metric-number">
-              <span class="metric-count" data-target="99">0</span><span class="metric-suffix">%</span>
-            </div>
-            <p class="metric-label">Accuracy on custom<br>document AI pipeline</p>
-            <p class="metric-source">Document processing · 2025</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Phase 2: Case studies 1 + 2 -->
-      <div class="proof-phase proof-phase-2">
-        <div class="proof-cases-row">
-          <div class="case-card case-card-1">
-            <p class="case-tag">Case Study · 01</p>
-            <p class="case-title">Logistics Co. — Private LLM Deployment</p>
-            <p class="case-outcome">Replaced cloud AI with on-premise Llama deployment. <span class="case-highlight">70% ops cost saved.</span> Data never left their DC.</p>
-          </div>
-          <div class="case-card case-card-2">
-            <p class="case-tag">Case Study · 02</p>
-            <p class="case-title">NBFC — AI Document Pipeline</p>
-            <p class="case-outcome">Custom OCR + LLM pipeline for loan document processing. <span class="case-highlight">99% accuracy</span> at 40x human speed.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Phase 3: Case study 3 + closing -->
-      <div class="proof-phase proof-phase-3">
-        <div class="case-card case-card-3">
-          <p class="case-tag">Case Study · 03</p>
-          <p class="case-title">Compliance Team — AI Audit System</p>
-          <p class="case-outcome">Private call audit system with custom scoring model. <span class="case-highlight">₹8L/year saved</span> vs manual review cost.</p>
-        </div>
-        <p class="proof-closing">Every project ships on your infrastructure. Your data never leaves.</p>
+      <div class="brief-content" style="text-align: center;">
+        <div style="font-family: 'Instrument Serif', serif; font-size: clamp(56px, 7vw, 80px); color: var(--bone); line-height: 1; letter-spacing: -0.02em;">4</div>
+        <p style="font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.18em; color: var(--smoke); opacity: 0.4; text-transform: uppercase;">Services</p>
       </div>
     </div>
   </section>
 
-  <!-- ─── CONTACT COMPARTMENT ─── -->
-  <section id="contact" class="compartment">
-    <div class="compartment-sticky">
-      <!-- Phase 1: Big headline -->
-      <div class="contact-phase contact-phase-1">
-        <p class="contact-label">// start here</p>
-        <h2 class="contact-title">Let's build<br><em>your AI.</em></h2>
-      </div>
+  <!-- ─── PROOF ─── -->
+  <section id="proof">
+    <p class="proof-label">// outcomes</p>
 
-      <!-- Phase 2: Subtitle + promise -->
-      <div class="contact-phase contact-phase-2">
-        <h2 class="contact-title-echo">Let's build <em>your AI.</em></h2>
-        <p class="contact-sub">No forms. No sales funnels. Pick what works for you.</p>
-        <p class="contact-promise">One conversation. Direct access to the builder. No middlemen.</p>
-      </div>
-
-      <!-- Phase 3: CTAs -->
-      <div class="contact-phase contact-phase-3">
-        <h2 class="contact-title-final">Let's build <em>your AI.</em></h2>
-        <div class="contact-buttons">
-          <a href="https://wa.me/918320065658" target="_blank" rel="noopener" class="btn-wa">
-            ↗ WhatsApp Me
-          </a>
-          <a href="https://cal.com/meetdeshani" target="_blank" rel="noopener" class="btn-cal">
-            → Book a Call
-          </a>
-          <span class="btn-testimony" aria-disabled="true">
-            Read Testimony
-            <span class="btn-testimony-badge">Coming Soon</span>
-          </span>
+    <div class="proof-metrics">
+      <div class="proof-metric">
+        <div class="metric-number">
+          <span class="metric-count" data-target="70">0</span><span class="metric-suffix">%</span>
         </div>
+        <p class="metric-label">Cost reduction for a<br>logistics operation</p>
+        <p class="metric-source">Private LLM deployment · 2024</p>
+      </div>
+
+      <div class="proof-metric">
+        <div class="metric-number">
+          <span class="metric-count" data-target="8">0</span><span class="metric-suffix">L/yr</span>
+        </div>
+        <p class="metric-label">Annual savings unlocked<br>via AI automation</p>
+        <p class="metric-source">Operations platform · 2024</p>
+      </div>
+
+      <div class="proof-metric">
+        <div class="metric-number">
+          <span class="metric-count" data-target="99">0</span><span class="metric-suffix">%</span>
+        </div>
+        <p class="metric-label">Accuracy on custom<br>document AI pipeline</p>
+        <p class="metric-source">Document processing · 2025</p>
+      </div>
+    </div>
+
+    <div class="proof-cases">
+      <div class="case-card">
+        <p class="case-tag">Case Study · 01</p>
+        <p class="case-title">Logistics Co. — Private LLM Deployment</p>
+        <p class="case-outcome">Replaced cloud AI with on-premise Llama deployment. <span class="case-highlight">70% ops cost saved.</span> Data never left their DC.</p>
+      </div>
+
+      <div class="case-card">
+        <p class="case-tag">Case Study · 02</p>
+        <p class="case-title">NBFC — AI Document Pipeline</p>
+        <p class="case-outcome">Custom OCR + LLM pipeline for loan document processing. <span class="case-highlight">99% accuracy</span> at 40x human speed.</p>
+      </div>
+
+      <div class="case-card">
+        <p class="case-tag">Case Study · 03</p>
+        <p class="case-title">Compliance Team — AI Audit System</p>
+        <p class="case-outcome">Private call audit system with custom scoring model. <span class="case-highlight">₹8L/year saved</span> vs manual review cost.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CONTACT ─── -->
+  <section id="contact">
+    <div class="contact-inner">
+      <p class="contact-label">// start here</p>
+      <h2 class="contact-title">Let's build<br><em>your AI.</em></h2>
+      <p class="contact-sub">No forms. No sales funnels. Pick what works for you.</p>
+      <div class="contact-buttons">
+        <a href="https://wa.me/918320065658" target="_blank" rel="noopener" class="btn-wa">
+          ↗ WhatsApp Me
+        </a>
+        <a href="https://cal.com/meetdeshani" target="_blank" rel="noopener" class="btn-cal">
+          → Book a Call
+        </a>
+        <span class="btn-testimony" aria-disabled="true">
+          Read Testimony
+          <span class="btn-testimony-badge">Coming Soon</span>
+        </span>
       </div>
     </div>
   </section>
@@ -3230,7 +2821,7 @@ function initMainPage() {
   heroTl.to('#scroll-hint', { autoAlpha: 0, duration: 0.08 }, 0.0)
 
   // ══════════════════════════════════════════
-  //  MANIFESTO WORD-BY-WORD REVEAL (inject spans)
+  //  MANIFESTO WORD-BY-WORD REVEAL
   // ══════════════════════════════════════════
   const manifestoRaw = "I am one person. I build AI that lives on YOUR server. Your data never leaves. Your competitors never see it. This is private AI — and it changes everything."
 
@@ -3258,258 +2849,105 @@ function initMainPage() {
     }
   })
 
-  // ══════════════════════════════════════════
-  //  COMPARTMENTALIZED SCROLL SYSTEM
-  // ══════════════════════════════════════════
-  const isMobile = window.innerWidth < 768
-  const scrollDist = isMobile ? '+=150%' : '+=200%'
-  const EASE_OUT = 'cubic-bezier(0.23, 1, 0.32, 1)'
-
-  // ── MEET COMPARTMENT ──
-  const meetTl = gsap.timeline({
-    scrollTrigger: {
-      trigger: '#meet',
-      start: 'top top',
-      end: scrollDist,
-      pin: true,
-      scrub: 0.5,
-      anticipatePin: 1,
-      onUpdate: (self) => {
-        // Word reveal only during phase 1 (progress 0-0.28)
-        const p = Math.min(self.progress / 0.28, 1)
-        const wordsToShow = Math.floor(p * wordSpans.length)
-        wordSpans.forEach((span, i) => {
-          if (i <= wordsToShow) {
-            gsap.to(span, { opacity: 1, duration: 0.3, ease: 'power2.out', overwrite: 'auto' })
-          }
-        })
-      }
-    }
-  })
-
-  // Phase 1→2: manifesto out, credentials 1-2 in
-  meetTl
-    .to('.meet-phase-1', { autoAlpha: 0, y: -40, duration: 0.08, ease: 'power2.in' }, 0.28)
-    .to('.meet-phase-2', { autoAlpha: 1, y: 0, scale: 1, filter: 'blur(0px)', duration: 0.12, ease: EASE_OUT }, 0.33)
-    .fromTo('.meet-cred-1', { autoAlpha: 0, y: 20, scale: 0.95 },
-      { autoAlpha: 1, y: 0, scale: 1, duration: 0.06, ease: EASE_OUT }, 0.34)
-    .fromTo('.meet-cred-divider-1', { autoAlpha: 0, scaleX: 0 },
-      { autoAlpha: 1, scaleX: 1, duration: 0.04 }, 0.37)
-    .fromTo('.meet-cred-2', { autoAlpha: 0, y: 20, scale: 0.95 },
-      { autoAlpha: 1, y: 0, scale: 1, duration: 0.06, ease: EASE_OUT }, 0.39)
-
-  // Phase 2→3: credentials 3-4 + CTA
-  meetTl
-    .to('.meet-phase-2', { autoAlpha: 0, y: -40, duration: 0.08, ease: 'power2.in' }, 0.60)
-    .to('.meet-phase-3', { autoAlpha: 1, y: 0, scale: 1, filter: 'blur(0px)', duration: 0.12, ease: EASE_OUT }, 0.66)
-    .fromTo('.meet-cred-3', { autoAlpha: 0, y: 20, scale: 0.95 },
-      { autoAlpha: 1, y: 0, scale: 1, duration: 0.06, ease: EASE_OUT }, 0.67)
-    .fromTo('.meet-cred-divider-2', { autoAlpha: 0, scaleX: 0 },
-      { autoAlpha: 1, scaleX: 1, duration: 0.04 }, 0.70)
-    .fromTo('.meet-cred-4', { autoAlpha: 0, y: 20, scale: 0.95 },
-      { autoAlpha: 1, y: 0, scale: 1, duration: 0.06, ease: EASE_OUT }, 0.72)
-    .fromTo('.meet-redirect', { autoAlpha: 0, y: 12 },
-      { autoAlpha: 1, y: 0, duration: 0.06, ease: EASE_OUT }, 0.76)
-  meetTl.set({}, {}, 1) // normalize duration to 1.0
-
-  // ── PLATFORM COMPARTMENT ──
-  const platformTl = gsap.timeline({
-    scrollTrigger: {
-      trigger: '#platform',
-      start: 'top top',
-      end: scrollDist,
-      pin: true,
-      scrub: 0.5,
-      anticipatePin: 1
-    }
-  })
-
-  // Phase 1: title + desc + Infinity Nexus
-  platformTl
-    .fromTo('.platform-label', { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.04 }, 0)
-    .fromTo('.platform-title', { autoAlpha: 0, y: 20, scale: 0.95 },
-      { autoAlpha: 1, y: 0, scale: 1, duration: 0.06, ease: EASE_OUT }, 0.03)
-    .fromTo('.platform-desc', { autoAlpha: 0, y: 16 },
-      { autoAlpha: 1, y: 0, duration: 0.06, ease: EASE_OUT }, 0.06)
-    .fromTo('.platform-feat-1', { autoAlpha: 0, y: 24, scale: 0.95, filter: 'blur(2px)' },
-      { autoAlpha: 1, y: 0, scale: 1, filter: 'blur(0px)', duration: 0.08, ease: EASE_OUT }, 0.10)
-
-  // Phase 1→2
-  platformTl
-    .to('.platform-phase-1', { autoAlpha: 0, y: -30, duration: 0.08, ease: 'power2.in' }, 0.30)
-    .fromTo('.platform-phase-2', { autoAlpha: 0, y: 30, scale: 0.95, filter: 'blur(2px)' },
-      { autoAlpha: 1, y: 0, scale: 1, filter: 'blur(0px)', duration: 0.10, ease: EASE_OUT }, 0.35)
-    .fromTo('.platform-feat-2', { autoAlpha: 0, x: -20 },
-      { autoAlpha: 1, x: 0, duration: 0.06, ease: EASE_OUT }, 0.38)
-    .fromTo('.platform-feat-3', { autoAlpha: 0, x: -20 },
-      { autoAlpha: 1, x: 0, duration: 0.06, ease: EASE_OUT }, 0.42)
-
-  // Phase 2→3
-  platformTl
-    .to('.platform-phase-2', { autoAlpha: 0, y: -30, duration: 0.08, ease: 'power2.in' }, 0.62)
-    .fromTo('.platform-phase-3', { autoAlpha: 0, y: 30, scale: 0.95, filter: 'blur(2px)' },
-      { autoAlpha: 1, y: 0, scale: 1, filter: 'blur(0px)', duration: 0.10, ease: EASE_OUT }, 0.67)
-    .fromTo('.platform-infinity', { autoAlpha: 0, scale: 0.8 },
-      { autoAlpha: 0.06, scale: 1, duration: 0.10 }, 0.70)
-    .fromTo('.platform-cta', { autoAlpha: 0, y: 12 },
-      { autoAlpha: 1, y: 0, duration: 0.06, ease: EASE_OUT }, 0.78)
-  platformTl.set({}, {}, 1)
-
-  // ── CONSULTING COMPARTMENT ──
-  const consultTl = gsap.timeline({
-    scrollTrigger: {
-      trigger: '#consulting',
-      start: 'top top',
-      end: scrollDist,
-      pin: true,
-      scrub: 0.5,
-      anticipatePin: 1
-    }
-  })
-
-  // Phase 1: intro + Private AI card
-  consultTl
-    .fromTo('.consult-label', { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.04 }, 0)
-    .fromTo('.consult-title', { autoAlpha: 0, y: 20, scale: 0.95 },
-      { autoAlpha: 1, y: 0, scale: 1, duration: 0.06, ease: EASE_OUT }, 0.03)
-    .fromTo('.consult-desc', { autoAlpha: 0, y: 16 },
-      { autoAlpha: 1, y: 0, duration: 0.05, ease: EASE_OUT }, 0.07)
-    .fromTo('.consult-card-1', { autoAlpha: 0, y: 24, scale: 0.95, filter: 'blur(2px)' },
-      { autoAlpha: 1, y: 0, scale: 1, filter: 'blur(0px)', duration: 0.08, ease: EASE_OUT }, 0.12)
-
-  // Phase 1→2
-  consultTl
-    .to('.consult-phase-1', { autoAlpha: 0, y: -30, duration: 0.08, ease: 'power2.in' }, 0.30)
-    .fromTo('.consult-phase-2', { autoAlpha: 0, y: 30, scale: 0.95, filter: 'blur(2px)' },
-      { autoAlpha: 1, y: 0, scale: 1, filter: 'blur(0px)', duration: 0.10, ease: EASE_OUT }, 0.35)
-    .fromTo('.consult-card-2', { autoAlpha: 0, x: -20, scale: 0.95 },
-      { autoAlpha: 1, x: 0, scale: 1, duration: 0.06, ease: EASE_OUT }, 0.38)
-    .fromTo('.consult-card-3', { autoAlpha: 0, x: -20, scale: 0.95 },
-      { autoAlpha: 1, x: 0, scale: 1, duration: 0.06, ease: EASE_OUT }, 0.43)
-
-  // Phase 2→3
-  consultTl
-    .to('.consult-phase-2', { autoAlpha: 0, y: -30, duration: 0.08, ease: 'power2.in' }, 0.62)
-    .fromTo('.consult-phase-3', { autoAlpha: 0, y: 30, scale: 0.95, filter: 'blur(2px)' },
-      { autoAlpha: 1, y: 0, scale: 1, filter: 'blur(0px)', duration: 0.10, ease: EASE_OUT }, 0.67)
-    .fromTo('.consult-card-4', { autoAlpha: 0, x: -20, scale: 0.95 },
-      { autoAlpha: 1, x: 0, scale: 1, duration: 0.06, ease: EASE_OUT }, 0.70)
-    .fromTo('.consult-cta', { autoAlpha: 0, y: 12 },
-      { autoAlpha: 1, y: 0, duration: 0.06, ease: EASE_OUT }, 0.78)
-  consultTl.set({}, {}, 1)
-
-  // ── OUTCOMES COMPARTMENT ──
-  let proofCountersStarted = false
-  function startCounters() {
-    document.querySelectorAll('.metric-count').forEach(counter => {
-      if (counter.dataset.counted) return
-      counter.dataset.counted = 'true'
-      const target = parseInt(counter.dataset.target)
-      const duration = 1.8
-      const start = performance.now()
-      function update(now) {
-        const elapsed = (now - start) / 1000
-        const progress = Math.min(elapsed / duration, 1)
-        const eased = 1 - Math.pow(1 - progress, 3)
-        counter.textContent = Math.round(eased * target)
-        if (progress < 1) requestAnimationFrame(update)
-      }
-      requestAnimationFrame(update)
+  // ── Meet credentials + redirect fade-up ──
+  document.querySelectorAll('#meet .fade-up').forEach((el) => {
+    gsap.to(el, {
+      opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+      scrollTrigger: { trigger: el, start: 'top 85%' }
     })
-  }
+  })
 
-  const proofTl = gsap.timeline({
-    scrollTrigger: {
-      trigger: '#proof',
-      start: 'top top',
-      end: scrollDist,
-      pin: true,
-      scrub: 0.5,
-      anticipatePin: 1,
-      onUpdate: (self) => {
-        if (self.progress > 0.05 && !proofCountersStarted) {
-          proofCountersStarted = true
-          startCounters()
+  // Scroll-triggered word reveal
+  ScrollTrigger.create({
+    trigger: '#meet',
+    start: 'top 80%',
+    end: 'bottom 30%',
+    onUpdate: (self) => {
+      const progress = self.progress
+      const totalWords = wordSpans.length
+      const wordsToShow = Math.floor(progress * totalWords * 1.4)
+      wordSpans.forEach((span, i) => {
+        if (i <= wordsToShow) {
+          gsap.to(span, { opacity: 1, duration: 0.3, ease: 'power2.out', overwrite: 'auto' })
+        }
+      })
+    }
+  })
+
+  // ── Brief sections fade-up ──
+  document.querySelectorAll('.brief-section.fade-up').forEach((section) => {
+    gsap.to(section, {
+      opacity: 1, y: 0, duration: 0.9, ease: 'power3.out',
+      scrollTrigger: { trigger: section, start: 'top 78%' }
+    })
+  })
+
+  // ── Proof metrics count-up ──
+  document.querySelectorAll('.proof-metric').forEach((metric, i) => {
+    gsap.to(metric, {
+      opacity: 1, y: 0, duration: 0.7, ease: 'power3.out',
+      delay: i * 0.12,
+      scrollTrigger: {
+        trigger: '#proof',
+        start: 'top 70%',
+        onEnter: () => {
+          // Trigger count-up for this metric
+          const counter = metric.querySelector('.metric-count')
+          if (counter && !counter.dataset.counted) {
+            counter.dataset.counted = 'true'
+            const target = parseInt(counter.dataset.target)
+            const duration = 1.8
+            const start = performance.now()
+            function update(now) {
+              const elapsed = (now - start) / 1000
+              const progress = Math.min(elapsed / duration, 1)
+              const eased = 1 - Math.pow(1 - progress, 3)
+              counter.textContent = Math.round(eased * target)
+              if (progress < 1) requestAnimationFrame(update)
+            }
+            requestAnimationFrame(update)
+          }
         }
       }
-    }
+    })
   })
 
-  // Phase 1: metrics with stagger
-  proofTl
-    .fromTo('.proof-label', { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.04 }, 0)
-    .fromTo('.proof-metric-1', { autoAlpha: 0, y: 30, scale: 0.95 },
-      { autoAlpha: 1, y: 0, scale: 1, duration: 0.08, ease: EASE_OUT }, 0.04)
-    .fromTo('.proof-metric-2', { autoAlpha: 0, y: 30, scale: 0.95 },
-      { autoAlpha: 1, y: 0, scale: 1, duration: 0.08, ease: EASE_OUT }, 0.08)
-    .fromTo('.proof-metric-3', { autoAlpha: 0, y: 30, scale: 0.95 },
-      { autoAlpha: 1, y: 0, scale: 1, duration: 0.08, ease: EASE_OUT }, 0.12)
+  // ── Case cards ──
+  document.querySelectorAll('.case-card').forEach((card, i) => {
+    gsap.to(card, {
+      opacity: 1, y: 0, duration: 0.6, ease: 'power3.out',
+      delay: i * 0.1,
+      scrollTrigger: {
+        trigger: '.proof-cases',
+        start: 'top 80%',
+      }
+    })
+  })
 
-  // Phase 1→2
-  proofTl
-    .to('.proof-phase-1', { autoAlpha: 0, y: -30, duration: 0.08, ease: 'power2.in' }, 0.30)
-    .fromTo('.proof-phase-2', { autoAlpha: 0, y: 30, scale: 0.95, filter: 'blur(2px)' },
-      { autoAlpha: 1, y: 0, scale: 1, filter: 'blur(0px)', duration: 0.10, ease: EASE_OUT }, 0.35)
-    .fromTo('.case-card-1', { autoAlpha: 0, y: 20, scale: 0.95 },
-      { autoAlpha: 1, y: 0, scale: 1, duration: 0.06, ease: EASE_OUT }, 0.38)
-    .fromTo('.case-card-2', { autoAlpha: 0, y: 20, scale: 0.95 },
-      { autoAlpha: 1, y: 0, scale: 1, duration: 0.06, ease: EASE_OUT }, 0.43)
-
-  // Phase 2→3
-  proofTl
-    .to('.proof-phase-2', { autoAlpha: 0, y: -30, duration: 0.08, ease: 'power2.in' }, 0.62)
-    .fromTo('.proof-phase-3', { autoAlpha: 0, y: 30, scale: 0.95, filter: 'blur(2px)' },
-      { autoAlpha: 1, y: 0, scale: 1, filter: 'blur(0px)', duration: 0.10, ease: EASE_OUT }, 0.67)
-    .fromTo('.case-card-3', { autoAlpha: 0, y: 20, scale: 0.95 },
-      { autoAlpha: 1, y: 0, scale: 1, duration: 0.06, ease: EASE_OUT }, 0.70)
-    .fromTo('.proof-closing', { autoAlpha: 0, y: 12 },
-      { autoAlpha: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.78)
-  proofTl.set({}, {}, 1)
-
-  // ── CONTACT COMPARTMENT ──
-  const contactTl = gsap.timeline({
+  // ── Contact fade-up ──
+  gsap.timeline({
     scrollTrigger: {
       trigger: '#contact',
-      start: 'top top',
-      end: scrollDist,
-      pin: true,
-      scrub: 0.5,
-      anticipatePin: 1
+      start: 'top 75%',
     }
   })
-
-  // Phase 1: big headline
-  contactTl
-    .fromTo('.contact-label', { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.04 }, 0)
-    .fromTo('.contact-title', { autoAlpha: 0, y: 40, scale: 0.95 },
-      { autoAlpha: 1, y: 0, scale: 1, duration: 0.12, ease: EASE_OUT }, 0.05)
-
-  // Phase 1→2
-  contactTl
-    .to('.contact-phase-1', { autoAlpha: 0, y: -30, duration: 0.08, ease: 'power2.in' }, 0.30)
-    .fromTo('.contact-phase-2', { autoAlpha: 0, y: 30, filter: 'blur(2px)' },
-      { autoAlpha: 1, y: 0, filter: 'blur(0px)', duration: 0.10, ease: EASE_OUT }, 0.35)
-    .fromTo('.contact-sub', { autoAlpha: 0, y: 16 },
-      { autoAlpha: 1, y: 0, duration: 0.06, ease: EASE_OUT }, 0.40)
-    .fromTo('.contact-promise', { autoAlpha: 0, y: 16 },
-      { autoAlpha: 1, y: 0, duration: 0.06, ease: EASE_OUT }, 0.45)
-
-  // Phase 2→3
-  contactTl
-    .to('.contact-phase-2', { autoAlpha: 0, y: -30, duration: 0.08, ease: 'power2.in' }, 0.62)
-    .fromTo('.contact-phase-3', { autoAlpha: 0, y: 30, filter: 'blur(2px)' },
-      { autoAlpha: 1, y: 0, filter: 'blur(0px)', duration: 0.10, ease: EASE_OUT }, 0.67)
-    .fromTo('.btn-wa', { autoAlpha: 0, y: 16, scale: 0.95 },
-      { autoAlpha: 1, y: 0, scale: 1, duration: 0.06, ease: EASE_OUT }, 0.72)
-    .fromTo('.btn-cal', { autoAlpha: 0, y: 16, scale: 0.95 },
-      { autoAlpha: 1, y: 0, scale: 1, duration: 0.06, ease: EASE_OUT }, 0.76)
-    .fromTo('.btn-testimony', { autoAlpha: 0, y: 16, scale: 0.95 },
-      { autoAlpha: 1, y: 0, scale: 1, duration: 0.06, ease: EASE_OUT }, 0.80)
-  contactTl.set({}, {}, 1)
+  .from('.contact-label', { opacity: 0, y: 20, duration: 0.6, ease: 'power3.out' })
+  .from('.contact-title', { opacity: 0, y: 30, duration: 0.8, ease: 'power3.out' }, '-=0.3')
+  .from('.contact-sub', { opacity: 0, y: 20, duration: 0.6, ease: 'power3.out' }, '-=0.4')
+  .from('.contact-buttons', { opacity: 0, y: 16, duration: 0.6, ease: 'power3.out' }, '-=0.3')
 
   // ── Nav contrast: dark on hero, light on cream, dark on dark sections ──
   const nav = document.getElementById('nav')
 
+  // Hero ends → Meet begins (dark nav → light nav)
+  ScrollTrigger.create({
+    trigger: '#meet',
+    start: 'top 64px',
+    onEnter: () => nav.classList.add('light'),
+    onEnterBack: () => nav.classList.add('light'),
+  })
+
+  // Hero (keep nav dark)
   ScrollTrigger.create({
     trigger: '#hero',
     start: 'top top',
@@ -3518,13 +2956,7 @@ function initMainPage() {
     onEnterBack: () => nav.classList.remove('light'),
   })
 
-  ScrollTrigger.create({
-    trigger: '#meet',
-    start: 'top 64px',
-    onEnter: () => nav.classList.add('light'),
-    onEnterBack: () => nav.classList.add('light'),
-  })
-
+  // Platform section (dark bg → dark nav)
   ScrollTrigger.create({
     trigger: '#platform',
     start: 'top 64px',
@@ -3532,6 +2964,7 @@ function initMainPage() {
     onLeaveBack: () => nav.classList.add('light'),
   })
 
+  // Consulting section (light bg → light nav)
   ScrollTrigger.create({
     trigger: '#consulting',
     start: 'top 64px',
@@ -3539,6 +2972,7 @@ function initMainPage() {
     onLeaveBack: () => nav.classList.remove('light'),
   })
 
+  // Proof section (dark bg → dark nav)
   ScrollTrigger.create({
     trigger: '#proof',
     start: 'top 64px',
@@ -3546,6 +2980,7 @@ function initMainPage() {
     onLeaveBack: () => nav.classList.add('light'),
   })
 
+  // Contact section (light bg → light nav)
   ScrollTrigger.create({
     trigger: '#contact',
     start: 'top 64px',
@@ -3592,11 +3027,6 @@ function initMainPage() {
       { r:191, g:214, b:236, ox:  0, oy:-18 },
     ]
   };
-
-  /* Tooltip state */
-  var tooltipEl = document.getElementById('dots-tooltip');
-  var tooltipTimer = null;
-  var tooltipVisible = false;
 
   var W, H, stars=[], nebulae=[], rafId, time=0;
   var dpr = Math.min(window.devicePixelRatio||1, 2);
@@ -3871,33 +3301,6 @@ function initMainPage() {
       DOTS.ripples.push({r:28,a:0.85}); DOTS.ripples.push({r:44,a:0.55});
       var pa=Math.atan2(ddy,ddx);
       DOTS.vx+=Math.cos(pa)*4.5; DOTS.vy+=Math.sin(pa)*4.5;
-
-      /* Show tooltip below the planet */
-      if (tooltipEl) {
-        clearTimeout(tooltipTimer);
-        var ttLeft = DOTS.x - 100;
-        var ttTop = DOTS.y + 55;
-        /* Keep within hero bounds */
-        if (ttLeft < 16) ttLeft = 16;
-        if (ttLeft + 200 > W) ttLeft = W - 216;
-        if (ttTop + 60 > H) ttTop = DOTS.y - 70;
-        tooltipEl.style.left = ttLeft + 'px';
-        tooltipEl.style.top = ttTop + 'px';
-        tooltipEl.style.display = 'block';
-        requestAnimationFrame(function(){ tooltipEl.classList.add('visible'); });
-        tooltipVisible = true;
-        tooltipTimer = setTimeout(function(){
-          tooltipEl.classList.remove('visible');
-          tooltipVisible = false;
-          setTimeout(function(){ tooltipEl.style.display = 'none'; }, 140);
-        }, 2800);
-      }
-    } else if (tooltipVisible && tooltipEl) {
-      /* Click elsewhere dismisses tooltip */
-      clearTimeout(tooltipTimer);
-      tooltipEl.classList.remove('visible');
-      tooltipVisible = false;
-      setTimeout(function(){ tooltipEl.style.display = 'none'; }, 140);
     }
     for (var i=0;i<stars.length;i++) {
       var s=stars[i], dx=s.x-x, dy=s.y-y, dist=Math.sqrt(dx*dx+dy*dy);
@@ -3908,11 +3311,7 @@ function initMainPage() {
     }
   }
 
-  heroEl.addEventListener('mousemove',function(e){
-    var p=getPos(e);mouse.x=p.x;mouse.y=p.y;
-    var dm=Math.sqrt(Math.pow(p.x-DOTS.x,2)+Math.pow(p.y-DOTS.y,2));
-    heroEl.style.cursor=dm<95?'pointer':'';
-  });
+  heroEl.addEventListener('mousemove',function(e){var p=getPos(e);mouse.x=p.x;mouse.y=p.y;});
   heroEl.addEventListener('mouseleave',function(){mouse.x=-9999;mouse.y=-9999;});
   heroEl.addEventListener('click',function(e){var p=getPos(e);kick(p.x,p.y);});
   heroEl.addEventListener('touchstart',function(e){var t=e.touches[0],p=getPos(t);mouse.x=p.x;mouse.y=p.y;kick(p.x,p.y);},{passive:true});
