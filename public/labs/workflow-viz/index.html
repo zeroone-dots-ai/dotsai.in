@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workflow Automator Demo | ZeroOne D.O.T.S AI Labs</title>
+<meta name="description" content="Interactive workflow automation pipeline visualizer. See how ZeroOne builds AI-powered business automation.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --hero: #06060a;
+  --plum: #43305f;
+  --plum-deep: #241d33;
+  --lavender: #d7cff0;
+  --mint: #c9ded4;
+  --peach: #f1c6ae;
+  --sky: #bfd6ec;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--hero);
+  color: #e8e4ef;
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  position: sticky; top: 0; z-index: 100;
+  backdrop-filter: blur(20px);
+  background: rgba(6,6,10,0.85);
+  border-bottom: 1px solid rgba(215,207,240,0.08);
+}
+.topbar-inner {
+  max-width: 1120px; width: calc(100% - 32px); height: 64px;
+  margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.brand-lockup { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.brand-word { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(215,207,240,0.7); }
+.nav-links { display: flex; align-items: center; gap: 20px; }
+.nav-links a { font-size: 13px; color: rgba(215,207,240,0.5); text-decoration: none; transition: color 200ms var(--ease-out); }
+.nav-links a:hover { color: var(--lavender); }
+.nav-links a.active { color: var(--lavender); }
+
+.demo-banner {
+  background: linear-gradient(90deg, var(--plum-deep), rgba(67,48,95,0.6));
+  text-align: center; padding: 10px 16px; font-size: 13px;
+  color: rgba(215,207,240,0.8); border-bottom: 1px solid rgba(215,207,240,0.06);
+}
+
+.main { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 32px 16px; }
+.page-title {
+  font-family: 'Instrument Serif', serif; font-size: 32px; font-weight: 400;
+  color: var(--lavender); text-align: center; margin-bottom: 8px;
+}
+.page-sub {
+  font-size: 14px; color: rgba(215,207,240,0.45); text-align: center; margin-bottom: 28px;
+}
+
+/* Controls */
+.controls {
+  display: flex; gap: 12px; margin-bottom: 24px; align-items: center;
+}
+.ctrl-btn {
+  font-family: 'Space Mono', monospace; font-size: 12px;
+  padding: 10px 20px; border-radius: 10px; border: none;
+  cursor: pointer; transition: transform 160ms var(--ease-out), background 200ms var(--ease-out);
+  letter-spacing: 0.06em; text-transform: uppercase;
+}
+.ctrl-btn:active { transform: scale(0.97); }
+.ctrl-btn.primary { background: var(--plum); color: var(--lavender); }
+.ctrl-btn.primary:hover { background: #503b70; }
+.ctrl-btn.secondary {
+  background: rgba(215,207,240,0.08); color: rgba(215,207,240,0.7);
+  border: 1px solid rgba(215,207,240,0.1);
+}
+.ctrl-btn.secondary:hover { background: rgba(215,207,240,0.12); }
+.status-text {
+  font-family: 'Space Mono', monospace; font-size: 11px;
+  color: rgba(215,207,240,0.4); letter-spacing: 0.06em;
+}
+
+/* Canvas area */
+.viz-wrap {
+  width: 100%; max-width: 900px;
+  background: rgba(215,207,240,0.03);
+  border: 1px solid rgba(215,207,240,0.08);
+  border-radius: 16px;
+  overflow: hidden; position: relative;
+}
+.viz-canvas {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: block;
+}
+
+/* CTA */
+.cta-row {
+  margin-top: 32px; text-align: center;
+}
+.cta-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500;
+  padding: 14px 28px; border-radius: 12px; border: none;
+  background: var(--plum); color: var(--lavender);
+  cursor: pointer; text-decoration: none;
+  transition: transform 160ms var(--ease-out), background 200ms var(--ease-out);
+}
+.cta-btn:active { transform: scale(0.97); }
+.cta-btn:hover { background: #503b70; }
+
+/* Footer */
+.page-footer {
+  text-align: center; padding: 24px 16px;
+  border-top: 1px solid rgba(215,207,240,0.06);
+}
+.page-footer a { color: var(--lavender); text-decoration: none; font-size: 13px; opacity: 0.6; transition: opacity 200ms var(--ease-out); }
+.page-footer a:hover { opacity: 1; }
+.page-footer .copy { font-size: 11px; color: rgba(215,207,240,0.3); margin-top: 8px; font-family: 'Space Mono', monospace; }
+
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  .page-title { font-size: 24px; }
+  .viz-canvas { aspect-ratio: 4 / 3; }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="/" class="brand-lockup"><span class="brand-word">ZeroOne D.O.T.S AI</span></a>
+    <nav class="nav-links">
+      <a href="/">Home</a>
+      <a href="/labs/" class="active">Labs</a>
+      <a href="https://wa.me/918320065658" target="_blank" rel="noopener">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="demo-banner">This is a demo &mdash; animated workflow pipeline visualizer</div>
+
+<div class="main">
+  <h1 class="page-title">Workflow Automator</h1>
+  <p class="page-sub">Watch an AI automation pipeline process an incoming email in real time</p>
+
+  <div class="controls">
+    <button class="ctrl-btn primary" id="play-btn">&#9654; Play</button>
+    <button class="ctrl-btn secondary" id="reset-btn">Reset</button>
+    <span class="status-text" id="status-text">Ready</span>
+  </div>
+
+  <div class="viz-wrap">
+    <canvas class="viz-canvas" id="viz-canvas"></canvas>
+  </div>
+
+  <div class="cta-row">
+    <a href="https://wa.me/918320065658?text=I%20want%20to%20build%20a%20workflow%20like%20this" target="_blank" rel="noopener" class="cta-btn">
+      Build your own workflow &#8594;
+    </a>
+  </div>
+</div>
+
+<footer class="page-footer">
+  <a href="/labs/">&#8592; Back to Labs</a>
+  <div class="copy">&copy; 2026 ZeroOne D.O.T.S AI</div>
+</footer>
+
+<script>
+(function() {
+  var canvas = document.getElementById('viz-canvas');
+  var ctx = canvas.getContext('2d');
+  var playBtn = document.getElementById('play-btn');
+  var resetBtn = document.getElementById('reset-btn');
+  var statusText = document.getElementById('status-text');
+
+  var dpr = window.devicePixelRatio || 1;
+  var W, H;
+
+  function resize() {
+    var rect = canvas.getBoundingClientRect();
+    W = rect.width;
+    H = rect.height;
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Node definitions (positions as fractions of W, H)
+  var nodeDefs = [
+    { id: 0, label: 'Email Received', icon: '\u2709', x: 0.12, y: 0.5, color: '#d7cff0' },
+    { id: 1, label: 'AI Classification', icon: '\u2699', x: 0.32, y: 0.5, color: '#c9ded4' },
+    { id: 2, label: 'Extract Data', icon: '\ud83d\udcca', x: 0.54, y: 0.28, color: '#bfd6ec' },
+    { id: 3, label: 'Draft Response', icon: '\u270d', x: 0.54, y: 0.72, color: '#f1c6ae' },
+    { id: 4, label: 'Update CRM', icon: '\ud83d\udcbe', x: 0.74, y: 0.28, color: '#bfd6ec' },
+    { id: 5, label: 'Send for Review', icon: '\u2705', x: 0.74, y: 0.72, color: '#f1c6ae' },
+    { id: 6, label: 'Log & Archive', icon: '\ud83d\udcc1', x: 0.9, y: 0.5, color: '#d7cff0' }
+  ];
+
+  // Edges: [fromIdx, toIdx]
+  var edges = [
+    [0, 1], [1, 2], [1, 3], [2, 4], [3, 5], [4, 6], [5, 6]
+  ];
+
+  // Activation order: groups of nodes that activate together
+  var activationSteps = [
+    [0],     // Email received
+    [1],     // AI Classification
+    [2, 3],  // Branch: Extract Data + Draft Response
+    [4, 5],  // Update CRM + Send for Review
+    [6]      // Log & Archive
+  ];
+
+  // Edge activation: which edges light up at each step
+  var edgeSteps = [
+    [],       // step 0: node 0 lights
+    [0],      // step 1: edge 0->1
+    [1, 2],   // step 2: edges 1->2, 1->3
+    [3, 4],   // step 3: edges 2->4, 3->5
+    [5, 6]    // step 4: edges 4->6, 5->6
+  ];
+
+  var nodeW = 130, nodeH = 64, nodeR = 12;
+  var activeNodes = {};
+  var completeNodes = {};
+  var activeEdges = {};
+  var currentStep = -1;
+  var playing = false;
+  var animFrame;
+  var flowDots = []; // animated dots on edges
+  var glowPhase = 0;
+
+  function getNodePos(n) {
+    return { x: n.x * W, y: n.y * H };
+  }
+
+  function drawRoundedRect(x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.closePath();
+  }
+
+  function drawEdge(fromNode, toNode, active, progress) {
+    var from = getNodePos(fromNode);
+    var to = getNodePos(toNode);
+    var fx = from.x + nodeW / 2;
+    var fy = from.y;
+    var tx = to.x - nodeW / 2;
+    var ty = to.y;
+
+    // Curved path using cubic bezier
+    var midX = (fx + tx) / 2;
+
+    ctx.beginPath();
+    ctx.moveTo(fx, fy);
+    ctx.bezierCurveTo(midX, fy, midX, ty, tx, ty);
+
+    if (active) {
+      ctx.strokeStyle = 'rgba(215,207,240,0.4)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Animated dash overlay
+      ctx.save();
+      ctx.setLineDash([6, 8]);
+      ctx.lineDashOffset = -(glowPhase * 2);
+      ctx.strokeStyle = 'rgba(215,207,240,0.7)';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(fx, fy);
+      ctx.bezierCurveTo(midX, fy, midX, ty, tx, ty);
+      ctx.stroke();
+      ctx.restore();
+    } else {
+      ctx.strokeStyle = 'rgba(215,207,240,0.08)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+  }
+
+  function drawNode(node, state) {
+    var pos = getNodePos(node);
+    var x = pos.x - nodeW / 2;
+    var y = pos.y - nodeH / 2;
+
+    // Glow for active nodes
+    if (state === 'active') {
+      ctx.save();
+      ctx.shadowColor = node.color;
+      ctx.shadowBlur = 20 + Math.sin(glowPhase * 0.05) * 5;
+      drawRoundedRect(x, y, nodeW, nodeH, nodeR);
+      ctx.fillStyle = 'rgba(0,0,0,0.01)';
+      ctx.fill();
+      ctx.restore();
+    }
+
+    // Background
+    drawRoundedRect(x, y, nodeW, nodeH, nodeR);
+    if (state === 'active' || state === 'complete') {
+      ctx.fillStyle = 'rgba(215,207,240,0.1)';
+    } else {
+      ctx.fillStyle = 'rgba(215,207,240,0.04)';
+    }
+    ctx.fill();
+
+    // Border
+    if (state === 'active') {
+      ctx.strokeStyle = node.color;
+      ctx.lineWidth = 1.5;
+    } else if (state === 'complete') {
+      ctx.strokeStyle = 'rgba(201,222,212,0.5)';
+      ctx.lineWidth = 1.5;
+    } else {
+      ctx.strokeStyle = 'rgba(215,207,240,0.1)';
+      ctx.lineWidth = 1;
+    }
+    ctx.stroke();
+
+    // Icon
+    ctx.font = '16px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = state === 'idle' ? 'rgba(215,207,240,0.3)' : node.color;
+    ctx.fillText(node.icon, pos.x, pos.y - 6);
+
+    // Label
+    ctx.font = '500 11px "DM Sans", sans-serif';
+    ctx.fillStyle = state === 'idle' ? 'rgba(215,207,240,0.3)' : 'rgba(215,207,240,0.9)';
+    ctx.fillText(node.label, pos.x, pos.y + 14);
+
+    // Status text
+    ctx.font = '10px "Space Mono", monospace';
+    if (state === 'active') {
+      ctx.fillStyle = node.color;
+      ctx.fillText('Processing...', pos.x, pos.y + 27);
+    } else if (state === 'complete') {
+      ctx.fillStyle = 'rgba(201,222,212,0.7)';
+      ctx.fillText('Complete \u2713', pos.x, pos.y + 27);
+    }
+  }
+
+  function getNodeState(id) {
+    if (completeNodes[id]) return 'complete';
+    if (activeNodes[id]) return 'active';
+    return 'idle';
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    // Draw edges
+    edges.forEach(function(e, idx) {
+      drawEdge(nodeDefs[e[0]], nodeDefs[e[1]], !!activeEdges[idx]);
+    });
+
+    // Draw nodes
+    nodeDefs.forEach(function(n) {
+      drawNode(n, getNodeState(n.id));
+    });
+
+    glowPhase++;
+    animFrame = requestAnimationFrame(draw);
+  }
+
+  function advanceStep() {
+    currentStep++;
+    if (currentStep >= activationSteps.length) {
+      // All done, loop after pause
+      statusText.textContent = 'Pipeline complete \u2014 restarting...';
+      setTimeout(function() {
+        if (playing) resetAndPlay();
+      }, 2000);
+      return;
+    }
+
+    // Mark previous step's nodes as complete
+    if (currentStep > 0) {
+      activationSteps[currentStep - 1].forEach(function(id) {
+        delete activeNodes[id];
+        completeNodes[id] = true;
+      });
+    }
+
+    // Activate current step's nodes
+    activationSteps[currentStep].forEach(function(id) {
+      activeNodes[id] = true;
+    });
+
+    // Activate edges for this step
+    if (edgeSteps[currentStep]) {
+      edgeSteps[currentStep].forEach(function(eIdx) {
+        activeEdges[eIdx] = true;
+      });
+    }
+
+    var labels = activationSteps[currentStep].map(function(id) { return nodeDefs[id].label; });
+    statusText.textContent = 'Running: ' + labels.join(' + ');
+
+    // Next step after delay
+    var delay = currentStep === 0 ? 1200 : 1500;
+    if (playing) {
+      setTimeout(function() {
+        // Mark current as complete before advancing
+        activationSteps[currentStep].forEach(function(id) {
+          delete activeNodes[id];
+          completeNodes[id] = true;
+        });
+        advanceStep();
+      }, delay);
+    }
+  }
+
+  function resetState() {
+    currentStep = -1;
+    activeNodes = {};
+    completeNodes = {};
+    activeEdges = {};
+    statusText.textContent = 'Ready';
+  }
+
+  function resetAndPlay() {
+    resetState();
+    advanceStep();
+  }
+
+  playBtn.addEventListener('click', function() {
+    if (playing) {
+      playing = false;
+      playBtn.innerHTML = '&#9654; Play';
+      statusText.textContent = 'Paused';
+    } else {
+      playing = true;
+      playBtn.innerHTML = '&#10074;&#10074; Pause';
+      if (currentStep < 0 || currentStep >= activationSteps.length) {
+        resetAndPlay();
+      } else {
+        advanceStep();
+      }
+    }
+  });
+
+  resetBtn.addEventListener('click', function() {
+    playing = false;
+    playBtn.innerHTML = '&#9654; Play';
+    resetState();
+  });
+
+  // Start render loop
+  draw();
+
+  // Auto-play after a short delay
+  setTimeout(function() {
+    playing = true;
+    playBtn.innerHTML = '&#10074;&#10074; Pause';
+    advanceStep();
+  }, 800);
+})();
+</script>
+</body>
+</html>
