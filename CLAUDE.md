@@ -2,97 +2,51 @@
 
 > **Project:** ZeroOne D.O.T.S AI — Premium solopreneur AI agency website
 > **Owner:** Meet Deshani · ZeroOne D.O.T.S AI
-> **Live:** https://dotsai.in
+> **Live:** https://dotsai.in (production) · https://test.dotsai.in (testing)
 > **Repo:** https://github.com/zeroone-dots-ai/dotsai.in
-> **Last updated:** 2026-03-26
+> **Last updated:** 2026-04-02
 
 ---
 
-## Quick Start (New Teammate)
+## Quick Start
 
 ```bash
-# Clone
 git clone https://github.com/zeroone-dots-ai/dotsai.in.git
 cd dotsai.in
 
-# NEVER work directly on main — create your branch
-git checkout -b feat/your-feature-name
+# Work on master (testing branch)
+git checkout master
 
-# The live site is ONE file: public/index.html
-# Edit it, open in browser to preview locally
+# The live site is static HTML in public/
+# Edit public/index.html and public/main.css
 open public/index.html
 
-# When done — commit and push YOUR branch
-git add public/index.html
+# Commit and push to master
+git add public/
 git commit -m "feat: what you changed"
-git push origin feat/your-feature-name
+git push origin master
 
-# Open a PR on GitHub → Meet reviews → merges to main → auto-deploys in ~30s
+# Test on test.dotsai.in → when verified, PR master → main for production
 ```
 
 ---
 
-## Git Workflow
+## Branching Strategy
 
-### Branch Strategy
-| Branch | Purpose | Who touches it |
-|--------|---------|----------------|
-| `main` | **Production** — auto-deploys to dotsai.in | Meet only (via PR merge) |
-| `dev` | Staging / integration | Team |
-| `feat/*` | New features | Anyone |
-| `fix/*` | Bug fixes | Anyone |
-| `content/*` | Copy/text changes | Anyone |
+| Branch | Environment | Domain | Purpose |
+|--------|------------|--------|---------|
+| `master` | Testing | test.dotsai.in | All development lands here first |
+| `main` | Production | dotsai.in | Only tested, verified code gets merged here |
 
-### Rules
-- **Never commit directly to `main`** — always PR
-- One PR = one logical change
-- PR title format: `feat: galaxy improvements` / `fix: cursor on mobile` / `content: update hero copy`
-- Meet approves and merges → deploy happens automatically
-
-### Auto-Deploy Pipeline
+**Flow:**
 ```
-Push/merge to main
-      ↓
-GitHub Actions fires (.github/workflows/deploy.yml)
-      ↓
-SCP → copies public/ files to VPS
-      ↓
-nginx reload
-      ↓
-dotsai.in live ✅  (~30 seconds total)
+master (edit + test on test.dotsai.in) → PR → main (production on dotsai.in)
 ```
 
----
-
-## What's Actually Built
-
-### Live Site: `public/index.html`
-Single static HTML file. **This is the source of truth for what's live.**
-
-#### Sections (in order)
-1. **Splash** — 6-variant random logo animation (GSAP). Auto-dismisses after 5s or SKIP button.
-2. **Hero** — Dark galaxy scene. "Own Your AI. Don't Rent It."
-3. **Manifesto** — Word-by-word scroll reveal. "I am one person. I build AI that lives on YOUR server."
-4. **Services** — 4 service rows with GSAP entrance. Links to service subdomains.
-5. **Proof** — 3 case study cards + animated metrics (70%, 8L/yr, 99%)
-6. **Contact** — WhatsApp + Cal.com CTAs. No form — direct contact only.
-
-#### Interactive Elements (all in `public/index.html`)
-| System | File section | What it does |
-|--------|-------------|-------------|
-| **Splash animation** | `sRunV1`–`sRunV6` | 6 GSAP logo variants, random on each load |
-| **Galaxy** | `HERO GALAXY v3` | 4000 stars, 3 depth layers, nebulae across 4 quadrants |
-| **D.O.T.S Planet** | Inside galaxy script | 4 brand dots orbiting bottom-right, physics shield |
-| **Infinity orbit** | `PARTICLE MESH` | Lemniscate particle orbit, top-right of hero |
-| **Quantum Cursor** | `QUANTUM DOT CURSOR` | Spring-physics cursor, color cycles D.O.T.S palette |
-| **Scroll animations** | `initMainPage()` | GSAP ScrollTrigger on all sections |
-
-#### Physics behaviour
-- **Hover over galaxy** → stars repel from cursor (120px radius)
-- **Click galaxy** → stars explode outward + ripple rings
-- **Hover near D.O.T.S planet** → shield glows up
-- **Click near D.O.T.S planet** → shield ripple, dots bounce back (spring physics)
-- **Cursor** → inner dot exact pos, outer ring lags (spring), nova burst on click
+**Rules:**
+- Default target is always `master` unless explicitly told to edit production
+- After testing on test.dotsai.in, create PR from `master` → `main`
+- Never commit directly to `main`
 
 ---
 
@@ -101,264 +55,144 @@ Single static HTML file. **This is the source of truth for what's live.**
 ```
 dotsai.in/
 ├── public/                    ← DEPLOYED FILES (what goes live)
-│   ├── index.html             ← THE SITE — edit this
+│   ├── index.html             ← THE SITE — main page
+│   ├── main.css               ← All styles
+│   ├── site.css               ← Additional styles
+│   ├── favicon.svg            ← Site icon
+│   ├── og-image.png           ← Social share image
 │   ├── robots.txt             ← SEO: allows all AI crawlers
-│   ├── sitemap.xml            ← SEO: dotsai.in + 4 subdomains
-│   ├── llms.txt               ← LLM-friendly plain text description
+│   ├── sitemap.xml            ← SEO sitemap
+│   ├── llms.txt               ← LLM-friendly description
+│   ├── 404.html               ← Custom 404 page
 │   ├── brand/                 ← SVG logos (zeroone-dark-*.svg)
-│   └── logo-splash-v5-random.html  ← standalone splash preview
+│   ├── labs/                  ← Interactive demos
+│   ├── meet/                  ← Meet's personal page
+│   ├── ai-agency-india/       ← SEO landing page
+│   ├── ai-agency-gurugram/    ← SEO landing page
+│   ├── ai-automation/         ← SEO landing page
+│   ├── geo-ai/                ← SEO landing page
+│   ├── platform-engineering/  ← SEO landing page
+│   ├── private-ai/            ← SEO landing page
+│   ├── web-ai-experiences/    ← SEO landing page
+│   ├── case-studies/          ← Case studies page
+│   ├── insights/              ← Blog/insights page
+│   └── monitor-data/          ← Site monitoring data
 │
-├── app/                       ← Future Next.js build (not deployed yet)
-│   ├── components/
-│   │   ├── GalaxyBackground.tsx   ← Galaxy logic (React version)
-│   │   ├── SplashIntro.tsx        ← Splash (React version)
-│   │   ├── QuantumCursor.tsx      ← Cursor (React version)
-│   │   └── InfinityCompanion.tsx  ← Infinity orbit (React version)
-│   ├── page.tsx               ← Main page
-│   └── globals.css            ← CSS vars + Tailwind
-│
-├── .github/
-│   └── workflows/
-│       └── deploy.yml         ← CI/CD: push to main → VPS deploy
-│
-├── .planning/                 ← Research docs (NotebookLM outputs)
-├── research/                  ← Detailed strategy docs
-├── scripts/                   ← release_audit.sh, release_gate.sh
-├── sql/                       ← Analytics schema (future)
-├── qa/                        ← QA run logs
-│
+├── research/                  ← SEO strategy & site research docs
+├── deploy/nginx/              ← Nginx config reference
+├── .claude/                   ← Claude Code config
 ├── CLAUDE.md                  ← This file
-└── README.md                  ← GitHub-facing docs
+└── .gitignore
 ```
+
+---
+
+## Sections (index.html)
+
+| Section ID | Nav Filter | Content |
+|-----------|-----------|---------|
+| `hero` | All filters | 3-panel pinned scroll: Private AI, GEO, Web Presence |
+| `meet` | Meet | Manifesto + credentials (5+, 2+, 1, 0) + tagline |
+| `platform` | Product | Platform redirect — "Give Your Team Their Own Agents" |
+| `consulting` | Services | Consulting redirect — 4 service items |
+| `proof` | Work | Case studies + animated metrics |
+| `labs-teaser` | Work | Interactive demos grid |
+| `contact` | All filters | WhatsApp + Cal.com CTAs |
+
+### Nav Filter Mapping
+- **All** → all sections visible
+- **Meet** → hero, meet, contact
+- **Services** → hero, consulting, contact
+- **Product** → hero, platform, contact
+- **Work** → hero, proof, labs-teaser, contact
+
+### Nav Behavior
+- Hidden on hero section (slides up, opacity 0)
+- Appears when scrolling past hero
+- Centered filter pills (All/Meet/Services/Product/Work) + Let's Talk CTA
+- Light/dark variant auto-switches per section background
+
+---
+
+## Interactive Systems (all in index.html)
+
+| System | What it does |
+|--------|-------------|
+| Galaxy | 4000 stars, 3 depth layers, nebulae, click explosions |
+| D.O.T.S Planet | 4 brand dots orbiting, physics shield on hover |
+| Infinity orbit | Lemniscate particle mesh, top-right of hero |
+| Quantum Cursor | Spring-physics cursor, D.O.T.S color cycling |
+| Splash | 6 GSAP logo variants, random on load |
+| Scroll animations | GSAP ScrollTrigger on all sections (pinned compartments) |
+| Manifesto | Word-by-word scroll reveal |
 
 ---
 
 ## Brand System
 
-### Identity
-- **Company:** ZeroOne D.O.T.S AI
-- **Person:** Meet Deshani
-- **Domain:** dotsai.in (India) · zeroonedotsai.consulting (global)
-- **Pillars:** D = Data · O = Operations · T = Tech · S = Strategy
-
-### Colors (use these everywhere)
+### Colors
 ```css
-/* Dark Hero */
 --hero-bg:     #06060a;   /* deep black */
---ink:         #171722;   /* dark sections */
---plum-dark:   #241D33;   /* hero gradient end */
-
-/* Light Body */
---paper:       #F7F3ED;   /* warm cream — primary bg */
---bone:        #ECE5DB;   /* secondary bg */
---smoke:       #6E675F;   /* muted text */
-
-/* Brand Accents */
+--paper:       #F7F3ED;   /* warm cream */
 --plum:        #43305F;   /* primary accent */
 --lavender:    #D7CFF0;   /* light accent */
---gold:        #B28743;   /* premium signal — use sparingly */
-
-/* D.O.T.S Palette (galaxy + cursor colors) */
---dots-data:       #D7CFF0;  /* lavender — Data */
---dots-operations: #C9DED4;  /* mint    — Operations */
---dots-tech:       #F1C6AE;  /* peach   — Tech */
---dots-strategy:   #BFD6EC;  /* sky     — Strategy */
+--dots-data:       #D7CFF0;  /* lavender */
+--dots-operations: #C9DED4;  /* mint */
+--dots-tech:       #F1C6AE;  /* peach */
+--dots-strategy:   #BFD6EC;  /* sky */
 ```
 
 ### Typography
-- **H1/H2:** Instrument Serif (Google Fonts) — editorial, elegant
-- **Body:** DM Sans — clean, modern
-- **Labels/mono:** Space Mono — technical accents, timestamps
-
-### Visual Rules
-- Dark hero (#06060a) → light cream body (#F7F3ED) — NOT the other way
-- Galaxy stars use D.O.T.S palette colors only
-- No bento grids · No neon · No cyberpunk · No glassmorphism
-- Gold used ONLY in proof/metrics section
-- All CTAs: direct contact (WhatsApp/Cal) — NO forms
+- **Headlines:** Instrument Serif
+- **Body:** DM Sans
+- **Labels/code:** Space Mono
 
 ---
 
-## VPS & Server
+## VPS & Deployment
 
 | Item | Value |
 |------|-------|
 | IP | 72.62.229.16 (Hostinger VPS) |
 | Server | Nginx in Docker |
-| Site root | `/opt/services/nginx/html/dotsai.in/` |
-| Nginx config | `/opt/services/nginx/conf.d/default.conf` |
-| SSL | Let's Encrypt (auto-renews) |
-| Deploy user | `root` |
+| Production root | `/opt/services/nginx/html/dotsai.in/` |
+| Test root | `/opt/services/nginx/html/test.dotsai.in/` |
+| Nginx configs | `/opt/services/nginx/conf.d/default.conf` (prod), `test.dotsai.in.conf` (test) |
+| SSL | Let's Encrypt (separate certs for each domain) |
 
-### Manual deploy (if GitHub Actions fails)
+### Deploy to test (manual)
 ```bash
-# SSH to VPS and copy manually
-scp public/index.html root@72.62.229.16:/opt/services/nginx/html/dotsai.in/index.html
+scp public/* root@72.62.229.16:/opt/services/nginx/html/test.dotsai.in/
 ssh root@72.62.229.16 "docker exec nginx nginx -s reload"
 ```
 
-### Check what's live
+### Deploy to production (after testing)
 ```bash
-curl -sk https://dotsai.in | grep '<title>'
+scp public/* root@72.62.229.16:/opt/services/nginx/html/dotsai.in/
+ssh root@72.62.229.16 "docker exec nginx nginx -s reload"
+```
+
+### Or edit VPS directly for quick test iterations
+```bash
+ssh root@72.62.229.16
+vi /opt/services/nginx/html/test.dotsai.in/index.html
 ```
 
 ---
 
-## GitHub Secrets (already configured)
-| Secret | Value |
-|--------|-------|
-| `VPS_HOST` | 72.62.229.16 |
-| `VPS_USER` | root |
-| `VPS_SSH_KEY` | ed25519 deploy key (in GitHub → Settings → Secrets) |
-
-Do NOT add these to any file — they live in GitHub Secrets only.
-
----
-
-## Subdomain Map
-
-| Subdomain | Status | Purpose |
-|-----------|--------|---------|
-| `geo.dotsai.in` | Planned | GEO AI & Local SEO |
-| `private.dotsai.in` | Planned | Private AI Deployment |
-| `platform.dotsai.in` | Planned | → redirects to platform.dotsai.cloud |
-| `web.dotsai.in` | Planned | AI Web Presence |
-
-Each subdomain = separate nginx config + separate deploy.
-
----
-
-## Contact Links (use exact URLs)
+## Contact Links
 - **WhatsApp:** `https://wa.me/918320065658`
-- **Cal.com:** `https://cal.com/meetdeshani` ← verify this is live before using
-- **Email:** aamdhanee.dev@gmail.com
+- **Cal.com:** `https://cal.com/meetdeshani`
 
 ---
 
 ## DO NOT
 
-- ❌ Commit directly to `main` — always PR
-- ❌ Bento box / card grid layouts
-- ❌ Dark neon / cyberpunk / glassmorphism aesthetics
-- ❌ Contact forms — direct WhatsApp/Cal only
-- ❌ Multi-page routing — single page, subdomains for services
-- ❌ Copy Infinity Platform SaaS messaging — this is Meet the person, not the product
-- ❌ Change the galaxy to Three.js — it's Canvas 2D (faster, better click interaction)
-- ❌ Push `.env` files or credentials to git
-- ❌ Edit files directly on VPS — always go through git → auto-deploy
-
----
-
-## Full Workflow — Step by Step
-
-This is the **exact process** for every change, big or small:
-
-```
-1. BRANCH      git checkout -b feat/your-feature-name
-                  (from main — always pull main first)
-
-2. EDIT        Edit public/index.html locally
-               Preview: open public/index.html in browser
-
-3. COMMIT      git add public/index.html
-               git commit -m "feat: what exactly you changed"
-               (short, clear message — these are your revert points)
-
-4. PUSH BRANCH git push origin feat/your-feature-name
-
-5. OPEN PR     Go to github.com/zeroone-dots-ai/dotsai.in
-               Click "Compare & Pull Request"
-               Write what you changed and why
-
-6. MEET MERGES Meet reviews → clicks "Merge pull request" on GitHub
-
-7. AUTO DEPLOY GitHub Actions runs automatically (~30-40 seconds):
-               → copies public/index.html to VPS
-               → nginx reloads
-               → dotsai.in is live with your changes ✅
-```
-
-### Which GitHub Account
-- **Org:** `zeroone-dots-ai` (not personal account)
-- **Repo:** `github.com/zeroone-dots-ai/dotsai.in`
-- Ask Meet to add you as a collaborator on the repo
-- Clone with: `git clone https://github.com/zeroone-dots-ai/dotsai.in.git`
-
-### Check Deploy Succeeded
-```bash
-# Watch GitHub Actions in real-time:
-# github.com/zeroone-dots-ai/dotsai.in/actions
-
-# Or verify live site content:
-curl -sk https://dotsai.in | grep '<title>'
-```
-
----
-
-## Reverting — How to Undo a Bad Deploy
-
-Every commit on `main` is a rollback point. Here's how to revert:
-
-### Option A — Revert one commit (safest, keeps full history)
-```bash
-git checkout main
-git pull origin main
-
-# Find the bad commit hash
-git log --oneline -10
-
-# Revert it (creates a new "undo" commit)
-git revert <commit-hash>
-git push origin main
-# → GitHub Actions auto-deploys the reverted version ✅
-```
-
-### Option B — Roll back to a specific good version
-```bash
-git checkout main
-git pull origin main
-
-# See all commits (find the last good one)
-git log --oneline
-
-# Hard reset to that good commit (⚠️ rewrites history — only Meet should do this)
-git reset --hard <good-commit-hash>
-git push --force origin main
-```
-
-### Option C — Emergency manual rollback (if CI/CD is broken)
-```bash
-# SSH to VPS and restore previous backup
-ssh root@72.62.229.16
-cp /opt/services/nginx/html/dotsai.in/index.html.bak /opt/services/nginx/html/dotsai.in/index.html
-docker exec nginx nginx -s reload
-```
-
-### Why branches + PRs protect you
-- Every merge to `main` appears in `git log` with author, date, and message
-- You can always see exactly WHAT changed and WHO changed it
-- `git revert` undoes a single change without touching others
-- Never lose work — even deleted branches are recoverable for 30 days on GitHub
-
----
-
-## Editing Tips
-
-### Editing the splash animation
-Search for `sRunV1` through `sRunV6` in `public/index.html`.
-Each is a self-contained GSAP timeline. Add a `sRunV7` and register it in the `sRunners` array.
-
-### Editing the galaxy
-Search for `HERO GALAXY v3` comment block. Key vars:
-- `COUNT` — star count (4000 desktop, 1600 mobile)
-- `GCX/GCY` — galaxy core position (currently left side: 18% x, 50% y)
-- `DOTS.orbitCx/Cy` — D.O.T.S planet orbit center (76% x, 72% y)
-- `nebulae[]` — glow cloud positions per quadrant
-
-### Editing copy
-All copy is in the HTML directly. Sections labelled with `<!-- ─── HERO ─── -->` comments.
-
-### Adding a section
-1. Add HTML between existing section divs
-2. Add GSAP ScrollTrigger animation in `initMainPage()` function
-3. Add CSS in the `<style>` block at top of file
+- Commit directly to `main` — always PR from master
+- Use Vercel — this is VPS-hosted, never Vercel
+- Add bento grids, neon, cyberpunk, glassmorphism
+- Add contact forms — WhatsApp/Cal only
+- Change galaxy to Three.js — it's Canvas 2D
+- Push `.env` or credentials to git
+- Redesign content when asked to add animations
+- Build locally — edit VPS test site directly for quick iterations
