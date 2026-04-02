@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dotsai-in",
+      "runtimeExecutable": "bun",
+      "runtimeArgs": ["run", "dev"],
+      "port": 3025
+    },
+    {
+      "name": "dotsai-static",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8000", "--directory", "/Users/meetdeshani/Desktop/dotsai.in/public"],
+      "port": 8000
+    }
+  ]
+}
