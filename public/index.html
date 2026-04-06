@@ -23,13 +23,38 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Organization",
+      "@type": ["Organization", "LocalBusiness", "ProfessionalService"],
       "@id": "https://dotsai.in/#organization",
       "name": "ZeroOne D.O.T.S AI",
       "url": "https://dotsai.in",
       "logo": "https://dotsai.in/favicon.svg",
+      "image": "https://dotsai.in/og-image.png",
+      "telephone": "+918320065658",
+      "priceRange": "$$",
       "description": "Founder-led private AI agency in India building private AI systems, automation, GEO, and premium AI web experiences.",
-      "areaServed": "IN",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Gurugram",
+        "addressRegion": "Haryana",
+        "addressCountry": "IN",
+        "postalCode": "122001"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 28.4595,
+        "longitude": 77.0266
+      },
+      "areaServed": [
+        { "@type": "Country", "name": "India" },
+        { "@type": "City", "name": "Gurugram" },
+        { "@type": "Place", "name": "Delhi NCR" }
+      ],
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "10:00",
+        "closes": "19:00"
+      },
       "founder": {
         "@type": "Person",
         "@id": "https://dotsai.in/#meet",
@@ -183,6 +208,22 @@
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "The cost of private AI deployment in India depends on the scale of your infrastructure, the open-weight models required (LLaMA, Mistral, DeepSeek, etc.), and the complexity of integrations. ZeroOne D.O.T.S AI works with startups and mid-sized businesses — engagements typically start with a focused deployment of one AI system rather than an all-at-once overhaul, which keeps initial investment manageable. Unlike large AI agencies, there are no agency overheads, no junior team hand-offs, and no retainer traps. Contact Meet Deshani directly for a scoped estimate."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which industries in India benefit most from AI automation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The industries with the highest AI automation ROI in India are logistics and supply chain (routing, exception handling, dispatch triage), NBFC and BFSI (loan document processing, KYC, compliance audit), healthcare (patient record extraction, billing triage), and professional services (contract review, inbox routing, report generation). ZeroOne D.O.T.S AI has built AI automation systems for logistics operations and NBFC document pipelines — delivering 70% cost reduction and 99% accuracy on structured document processing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is an AI automation agency different from a software development company in India?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A software development company builds features and apps. An AI automation agency like ZeroOne D.O.T.S AI builds AI-driven workflows that replace or accelerate specific manual processes — inbox triage, document review, audit scoring, operational routing. The output is not a product; it is a running system integrated into your existing infrastructure. The distinction matters because automation work requires AI model selection, prompt engineering, data pipeline design, and ongoing tuning — not just code."
       }
     }
   ]
