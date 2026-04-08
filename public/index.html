@@ -1405,7 +1405,7 @@ function initMainPage() {
   if (!canvas) return;
   var ctx = canvas.getContext('2d');
   var heroEl = document.getElementById('hero');
-  var sceneState = window.__dotsHeroScene || (window.__dotsHeroScene = {
+  var sceneDefaults = {
     pointerX: 0,
     pointerY: 0,
     panX: 0,
@@ -1413,7 +1413,22 @@ function initMainPage() {
     tiltX: 0,
     tiltY: 0,
     energy: 0,
-  });
+    orbitYaw: -0.18,
+    orbitPitch: 0.10,
+    orbitYawVel: 0,
+    orbitPitchVel: 0,
+    dragActive: false,
+    focusX: 0,
+    focusY: 0,
+    impulseX: 0,
+    impulseY: 0,
+    impulseLife: 0,
+  };
+  var sceneState = window.__dotsHeroScene || {};
+  for (var sceneKey in sceneDefaults) {
+    if (sceneState[sceneKey] == null) sceneState[sceneKey] = sceneDefaults[sceneKey];
+  }
+  window.__dotsHeroScene = sceneState;
 
   var PALETTE = [
     { r:200, g:182, b:255 },
@@ -1440,9 +1455,13 @@ function initMainPage() {
     ]
   };
 
+  var SINGULARITY = { x: -92, y: 18, z: -135, radius: 36 };
+  var ATLAS = { x: -214, y: -148, z: 118, radius: 28, orbitAngle: 0.1 };
+
   var W, H, stars = [], nebulae = [], shockwaves = [], rafId, time = 0;
   var dpr = Math.min(window.devicePixelRatio||1, 2);
   var mouse = { x:-9999, y:-9999 };
+  var drag = { active: false, moved: false, lastX: 0, lastY: 0 };
 
   function clamp(v, min, max) {
     return Math.max(min, Math.min(max, v));
@@ -1476,16 +1495,23 @@ function initMainPage() {
 
     sceneState.pointerX += (targetX - sceneState.pointerX) * 0.045;
     sceneState.pointerY += (targetY - sceneState.pointerY) * 0.045;
-    sceneState.panX += ((((mouse.x < 0 ? W * 0.5 : mouse.x) / W) - 0.5) * 42 - sceneState.panX) * 0.06;
-    sceneState.panY += ((((mouse.y < 0 ? H * 0.5 : mouse.y) / H) - 0.5) * 28 - sceneState.panY) * 0.06;
+    sceneState.orbitYaw += sceneState.orbitYawVel;
+    sceneState.orbitPitch += sceneState.orbitPitchVel;
+    sceneState.orbitYawVel *= sceneState.dragActive ? 0.82 : 0.955;
+    sceneState.orbitPitchVel *= sceneState.dragActive ? 0.82 : 0.955;
+    sceneState.orbitPitch = clamp(sceneState.orbitPitch, -0.68, 0.68);
+    sceneState.panX += ((((mouse.x < 0 ? W * 0.5 : mouse.x) / W) - 0.5) * 36 + Math.sin(sceneState.orbitYaw) * 34 - sceneState.panX) * 0.06;
+    sceneState.panY += ((((mouse.y < 0 ? H * 0.5 : mouse.y) / H) - 0.5) * 22 + sceneState.orbitPitch * 34 - sceneState.panY) * 0.06;
+    sceneState.impulseLife *= 0.92;
     sceneState.energy *= 0.965;
-    sceneState.tiltX = -sceneState.pointerY * 6.2;
-    sceneState.tiltY = sceneState.pointerX * 8.8;
+    sceneState.tiltX = clamp((-sceneState.pointerY * 3.1) + sceneState.orbitPitch * 32, -22, 22);
+    sceneState.tiltY = clamp((sceneState.pointerX * 4.8) + sceneState.orbitYaw * 34, -28, 28);
 
     heroEl.style.setProperty('--hero-tilt-x', sceneState.tiltX.toFixed(3));
     heroEl.style.setProperty('--hero-tilt-y', sceneState.tiltY.toFixed(3));
     heroEl.style.setProperty('--hero-pan-x', sceneState.panX.toFixed(3));
     heroEl.style.setProperty('--hero-pan-y', sceneState.panY.toFixed(3));
+    heroEl.classList.toggle('is-grabbing', !!sceneState.dragActive);
   }
 
   function resize() {
@@ -1542,12 +1568,12 @@ function initMainPage() {
       }
 
       var depthBias = clamp((z + maxRadius) / (maxRadius * 2), 0, 1);
-      var isBig = depthBias > 0.58 && Math.random() < 0.08;
+      var isBig = depthBias > 0.66 && Math.random() < 0.045;
       var size;
-      if (isBig) size = 1.9 + Math.random() * 2.4;
-      else if (depthBias > 0.62) size = 0.9 + Math.random() * 1.3;
-      else if (depthBias > 0.36) size = 0.45 + Math.random() * 0.9;
-      else size = 0.16 + Math.random() * 0.42;
+      if (isBig) size = 1.10 + Math.random() * 1.65;
+      else if (depthBias > 0.62) size = 0.70 + Math.random() * 0.82;
+      else if (depthBias > 0.36) size = 0.32 + Math.random() * 0.56;
+      else size = 0.11 + Math.random() * 0.26;
 
       var color;
       if (depthBias < 0.24) {
@@ -1585,6 +1611,143 @@ function initMainPage() {
     rafId = requestAnimationFrame(draw);
   }
 
+  function drawSingularity(anchorX, anchorY, rotX, rotY) {
+    var proj = projectPoint(SINGULARITY.x, SINGULARITY.y, SINGULARITY.z, anchorX, anchorY, rotX, rotY, 960);
+    var radius = SINGULARITY.radius * proj.scale;
+
+    ctx.save();
+    ctx.translate(proj.x, proj.y);
+    ctx.rotate(time * 0.18 + sceneState.orbitYaw * 0.55);
+    ctx.scale(1, 0.42 + proj.scale * 0.08);
+
+    var accretion = ctx.createRadialGradient(0, 0, radius * 0.18, 0, 0, radius * 1.45);
+    accretion.addColorStop(0, 'rgba(255,255,255,0)');
+    accretion.addColorStop(0.38, 'rgba(255,205,178,0.22)');
+    accretion.addColorStop(0.62, 'rgba(162,210,255,0.14)');
+    accretion.addColorStop(0.84, 'rgba(215,207,240,0.08)');
+    accretion.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = accretion;
+    ctx.beginPath();
+    ctx.arc(0, 0, radius * 1.45, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(0, 0, radius * 0.90, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(255,240,230,0.34)';
+    ctx.lineWidth = Math.max(0.9, radius * 0.05);
+    ctx.stroke();
+
+    ctx.restore();
+
+    var lensGlow = ctx.createRadialGradient(proj.x, proj.y, 0, proj.x, proj.y, radius * 2.0);
+    lensGlow.addColorStop(0, 'rgba(16,18,30,0.82)');
+    lensGlow.addColorStop(0.32, 'rgba(12,14,24,0.76)');
+    lensGlow.addColorStop(0.62, 'rgba(8,10,18,0.20)');
+    lensGlow.addColorStop(1, 'rgba(8,10,18,0)');
+    ctx.fillStyle = lensGlow;
+    ctx.beginPath();
+    ctx.arc(proj.x, proj.y, radius * 2.0, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = 'rgba(4,5,9,0.94)';
+    ctx.beginPath();
+    ctx.arc(proj.x, proj.y, radius * 0.54, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  function drawAtlas(anchorX, anchorY, rotX, rotY) {
+    ATLAS.orbitAngle += 0.016;
+    var proj = projectPoint(ATLAS.x, ATLAS.y, ATLAS.z, anchorX, anchorY, rotX, rotY, 960);
+    var radius = ATLAS.radius * proj.scale;
+    var yaw = time * 0.22 + sceneState.orbitYaw * 0.55;
+    var orbitX = Math.cos(ATLAS.orbitAngle) * radius * 1.7;
+    var orbitY = Math.sin(ATLAS.orbitAngle * 1.2) * radius * 0.55;
+
+    ctx.save();
+    ctx.translate(proj.x, proj.y);
+    ctx.rotate(yaw * 0.22);
+    ctx.strokeStyle = 'rgba(184,224,210,0.30)';
+    ctx.lineWidth = Math.max(0.7, radius * 0.05);
+
+    ctx.beginPath();
+    ctx.arc(0, 0, radius, 0, Math.PI * 2);
+    ctx.stroke();
+
+    for (var lat = -1; lat <= 1; lat++) {
+      var ry = radius * (0.34 + Math.abs(lat) * 0.16);
+      ctx.beginPath();
+      ctx.ellipse(0, lat * radius * 0.26, radius, ry, 0, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+
+    ctx.beginPath();
+    ctx.ellipse(0, 0, radius * 0.36, radius, 0, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.ellipse(0, 0, radius * 0.72, radius, 0, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.restore();
+
+    ctx.strokeStyle = 'rgba(184,224,210,0.16)';
+    ctx.lineWidth = 0.9;
+    ctx.beginPath();
+    ctx.arc(proj.x, proj.y, radius * 1.7, 0, Math.PI * 2);
+    ctx.stroke();
+
+    var beacon = ctx.createRadialGradient(proj.x + orbitX, proj.y + orbitY, 0, proj.x + orbitX, proj.y + orbitY, radius * 0.9);
+    beacon.addColorStop(0, 'rgba(184,224,210,0.72)');
+    beacon.addColorStop(1, 'rgba(184,224,210,0)');
+    ctx.fillStyle = beacon;
+    ctx.beginPath();
+    ctx.arc(proj.x + orbitX, proj.y + orbitY, radius * 0.9, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = 'rgba(184,224,210,0.95)';
+    ctx.beginPath();
+    ctx.arc(proj.x + orbitX, proj.y + orbitY, Math.max(2.1, radius * 0.16), 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  function applyDragWake(x, y, dx, dy) {
+    var motion = Math.sqrt(dx * dx + dy * dy);
+    if (motion < 0.35) return;
+
+    sceneState.focusX = x;
+    sceneState.focusY = y;
+    sceneState.impulseX = dx;
+    sceneState.impulseY = dy;
+    sceneState.impulseLife = 1;
+    sceneState.energy = 1;
+
+    for (var i = 0; i < stars.length; i++) {
+      var s = stars[i];
+      var sx = s.screenX || -9999;
+      var sy = s.screenY || -9999;
+      var distX = sx - x;
+      var distY = sy - y;
+      var dist = Math.sqrt(distX * distX + distY * distY);
+      if (dist < 170 && dist > 0.001) {
+        var wake = Math.pow((170 - dist) / 170, 1.45) * motion * 0.045;
+        s.vx += (dx * 0.08 + (distX / dist) * wake) / s.mass;
+        s.vy += (dy * 0.06 + (distY / dist) * wake) / s.mass;
+        s.vz += wake * 0.85;
+      }
+    }
+
+    if (DOTS.screen) {
+      var ddx = DOTS.screen.x - x;
+      var ddy = DOTS.screen.y - y;
+      var ddist = Math.sqrt(ddx * ddx + ddy * ddy);
+      if (ddist < DOTS.screen.r * 2.4) {
+        DOTS.vx += dx * 0.06;
+        DOTS.vy += dy * 0.05;
+        DOTS.vz += motion * 0.12;
+        DOTS.shieldGlow = Math.min(1, DOTS.shieldGlow + 0.18);
+      }
+    }
+  }
+
   function drawNebula(n, anchorX, anchorY, rotX, rotY) {
     var proj = projectPoint(n.x, n.y, n.z, anchorX, anchorY, rotX, rotY, 1040);
     var rx = n.rx * proj.scale;
@@ -1616,10 +1779,10 @@ function initMainPage() {
     var r = Math.round(s.color.r);
     var g = Math.round(s.color.g);
     var b = Math.round(s.color.b);
-    var size = Math.max(0.25, s.size * proj.scale);
+    var size = Math.max(0.22, Math.min(2.85, s.size * proj.scale));
 
-    if (s.isBig || size > 2.5) {
-      var glowR = size * 5.4;
+    if (s.isBig || size > 2.0) {
+      var glowR = size * 4.2;
       var glow = ctx.createRadialGradient(proj.x, proj.y, 0, proj.x, proj.y, glowR);
       glow.addColorStop(0, 'rgba(' + r + ',' + g + ',' + b + ',' + (alpha * 0.26).toFixed(3) + ')');
       glow.addColorStop(0.45, 'rgba(' + r + ',' + g + ',' + b + ',' + (alpha * 0.10).toFixed(3) + ')');
@@ -1634,14 +1797,14 @@ function initMainPage() {
       ctx.rotate(rendered.sparkAngle);
       for (var sp = 0; sp < 4; sp++) {
         ctx.rotate(Math.PI / 2);
-        var spike = ctx.createLinearGradient(0, 0, 0, size * 4.2);
+        var spike = ctx.createLinearGradient(0, 0, 0, size * 3.0);
         spike.addColorStop(0, 'rgba(' + r + ',' + g + ',' + b + ',' + (alpha * 0.55).toFixed(3) + ')');
         spike.addColorStop(1, 'rgba(' + r + ',' + g + ',' + b + ',0)');
         ctx.strokeStyle = spike;
-        ctx.lineWidth = Math.max(0.55, size * 0.18);
+        ctx.lineWidth = Math.max(0.45, size * 0.14);
         ctx.beginPath();
         ctx.moveTo(0, 0);
-        ctx.lineTo(0, size * 4.2);
+        ctx.lineTo(0, size * 3.0);
         ctx.stroke();
       }
       ctx.restore();
@@ -1835,8 +1998,8 @@ function initMainPage() {
     time += 0.008;
     syncSceneState();
 
-    var cameraTiltY = sceneState.pointerX * 0.42;
-    var cameraTiltX = -sceneState.pointerY * 0.18 + Math.sin(time * 0.45) * 0.04;
+    var cameraTiltY = sceneState.orbitYaw + sceneState.pointerX * 0.12;
+    var cameraTiltX = sceneState.orbitPitch - sceneState.pointerY * 0.06 + Math.sin(time * 0.45) * 0.02;
     var galaxyAnchorX = W * 0.20 + sceneState.panX * 0.34;
     var galaxyAnchorY = H * 0.57 + sceneState.panY * 0.18;
     var globalSpin = time * 0.12;
@@ -1863,6 +2026,17 @@ function initMainPage() {
       var localX = s.baseX + s.ox;
       var localY = s.baseY + s.oy;
       var localZ = s.baseZ + s.oz;
+      var holeDx = SINGULARITY.x - localX;
+      var holeDy = SINGULARITY.y - localY;
+      var holeDz = SINGULARITY.z - localZ;
+      var holeDist = Math.sqrt(holeDx * holeDx + holeDy * holeDy + holeDz * holeDz);
+      if (holeDist < 190 && holeDist > 0.001) {
+        var pull = Math.pow((190 - holeDist) / 190, 2) * 0.05;
+        s.vx += (holeDx / holeDist) * pull;
+        s.vy += (holeDy / holeDist) * pull * 0.4;
+        s.vz += (holeDz / holeDist) * pull;
+      }
+
       var spin = rotateY(localX, localZ, globalSpin + s.spinOffset * 0.08);
       var proj = projectPoint(spin.x, localY, spin.z, galaxyAnchorX, galaxyAnchorY, cameraTiltX, cameraTiltY, 980);
 
@@ -1893,6 +2067,9 @@ function initMainPage() {
 
     renderedStars.sort(function(a, b) { return a.proj.z - b.proj.z; });
     for (var rs = 0; rs < renderedStars.length; rs++) drawStar(renderedStars[rs]);
+
+    drawSingularity(galaxyAnchorX, galaxyAnchorY, cameraTiltX, cameraTiltY);
+    drawAtlas(galaxyAnchorX, galaxyAnchorY, cameraTiltX, cameraTiltY);
 
     var dotsAnchorX = DOTS.orbitCx + sceneState.panX * 0.46;
     var dotsAnchorY = DOTS.orbitCy + sceneState.panY * 0.28;
@@ -1952,12 +2129,56 @@ function initMainPage() {
     sceneState.energy = 1;
   }
 
-  heroEl.addEventListener('mousemove',function(e){var p=getPos(e);mouse.x=p.x;mouse.y=p.y;});
-  heroEl.addEventListener('mouseleave',function(){mouse.x=-9999;mouse.y=-9999;});
-  heroEl.addEventListener('click',function(e){var p=getPos(e);kick(p.x,p.y);});
+  function onMouseMove(e) {
+    var p = getPos(e);
+    mouse.x = p.x;
+    mouse.y = p.y;
+    if (!drag.active) return;
+    var dx = e.clientX - drag.lastX;
+    var dy = e.clientY - drag.lastY;
+    drag.lastX = e.clientX;
+    drag.lastY = e.clientY;
+    if (Math.abs(dx) + Math.abs(dy) > 0.8) drag.moved = true;
+    sceneState.orbitYaw += dx * 0.0054;
+    sceneState.orbitPitch += dy * 0.0044;
+    sceneState.orbitPitch = clamp(sceneState.orbitPitch, -0.68, 0.68);
+    sceneState.orbitYawVel = dx * 0.0013;
+    sceneState.orbitPitchVel = dy * 0.0010;
+    applyDragWake(p.x, p.y, dx, dy);
+  }
+
+  function onMouseUp(e) {
+    if (!drag.active) return;
+    var p = getPos(e);
+    mouse.x = p.x;
+    mouse.y = p.y;
+    sceneState.dragActive = false;
+    drag.active = false;
+    if (!drag.moved) kick(p.x, p.y);
+  }
+
+  heroEl.addEventListener('mousemove', onMouseMove);
+  heroEl.addEventListener('mouseleave', function(){ mouse.x = -9999; mouse.y = -9999; });
+  heroEl.addEventListener('mousedown', function(e) {
+    if (e.button !== 0) return;
+    if (e.target && e.target.closest('a,button,[role="button"],input,textarea,select')) return;
+    var p = getPos(e);
+    mouse.x = p.x;
+    mouse.y = p.y;
+    drag.active = true;
+    drag.moved = false;
+    drag.lastX = e.clientX;
+    drag.lastY = e.clientY;
+    sceneState.dragActive = true;
+    sceneState.orbitYawVel = 0;
+    sceneState.orbitPitchVel = 0;
+    e.preventDefault();
+  });
+  window.addEventListener('mousemove', onMouseMove);
+  window.addEventListener('mouseup', onMouseUp);
   heroEl.addEventListener('touchstart',function(e){var t=e.touches[0],p=getPos(t);mouse.x=p.x;mouse.y=p.y;kick(p.x,p.y);},{passive:true});
   heroEl.addEventListener('touchmove',function(e){var t=e.touches[0],p=getPos(t);mouse.x=p.x;mouse.y=p.y;},{passive:true});
-  heroEl.addEventListener('touchend',function(){mouse.x=-9999;mouse.y=-9999;});
+  heroEl.addEventListener('touchend',function(){mouse.x=-9999;mouse.y=-9999;sceneState.dragActive=false;});
   window.addEventListener('resize',function(){cancelAnimationFrame(rafId);resize();});
 
   var mp=document.getElementById('main-page');
@@ -2020,7 +2241,7 @@ function initMainPage() {
     if (!canvas) return;
     var ctx = canvas.getContext('2d');
     var heroEl = document.getElementById('hero');
-    var sceneState = window.__dotsHeroScene || (window.__dotsHeroScene = {
+    var sceneDefaults = {
       pointerX: 0,
       pointerY: 0,
       panX: 0,
@@ -2028,7 +2249,22 @@ function initMainPage() {
       tiltX: 0,
       tiltY: 0,
       energy: 0,
-    });
+      orbitYaw: -0.18,
+      orbitPitch: 0.10,
+      orbitYawVel: 0,
+      orbitPitchVel: 0,
+      dragActive: false,
+      focusX: 0,
+      focusY: 0,
+      impulseX: 0,
+      impulseY: 0,
+      impulseLife: 0,
+    };
+    var sceneState = window.__dotsHeroScene || {};
+    for (var sceneKey in sceneDefaults) {
+      if (sceneState[sceneKey] == null) sceneState[sceneKey] = sceneDefaults[sceneKey];
+    }
+    window.__dotsHeroScene = sceneState;
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
     var W, H, cx, cy, scale;
     var mx = -1000, my = -1000;
@@ -2102,10 +2338,10 @@ function initMainPage() {
       ctx.globalAlpha = scrollFade;
       var orbitPs = [];
       var renderables = [];
-      var rotY = sceneState.pointerX * 0.28 - 0.26;
-      var rotX = -sceneState.pointerY * 0.20 + 0.18;
-      var anchorX = cx + sceneState.panX * 0.20;
-      var anchorY = cy + sceneState.panY * 0.12;
+      var rotY = sceneState.orbitYaw * 0.72 + sceneState.pointerX * 0.10 - 0.18;
+      var rotX = sceneState.orbitPitch * 0.68 - sceneState.pointerY * 0.06 + 0.12;
+      var anchorX = cx + sceneState.panX * 0.20 + Math.sin(sceneState.orbitYaw) * 14;
+      var anchorY = cy + sceneState.panY * 0.12 + sceneState.orbitPitch * 8;
 
       for (var i = 0; i < particles.length; i++) {
         var p = particles[i];
@@ -2144,6 +2380,18 @@ function initMainPage() {
             p.vx += (mdx / mDist) * force * 0.45;
             p.vy += (mdy / mDist) * force * 0.34;
             p.vz += force * 0.95;
+          }
+        }
+
+        if (sceneState.impulseLife > 0.02) {
+          var wakeDx = p.sx - sceneState.focusX;
+          var wakeDy = p.sy - sceneState.focusY;
+          var wakeDist = Math.sqrt(wakeDx * wakeDx + wakeDy * wakeDy);
+          if (wakeDist < 170 && wakeDist > 0.001) {
+            var wakeForce = Math.pow((170 - wakeDist) / 170, 1.4) * sceneState.impulseLife;
+            p.vx += sceneState.impulseX * 0.022 * wakeForce;
+            p.vy += sceneState.impulseY * 0.018 * wakeForce;
+            p.vz += (Math.abs(sceneState.impulseX) + Math.abs(sceneState.impulseY)) * 0.03 * wakeForce;
           }
         }
 
@@ -2255,7 +2503,7 @@ function initMainPage() {
    QUANTUM FIELD CURSOR
    - Dot: follows instantly (actual cursor position)
    - Ring: spring-lagged 44px circle
-   - Trail: 28 comet particles in D.O.T.S. palette
+   - Trail: time-fading comet field with persistent drawing feel
    - Hover: ring expands + dot brightens (magnetic)
    - Click: ring shrinks + 12-particle burst explosion
 ══════════════════════════════════════════════════ */
@@ -2276,11 +2524,15 @@ function initMainPage() {
     [255, 181, 194],
   ];
 
-  const TRAIL = 28;
+  const TRAIL_LIFE = 2600;
+  const TRAIL_MAX  = 180;
   const hist  = [];
   let mx = -999, my = -999;
   let rx = -999, ry = -999;
   let bursts = [];
+  let lastTrailAt = 0;
+  let lastTrailX = -999;
+  let lastTrailY = -999;
 
   function resize() {
     tc.width  = window.innerWidth;
@@ -2294,8 +2546,17 @@ function initMainPage() {
     mx = e.clientX; my = e.clientY;
     dot.style.left = mx + 'px';
     dot.style.top  = my + 'px';
-    hist.unshift({ x: mx, y: my });
-    if (hist.length > TRAIL) hist.pop();
+    var now = performance.now();
+    var dx = mx - lastTrailX;
+    var dy = my - lastTrailY;
+    var dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist > 2.5 || now - lastTrailAt > 26) {
+      hist.unshift({ x: mx, y: my, t: now });
+      lastTrailAt = now;
+      lastTrailX = mx;
+      lastTrailY = my;
+    }
+    if (hist.length > TRAIL_MAX) hist.length = TRAIL_MAX;
   }, { passive: true });
 
   /* ── Hover on interactive elements ── */
@@ -2337,6 +2598,10 @@ function initMainPage() {
   /* ── Animation loop ── */
   function draw() {
     ctx.clearRect(0, 0, tc.width, tc.height);
+    var now = performance.now();
+    for (var h = hist.length - 1; h >= 0; h--) {
+      if (now - hist[h].t > TRAIL_LIFE) hist.splice(h, 1);
+    }
 
     /* Spring ring */
     rx += (mx - rx) * 0.10;
@@ -2347,23 +2612,24 @@ function initMainPage() {
     /* Comet trail */
     for (var i = 0; i < hist.length; i++) {
       var p   = hist[i];
-      var t   = i / TRAIL;
-      var alp = (1 - t) * 0.55;
-      var sz  = (1 - t) * 5;
+      var age = (now - p.t) / TRAIL_LIFE;
+      var life = 1 - age;
+      var t   = hist.length <= 1 ? 0 : i / (hist.length - 1);
+      var alp = Math.pow(life, 1.45) * 0.52;
+      var sz  = 1.2 + Math.pow(life, 0.85) * 4.4;
       if (sz < 0.2 || alp < 0.01) continue;
-      var ci  = Math.floor(i * PALETTE.length / TRAIL) % PALETTE.length;
+      var ci  = Math.floor(t * (PALETTE.length * 1.25)) % PALETTE.length;
       var c   = PALETTE[ci];
-      var g   = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, sz * 2.5);
+      var g   = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, sz * 2.8);
       g.addColorStop(0, 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + alp.toFixed(3) + ')');
       g.addColorStop(1, 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',0)');
       ctx.fillStyle = g;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, sz * 2.5, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, sz * 2.8, 0, Math.PI * 2);
       ctx.fill();
     }
 
     /* Click bursts */
-    var now = performance.now();
     bursts = bursts.filter(function (b) {
       var age = (now - b.t) / 800;
       if (age > 1) return false;
