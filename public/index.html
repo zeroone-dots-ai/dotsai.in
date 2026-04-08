@@ -1506,11 +1506,19 @@ function initMainPage() {
     sceneState.energy *= 0.965;
     sceneState.tiltX = clamp((-sceneState.pointerY * 3.1) + sceneState.orbitPitch * 32, -22, 22);
     sceneState.tiltY = clamp((sceneState.pointerX * 4.8) + sceneState.orbitYaw * 34, -28, 28);
+    var textTiltX = clamp(-sceneState.pointerY * 1.05, -2.2, 2.2);
+    var textTiltY = clamp(sceneState.pointerX * 1.45, -2.8, 2.8);
+    var textPanX = clamp(sceneState.pointerX * 10, -10, 10);
+    var textPanY = clamp(sceneState.pointerY * 7, -7, 7);
 
     heroEl.style.setProperty('--hero-tilt-x', sceneState.tiltX.toFixed(3));
     heroEl.style.setProperty('--hero-tilt-y', sceneState.tiltY.toFixed(3));
     heroEl.style.setProperty('--hero-pan-x', sceneState.panX.toFixed(3));
     heroEl.style.setProperty('--hero-pan-y', sceneState.panY.toFixed(3));
+    heroEl.style.setProperty('--hero-text-tilt-x', textTiltX.toFixed(3));
+    heroEl.style.setProperty('--hero-text-tilt-y', textTiltY.toFixed(3));
+    heroEl.style.setProperty('--hero-text-pan-x', textPanX.toFixed(3));
+    heroEl.style.setProperty('--hero-text-pan-y', textPanY.toFixed(3));
     heroEl.classList.toggle('is-grabbing', !!sceneState.dragActive);
   }
 
