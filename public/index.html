@@ -3215,15 +3215,14 @@ a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .service-row
 (function() {
   const nav = document.getElementById('nav');
   const filters = document.querySelectorAll('.nav-filter');
-  const heroSection = document.getElementById('hero');
 
   // Filter → section mapping
   const FILTER_MAP = {
     all:      ['hero','meet','platform','consulting','proof','labs-teaser','contact'],
-    meet:     ['hero','meet','contact'],
-    services: ['hero','consulting','contact'],
-    product:  ['hero','platform','contact'],
-    work:     ['hero','proof','labs-teaser','contact']
+    meet:     ['meet','contact'],
+    services: ['consulting','contact'],
+    product:  ['platform','contact'],
+    work:     ['proof','labs-teaser','contact']
   };
 
   const ALL_SECTIONS = ['hero','meet','platform','consulting','proof','labs-teaser','contact'];
@@ -3232,6 +3231,10 @@ a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .service-row
   // ── Show/hide nav based on scroll past hero ──
   // Show nav after scrolling past hero (account for pinned hero height)
   function updateNavVisibility() {
+    if (activeFilter !== 'all') {
+      nav.classList.remove('nav-hidden');
+      return;
+    }
     var heroEl = document.getElementById('hero');
     if (!heroEl) return;
     var heroBottom = heroEl.getBoundingClientRect().bottom;
@@ -3278,7 +3281,8 @@ a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .service-row
 
       // Scroll to first non-hero visible section
       if (filter !== 'all') {
-        var firstSection = visible[1]; // skip hero
+        updateNavVisibility();
+        var firstSection = visible[0];
         var target = document.getElementById(firstSection);
         // Account for pin-spacer wrapper
         var scrollTarget = target && target.closest('.pin-spacer') || target;
@@ -3288,6 +3292,7 @@ a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .service-row
           }, 50);
         }
       } else {
+        updateNavVisibility();
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     });
