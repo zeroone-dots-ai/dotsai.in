@@ -515,28 +515,35 @@ nav.light .nav-cta {
 /* Hero dot grid logo at bottom */
 .hero-logo-bottom {
   position: absolute;
-  bottom: 48px;
-  left: 50%;
+  top: clamp(120px, 19vh, 170px);
+  left: clamp(28px, 5vw, 76px);
   transform:
-    translate3d(calc(-50% + (var(--hero-pan-x) * -0.5px)), calc(var(--hero-pan-y) * 0.9px), 80px)
-    rotateX(calc(var(--hero-tilt-x) * -0.45deg))
-    rotateY(calc(var(--hero-tilt-y) * -0.6deg));
-  z-index: 2;
+    translate3d(calc(var(--hero-pan-x) * -0.7px), calc(var(--hero-pan-y) * 0.45px), 90px)
+    rotateX(calc(var(--hero-tilt-x) * -0.28deg))
+    rotateY(calc(var(--hero-tilt-y) * -0.5deg));
+  z-index: 4;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 10px;
+  align-items: flex-start;
+  gap: 8px;
   opacity: 0;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(7,9,16,0.46), rgba(7,9,16,0.16));
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 18px 40px rgba(5,6,12,0.32);
+  backdrop-filter: blur(10px);
   will-change: transform;
+  pointer-events: none;
 }
 
 .hero-dot-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
+  gap: 8px;
 }
 .hero-dot {
-  width: 7px; height: 7px;
+  width: 10px; height: 10px;
   border-radius: 50%;
 }
 .hero-dot.ghost { background: rgba(255,255,255,0.08); }
@@ -544,11 +551,19 @@ nav.light .nav-cta {
 .hero-dot.ops   { background: #B8E0D2; box-shadow: 0 0 6px 2px rgba(184,224,210,0.4); }
 .hero-dot.tech  { background: #FFCDB2; box-shadow: 0 0 6px 2px rgba(255,205,178,0.4); }
 
-.hero-logo-label {
+.hero-logo-kicker {
   font-family: 'Space Mono', monospace;
   font-size: 9px;
   letter-spacing: 0.18em;
-  color: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.34);
+  text-transform: uppercase;
+}
+
+.hero-logo-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.72);
   text-transform: uppercase;
 }
 
@@ -946,6 +961,19 @@ nav.light .nav-cta {
   .brief-inner { grid-template-columns: 1fr; gap: 32px; }
   .hero-slide { padding: 0 24px; }
   .hero-slide-tags { gap: 8px; }
+  .hero-logo-bottom {
+    top: auto;
+    bottom: 92px;
+    left: 24px;
+    padding: 12px 14px;
+  }
+  .hero-dot {
+    width: 8px;
+    height: 8px;
+  }
+  .hero-logo-label {
+    font-size: 10px;
+  }
 }
 
 /* ───────────────────────────────────────────────

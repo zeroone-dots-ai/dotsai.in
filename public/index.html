@@ -337,6 +337,7 @@
         <div class="hero-dot ghost"></div>
         <div class="hero-dot tech"></div>
       </div>
+      <span class="hero-logo-kicker">ZeroOne</span>
       <span class="hero-logo-label">D.O.T.S AI</span>
     </div>
 
@@ -1128,8 +1129,8 @@ function initMainPage() {
       { autoAlpha: 0, y: 50 },
       { autoAlpha: 1, y: 0, duration: 0.22, ease: 'power3.out' }, 0.70)
 
-  // Fade logo-bottom and scroll-hint immediately on first scroll
-  heroTl.to('#hero-logo-bottom', { autoAlpha: 0, duration: 0.08 }, 0.0)
+  // Fade only the scroll hint immediately on first scroll.
+  // Keep the brand mark present through all hero panels.
   heroTl.to('#scroll-hint', { autoAlpha: 0, duration: 0.08 }, 0.0)
 
   // ══════════════════════════════════════════
@@ -1338,6 +1339,41 @@ function initMainPage() {
   proofTl.set({}, {}, 1)
 
   // ══════════════════════════════════════════
+  //  LABS — Pinned (3 phases: intro + demos + CTA)
+  // ══════════════════════════════════════════
+  const labsEl = document.getElementById('labs-teaser')
+  const labsLabel = labsEl.querySelector('.labs-teaser-label')
+  const labsTitle = labsEl.querySelector('.labs-teaser-title')
+  const labsSub = labsEl.querySelector('.labs-teaser-sub')
+  const labsCards = labsEl.querySelectorAll('.labs-teaser-card')
+  const labsAll = labsEl.querySelector('.labs-teaser-all')
+
+  if (!isMobile) {
+    labsEl.style.height = '100vh'
+    labsEl.style.overflow = 'hidden'
+    gsap.set(labsLabel, { opacity: 0, y: 18 })
+    gsap.set([labsTitle, labsSub], { opacity: 0, y: 24 })
+    gsap.set(labsCards, { opacity: 0, y: 32, scale: 0.96 })
+    gsap.set(labsAll, { opacity: 0, y: 18 })
+
+    const labsTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#labs-teaser', start: 'top top',
+        end: '+=220%',
+        pin: true, scrub: 0.5, anticipatePin: 1,
+      }
+    })
+    labsTl.to(labsLabel, { opacity: 0.28, y: 0, duration: 0.05, ease: EASE_OUT }, 0.02)
+    labsTl.to(labsTitle, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.08)
+    labsTl.to(labsSub, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.15)
+    labsCards.forEach((card, i) => {
+      labsTl.to(card, { opacity: 1, y: 0, scale: 1, duration: 0.08, ease: EASE_OUT }, 0.38 + i * 0.08)
+    })
+    labsTl.to(labsAll, { opacity: 1, y: 0, duration: 0.10, ease: EASE_OUT }, 0.80)
+    labsTl.set({}, {}, 1)
+  }
+
+  // ══════════════════════════════════════════
   //  CONTACT — Pinned (3 phases)
   // ══════════════════════════════════════════
   const contactEl = document.getElementById('contact')
@@ -1384,6 +1420,13 @@ function initMainPage() {
     trigger: '#proof', start: 'top 64px',
     onEnter: () => nav.classList.remove('light'),
     onLeaveBack: () => nav.classList.add('light'),
+  })
+  ScrollTrigger.create({
+    trigger: '#labs-teaser', start: 'top 64px',
+    onEnter: () => nav.classList.remove('light'),
+    onEnterBack: () => nav.classList.remove('light'),
+    onLeave: () => nav.classList.add('light'),
+    onLeaveBack: () => nav.classList.remove('light'),
   })
   ScrollTrigger.create({
     trigger: '#contact', start: 'top 64px',
@@ -2810,6 +2853,17 @@ function initMainPage() {
 
 .labs-teaser-all:hover {
   color: rgba(243,240,255,0.85);
+}
+
+@media (min-width: 901px) {
+  .labs-teaser-label,
+  .labs-teaser-title,
+  .labs-teaser-sub,
+  .labs-teaser-all {
+    width: min(1120px, 100%);
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 /* ── Mini card visualizations ── */
