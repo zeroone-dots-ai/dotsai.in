@@ -2063,10 +2063,11 @@ function initMainPage() {
     time += 0.0054;
     syncSceneState();
 
+    var isMobileScene = W < 768;
     var cameraTiltY = sceneState.orbitYaw + sceneState.pointerX * 0.12;
     var cameraTiltX = sceneState.orbitPitch - sceneState.pointerY * 0.06 + Math.sin(time * 0.45) * 0.02;
-    var galaxyAnchorX = W * 0.18 + sceneState.panX * 0.32;
-    var galaxyAnchorY = H * 0.52 + sceneState.panY * 0.16;
+    var galaxyAnchorX = W * (isMobileScene ? 0.30 : 0.18) + sceneState.panX * (isMobileScene ? 0.24 : 0.32);
+    var galaxyAnchorY = H * (isMobileScene ? 0.44 : 0.52) + sceneState.panY * (isMobileScene ? 0.11 : 0.16);
     var globalSpin = time * 0.12;
 
     for (var ni = 0; ni < nebulae.length; ni++) {

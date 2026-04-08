@@ -396,10 +396,11 @@ nav.light .nav-cta {
   position: absolute;
   top: 30%; left: 50%;
   transform:
-    translate3d(calc(-50% + (var(--hero-pan-x) * -0.4px)), calc(-50% + (var(--hero-pan-y) * -0.3px)), 0)
-    scale(1.06);
-  width: 600px; height: 400px;
-  background: radial-gradient(ellipse, rgba(67,48,95,0.35) 0%, transparent 70%);
+    translate(calc(-50% + (var(--hero-pan-x) * -0.24px)), calc(-50% + (var(--hero-pan-y) * -0.18px)))
+    scale(1.03);
+  width: 700px; height: 470px;
+  background:
+    radial-gradient(ellipse at center, rgba(246,245,239,0.085) 0%, rgba(162,210,255,0.04) 34%, rgba(184,224,210,0.03) 54%, transparent 74%);
   pointer-events: none;
   will-change: transform;
 }
@@ -979,6 +980,17 @@ nav.light .nav-cta {
 }
 
 @media (max-width: 768px) {
+  #hero {
+    perspective: 1200px;
+  }
+  #hero::before {
+    top: 34%;
+    width: 82vw;
+    height: 52vw;
+    transform: translate(-50%, -50%) scale(1.01);
+    background:
+      radial-gradient(ellipse at center, rgba(246,245,239,0.07) 0%, rgba(162,210,255,0.028) 38%, transparent 74%);
+  }
   .hero-progress { display: none; }
   .brief-inner { grid-template-columns: 1fr; gap: 32px; }
   .hero-slide { padding: 0 24px; }
@@ -1775,10 +1787,8 @@ footer {
   pointer-events: none;
   display: block;
   transform:
-    translate3d(calc(var(--hero-pan-x) * -0.9px), calc(var(--hero-pan-y) * -0.65px), 0)
-    rotateX(calc(var(--hero-tilt-x) * 0.4deg))
-    rotateY(calc(var(--hero-tilt-y) * 0.55deg))
-    scale(1.03);
+    translate(calc(var(--hero-pan-x) * -0.42px), calc(var(--hero-pan-y) * -0.26px))
+    scale(1.012);
   transform-origin: 50% 50%;
   will-change: transform;
 }
@@ -1795,10 +1805,8 @@ footer {
   pointer-events: none;
   display: block;
   transform:
-    translate3d(calc(var(--hero-pan-x) * -0.45px), calc(var(--hero-pan-y) * -0.4px), 30px)
-    rotateX(calc(var(--hero-tilt-x) * 0.18deg))
-    rotateY(calc(var(--hero-tilt-y) * 0.28deg))
-    scale(1.01);
+    translate(calc(var(--hero-pan-x) * -0.18px), calc(var(--hero-pan-y) * -0.14px))
+    scale(1.006);
   transform-origin: 50% 50%;
   will-change: transform;
 }
