@@ -368,6 +368,10 @@ nav.light .nav-cta {
    SECTION 1: HERO
 ─────────────────────────────────────────────── */
 #hero {
+  --hero-tilt-x: 0;
+  --hero-tilt-y: 0;
+  --hero-pan-x: 0;
+  --hero-pan-y: 0;
   min-height: 100vh;
   background: var(--hero-bg);
   display: flex;
@@ -377,6 +381,9 @@ nav.light .nav-cta {
   position: relative;
   overflow: hidden;
   padding: 120px 48px 80px;
+  perspective: 1800px;
+  transform-style: preserve-3d;
+  isolation: isolate;
 }
 
 /* Subtle radial glow behind text */
@@ -384,10 +391,13 @@ nav.light .nav-cta {
   content: '';
   position: absolute;
   top: 30%; left: 50%;
-  transform: translate(-50%, -50%);
+  transform:
+    translate3d(calc(-50% + (var(--hero-pan-x) * -0.4px)), calc(-50% + (var(--hero-pan-y) * -0.3px)), 0)
+    scale(1.06);
   width: 600px; height: 400px;
   background: radial-gradient(ellipse, rgba(67,48,95,0.35) 0%, transparent 70%);
   pointer-events: none;
+  will-change: transform;
 }
 
 .hero-content {
@@ -503,13 +513,17 @@ nav.light .nav-cta {
   position: absolute;
   bottom: 48px;
   left: 50%;
-  transform: translateX(-50%);
+  transform:
+    translate3d(calc(-50% + (var(--hero-pan-x) * -0.5px)), calc(var(--hero-pan-y) * 0.9px), 80px)
+    rotateX(calc(var(--hero-tilt-x) * -0.45deg))
+    rotateY(calc(var(--hero-tilt-y) * -0.6deg));
   z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
   opacity: 0;
+  will-change: transform;
 }
 
 .hero-dot-grid {
@@ -545,6 +559,11 @@ nav.light .nav-cta {
   align-items: center;
   gap: 6px;
   opacity: 0;
+  transform:
+    translate3d(calc(var(--hero-pan-x) * -0.55px), calc(var(--hero-pan-y) * 0.7px), 100px)
+    rotateX(calc(var(--hero-tilt-x) * -0.25deg))
+    rotateY(calc(var(--hero-tilt-y) * -0.5deg));
+  will-change: transform;
 }
 .scroll-hint-line {
   width: 1px;
@@ -574,6 +593,12 @@ nav.light .nav-cta {
   width: 100%;
   height: 100%;
   z-index: 3;
+  transform-style: preserve-3d;
+  transform:
+    translate3d(calc(var(--hero-pan-x) * 0.95px), calc(var(--hero-pan-y) * 0.75px), 120px)
+    rotateX(calc(var(--hero-tilt-x) * 0.9deg))
+    rotateY(calc(var(--hero-tilt-y) * 1.2deg));
+  will-change: transform;
 }
 
 .hero-slide {
@@ -587,6 +612,7 @@ nav.light .nav-cta {
   padding: 0 48px;
   opacity: 0;
   will-change: opacity, transform;
+  transform-style: preserve-3d;
 }
 
 .hero-slide:first-child {
@@ -600,6 +626,7 @@ nav.light .nav-cta {
   text-transform: uppercase;
   color: rgba(200,182,255,0.5);
   margin-bottom: 28px;
+  text-shadow: 0 8px 24px rgba(6,6,10,0.55);
 }
 
 .hero-slide-title {
@@ -611,6 +638,7 @@ nav.light .nav-cta {
   letter-spacing: -0.02em;
   margin-bottom: 24px;
   max-width: 900px;
+  text-shadow: 0 14px 42px rgba(6,6,10,0.62);
 }
 
 .hero-slide-title em {
@@ -626,6 +654,7 @@ nav.light .nav-cta {
   color: rgba(255,255,255,0.45);
   max-width: 540px;
   margin-bottom: 40px;
+  text-shadow: 0 8px 28px rgba(6,6,10,0.5);
 }
 
 .hero-slide-tags {
@@ -660,12 +689,16 @@ nav.light .nav-cta {
   position: absolute;
   right: 48px;
   top: 50%;
-  transform: translateY(-50%);
+  transform:
+    translate3d(calc(var(--hero-pan-x) * -0.4px), calc(-50% + (var(--hero-pan-y) * -0.35px)), 110px)
+    rotateX(calc(var(--hero-tilt-x) * -0.2deg))
+    rotateY(calc(var(--hero-tilt-y) * -0.7deg));
   z-index: 10;
   display: flex;
   flex-direction: column;
   gap: 16px;
   align-items: center;
+  will-change: transform;
 }
 
 .hero-pip {
@@ -1680,6 +1713,13 @@ footer {
   z-index: 1;
   pointer-events: none;
   display: block;
+  transform:
+    translate3d(calc(var(--hero-pan-x) * -0.9px), calc(var(--hero-pan-y) * -0.65px), 0)
+    rotateX(calc(var(--hero-tilt-x) * 0.4deg))
+    rotateY(calc(var(--hero-tilt-y) * 0.55deg))
+    scale(1.03);
+  transform-origin: 50% 50%;
+  will-change: transform;
 }
 #hero .hero-content { position: relative; z-index: 3; }
 #hero .hero-logo-bottom { position: relative; z-index: 3; }
@@ -1693,6 +1733,13 @@ footer {
   z-index: 2;
   pointer-events: none;
   display: block;
+  transform:
+    translate3d(calc(var(--hero-pan-x) * -0.45px), calc(var(--hero-pan-y) * -0.4px), 30px)
+    rotateX(calc(var(--hero-tilt-x) * 0.18deg))
+    rotateY(calc(var(--hero-tilt-y) * 0.28deg))
+    scale(1.01);
+  transform-origin: 50% 50%;
+  will-change: transform;
 }
 
 /* Cursor glow overlay */
@@ -1769,4 +1816,3 @@ footer {
 /* Remove old cursor glow - replaced */
 
 #hero { cursor: none !important; }
-
