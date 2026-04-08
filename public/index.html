@@ -2239,10 +2239,11 @@ function initMainPage() {
 
   function infinityPoint(t, scale) {
     var denom = 1 + Math.sin(t) * Math.sin(t);
+    var ribbon = (scale * Math.sin(t) * Math.cos(t)) / denom;
     return {
       x: (scale * Math.cos(t)) / denom,
-      y: Math.sin(t * 2) * scale * 0.18,
-      z: (scale * Math.sin(t) * Math.cos(t) * 1.55) / denom,
+      y: ribbon * 0.92,
+      z: Math.sin(t * 2) * scale * 0.10 + Math.cos(t * 3) * scale * 0.035,
     };
   }
 
@@ -2309,9 +2310,9 @@ function initMainPage() {
         var phase = (i / orbitCount) * Math.PI * 2;
         var pt = infinityPoint(phase, scale);
         particles.push({
-          x: pt.x + (Math.random()-0.5)*18,
-          y: pt.y + (Math.random()-0.5)*16,
-          z: pt.z + (Math.random()-0.5)*16,
+          x: pt.x + (Math.random()-0.5)*12,
+          y: pt.y + (Math.random()-0.5)*10,
+          z: pt.z + (Math.random()-0.5)*10,
           vx: 0, vy: 0, vz: 0,
           targetX: pt.x, targetY: pt.y, targetZ: pt.z,
           phase: phase,
@@ -2349,8 +2350,8 @@ function initMainPage() {
       ctx.globalAlpha = scrollFade;
       var orbitPs = [];
       var renderables = [];
-      var rotY = sceneState.orbitYaw * 0.42 + sceneState.pointerX * 0.07;
-      var rotX = sceneState.orbitPitch * 0.24 - sceneState.pointerY * 0.04 + 0.03;
+      var rotY = sceneState.orbitYaw * 0.12 + sceneState.pointerX * 0.025;
+      var rotX = sceneState.orbitPitch * 0.08 - sceneState.pointerY * 0.018 + 0.006;
       var anchorX = cx + sceneState.panX * 0.20 + Math.sin(sceneState.orbitYaw) * 14;
       var anchorY = cy + sceneState.panY * 0.12 + sceneState.orbitPitch * 8;
 
