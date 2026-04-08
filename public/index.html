@@ -2673,8 +2673,13 @@ function initMainPage() {
   position: relative;
   background: var(--hero-bg, #06060a);
   color: #f3f0ff;
+  min-height: 100vh;
+  box-sizing: border-box;
   padding: 100px 48px 80px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 #labs-teaser::before {
@@ -2954,7 +2959,9 @@ function initMainPage() {
 
 @media (max-width: 900px) {
   #labs-teaser {
+    min-height: 100svh;
     padding: 72px 20px 60px;
+    justify-content: flex-start;
   }
   .labs-teaser-grid {
     grid-template-columns: 1fr;
@@ -3228,6 +3235,26 @@ a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .service-row
   const ALL_SECTIONS = ['hero','meet','platform','consulting','proof','labs-teaser','contact'];
   let activeFilter = 'all';
 
+  function getScrollAnchor(sectionIds) {
+    var best = null;
+    sectionIds.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (!el || el.classList.contains('section-hidden')) return;
+      var pinSpacer = el.closest('.pin-spacer');
+      var target = pinSpacer || el;
+      var rect = target.getBoundingClientRect();
+      var distance = Math.abs(rect.top);
+      if (!best || distance < best.distance) {
+        best = {
+          id: id,
+          viewportTop: rect.top,
+          distance: distance
+        };
+      }
+    });
+    return best;
+  }
+
   // ── Show/hide nav based on scroll past hero ──
   // Show nav after scrolling past hero (account for pinned hero height)
   function updateNavVisibility() {
@@ -3252,6 +3279,8 @@ a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .service-row
     btn.addEventListener('click', function() {
       var filter = btn.dataset.filter;
       if (filter === activeFilter) return;
+      var previousFilter = activeFilter;
+      var anchor = previousFilter === 'all' ? null : getScrollAnchor(FILTER_MAP[previousFilter]);
       activeFilter = filter;
 
       // Update active pill
@@ -3293,7 +3322,19 @@ a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .service-row
         }
       } else {
         updateNavVisibility();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (anchor) {
+          setTimeout(function() {
+            var anchorEl = document.getElementById(anchor.id);
+            var anchorTarget = anchorEl && (anchorEl.closest('.pin-spacer') || anchorEl);
+            if (!anchorTarget) return;
+            var newTop = anchorTarget.getBoundingClientRect().top;
+            var delta = newTop - anchor.viewportTop;
+            if (Math.abs(delta) > 1) {
+              window.scrollBy({ top: delta, behavior: 'auto' });
+            }
+            updateNavVisibility();
+          }, 50);
+        }
       }
     });
   });
