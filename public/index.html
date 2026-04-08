@@ -326,7 +326,26 @@
     </div>
 
     <div class="hero-logo-bottom" id="hero-logo-bottom">
-      <img src="/brand/zeroone-dark-horizontal.svg" alt="ZeroOne D.O.T.S AI" class="hero-logo-image">
+      <div class="hero-dot-grid" aria-hidden="true">
+        <div class="hero-dot data"></div>
+        <div class="hero-dot ghost"></div>
+        <div class="hero-dot ghost"></div>
+        <div class="hero-dot ghost"></div>
+        <div class="hero-dot ops"></div>
+        <div class="hero-dot ghost"></div>
+        <div class="hero-dot ghost"></div>
+        <div class="hero-dot ghost"></div>
+        <div class="hero-dot tech"></div>
+      </div>
+      <div class="hero-logo-wordmark" aria-label="ZeroOne D.O.T.S AI">
+        <span class="hero-logo-zeroone">ZEROONE</span>
+        <span class="hero-logo-dotsline">
+          <span class="hero-logo-data">D</span><span class="hero-logo-sep">·</span>
+          <span class="hero-logo-ops">O</span><span class="hero-logo-sep">·</span>
+          <span class="hero-logo-tech">T</span><span class="hero-logo-sep">·</span>
+          <span class="hero-logo-strategy">S</span><span class="hero-logo-ai">AI</span>
+        </span>
+      </div>
     </div>
 
     <div class="scroll-hint" id="scroll-hint">
@@ -1564,16 +1583,16 @@ function initMainPage() {
 
   function buildGalaxy() {
     var isMobile = W<768;
-    var COUNT = isMobile ? 1100 : 2200;
+    var COUNT = isMobile ? 1500 : 3600;
     var maxRadius = Math.max(W, H) * (isMobile ? 0.72 : 0.84);
     var armCount = 4;
     stars = [];
     nebulae = [
-      { x:-140, y:-20, z:-180, rx:W*0.18, ry:H*0.18, r:255,g:255,b:255, a:0.055, rot:0.18, speed:0.05 },
-      { x:-220, y:-130, z:-40, rx:W*0.21, ry:H*0.16, r:215,g:207,b:240, a:0.040, rot:-0.30, speed:0.08 },
-      { x:-190, y: 165, z: 80, rx:W*0.20, ry:H*0.14, r:184,g:224,b:210, a:0.030, rot:0.42, speed:0.07 },
-      { x: 320, y: -40, z:-120, rx:W*0.14, ry:H*0.10, r:162,g:210,b:255, a:0.020, rot:-0.14, speed:0.06 },
-      { x: 360, y: 160, z: 50, rx:W*0.18, ry:H*0.13, r:255,g:205,b:178, a:0.030, rot:0.28, speed:0.05 },
+      { x:-108, y:-12, z:-170, rx:W*0.19, ry:H*0.19, r:255,g:255,b:255, a:0.062, rot:0.18, speed:0.05 },
+      { x:-238, y:-136, z:-36, rx:W*0.22, ry:H*0.17, r:215,g:207,b:240, a:0.048, rot:-0.30, speed:0.08 },
+      { x:-198, y: 172, z: 82, rx:W*0.20, ry:H*0.15, r:184,g:224,b:210, a:0.034, rot:0.42, speed:0.07 },
+      { x: 312, y: -48, z:-120, rx:W*0.15, ry:H*0.11, r:162,g:210,b:255, a:0.024, rot:-0.14, speed:0.06 },
+      { x: 360, y: 160, z: 50, rx:W*0.18, ry:H*0.13, r:255,g:205,b:178, a:0.032, rot:0.28, speed:0.05 },
     ];
 
     DOTS.orbitCx = W * 0.76;
@@ -1586,13 +1605,13 @@ function initMainPage() {
       var mode = Math.random();
       var radius, angle, x, y, z;
 
-      if (mode < 0.66) {
+      if (mode < 0.60) {
         radius = Math.pow(Math.random(), 0.56) * maxRadius;
         angle = radius * 0.028 + (i % armCount) * (Math.PI * 2 / armCount) + (Math.random() - 0.5) * 0.65;
         x = Math.cos(angle) * radius + (Math.random() - 0.5) * radius * 0.18;
         z = Math.sin(angle) * radius * 0.92 + (Math.random() - 0.5) * radius * 0.18;
         y = (Math.random() - 0.5) * (18 + radius * 0.07);
-      } else if (mode < 0.86) {
+      } else if (mode < 0.80) {
         radius = Math.pow(Math.random(), 2.2) * Math.min(W, H) * 0.18;
         angle = Math.random() * Math.PI * 2;
         x = Math.cos(angle) * radius;
@@ -1607,12 +1626,12 @@ function initMainPage() {
       }
 
       var depthBias = clamp((z + maxRadius) / (maxRadius * 2), 0, 1);
-      var isBig = depthBias > 0.66 && Math.random() < 0.045;
+      var isBig = depthBias > 0.68 && Math.random() < 0.09;
       var size;
-      if (isBig) size = 1.10 + Math.random() * 1.65;
-      else if (depthBias > 0.62) size = 0.70 + Math.random() * 0.82;
-      else if (depthBias > 0.36) size = 0.32 + Math.random() * 0.56;
-      else size = 0.11 + Math.random() * 0.26;
+      if (isBig) size = 1.8 + Math.random() * 2.9;
+      else if (depthBias > 0.62) size = 0.82 + Math.random() * 1.12;
+      else if (depthBias > 0.36) size = 0.38 + Math.random() * 0.72;
+      else size = 0.13 + Math.random() * 0.34;
 
       var color;
       if (depthBias < 0.24) {
@@ -1622,7 +1641,7 @@ function initMainPage() {
         color = PALETTE[Math.floor(Math.random()*PALETTE.length)];
       }
 
-      var brightness = Math.min(0.18 + depthBias * 0.60 + Math.random() * 0.18, 1.0);
+      var brightness = Math.min(0.16 + depthBias * 0.72 + Math.random() * 0.24, 1.0);
       stars.push({
         baseX: x,
         baseY: y,
@@ -1638,6 +1657,7 @@ function initMainPage() {
         brightness: brightness,
         phase: Math.random() * Math.PI * 2,
         isBig: isBig,
+        sparkle: Math.random(),
         mass: isBig ? 2.5 + Math.random() * 2.5 : 0.8 + Math.random() * 1.2,
         twinkleRate: 0.018 + Math.random() * 0.022,
         spinOffset: Math.random() * Math.PI * 2,
@@ -1818,13 +1838,14 @@ function initMainPage() {
     var r = Math.round(s.color.r);
     var g = Math.round(s.color.g);
     var b = Math.round(s.color.b);
-    var size = Math.max(0.22, Math.min(2.85, s.size * proj.scale));
+    var size = Math.max(0.24, Math.min(4.9, s.size * proj.scale));
+    var crossy = s.isBig || size > 1.65 || (size > 1.1 && s.sparkle > 0.82);
 
-    if (s.isBig || size > 2.0) {
-      var glowR = size * 4.2;
+    if (crossy) {
+      var glowR = size * (s.isBig ? 4.9 : 3.8);
       var glow = ctx.createRadialGradient(proj.x, proj.y, 0, proj.x, proj.y, glowR);
-      glow.addColorStop(0, 'rgba(' + r + ',' + g + ',' + b + ',' + (alpha * 0.26).toFixed(3) + ')');
-      glow.addColorStop(0.45, 'rgba(' + r + ',' + g + ',' + b + ',' + (alpha * 0.10).toFixed(3) + ')');
+      glow.addColorStop(0, 'rgba(' + r + ',' + g + ',' + b + ',' + (alpha * 0.30).toFixed(3) + ')');
+      glow.addColorStop(0.42, 'rgba(' + r + ',' + g + ',' + b + ',' + (alpha * 0.11).toFixed(3) + ')');
       glow.addColorStop(1, 'rgba(' + r + ',' + g + ',' + b + ',0)');
       ctx.fillStyle = glow;
       ctx.beginPath();
@@ -1836,23 +1857,28 @@ function initMainPage() {
       ctx.rotate(rendered.sparkAngle);
       for (var sp = 0; sp < 4; sp++) {
         ctx.rotate(Math.PI / 2);
-        var spike = ctx.createLinearGradient(0, 0, 0, size * 3.0);
-        spike.addColorStop(0, 'rgba(' + r + ',' + g + ',' + b + ',' + (alpha * 0.55).toFixed(3) + ')');
+        var spikeLen = size * (s.isBig ? 3.8 : 2.7);
+        var spike = ctx.createLinearGradient(0, 0, 0, spikeLen);
+        spike.addColorStop(0, 'rgba(' + r + ',' + g + ',' + b + ',' + (alpha * (s.isBig ? 0.58 : 0.38)).toFixed(3) + ')');
         spike.addColorStop(1, 'rgba(' + r + ',' + g + ',' + b + ',0)');
         ctx.strokeStyle = spike;
-        ctx.lineWidth = Math.max(0.45, size * 0.14);
+        ctx.lineWidth = Math.max(0.38, size * (s.isBig ? 0.28 : 0.17));
         ctx.beginPath();
         ctx.moveTo(0, 0);
-        ctx.lineTo(0, size * 3.0);
+        ctx.lineTo(0, spikeLen);
         ctx.stroke();
       }
       ctx.restore();
     }
 
     ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + alpha.toFixed(3) + ')';
-    ctx.beginPath();
-    ctx.arc(proj.x, proj.y, size, 0, Math.PI * 2);
-    ctx.fill();
+    if (s.isBig) {
+      ctx.fillRect(proj.x - size / 2, proj.y - size / 2, size, size);
+    } else {
+      ctx.beginPath();
+      ctx.arc(proj.x, proj.y, size, 0, Math.PI * 2);
+      ctx.fill();
+    }
   }
 
   function updateDots(anchorX, anchorY, rotX, rotY) {
@@ -2034,13 +2060,13 @@ function initMainPage() {
 
   function draw() {
     ctx.clearRect(0,0,W,H);
-    time += 0.008;
+    time += 0.0054;
     syncSceneState();
 
     var cameraTiltY = sceneState.orbitYaw + sceneState.pointerX * 0.12;
     var cameraTiltX = sceneState.orbitPitch - sceneState.pointerY * 0.06 + Math.sin(time * 0.45) * 0.02;
-    var galaxyAnchorX = W * 0.20 + sceneState.panX * 0.34;
-    var galaxyAnchorY = H * 0.57 + sceneState.panY * 0.18;
+    var galaxyAnchorX = W * 0.18 + sceneState.panX * 0.32;
+    var galaxyAnchorY = H * 0.52 + sceneState.panY * 0.16;
     var globalSpin = time * 0.12;
 
     for (var ni = 0; ni < nebulae.length; ni++) {
@@ -2565,10 +2591,11 @@ function initMainPage() {
   ];
 
   const TRAIL_LIFE = 2600;
-  const TRAIL_MAX  = 180;
+  const TRAIL_MAX  = 140;
   const hist  = [];
   let mx = -999, my = -999;
   let rx = -999, ry = -999;
+  let rvx = 0, rvy = 0;
   let bursts = [];
   let lastTrailAt = 0;
   let lastTrailX = -999;
@@ -2644,8 +2671,15 @@ function initMainPage() {
     }
 
     /* Spring ring */
-    rx += (mx - rx) * 0.10;
-    ry += (my - ry) * 0.10;
+    var hovering = ring.classList.contains('hovering');
+    var stiffness = hovering ? 0.14 : 0.11;
+    var damping = hovering ? 0.72 : 0.76;
+    rvx += (mx - rx) * stiffness;
+    rvy += (my - ry) * stiffness;
+    rvx *= damping;
+    rvy *= damping;
+    rx += rvx;
+    ry += rvy;
     ring.style.left = rx + 'px';
     ring.style.top  = ry + 'px';
 

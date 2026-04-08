@@ -523,16 +523,70 @@ nav.light .nav-cta {
     rotateY(calc(var(--hero-tilt-y) * -0.14deg));
   z-index: 4;
   opacity: 1;
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 1.4vw, 18px);
   will-change: transform;
   pointer-events: none;
 }
 
-.hero-logo-image {
-  display: block;
-  width: clamp(170px, 18vw, 236px);
-  height: auto;
-  opacity: 0.96;
-  filter: drop-shadow(0 14px 28px rgba(5,6,12,0.26));
+.hero-dot-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  flex: 0 0 auto;
+}
+
+.hero-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.hero-dot.ghost {
+  background: rgba(255,255,255,0.12);
+}
+
+.hero-dot.data  { background: #C8B6FF; box-shadow: 0 0 8px rgba(200,182,255,0.36); }
+.hero-dot.ops   { background: #B8E0D2; box-shadow: 0 0 8px rgba(184,224,210,0.28); }
+.hero-dot.tech  { background: #FFCDB2; box-shadow: 0 0 8px rgba(255,205,178,0.28); }
+
+.hero-logo-wordmark {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(11px, 0.92vw, 14px);
+  line-height: 1;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.9);
+  text-shadow: 0 6px 20px rgba(6,6,10,0.42);
+}
+
+.hero-logo-zeroone {
+  color: rgba(255,255,255,0.9);
+}
+
+.hero-logo-dotsline {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.hero-logo-sep {
+  color: rgba(255,255,255,0.24);
+  margin: 0 2px;
+}
+
+.hero-logo-data { color: #C8B6FF; }
+.hero-logo-ops { color: #B8E0D2; }
+.hero-logo-tech { color: #FFCDB2; }
+.hero-logo-strategy { color: #A2D2FF; }
+
+.hero-logo-ai {
+  color: rgba(255,255,255,0.94);
+  margin-left: 10px;
 }
 
 /* Scroll hint */
@@ -932,9 +986,22 @@ nav.light .nav-cta {
   .hero-logo-bottom {
     top: 20px;
     left: 18px;
+    gap: 10px;
   }
-  .hero-logo-image {
-    width: min(52vw, 176px);
+  .hero-dot-grid {
+    gap: 5px;
+  }
+  .hero-dot {
+    width: 8px;
+    height: 8px;
+  }
+  .hero-logo-wordmark {
+    gap: 10px;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+  }
+  .hero-logo-ai {
+    margin-left: 6px;
   }
 }
 
