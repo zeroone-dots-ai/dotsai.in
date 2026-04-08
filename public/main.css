@@ -515,56 +515,24 @@ nav.light .nav-cta {
 /* Hero dot grid logo at bottom */
 .hero-logo-bottom {
   position: absolute;
-  top: clamp(120px, 19vh, 170px);
-  left: clamp(28px, 5vw, 76px);
+  top: clamp(26px, 4vh, 44px);
+  left: clamp(22px, 3.6vw, 44px);
   transform:
-    translate3d(calc(var(--hero-pan-x) * -0.7px), calc(var(--hero-pan-y) * 0.45px), 90px)
-    rotateX(calc(var(--hero-tilt-x) * -0.28deg))
-    rotateY(calc(var(--hero-tilt-y) * -0.5deg));
+    translate3d(calc(var(--hero-pan-x) * -0.18px), calc(var(--hero-pan-y) * 0.12px), 70px)
+    rotateX(calc(var(--hero-tilt-x) * -0.08deg))
+    rotateY(calc(var(--hero-tilt-y) * -0.14deg));
   z-index: 4;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  opacity: 0;
-  padding: 14px 16px;
-  border-radius: 18px;
-  background: linear-gradient(180deg, rgba(7,9,16,0.46), rgba(7,9,16,0.16));
-  border: 1px solid rgba(255,255,255,0.08);
-  box-shadow: 0 18px 40px rgba(5,6,12,0.32);
-  backdrop-filter: blur(10px);
+  opacity: 1;
   will-change: transform;
   pointer-events: none;
 }
 
-.hero-dot-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-}
-.hero-dot {
-  width: 10px; height: 10px;
-  border-radius: 50%;
-}
-.hero-dot.ghost { background: rgba(255,255,255,0.08); }
-.hero-dot.data  { background: #C8B6FF; box-shadow: 0 0 6px 2px rgba(200,182,255,0.4); }
-.hero-dot.ops   { background: #B8E0D2; box-shadow: 0 0 6px 2px rgba(184,224,210,0.4); }
-.hero-dot.tech  { background: #FFCDB2; box-shadow: 0 0 6px 2px rgba(255,205,178,0.4); }
-
-.hero-logo-kicker {
-  font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.18em;
-  color: rgba(255,255,255,0.34);
-  text-transform: uppercase;
-}
-
-.hero-logo-label {
-  font-family: 'Space Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  color: rgba(255,255,255,0.72);
-  text-transform: uppercase;
+.hero-logo-image {
+  display: block;
+  width: clamp(170px, 18vw, 236px);
+  height: auto;
+  opacity: 0.96;
+  filter: drop-shadow(0 14px 28px rgba(5,6,12,0.26));
 }
 
 /* Scroll hint */
@@ -962,17 +930,11 @@ nav.light .nav-cta {
   .hero-slide { padding: 0 24px; }
   .hero-slide-tags { gap: 8px; }
   .hero-logo-bottom {
-    top: auto;
-    bottom: 92px;
-    left: 24px;
-    padding: 12px 14px;
+    top: 20px;
+    left: 18px;
   }
-  .hero-dot {
-    width: 8px;
-    height: 8px;
-  }
-  .hero-logo-label {
-    font-size: 10px;
+  .hero-logo-image {
+    width: min(52vw, 176px);
   }
 }
 
@@ -1754,7 +1716,7 @@ footer {
   will-change: transform;
 }
 #hero .hero-content { position: relative; z-index: 3; }
-#hero .hero-logo-bottom { position: relative; z-index: 3; }
+#hero .hero-logo-bottom { position: absolute; z-index: 4; }
 #hero .scroll-hint { position: relative; z-index: 3; }
 
 /* ── Particle Mesh Canvas (infinity orbit layer) ── */

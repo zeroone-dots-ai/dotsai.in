@@ -326,19 +326,7 @@
     </div>
 
     <div class="hero-logo-bottom" id="hero-logo-bottom">
-      <div class="hero-dot-grid">
-        <div class="hero-dot data"></div>
-        <div class="hero-dot ghost"></div>
-        <div class="hero-dot ghost"></div>
-        <div class="hero-dot ghost"></div>
-        <div class="hero-dot ops"></div>
-        <div class="hero-dot ghost"></div>
-        <div class="hero-dot ghost"></div>
-        <div class="hero-dot ghost"></div>
-        <div class="hero-dot tech"></div>
-      </div>
-      <span class="hero-logo-kicker">ZeroOne</span>
-      <span class="hero-logo-label">D.O.T.S AI</span>
+      <img src="/brand/zeroone-dark-horizontal.svg" alt="ZeroOne D.O.T.S AI" class="hero-logo-image">
     </div>
 
     <div class="scroll-hint" id="scroll-hint">
@@ -1078,7 +1066,6 @@ function initMainPage() {
   }
 
   // Entrance animation for first slide content
-  gsap.set('#hero-logo-bottom', { opacity: 0 })
   gsap.set('#scroll-hint', { opacity: 0 })
 
   const firstSlide = slides[0]
@@ -1087,7 +1074,6 @@ function initMainPage() {
     .from(firstSlide.querySelector('.hero-slide-title'),   { opacity: 0, y: 24, duration: 0.8, ease: 'power3.out' }, '-=0.4')
     .from(firstSlide.querySelector('.hero-slide-sub'),     { opacity: 0, y: 16, duration: 0.7, ease: 'power3.out' }, '-=0.5')
     .from(firstSlide.querySelector('.hero-slide-tags') || firstSlide.querySelector('.hero-slide-ctas'), { opacity: 0, y: 12, duration: 0.6, ease: 'power3.out' }, '-=0.4')
-    .to('#hero-logo-bottom', { opacity: 1, duration: 0.5 }, '-=0.2')
     .to('#scroll-hint', { opacity: 1, duration: 0.4 }, '-=0.1')
 
   // Scroll-driven hero transitions
