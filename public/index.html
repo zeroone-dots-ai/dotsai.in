@@ -244,28 +244,15 @@
 <div id="main-page">
 
   <!-- NAV -->
-  <nav id="nav">
-    <a href="#" class="nav-logo">
-      <div class="nav-dot-grid">
-        <div class="nav-dot data"></div>
-        <div class="nav-dot ghost"></div>
-        <div class="nav-dot ghost"></div>
-        <div class="nav-dot ghost"></div>
-        <div class="nav-dot ops"></div>
-        <div class="nav-dot ghost"></div>
-        <div class="nav-dot ghost"></div>
-        <div class="nav-dot ghost"></div>
-        <div class="nav-dot tech"></div>
-      </div>
-      <span class="nav-logo-text">ZEROONE D.O.T.S AI</span>
-    </a>
-    <div class="nav-links">
-      <a href="#meet" class="nav-link">Meet</a>
-      <a href="#consulting" class="nav-link">Consulting</a>
-      <a href="#platform" class="nav-link">Platform</a>
-      <a href="/labs/" class="nav-link">Labs</a>
+  <nav id="nav" class="nav-hidden">
+    <div class="nav-filters">
+      <button class="nav-filter active" data-filter="all">All</button>
+      <button class="nav-filter" data-filter="meet">Meet</button>
+      <button class="nav-filter" data-filter="services">Services</button>
+      <button class="nav-filter" data-filter="product">Product</button>
+      <button class="nav-filter" data-filter="work">Work</button>
     </div>
-    <a href="https://wa.me/918320065658" target="_blank" rel="noopener" class="nav-cta">↗ Let's Talk</a>
+    <a href="https://wa.me/918320065658" target="_blank" rel="noopener" class="nav-cta">Let’s Talk</a>
   </nav>
 
   <!-- ─── HERO (3-panel scroll) ─── -->
@@ -387,6 +374,8 @@
           <span class="credential-text">Middlemen. You talk to the builder.</span>
         </div>
       </div>
+
+      <p class="meet-tagline">Builder by blood. I don’t pitch. I build. End to end.</p>
 
       <a href="https://meet.dotsai.in" class="meet-redirect fade-up">
         Full story → meet.dotsai.in <span class="service-arrow">↗</span>
@@ -2622,6 +2611,94 @@ a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .service-row
 </script>
 
 
+
+
+<script>
+/* ══════════════════════════════════════════════════
+   NAV FILTER + VISIBILITY SYSTEM
+══════════════════════════════════════════════════ */
+(function() {
+  const nav = document.getElementById('nav');
+  const filters = document.querySelectorAll('.nav-filter');
+  const heroSection = document.getElementById('hero');
+
+  // Filter → section mapping
+  const FILTER_MAP = {
+    all:      ['hero','meet','platform','consulting','proof','labs-teaser','contact'],
+    meet:     ['hero','meet','contact'],
+    services: ['hero','consulting','contact'],
+    product:  ['hero','platform','contact'],
+    work:     ['hero','proof','labs-teaser','contact']
+  };
+
+  const ALL_SECTIONS = ['hero','meet','platform','consulting','proof','labs-teaser','contact'];
+  let activeFilter = 'all';
+
+  // ── Show/hide nav based on scroll past hero ──
+  // Show nav after scrolling past hero (account for pinned hero height)
+  function updateNavVisibility() {
+    var heroEl = document.getElementById('hero');
+    if (!heroEl) return;
+    var heroBottom = heroEl.getBoundingClientRect().bottom;
+    if (heroBottom <= 0) {
+      nav.classList.remove('nav-hidden');
+    } else {
+      nav.classList.add('nav-hidden');
+    }
+  }
+  window.addEventListener('scroll', updateNavVisibility, { passive: true });
+  updateNavVisibility();
+
+  // ── Filter click handlers ──
+  filters.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var filter = btn.dataset.filter;
+      if (filter === activeFilter) return;
+      activeFilter = filter;
+
+      // Update active pill
+      filters.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+
+      // Show/hide sections + their GSAP pin-spacers
+      var visible = FILTER_MAP[filter];
+      ALL_SECTIONS.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        // GSAP wraps pinned sections in a div with pin-spacer class
+        var pinSpacer = el.closest('.pin-spacer');
+        if (visible.indexOf(id) !== -1) {
+          el.classList.remove('section-hidden');
+          if (pinSpacer) pinSpacer.style.display = '';
+        } else {
+          el.classList.add('section-hidden');
+          if (pinSpacer) pinSpacer.style.display = 'none';
+        }
+      });
+
+      // Refresh GSAP ScrollTrigger after layout change
+      if (typeof ScrollTrigger !== 'undefined') {
+        ScrollTrigger.refresh(true);
+      }
+
+      // Scroll to first non-hero visible section
+      if (filter !== 'all') {
+        var firstSection = visible[1]; // skip hero
+        var target = document.getElementById(firstSection);
+        // Account for pin-spacer wrapper
+        var scrollTarget = target && target.closest('.pin-spacer') || target;
+        if (scrollTarget) {
+          setTimeout(function() {
+            scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 50);
+        }
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
