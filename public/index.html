@@ -1102,6 +1102,8 @@ function initMainPage() {
       scrub: 0.5,
       onUpdate: (self) => {
         const progress = self.progress
+        window.__dotsHeroScene = window.__dotsHeroScene || {}
+        window.__dotsHeroScene.heroProgress = progress
         let activeIdx = 0
         if (progress > 0.55) activeIdx = 2
         else if (progress > 0.15) activeIdx = 1
@@ -2267,6 +2269,7 @@ function initMainPage() {
       impulseX: 0,
       impulseY: 0,
       impulseLife: 0,
+      heroProgress: 0,
     };
     var sceneState = window.__dotsHeroScene || {};
     for (var sceneKey in sceneDefaults) {
@@ -2276,7 +2279,6 @@ function initMainPage() {
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
     var W, H, cx, cy, scale;
     var mx = -1000, my = -1000;
-    var scrollY = 0;
     var time = 0;
     var raf;
     var particles = [];
@@ -2342,7 +2344,8 @@ function initMainPage() {
       ctx.clearRect(0, 0, W, H);
       time += 0.008;
 
-      var scrollFade = Math.max(0, 1 - scrollY / (H * 0.7));
+      var heroProgress = sceneState.heroProgress || 0;
+      var scrollFade = heroProgress < 0.90 ? 1 : Math.max(0, 1 - ((heroProgress - 0.90) / 0.10));
       ctx.globalAlpha = scrollFade;
       var orbitPs = [];
       var renderables = [];
@@ -2477,7 +2480,6 @@ function initMainPage() {
       mx = e.clientX - rect.left; my = e.clientY - rect.top;
     }, { passive: true });
     heroEl.addEventListener('mouseleave', function() { mx=-1000; my=-1000; });
-    window.addEventListener('scroll', function() { scrollY = window.scrollY; }, { passive: true });
     window.addEventListener('resize', function() { cancelAnimationFrame(raf); resize(); });
 
     resize();
