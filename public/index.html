@@ -1839,7 +1839,19 @@ function initMainPage() {
     var g = Math.round(s.color.g);
     var b = Math.round(s.color.b);
     var size = Math.max(0.24, Math.min(4.9, s.size * proj.scale));
-    var crossy = s.isBig || size > 1.65 || (size > 1.1 && s.sparkle > 0.82);
+    var heroSafeZone =
+      proj.x > W * 0.28 &&
+      proj.x < W * 0.73 &&
+      proj.y > H * 0.16 &&
+      proj.y < H * 0.72;
+
+    if (heroSafeZone) {
+      var sizeCap = W < 768 ? 1.85 : 1.28;
+      size = Math.min(size, sizeCap);
+      alpha *= size > 1.04 ? 0.72 : 0.84;
+    }
+
+    var crossy = !heroSafeZone && (s.isBig || size > 1.65 || (size > 1.1 && s.sparkle > 0.82));
 
     if (crossy) {
       var glowR = size * (s.isBig ? 4.9 : 3.8);
@@ -2067,7 +2079,7 @@ function initMainPage() {
     var cameraTiltY = sceneState.orbitYaw + sceneState.pointerX * 0.12;
     var cameraTiltX = sceneState.orbitPitch - sceneState.pointerY * 0.06 + Math.sin(time * 0.45) * 0.02;
     var galaxyAnchorX = W * (isMobileScene ? 0.30 : 0.18) + sceneState.panX * (isMobileScene ? 0.24 : 0.32);
-    var galaxyAnchorY = H * (isMobileScene ? 0.44 : 0.52) + sceneState.panY * (isMobileScene ? 0.11 : 0.16);
+    var galaxyAnchorY = H * (isMobileScene ? 0.44 : 0.495) + sceneState.panY * (isMobileScene ? 0.11 : 0.16);
     var globalSpin = time * 0.12;
 
     for (var ni = 0; ni < nebulae.length; ni++) {
