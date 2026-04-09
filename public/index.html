@@ -940,14 +940,28 @@
   <section id="labs-teaser">
     <div class="labs-teaser-shell">
       <div class="labs-teaser-copy">
-        <p class="labs-teaser-label">// labs</p>
-        <h2 class="labs-teaser-title">Curated public demos. <em>Only the ones that sell the story.</em></h2>
-        <p class="labs-teaser-sub">This is not a dump of random experiments. These are the demos that best explain the consulting stack in public: visibility, documents, and workflow intelligence.</p>
+        <p class="labs-teaser-label">// labs · current public set</p>
+        <h2 class="labs-teaser-title">Public demos we keep live now. <em>Everything else rotates with the story.</em></h2>
+        <p class="labs-teaser-sub">Labs should help sell the offer, not distract from it. The always-on public shelf stays focused on three demos that explain the stack fastest: visibility, document intelligence, and operations sync.</p>
         <div class="labs-teaser-facts">
-          <span class="labs-teaser-fact">Playable demos</span>
-          <span class="labs-teaser-fact">Client-relevant</span>
-          <span class="labs-teaser-fact">Easy to understand</span>
-          <span class="labs-teaser-fact">More labs can rotate in later</span>
+          <span class="labs-teaser-fact">3 core demos</span>
+          <span class="labs-teaser-fact">High signal</span>
+          <span class="labs-teaser-fact">Client-facing</span>
+          <span class="labs-teaser-fact">Rotation-ready</span>
+        </div>
+        <div class="labs-teaser-policy">
+          <div class="labs-teaser-policy-card">
+            <span class="labs-teaser-policy-label">Keep live now</span>
+            <div class="labs-teaser-policy-list">
+              <span>SEO &amp; GEO Analyzer</span>
+              <span>Document Intelligence</span>
+              <span>Workflow Control Room</span>
+            </div>
+          </div>
+          <div class="labs-teaser-policy-card labs-teaser-policy-card--muted">
+            <span class="labs-teaser-policy-label">Rotate later</span>
+            <p>Chat and niche experiments come forward only when they sharpen a real sales conversation or campaign.</p>
+          </div>
         </div>
       </div>
 
@@ -1000,7 +1014,7 @@
       </div>
     </div>
 
-    <a href="/labs/" class="labs-teaser-all">Explore the lab index &rarr;</a>
+    <a href="/labs/" class="labs-teaser-all">Explore the current lab shelf &rarr;</a>
   </section>
 
   <!-- ─── CONTACT ─── -->
@@ -3337,6 +3351,61 @@ function initMainPage() {
   color: rgba(243,240,255,0.58);
 }
 
+.labs-teaser-policy {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 12px;
+}
+
+.labs-teaser-policy-card {
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.04);
+  padding: 16px 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.labs-teaser-policy-card--muted {
+  background: rgba(255,255,255,0.025);
+}
+
+.labs-teaser-policy-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(243,240,255,0.36);
+}
+
+.labs-teaser-policy-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.labs-teaser-policy-list span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  background: rgba(215,207,240,0.08);
+  border: 1px solid rgba(215,207,240,0.14);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  line-height: 1.2;
+  color: rgba(243,240,255,0.82);
+}
+
+.labs-teaser-policy-card p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(243,240,255,0.54);
+}
+
 .labs-teaser-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -3629,6 +3698,9 @@ function initMainPage() {
   }
   .labs-teaser-facts {
     gap: 8px;
+  }
+  .labs-teaser-policy {
+    grid-template-columns: 1fr;
   }
   .labs-teaser-fact {
     font-size: 9px;

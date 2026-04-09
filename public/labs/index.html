@@ -4,17 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Labs | Interactive AI Demos | ZeroOne D.O.T.S AI</title>
-  <meta name="description" content="Interactive AI demos by ZeroOne D.O.T.S AI. Try live AI chat, document intelligence, workflow automation, and SEO analysis tools.">
+  <meta name="description" content="Curated public demos by ZeroOne D.O.T.S AI. Explore SEO and GEO analysis, document intelligence, and workflow operations demos that explain the consulting stack clearly.">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="https://dotsai.in/labs/">
   <meta property="og:title" content="Labs | Interactive AI Demos | ZeroOne D.O.T.S AI">
-  <meta property="og:description" content="Touch it. Break it. See what AI can do. Interactive demos of private AI, document parsing, workflow automation, and more.">
+  <meta property="og:description" content="Curated public demos for visibility, document intelligence, and workflow operations. Built to show how the consulting stack works in practice.">
   <meta property="og:url" content="https://dotsai.in/labs/">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://dotsai.in/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Labs | ZeroOne D.O.T.S AI">
-  <meta name="twitter:description" content="Interactive AI demos. Chat agents, document intelligence, workflow visualizers, and SEO tools.">
+  <meta name="twitter:description" content="Curated public demos for visibility, document intelligence, and workflow operations.">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="apple-touch-icon" href="/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -196,6 +196,62 @@ body {
   position: relative;
 }
 
+.labs-hero-policy {
+  margin-top: 34px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 16px;
+  position: relative;
+}
+
+.labs-hero-policy-card {
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.045);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.labs-hero-policy-card.muted {
+  background: rgba(255,255,255,0.03);
+}
+
+.labs-hero-policy-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(243,240,255,0.38);
+}
+
+.labs-hero-policy-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.labs-hero-policy-chips span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(215,207,240,0.14);
+  background: rgba(215,207,240,0.08);
+  font-size: 12px;
+  line-height: 1.2;
+  color: rgba(243,240,255,0.82);
+}
+
+.labs-hero-policy-card p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: rgba(243,240,255,0.58);
+}
+
 /* ── Grid ── */
 .labs-grid {
   max-width: 1120px;
@@ -222,6 +278,11 @@ body {
   text-decoration: none;
   color: inherit;
   animation: cardFadeIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+.lab-card.is-rotating {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.08);
 }
 .lab-card:nth-child(1) { animation-delay: 0.3s; }
 .lab-card:nth-child(2) { animation-delay: 0.42s; }
@@ -639,6 +700,10 @@ body {
     padding: 130px 20px 60px;
   }
 
+  .labs-hero-policy {
+    grid-template-columns: 1fr;
+  }
+
   .labs-grid {
     grid-template-columns: 1fr;
     padding: 0 20px 80px;
@@ -699,27 +764,41 @@ body {
       <a href="/">Home</a> <span>/</span> <span>Labs</span>
     </div>
     <h1>Labs<em>.</em></h1>
-    <p class="labs-subtitle">Interactive demos of what we build. Touch it. Break it. See what AI can do.</p>
+    <p class="labs-subtitle">The current public demo shelf for visibility, document intelligence, and workflow operations. We keep only the demos that explain the consulting stack quickly and clearly.</p>
+    <div class="labs-hero-policy">
+      <div class="labs-hero-policy-card">
+        <span class="labs-hero-policy-label">Keep live now</span>
+        <div class="labs-hero-policy-chips">
+          <span>SEO &amp; GEO Analyzer</span>
+          <span>Document Intelligence</span>
+          <span>Workflow Control Room</span>
+        </div>
+      </div>
+      <div class="labs-hero-policy-card muted">
+        <span class="labs-hero-policy-label">Rotation rule</span>
+        <p>Chat and niche experiments rotate in only when they help a real sales conversation, campaign, or client use case.</p>
+      </div>
+    </div>
   </header>
 
   <!-- GRID -->
   <section class="labs-grid">
 
-    <!-- Card 1: AI Chat Agent -->
-    <a href="/labs/ai-chat/" class="lab-card">
+    <!-- Card 1: SEO & GEO Analyzer -->
+    <a href="/labs/seo-checker/" class="lab-card">
       <span class="lab-card-num">01</span>
       <div class="lab-card-visual">
-        <div class="viz-chat">
-          <div class="viz-chat-bubble user">How can AI help my business?</div>
-          <div class="viz-chat-bubble ai">Let me analyze your workflow...</div>
-          <div class="viz-chat-typing">
-            <span></span><span></span><span></span>
-          </div>
+        <div class="viz-seo">
+          <div class="viz-seo-ring"></div>
+          <div class="viz-seo-ring"></div>
+          <div class="viz-seo-ring"></div>
+          <div class="viz-seo-ring"></div>
+          <div class="viz-seo-core"></div>
         </div>
       </div>
-      <span class="lab-card-tag">Live Demo</span>
-      <h3>AI Chat Agent</h3>
-      <p class="lab-card-desc">Talk to our AI. Live. A conversational agent that understands context and delivers real answers.</p>
+      <span class="lab-card-tag">Visibility</span>
+      <h3>SEO &amp; GEO Analyzer</h3>
+      <p class="lab-card-desc">Paste a URL and review search visibility, answer-engine presence, and discoverability before a full growth build.</p>
       <span class="lab-card-cta">Try it <span class="arrow">&rarr;</span></span>
     </a>
 
@@ -743,7 +822,7 @@ body {
       <span class="lab-card-cta">Try it <span class="arrow">&rarr;</span></span>
     </a>
 
-    <!-- Card 3: Workflow Automator -->
+    <!-- Card 3: Workflow Control Room -->
     <a href="/labs/workflow-viz/" class="lab-card">
       <span class="lab-card-num">03</span>
       <div class="lab-card-visual">
@@ -757,27 +836,27 @@ body {
           <div class="viz-wf-node"><div class="viz-wf-node-dot"></div></div>
         </div>
       </div>
-      <span class="lab-card-tag">Automation</span>
-      <h3>Workflow Automator</h3>
-      <p class="lab-card-desc">See AI agents work in real-time. An animated pipeline visualizer showing multi-step automation.</p>
+      <span class="lab-card-tag">Operations</span>
+      <h3>Workflow Control Room</h3>
+      <p class="lab-card-desc">See handoffs, agents, and automation steps move together instead of living across disconnected tools.</p>
       <span class="lab-card-cta">Try it <span class="arrow">&rarr;</span></span>
     </a>
 
-    <!-- Card 4: SEO & GEO Analyzer -->
-    <a href="/labs/seo-checker/" class="lab-card">
+    <!-- Card 4: AI Front Door -->
+    <a href="/labs/ai-chat/" class="lab-card is-rotating">
       <span class="lab-card-num">04</span>
       <div class="lab-card-visual">
-        <div class="viz-seo">
-          <div class="viz-seo-ring"></div>
-          <div class="viz-seo-ring"></div>
-          <div class="viz-seo-ring"></div>
-          <div class="viz-seo-ring"></div>
-          <div class="viz-seo-core"></div>
+        <div class="viz-chat">
+          <div class="viz-chat-bubble user">How can AI help my business?</div>
+          <div class="viz-chat-bubble ai">Let me analyze your workflow...</div>
+          <div class="viz-chat-typing">
+            <span></span><span></span><span></span>
+          </div>
         </div>
       </div>
-      <span class="lab-card-tag">Analysis</span>
-      <h3>SEO &amp; GEO Analyzer</h3>
-      <p class="lab-card-desc">Paste a URL. Get AI insights. Analyze search visibility and answer-engine presence instantly.</p>
+      <span class="lab-card-tag">Rotating demo</span>
+      <h3>AI Front Door</h3>
+      <p class="lab-card-desc">Useful when a business needs a front-desk assistant or support layer, but it rotates in only when that use case matters.</p>
       <span class="lab-card-cta">Try it <span class="arrow">&rarr;</span></span>
     </a>
 
