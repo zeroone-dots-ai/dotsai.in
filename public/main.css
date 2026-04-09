@@ -964,7 +964,7 @@ nav.light .nav-cta {
 
 .platform-copy-stack {
   position: relative;
-  min-height: 430px;
+  min-height: 540px;
 }
 
 .platform-copy-card {
@@ -1039,7 +1039,8 @@ nav.light .nav-cta {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,0.05);
   opacity: 0;
   transform: translateY(18px);
 }
@@ -1612,7 +1613,7 @@ nav.light .nav-cta {
     gap: 18px;
   }
   .platform-copy-stack {
-    min-height: 340px;
+    min-height: 420px;
   }
   .platform-title {
     font-size: clamp(34px, 9.5vw, 52px);
@@ -1628,6 +1629,9 @@ nav.light .nav-cta {
   .platform-fact {
     padding: 7px 10px;
     font-size: 9px;
+  }
+  .platform-cta-cluster {
+    padding-top: 10px;
   }
   .platform-stage-glow {
     inset: 6% 2% 5%;
