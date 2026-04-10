@@ -5125,6 +5125,69 @@ a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .service-row
 })();
 </script>
 
+<!-- ── Planet Drag-to-Scroll ───────────────────────────────────────── -->
+<script>
+(function() {
+  'use strict';
+  var orb    = document.querySelector('.story-thread-orb');
+  var ring   = document.getElementById('cursor-ring');
+  var thread = document.getElementById('story-thread');
+  if (!orb || !thread) return;
+
+  // The whole #story-thread has pointer-events:none — unlock just the orb
+  orb.style.pointerEvents = 'auto';
+
+  var isDragging  = false;
+  var startY      = 0;
+  var startScroll = 0;
+  var sensitivity = 1;
+
+  function recalc() {
+    var railH = thread.getBoundingClientRect().height - 36;
+    var total = document.documentElement.scrollHeight - window.innerHeight;
+    sensitivity = railH > 0 ? total / railH : 8;
+  }
+
+  // Targeting ring on hover
+  orb.addEventListener('mouseenter', function() {
+    if (ring) ring.classList.add('hovering');
+  });
+  orb.addEventListener('mouseleave', function() {
+    if (!isDragging && ring) ring.classList.remove('hovering');
+  });
+
+  orb.addEventListener('pointerdown', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    isDragging = true;
+    orb.setPointerCapture(e.pointerId);
+    startY      = e.clientY;
+    startScroll = window.scrollY;
+    recalc();
+    gsap.to(orb, { scale: 1.18, duration: 0.16, ease: 'power2.out' });
+    document.body.style.userSelect = 'none';
+  });
+
+  orb.addEventListener('pointermove', function(e) {
+    if (!isDragging) return;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    var target = startScroll + (e.clientY - startY) * sensitivity;
+    window.scrollTo(0, Math.max(0, Math.min(max, target)));
+  });
+
+  function onRelease() {
+    if (!isDragging) return;
+    isDragging = false;
+    document.body.style.userSelect = '';
+    if (ring) ring.classList.remove('hovering');
+    gsap.to(orb, { scale: 1, duration: 0.45, ease: 'elastic.out(1, 0.4)' });
+  }
+
+  orb.addEventListener('pointerup',     onRelease);
+  orb.addEventListener('pointercancel', onRelease);
+})();
+</script>
+
 <!-- ── Magnetic CTA ─────────────────────────────────────────────────── -->
 <script>
 (function() {
