@@ -4975,6 +4975,75 @@ a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .service-row
   var EASE     = 'cubic-bezier(0.23, 1, 0.32, 1)';
   var isOpen   = false;
 
+  // ── Drag-to-anywhere ──────────────────────────────────────────────
+  function makeDraggable(card) {
+    var drag = { active: false, startX: 0, startY: 0, origLeft: 0, origTop: 0 };
+
+    function onDown(e) {
+      // Don't start drag on the close button
+      if (e.target.closest('.tfloat-x')) return;
+      drag.active = true;
+      card.setPointerCapture(e.pointerId);
+
+      var rect = card.getBoundingClientRect();
+      drag.startX  = e.clientX;
+      drag.startY  = e.clientY;
+      drag.origLeft = rect.left;
+      drag.origTop  = rect.top;
+
+      // Switch to fixed absolute position so we can move freely
+      card.style.position = 'fixed';
+      card.style.left     = rect.left + 'px';
+      card.style.top      = rect.top  + 'px';
+      card.style.right    = 'auto';
+      card.style.bottom   = 'auto';
+      card.style.margin   = '0';
+      card.style.transform = 'none';
+      card.style.transition = 'none';
+      card.style.zIndex   = '9100';
+      card.style.cursor   = 'grabbing';
+      card.style.userSelect = 'none';
+      gsap.to(card, { scale: 1.04, boxShadow: '0 32px 64px rgba(0,0,0,0.38)', duration: 0.18, ease: 'power2.out' });
+    }
+
+    function onMove(e) {
+      if (!drag.active) return;
+      var dx = e.clientX - drag.startX;
+      var dy = e.clientY - drag.startY;
+
+      var newLeft = drag.origLeft + dx;
+      var newTop  = drag.origTop  + dy;
+
+      // Keep card inside viewport with 10px padding
+      var pad = 10;
+      var cw  = card.offsetWidth;
+      var ch  = card.offsetHeight;
+      newLeft = Math.max(pad, Math.min(window.innerWidth  - cw - pad, newLeft));
+      newTop  = Math.max(pad, Math.min(window.innerHeight - ch - pad, newTop));
+
+      card.style.left = newLeft + 'px';
+      card.style.top  = newTop  + 'px';
+    }
+
+    function onUp(e) {
+      if (!drag.active) return;
+      drag.active = false;
+      card.releasePointerCapture(e.pointerId);
+      card.style.cursor   = 'grab';
+      card.style.zIndex   = '';
+      gsap.to(card, { scale: 1, boxShadow: '', duration: 0.24, ease: EASE });
+    }
+
+    card.addEventListener('pointerdown', onDown);
+    card.addEventListener('pointermove', onMove);
+    card.addEventListener('pointerup',   onUp);
+    card.addEventListener('pointercancel', onUp);
+    card.style.cursor = 'grab';
+  }
+
+  cards.forEach(makeDraggable);
+  // ─────────────────────────────────────────────────────────────────
+
   function openOverlay() {
     if (isOpen) return;
     isOpen = true;
@@ -4982,8 +5051,17 @@ a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .service-row
     overlay.style.pointerEvents = 'auto';
     document.body.style.overflow = 'hidden';
 
-    // Reset cards
-    cards.forEach(function(c) { c.style.display = ''; });
+    // Reset cards to original CSS layout before re-animating
+    cards.forEach(function(c) {
+      c.style.display = '';
+      c.style.position = '';
+      c.style.left = '';
+      c.style.top  = '';
+      c.style.right = '';
+      c.style.bottom = '';
+      c.style.margin = '';
+      c.style.transform = '';
+    });
 
     gsap.fromTo(backdrop, { opacity: 0 }, { opacity: 1, duration: 0.32 });
     cards.forEach(function(card, i) {
