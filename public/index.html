@@ -2449,18 +2449,11 @@ function initMainPage() {
     onEnterBack: () => setStoryThreadState('contact'),
   }))
 
-    if (DOTS.screen) {
-      var ddx = DOTS.screen.x - x;
-      var ddy = DOTS.screen.y - y;
-      var ddist = Math.sqrt(ddx * ddx + ddy * ddy);
-      if (ddist < DOTS.screen.r * 2.4) {
-        DOTS.vx += dx * 0.06;
-        DOTS.vy += dy * 0.05;
-        DOTS.vz += motion * 0.12;
-        DOTS.shieldGlow = Math.min(1, DOTS.shieldGlow + 0.18);
-      }
-    }
-  }
+  sectionFilterRegistry.ready = true
+}
+
+
+;(function() {
 
   function drawNebula(n, anchorX, anchorY, rotX, rotY) {
     var proj = projectPoint(n.x, n.y, n.z, anchorX, anchorY, rotX, rotY, 1040);
