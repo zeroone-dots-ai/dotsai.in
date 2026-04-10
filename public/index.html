@@ -2308,23 +2308,42 @@ function initMainPage() {
   if (!isMobile) {
     labsEl.style.height = '100vh'
     labsEl.style.overflow = 'hidden'
-    gsap.set(labsLabel, { opacity: 1, y: 0 })
-    gsap.set([labsTitle, labsSub], { opacity: 1, y: 0 })
-    gsap.set(labsFacts, { opacity: 1, y: 0 })
-    gsap.set(labsCards, { opacity: 1, y: 0, scale: 1 })
-    gsap.set(labsAll, { opacity: 1, y: 0 })
+
+    const labsPolicies = labsEl.querySelectorAll('.labs-teaser-policy-card')
+
+    // Everything starts hidden — scroll reveals progressively
+    gsap.set(labsLabel,    { opacity: 0, y: 18 })
+    gsap.set(labsTitle,    { opacity: 0, y: 24 })
+    gsap.set(labsSub,      { opacity: 0, y: 16 })
+    gsap.set(labsFacts,    { opacity: 0, y: 10 })
+    gsap.set(labsPolicies, { opacity: 0, y: 18 })
+    gsap.set(labsCards,    { opacity: 0, y: 40, scale: 0.95 })
+    gsap.set(labsAll,      { opacity: 0, y: 12 })
 
     const labsTl = gsap.timeline({
       scrollTrigger: {
         trigger: '#labs-teaser', start: 'top top',
-        end: '+=220%',
-        pin: true, scrub: 0.5, anticipatePin: 1,
+        end: '+=240%',
+        pin: true, scrub: 0.6, anticipatePin: 1,
       }
     })
-    labsTl.to(labsCards, { y: -8, stagger: 0.03, duration: 0.10, ease: EASE_OUT }, 0.22)
-    labsTl.to(labsCards, { y: 0, duration: 0.10, ease: EASE_OUT }, 0.38)
-    labsTl.to(labsAll, { opacity: 1, y: 0, duration: 0.10, ease: EASE_OUT }, 0.84)
+
+    // Phase 1 — left copy enters (0 → 0.38)
+    labsTl.to(labsLabel,       { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.03)
+    labsTl.to(labsTitle,       { opacity: 1, y: 0, duration: 0.10, ease: EASE_OUT }, 0.09)
+    labsTl.to(labsSub,         { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.17)
+    labsTl.to(labsFacts,       { opacity: 1, y: 0, stagger: 0.025, duration: 0.07, ease: EASE_OUT }, 0.23)
+    labsTl.to(labsPolicies,    { opacity: 1, y: 0, stagger: 0.06,  duration: 0.09, ease: EASE_OUT }, 0.30)
+
+    // Phase 2 — demo cards appear one by one (0.42 → 0.72)
+    labsTl.to(labsCards[0],    { opacity: 1, y: 0, scale: 1, duration: 0.12, ease: EASE_OUT }, 0.42)
+    labsTl.to(labsCards[1],    { opacity: 1, y: 0, scale: 1, duration: 0.12, ease: EASE_OUT }, 0.55)
+    labsTl.to(labsCards[2],    { opacity: 1, y: 0, scale: 1, duration: 0.12, ease: EASE_OUT }, 0.68)
+
+    // Phase 3 — CTA then hold (0.82 → 1.0)
+    labsTl.to(labsAll,         { opacity: 1, y: 0, duration: 0.10, ease: EASE_OUT }, 0.82)
     labsTl.set({}, {}, 1)
+
     registerSectionTrigger('labs-teaser', labsTl.scrollTrigger)
   }
 
