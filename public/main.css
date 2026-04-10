@@ -4831,3 +4831,54 @@ footer {
     pointer-events: none;
   }
 }
+
+/* ───────────────────────────────────────────────
+   MOBILE OVERRIDE — ensure all animated content
+   is visible when GSAP pins are killed
+─────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  /* Remove height/overflow constraints set by JS */
+  #meet, #platform, #consulting, #proof, #assist {
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* CSS initial-state classes that GSAP animates from */
+  .fade-up, .fade-in, .service-row,
+  .proof-metric, .case-card,
+  .meet-credential, .brief-service-item {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* All GSAP-hidden elements in pinned sections */
+  .manifesto-word,
+  .meet-redirect, .credential-divider,
+  .platform-label, .platform-copy-card, .platform-phase,
+  .platform-signal, .platform-core-rail,
+  .platform-suite-kicker, .platform-suite-badge,
+  .platform-suite-card, .platform-suite-ribbon,
+  .platform-rollout-column, .platform-doc-chip,
+  .platform-agent-card, .platform-market-chip,
+  .platform-rollout-stat, .platform-cta-cluster,
+  .platform-stage-glow,
+  .consulting-label, .consulting-copy-card, .consulting-phase,
+  .consulting-engine-card, .consulting-outcome-row,
+  .consulting-step-card, .consulting-outcome-footer,
+  .consulting-cta-cluster, .consulting-stage-glow,
+  .proof-label, .proof-copy-card, .proof-phase,
+  .proof-case-note, .proof-stage-glow,
+  .assist-label, .assist-copy-card, .assist-phase,
+  .assist-tools-core, .assist-tool-card,
+  .assist-partner-note, .assist-partner-card,
+  .assist-partner-footer, .assist-cta-cluster,
+  .assist-stage-glow,
+  .labs-teaser-label, .labs-teaser-title, .labs-teaser-sub,
+  .labs-teaser-fact, .labs-teaser-card, .labs-teaser-all,
+  .labs-teaser-policy-card {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+  }
+}

@@ -2468,6 +2468,25 @@ function initMainPage() {
     onEnterBack: () => setStoryThreadState('contact'),
   }))
 
+  // ══════════════════════════════════════════
+  //  MOBILE — kill pin animations, show content
+  // ══════════════════════════════════════════
+  if (isMobile) {
+    const mPins = ['#meet','#platform','#consulting','#proof','#assist']
+    mPins.forEach(s => {
+      const el = document.querySelector(s)
+      if (!el) return
+      el.style.height = 'auto'
+      el.style.minHeight = ''
+      el.style.overflow = 'visible'
+    })
+    // Kill all pinned ScrollTriggers — removes spacer divs (the empty scroll gaps)
+    ScrollTrigger.getAll().forEach(st => {
+      if (st.vars && st.vars.pin) st.kill(true)
+    })
+    ScrollTrigger.refresh()
+  }
+
   sectionFilterRegistry.ready = true
 }
 
