@@ -2480,11 +2480,28 @@ function initMainPage() {
       el.style.minHeight = ''
       el.style.overflow = 'visible'
     })
-    // Kill all pinned ScrollTriggers — removes spacer divs (the empty scroll gaps)
+    // Kill all pinned ScrollTriggers except hero — removes spacer divs (the empty scroll gaps)
     ScrollTrigger.getAll().forEach(st => {
-      if (st.vars && st.vars.pin) st.kill(true)
+      if (st.vars && st.vars.pin && st.trigger && st.trigger.id !== 'hero') st.kill(true)
     })
     ScrollTrigger.refresh()
+  }
+
+  // Mobile Device Tilt for Galaxy & Text
+  if (isMobile && window.DeviceOrientationEvent) {
+    window.addEventListener('deviceorientation', function(e) {
+      if (e.gamma === null || e.beta === null) return;
+      var tiltX = Math.max(-15, Math.min(15, e.gamma || 0));
+      var tiltY = Math.max(-15, Math.min(15, (e.beta || 45) - 45));
+      var slidesEl = document.querySelector('.hero-slides');
+      if (slidesEl) {
+        slidesEl.style.setProperty('--tilt-x', tiltX);
+        slidesEl.style.setProperty('--tilt-y', tiltY);
+      }
+      window.__dotsHeroScene = window.__dotsHeroScene || {};
+      window.__dotsHeroScene.pointerX = tiltX / 15;
+      window.__dotsHeroScene.pointerY = tiltY / 15;
+    }, { passive: true });
   }
 
   sectionFilterRegistry.ready = true
@@ -2514,7 +2531,7 @@ function initMainPage() {
     tiltY: 0,
     energy: 0,
     orbitYaw: -0.18,
-    orbitPitch: 0.10,
+    orbitPitch: 1.57,
     orbitYawVel: 0,
     orbitPitchVel: 0,
     dragActive: false,
@@ -2599,15 +2616,18 @@ function initMainPage() {
     sceneState.orbitPitch += sceneState.orbitPitchVel;
     sceneState.orbitYawVel *= sceneState.dragActive ? 0.82 : 0.955;
     sceneState.orbitPitchVel *= sceneState.dragActive ? 0.82 : 0.955;
-    sceneState.orbitPitch = clamp(sceneState.orbitPitch, -0.68, 0.68);
+    sceneState.orbitPitch = clamp(sceneState.orbitPitch, -1.6, 1.6);
     sceneState.panX += ((((mouse.x < 0 ? W * 0.5 : mouse.x) / W) - 0.5) * 36 + Math.sin(sceneState.orbitYaw) * 34 - sceneState.panX) * 0.06;
     sceneState.panY += ((((mouse.y < 0 ? H * 0.5 : mouse.y) / H) - 0.5) * 22 + sceneState.orbitPitch * 34 - sceneState.panY) * 0.06;
     sceneState.impulseLife *= 0.92;
     sceneState.energy *= 0.965;
     sceneState.tiltX = clamp((-sceneState.pointerY * 3.1) + sceneState.orbitPitch * 32, -22, 22);
     sceneState.tiltY = clamp((sceneState.pointerX * 4.8) + sceneState.orbitYaw * 34, -28, 28);
-    var textTiltX = clamp(-sceneState.pointerY * 1.05, -2.2, 2.2);
-    var textTiltY = clamp(sceneState.pointerX * 1.45, -2.8, 2.8);
+    var isMobileSize = W < 768;
+    var maxTiltX = isMobileSize ? 15 : 2.2;
+    var maxTiltY = isMobileSize ? 15 : 2.8;
+    var textTiltX = clamp(-sceneState.pointerY * (isMobileSize ? 15 : 1.05), -maxTiltX, maxTiltX);
+    var textTiltY = clamp(sceneState.pointerX * (isMobileSize ? 15 : 1.45), -maxTiltY, maxTiltY);
     var textPanX = clamp(sceneState.pointerX * 10, -10, 10);
     var textPanY = clamp(sceneState.pointerY * 7, -7, 7);
 
@@ -3379,7 +3399,7 @@ function initMainPage() {
       tiltY: 0,
       energy: 0,
       orbitYaw: -0.18,
-      orbitPitch: 0.10,
+      orbitPitch: 1.57,
       orbitYawVel: 0,
       orbitPitchVel: 0,
       dragActive: false,
@@ -3412,9 +3432,10 @@ function initMainPage() {
       canvas.style.height = H + 'px';
       ctx.setTransform(1,0,0,1,0,0);
       ctx.scale(dpr, dpr);
-      cx = W * 0.76;
-      cy = H * 0.14;
-      scale = Math.min(W, H) * (W < 768 ? 0.12 : 0.15);
+      var isMobile = W < 768;
+      cx = W * (isMobile ? 0.50 : 0.76);
+      cy = H * (isMobile ? 0.35 : 0.14);
+      scale = Math.min(W, H) * (isMobile ? 0.12 : 0.15);
       buildParticles();
     }
 
