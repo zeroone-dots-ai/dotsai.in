@@ -389,6 +389,22 @@ body:has(#story-thread[data-section="contact"]) .nav-filter.active {
   color: #0e0420;
 }
 
+/* ── Per-section text selection colors ───────────────────────── */
+#hero *::selection,
+#meet *::selection      { background: #D7CFF0; color: #160630; }
+#platform *::selection  { background: #A2D2FF; color: #04122a; }
+#consulting *::selection{ background: #FFD870; color: #2a1400; }
+#proof *::selection     { background: #FFCDB2; color: #2a0c04; }
+#assist *::selection    { background: #C090FF; color: #160630; }
+#labs-teaser *::selection { background: #B8E0D2; color: #031a0e; }
+#contact *::selection   { background: #C8A0E8; color: #0e0420; }
+
+/* ── Nav pill magnetic — transformed by JS, needs transform-origin center ── */
+.nav-filter {
+  transform-origin: center center;
+  will-change: transform;
+}
+
 
 /* Persistent story thread */
 #story-thread {
