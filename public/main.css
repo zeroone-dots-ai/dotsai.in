@@ -281,17 +281,6 @@ nav.nav-hidden {
   border-radius: 100px;
   padding: 4px;
   scrollbar-width: none;
-  /* Fade edges hint that more pills are scrollable */
-  mask-image: linear-gradient(to right,
-    transparent 0px,
-    black 12px,
-    black calc(100% - 12px),
-    transparent 100%);
-  -webkit-mask-image: linear-gradient(to right,
-    transparent 0px,
-    black 12px,
-    black calc(100% - 12px),
-    transparent 100%);
 }
 
 .nav-filters::-webkit-scrollbar {
@@ -339,16 +328,6 @@ nav.light {
 nav.light .nav-filters {
   background: rgba(23,23,34,0.07);
   border-color: rgba(23,23,34,0.13);
-  mask-image: linear-gradient(to right,
-    transparent 0px,
-    black 12px,
-    black calc(100% - 12px),
-    transparent 100%);
-  -webkit-mask-image: linear-gradient(to right,
-    transparent 0px,
-    black 12px,
-    black calc(100% - 12px),
-    transparent 100%);
 }
 nav.light .nav-filter {
   color: rgba(23,23,34,0.60);

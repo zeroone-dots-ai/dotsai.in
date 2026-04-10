@@ -5125,67 +5125,44 @@ a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .service-row
 })();
 </script>
 
-<!-- ── Magnetic CTA + Dynamic Dock for Nav Filter Pills ─────────────── -->
+<!-- ── Magnetic CTA ─────────────────────────────────────────────────── -->
 <script>
 (function() {
   'use strict';
-  var pills = Array.from(document.querySelectorAll('.nav-filter'));
-  var filtersBar = document.querySelector('.nav-filters');
-  if (!pills.length || !filtersBar) return;
+  // Selectors for every CTA that gets the magnetic pull effect
+  var CTA_SELECTORS = [
+    '.nav-cta',                            // Let's Talk (nav)
+    '.btn-primary',                        // → Explore Platform
+    '.btn-secondary',                      // ↗ Let's Talk (platform section)
+    '.btn-wa',                             // ↗ WhatsApp Me (contact)
+    '.brief-cta',                          // Book session CTA (assist)
+    '.meet-redirect',                      // Meet personal redirect
+    '#contact-calendar-toggle',            // Open inline calendar
+    '.contact-schedule-action-secondary'   // Open in new tab (cal.com)
+  ];
 
-  // — Dynamic Dock: bell-curve scale by horizontal proximity —
-  var DOCK_MAX = 1.32;
-  var SIGMA    = 42; // bell-curve half-width in px
+  var ctaEls = Array.from(document.querySelectorAll(CTA_SELECTORS.join(',')));
+  if (!ctaEls.length) return;
 
-  function bellScale(distX) {
-    return 1 + (DOCK_MAX - 1) * Math.exp(-(distX * distX) / (2 * SIGMA * SIGMA));
-  }
-
-  filtersBar.addEventListener('mousemove', function(e) {
-    pills.forEach(function(pill) {
-      var r    = pill.getBoundingClientRect();
-      var cx   = r.left + r.width  / 2;
-      var dist = Math.abs(e.clientX - cx);
-      gsap.to(pill, {
-        scale: bellScale(dist),
-        duration: 0.14,
+  ctaEls.forEach(function(el) {
+    el.addEventListener('mousemove', function(e) {
+      var r  = el.getBoundingClientRect();
+      var dx = (e.clientX - (r.left + r.width  / 2)) * 0.30;
+      var dy = (e.clientY - (r.top  + r.height / 2)) * 0.30;
+      gsap.to(el, {
+        x: dx, y: dy,
+        duration: 0.25,
         ease: 'power2.out',
         overwrite: 'auto'
       });
     });
-  });
 
-  filtersBar.addEventListener('mouseleave', function() {
-    pills.forEach(function(pill) {
-      gsap.to(pill, {
-        scale: 1, x: 0, y: 0,
-        duration: 0.65,
-        ease: 'elastic.out(1, 0.35)',
-        overwrite: true
-      });
-    });
-  });
-
-  // — Magnetic: translate each pill toward the cursor —
-  pills.forEach(function(pill) {
-    pill.addEventListener('mousemove', function(e) {
-      var r  = pill.getBoundingClientRect();
-      var dx = (e.clientX - (r.left + r.width  / 2)) * 0.32;
-      var dy = (e.clientY - (r.top  + r.height / 2)) * 0.32;
-      gsap.to(pill, {
-        x: dx, y: dy,
-        duration: 0.28,
-        ease: 'power2.out',
-        overwrite: false
-      });
-    });
-
-    pill.addEventListener('mouseleave', function() {
-      gsap.to(pill, {
+    el.addEventListener('mouseleave', function() {
+      gsap.to(el, {
         x: 0, y: 0,
-        duration: 0.75,
-        ease: 'elastic.out(1, 0.3)',
-        overwrite: false
+        duration: 0.80,
+        ease: 'elastic.out(1, 0.32)',
+        overwrite: 'auto'
       });
     });
   });
