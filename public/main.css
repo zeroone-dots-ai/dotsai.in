@@ -370,9 +370,9 @@ nav.light .nav-filter.active {
 }
 
 .story-thread-orb {
-  width: 84px;
-  height: 84px;
-  margin-left: -42px;
+  width: 64px;
+  height: 64px;
+  margin-left: -32px;
 }
 
 .story-thread-orb::before {
@@ -386,23 +386,35 @@ nav.light .nav-filter.active {
 
 .story-thread-core {
   position: absolute;
-  inset: 18px;
+  inset: 12px;
   border-radius: 50%;
-  background:
-    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.62) 30%, var(--story-accent-soft) 66%, rgba(255,255,255,0.08) 100%),
-    radial-gradient(circle at center, rgba(23,23,34,0.14), rgba(23,23,34,0));
+  overflow: hidden;
   box-shadow:
     0 0 0 1px rgba(255,255,255,0.42),
     0 18px 40px rgba(23,23,34,0.14),
     0 0 34px var(--story-accent-soft);
 }
 
+.story-thread-core::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  left: -30%;
+  width: 160%;
+  height: 160%;
+  background: var(--planet-surface, linear-gradient(12deg, #1a0d2e 0%, #4a2a7e 18%, #c8b6ff 34%, #e8d5ff 48%, #d7cff0 56%, #8060a8 72%, #3d1f5c 88%, #0f0820 100%));
+  transform: rotate(var(--planet-rot, 10deg));
+  will-change: transform;
+}
+
 .story-thread-core::after {
   content: '';
   position: absolute;
-  inset: 10px;
+  inset: 0;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.35) 58%, rgba(255,255,255,0) 100%);
+  background: radial-gradient(circle at 26% 24%, rgba(255,255,255,0.88) 0%, rgba(255,255,255,0.30) 38%, rgba(255,255,255,0) 66%);
+  z-index: 1;
+  pointer-events: none;
 }
 
 .story-thread-dot,
@@ -412,44 +424,43 @@ nav.light .nav-filter.active {
 }
 
 .story-thread-dot {
-  width: 10px;
-  height: 10px;
+  width: 6px;
+  height: 6px;
   top: 50%;
   left: 50%;
-  margin-left: -5px;
-  margin-top: -5px;
-  animation: storyThreadPulse 3.6s ease-in-out infinite;
+  margin-left: -3px;
+  margin-top: -3px;
+  /* Scroll-driven orbit: rotate the coord system then translate out */
+  transform: rotate(calc(var(--planet-rot, 0deg) + var(--orbit-offset, 0deg))) translateX(var(--orbit-r, 24px));
+  animation: none;
 }
 
 .story-thread-dot-data {
-  --tx: -18px;
-  --ty: -18px;
+  --orbit-offset: 0deg;
+  --orbit-r: 25px;
   background: #D7CFF0;
-  box-shadow: 0 0 12px rgba(215,207,240,0.55);
+  box-shadow: 0 0 8px rgba(215,207,240,0.8);
 }
 
 .story-thread-dot-ops {
-  --tx: 10px;
-  --ty: -18px;
+  --orbit-offset: 90deg;
+  --orbit-r: 23px;
   background: #C9DED4;
-  box-shadow: 0 0 12px rgba(201,222,212,0.5);
-  animation-delay: 0.35s;
+  box-shadow: 0 0 8px rgba(201,222,212,0.75);
 }
 
 .story-thread-dot-tech {
-  --tx: -18px;
-  --ty: 10px;
+  --orbit-offset: 180deg;
+  --orbit-r: 26px;
   background: #F1C6AE;
-  box-shadow: 0 0 12px rgba(241,198,174,0.52);
-  animation-delay: 0.7s;
+  box-shadow: 0 0 8px rgba(241,198,174,0.75);
 }
 
 .story-thread-dot-strategy {
-  --tx: 10px;
-  --ty: 10px;
+  --orbit-offset: 270deg;
+  --orbit-r: 22px;
   background: #BFD6EC;
-  box-shadow: 0 0 12px rgba(191,214,236,0.52);
-  animation-delay: 1.05s;
+  box-shadow: 0 0 8px rgba(191,214,236,0.75);
 }
 
 .story-thread-ring {
@@ -468,14 +479,8 @@ nav.light .nav-filter.active {
 }
 
 .story-thread-badge {
-  width: 102px;
-  margin-left: -51px;
-  transform: translateY(94px);
-  padding: 10px 10px 9px;
-  border-radius: 16px;
-  background: rgba(247,243,237,0.88);
-  border: 1px solid rgba(67,48,95,0.10);
-  box-shadow: 0 18px 34px rgba(23,23,34,0.08);
+  width: 110px;
+  margin-left: -55px;
   text-align: center;
 }
 
@@ -486,39 +491,91 @@ nav.light .nav-filter.active {
 
 .story-thread-step {
   font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.18em;
+  font-size: 8px;
+  letter-spacing: 0.20em;
   text-transform: uppercase;
-  color: rgba(67,48,95,0.52);
-  margin-bottom: 4px;
+  color: rgba(67,48,95,0.48);
+  margin-bottom: 5px;
 }
 
 .story-thread-name {
   font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
-  color: rgba(23,23,34,0.76);
-}
-
-#story-thread[data-skin="dark"] .story-thread-badge {
-  background: rgba(10,10,16,0.82);
-  border-color: rgba(255,255,255,0.08);
-  box-shadow: 0 18px 34px rgba(0,0,0,0.24);
+  color: rgba(23,23,34,0.72);
+  letter-spacing: 0.03em;
 }
 
 #story-thread[data-skin="dark"] .story-thread-step {
-  color: rgba(255,255,255,0.42);
+  color: rgba(255,255,255,0.45);
 }
 
 #story-thread[data-skin="dark"] .story-thread-name {
-  color: rgba(255,255,255,0.78);
+  color: rgba(255,255,255,0.85);
 }
 
 #story-thread[data-skin="dark"] .story-thread-core {
   box-shadow:
-    0 0 0 1px rgba(255,255,255,0.14),
+    0 0 0 1px rgba(255,255,255,0.10),
     0 16px 34px rgba(0,0,0,0.28),
     0 0 30px var(--story-accent-soft);
+}
+
+/* ── Per-section planet surfaces ── */
+#story-thread[data-section="hero"],
+#story-thread[data-section="meet"] {
+  --planet-surface: linear-gradient(12deg,
+    #0f0820 0%, #2d1450 14%, #6838a8 26%,
+    #c8b6ff 36%, #ede0ff 46%, #d7cff0 54%,
+    #a07ed0 64%, #5028a0 76%, #1a0838 90%, #060214 100%);
+}
+
+#story-thread[data-section="platform"] {
+  --planet-surface: linear-gradient(12deg,
+    #01050e 0%, #051828 12%, #0c3060 24%,
+    #1a5898 34%, #3888d0 42%, #a2d2ff 50%,
+    #e8f6ff 54%, #4090d0 64%, #0d3060 76%,
+    #051828 88%, #01050e 100%);
+}
+
+#story-thread[data-section="consulting"] {
+  --planet-surface: linear-gradient(12deg,
+    #120800 0%, #3a1e00 12%, #8a4a0a 24%,
+    #c87820 34%, #f0a830 42%, #ffd870 50%,
+    #ffe89a 54%, #e09020 64%, #9a5a08 76%,
+    #3a1e00 88%, #120800 100%);
+}
+
+#story-thread[data-section="proof"] {
+  --planet-surface: linear-gradient(12deg,
+    #180500 0%, #4a0e08 12%, #9a2010 24%,
+    #d84830 34%, #ff8060 42%, #ffcdb2 50%,
+    #ffe8d8 54%, #f07050 64%, #c03020 76%,
+    #6a1008 88%, #180500 100%);
+}
+
+#story-thread[data-section="assist"] {
+  --planet-surface: linear-gradient(12deg,
+    #0c0520 0%, #281060 12%, #5028b0 24%,
+    #8850d8 34%, #c090ff 42%, #e8d0ff 50%,
+    #f0e4ff 54%, #b080f0 64%, #7040c0 76%,
+    #2a1068 88%, #080318 100%);
+}
+
+#story-thread[data-section="labs-teaser"] {
+  --planet-surface: linear-gradient(12deg,
+    #010f08 0%, #062818 12%, #0a5028 24%,
+    #1a8050 34%, #40b880 42%, #b8e0d2 50%,
+    #d8f4ec 54%, #50a870 64%, #0a4020 76%,
+    #041008 88%, #010f08 100%);
+}
+
+#story-thread[data-section="contact"] {
+  --planet-surface: linear-gradient(12deg,
+    #06020e 0%, #160a30 12%, #2a1050 24%,
+    #4a2278 34%, #7048a8 42%, #a87ad0 50%,
+    #c8a0e8 54%, #6040a0 64%, #3a1868 76%,
+    #180838 88%, #060210 100%);
 }
 
 @keyframes storyThreadSpin {
@@ -531,10 +588,6 @@ nav.light .nav-filter.active {
   to { transform: rotate(0deg); }
 }
 
-@keyframes storyThreadPulse {
-  0%, 100% { transform: translate(var(--tx, 0), var(--ty, 0)) scale(0.92); }
-  50% { transform: translate(var(--tx, 0), var(--ty, 0)) scale(1.08); }
-}
 
 /* Section filter transitions */
 section.section-hidden {
