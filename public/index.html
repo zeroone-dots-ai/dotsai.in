@@ -180,7 +180,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-<link rel="stylesheet" href="/main.css">
+<link rel="stylesheet" href="/main.css?v=20260410-inline-cal-story">
 </head>
 
 <body class="splash-active">
@@ -250,10 +250,29 @@
       <button class="nav-filter" data-filter="meet">Meet</button>
       <button class="nav-filter" data-filter="services">Services</button>
       <button class="nav-filter" data-filter="product">Product</button>
-      <button class="nav-filter" data-filter="work">Work</button>
+      <button class="nav-filter" data-filter="outcomes">Outcomes</button>
+      <button class="nav-filter" data-filter="assist">Assist</button>
+      <button class="nav-filter" data-filter="labs">Labs</button>
     </div>
     <a href="https://wa.me/918320065658" target="_blank" rel="noopener" class="nav-cta">Let’s Talk</a>
   </nav>
+
+  <div id="story-thread" data-section="hero" data-skin="light" aria-hidden="true">
+    <div class="story-thread-rail"></div>
+    <div class="story-thread-orb" id="story-thread-orb">
+      <div class="story-thread-core"></div>
+      <span class="story-thread-dot story-thread-dot-data"></span>
+      <span class="story-thread-dot story-thread-dot-ops"></span>
+      <span class="story-thread-dot story-thread-dot-tech"></span>
+      <span class="story-thread-dot story-thread-dot-strategy"></span>
+      <span class="story-thread-ring story-thread-ring-a"></span>
+      <span class="story-thread-ring story-thread-ring-b"></span>
+    </div>
+    <div class="story-thread-badge" id="story-thread-badge">
+      <span class="story-thread-step" id="story-thread-step">00</span>
+      <span class="story-thread-name" id="story-thread-name">Hero</span>
+    </div>
+  </div>
 
   <!-- ─── HERO (3-panel scroll) ─── -->
   <section id="hero">
@@ -326,7 +345,7 @@
     </div>
 
     <div class="hero-logo-bottom" id="hero-logo-bottom">
-      <div class="hero-dot-grid">
+      <div class="hero-dot-grid" aria-hidden="true">
         <div class="hero-dot data"></div>
         <div class="hero-dot ghost"></div>
         <div class="hero-dot ghost"></div>
@@ -337,7 +356,15 @@
         <div class="hero-dot ghost"></div>
         <div class="hero-dot tech"></div>
       </div>
-      <span class="hero-logo-label">D.O.T.S AI</span>
+      <div class="hero-logo-wordmark" aria-label="ZeroOne D.O.T.S AI">
+        <span class="hero-logo-zeroone">ZEROONE</span>
+        <span class="hero-logo-dotsline">
+          <span class="hero-logo-data">D</span><span class="hero-logo-sep">·</span>
+          <span class="hero-logo-ops">O</span><span class="hero-logo-sep">·</span>
+          <span class="hero-logo-tech">T</span><span class="hero-logo-sep">·</span>
+          <span class="hero-logo-strategy">S</span><span class="hero-logo-ai">AI</span>
+        </span>
+      </div>
     </div>
 
     <div class="scroll-hint" id="scroll-hint">
@@ -383,204 +410,899 @@
     </div>
   </section>
 
-  <!-- ─── PLATFORM (brief redirect) ─── -->
-  <section id="platform" class="brief-section brief-section-dark fade-up">
-    <div class="brief-inner">
-      <div class="brief-content">
-        <p class="brief-label">// products to use</p>
-        <h2 class="brief-title">Platform</h2>
-        <p class="brief-desc">
-          AI products built by ZeroOne. Give your employees their own agents. Universal SaaS — on your infrastructure, not ours.
-        </p>
-        <div class="brief-services">
-          <div class="brief-service-item">
-            <span class="brief-service-dot" style="background: #C8B6FF;"></span>
-            Infinity Nexus — Private AI operating system
-          </div>
-          <div class="brief-service-item">
-            <span class="brief-service-dot" style="background: #B8E0D2;"></span>
-            CRM, Notes, Docs, Automation — all on your server
-          </div>
-          <div class="brief-service-item">
-            <span class="brief-service-dot" style="background: #FFCDB2;"></span>
-            More products shipping soon
+  <!-- ─── PLATFORM (universal SaaS compartment) ─── -->
+  <section id="platform" class="platform-section fade-up">
+    <div class="platform-grid">
+      <div class="platform-copy">
+        <p class="platform-label">// universal SaaS platform</p>
+
+        <div class="platform-copy-stack">
+          <article class="platform-copy-card">
+            <p class="platform-kicker">Act 01 · Infrastructure fabric</p>
+            <h2 class="platform-title">One private platform. <em>Any business surface.</em></h2>
+            <p class="platform-desc">
+              Bring every data stream in, launch under your own brand, and run stepwise operations in a private environment configured around your business.
+            </p>
+            <div class="platform-facts">
+              <span class="platform-fact">Omni-channel data</span>
+              <span class="platform-fact">Private deployment</span>
+              <span class="platform-fact">White-label launch</span>
+              <span class="platform-fact">Structured execution</span>
+            </div>
+          </article>
+
+          <article class="platform-copy-card">
+            <p class="platform-kicker">Act 02 · Product surface</p>
+            <h2 class="platform-title">Every internal tool. <em>Inside one product.</em></h2>
+            <p class="platform-desc">
+              Analytics, automation, feedback, docs, video guides, logs, storage, structured web data, conversion flows, and private sandboxes become modules in a single operating layer.
+            </p>
+            <div class="platform-facts">
+              <span class="platform-fact">Analytics + automation</span>
+              <span class="platform-fact">Docs + guides</span>
+              <span class="platform-fact">Logs + storage</span>
+              <span class="platform-fact">Sandbox + migration</span>
+            </div>
+          </article>
+
+          <article class="platform-copy-card">
+            <p class="platform-kicker">Act 03 · Agent home and control</p>
+            <h2 class="platform-title">Give your agents a home you control. <em>No infra team needed.</em></h2>
+            <p class="platform-desc">
+              Give every team a dedicated agent workspace, launch with private rollout rails, and ship with the docs, backups, QA paths, and environments needed to run without assembling infrastructure from scratch.
+            </p>
+            <div class="platform-facts">
+              <span class="platform-fact">Agent teams</span>
+              <span class="platform-fact">Private rollout</span>
+              <span class="platform-fact">Operating vault</span>
+              <span class="platform-fact">Fully private + yours</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="platform-cta-cluster">
+          <a href="https://dotsai.cloud" target="_blank" rel="noopener" class="brief-cta brief-cta-dark platform-cta">
+            Explore dotsai.cloud <span class="service-arrow">↗</span>
+          </a>
+          <p class="platform-cta-note">Give your agents a home you control. Private by default, ready without needing an infra team.</p>
+        </div>
+      </div>
+
+      <div class="platform-stage">
+        <div class="platform-stage-glow"></div>
+
+        <div class="platform-phase platform-phase-core">
+          <div class="platform-core-orbit">
+            <div class="platform-core-ring platform-core-ring-a"></div>
+            <div class="platform-core-ring platform-core-ring-b"></div>
+            <div class="platform-core-ring platform-core-ring-c"></div>
+
+            <div class="platform-core-center">
+              <span class="platform-core-label">ZeroOne private fabric</span>
+              <strong>Universal<br>SaaS</strong>
+              <p>Your data. Your control. Your execution.</p>
+            </div>
+
+            <div class="platform-signal platform-signal-data">
+              <span class="platform-signal-title">Ingest</span>
+              <span class="platform-signal-body">Any data stream</span>
+            </div>
+            <div class="platform-signal platform-signal-compute">
+              <span class="platform-signal-title">Compute</span>
+              <span class="platform-signal-body">No infra team needed</span>
+            </div>
+            <div class="platform-signal platform-signal-brand">
+              <span class="platform-signal-title">Brand</span>
+              <span class="platform-signal-body">Launch under your name</span>
+            </div>
+            <div class="platform-signal platform-signal-ops">
+              <span class="platform-signal-title">Ops</span>
+              <span class="platform-signal-body">Accurate stepwise flows</span>
+            </div>
+
+            <div class="platform-core-rail">
+              <span>URL or stream</span>
+              <i></i>
+              <span>Structured state</span>
+              <i></i>
+              <span>Actionable execution</span>
+            </div>
           </div>
         </div>
-        <a href="https://dotsai.cloud" target="_blank" rel="noopener" class="brief-cta brief-cta-dark">
-          Explore dotsai.cloud <span class="service-arrow">↗</span>
-        </a>
-      </div>
-      <div class="brief-content" style="text-align: center;">
-        <div style="font-family: 'Instrument Serif', serif; font-size: clamp(56px, 7vw, 80px); color: rgba(255,255,255,0.06); line-height: 1; letter-spacing: -0.02em;">∞</div>
-        <p style="font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.18em; color: rgba(255,255,255,0.2); text-transform: uppercase;">Infinity Nexus</p>
+
+        <div class="platform-phase platform-phase-suite">
+          <div class="platform-suite-frame">
+            <div class="platform-suite-header">
+              <span class="platform-suite-kicker">One product should already contain this.</span>
+              <div class="platform-suite-badge">Infinity Nexus surface</div>
+            </div>
+
+            <div class="platform-suite-grid">
+              <article class="platform-suite-card">
+                <span class="platform-suite-dot data"></span>
+                <strong>Analytics</strong>
+                <p>Dashboards, traces, signal visibility.</p>
+              </article>
+              <article class="platform-suite-card">
+                <span class="platform-suite-dot ops"></span>
+                <strong>Automation</strong>
+                <p>Promptable actions and exact SOP flows.</p>
+              </article>
+              <article class="platform-suite-card">
+                <span class="platform-suite-dot tech"></span>
+                <strong>Feedback</strong>
+                <p>Review loops, response capture, tuning input.</p>
+              </article>
+              <article class="platform-suite-card">
+                <span class="platform-suite-dot strategy"></span>
+                <strong>Documents</strong>
+                <p>Notes, specs, architecture, audits, history.</p>
+              </article>
+              <article class="platform-suite-card">
+                <span class="platform-suite-dot ops"></span>
+                <strong>Video Guides</strong>
+                <p>Embedded walkthroughs for every operator.</p>
+              </article>
+              <article class="platform-suite-card">
+                <span class="platform-suite-dot data"></span>
+                <strong>Logs + Storage</strong>
+                <p>Database, event logs, files, restore rails.</p>
+              </article>
+            </div>
+
+            <div class="platform-suite-ribbon">
+              <span>Web data lowerer</span>
+              <i></i>
+              <span>Prompt URL</span>
+              <i></i>
+              <span>Scrape</span>
+              <i></i>
+              <span>Structure</span>
+              <i></i>
+              <span>Store</span>
+            </div>
+
+            <div class="platform-suite-ribbon platform-suite-ribbon-alt">
+              <span>Clone anything</span>
+              <span>Migrate anything</span>
+              <span>Private sandbox</span>
+              <span>Onboard agents</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="platform-phase platform-phase-rollout">
+          <div class="platform-rollout-grid">
+            <article class="platform-rollout-column platform-rollout-docs">
+              <span class="platform-rollout-label">Operating vault</span>
+              <div class="platform-doc-grid">
+                <span class="platform-doc-chip">Index</span>
+                <span class="platform-doc-chip">DB Architect</span>
+                <span class="platform-doc-chip">Backend + API</span>
+                <span class="platform-doc-chip">UI / UX Guide</span>
+                <span class="platform-doc-chip">QA + Test</span>
+                <span class="platform-doc-chip">Security</span>
+                <span class="platform-doc-chip">Backups</span>
+                <span class="platform-doc-chip">Cron</span>
+                <span class="platform-doc-chip">Deploy</span>
+                <span class="platform-doc-chip">Test Env</span>
+              </div>
+            </article>
+
+            <div class="platform-rollout-stack">
+              <article class="platform-rollout-column platform-rollout-agents">
+                <span class="platform-rollout-label">Agent teams</span>
+                <div class="platform-agent-grid">
+                  <div class="platform-agent-card">
+                    <strong>Ops</strong>
+                    <span>Set up for your workflows</span>
+                  </div>
+                  <div class="platform-agent-card">
+                    <strong>Sales</strong>
+                    <span>Trained on your offer</span>
+                  </div>
+                  <div class="platform-agent-card">
+                    <strong>Support</strong>
+                    <span>Private to your business</span>
+                  </div>
+                  <div class="platform-agent-card">
+                    <strong>Finance</strong>
+                    <span>Low-cost and fully yours</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="platform-rollout-column platform-rollout-market">
+                <span class="platform-rollout-label">Launch rails</span>
+                <div class="platform-market-grid">
+                  <span class="platform-market-chip">Marketplace</span>
+                  <span class="platform-market-chip">Ad engine</span>
+                  <span class="platform-market-chip">Community learning</span>
+                  <span class="platform-market-chip">Migration</span>
+                  <span class="platform-market-chip">White-label</span>
+                  <span class="platform-market-chip">Campaign systems</span>
+                </div>
+                <p class="platform-rollout-stat">Private by default. Configured for you. Ready to expand.</p>
+              </article>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ─── CONSULTING (brief redirect) ─── -->
-  <section id="consulting" class="brief-section fade-up">
-    <div class="brief-inner">
-      <div class="brief-content">
-        <p class="brief-label">// hire me for</p>
-        <h2 class="brief-title">Consulting</h2>
-        <p class="brief-desc">
-          Hands-on AI consulting. I design, build, and deploy — not just advise. Recover your margins through AI.
-        </p>
-        <div class="brief-services">
-          <div class="brief-service-item">
-            <span class="brief-service-dot" style="background: #C8B6FF;"></span>
-            Private AI Deployment
-          </div>
-          <div class="brief-service-item">
-            <span class="brief-service-dot" style="background: #A2D2FF;"></span>
-            SEO, GEO &amp; Digital Marketing
-          </div>
-          <div class="brief-service-item">
-            <span class="brief-service-dot" style="background: #B8E0D2;"></span>
-            AI Automation &amp; Agents
-          </div>
-          <div class="brief-service-item">
-            <span class="brief-service-dot" style="background: #FFCDB2;"></span>
-            AI Web &amp; Digital Agency
+  <!-- ─── CONSULTING (India-market operating system) ─── -->
+  <section id="consulting" class="consulting-section fade-up">
+    <div class="consulting-grid">
+      <div class="consulting-copy">
+        <p class="consulting-label">// consulting for indian businesses</p>
+
+        <div class="consulting-copy-stack">
+          <article class="consulting-copy-card">
+            <p class="consulting-kicker">Act 01 · Brand and market fit</p>
+            <h2 class="consulting-title">Design the brand first. <em>Then build what supports it.</em></h2>
+            <p class="consulting-desc">
+              If you are still shaping the business, we start with positioning, offer clarity, market choice, and trust assets. If those fundamentals already exist, we use them as the base and move straight into execution.
+            </p>
+            <div class="consulting-facts">
+              <span class="consulting-fact">Brand design</span>
+              <span class="consulting-fact">Offer clarity</span>
+              <span class="consulting-fact">Market choice</span>
+              <span class="consulting-fact">Trust assets</span>
+            </div>
+          </article>
+
+          <article class="consulting-copy-card">
+            <p class="consulting-kicker">Act 02 · Sync and visibility</p>
+            <h2 class="consulting-title">Make the business run in sync. <em>Then make it visible.</em></h2>
+            <p class="consulting-desc">
+              Lead capture, WhatsApp, CRM, sheets, onboarding, approvals, SEO, GEO, landing pages, and campaigns are stitched into one operating rhythm that the team can actually use and measure.
+            </p>
+            <div class="consulting-facts">
+              <span class="consulting-fact">Automations</span>
+              <span class="consulting-fact">Ops sync</span>
+              <span class="consulting-fact">SEO + GEO</span>
+              <span class="consulting-fact">ROI campaigns</span>
+            </div>
+          </article>
+
+          <article class="consulting-copy-card">
+            <p class="consulting-kicker">Act 03 · Exact execution stack</p>
+            <h2 class="consulting-title">Specific problem. <em>Specific tool stack.</em></h2>
+            <p class="consulting-desc">
+              Some businesses need custom tools. Some need secure open-source systems. Some should use paid software because the ROI is obvious. The job is to choose and build the exact stack that improves margin and productivity.
+            </p>
+            <div class="consulting-facts">
+              <span class="consulting-fact">Custom tools</span>
+              <span class="consulting-fact">Secure open source</span>
+              <span class="consulting-fact">Best-fit integrations</span>
+              <span class="consulting-fact">Team handoff</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="consulting-cta-cluster">
+          <a href="https://zeroonedotsai.consulting" target="_blank" rel="noopener" class="brief-cta brief-cta-light consulting-cta">
+            Visit the consulting site <span class="service-arrow">↗</span>
+          </a>
+          <p class="consulting-cta-note">No menu maze here. The full consulting breakdown lives on the consulting site. This section stays focused on how the business gets designed, synced, made visible, and improved.</p>
+        </div>
+      </div>
+
+      <div class="consulting-stage">
+        <div class="consulting-stage-glow"></div>
+
+        <div class="consulting-phase consulting-phase-journey">
+          <div class="consulting-journey-board">
+            <div class="consulting-journey-note">
+              <span class="consulting-stage-label">Recovery map</span>
+              <strong>Sellable from day one.</strong>
+              <p>Built for Indian businesses that need clarity before scale, not generic AI decoration.</p>
+            </div>
+
+            <div class="consulting-journey-list">
+              <div class="consulting-journey-row">
+                <span class="consulting-journey-index">01</span>
+                <div>
+                  <strong>Design your brand</strong>
+                  <p>Offer, category story, trust, and why you should be chosen.</p>
+                </div>
+              </div>
+              <div class="consulting-journey-row">
+                <span class="consulting-journey-index">02</span>
+                <div>
+                  <strong>Sync the business</strong>
+                  <p>Lead flow, ops, follow-ups, docs, WhatsApp, CRM, and automation.</p>
+                </div>
+              </div>
+              <div class="consulting-journey-row">
+                <span class="consulting-journey-index">03</span>
+                <div>
+                  <strong>Make it visible</strong>
+                  <p>SEO, GEO, content rails, campaigns, and low-waste demand capture.</p>
+                </div>
+              </div>
+              <div class="consulting-journey-row">
+                <span class="consulting-journey-index">04</span>
+                <div>
+                  <strong>Improve margins</strong>
+                  <p>Remove waste, reduce manual work, and tighten business economics.</p>
+                </div>
+              </div>
+              <div class="consulting-journey-row">
+                <span class="consulting-journey-index">05</span>
+                <div>
+                  <strong>Lift productivity</strong>
+                  <p>Make the team faster without making the system harder.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="consulting-journey-footer">
+              <span>start from zero</span>
+              <i></i>
+              <span>or start from the current bottleneck</span>
+            </div>
           </div>
         </div>
-        <a href="/ai-agency-india/" class="brief-cta brief-cta-light">
-          View all services → <span class="service-arrow">↗</span>
-        </a>
-      </div>
-      <div class="brief-content" style="text-align: center;">
-        <div style="font-family: 'Instrument Serif', serif; font-size: clamp(56px, 7vw, 80px); color: var(--bone); line-height: 1; letter-spacing: -0.02em;">4</div>
-        <p style="font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.18em; color: var(--smoke); opacity: 0.4; text-transform: uppercase;">Services</p>
+
+        <div class="consulting-phase consulting-phase-engine">
+          <div class="consulting-engine-board">
+            <div class="consulting-engine-core">
+              <span class="consulting-stage-label">Execution logic</span>
+              <strong>Right tool.<br>Right depth.<br>Right ROI.</strong>
+              <p>Vibe code makes custom delivery faster. The discipline is still in choosing the right system.</p>
+            </div>
+
+            <article class="consulting-engine-card consulting-engine-card-build">
+              <span class="consulting-engine-dot data"></span>
+              <strong>Custom tools</strong>
+              <p>Dashboards, portals, internal systems, and client workflows.</p>
+            </article>
+
+            <article class="consulting-engine-card consulting-engine-card-open">
+              <span class="consulting-engine-dot ops"></span>
+              <strong>Secure open source</strong>
+              <p>Private stacks when data, control, or long-term cost matter.</p>
+            </article>
+
+            <article class="consulting-engine-card consulting-engine-card-roi">
+              <span class="consulting-engine-dot tech"></span>
+              <strong>ROI integrations</strong>
+              <p>Use best-in-class tools when they win faster and pay back quickly.</p>
+            </article>
+
+            <article class="consulting-engine-card consulting-engine-card-sync">
+              <span class="consulting-engine-dot strategy"></span>
+              <strong>Automation fabric</strong>
+              <p>WhatsApp, CRM, docs, approvals, follow-ups, and reporting in sync.</p>
+            </article>
+
+            <div class="consulting-engine-connector consulting-engine-connector-a"></div>
+            <div class="consulting-engine-connector consulting-engine-connector-b"></div>
+          </div>
+        </div>
+
+        <div class="consulting-phase consulting-phase-outcome">
+          <div class="consulting-outcome-board">
+            <article class="consulting-outcome-column consulting-outcome-column-metrics">
+              <span class="consulting-stage-label">What improves</span>
+              <div class="consulting-outcome-row">
+                <strong>Visibility</strong>
+                <span>SEO, GEO, campaigns, and better reach</span>
+              </div>
+              <div class="consulting-outcome-row">
+                <strong>Margins</strong>
+                <span>Lower waste, fewer manual steps, tighter spend</span>
+              </div>
+              <div class="consulting-outcome-row">
+                <strong>Productivity</strong>
+                <span>Faster delivery, cleaner handoffs, less operator load</span>
+              </div>
+              <div class="consulting-outcome-row">
+                <strong>Control</strong>
+                <span>Private systems, structured ops, and measurable workflows</span>
+              </div>
+            </article>
+
+            <article class="consulting-outcome-column consulting-outcome-column-steps">
+              <span class="consulting-stage-label">How it ships</span>
+              <div class="consulting-step-card">
+                <span class="consulting-step-index">01</span>
+                <div>
+                  <strong>Audit</strong>
+                  <p>Find the constraint worth fixing first.</p>
+                </div>
+              </div>
+              <div class="consulting-step-card">
+                <span class="consulting-step-index">02</span>
+                <div>
+                  <strong>System map</strong>
+                  <p>Choose the stack, scope, ownership, and rollout.</p>
+                </div>
+              </div>
+              <div class="consulting-step-card">
+                <span class="consulting-step-index">03</span>
+                <div>
+                  <strong>Build</strong>
+                  <p>Ship the tool, integration, flow, or interface that solves it.</p>
+                </div>
+              </div>
+              <div class="consulting-step-card">
+                <span class="consulting-step-index">04</span>
+                <div>
+                  <strong>Deploy</strong>
+                  <p>Train the team, document the flow, and lock the system in.</p>
+                </div>
+              </div>
+            </article>
+
+            <div class="consulting-outcome-footer">
+              <span>One builder. One line of accountability. No generic stack selling.</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ─── PROOF ─── -->
-  <section id="proof">
-    <p class="proof-label">// outcomes</p>
+  <section id="proof" class="proof-section">
+    <div class="proof-shell">
+      <div class="proof-copy">
+        <p class="proof-label">// outcomes</p>
 
-    <div class="proof-metrics">
-      <div class="proof-metric">
-        <div class="metric-number">
-          <span class="metric-count" data-target="70">0</span><span class="metric-suffix">%</span>
+        <div class="proof-copy-stack">
+          <article class="proof-copy-card">
+            <p class="proof-kicker">Phase 01 · Business movement</p>
+            <h2 class="proof-title">Clear outcomes. <em>Real business movement.</em></h2>
+            <p class="proof-desc">
+              Cost reduced, savings unlocked, and accuracy improved. Each outcome here is tied to a real system that moved the business in a measurable way.
+            </p>
+            <div class="proof-facts">
+              <span class="proof-fact">Measured outcomes</span>
+              <span class="proof-fact">Deployment-backed</span>
+              <span class="proof-fact">Private infrastructure</span>
+              <span class="proof-fact">Operational impact</span>
+            </div>
+          </article>
+
+          <article class="proof-copy-card">
+            <p class="proof-kicker">Phase 02 · Deployment evidence</p>
+            <h2 class="proof-title">Every number tied to <em>a real operating system.</em></h2>
+            <p class="proof-desc">
+              Private LLM deployment, OCR plus LLM document processing, and AI audit automation are shown because the buyer should understand what caused the outcome, not just the headline number.
+            </p>
+            <div class="proof-facts">
+              <span class="proof-fact">Deployment context</span>
+              <span class="proof-fact">Function owner</span>
+              <span class="proof-fact">Business use-case</span>
+              <span class="proof-fact">Year shipped</span>
+            </div>
+          </article>
         </div>
-        <p class="metric-label">Cost reduction for a<br>logistics operation</p>
-        <p class="metric-source">Private LLM deployment · 2024</p>
       </div>
 
-      <div class="proof-metric">
-        <div class="metric-number">
-          <span class="metric-count" data-target="8">0</span><span class="metric-suffix">L/yr</span>
-        </div>
-        <p class="metric-label">Annual savings unlocked<br>via AI automation</p>
-        <p class="metric-source">Operations platform · 2024</p>
-      </div>
+      <div class="proof-stage">
+        <div class="proof-stage-glow"></div>
 
-      <div class="proof-metric">
-        <div class="metric-number">
-          <span class="metric-count" data-target="99">0</span><span class="metric-suffix">%</span>
+        <div class="proof-phase proof-phase-metrics">
+          <div class="proof-metrics-board">
+            <div class="proof-metrics">
+              <div class="proof-metric">
+                <div class="metric-number">
+                  <span class="metric-count" data-target="70">0</span><span class="metric-suffix">%</span>
+                </div>
+                <p class="metric-label">Cost reduction for a logistics operation</p>
+                <p class="metric-source">Private LLM deployment · 2024</p>
+              </div>
+
+              <div class="proof-metric">
+                <div class="metric-number">
+                  <span class="metric-count" data-target="8">0</span><span class="metric-suffix">L/yr</span>
+                </div>
+                <p class="metric-label">Annual savings unlocked via AI automation</p>
+                <p class="metric-source">Operations platform · 2024</p>
+              </div>
+
+              <div class="proof-metric">
+                <div class="metric-number">
+                  <span class="metric-count" data-target="99">0</span><span class="metric-suffix">%</span>
+                </div>
+                <p class="metric-label">Accuracy on a custom document AI pipeline</p>
+                <p class="metric-source">Document processing · 2025</p>
+              </div>
+            </div>
+
+            <div class="proof-metric-rail">
+              <span>cost saved</span>
+              <i></i>
+              <span>time compressed</span>
+              <i></i>
+              <span>accuracy owned</span>
+            </div>
+          </div>
         </div>
-        <p class="metric-label">Accuracy on custom<br>document AI pipeline</p>
-        <p class="metric-source">Document processing · 2025</p>
+
+        <div class="proof-phase proof-phase-cases">
+          <div class="proof-cases-board">
+            <div class="proof-cases">
+              <div class="case-card">
+                <p class="case-tag">Logistics · Private AI</p>
+                <p class="case-title">Replaced cloud AI with an on-prem private LLM stack.</p>
+                <p class="case-outcome"><span class="case-highlight">70% ops cost saved</span> while keeping operational data inside the client environment.</p>
+              </div>
+
+              <div class="case-card">
+                <p class="case-tag">NBFC · Document intelligence</p>
+                <p class="case-title">Built a custom OCR plus LLM loan-document pipeline.</p>
+                <p class="case-outcome"><span class="case-highlight">99% accuracy</span> on structured document understanding at a speed manual teams could not match.</p>
+              </div>
+
+              <div class="case-card">
+                <p class="case-tag">Compliance · Audit automation</p>
+                <p class="case-title">Deployed a private call-audit workflow with custom scoring.</p>
+                <p class="case-outcome"><span class="case-highlight">₹8L/year saved</span> by cutting manual review load and standardising quality checks.</p>
+              </div>
+            </div>
+
+            <div class="proof-case-note">
+              <span>Most client work stays private, so public proof stays selective and specific.</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="proof-cases">
-      <div class="case-card">
-        <p class="case-tag">Case Study · 01</p>
-        <p class="case-title">Logistics Co. — Private LLM Deployment</p>
-        <p class="case-outcome">Replaced cloud AI with on-premise Llama deployment. <span class="case-highlight">70% ops cost saved.</span> Data never left their DC.</p>
+  <!-- ─── 1:1 ASSIST ─── -->
+  <section id="assist" class="assist-section fade-up">
+    <div class="assist-grid">
+      <div class="assist-copy">
+        <p class="assist-label">// 1:1 assist</p>
+
+        <div class="assist-copy-stack">
+          <article class="assist-copy-card">
+            <p class="assist-kicker">Act 01 · Founder leverage</p>
+            <h2 class="assist-title">For founders and people whose hour is expensive. <em>Not another generic AI service.</em></h2>
+            <p class="assist-desc">
+              This is a private working relationship for founders, operators, and high-agency people who want a calm technical advantage. We find leverage hiding in plain sight and turn it into something usable.
+            </p>
+            <div class="assist-facts">
+              <span class="assist-fact">Founder-specific</span>
+              <span class="assist-fact">High-trust</span>
+              <span class="assist-fact">Private by default</span>
+              <span class="assist-fact">Direct with Meet</span>
+            </div>
+          </article>
+
+          <article class="assist-copy-card">
+            <p class="assist-kicker">Act 02 · Claude Code + tiny tools</p>
+            <h2 class="assist-title">Learn Claude Code. <em>Build tiny tools that compound.</em></h2>
+            <p class="assist-desc">
+              Small scripts, decision tools, dashboards, research workflows, and private helpers can save minutes every day until they become a serious compounding advantage. This is where imagination starts becoming infrastructure.
+            </p>
+            <div class="assist-facts">
+              <span class="assist-fact">Claude Code</span>
+              <span class="assist-fact">Tiny tools</span>
+              <span class="assist-fact">Compound productivity</span>
+              <span class="assist-fact">Structured output</span>
+            </div>
+          </article>
+
+          <article class="assist-copy-card">
+            <p class="assist-kicker">Act 03 · Quiet No.2 energy</p>
+            <h2 class="assist-title">Turn imagination into structure. <em>I like being the No.2 to the No.1.</em></h2>
+            <p class="assist-desc">
+              You bring the ambition. I bring calm, kind, competent execution. No ego theatre. No unnecessary complexity. Just a very technical person who is unusually nice to work with and serious about making you more capable.
+            </p>
+            <div class="assist-facts">
+              <span class="assist-fact">Kind + competent</span>
+              <span class="assist-fact">Discreet partner</span>
+              <span class="assist-fact">Fast structure</span>
+              <span class="assist-fact">Unfair advantage</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="assist-cta-cluster">
+          <a href="https://cal.com/meetdeshani" target="_blank" rel="noopener" class="brief-cta brief-cta-light assist-cta">
+            Book a private 1:1 session <span class="service-arrow">↗</span>
+          </a>
+          <p class="assist-cta-note">Best for founders, operators, and people who want a discreet, highly technical second seat without building a whole team first.</p>
+        </div>
       </div>
 
-      <div class="case-card">
-        <p class="case-tag">Case Study · 02</p>
-        <p class="case-title">NBFC — AI Document Pipeline</p>
-        <p class="case-outcome">Custom OCR + LLM pipeline for loan document processing. <span class="case-highlight">99% accuracy</span> at 40x human speed.</p>
-      </div>
+      <div class="assist-stage">
+        <div class="assist-stage-glow"></div>
 
-      <div class="case-card">
-        <p class="case-tag">Case Study · 03</p>
-        <p class="case-title">Compliance Team — AI Audit System</p>
-        <p class="case-outcome">Private call audit system with custom scoring model. <span class="case-highlight">₹8L/year saved</span> vs manual review cost.</p>
+        <div class="assist-phase assist-phase-advantage">
+          <div class="assist-advantage-board">
+            <div class="assist-advantage-note">
+              <span class="assist-stage-label">Hidden leverage</span>
+              <strong>Find what was already there.</strong>
+              <p>Thirty focused minutes with AI can turn vague ambition into a structured decision, prompt, system map, or first working tool.</p>
+            </div>
+
+            <div class="assist-advantage-grid">
+              <article class="assist-advantage-card">
+                <strong>Hidden opportunities</strong>
+                <p>See the leverage other people walk past because they never structure the thought.</p>
+              </article>
+              <article class="assist-advantage-card">
+                <strong>Compound minutes</strong>
+                <p>Save ten minutes a day enough times and your year starts changing shape.</p>
+              </article>
+              <article class="assist-advantage-card">
+                <strong>Structured output</strong>
+                <p>What lived only in your head becomes drafts, systems, tools, and next steps.</p>
+              </article>
+              <article class="assist-advantage-card">
+                <strong>Private thinking</strong>
+                <p>Use AI without handing every strategic thought to public SaaS memory.</p>
+              </article>
+            </div>
+
+            <div class="assist-advantage-footer">
+              <span>Bring the moon home.</span>
+              <i></i>
+              <span>Plant the money tree.</span>
+              <i></i>
+              <span>Then build the real version.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="assist-phase assist-phase-tools">
+          <div class="assist-tools-board">
+            <div class="assist-tools-core">
+              <span class="assist-stage-label">Working session</span>
+              <strong>Idea in.<br>Tool out.</strong>
+              <p>Claude Code, prompts, operators, dashboards, and private workflows built around the bottleneck that matters now.</p>
+            </div>
+
+            <article class="assist-tool-card assist-tool-card-code">
+              <span class="assist-tool-dot data"></span>
+              <strong>Claude Code workflows</strong>
+              <p>Use the tool properly, not theatrically.</p>
+            </article>
+
+            <article class="assist-tool-card assist-tool-card-micro">
+              <span class="assist-tool-dot ops"></span>
+              <strong>Micro tools</strong>
+              <p>Small internal apps that create outsized operator leverage.</p>
+            </article>
+
+            <article class="assist-tool-card assist-tool-card-research">
+              <span class="assist-tool-dot tech"></span>
+              <strong>Research to structure</strong>
+              <p>Turn open-ended thinking into clean documents, decisions, and action rails.</p>
+            </article>
+
+            <article class="assist-tool-card assist-tool-card-ops">
+              <span class="assist-tool-dot strategy"></span>
+              <strong>Operator systems</strong>
+              <p>Assistants, calculators, trackers, and workflows that keep compounding after the session.</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="assist-phase assist-phase-partner">
+          <div class="assist-partner-board">
+            <div class="assist-partner-note">
+              <span class="assist-stage-label">Relationship fit</span>
+              <strong>Sharp enough to ship. Nice enough to work beside.</strong>
+              <p>I am genuinely interested in being the strongest No.2 behind a serious No.1. Calm in the room. Fast in execution. Low ego by default.</p>
+            </div>
+
+            <div class="assist-partner-grid">
+              <div class="assist-partner-card">
+                <strong>Nice to work with</strong>
+                <span>You get patience, clarity, and zero weird power games.</span>
+              </div>
+              <div class="assist-partner-card">
+                <strong>Competent enough to ship</strong>
+                <span>Not just ideas. Real tools, real workflows, real outputs.</span>
+              </div>
+              <div class="assist-partner-card">
+                <strong>Discreet by nature</strong>
+                <span>Private work, founder-side thinking, and no unnecessary exposure.</span>
+              </div>
+              <div class="assist-partner-card">
+                <strong>Built for ambitious people</strong>
+                <span>Best when the goal is speed, leverage, and unfair clarity.</span>
+              </div>
+            </div>
+
+            <div class="assist-partner-footer">
+              <span>High-trust working relationship</span>
+              <i></i>
+              <span>Private leverage</span>
+              <i></i>
+              <span>Compounding capability</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ─── LABS TEASER ─── -->
   <section id="labs-teaser">
-    <p class="labs-teaser-label">// labs</p>
-    <h2 class="labs-teaser-title">Try It Yourself</h2>
-    <p class="labs-teaser-sub">Interactive demos of what we build. No sign-up required.</p>
-
-    <div class="labs-teaser-grid">
-
-      <a href="/labs/ai-chat/" class="labs-teaser-card">
-        <div class="labs-teaser-visual">
-          <div class="ltv-chat">
-            <div class="ltv-bubble ltv-user"></div>
-            <div class="ltv-bubble ltv-ai"></div>
-            <div class="ltv-typing"><span></span><span></span><span></span></div>
+    <div class="labs-teaser-shell">
+      <div class="labs-teaser-copy">
+        <p class="labs-teaser-label">// labs</p>
+        <h2 class="labs-teaser-title">Try the demos. <em>See the stack in motion.</em></h2>
+        <p class="labs-teaser-sub">Explore live demos for visibility, document intelligence, and workflow operations. Each one shows how AI can be shaped into a practical business system.</p>
+        <div class="labs-teaser-facts">
+          <span class="labs-teaser-fact">Live demos</span>
+          <span class="labs-teaser-fact">Practical use cases</span>
+          <span class="labs-teaser-fact">Business-ready outputs</span>
+          <span class="labs-teaser-fact">Operations in view</span>
+        </div>
+        <div class="labs-teaser-policy">
+          <div class="labs-teaser-policy-card">
+            <span class="labs-teaser-policy-label">Start with</span>
+            <div class="labs-teaser-policy-list">
+              <span>SEO &amp; GEO Analyzer</span>
+              <span>Document Intelligence</span>
+              <span>Workflow Control Room</span>
+            </div>
+          </div>
+          <div class="labs-teaser-policy-card labs-teaser-policy-card--muted">
+            <span class="labs-teaser-policy-label">What they show</span>
+            <p>How a brand gets found, how messy data becomes structured, and how operations can move in one connected flow.</p>
           </div>
         </div>
-        <span class="labs-teaser-tag">01</span>
-        <h3>AI Chat Agent</h3>
-        <p>Talk to our AI. Live.</p>
-        <span class="labs-teaser-cta">Try it &rarr;</span>
-      </a>
+      </div>
 
-      <a href="/labs/doc-parser/" class="labs-teaser-card">
-        <div class="labs-teaser-visual">
-          <div class="ltv-doc">
-            <div class="ltv-line" style="width:80%"></div>
-            <div class="ltv-line" style="width:65%"></div>
-            <div class="ltv-line" style="width:88%"></div>
-            <div class="ltv-line" style="width:50%"></div>
+      <div class="labs-teaser-grid">
+
+        <a href="/labs/seo-checker/" class="labs-teaser-card">
+          <div class="labs-teaser-visual">
+            <div class="ltv-gauge">
+              <div class="ltv-gauge-ring"></div>
+              <div class="ltv-gauge-core">84</div>
+            </div>
           </div>
-        </div>
-        <span class="labs-teaser-tag">02</span>
-        <h3>Document Intelligence</h3>
-        <p>Drop a PDF. Watch AI parse it.</p>
-        <span class="labs-teaser-cta">Try it &rarr;</span>
-      </a>
+          <span class="labs-teaser-tag">01 · Visibility</span>
+          <h3>SEO &amp; GEO Analyzer</h3>
+          <p>Show how a brand can be reviewed for search, answer engines, and market visibility before a full growth build.</p>
+          <span class="labs-teaser-cta">Open demo &rarr;</span>
+        </a>
 
-      <a href="/labs/workflow-viz/" class="labs-teaser-card">
-        <div class="labs-teaser-visual">
-          <div class="ltv-wf">
-            <div class="ltv-node" style="background:rgba(200,182,255,0.2)"><div class="ltv-nd" style="background:#C8B6FF"></div></div>
-            <div class="ltv-conn"></div>
-            <div class="ltv-node" style="background:rgba(184,224,210,0.2)"><div class="ltv-nd" style="background:#B8E0D2"></div></div>
-            <div class="ltv-conn"></div>
-            <div class="ltv-node" style="background:rgba(255,205,178,0.2)"><div class="ltv-nd" style="background:#FFCDB2"></div></div>
+        <a href="/labs/doc-parser/" class="labs-teaser-card">
+          <div class="labs-teaser-visual">
+            <div class="ltv-doc">
+              <div class="ltv-line" style="width:80%"></div>
+              <div class="ltv-line" style="width:65%"></div>
+              <div class="ltv-line" style="width:88%"></div>
+              <div class="ltv-line" style="width:50%"></div>
+            </div>
           </div>
-        </div>
-        <span class="labs-teaser-tag">03</span>
-        <h3>Workflow Automator</h3>
-        <p>See AI agents work in real-time.</p>
-        <span class="labs-teaser-cta">Try it &rarr;</span>
-      </a>
+          <span class="labs-teaser-tag">02 · Structured data</span>
+          <h3>Document Intelligence</h3>
+          <p>Drop a file and watch how business-ready structured data can be extracted from messy documents.</p>
+          <span class="labs-teaser-cta">Open demo &rarr;</span>
+        </a>
 
+        <a href="/labs/workflow-viz/" class="labs-teaser-card">
+          <div class="labs-teaser-visual">
+            <div class="ltv-wf">
+              <div class="ltv-node" style="background:rgba(200,182,255,0.2)"><div class="ltv-nd" style="background:#C8B6FF"></div></div>
+              <div class="ltv-conn"></div>
+              <div class="ltv-node" style="background:rgba(184,224,210,0.2)"><div class="ltv-nd" style="background:#B8E0D2"></div></div>
+              <div class="ltv-conn"></div>
+              <div class="ltv-node" style="background:rgba(255,205,178,0.2)"><div class="ltv-nd" style="background:#FFCDB2"></div></div>
+            </div>
+          </div>
+          <span class="labs-teaser-tag">03 · Operations</span>
+          <h3>Workflow Control Room</h3>
+          <p>See how handoffs, tasks, and automations can move together instead of living in disconnected tools.</p>
+          <span class="labs-teaser-cta">Open demo &rarr;</span>
+        </a>
+
+      </div>
     </div>
 
-    <a href="/labs/" class="labs-teaser-all">See all labs &rarr;</a>
+    <a href="/labs/" class="labs-teaser-all">Explore all labs &rarr;</a>
   </section>
 
   <!-- ─── CONTACT ─── -->
   <section id="contact">
-    <div class="contact-inner">
-      <p class="contact-label">// start here</p>
-      <h2 class="contact-title">Let's build<br><em>your AI.</em></h2>
-      <p class="contact-sub">No forms. No sales funnels. Pick what works for you.</p>
-      <div class="contact-buttons">
-        <a href="https://wa.me/918320065658" target="_blank" rel="noopener" class="btn-wa">
-          ↗ WhatsApp Me
-        </a>
-        <a href="https://cal.com/meetdeshani" target="_blank" rel="noopener" class="btn-cal">
-          → Book a Call
-        </a>
-        <span class="btn-testimony" aria-disabled="true">
-          Read Testimony
-          <span class="btn-testimony-badge">Coming Soon</span>
-        </span>
+    <div class="contact-shell">
+      <div class="contact-inner">
+        <p class="contact-label">// final step</p>
+        <h2 class="contact-title">Start with what<br><em>your business needs.</em></h2>
+        <p class="contact-sub">Private AI, platform, consulting, or outcomes. Pick the path that fits your business.</p>
+        <div class="contact-buttons">
+          <a href="https://wa.me/918320065658" target="_blank" rel="noopener" class="btn-wa">
+            ↗ WhatsApp Me
+          </a>
+          <span class="btn-testimony" aria-disabled="true">
+            Read Testimony
+            <span class="btn-testimony-badge">Coming Soon</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="contact-schedule-card" id="contact-schedule-card">
+        <div class="contact-schedule-top">
+          <span class="contact-schedule-label">Prefer a call?</span>
+          <span class="contact-schedule-badge">Cal.com</span>
+        </div>
+        <h3 class="contact-schedule-title">Book a focused strategy call.</h3>
+        <p class="contact-schedule-copy">Best for platform fit, consulting scope, private AI rollout, or choosing the right first build for your business.</p>
+
+        <div class="contact-schedule-meta">
+          <span class="contact-schedule-chip">20 min</span>
+          <span class="contact-schedule-chip">Direct with Meet</span>
+          <span class="contact-schedule-chip">India-friendly timing</span>
+        </div>
+
+        <div class="contact-schedule-agenda">
+          <div class="contact-schedule-row">
+            <span class="contact-schedule-topic contact-schedule-topic-1">Platform fit</span>
+            <strong class="contact-schedule-value contact-schedule-value-1">Roadmap</strong>
+          </div>
+          <div class="contact-schedule-row">
+            <span class="contact-schedule-topic contact-schedule-topic-2">Consulting scope</span>
+            <strong class="contact-schedule-value contact-schedule-value-2">ROI view</strong>
+          </div>
+          <div class="contact-schedule-row">
+            <span class="contact-schedule-topic contact-schedule-topic-3">First build</span>
+            <strong class="contact-schedule-value contact-schedule-value-3">Next steps</strong>
+          </div>
+        </div>
+
+        <div class="contact-schedule-actions">
+          <button
+            type="button"
+            class="contact-schedule-action contact-schedule-action-primary"
+            id="contact-calendar-toggle"
+            aria-expanded="false"
+            aria-controls="contact-calendar-panel"
+          >
+            Open inline calendar
+          </button>
+          <a
+            href="https://cal.com/meetdeshani/30min?layout=week_view"
+            target="_blank"
+            rel="noopener"
+            class="contact-schedule-action contact-schedule-action-secondary"
+          >
+            Open in new tab ↗
+          </a>
+        </div>
+
+        <div
+          class="contact-schedule-frame-shell"
+          id="contact-calendar-panel"
+          hidden
+          aria-hidden="true"
+        >
+          <div class="contact-schedule-frame-top">
+            <div>
+              <span class="contact-schedule-frame-label">30 min meeting</span>
+              <p class="contact-schedule-frame-sub">Week view booking flow inside the page.</p>
+            </div>
+            <button type="button" class="contact-schedule-frame-close" id="contact-calendar-close">
+              Hide
+            </button>
+          </div>
+          <p class="contact-schedule-frame-status" id="contact-calendar-status">
+            Loading live availability from Cal.com...
+          </p>
+          <iframe
+            id="contact-calendar-frame"
+            class="contact-schedule-frame"
+            title="Meet Deshani 30 minute booking calendar"
+            data-src="https://cal.com/meetdeshani/30min?layout=week_view"
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allow="camera; microphone; fullscreen; autoplay"
+          ></iframe>
+        </div>
       </div>
     </div>
   </section>
@@ -1062,6 +1784,91 @@ runSplash()
 
 function initMainPage() {
   gsap.registerPlugin(ScrollTrigger)
+  const sectionFilterRegistry = window.__dotsSectionFilterRegistry = window.__dotsSectionFilterRegistry || { sections: {}, ready: false }
+
+  function ensureSectionEntry(sectionId) {
+    if (!sectionFilterRegistry.sections[sectionId]) {
+      sectionFilterRegistry.sections[sectionId] = {
+        element: document.getElementById(sectionId),
+        triggers: []
+      }
+    }
+    return sectionFilterRegistry.sections[sectionId]
+  }
+
+  function registerSectionTrigger(sectionId, trigger) {
+    if (!trigger) return trigger
+    const entry = ensureSectionEntry(sectionId)
+    if (entry.triggers.indexOf(trigger) === -1) entry.triggers.push(trigger)
+    return trigger
+  }
+
+  ;['hero', 'meet', 'platform', 'consulting', 'proof', 'assist', 'labs-teaser', 'contact'].forEach(ensureSectionEntry)
+  const storyThread = document.getElementById('story-thread')
+  const storyOrb = document.getElementById('story-thread-orb')
+  const storyBadge = document.getElementById('story-thread-badge')
+  const storyStep = document.getElementById('story-thread-step')
+  const storyName = document.getElementById('story-thread-name')
+  const STORY_EASE = 'cubic-bezier(0.23, 1, 0.32, 1)'
+  const STORY_STATES = {
+    hero: { visible: false, progress: 0.0, scale: 0.84, rotate: -14, x: 0, step: '00', name: 'Hero', skin: 'light', accent: '#C8B6FF', accentSoft: 'rgba(200,182,255,0.18)' },
+    meet: { visible: true, progress: 0.08, scale: 0.92, rotate: -18, x: -10, step: '01', name: 'Meet', skin: 'light', accent: '#C8B6FF', accentSoft: 'rgba(200,182,255,0.22)' },
+    platform: { visible: true, progress: 0.24, scale: 1.06, rotate: 14, x: 2, step: '02', name: 'Platform', skin: 'dark', accent: '#A2D2FF', accentSoft: 'rgba(162,210,255,0.24)' },
+    consulting: { visible: true, progress: 0.40, scale: 0.98, rotate: -8, x: -8, step: '03', name: 'Consulting', skin: 'light', accent: '#B28743', accentSoft: 'rgba(178,135,67,0.18)' },
+    proof: { visible: true, progress: 0.56, scale: 1.02, rotate: 10, x: 8, step: '04', name: 'Outcomes', skin: 'dark', accent: '#FFCDB2', accentSoft: 'rgba(255,205,178,0.20)' },
+    assist: { visible: true, progress: 0.72, scale: 1.08, rotate: -16, x: -6, step: '05', name: 'Assist', skin: 'light', accent: '#C8B6FF', accentSoft: 'rgba(200,182,255,0.22)' },
+    'labs-teaser': { visible: true, progress: 0.86, scale: 0.94, rotate: 18, x: 4, step: '06', name: 'Labs', skin: 'dark', accent: '#B8E0D2', accentSoft: 'rgba(184,224,210,0.24)' },
+    contact: { visible: true, progress: 0.95, scale: 0.90, rotate: 0, x: -14, step: '07', name: 'Contact', skin: 'light', accent: '#43305F', accentSoft: 'rgba(67,48,95,0.18)' }
+  }
+  let currentStoryState = 'hero'
+
+  function setStoryThreadState(sectionId, immediate) {
+    if (!storyThread || !storyOrb || !storyBadge || !storyStep || !storyName) return
+    const state = STORY_STATES[sectionId] || STORY_STATES.hero
+    currentStoryState = sectionId
+    storyThread.dataset.section = sectionId
+    storyThread.dataset.skin = state.skin
+    storyThread.style.setProperty('--story-accent', state.accent)
+    storyThread.style.setProperty('--story-accent-soft', state.accentSoft)
+    storyStep.textContent = state.step
+    storyName.textContent = state.name
+
+    if (!state.visible) {
+      gsap.to(storyThread, { autoAlpha: 0, duration: immediate ? 0 : 0.28, ease: STORY_EASE })
+      return
+    }
+
+    const height = storyThread.clientHeight || Math.max(window.innerHeight * 0.62, 420)
+    const orbHeight = storyOrb.offsetHeight || 76
+    const targetY = Math.max(0, Math.min(height - orbHeight, height * state.progress - orbHeight * 0.5))
+
+    gsap.to(storyThread, { autoAlpha: 1, duration: immediate ? 0 : 0.38, ease: STORY_EASE })
+    gsap.to(storyOrb, {
+      y: targetY,
+      x: state.x,
+      scale: state.scale,
+      rotate: state.rotate,
+      duration: immediate ? 0 : 0.7,
+      ease: STORY_EASE
+    })
+    gsap.to(storyBadge, {
+      y: targetY,
+      x: state.x * 0.65,
+      duration: immediate ? 0 : 0.7,
+      ease: STORY_EASE
+    })
+  }
+
+  window.__dotsStoryThreadState = {
+    set(sectionId, immediate) {
+      setStoryThreadState(sectionId, immediate)
+    },
+    getCurrent() {
+      return currentStoryState
+    }
+  }
+  setStoryThreadState('hero', true)
+  window.addEventListener('resize', () => setStoryThreadState(currentStoryState, true))
 
   // ══════════════════════════════════════════
   //  3-PANEL HERO SCROLL (pin + crossfade)
@@ -1077,7 +1884,6 @@ function initMainPage() {
   }
 
   // Entrance animation for first slide content
-  gsap.set('#hero-logo-bottom', { opacity: 0 })
   gsap.set('#scroll-hint', { opacity: 0 })
 
   const firstSlide = slides[0]
@@ -1086,7 +1892,6 @@ function initMainPage() {
     .from(firstSlide.querySelector('.hero-slide-title'),   { opacity: 0, y: 24, duration: 0.8, ease: 'power3.out' }, '-=0.4')
     .from(firstSlide.querySelector('.hero-slide-sub'),     { opacity: 0, y: 16, duration: 0.7, ease: 'power3.out' }, '-=0.5')
     .from(firstSlide.querySelector('.hero-slide-tags') || firstSlide.querySelector('.hero-slide-ctas'), { opacity: 0, y: 12, duration: 0.6, ease: 'power3.out' }, '-=0.4')
-    .to('#hero-logo-bottom', { opacity: 1, duration: 0.5 }, '-=0.2')
     .to('#scroll-hint', { opacity: 1, duration: 0.4 }, '-=0.1')
 
   // Scroll-driven hero transitions
@@ -1102,6 +1907,8 @@ function initMainPage() {
       scrub: 0.5,
       onUpdate: (self) => {
         const progress = self.progress
+        window.__dotsHeroScene = window.__dotsHeroScene || {}
+        window.__dotsHeroScene.heroProgress = progress
         let activeIdx = 0
         if (progress > 0.55) activeIdx = 2
         else if (progress > 0.15) activeIdx = 1
@@ -1126,9 +1933,10 @@ function initMainPage() {
       { autoAlpha: 0, y: 50 },
       { autoAlpha: 1, y: 0, duration: 0.22, ease: 'power3.out' }, 0.70)
 
-  // Fade logo-bottom and scroll-hint immediately on first scroll
-  heroTl.to('#hero-logo-bottom', { autoAlpha: 0, duration: 0.08 }, 0.0)
+  // Fade only the scroll hint immediately on first scroll.
+  // Keep the brand mark present through all hero panels.
   heroTl.to('#scroll-hint', { autoAlpha: 0, duration: 0.08 }, 0.0)
+  registerSectionTrigger('hero', heroTl.scrollTrigger)
 
   // ══════════════════════════════════════════
   //  MANIFESTO WORD-BY-WORD REVEAL
@@ -1214,198 +2022,462 @@ function initMainPage() {
   meetTl.to(credentials[3], { opacity: 1, y: 0, duration: 0.06, ease: EASE_OUT }, 0.75)
   meetTl.to(meetRedirect, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.82)
   meetTl.set({}, {}, 1)
+  registerSectionTrigger('meet', meetTl.scrollTrigger)
 
   // ══════════════════════════════════════════
   //  PLATFORM — Pinned (3 phases)
   // ══════════════════════════════════════════
   const platformEl = document.getElementById('platform')
-  const pLabel = platformEl.querySelector('.brief-label')
-  const pTitle = platformEl.querySelector('.brief-title')
-  const pDesc = platformEl.querySelector('.brief-desc')
-  const pServices = platformEl.querySelectorAll('.brief-service-item')
-  const pCta = platformEl.querySelector('.brief-cta')
-  const pRight = platformEl.querySelectorAll('.brief-content')[1]
+  const pLabel = platformEl.querySelector('.platform-label')
+  const pCards = platformEl.querySelectorAll('.platform-copy-card')
+  const pPhases = platformEl.querySelectorAll('.platform-phase')
+  const pSignals = platformEl.querySelectorAll('.platform-signal, .platform-core-rail')
+  const pSuiteItems = platformEl.querySelectorAll('.platform-suite-kicker, .platform-suite-badge, .platform-suite-card, .platform-suite-ribbon')
+  const pRolloutCols = platformEl.querySelectorAll('.platform-rollout-column')
+  const pDocChips = platformEl.querySelectorAll('.platform-doc-chip')
+  const pAgentCards = platformEl.querySelectorAll('.platform-agent-card')
+  const pMarketChips = platformEl.querySelectorAll('.platform-market-chip')
+  const pRolloutStat = platformEl.querySelector('.platform-rollout-stat')
+  const pCta = platformEl.querySelector('.platform-cta-cluster')
+  const pGlow = platformEl.querySelector('.platform-stage-glow')
 
   platformEl.style.height = '100vh'
   platformEl.style.overflow = 'hidden'
   gsap.set(platformEl, { opacity: 1, y: 0 })
-  gsap.set([pLabel, pTitle, pDesc], { opacity: 0, y: 20 })
-  gsap.set(pServices, { opacity: 0, y: 14 })
+  gsap.set(pLabel, { opacity: 0, y: 14 })
+  gsap.set(pCards, { opacity: 0, y: 24 })
+  gsap.set(pPhases, { opacity: 0, y: 28, scale: 0.96 })
+  gsap.set(pSignals, { opacity: 0 })
+  gsap.set(pSuiteItems, { opacity: 0, y: 18, scale: 0.97 })
+  gsap.set(pRolloutCols, { opacity: 0, y: 22, scale: 0.97 })
+  gsap.set(pDocChips, { opacity: 0, y: 12 })
+  gsap.set(pAgentCards, { opacity: 0, y: 14, scale: 0.97 })
+  gsap.set(pMarketChips, { opacity: 0, y: 12 })
+  gsap.set(pRolloutStat, { opacity: 0, y: 18 })
   gsap.set(pCta, { opacity: 0, y: 12 })
-  gsap.set(pRight, { opacity: 0, scale: 0.95 })
+  gsap.set(pGlow, { opacity: 0.55, scale: 0.95 })
+  gsap.set([pCards[0], pPhases[0]], { opacity: 1, y: 0, scale: 1 })
 
   const platformTl = gsap.timeline({
     scrollTrigger: {
       trigger: '#platform', start: 'top top',
-      end: isMobile ? '+=150%' : '+=200%',
+      end: isMobile ? '+=220%' : '+=300%',
       pin: true, scrub: 0.5, anticipatePin: 1,
     }
   })
-  platformTl.to(pLabel, { opacity: 0.6, y: 0, duration: 0.06, ease: EASE_OUT }, 0.02)
-  platformTl.to(pTitle, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.06)
-  platformTl.to(pDesc, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.12)
-  pServices.forEach((item, i) => {
-    platformTl.to(item, { opacity: 1, y: 0, duration: 0.06, ease: EASE_OUT }, 0.35 + i * 0.06)
-  })
-  platformTl.to(pCta, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.65)
-  platformTl.to(pRight, { opacity: 1, scale: 1, duration: 0.10, ease: EASE_OUT }, 0.70)
+  platformTl.to(pGlow, { opacity: 1, scale: 1, duration: 0.12, ease: EASE_OUT }, 0.02)
+  platformTl.to(pLabel, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.04)
+  platformTl.to(pCards[0], { opacity: 1, y: 0, duration: 0.10, ease: EASE_OUT }, 0.08)
+  platformTl.to(pPhases[0], { opacity: 1, y: 0, scale: 1, duration: 0.12, ease: EASE_OUT }, 0.10)
+  platformTl.to(pSignals, { opacity: 1, stagger: 0.02, duration: 0.07, ease: EASE_OUT }, 0.16)
+
+  platformTl.to([pCards[0], ...pSignals], { opacity: 0, duration: 0.08, ease: EASE_OUT }, 0.37)
+  platformTl.to(pPhases[0], { opacity: 0, y: -10, scale: 0.97, duration: 0.10, ease: EASE_OUT }, 0.37)
+  platformTl.to(pCards[1], { opacity: 1, y: 0, duration: 0.10, ease: EASE_OUT }, 0.45)
+  platformTl.to(pPhases[1], { opacity: 1, y: 0, scale: 1, duration: 0.12, ease: EASE_OUT }, 0.46)
+  platformTl.to(pSuiteItems, { opacity: 1, y: 0, scale: 1, stagger: 0.02, duration: 0.07, ease: EASE_OUT }, 0.49)
+
+  platformTl.to([pCards[1], ...pSuiteItems], { opacity: 0, duration: 0.08, ease: EASE_OUT }, 0.76)
+  platformTl.to(pPhases[1], { opacity: 0, y: -10, scale: 0.97, duration: 0.10, ease: EASE_OUT }, 0.76)
+  platformTl.to(pCards[2], { opacity: 1, y: 0, duration: 0.10, ease: EASE_OUT }, 0.82)
+  platformTl.to(pPhases[2], { opacity: 1, y: 0, scale: 1, duration: 0.12, ease: EASE_OUT }, 0.83)
+  platformTl.to(pRolloutCols, { opacity: 1, y: 0, scale: 1, stagger: 0.04, duration: 0.08, ease: EASE_OUT }, 0.87)
+  platformTl.to(pDocChips, { opacity: 1, y: 0, stagger: 0.02, duration: 0.06, ease: EASE_OUT }, 0.90)
+  platformTl.to(pAgentCards, { opacity: 1, y: 0, scale: 1, stagger: 0.03, duration: 0.06, ease: EASE_OUT }, 0.92)
+  platformTl.to(pMarketChips, { opacity: 1, y: 0, stagger: 0.02, duration: 0.06, ease: EASE_OUT }, 0.94)
+  platformTl.to(pRolloutStat, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.97)
+  platformTl.to(pCta, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.98)
   platformTl.set({}, {}, 1)
+  registerSectionTrigger('platform', platformTl.scrollTrigger)
 
   // ══════════════════════════════════════════
   //  CONSULTING — Pinned (3 phases)
   // ══════════════════════════════════════════
   const consultEl = document.getElementById('consulting')
-  const cLabel = consultEl.querySelector('.brief-label')
-  const cTitle = consultEl.querySelector('.brief-title')
-  const cDesc = consultEl.querySelector('.brief-desc')
-  const cServices = consultEl.querySelectorAll('.brief-service-item')
-  const cCta = consultEl.querySelector('.brief-cta')
-  const cRight = consultEl.querySelectorAll('.brief-content')[1]
+  const cLabel = consultEl.querySelector('.consulting-label')
+  const cCards = consultEl.querySelectorAll('.consulting-copy-card')
+  const cPhases = consultEl.querySelectorAll('.consulting-phase')
+  const cJourneyRows = consultEl.querySelectorAll('.consulting-journey-row')
+  const cJourneyFooter = consultEl.querySelector('.consulting-journey-footer')
+  const cEngineCards = consultEl.querySelectorAll('.consulting-engine-card')
+  const cOutcomeRows = consultEl.querySelectorAll('.consulting-outcome-row')
+  const cStepCards = consultEl.querySelectorAll('.consulting-step-card')
+  const cOutcomeFooter = consultEl.querySelector('.consulting-outcome-footer')
+  const cCta = consultEl.querySelector('.consulting-cta-cluster')
+  const cGlow = consultEl.querySelector('.consulting-stage-glow')
 
   consultEl.style.height = '100vh'
   consultEl.style.overflow = 'hidden'
   gsap.set(consultEl, { opacity: 1, y: 0 })
-  gsap.set([cLabel, cTitle, cDesc], { opacity: 0, y: 20 })
-  gsap.set(cServices, { opacity: 0, y: 14 })
+  gsap.set(cLabel, { opacity: 0, y: 14 })
+  gsap.set(cCards, { opacity: 0, y: 24 })
+  gsap.set(cPhases, { opacity: 0, y: 28, scale: 0.96 })
+  gsap.set(cJourneyRows, { opacity: 1, y: 0 })
+  gsap.set(cJourneyFooter, { opacity: 1, y: 0 })
+  gsap.set(cEngineCards, { opacity: 0, y: 18, scale: 0.97 })
+  gsap.set(cOutcomeRows, { opacity: 0, y: 16 })
+  gsap.set(cStepCards, { opacity: 0, y: 16, scale: 0.97 })
+  gsap.set(cOutcomeFooter, { opacity: 0, y: 14 })
   gsap.set(cCta, { opacity: 0, y: 12 })
-  gsap.set(cRight, { opacity: 0, scale: 0.95 })
+  gsap.set(cGlow, { opacity: 0.52, scale: 0.95 })
+  gsap.set([cCards[0], cPhases[0]], { opacity: 1, y: 0, scale: 1 })
 
   const consultTl = gsap.timeline({
     scrollTrigger: {
       trigger: '#consulting', start: 'top top',
-      end: isMobile ? '+=150%' : '+=200%',
+      end: isMobile ? '+=220%' : '+=300%',
       pin: true, scrub: 0.5, anticipatePin: 1,
     }
   })
-  consultTl.to(cLabel, { opacity: 0.6, y: 0, duration: 0.06, ease: EASE_OUT }, 0.02)
-  consultTl.to(cTitle, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.06)
-  consultTl.to(cDesc, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.12)
-  cServices.forEach((item, i) => {
-    consultTl.to(item, { opacity: 1, y: 0, duration: 0.06, ease: EASE_OUT }, 0.35 + i * 0.05)
-  })
-  consultTl.to(cCta, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.65)
-  consultTl.to(cRight, { opacity: 1, scale: 1, duration: 0.10, ease: EASE_OUT }, 0.70)
+  consultTl.to(cGlow, { opacity: 1, scale: 1, duration: 0.10, ease: EASE_OUT }, 0.02)
+  consultTl.to(cLabel, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.04)
+  consultTl.to(cCards[0], { opacity: 1, y: 0, duration: 0.10, ease: EASE_OUT }, 0.08)
+  consultTl.to(cPhases[0], { opacity: 1, y: 0, scale: 1, duration: 0.12, ease: EASE_OUT }, 0.10)
+  consultTl.to([cCards[0], ...cJourneyRows, cJourneyFooter], { opacity: 0, duration: 0.08, ease: EASE_OUT }, 0.39)
+  consultTl.to(cPhases[0], { opacity: 0, y: -10, scale: 0.97, duration: 0.10, ease: EASE_OUT }, 0.39)
+  consultTl.to(cCards[1], { opacity: 1, y: 0, duration: 0.10, ease: EASE_OUT }, 0.46)
+  consultTl.to(cPhases[1], { opacity: 1, y: 0, scale: 1, duration: 0.12, ease: EASE_OUT }, 0.47)
+  consultTl.to(cEngineCards, { opacity: 1, y: 0, scale: 1, stagger: 0.03, duration: 0.08, ease: EASE_OUT }, 0.54)
+
+  consultTl.to([cCards[1], ...cEngineCards], { opacity: 0, duration: 0.08, ease: EASE_OUT }, 0.76)
+  consultTl.to(cPhases[1], { opacity: 0, y: -10, scale: 0.97, duration: 0.10, ease: EASE_OUT }, 0.76)
+  consultTl.to(cCards[2], { opacity: 1, y: 0, duration: 0.10, ease: EASE_OUT }, 0.82)
+  consultTl.to(cPhases[2], { opacity: 1, y: 0, scale: 1, duration: 0.12, ease: EASE_OUT }, 0.83)
+  consultTl.to(cOutcomeRows, { opacity: 1, y: 0, stagger: 0.03, duration: 0.07, ease: EASE_OUT }, 0.88)
+  consultTl.to(cStepCards, { opacity: 1, y: 0, scale: 1, stagger: 0.03, duration: 0.07, ease: EASE_OUT }, 0.90)
+  consultTl.to(cOutcomeFooter, { opacity: 1, y: 0, duration: 0.06, ease: EASE_OUT }, 0.95)
+  consultTl.to(cCta, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.98)
   consultTl.set({}, {}, 1)
+  registerSectionTrigger('consulting', consultTl.scrollTrigger)
 
   // ══════════════════════════════════════════
   //  PROOF — Pinned (2 phases: metrics + cases)
   // ══════════════════════════════════════════
   const proofEl = document.getElementById('proof')
   const proofLabel = proofEl.querySelector('.proof-label')
+  const proofCards = proofEl.querySelectorAll('.proof-copy-card')
+  const proofPhases = proofEl.querySelectorAll('.proof-phase')
   const proofMetrics = proofEl.querySelectorAll('.proof-metric')
+  const proofMetricRail = proofEl.querySelector('.proof-metric-rail')
   const caseCards = proofEl.querySelectorAll('.case-card')
+  const proofCaseNote = proofEl.querySelector('.proof-case-note')
+  const proofGlow = proofEl.querySelector('.proof-stage-glow')
   let countersStarted = false
+  function startProofCounters() {
+    if (countersStarted) return
+    countersStarted = true
+    proofMetrics.forEach((metric) => {
+      const counter = metric.querySelector('.metric-count')
+      if (counter && !counter.dataset.counted) {
+        counter.dataset.counted = 'true'
+        const target = parseInt(counter.dataset.target)
+        const dur = 1.8, st = performance.now()
+        function tick(now) {
+          const p = Math.min((now - st) / 1000 / dur, 1)
+          counter.textContent = Math.round((1 - Math.pow(1 - p, 3)) * target)
+          if (p < 1) requestAnimationFrame(tick)
+        }
+        requestAnimationFrame(tick)
+      }
+    })
+  }
 
   proofEl.style.height = '100vh'
   proofEl.style.overflow = 'hidden'
   gsap.set(proofLabel, { opacity: 0, y: 16 })
+  gsap.set(proofCards, { opacity: 0, y: 24 })
+  gsap.set(proofPhases, { opacity: 0, y: 28, scale: 0.97 })
+  gsap.set(proofMetrics, { opacity: 1, y: 0 })
+  gsap.set(proofMetricRail, { opacity: 1, y: 0 })
+  gsap.set(caseCards, { opacity: 0, y: 18 })
+  gsap.set(proofCaseNote, { opacity: 0, y: 14 })
+  gsap.set(proofGlow, { opacity: 0.5, scale: 0.95 })
+  gsap.set([proofCards[0], proofPhases[0]], { opacity: 1, y: 0, scale: 1 })
 
   const proofTl = gsap.timeline({
     scrollTrigger: {
       trigger: '#proof', start: 'top top',
-      end: isMobile ? '+=150%' : '+=200%',
+      end: isMobile ? '+=190%' : '+=240%',
       pin: true, scrub: 0.5, anticipatePin: 1,
-      onUpdate: (self) => {
-        if (self.progress > 0.08 && !countersStarted) {
-          countersStarted = true
-          proofMetrics.forEach((metric) => {
-            const counter = metric.querySelector('.metric-count')
-            if (counter && !counter.dataset.counted) {
-              counter.dataset.counted = 'true'
-              const target = parseInt(counter.dataset.target)
-              const dur = 1.8, st = performance.now()
-              function tick(now) {
-                const p = Math.min((now - st) / 1000 / dur, 1)
-                counter.textContent = Math.round((1 - Math.pow(1 - p, 3)) * target)
-                if (p < 1) requestAnimationFrame(tick)
-              }
-              requestAnimationFrame(tick)
-            }
-          })
-        }
-      }
+      onEnter: startProofCounters,
+      onEnterBack: startProofCounters
     }
   })
-  proofTl.to(proofLabel, { opacity: 0.25, y: 0, duration: 0.05, ease: EASE_OUT }, 0.02)
-  proofMetrics.forEach((m, i) => {
-    proofTl.to(m, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.08 + i * 0.07)
-  })
+  proofTl.to(proofGlow, { opacity: 1, scale: 1, duration: 0.10, ease: EASE_OUT }, 0.02)
+  proofTl.to(proofLabel, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.04)
+  proofTl.to(proofCards[0], { opacity: 1, y: 0, duration: 0.10, ease: EASE_OUT }, 0.08)
+  proofTl.to(proofPhases[0], { opacity: 1, y: 0, scale: 1, duration: 0.12, ease: EASE_OUT }, 0.10)
+  proofTl.to([proofCards[0], ...proofMetrics, proofMetricRail], { opacity: 0, duration: 0.08, ease: EASE_OUT }, 0.54)
+  proofTl.to(proofPhases[0], { opacity: 0, y: -10, scale: 0.97, duration: 0.10, ease: EASE_OUT }, 0.54)
+  proofTl.to(proofCards[1], { opacity: 1, y: 0, duration: 0.10, ease: EASE_OUT }, 0.62)
+  proofTl.to(proofPhases[1], { opacity: 1, y: 0, scale: 1, duration: 0.12, ease: EASE_OUT }, 0.63)
   caseCards.forEach((c, i) => {
-    proofTl.to(c, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.45 + i * 0.07)
+    proofTl.to(c, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.70 + i * 0.07)
   })
+  proofTl.to(proofCaseNote, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.92)
   proofTl.set({}, {}, 1)
+  registerSectionTrigger('proof', proofTl.scrollTrigger)
 
   // ══════════════════════════════════════════
-  //  CONTACT — Pinned (3 phases)
+  //  1:1 ASSIST — Pinned (3 phases)
+  // ══════════════════════════════════════════
+  const assistEl = document.getElementById('assist')
+  const aLabel = assistEl.querySelector('.assist-label')
+  const aCards = assistEl.querySelectorAll('.assist-copy-card')
+  const aPhases = assistEl.querySelectorAll('.assist-phase')
+  const aAdvNote = assistEl.querySelector('.assist-advantage-note')
+  const aAdvCards = assistEl.querySelectorAll('.assist-advantage-card')
+  const aAdvFooter = assistEl.querySelector('.assist-advantage-footer')
+  const aToolsCore = assistEl.querySelector('.assist-tools-core')
+  const aToolCards = assistEl.querySelectorAll('.assist-tool-card')
+  const aPartnerNote = assistEl.querySelector('.assist-partner-note')
+  const aPartnerCards = assistEl.querySelectorAll('.assist-partner-card')
+  const aPartnerFooter = assistEl.querySelector('.assist-partner-footer')
+  const aCta = assistEl.querySelector('.assist-cta-cluster')
+  const aGlow = assistEl.querySelector('.assist-stage-glow')
+
+  assistEl.style.height = '100vh'
+  assistEl.style.overflow = 'hidden'
+  gsap.set(assistEl, { opacity: 1, y: 0 })
+  gsap.set(aLabel, { opacity: 0, y: 14 })
+  gsap.set(aCards, { opacity: 0, y: 24 })
+  gsap.set(aPhases, { opacity: 0, y: 28, scale: 0.96 })
+  gsap.set([aAdvNote, ...aAdvCards, aAdvFooter], { opacity: 1, y: 0, scale: 1 })
+  gsap.set(aToolsCore, { opacity: 0, y: 16 })
+  gsap.set(aToolCards, { opacity: 0, y: 18, scale: 0.97 })
+  gsap.set(aPartnerNote, { opacity: 0, y: 16 })
+  gsap.set(aPartnerCards, { opacity: 0, y: 18, scale: 0.97 })
+  gsap.set(aPartnerFooter, { opacity: 0, y: 14 })
+  gsap.set(aCta, { opacity: 0, y: 12 })
+  gsap.set(aGlow, { opacity: 0.52, scale: 0.95 })
+  gsap.set([aCards[0], aPhases[0]], { opacity: 1, y: 0, scale: 1 })
+
+  const assistTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#assist', start: 'top top',
+      end: isMobile ? '+=220%' : '+=300%',
+      pin: true, scrub: 0.5, anticipatePin: 1,
+    }
+  })
+  assistTl.to(aGlow, { opacity: 1, scale: 1, duration: 0.10, ease: EASE_OUT }, 0.02)
+  assistTl.to(aLabel, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.04)
+  assistTl.to(aCards[0], { opacity: 1, y: 0, duration: 0.10, ease: EASE_OUT }, 0.08)
+  assistTl.to(aPhases[0], { opacity: 1, y: 0, scale: 1, duration: 0.12, ease: EASE_OUT }, 0.10)
+  assistTl.to([aCards[0], aAdvNote, ...aAdvCards, aAdvFooter], { opacity: 0, duration: 0.08, ease: EASE_OUT }, 0.39)
+  assistTl.to(aPhases[0], { opacity: 0, y: -10, scale: 0.97, duration: 0.10, ease: EASE_OUT }, 0.39)
+  assistTl.to(aCards[1], { opacity: 1, y: 0, duration: 0.10, ease: EASE_OUT }, 0.46)
+  assistTl.to(aPhases[1], { opacity: 1, y: 0, scale: 1, duration: 0.12, ease: EASE_OUT }, 0.47)
+  assistTl.to(aToolsCore, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.53)
+  assistTl.to(aToolCards, { opacity: 1, y: 0, scale: 1, stagger: 0.03, duration: 0.08, ease: EASE_OUT }, 0.56)
+
+  assistTl.to([aCards[1], aToolsCore, ...aToolCards], { opacity: 0, duration: 0.08, ease: EASE_OUT }, 0.76)
+  assistTl.to(aPhases[1], { opacity: 0, y: -10, scale: 0.97, duration: 0.10, ease: EASE_OUT }, 0.76)
+  assistTl.to(aCards[2], { opacity: 1, y: 0, duration: 0.10, ease: EASE_OUT }, 0.82)
+  assistTl.to(aPhases[2], { opacity: 1, y: 0, scale: 1, duration: 0.12, ease: EASE_OUT }, 0.83)
+  assistTl.to(aPartnerNote, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.88)
+  assistTl.to(aPartnerCards, { opacity: 1, y: 0, scale: 1, stagger: 0.03, duration: 0.07, ease: EASE_OUT }, 0.90)
+  assistTl.to(aPartnerFooter, { opacity: 1, y: 0, duration: 0.06, ease: EASE_OUT }, 0.95)
+  assistTl.to(aCta, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.98)
+  assistTl.set({}, {}, 1)
+  registerSectionTrigger('assist', assistTl.scrollTrigger)
+
+  // ══════════════════════════════════════════
+  //  LABS — Pinned (3 phases: intro + demos + CTA)
+  // ══════════════════════════════════════════
+  const labsEl = document.getElementById('labs-teaser')
+  const labsLabel = labsEl.querySelector('.labs-teaser-label')
+  const labsTitle = labsEl.querySelector('.labs-teaser-title')
+  const labsSub = labsEl.querySelector('.labs-teaser-sub')
+  const labsFacts = labsEl.querySelectorAll('.labs-teaser-fact')
+  const labsCards = labsEl.querySelectorAll('.labs-teaser-card')
+  const labsAll = labsEl.querySelector('.labs-teaser-all')
+
+  if (!isMobile) {
+    labsEl.style.height = '100vh'
+    labsEl.style.overflow = 'hidden'
+    gsap.set(labsLabel, { opacity: 1, y: 0 })
+    gsap.set([labsTitle, labsSub], { opacity: 1, y: 0 })
+    gsap.set(labsFacts, { opacity: 1, y: 0 })
+    gsap.set(labsCards, { opacity: 1, y: 0, scale: 1 })
+    gsap.set(labsAll, { opacity: 1, y: 0 })
+
+    const labsTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#labs-teaser', start: 'top top',
+        end: '+=220%',
+        pin: true, scrub: 0.5, anticipatePin: 1,
+      }
+    })
+    labsTl.to(labsCards, { y: -8, stagger: 0.03, duration: 0.10, ease: EASE_OUT }, 0.22)
+    labsTl.to(labsCards, { y: 0, duration: 0.10, ease: EASE_OUT }, 0.38)
+    labsTl.to(labsAll, { opacity: 1, y: 0, duration: 0.10, ease: EASE_OUT }, 0.84)
+    labsTl.set({}, {}, 1)
+    registerSectionTrigger('labs-teaser', labsTl.scrollTrigger)
+  }
+
+  // ══════════════════════════════════════════
+  //  CONTACT — Final reveal (no pin)
   // ══════════════════════════════════════════
   const contactEl = document.getElementById('contact')
-  contactEl.style.height = '100vh'
-  contactEl.style.overflow = 'hidden'
+  contactEl.style.minHeight = '100vh'
+  contactEl.style.overflow = 'visible'
 
   const contactTl = gsap.timeline({
     scrollTrigger: {
-      trigger: '#contact', start: 'top top',
-      end: isMobile ? '+=120%' : '+=150%',
-      pin: true, scrub: 0.5, anticipatePin: 1,
+      trigger: '#contact',
+      start: isMobile ? 'top 86%' : 'top 78%',
+      end: 'bottom bottom',
+      toggleActions: 'play none none reverse',
     }
   })
-  contactTl.from('.contact-label', { opacity: 0, y: 20, duration: 0.08, ease: EASE_OUT }, 0.02)
-  contactTl.from('.contact-title', { opacity: 0, y: 30, duration: 0.10, ease: EASE_OUT }, 0.10)
-  contactTl.from('.contact-sub', { opacity: 0, y: 16, duration: 0.08, ease: EASE_OUT }, 0.35)
-  contactTl.from('.contact-buttons', { opacity: 0, y: 14, duration: 0.12, ease: EASE_OUT }, 0.55)
+  contactTl.from('.contact-label', { opacity: 0, y: 20, duration: 0.08, ease: EASE_OUT, immediateRender: false }, 0.02)
+  contactTl.from('.contact-title', { opacity: 0, y: 30, duration: 0.10, ease: EASE_OUT, immediateRender: false }, 0.10)
+  contactTl.from('.contact-sub', { opacity: 0, y: 16, duration: 0.08, ease: EASE_OUT, immediateRender: false }, 0.35)
+  contactTl.from('.contact-buttons', { opacity: 0, y: 14, duration: 0.12, ease: EASE_OUT, immediateRender: false }, 0.55)
+  contactTl.from('.contact-schedule-card', { opacity: 0, y: 22, scale: 0.97, duration: 0.14, ease: EASE_OUT, immediateRender: false }, 0.44)
   contactTl.set({}, {}, 1)
+  registerSectionTrigger('contact', contactTl.scrollTrigger)
 
   // ── Nav contrast: dark on hero, light on cream, dark on dark sections ──
   const nav = document.getElementById('nav')
 
-  ScrollTrigger.create({
+  registerSectionTrigger('meet', ScrollTrigger.create({
     trigger: '#meet', start: 'top 64px',
     onEnter: () => nav.classList.add('light'),
     onEnterBack: () => nav.classList.add('light'),
-  })
-  ScrollTrigger.create({
+  }))
+  registerSectionTrigger('hero', ScrollTrigger.create({
     trigger: '#hero', start: 'top top', end: 'bottom 64px',
     onEnter: () => nav.classList.remove('light'),
     onEnterBack: () => nav.classList.remove('light'),
-  })
-  ScrollTrigger.create({
+  }))
+  registerSectionTrigger('platform', ScrollTrigger.create({
     trigger: '#platform', start: 'top 64px',
     onEnter: () => nav.classList.remove('light'),
     onLeaveBack: () => nav.classList.add('light'),
-  })
-  ScrollTrigger.create({
+  }))
+  registerSectionTrigger('consulting', ScrollTrigger.create({
     trigger: '#consulting', start: 'top 64px',
     onEnter: () => nav.classList.add('light'),
     onLeaveBack: () => nav.classList.remove('light'),
-  })
-  ScrollTrigger.create({
+  }))
+  registerSectionTrigger('proof', ScrollTrigger.create({
     trigger: '#proof', start: 'top 64px',
     onEnter: () => nav.classList.remove('light'),
     onLeaveBack: () => nav.classList.add('light'),
-  })
-  ScrollTrigger.create({
+  }))
+  registerSectionTrigger('assist', ScrollTrigger.create({
+    trigger: '#assist', start: 'top 64px',
+    onEnter: () => nav.classList.add('light'),
+    onEnterBack: () => nav.classList.add('light'),
+    onLeave: () => nav.classList.remove('light'),
+    onLeaveBack: () => nav.classList.remove('light'),
+  }))
+  registerSectionTrigger('labs-teaser', ScrollTrigger.create({
+    trigger: '#labs-teaser', start: 'top 64px',
+    onEnter: () => nav.classList.remove('light'),
+    onEnterBack: () => nav.classList.remove('light'),
+    onLeave: () => nav.classList.add('light'),
+    onLeaveBack: () => nav.classList.remove('light'),
+  }))
+  registerSectionTrigger('contact', ScrollTrigger.create({
     trigger: '#contact', start: 'top 64px',
     onEnter: () => nav.classList.add('light'),
     onLeaveBack: () => nav.classList.remove('light'),
-  })
+  }))
+
+  registerSectionTrigger('hero', ScrollTrigger.create({
+    trigger: '#hero',
+    start: 'top top',
+    end: 'bottom 45%',
+    onEnter: () => setStoryThreadState('hero'),
+    onEnterBack: () => setStoryThreadState('hero'),
+  }))
+  registerSectionTrigger('meet', ScrollTrigger.create({
+    trigger: '#meet',
+    start: 'top 55%',
+    onEnter: () => setStoryThreadState('meet'),
+    onEnterBack: () => setStoryThreadState('meet'),
+  }))
+  registerSectionTrigger('platform', ScrollTrigger.create({
+    trigger: '#platform',
+    start: 'top 55%',
+    onEnter: () => setStoryThreadState('platform'),
+    onEnterBack: () => setStoryThreadState('platform'),
+  }))
+  registerSectionTrigger('consulting', ScrollTrigger.create({
+    trigger: '#consulting',
+    start: 'top 55%',
+    onEnter: () => setStoryThreadState('consulting'),
+    onEnterBack: () => setStoryThreadState('consulting'),
+  }))
+  registerSectionTrigger('proof', ScrollTrigger.create({
+    trigger: '#proof',
+    start: 'top 55%',
+    onEnter: () => setStoryThreadState('proof'),
+    onEnterBack: () => setStoryThreadState('proof'),
+  }))
+  registerSectionTrigger('assist', ScrollTrigger.create({
+    trigger: '#assist',
+    start: 'top 55%',
+    onEnter: () => setStoryThreadState('assist'),
+    onEnterBack: () => setStoryThreadState('assist'),
+  }))
+  registerSectionTrigger('labs-teaser', ScrollTrigger.create({
+    trigger: '#labs-teaser',
+    start: 'top 55%',
+    onEnter: () => setStoryThreadState('labs-teaser'),
+    onEnterBack: () => setStoryThreadState('labs-teaser'),
+  }))
+  registerSectionTrigger('contact', ScrollTrigger.create({
+    trigger: '#contact',
+    start: 'top 55%',
+    onEnter: () => setStoryThreadState('contact'),
+    onEnterBack: () => setStoryThreadState('contact'),
+  }))
+
+  sectionFilterRegistry.ready = true
 }
 
 </script>
 
 <script>
 /* ══════════════════════════════════════════════════
-   HERO GALAXY v3
-   - 4000 stars, 3 depth layers, sorted far→near
-   - Nebulae spread across all 4 quadrants
-   - Galactic core subtle — text floats free
-   - D.O.T.S planet orbits BOTTOM-RIGHT away from text
-   - Shield + physics — always springs back
+   HERO GALAXY v4
+   - Projected 3D galaxy disc with depth-sorted stars
+   - Mouse-tilted camera + click shockwaves
+   - 3D D.O.T.S companion with spring orbit physics
+   - Shared hero scene state drives canvas + content depth
 ══════════════════════════════════════════════════ */
 (function () {
   var canvas = document.getElementById('hero-physics');
   if (!canvas) return;
   var ctx = canvas.getContext('2d');
   var heroEl = document.getElementById('hero');
+  var sceneDefaults = {
+    pointerX: 0,
+    pointerY: 0,
+    panX: 0,
+    panY: 0,
+    tiltX: 0,
+    tiltY: 0,
+    energy: 0,
+    orbitYaw: -0.18,
+    orbitPitch: 0.10,
+    orbitYawVel: 0,
+    orbitPitchVel: 0,
+    dragActive: false,
+    focusX: 0,
+    focusY: 0,
+    impulseX: 0,
+    impulseY: 0,
+    impulseLife: 0,
+  };
+  var sceneState = window.__dotsHeroScene || {};
+  for (var sceneKey in sceneDefaults) {
+    if (sceneState[sceneKey] == null) sceneState[sceneKey] = sceneDefaults[sceneKey];
+  }
+  window.__dotsHeroScene = sceneState;
 
   var PALETTE = [
     { r:200, g:182, b:255 },
@@ -1415,24 +2487,89 @@ function initMainPage() {
     { r:255, g:181, b:194 },
   ];
 
-  /* D.O.T.S planet — orbits bottom-right quadrant */
   var DOTS = {
-    x:0, y:0, baseX:0, baseY:0, vx:0, vy:0,
-    orbitAngle: 0.4,
-    orbitCx:0, orbitCy:0, orbitRx:0, orbitRy:0,
-    shieldGlow:0, ripples:[],
+    x: 0, y: 0, z: 0,
+    tx: 0, ty: 0, tz: 0,
+    vx: 0, vy: 0, vz: 0,
+    orbitAngle: 0.45,
+    orbitCx: 0, orbitCy: 0, orbitRx: 0, orbitRy: 0, orbitRz: 0,
+    shieldGlow: 0,
+    ripples: [],
+    screen: null,
     dots:[
-      { r:215, g:207, b:240, ox:-14, oy:-9  },
-      { r:184, g:224, b:210, ox: 14, oy:-9  },
-      { r:241, g:198, b:174, ox:  0, oy: 14 },
-      { r:191, g:214, b:236, ox:  0, oy:-18 },
+      { r:215, g:207, b:240, ox:-18, oy:-8, oz: 16 },
+      { r:184, g:224, b:210, ox: 16, oy:-9, oz: -8 },
+      { r:241, g:198, b:174, ox:  2, oy: 15, oz: 10 },
+      { r:191, g:214, b:236, ox:  0, oy:-18, oz: -14 },
     ]
   };
 
-  var W, H, stars=[], nebulae=[], rafId, time=0;
+  var SINGULARITY = { x: -92, y: 18, z: -135, radius: 36 };
+  var ATLAS = { x: -214, y: -148, z: 118, radius: 28, orbitAngle: 0.1 };
+
+  var W, H, stars = [], nebulae = [], shockwaves = [], rafId, time = 0;
   var dpr = Math.min(window.devicePixelRatio||1, 2);
   var mouse = { x:-9999, y:-9999 };
-  var clickData = null;
+  var drag = { active: false, moved: false, lastX: 0, lastY: 0 };
+
+  function clamp(v, min, max) {
+    return Math.max(min, Math.min(max, v));
+  }
+
+  function rotateY(x, z, a) {
+    var c = Math.cos(a), s = Math.sin(a);
+    return { x: x * c - z * s, z: x * s + z * c };
+  }
+
+  function rotateX(y, z, a) {
+    var c = Math.cos(a), s = Math.sin(a);
+    return { y: y * c - z * s, z: y * s + z * c };
+  }
+
+  function projectPoint(px, py, pz, anchorX, anchorY, rotX, rotY, cameraDist) {
+    var yr = rotateY(px, pz, rotY);
+    var xr = rotateX(py, yr.z, rotX);
+    var depth = cameraDist / Math.max(150, cameraDist - xr.z);
+    return {
+      x: anchorX + yr.x * depth,
+      y: anchorY + xr.y * depth,
+      scale: depth,
+      z: xr.z,
+    };
+  }
+
+  function syncSceneState() {
+    var targetX = mouse.x < 0 ? 0 : ((mouse.x / W) - 0.5) * 2;
+    var targetY = mouse.y < 0 ? 0 : ((mouse.y / H) - 0.5) * 2;
+
+    sceneState.pointerX += (targetX - sceneState.pointerX) * 0.045;
+    sceneState.pointerY += (targetY - sceneState.pointerY) * 0.045;
+    sceneState.orbitYaw += sceneState.orbitYawVel;
+    sceneState.orbitPitch += sceneState.orbitPitchVel;
+    sceneState.orbitYawVel *= sceneState.dragActive ? 0.82 : 0.955;
+    sceneState.orbitPitchVel *= sceneState.dragActive ? 0.82 : 0.955;
+    sceneState.orbitPitch = clamp(sceneState.orbitPitch, -0.68, 0.68);
+    sceneState.panX += ((((mouse.x < 0 ? W * 0.5 : mouse.x) / W) - 0.5) * 36 + Math.sin(sceneState.orbitYaw) * 34 - sceneState.panX) * 0.06;
+    sceneState.panY += ((((mouse.y < 0 ? H * 0.5 : mouse.y) / H) - 0.5) * 22 + sceneState.orbitPitch * 34 - sceneState.panY) * 0.06;
+    sceneState.impulseLife *= 0.92;
+    sceneState.energy *= 0.965;
+    sceneState.tiltX = clamp((-sceneState.pointerY * 3.1) + sceneState.orbitPitch * 32, -22, 22);
+    sceneState.tiltY = clamp((sceneState.pointerX * 4.8) + sceneState.orbitYaw * 34, -28, 28);
+    var textTiltX = clamp(-sceneState.pointerY * 1.05, -2.2, 2.2);
+    var textTiltY = clamp(sceneState.pointerX * 1.45, -2.8, 2.8);
+    var textPanX = clamp(sceneState.pointerX * 10, -10, 10);
+    var textPanY = clamp(sceneState.pointerY * 7, -7, 7);
+
+    heroEl.style.setProperty('--hero-tilt-x', sceneState.tiltX.toFixed(3));
+    heroEl.style.setProperty('--hero-tilt-y', sceneState.tiltY.toFixed(3));
+    heroEl.style.setProperty('--hero-pan-x', sceneState.panX.toFixed(3));
+    heroEl.style.setProperty('--hero-pan-y', sceneState.panY.toFixed(3));
+    heroEl.style.setProperty('--hero-text-tilt-x', textTiltX.toFixed(3));
+    heroEl.style.setProperty('--hero-text-tilt-y', textTiltY.toFixed(3));
+    heroEl.style.setProperty('--hero-text-pan-x', textPanX.toFixed(3));
+    heroEl.style.setProperty('--hero-text-pan-y', textPanY.toFixed(3));
+    heroEl.classList.toggle('is-grabbing', !!sceneState.dragActive);
+  }
 
   function resize() {
     W = heroEl.offsetWidth; H = heroEl.offsetHeight;
@@ -1445,248 +2582,579 @@ function initMainPage() {
 
   function buildGalaxy() {
     var isMobile = W<768;
-    var COUNT = isMobile ? 1600 : 4000;
+    var COUNT = isMobile ? 1500 : 3600;
+    var maxRadius = Math.max(W, H) * (isMobile ? 0.72 : 0.84);
+    var armCount = 4;
     stars = [];
-
-    /* Galaxy core is slightly off-center — upper-left of center */
-    var GCX = W*0.18, GCY = H*0.50;
-
-    /* D.O.T.S orbit: bottom-right quadrant, far from text */
-    DOTS.orbitCx = W*0.76; DOTS.orbitCy = H*0.72;
-    DOTS.orbitRx = W*0.09; DOTS.orbitRy = H*0.07;
-    DOTS.baseX = DOTS.orbitCx + Math.cos(DOTS.orbitAngle)*DOTS.orbitRx;
-    DOTS.baseY = DOTS.orbitCy + Math.sin(DOTS.orbitAngle)*DOTS.orbitRy;
-    DOTS.x = DOTS.baseX; DOTS.y = DOTS.baseY;
-
-    /* Nebulae — one per quadrant + very subtle center */
     nebulae = [
-      /* Galactic core — LEFT side, anchors the galaxy origin */
-      { x:GCX,    y:GCY,    rx:W*0.16, ry:H*0.22, r:255,g:255,b:255, a:0.055 },
-      /* Left arm glow — lavender sweeping from core */
-      { x:W*0.10, y:H*0.28, rx:W*0.18, ry:H*0.18, r:215,g:207,b:240, a:0.040 },
-      /* Bottom-left — mint dust lane */
-      { x:W*0.14, y:H*0.75, rx:W*0.16, ry:H*0.15, r:184,g:224,b:210, a:0.030 },
-      /* Far right mid — faint sky arm tip (where text breathes) */
-      { x:W*0.88, y:H*0.45, rx:W*0.14, ry:H*0.12, r:162,g:210,b:255, a:0.018 },
-      /* Bottom-right — peach glow around DOTS planet */
-      { x:W*0.76, y:H*0.72, rx:W*0.16, ry:H*0.14, r:255,g:205,b:178, a:0.030 },
+      { x:-108, y:-12, z:-170, rx:W*0.19, ry:H*0.19, r:255,g:255,b:255, a:0.062, rot:0.18, speed:0.05 },
+      { x:-238, y:-136, z:-36, rx:W*0.22, ry:H*0.17, r:215,g:207,b:240, a:0.048, rot:-0.30, speed:0.08 },
+      { x:-198, y: 172, z: 82, rx:W*0.20, ry:H*0.15, r:184,g:224,b:210, a:0.034, rot:0.42, speed:0.07 },
+      { x: 312, y: -48, z:-120, rx:W*0.15, ry:H*0.11, r:162,g:210,b:255, a:0.024, rot:-0.14, speed:0.06 },
+      { x: 360, y: 160, z: 50, rx:W*0.18, ry:H*0.13, r:255,g:205,b:178, a:0.032, rot:0.28, speed:0.05 },
     ];
 
-    for (var i=0; i<COUNT; i++) {
-      var z = Math.pow(Math.random(), 0.62);
-      var x, y, color, size, isBig;
-      var type = Math.random();
+    DOTS.orbitCx = W * 0.76;
+    DOTS.orbitCy = H * 0.72;
+    DOTS.orbitRx = W * 0.060;
+    DOTS.orbitRy = H * 0.052;
+    DOTS.orbitRz = Math.min(W, H) * 0.11;
 
-      if (type < 0.60) {
-        /* Spiral arm — 3 arms wrapping around the whole canvas */
-        var arm = i%3, armOff = (arm/3)*Math.PI*2;
-        var t2  = Math.pow(Math.random(), 0.52);
-        var rad = t2 * Math.max(W,H) * 0.95;
-        var ang = t2*Math.PI*10 + armOff;
-        var spr = rad*0.18;
-        x = GCX + Math.cos(ang)*rad + (Math.random()-0.5)*spr*2;
-        y = GCY + Math.sin(ang)*rad*0.44 + (Math.random()-0.5)*spr;
-      } else if (type < 0.78) {
-        /* Core cluster — near galaxy center but NOT dead center of canvas */
-        var cr2 = Math.pow(Math.random(),2.5)*Math.min(W,H)*0.15;
-        var ca2 = Math.random()*Math.PI*2;
-        x = GCX + Math.cos(ca2)*cr2;
-        y = GCY + Math.sin(ca2)*cr2*0.5;
-        z = Math.max(z, 0.5);
+    for (var i = 0; i < COUNT; i++) {
+      var mode = Math.random();
+      var radius, angle, x, y, z;
+
+      if (mode < 0.60) {
+        radius = Math.pow(Math.random(), 0.56) * maxRadius;
+        angle = radius * 0.028 + (i % armCount) * (Math.PI * 2 / armCount) + (Math.random() - 0.5) * 0.65;
+        x = Math.cos(angle) * radius + (Math.random() - 0.5) * radius * 0.18;
+        z = Math.sin(angle) * radius * 0.92 + (Math.random() - 0.5) * radius * 0.18;
+        y = (Math.random() - 0.5) * (18 + radius * 0.07);
+      } else if (mode < 0.80) {
+        radius = Math.pow(Math.random(), 2.2) * Math.min(W, H) * 0.18;
+        angle = Math.random() * Math.PI * 2;
+        x = Math.cos(angle) * radius;
+        z = Math.sin(angle) * radius * 0.9;
+        y = (Math.random() - 0.5) * (26 + radius * 0.08);
       } else {
-        /* Scattered halo stars — fill edges */
-        x = Math.random()*W;
-        y = Math.random()*H;
-        z = Math.random()*0.35;
+        radius = (0.3 + Math.random() * 0.7) * maxRadius;
+        angle = Math.random() * Math.PI * 2;
+        x = Math.cos(angle) * radius;
+        z = Math.sin(angle) * radius;
+        y = (Math.random() - 0.5) * Math.min(W, H) * 0.42;
       }
 
-      x = Math.max(2, Math.min(W-2,x));
-      y = Math.max(2, Math.min(H-2,y));
+      var depthBias = clamp((z + maxRadius) / (maxRadius * 2), 0, 1);
+      var isBig = depthBias > 0.68 && Math.random() < 0.09;
+      var size;
+      if (isBig) size = 1.8 + Math.random() * 2.9;
+      else if (depthBias > 0.62) size = 0.82 + Math.random() * 1.12;
+      else if (depthBias > 0.36) size = 0.38 + Math.random() * 0.72;
+      else size = 0.13 + Math.random() * 0.34;
 
-      isBig = z>0.73 && Math.random()<0.12;
-      if (isBig)        size = 2.0+Math.random()*3.8;
-      else if (z>0.50)  size = 0.6+Math.random()*1.5;
-      else if (z>0.30)  size = 0.32+Math.random()*0.8;
-      else              size = 0.15+Math.random()*0.42;
-
-      if (z<0.26) {
+      var color;
+      if (depthBias < 0.24) {
         var w2 = 210+Math.random()*38;
         color = { r:w2, g:w2+5, b:Math.min(255,w2+32) };
       } else {
         color = PALETTE[Math.floor(Math.random()*PALETTE.length)];
       }
 
-      var brightness = Math.min(0.12+z*0.68+Math.random()*0.20, 1.0);
+      var brightness = Math.min(0.16 + depthBias * 0.72 + Math.random() * 0.24, 1.0);
       stars.push({
-        x,y, baseX:x, baseY:y, vx:0, vy:0,
-        size, color, brightness,
-        phase:Math.random()*Math.PI*2,
-        isBig, z,
-        mass: isBig ? 3+Math.random()*3 : 0.4+Math.random()*0.7,
-        twinkleRate: 0.005+z*0.02+Math.random()*0.012,
+        baseX: x,
+        baseY: y,
+        baseZ: z,
+        ox: 0,
+        oy: 0,
+        oz: 0,
+        vx: 0,
+        vy: 0,
+        vz: 0,
+        size: size,
+        color: color,
+        brightness: brightness,
+        phase: Math.random() * Math.PI * 2,
+        isBig: isBig,
+        sparkle: Math.random(),
+        mass: isBig ? 2.5 + Math.random() * 2.5 : 0.8 + Math.random() * 1.2,
+        twinkleRate: 0.018 + Math.random() * 0.022,
+        spinOffset: Math.random() * Math.PI * 2,
+        screenX: 0,
+        screenY: 0,
       });
     }
 
-    stars.sort(function(a,b){ return a.z-b.z; });
     cancelAnimationFrame(rafId);
     rafId = requestAnimationFrame(draw);
   }
 
-  function draw() {
-    ctx.clearRect(0,0,W,H);
-    time += 0.004;
-    var mx=mouse.x, my=mouse.y;
+  function drawSingularity(anchorX, anchorY, rotX, rotY) {
+    var proj = projectPoint(SINGULARITY.x, SINGULARITY.y, SINGULARITY.z, anchorX, anchorY, rotX, rotY, 960);
+    var radius = SINGULARITY.radius * proj.scale;
 
-    /* 1. Nebulae */
-    for (var ni=0; ni<nebulae.length; ni++) {
-      var n=nebulae[ni];
-      ctx.save(); ctx.translate(n.x,n.y); ctx.scale(1,n.ry/n.rx);
-      var ng=ctx.createRadialGradient(0,0,0,0,0,n.rx);
-      ng.addColorStop(0,   'rgba('+n.r+','+n.g+','+n.b+','+n.a+')');
-      ng.addColorStop(0.45,'rgba('+n.r+','+n.g+','+n.b+','+(n.a*0.4)+')');
-      ng.addColorStop(1,   'rgba('+n.r+','+n.g+','+n.b+',0)');
-      ctx.fillStyle=ng; ctx.beginPath(); ctx.arc(0,0,n.rx,0,Math.PI*2); ctx.fill();
+    ctx.save();
+    ctx.translate(proj.x, proj.y);
+    ctx.rotate(time * 0.18 + sceneState.orbitYaw * 0.55);
+    ctx.scale(1, 0.42 + proj.scale * 0.08);
+
+    var accretion = ctx.createRadialGradient(0, 0, radius * 0.18, 0, 0, radius * 1.45);
+    accretion.addColorStop(0, 'rgba(255,255,255,0)');
+    accretion.addColorStop(0.38, 'rgba(255,205,178,0.22)');
+    accretion.addColorStop(0.62, 'rgba(162,210,255,0.14)');
+    accretion.addColorStop(0.84, 'rgba(215,207,240,0.08)');
+    accretion.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = accretion;
+    ctx.beginPath();
+    ctx.arc(0, 0, radius * 1.45, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(0, 0, radius * 0.90, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(255,240,230,0.34)';
+    ctx.lineWidth = Math.max(0.9, radius * 0.05);
+    ctx.stroke();
+
+    ctx.restore();
+
+    var lensGlow = ctx.createRadialGradient(proj.x, proj.y, 0, proj.x, proj.y, radius * 2.0);
+    lensGlow.addColorStop(0, 'rgba(16,18,30,0.82)');
+    lensGlow.addColorStop(0.32, 'rgba(12,14,24,0.76)');
+    lensGlow.addColorStop(0.62, 'rgba(8,10,18,0.20)');
+    lensGlow.addColorStop(1, 'rgba(8,10,18,0)');
+    ctx.fillStyle = lensGlow;
+    ctx.beginPath();
+    ctx.arc(proj.x, proj.y, radius * 2.0, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = 'rgba(4,5,9,0.94)';
+    ctx.beginPath();
+    ctx.arc(proj.x, proj.y, radius * 0.54, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  function drawAtlas(anchorX, anchorY, rotX, rotY) {
+    ATLAS.orbitAngle += 0.016;
+    var proj = projectPoint(ATLAS.x, ATLAS.y, ATLAS.z, anchorX, anchorY, rotX, rotY, 960);
+    var radius = ATLAS.radius * proj.scale;
+    var yaw = time * 0.22 + sceneState.orbitYaw * 0.55;
+    var orbitX = Math.cos(ATLAS.orbitAngle) * radius * 1.7;
+    var orbitY = Math.sin(ATLAS.orbitAngle * 1.2) * radius * 0.55;
+
+    ctx.save();
+    ctx.translate(proj.x, proj.y);
+    ctx.rotate(yaw * 0.22);
+    ctx.strokeStyle = 'rgba(184,224,210,0.30)';
+    ctx.lineWidth = Math.max(0.7, radius * 0.05);
+
+    ctx.beginPath();
+    ctx.arc(0, 0, radius, 0, Math.PI * 2);
+    ctx.stroke();
+
+    for (var lat = -1; lat <= 1; lat++) {
+      var ry = radius * (0.34 + Math.abs(lat) * 0.16);
+      ctx.beginPath();
+      ctx.ellipse(0, lat * radius * 0.26, radius, ry, 0, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+
+    ctx.beginPath();
+    ctx.ellipse(0, 0, radius * 0.36, radius, 0, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.ellipse(0, 0, radius * 0.72, radius, 0, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.restore();
+
+    ctx.strokeStyle = 'rgba(184,224,210,0.16)';
+    ctx.lineWidth = 0.9;
+    ctx.beginPath();
+    ctx.arc(proj.x, proj.y, radius * 1.7, 0, Math.PI * 2);
+    ctx.stroke();
+
+    var beacon = ctx.createRadialGradient(proj.x + orbitX, proj.y + orbitY, 0, proj.x + orbitX, proj.y + orbitY, radius * 0.9);
+    beacon.addColorStop(0, 'rgba(184,224,210,0.72)');
+    beacon.addColorStop(1, 'rgba(184,224,210,0)');
+    ctx.fillStyle = beacon;
+    ctx.beginPath();
+    ctx.arc(proj.x + orbitX, proj.y + orbitY, radius * 0.9, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = 'rgba(184,224,210,0.95)';
+    ctx.beginPath();
+    ctx.arc(proj.x + orbitX, proj.y + orbitY, Math.max(2.1, radius * 0.16), 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  function applyDragWake(x, y, dx, dy) {
+    var motion = Math.sqrt(dx * dx + dy * dy);
+    if (motion < 0.35) return;
+
+    sceneState.focusX = x;
+    sceneState.focusY = y;
+    sceneState.impulseX = dx;
+    sceneState.impulseY = dy;
+    sceneState.impulseLife = 1;
+    sceneState.energy = 1;
+
+    for (var i = 0; i < stars.length; i++) {
+      var s = stars[i];
+      var sx = s.screenX || -9999;
+      var sy = s.screenY || -9999;
+      var distX = sx - x;
+      var distY = sy - y;
+      var dist = Math.sqrt(distX * distX + distY * distY);
+      if (dist < 170 && dist > 0.001) {
+        var wake = Math.pow((170 - dist) / 170, 1.45) * motion * 0.045;
+        s.vx += (dx * 0.08 + (distX / dist) * wake) / s.mass;
+        s.vy += (dy * 0.06 + (distY / dist) * wake) / s.mass;
+        s.vz += wake * 0.85;
+      }
+    }
+
+    if (DOTS.screen) {
+      var ddx = DOTS.screen.x - x;
+      var ddy = DOTS.screen.y - y;
+      var ddist = Math.sqrt(ddx * ddx + ddy * ddy);
+      if (ddist < DOTS.screen.r * 2.4) {
+        DOTS.vx += dx * 0.06;
+        DOTS.vy += dy * 0.05;
+        DOTS.vz += motion * 0.12;
+        DOTS.shieldGlow = Math.min(1, DOTS.shieldGlow + 0.18);
+      }
+    }
+  }
+
+  function drawNebula(n, anchorX, anchorY, rotX, rotY) {
+    var proj = projectPoint(n.x, n.y, n.z, anchorX, anchorY, rotX, rotY, 1040);
+    var rx = n.rx * proj.scale;
+    var ry = n.ry * proj.scale;
+
+    if (proj.x + rx < -40 || proj.x - rx > W + 40 || proj.y + ry < -40 || proj.y - ry > H + 40) return;
+
+    ctx.save();
+    ctx.translate(proj.x, proj.y);
+    ctx.rotate(n.rot + time * n.speed + sceneState.pointerX * 0.05);
+    ctx.scale(1, ry / Math.max(rx, 1));
+
+    var grad = ctx.createRadialGradient(0, 0, 0, 0, 0, rx);
+    grad.addColorStop(0, 'rgba(' + n.r + ',' + n.g + ',' + n.b + ',' + n.a + ')');
+    grad.addColorStop(0.45, 'rgba(' + n.r + ',' + n.g + ',' + n.b + ',' + (n.a * 0.42) + ')');
+    grad.addColorStop(1, 'rgba(' + n.r + ',' + n.g + ',' + n.b + ',0)');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(0, 0, rx, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function drawStar(rendered) {
+    var s = rendered.star;
+    var proj = rendered.proj;
+    var tw = 0.45 + 0.55 * Math.sin(time * 1.8 + s.phase);
+    var alpha = clamp(s.brightness * (0.34 + 0.66 * tw), 0.08, 1);
+    var r = Math.round(s.color.r);
+    var g = Math.round(s.color.g);
+    var b = Math.round(s.color.b);
+    var size = Math.max(0.24, Math.min(4.9, s.size * proj.scale));
+    var heroSafeZone =
+      proj.x > W * 0.28 &&
+      proj.x < W * 0.73 &&
+      proj.y > H * 0.16 &&
+      proj.y < H * 0.72;
+
+    if (heroSafeZone) {
+      var sizeCap = W < 768 ? 1.85 : 1.28;
+      size = Math.min(size, sizeCap);
+      alpha *= size > 1.04 ? 0.72 : 0.84;
+    }
+
+    var crossy = !heroSafeZone && (s.isBig || size > 1.65 || (size > 1.1 && s.sparkle > 0.82));
+
+    if (crossy) {
+      var glowR = size * (s.isBig ? 4.9 : 3.8);
+      var glow = ctx.createRadialGradient(proj.x, proj.y, 0, proj.x, proj.y, glowR);
+      glow.addColorStop(0, 'rgba(' + r + ',' + g + ',' + b + ',' + (alpha * 0.30).toFixed(3) + ')');
+      glow.addColorStop(0.42, 'rgba(' + r + ',' + g + ',' + b + ',' + (alpha * 0.11).toFixed(3) + ')');
+      glow.addColorStop(1, 'rgba(' + r + ',' + g + ',' + b + ',0)');
+      ctx.fillStyle = glow;
+      ctx.beginPath();
+      ctx.arc(proj.x, proj.y, glowR, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.save();
+      ctx.translate(proj.x, proj.y);
+      ctx.rotate(rendered.sparkAngle);
+      for (var sp = 0; sp < 4; sp++) {
+        ctx.rotate(Math.PI / 2);
+        var spikeLen = size * (s.isBig ? 3.8 : 2.7);
+        var spike = ctx.createLinearGradient(0, 0, 0, spikeLen);
+        spike.addColorStop(0, 'rgba(' + r + ',' + g + ',' + b + ',' + (alpha * (s.isBig ? 0.58 : 0.38)).toFixed(3) + ')');
+        spike.addColorStop(1, 'rgba(' + r + ',' + g + ',' + b + ',0)');
+        ctx.strokeStyle = spike;
+        ctx.lineWidth = Math.max(0.38, size * (s.isBig ? 0.28 : 0.17));
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(0, spikeLen);
+        ctx.stroke();
+      }
       ctx.restore();
     }
 
-    /* 2. Stars (far→near) */
-    for (var i=0; i<stars.length; i++) {
-      var s=stars[i];
-      var hdx=s.x-mx, hdy=s.y-my, hd=Math.sqrt(hdx*hdx+hdy*hdy);
-      if (hd<130&&hd>0) {
-        var ha=Math.atan2(hdy,hdx), hf=((130-hd)/130)*0.26*(0.3+s.z*0.7);
-        s.vx+=Math.cos(ha)*hf/s.mass; s.vy+=Math.sin(ha)*hf/s.mass;
-      }
-      s.vx+=(s.baseX-s.x)*0.003; s.vy+=(s.baseY-s.y)*0.003;
-      s.vx*=0.96; s.vy*=0.96;
-      s.x+=s.vx; s.y+=s.vy;
-      s.phase+=s.twinkleRate;
-      var tw=0.45+0.55*Math.sin(time*1.8+s.phase);
-      var alpha=s.brightness*(0.38+0.62*tw);
-      var r=Math.round(s.color.r), g=Math.round(s.color.g), b=Math.round(s.color.b);
-
-      if (s.isBig) {
-        var hR=s.size*4.8;
-        var gr=ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,hR);
-        gr.addColorStop(0,'rgba('+r+','+g+','+b+','+(alpha*0.28).toFixed(3)+')');
-        gr.addColorStop(0.4,'rgba('+r+','+g+','+b+','+(alpha*0.08).toFixed(3)+')');
-        gr.addColorStop(1,'rgba('+r+','+g+','+b+',0)');
-        ctx.fillStyle=gr; ctx.beginPath(); ctx.arc(s.x,s.y,hR,0,Math.PI*2); ctx.fill();
-        /* Cross spikes */
-        ctx.save(); ctx.translate(s.x,s.y);
-        var spLen=s.size*3.8;
-        for (var sp=0;sp<4;sp++) {
-          ctx.rotate(Math.PI/2);
-          var sg=ctx.createLinearGradient(0,0,0,spLen);
-          sg.addColorStop(0,'rgba('+r+','+g+','+b+','+(alpha*0.55).toFixed(3)+')');
-          sg.addColorStop(1,'rgba('+r+','+g+','+b+',0)');
-          ctx.strokeStyle=sg; ctx.lineWidth=s.size*0.32;
-          ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(0,spLen); ctx.stroke();
-        }
-        ctx.restore();
-        ctx.fillStyle='rgba('+r+','+g+','+b+','+alpha.toFixed(3)+')';
-        ctx.fillRect(s.x-s.size/2,s.y-s.size/2,s.size,s.size);
-      } else {
-        ctx.fillStyle='rgba('+r+','+g+','+b+','+(alpha*(0.35+s.z*0.65)).toFixed(3)+')';
-        ctx.beginPath(); ctx.arc(s.x,s.y,s.size,0,Math.PI*2); ctx.fill();
-      }
+    ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + alpha.toFixed(3) + ')';
+    if (s.isBig) {
+      ctx.fillRect(proj.x - size / 2, proj.y - size / 2, size, size);
+    } else {
+      ctx.beginPath();
+      ctx.arc(proj.x, proj.y, size, 0, Math.PI * 2);
+      ctx.fill();
     }
-
-    /* 3. D.O.T.S planet */
-    DOTS.orbitAngle+=0.00008;
-    DOTS.baseX=DOTS.orbitCx+Math.cos(DOTS.orbitAngle)*DOTS.orbitRx;
-    DOTS.baseY=DOTS.orbitCy+Math.sin(DOTS.orbitAngle)*DOTS.orbitRy;
-    DOTS.vx+=(DOTS.baseX-DOTS.x)*0.014; DOTS.vy+=(DOTS.baseY-DOTS.y)*0.014;
-    DOTS.vx*=0.80; DOTS.vy*=0.80;
-    DOTS.x+=DOTS.vx; DOTS.y+=DOTS.vy;
-    DOTS.shieldGlow*=0.955;
-    var dm=Math.sqrt(Math.pow(mx-DOTS.x,2)+Math.pow(my-DOTS.y,2));
-    if (dm<90) DOTS.shieldGlow=Math.min(DOTS.shieldGlow+0.07,1.0);
-    drawDOTS();
-
-    /* 4. Click ripple */
-    if (clickData) {
-      var age=(performance.now()-clickData.time)/1000;
-      if (age<0.7) {
-        var rr=age*290, ra=(1-age/0.7)*0.17;
-        ctx.beginPath(); ctx.arc(clickData.x,clickData.y,rr,0,Math.PI*2);
-        ctx.strokeStyle='rgba(200,182,255,'+ra.toFixed(3)+')';
-        ctx.lineWidth=1.5; ctx.stroke();
-      } else clickData=null;
-    }
-    rafId=requestAnimationFrame(draw);
   }
 
-  function drawDOTS() {
-    var cx=DOTS.x, cy=DOTS.y, shR=44;
-    var pulse=0.20+0.12*Math.sin(time*1.6);
-    var sa=DOTS.shieldGlow*0.55+pulse;
+  function updateDots(anchorX, anchorY, rotX, rotY) {
+    DOTS.orbitAngle += 0.010;
+    DOTS.tx = Math.cos(DOTS.orbitAngle) * DOTS.orbitRx;
+    DOTS.ty = Math.sin(DOTS.orbitAngle * 1.35) * DOTS.orbitRy * 0.48;
+    DOTS.tz = Math.sin(DOTS.orbitAngle) * DOTS.orbitRz;
 
-    /* Atmospheric halo */
-    var halo=ctx.createRadialGradient(cx,cy,0,cx,cy,shR*3.0);
-    halo.addColorStop(0,'rgba(215,207,240,'+(sa*0.14).toFixed(3)+')');
-    halo.addColorStop(0.35,'rgba(184,224,210,'+(sa*0.07).toFixed(3)+')');
-    halo.addColorStop(0.7,'rgba(162,210,255,'+(sa*0.03).toFixed(3)+')');
-    halo.addColorStop(1,'rgba(0,0,0,0)');
-    ctx.fillStyle=halo; ctx.beginPath(); ctx.arc(cx,cy,shR*3.0,0,Math.PI*2); ctx.fill();
+    DOTS.vx += (DOTS.tx - DOTS.x) * 0.018;
+    DOTS.vy += (DOTS.ty - DOTS.y) * 0.018;
+    DOTS.vz += (DOTS.tz - DOTS.z) * 0.016;
+    DOTS.vx *= 0.88;
+    DOTS.vy *= 0.88;
+    DOTS.vz *= 0.90;
+    DOTS.x += DOTS.vx;
+    DOTS.y += DOTS.vy;
+    DOTS.z += DOTS.vz;
 
-    /* Outer rotating dashed ring */
-    ctx.save(); ctx.translate(cx,cy); ctx.rotate(time*0.22);
-    ctx.beginPath(); ctx.arc(0,0,shR,0,Math.PI*2);
-    ctx.setLineDash([6,10]);
-    ctx.strokeStyle='rgba(215,207,240,'+(sa*0.70).toFixed(3)+')';
-    ctx.lineWidth=1.1; ctx.stroke(); ctx.setLineDash([]); ctx.restore();
+    var proj = projectPoint(DOTS.x, DOTS.y, DOTS.z, anchorX, anchorY, rotX * 0.82, rotY * 0.70, 900);
+    var radius = 34 * proj.scale + 7;
+    DOTS.screen = {
+      x: proj.x,
+      y: proj.y,
+      z: proj.z,
+      scale: proj.scale,
+      r: radius,
+    };
 
-    /* Inner counter-rotating ring */
-    ctx.save(); ctx.translate(cx,cy); ctx.rotate(-time*0.38);
-    ctx.beginPath(); ctx.arc(0,0,shR*0.65,0,Math.PI*2);
-    ctx.setLineDash([3,14]);
-    ctx.strokeStyle='rgba(184,224,210,'+(sa*0.48).toFixed(3)+')';
-    ctx.lineWidth=0.8; ctx.stroke(); ctx.setLineDash([]); ctx.restore();
+    var distToMouse = Math.sqrt(Math.pow(mouse.x - proj.x, 2) + Math.pow(mouse.y - proj.y, 2));
+    if (distToMouse < radius * 2.0) DOTS.shieldGlow = Math.min(DOTS.shieldGlow + 0.08, 1);
+    else DOTS.shieldGlow *= 0.95;
 
-    /* Planet body fill */
-    var planet=ctx.createRadialGradient(cx,cy,0,cx,cy,shR*0.36);
-    planet.addColorStop(0,'rgba(215,207,240,'+(sa*0.18).toFixed(3)+')');
-    planet.addColorStop(0.6,'rgba(184,224,210,'+(sa*0.07).toFixed(3)+')');
-    planet.addColorStop(1,'rgba(0,0,0,0)');
-    ctx.fillStyle=planet; ctx.beginPath(); ctx.arc(cx,cy,shR*0.36,0,Math.PI*2); ctx.fill();
+    return DOTS.screen;
+  }
 
-    /* Impact ripples */
-    for (var ri=DOTS.ripples.length-1; ri>=0; ri--) {
-      var rip=DOTS.ripples[ri];
-      rip.r+=2.5; rip.a*=0.90;
-      if (rip.a<0.012) { DOTS.ripples.splice(ri,1); continue; }
-      ctx.beginPath(); ctx.arc(cx,cy,rip.r,0,Math.PI*2);
-      ctx.strokeStyle='rgba(215,207,240,'+rip.a.toFixed(3)+')';
-      ctx.lineWidth=1.5; ctx.stroke();
+  function drawDots(planet) {
+    var cx = planet.x;
+    var cy = planet.y;
+    var radius = planet.r;
+    var pulse = 0.18 + 0.12 * Math.sin(time * 1.6);
+    var shield = clamp(DOTS.shieldGlow * 0.68 + pulse, 0.18, 1);
+
+    var shadow = ctx.createRadialGradient(cx + radius * 0.18, cy + radius * 0.45, 0, cx + radius * 0.18, cy + radius * 0.45, radius * 1.4);
+    shadow.addColorStop(0, 'rgba(5,6,12,0.32)');
+    shadow.addColorStop(1, 'rgba(5,6,12,0)');
+    ctx.fillStyle = shadow;
+    ctx.beginPath();
+    ctx.ellipse(cx + radius * 0.18, cy + radius * 0.45, radius * 1.3, radius * 0.62, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    var halo = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius * 3.1);
+    halo.addColorStop(0, 'rgba(215,207,240,' + (shield * 0.18).toFixed(3) + ')');
+    halo.addColorStop(0.35, 'rgba(184,224,210,' + (shield * 0.08).toFixed(3) + ')');
+    halo.addColorStop(0.72, 'rgba(162,210,255,' + (shield * 0.04).toFixed(3) + ')');
+    halo.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = halo;
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius * 3.1, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(time * 0.16 + sceneState.pointerX * 0.05);
+    ctx.scale(1, 0.78);
+    ctx.beginPath();
+    ctx.arc(0, 0, radius * 1.08, 0, Math.PI * 2);
+    ctx.setLineDash([8, 12]);
+    ctx.strokeStyle = 'rgba(215,207,240,' + (shield * 0.74).toFixed(3) + ')';
+    ctx.lineWidth = Math.max(1.0, radius * 0.04);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.restore();
+
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(-time * 0.28);
+    ctx.scale(1, 0.68);
+    ctx.beginPath();
+    ctx.arc(0, 0, radius * 0.72, 0, Math.PI * 2);
+    ctx.setLineDash([4, 13]);
+    ctx.strokeStyle = 'rgba(184,224,210,' + (shield * 0.52).toFixed(3) + ')';
+    ctx.lineWidth = Math.max(0.8, radius * 0.026);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.restore();
+
+    var body = ctx.createRadialGradient(cx - radius * 0.24, cy - radius * 0.32, 0, cx, cy, radius * 1.1);
+    body.addColorStop(0, 'rgba(255,255,255,0.14)');
+    body.addColorStop(0.25, 'rgba(215,207,240,0.22)');
+    body.addColorStop(0.58, 'rgba(184,224,210,0.10)');
+    body.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = body;
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius * 0.92, 0, Math.PI * 2);
+    ctx.fill();
+
+    for (var ri = DOTS.ripples.length - 1; ri >= 0; ri--) {
+      var ripple = DOTS.ripples[ri];
+      ripple.r += radius * 0.07;
+      ripple.a *= 0.92;
+      if (ripple.a < 0.012) {
+        DOTS.ripples.splice(ri, 1);
+        continue;
+      }
+      ctx.beginPath();
+      ctx.ellipse(cx, cy, ripple.r, ripple.r * 0.78, 0, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(215,207,240,' + ripple.a.toFixed(3) + ')';
+      ctx.lineWidth = 1.4;
+      ctx.stroke();
     }
 
-    /* 4 dots — slow rotation */
-    var rot=time*0.055;
-    var pos=[];
-    for (var di=0; di<DOTS.dots.length; di++) {
-      var dot=DOTS.dots[di];
-      var cosR=Math.cos(rot), sinR=Math.sin(rot);
-      var px=cx+dot.ox*cosR-dot.oy*sinR;
-      var py=cy+dot.ox*sinR+dot.oy*cosR;
-      pos.push({x:px,y:py,r:dot.r,g:dot.g,b:dot.b});
-      var dg=ctx.createRadialGradient(px,py,0,px,py,12);
-      dg.addColorStop(0,'rgba('+dot.r+','+dot.g+','+dot.b+',0.65)');
-      dg.addColorStop(1,'rgba('+dot.r+','+dot.g+','+dot.b+',0)');
-      ctx.fillStyle=dg; ctx.beginPath(); ctx.arc(px,py,12,0,Math.PI*2); ctx.fill();
-      ctx.fillStyle='rgba('+dot.r+','+dot.g+','+dot.b+',1)';
-      ctx.beginPath(); ctx.arc(px,py,4.2,0,Math.PI*2); ctx.fill();
+    var dotPositions = [];
+    var yaw = time * 0.42;
+    var pitch = Math.sin(time * 0.7) * 0.22;
+    for (var di = 0; di < DOTS.dots.length; di++) {
+      var dot = DOTS.dots[di];
+      var yr = rotateY(dot.ox, dot.oz, yaw);
+      var xr = rotateX(dot.oy, yr.z, pitch);
+      var localScale = 1 + xr.z / 70;
+      var px = cx + yr.x * planet.scale * localScale;
+      var py = cy + xr.y * planet.scale * localScale;
+      var dotRadius = Math.max(2.6, 4.1 * planet.scale * localScale);
+      var alpha = clamp(0.42 + localScale * 0.32, 0.18, 1);
+
+      dotPositions.push({ x: px, y: py, z: xr.z, r: dot.r, g: dot.g, b: dot.b, radius: dotRadius, alpha: alpha });
     }
 
-    /* Constellation lines */
-    var la=(sa*0.28).toFixed(3);
-    for (var di2=0;di2<pos.length;di2++) for (var dj=di2+1;dj<pos.length;dj++) {
-      var lg=ctx.createLinearGradient(pos[di2].x,pos[di2].y,pos[dj].x,pos[dj].y);
-      lg.addColorStop(0,'rgba('+pos[di2].r+','+pos[di2].g+','+pos[di2].b+','+la+')');
-      lg.addColorStop(1,'rgba('+pos[dj].r+','+pos[dj].g+','+pos[dj].b+','+la+')');
-      ctx.strokeStyle=lg; ctx.lineWidth=0.55;
-      ctx.beginPath(); ctx.moveTo(pos[di2].x,pos[di2].y); ctx.lineTo(pos[dj].x,pos[dj].y); ctx.stroke();
+    dotPositions.sort(function(a, b) { return a.z - b.z; });
+    for (var li = 0; li < dotPositions.length; li++) {
+      for (var lj = li + 1; lj < dotPositions.length; lj++) {
+        var lineA = dotPositions[li];
+        var lineB = dotPositions[lj];
+        var lineGrad = ctx.createLinearGradient(lineA.x, lineA.y, lineB.x, lineB.y);
+        var lineAlpha = (shield * 0.26 * Math.min(lineA.alpha, lineB.alpha)).toFixed(3);
+        lineGrad.addColorStop(0, 'rgba(' + lineA.r + ',' + lineA.g + ',' + lineA.b + ',' + lineAlpha + ')');
+        lineGrad.addColorStop(1, 'rgba(' + lineB.r + ',' + lineB.g + ',' + lineB.b + ',' + lineAlpha + ')');
+        ctx.strokeStyle = lineGrad;
+        ctx.lineWidth = 0.7;
+        ctx.beginPath();
+        ctx.moveTo(lineA.x, lineA.y);
+        ctx.lineTo(lineB.x, lineB.y);
+        ctx.stroke();
+      }
     }
+
+    for (var dpi = 0; dpi < dotPositions.length; dpi++) {
+      var p = dotPositions[dpi];
+      var dotGlow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius * 3);
+      dotGlow.addColorStop(0, 'rgba(' + p.r + ',' + p.g + ',' + p.b + ',' + (p.alpha * 0.54).toFixed(3) + ')');
+      dotGlow.addColorStop(1, 'rgba(' + p.r + ',' + p.g + ',' + p.b + ',0)');
+      ctx.fillStyle = dotGlow;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius * 3, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = 'rgba(' + p.r + ',' + p.g + ',' + p.b + ',' + p.alpha.toFixed(3) + ')';
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  function drawShockwaves() {
+    for (var i = shockwaves.length - 1; i >= 0; i--) {
+      var wave = shockwaves[i];
+      wave.r += wave.speed;
+      wave.a *= 0.955;
+      if (wave.a < 0.014) {
+        shockwaves.splice(i, 1);
+        continue;
+      }
+      ctx.beginPath();
+      ctx.arc(wave.x, wave.y, wave.r, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(' + wave.r1 + ',' + wave.g1 + ',' + wave.b1 + ',' + wave.a.toFixed(3) + ')';
+      ctx.lineWidth = wave.lineWidth;
+      ctx.stroke();
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0,0,W,H);
+    time += 0.0054;
+    syncSceneState();
+
+    var isMobileScene = W < 768;
+    var cameraTiltY = sceneState.orbitYaw + sceneState.pointerX * 0.12;
+    var cameraTiltX = sceneState.orbitPitch - sceneState.pointerY * 0.06 + Math.sin(time * 0.45) * 0.02;
+    var galaxyAnchorX = W * (isMobileScene ? 0.30 : 0.18) + sceneState.panX * (isMobileScene ? 0.24 : 0.32);
+    var galaxyAnchorY = H * (isMobileScene ? 0.44 : 0.495) + sceneState.panY * (isMobileScene ? 0.11 : 0.16);
+    var globalSpin = time * 0.12;
+
+    for (var ni = 0; ni < nebulae.length; ni++) {
+      drawNebula(nebulae[ni], galaxyAnchorX, galaxyAnchorY, cameraTiltX, cameraTiltY);
+    }
+
+    var renderedStars = [];
+    for (var i = 0; i < stars.length; i++) {
+      var s = stars[i];
+
+      s.vx += (-s.ox) * 0.015;
+      s.vy += (-s.oy) * 0.015;
+      s.vz += (-s.oz) * 0.012;
+      s.vx *= 0.95;
+      s.vy *= 0.95;
+      s.vz *= 0.95;
+      s.ox += s.vx;
+      s.oy += s.vy;
+      s.oz += s.vz;
+      s.phase += s.twinkleRate;
+
+      var localX = s.baseX + s.ox;
+      var localY = s.baseY + s.oy;
+      var localZ = s.baseZ + s.oz;
+      var holeDx = SINGULARITY.x - localX;
+      var holeDy = SINGULARITY.y - localY;
+      var holeDz = SINGULARITY.z - localZ;
+      var holeDist = Math.sqrt(holeDx * holeDx + holeDy * holeDy + holeDz * holeDz);
+      if (holeDist < 190 && holeDist > 0.001) {
+        var pull = Math.pow((190 - holeDist) / 190, 2) * 0.05;
+        s.vx += (holeDx / holeDist) * pull;
+        s.vy += (holeDy / holeDist) * pull * 0.4;
+        s.vz += (holeDz / holeDist) * pull;
+      }
+
+      var spin = rotateY(localX, localZ, globalSpin + s.spinOffset * 0.08);
+      var proj = projectPoint(spin.x, localY, spin.z, galaxyAnchorX, galaxyAnchorY, cameraTiltX, cameraTiltY, 980);
+
+      s.screenX = proj.x;
+      s.screenY = proj.y;
+
+      if (mouse.x > -900) {
+        var mdx = proj.x - mouse.x;
+        var mdy = proj.y - mouse.y;
+        var dist = Math.sqrt(mdx * mdx + mdy * mdy);
+        var hoverRadius = 150 + proj.scale * 18;
+        if (dist < hoverRadius && dist > 0.001) {
+          var force = Math.pow((hoverRadius - dist) / hoverRadius, 1.7);
+          s.vx += (mdx / dist) * force * (0.65 + proj.scale * 0.34) / s.mass;
+          s.vy += (mdy / dist) * force * 0.55 / s.mass;
+          s.vz += force * 1.4 / s.mass;
+        }
+      }
+
+      if (proj.x < -60 || proj.x > W + 60 || proj.y < -60 || proj.y > H + 60) continue;
+
+      renderedStars.push({
+        star: s,
+        proj: proj,
+        sparkAngle: globalSpin * 0.8 + s.phase * 0.4,
+      });
+    }
+
+    renderedStars.sort(function(a, b) { return a.proj.z - b.proj.z; });
+    for (var rs = 0; rs < renderedStars.length; rs++) drawStar(renderedStars[rs]);
+
+    drawSingularity(galaxyAnchorX, galaxyAnchorY, cameraTiltX, cameraTiltY);
+    drawAtlas(galaxyAnchorX, galaxyAnchorY, cameraTiltX, cameraTiltY);
+
+    var dotsAnchorX = DOTS.orbitCx + sceneState.panX * 0.46;
+    var dotsAnchorY = DOTS.orbitCy + sceneState.panY * 0.28;
+    var planet = updateDots(dotsAnchorX, dotsAnchorY, cameraTiltX, cameraTiltY);
+    drawDots(planet);
+    drawShockwaves();
+
+    rafId=requestAnimationFrame(draw);
   }
 
   function getPos(e) {
@@ -1695,29 +3163,99 @@ function initMainPage() {
   }
 
   function kick(x,y) {
-    clickData={x,y,time:performance.now()};
-    var ddx=DOTS.x-x, ddy=DOTS.y-y, ddist=Math.sqrt(ddx*ddx+ddy*ddy);
-    if (ddist<95) {
-      DOTS.shieldGlow=1.0;
-      DOTS.ripples.push({r:28,a:0.85}); DOTS.ripples.push({r:44,a:0.55});
-      var pa=Math.atan2(ddy,ddx);
-      DOTS.vx+=Math.cos(pa)*4.5; DOTS.vy+=Math.sin(pa)*4.5;
-    }
-    for (var i=0;i<stars.length;i++) {
-      var s=stars[i], dx=s.x-x, dy=s.y-y, dist=Math.sqrt(dx*dx+dy*dy);
-      if (dist<260&&dist>0) {
-        var ang=Math.atan2(dy,dx), f=Math.pow((260-dist)/260,2)*12/s.mass;
-        s.vx+=Math.cos(ang)*f; s.vy+=Math.sin(ang)*f;
+    shockwaves.push({
+      x: x,
+      y: y,
+      r: 10,
+      speed: 7.2,
+      a: 0.16,
+      lineWidth: 1.5,
+      r1: 200,
+      g1: 182,
+      b1: 255,
+    });
+
+    if (DOTS.screen) {
+      var ddx = DOTS.screen.x - x;
+      var ddy = DOTS.screen.y - y;
+      var ddist = Math.sqrt(ddx * ddx + ddy * ddy);
+      if (ddist < DOTS.screen.r * 1.95) {
+        DOTS.shieldGlow = 1.0;
+        DOTS.ripples.push({ r: DOTS.screen.r * 0.72, a: 0.85 });
+        DOTS.ripples.push({ r: DOTS.screen.r * 1.05, a: 0.52 });
+        var pa = Math.atan2(ddy, ddx);
+        DOTS.vx += Math.cos(pa) * 4.2;
+        DOTS.vy += Math.sin(pa) * 3.0;
+        DOTS.vz += 8.5;
       }
     }
+
+    for (var i=0;i<stars.length;i++) {
+      var s = stars[i];
+      var dx = s.screenX - x;
+      var dy = s.screenY - y;
+      var dist = Math.sqrt(dx*dx + dy*dy);
+      if (dist < 260 && dist > 0.001) {
+        var ang = Math.atan2(dy, dx);
+        var force = Math.pow((260 - dist) / 260, 2) * 9.5 / s.mass;
+        s.vx += Math.cos(ang) * force;
+        s.vy += Math.sin(ang) * force;
+        s.vz += force * 1.65;
+      }
+    }
+    sceneState.energy = 1;
   }
 
-  heroEl.addEventListener('mousemove',function(e){var p=getPos(e);mouse.x=p.x;mouse.y=p.y;});
-  heroEl.addEventListener('mouseleave',function(){mouse.x=-9999;mouse.y=-9999;});
-  heroEl.addEventListener('click',function(e){var p=getPos(e);kick(p.x,p.y);});
+  function onMouseMove(e) {
+    var p = getPos(e);
+    mouse.x = p.x;
+    mouse.y = p.y;
+    if (!drag.active) return;
+    var dx = e.clientX - drag.lastX;
+    var dy = e.clientY - drag.lastY;
+    drag.lastX = e.clientX;
+    drag.lastY = e.clientY;
+    if (Math.abs(dx) + Math.abs(dy) > 0.8) drag.moved = true;
+    sceneState.orbitYaw += dx * 0.0054;
+    sceneState.orbitPitch += dy * 0.0044;
+    sceneState.orbitPitch = clamp(sceneState.orbitPitch, -0.68, 0.68);
+    sceneState.orbitYawVel = dx * 0.0013;
+    sceneState.orbitPitchVel = dy * 0.0010;
+    applyDragWake(p.x, p.y, dx, dy);
+  }
+
+  function onMouseUp(e) {
+    if (!drag.active) return;
+    var p = getPos(e);
+    mouse.x = p.x;
+    mouse.y = p.y;
+    sceneState.dragActive = false;
+    drag.active = false;
+    if (!drag.moved) kick(p.x, p.y);
+  }
+
+  heroEl.addEventListener('mousemove', onMouseMove);
+  heroEl.addEventListener('mouseleave', function(){ mouse.x = -9999; mouse.y = -9999; });
+  heroEl.addEventListener('mousedown', function(e) {
+    if (e.button !== 0) return;
+    if (e.target && e.target.closest('a,button,[role="button"],input,textarea,select')) return;
+    var p = getPos(e);
+    mouse.x = p.x;
+    mouse.y = p.y;
+    drag.active = true;
+    drag.moved = false;
+    drag.lastX = e.clientX;
+    drag.lastY = e.clientY;
+    sceneState.dragActive = true;
+    sceneState.orbitYawVel = 0;
+    sceneState.orbitPitchVel = 0;
+    e.preventDefault();
+  });
+  window.addEventListener('mousemove', onMouseMove);
+  window.addEventListener('mouseup', onMouseUp);
   heroEl.addEventListener('touchstart',function(e){var t=e.touches[0],p=getPos(t);mouse.x=p.x;mouse.y=p.y;kick(p.x,p.y);},{passive:true});
   heroEl.addEventListener('touchmove',function(e){var t=e.touches[0],p=getPos(t);mouse.x=p.x;mouse.y=p.y;},{passive:true});
-  heroEl.addEventListener('touchend',function(){mouse.x=-9999;mouse.y=-9999;});
+  heroEl.addEventListener('touchend',function(){mouse.x=-9999;mouse.y=-9999;sceneState.dragActive=false;});
   window.addEventListener('resize',function(){cancelAnimationFrame(rafId);resize();});
 
   var mp=document.getElementById('main-page');
@@ -1729,13 +3267,11 @@ function initMainPage() {
 </script>
 <script>
 /* ══════════════════════════════════════════════════
-   PARTICLE MESH — Infinity ∞ Orbit + Ambient Layer
-   Ported from web.dotsai.cloud ParticleMesh.tsx
-   - 70 particles orbiting an infinity (lemniscate) path
-   - Orbit particles connect with glowing lines (dist < 120)
-   - 50 ambient floating particles with sine drift
-   - Mouse repulsion on all particles
-   - Scroll fade (opacity → 0 at 70% scroll past hero)
+   PARTICLE MESH v2
+   - 3D infinity ribbon in projected space
+   - Orbit particles spring toward path targets
+   - Ambient particles drift through depth volume
+   - Uses shared hero scene tilt for unified motion
 ══════════════════════════════════════════════════ */
 (function () {
   const COLORS = [
@@ -1746,11 +3282,35 @@ function initMainPage() {
     [255, 181, 194],
   ];
 
-  function infinityPoint(t, cx, cy, scale) {
-    var denom = 1 + Math.sin(t) * Math.sin(t);
+  function rotateY(x, z, a) {
+    var c = Math.cos(a), s = Math.sin(a);
+    return { x: x * c - z * s, z: x * s + z * c };
+  }
+
+  function rotateX(y, z, a) {
+    var c = Math.cos(a), s = Math.sin(a);
+    return { y: y * c - z * s, z: y * s + z * c };
+  }
+
+  function projectPoint(px, py, pz, anchorX, anchorY, rotX, rotY, cameraDist) {
+    var yr = rotateY(px, pz, rotY);
+    var xr = rotateX(py, yr.z, rotX);
+    var depth = cameraDist / Math.max(140, cameraDist - xr.z);
     return {
-      x: cx + (scale * Math.cos(t)) / denom,
-      y: cy + (scale * Math.sin(t) * Math.cos(t)) / denom,
+      x: anchorX + yr.x * depth,
+      y: anchorY + xr.y * depth,
+      z: xr.z,
+      scale: depth,
+    };
+  }
+
+  function infinityPoint(t, scale) {
+    var denom = 1 + Math.sin(t) * Math.sin(t);
+    var ribbon = (scale * Math.sin(t) * Math.cos(t)) / denom;
+    return {
+      x: (scale * Math.cos(t)) / denom,
+      y: ribbon * 0.92,
+      z: Math.sin(t * 2) * scale * 0.10 + Math.cos(t * 3) * scale * 0.035,
     };
   }
 
@@ -1759,12 +3319,37 @@ function initMainPage() {
     if (!canvas) return;
     var ctx = canvas.getContext('2d');
     var heroEl = document.getElementById('hero');
+    var sceneDefaults = {
+      pointerX: 0,
+      pointerY: 0,
+      panX: 0,
+      panY: 0,
+      tiltX: 0,
+      tiltY: 0,
+      energy: 0,
+      orbitYaw: -0.18,
+      orbitPitch: 0.10,
+      orbitYawVel: 0,
+      orbitPitchVel: 0,
+      dragActive: false,
+      focusX: 0,
+      focusY: 0,
+      impulseX: 0,
+      impulseY: 0,
+      impulseLife: 0,
+      heroProgress: 0,
+    };
+    var sceneState = window.__dotsHeroScene || {};
+    for (var sceneKey in sceneDefaults) {
+      if (sceneState[sceneKey] == null) sceneState[sceneKey] = sceneDefaults[sceneKey];
+    }
+    window.__dotsHeroScene = sceneState;
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
     var W, H, cx, cy, scale;
     var mx = -1000, my = -1000;
-    var scrollY = 0;
     var time = 0;
     var raf;
+    var particles = [];
 
     function resize() {
       W = heroEl.offsetWidth;
@@ -1776,43 +3361,49 @@ function initMainPage() {
       canvas.style.height = H + 'px';
       ctx.setTransform(1,0,0,1,0,0);
       ctx.scale(dpr, dpr);
-      cx = W * 0.74; cy = H * 0.10;
-      scale = Math.min(W, H) * 0.14;
+      cx = W * 0.76;
+      cy = H * 0.14;
+      scale = Math.min(W, H) * (W < 768 ? 0.12 : 0.15);
       buildParticles();
     }
 
-    var particles = [];
     function buildParticles() {
       particles = [];
       var isMobile = W < 768;
-      var orbitCount   = isMobile ? 40 : 70;
-      var ambientCount = isMobile ? 25 : 50;
+      var orbitCount   = isMobile ? 48 : 88;
+      var ambientCount = isMobile ? 24 : 56;
 
       for (var i = 0; i < orbitCount; i++) {
         var phase = (i / orbitCount) * Math.PI * 2;
-        var pt = infinityPoint(phase, cx, cy, scale);
+        var pt = infinityPoint(phase, scale);
         particles.push({
-          x: pt.x + (Math.random()-0.5)*20,
-          y: pt.y + (Math.random()-0.5)*20,
-          vx: 0, vy: 0,
-          targetX: pt.x, targetY: pt.y,
+          x: pt.x + (Math.random()-0.5)*12,
+          y: pt.y + (Math.random()-0.5)*10,
+          z: pt.z + (Math.random()-0.5)*10,
+          vx: 0, vy: 0, vz: 0,
+          targetX: pt.x, targetY: pt.y, targetZ: pt.z,
           phase: phase,
           color: COLORS[i % COLORS.length],
-          radius: 1.5 + Math.random() * 1,
+          radius: 1.3 + Math.random() * 0.9,
           glow: Math.random(),
-          type: 'orbit'
+          speed: 0.52 + Math.random() * 0.42,
+          type: 'orbit',
+          sx: 0, sy: 0, sz: 0,
         });
       }
       for (var j = 0; j < ambientCount; j++) {
         particles.push({
-          x: Math.random()*W, y: Math.random()*H,
-          vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3,
-          targetX: 0, targetY: 0,
+          x: (Math.random() - 0.5) * W * 0.34,
+          y: (Math.random() - 0.5) * H * 0.30,
+          z: (Math.random() - 0.5) * Math.min(W, H) * 0.35,
+          vx: (Math.random()-0.5)*0.18, vy: (Math.random()-0.5)*0.18, vz: (Math.random()-0.5)*0.16,
+          targetX: 0, targetY: 0, targetZ: 0,
           phase: Math.random()*Math.PI*2,
           color: COLORS[j % COLORS.length],
           radius: 0.8 + Math.random()*0.6,
           glow: Math.random(),
-          type: 'ambient'
+          type: 'ambient',
+          sx: 0, sy: 0, sz: 0,
         });
       }
     }
@@ -1821,76 +3412,130 @@ function initMainPage() {
       ctx.clearRect(0, 0, W, H);
       time += 0.008;
 
-      var scrollFade = Math.max(0, 1 - scrollY / (H * 0.7));
+      var heroProgress = sceneState.heroProgress || 0;
+      var scrollFade = heroProgress < 0.90 ? 1 : Math.max(0, 1 - ((heroProgress - 0.90) / 0.10));
       ctx.globalAlpha = scrollFade;
-
       var orbitPs = [];
+      var renderables = [];
+      var rotY = sceneState.orbitYaw * 0.12 + sceneState.pointerX * 0.025;
+      var rotX = sceneState.orbitPitch * 0.08 - sceneState.pointerY * 0.018 + 0.006;
+      var anchorX = cx + sceneState.panX * 0.20 + Math.sin(sceneState.orbitYaw) * 14;
+      var anchorY = cy + sceneState.panY * 0.12 + sceneState.orbitPitch * 8;
+
       for (var i = 0; i < particles.length; i++) {
         var p = particles[i];
 
         if (p.type === 'orbit') {
-          p.phase += 0.002;
-          var target = infinityPoint(p.phase, cx, cy, scale);
-          p.targetX = target.x; p.targetY = target.y;
-          var dx = p.targetX - p.x, dy = p.targetY - p.y;
-          p.vx += dx * 0.012; p.vy += dy * 0.012;
-          p.vx *= 0.94; p.vy *= 0.94;
-          orbitPs.push(p);
+          p.phase += 0.002 * p.speed;
+          var target = infinityPoint(p.phase, scale);
+          p.targetX = target.x;
+          p.targetY = target.y;
+          p.targetZ = target.z;
+          p.vx += (p.targetX - p.x) * 0.020;
+          p.vy += (p.targetY - p.y) * 0.020;
+          p.vz += (p.targetZ - p.z) * 0.018;
+          p.vx *= 0.90;
+          p.vy *= 0.90;
+          p.vz *= 0.90;
         } else {
-          p.vx += Math.sin(time*1.2+p.phase)*0.008;
-          p.vy += Math.cos(time*0.8+p.phase)*0.008;
-          p.vx *= 0.98; p.vy *= 0.98;
-          if (p.x < 0 || p.x > W) p.vx *= -1;
-          if (p.y < 0 || p.y > H) p.vy *= -1;
+          p.vx += Math.sin(time * 1.1 + p.phase) * 0.004;
+          p.vy += Math.cos(time * 0.8 + p.phase) * 0.004;
+          p.vz += Math.sin(time * 0.6 + p.phase) * 0.003;
+          p.vx *= 0.985;
+          p.vy *= 0.985;
+          p.vz *= 0.985;
+
+          if (Math.abs(p.x) > W * 0.22) p.vx *= -1;
+          if (Math.abs(p.y) > H * 0.18) p.vy *= -1;
+          if (Math.abs(p.z) > Math.min(W, H) * 0.22) p.vz *= -1;
         }
 
-        // Mouse repulsion
-        var mdx = p.x - mx, mdy = p.y - my;
-        var mDist = Math.sqrt(mdx*mdx + mdy*mdy);
-        if (mDist < 140 && mDist > 0) {
-          var force = (140 - mDist) / 140;
-          p.vx += (mdx/mDist)*force*0.8;
-          p.vy += (mdy/mDist)*force*0.8;
+        if (p.sx || p.sy) {
+          var mdx = p.sx - mx;
+          var mdy = p.sy - my;
+          var mDist = Math.sqrt(mdx*mdx + mdy*mdy);
+          if (mDist < 150 && mDist > 0.001) {
+            var force = Math.pow((150 - mDist) / 150, 1.4);
+            p.vx += (mdx / mDist) * force * 0.45;
+            p.vy += (mdy / mDist) * force * 0.34;
+            p.vz += force * 0.95;
+          }
         }
 
-        p.x += p.vx; p.y += p.vy;
+        if (sceneState.impulseLife > 0.02) {
+          var wakeDx = p.sx - sceneState.focusX;
+          var wakeDy = p.sy - sceneState.focusY;
+          var wakeDist = Math.sqrt(wakeDx * wakeDx + wakeDy * wakeDy);
+          if (wakeDist < 170 && wakeDist > 0.001) {
+            var wakeForce = Math.pow((170 - wakeDist) / 170, 1.4) * sceneState.impulseLife;
+            p.vx += sceneState.impulseX * 0.022 * wakeForce;
+            p.vy += sceneState.impulseY * 0.018 * wakeForce;
+            p.vz += (Math.abs(sceneState.impulseX) + Math.abs(sceneState.impulseY)) * 0.03 * wakeForce;
+          }
+        }
+
+        p.x += p.vx;
+        p.y += p.vy;
+        p.z += p.vz;
         p.glow = 0.4 + 0.6*Math.abs(Math.sin(time*2.2+p.phase));
+
+        var proj = projectPoint(p.x, p.y, p.z, anchorX, anchorY, rotX, rotY, 720);
+        p.sx = proj.x;
+        p.sy = proj.y;
+        p.sz = proj.z;
+
+        if (proj.x < -120 || proj.x > W + 120 || proj.y < -120 || proj.y > H + 120) continue;
+        renderables.push({ particle: p, proj: proj });
+        if (p.type === 'orbit') orbitPs.push({ particle: p, proj: proj });
       }
 
-      // Draw orbit connections
+      orbitPs.sort(function(a, b) { return a.proj.z - b.proj.z; });
       for (var a = 0; a < orbitPs.length; a++) {
         for (var b = a+1; b < orbitPs.length; b++) {
-          var adx = orbitPs[a].x - orbitPs[b].x;
-          var ady = orbitPs[a].y - orbitPs[b].y;
+          var adx = orbitPs[a].proj.x - orbitPs[b].proj.x;
+          var ady = orbitPs[a].proj.y - orbitPs[b].proj.y;
           var dist = Math.sqrt(adx*adx + ady*ady);
-          if (dist < 120) {
-            var alpha = ((120 - dist)/120) * 0.08;
-            ctx.strokeStyle = 'rgba(200,182,255,'+alpha.toFixed(3)+')';
-            ctx.lineWidth = 0.6;
+          var zGap = Math.abs(orbitPs[a].proj.z - orbitPs[b].proj.z);
+          if (dist < 132 && zGap < 160) {
+            var alpha = ((132 - dist)/132) * 0.11 * (1 - zGap / 160);
+            var c1 = orbitPs[a].particle.color;
+            var c2 = orbitPs[b].particle.color;
+            var grad = ctx.createLinearGradient(orbitPs[a].proj.x, orbitPs[a].proj.y, orbitPs[b].proj.x, orbitPs[b].proj.y);
+            grad.addColorStop(0, 'rgba(' + c1[0] + ',' + c1[1] + ',' + c1[2] + ',' + alpha.toFixed(3) + ')');
+            grad.addColorStop(1, 'rgba(' + c2[0] + ',' + c2[1] + ',' + c2[2] + ',' + alpha.toFixed(3) + ')');
+            ctx.strokeStyle = grad;
+            ctx.lineWidth = 0.7;
             ctx.beginPath();
-            ctx.moveTo(orbitPs[a].x, orbitPs[a].y);
-            ctx.lineTo(orbitPs[b].x, orbitPs[b].y);
+            ctx.moveTo(orbitPs[a].proj.x, orbitPs[a].proj.y);
+            ctx.lineTo(orbitPs[b].proj.x, orbitPs[b].proj.y);
             ctx.stroke();
           }
         }
       }
 
-      // Draw particles
-      for (var k = 0; k < particles.length; k++) {
-        var p = particles[k];
+      renderables.sort(function(a, b) { return a.proj.z - b.proj.z; });
+      for (var k = 0; k < renderables.length; k++) {
+        var p = renderables[k].particle;
+        var proj = renderables[k].proj;
         var c = p.color;
         var r = c[0], g = c[1], bv = c[2];
-        var palpha = p.type==='orbit' ? 0.6+p.glow*0.4 : 0.3+p.glow*0.2;
+        var palpha = p.type === 'orbit' ? 0.46 + p.glow * 0.42 : 0.20 + p.glow * 0.16;
+        var radius = Math.max(0.5, p.radius * proj.scale);
 
-        if (p.glow > 0.6 && p.type==='orbit') {
-          var grad = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.radius*6);
-          grad.addColorStop(0,'rgba('+r+','+g+','+bv+','+(palpha*0.15).toFixed(3)+')');
+        if (p.glow > 0.52) {
+          var grad = ctx.createRadialGradient(proj.x, proj.y, 0, proj.x, proj.y, radius * (p.type === 'orbit' ? 7 : 4.5));
+          grad.addColorStop(0,'rgba('+r+','+g+','+bv+','+(palpha * (p.type === 'orbit' ? 0.18 : 0.10)).toFixed(3)+')');
           grad.addColorStop(1,'rgba('+r+','+g+','+bv+',0)');
           ctx.fillStyle = grad;
-          ctx.beginPath(); ctx.arc(p.x,p.y,p.radius*6,0,Math.PI*2); ctx.fill();
+          ctx.beginPath();
+          ctx.arc(proj.x, proj.y, radius * (p.type === 'orbit' ? 7 : 4.5), 0, Math.PI * 2);
+          ctx.fill();
         }
+
         ctx.fillStyle='rgba('+r+','+g+','+bv+','+palpha.toFixed(3)+')';
-        ctx.beginPath(); ctx.arc(p.x,p.y,p.radius,0,Math.PI*2); ctx.fill();
+        ctx.beginPath();
+        ctx.arc(proj.x, proj.y, radius, 0, Math.PI * 2);
+        ctx.fill();
       }
 
       ctx.globalAlpha = 1;
@@ -1903,7 +3548,6 @@ function initMainPage() {
       mx = e.clientX - rect.left; my = e.clientY - rect.top;
     }, { passive: true });
     heroEl.addEventListener('mouseleave', function() { mx=-1000; my=-1000; });
-    window.addEventListener('scroll', function() { scrollY = window.scrollY; }, { passive: true });
     window.addEventListener('resize', function() { cancelAnimationFrame(raf); resize(); });
 
     resize();
@@ -1937,7 +3581,7 @@ function initMainPage() {
    QUANTUM FIELD CURSOR
    - Dot: follows instantly (actual cursor position)
    - Ring: spring-lagged 44px circle
-   - Trail: 28 comet particles in D.O.T.S. palette
+   - Trail: time-fading comet field with persistent drawing feel
    - Hover: ring expands + dot brightens (magnetic)
    - Click: ring shrinks + 12-particle burst explosion
 ══════════════════════════════════════════════════ */
@@ -1958,11 +3602,16 @@ function initMainPage() {
     [255, 181, 194],
   ];
 
-  const TRAIL = 28;
+  const TRAIL_LIFE = 2600;
+  const TRAIL_MAX  = 140;
   const hist  = [];
   let mx = -999, my = -999;
   let rx = -999, ry = -999;
+  let rvx = 0, rvy = 0;
   let bursts = [];
+  let lastTrailAt = 0;
+  let lastTrailX = -999;
+  let lastTrailY = -999;
 
   function resize() {
     tc.width  = window.innerWidth;
@@ -1976,8 +3625,17 @@ function initMainPage() {
     mx = e.clientX; my = e.clientY;
     dot.style.left = mx + 'px';
     dot.style.top  = my + 'px';
-    hist.unshift({ x: mx, y: my });
-    if (hist.length > TRAIL) hist.pop();
+    var now = performance.now();
+    var dx = mx - lastTrailX;
+    var dy = my - lastTrailY;
+    var dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist > 2.5 || now - lastTrailAt > 26) {
+      hist.unshift({ x: mx, y: my, t: now });
+      lastTrailAt = now;
+      lastTrailX = mx;
+      lastTrailY = my;
+    }
+    if (hist.length > TRAIL_MAX) hist.length = TRAIL_MAX;
   }, { passive: true });
 
   /* ── Hover on interactive elements ── */
@@ -2019,33 +3677,45 @@ function initMainPage() {
   /* ── Animation loop ── */
   function draw() {
     ctx.clearRect(0, 0, tc.width, tc.height);
+    var now = performance.now();
+    for (var h = hist.length - 1; h >= 0; h--) {
+      if (now - hist[h].t > TRAIL_LIFE) hist.splice(h, 1);
+    }
 
     /* Spring ring */
-    rx += (mx - rx) * 0.10;
-    ry += (my - ry) * 0.10;
+    var hovering = ring.classList.contains('hovering');
+    var stiffness = hovering ? 0.14 : 0.11;
+    var damping = hovering ? 0.72 : 0.76;
+    rvx += (mx - rx) * stiffness;
+    rvy += (my - ry) * stiffness;
+    rvx *= damping;
+    rvy *= damping;
+    rx += rvx;
+    ry += rvy;
     ring.style.left = rx + 'px';
     ring.style.top  = ry + 'px';
 
     /* Comet trail */
     for (var i = 0; i < hist.length; i++) {
       var p   = hist[i];
-      var t   = i / TRAIL;
-      var alp = (1 - t) * 0.55;
-      var sz  = (1 - t) * 5;
+      var age = (now - p.t) / TRAIL_LIFE;
+      var life = 1 - age;
+      var t   = hist.length <= 1 ? 0 : i / (hist.length - 1);
+      var alp = Math.pow(life, 1.45) * 0.52;
+      var sz  = 1.2 + Math.pow(life, 0.85) * 4.4;
       if (sz < 0.2 || alp < 0.01) continue;
-      var ci  = Math.floor(i * PALETTE.length / TRAIL) % PALETTE.length;
+      var ci  = Math.floor(t * (PALETTE.length * 1.25)) % PALETTE.length;
       var c   = PALETTE[ci];
-      var g   = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, sz * 2.5);
+      var g   = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, sz * 2.8);
       g.addColorStop(0, 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + alp.toFixed(3) + ')');
       g.addColorStop(1, 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',0)');
       ctx.fillStyle = g;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, sz * 2.5, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, sz * 2.8, 0, Math.PI * 2);
       ctx.fill();
     }
 
     /* Click bursts */
-    var now = performance.now();
     bursts = bursts.filter(function (b) {
       var age = (now - b.t) / 800;
       if (age > 1) return false;
@@ -2078,6 +3748,8 @@ function initMainPage() {
   position: relative;
   background: var(--hero-bg, #06060a);
   color: #f3f0ff;
+  min-height: 100vh;
+  box-sizing: border-box;
   padding: 100px 48px 80px;
   overflow: hidden;
 }
@@ -2088,8 +3760,28 @@ function initMainPage() {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 25% 30%, rgba(215,207,240,0.08), transparent 35%),
-    radial-gradient(circle at 80% 70%, rgba(191,214,236,0.06), transparent 30%);
+    radial-gradient(circle at 18% 22%, rgba(215,207,240,0.10), transparent 28%),
+    radial-gradient(circle at 82% 24%, rgba(191,214,236,0.08), transparent 24%),
+    radial-gradient(circle at 62% 78%, rgba(255,205,178,0.06), transparent 26%);
+}
+
+.labs-teaser-shell {
+  position: relative;
+  z-index: 1;
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  min-height: calc(100vh - 180px);
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+}
+
+.labs-teaser-copy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .labs-teaser-label {
@@ -2098,42 +3790,120 @@ function initMainPage() {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: rgba(243,240,255,0.25);
-  margin-bottom: 14px;
   position: relative;
 }
 
 .labs-teaser-title {
   font-family: 'Instrument Serif', serif;
-  font-size: clamp(36px, 5vw, 58px);
-  line-height: 1;
+  font-size: clamp(40px, 5.2vw, 64px);
+  line-height: 0.98;
   letter-spacing: -0.04em;
-  margin: 0 0 12px;
+  margin: 0;
   position: relative;
+}
+
+.labs-teaser-title em {
+  display: block;
+  font-style: italic;
+  color: #D7CFF0;
 }
 
 .labs-teaser-sub {
   font-size: 16px;
-  line-height: 1.65;
-  color: rgba(243,240,255,0.55);
-  margin: 0 0 40px;
+  line-height: 1.72;
+  color: rgba(243,240,255,0.56);
+  margin: 0;
   position: relative;
+}
+
+.labs-teaser-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.labs-teaser-fact {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.04);
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(243,240,255,0.58);
+}
+
+.labs-teaser-policy {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 12px;
+}
+
+.labs-teaser-policy-card {
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.04);
+  padding: 16px 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.labs-teaser-policy-card--muted {
+  background: rgba(255,255,255,0.025);
+}
+
+.labs-teaser-policy-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(243,240,255,0.36);
+}
+
+.labs-teaser-policy-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.labs-teaser-policy-list span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  background: rgba(215,207,240,0.08);
+  border: 1px solid rgba(215,207,240,0.14);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  line-height: 1.2;
+  color: rgba(243,240,255,0.82);
+}
+
+.labs-teaser-policy-card p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(243,240,255,0.54);
 }
 
 .labs-teaser-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  max-width: 1120px;
-  margin: 0 auto;
   position: relative;
 }
 
 .labs-teaser-card {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.10);
   backdrop-filter: blur(12px);
-  border-radius: 20px;
-  padding: 24px;
+  border-radius: 22px;
+  padding: 22px 18px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -2144,8 +3914,8 @@ function initMainPage() {
 
 .labs-teaser-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 60px rgba(215,207,240,0.2);
-  border-color: rgba(215,207,240,0.25);
+  box-shadow: 0 24px 64px rgba(215,207,240,0.16);
+  border-color: rgba(215,207,240,0.22);
 }
 
 .labs-teaser-card:active {
@@ -2153,8 +3923,8 @@ function initMainPage() {
 }
 
 .labs-teaser-visual {
-  height: 100px;
-  border-radius: 12px;
+  height: 112px;
+  border-radius: 16px;
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.06);
   overflow: hidden;
@@ -2167,12 +3937,12 @@ function initMainPage() {
   font-family: 'Space Mono', monospace;
   font-size: 10px;
   letter-spacing: 0.18em;
-  color: rgba(243,240,255,0.3);
+  color: rgba(243,240,255,0.34);
 }
 
 .labs-teaser-card h3 {
   font-family: 'Instrument Serif', serif;
-  font-size: 22px;
+  font-size: 24px;
   line-height: 1.15;
   letter-spacing: -0.02em;
   margin: 0;
@@ -2198,13 +3968,15 @@ function initMainPage() {
 }
 
 .labs-teaser-all {
-  display: inline-block;
-  margin-top: 32px;
+  display: block;
+  width: min(1180px, 100%);
+  margin: 26px auto 0;
   font-size: 14px;
   font-weight: 500;
   color: rgba(243,240,255,0.5);
   text-decoration: none;
   position: relative;
+  text-align: right;
   transition: color 0.2s ease;
 }
 
@@ -2357,12 +4129,76 @@ function initMainPage() {
   100% { left: 100%; }
 }
 
+.ltv-gauge {
+  position: relative;
+  width: 86px;
+  height: 86px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ltv-gauge-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    conic-gradient(from 210deg, rgba(200,182,255,0.82) 0 42%, rgba(184,224,210,0.82) 42% 72%, rgba(255,205,178,0.82) 72% 84%, rgba(255,255,255,0.08) 84% 100%);
+  box-shadow: 0 0 30px rgba(200,182,255,0.12);
+}
+
+.ltv-gauge-ring::after {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  border-radius: 50%;
+  background: rgba(8,9,14,0.96);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.ltv-gauge-core {
+  position: relative;
+  z-index: 1;
+  font-family: 'Space Mono', monospace;
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  color: rgba(243,240,255,0.88);
+}
+
 @media (max-width: 900px) {
   #labs-teaser {
+    min-height: 100svh;
     padding: 72px 20px 60px;
+  }
+  .labs-teaser-shell {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    gap: 26px;
   }
   .labs-teaser-grid {
     grid-template-columns: 1fr;
+  }
+  .labs-teaser-title {
+    font-size: clamp(34px, 10vw, 48px);
+  }
+  .labs-teaser-facts {
+    gap: 8px;
+  }
+  .labs-teaser-policy {
+    grid-template-columns: 1fr;
+  }
+  .labs-teaser-fact {
+    font-size: 9px;
+    padding: 7px 10px;
+  }
+  .labs-teaser-card {
+    padding: 18px 16px;
+  }
+  .labs-teaser-visual {
+    height: 104px;
+  }
+  .labs-teaser-all {
+    margin-top: 22px;
   }
 }
 
@@ -2620,23 +4456,264 @@ a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .service-row
 (function() {
   const nav = document.getElementById('nav');
   const filters = document.querySelectorAll('.nav-filter');
-  const heroSection = document.getElementById('hero');
 
   // Filter → section mapping
   const FILTER_MAP = {
-    all:      ['hero','meet','platform','consulting','proof','labs-teaser','contact'],
-    meet:     ['hero','meet','contact'],
-    services: ['hero','consulting','contact'],
-    product:  ['hero','platform','contact'],
-    work:     ['hero','proof','labs-teaser','contact']
+    all:      ['hero','meet','platform','consulting','proof','assist','labs-teaser','contact'],
+    meet:     ['meet','contact'],
+    services: ['consulting','contact'],
+    product:  ['platform','contact'],
+    outcomes: ['proof','contact'],
+    assist:   ['assist','contact'],
+    labs:     ['labs-teaser','contact']
   };
 
-  const ALL_SECTIONS = ['hero','meet','platform','consulting','proof','labs-teaser','contact'];
+  const ALL_SECTIONS = ['hero','meet','platform','consulting','proof','assist','labs-teaser','contact'];
   let activeFilter = 'all';
+  const contactLabel = document.querySelector('.contact-label');
+  const contactTitle = document.querySelector('.contact-title');
+  const contactSub = document.querySelector('.contact-sub');
+  const scheduleLabel = document.querySelector('.contact-schedule-label');
+  const scheduleTitle = document.querySelector('.contact-schedule-title');
+  const scheduleCopy = document.querySelector('.contact-schedule-copy');
+  const calendarCard = document.getElementById('contact-schedule-card');
+  const calendarToggle = document.getElementById('contact-calendar-toggle');
+  const calendarClose = document.getElementById('contact-calendar-close');
+  const calendarPanel = document.getElementById('contact-calendar-panel');
+  const calendarFrame = document.getElementById('contact-calendar-frame');
+  const calendarStatus = document.getElementById('contact-calendar-status');
+  const scheduleTopics = [
+    document.querySelector('.contact-schedule-topic-1'),
+    document.querySelector('.contact-schedule-topic-2'),
+    document.querySelector('.contact-schedule-topic-3')
+  ];
+  const scheduleValues = [
+    document.querySelector('.contact-schedule-value-1'),
+    document.querySelector('.contact-schedule-value-2'),
+    document.querySelector('.contact-schedule-value-3')
+  ];
+
+  const CONTACT_COPY = {
+    all: {
+      label: '// final step',
+      title: 'Start with what<br><em>your business needs.</em>',
+      sub: 'Private AI, platform, consulting, outcomes, or 1:1 leverage. Pick the path that fits your business.',
+      scheduleLabel: 'Prefer a call?',
+      scheduleTitle: 'Book a focused strategy call.',
+      scheduleCopy: 'Best for figuring out the right first move across AI, consulting, platform, outcomes, or a private 1:1 working session.',
+      scheduleRows: [
+        ['Business context', 'Best entry point'],
+        ['Scope clarity', 'Roadmap'],
+        ['Right next step', 'Decision in one call']
+      ]
+    },
+    meet: {
+      label: '// start here',
+      title: "Let's build<br><em>your AI.</em>",
+      sub: 'No forms. No sales funnels. Pick what works for you.',
+      scheduleLabel: 'Prefer a call?',
+      scheduleTitle: 'Book a private AI call.',
+      scheduleCopy: 'Best for private AI direction, deployment thinking, and deciding what to build first around your business.',
+      scheduleRows: [
+        ['AI direction', 'Use-case'],
+        ['Private setup', 'Roadmap'],
+        ['Build path', 'Next step']
+      ]
+    },
+    services: {
+      label: '// consulting next step',
+      title: 'Let’s optimise<br><em>your business.</em>',
+      sub: 'Brand, visibility, operations, and ROI systems designed around the business you want to grow.',
+      scheduleLabel: 'Need a scope call?',
+      scheduleTitle: 'Book a consulting strategy call.',
+      scheduleCopy: 'Best for brand direction, operations sync, SEO or GEO thinking, campaigns, and deciding the highest-ROI next move.',
+      scheduleRows: [
+        ['Brand stage', 'Audit'],
+        ['Growth engine', 'ROI view'],
+        ['Ops sync', 'Next moves']
+      ]
+    },
+    product: {
+      label: '// platform next step',
+      title: 'Give your agents<br><em>a home you control.</em>',
+      sub: 'Private by default. No infra team needed. Start with the platform that fits your business.',
+      scheduleLabel: 'Need a walkthrough?',
+      scheduleTitle: 'See the platform in your context.',
+      scheduleCopy: 'Best for internal agents, automation rails, docs, storage, and deciding the right platform rollout without building infra first.',
+      scheduleRows: [
+        ['Use-case', 'Platform fit'],
+        ['Agent setup', 'Rollout path'],
+        ['Infra need', 'No-team option']
+      ]
+    },
+    outcomes: {
+      label: '// outcomes next step',
+      title: 'Let’s build<br><em>your next outcome.</em>',
+      sub: 'Cost reduction, productivity lift, automation, or structured AI systems. Start with the result you want moved now.',
+      scheduleLabel: 'Need a reality check?',
+      scheduleTitle: 'Book an outcome-scoping call.',
+      scheduleCopy: 'Best for pressure-testing the number that matters, understanding feasibility, and choosing the fastest route to a concrete result.',
+      scheduleRows: [
+        ['Target number', 'Business case'],
+        ['Current blocker', 'Intervention'],
+        ['Expected shift', 'Execution path']
+      ]
+    },
+    assist: {
+      label: '// 1:1 assist',
+      title: 'Get a private<br><em>1:1 working session.</em>',
+      sub: 'For founders and high-agency people who want Claude Code help, tiny tools that compound, and a calm technical second seat.',
+      scheduleLabel: 'Private calendar',
+      scheduleTitle: 'Book a founder-side 1:1.',
+      scheduleCopy: 'Best for Claude Code, tiny tools, structured thinking, and turning ambitious ideas into working systems with direct help from Meet.',
+      scheduleRows: [
+        ['Leverage gap', 'Working session'],
+        ['Claude Code', 'Tiny tool'],
+        ['Private 1:1', 'Direct with Meet']
+      ]
+    },
+    labs: {
+      label: '// try the demos',
+      title: 'Try the stack.<br><em>Then pick what fits.</em>',
+      sub: 'Start with a live demo, then use a call only if you want the business version designed around your workflow or team.',
+      scheduleLabel: 'Want the business version?',
+      scheduleTitle: 'Book a demo-to-build call.',
+      scheduleCopy: 'Best after trying a demo and wanting the same logic adapted into a real product, workflow, or internal system for your business.',
+      scheduleRows: [
+        ['Demo review', 'Use-case fit'],
+        ['Business version', 'Rollout path'],
+        ['Next build', 'Direct answer']
+      ]
+    }
+  };
+  var calendarLoaded = false;
+
+  function applyContactVariant(filter) {
+    var copy = CONTACT_COPY[filter] || CONTACT_COPY.all;
+    if (contactLabel) contactLabel.textContent = copy.label;
+    if (contactTitle) contactTitle.innerHTML = copy.title;
+    if (contactSub) contactSub.textContent = copy.sub;
+    if (scheduleLabel) scheduleLabel.textContent = copy.scheduleLabel;
+    if (scheduleTitle) scheduleTitle.textContent = copy.scheduleTitle;
+    if (scheduleCopy) scheduleCopy.textContent = copy.scheduleCopy;
+    if (copy.scheduleRows) {
+      copy.scheduleRows.forEach(function(row, index) {
+        if (scheduleTopics[index]) scheduleTopics[index].textContent = row[0];
+        if (scheduleValues[index]) scheduleValues[index].textContent = row[1];
+      });
+    }
+  }
+
+  function refreshScrollLayout() {
+    if (typeof ScrollTrigger !== 'undefined') {
+      requestAnimationFrame(function() {
+        ScrollTrigger.refresh(true);
+      });
+    }
+  }
+
+  function setCalendarOpen(shouldOpen) {
+    if (!calendarCard || !calendarPanel || !calendarToggle) return;
+
+    var contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.classList.toggle('contact-calendar-open', shouldOpen);
+    }
+    calendarCard.classList.toggle('is-calendar-open', shouldOpen);
+    calendarPanel.hidden = !shouldOpen;
+    calendarPanel.setAttribute('aria-hidden', shouldOpen ? 'false' : 'true');
+    calendarToggle.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+    calendarToggle.textContent = shouldOpen ? 'Hide calendar' : 'Open inline calendar';
+
+    if (shouldOpen) {
+      if (!calendarLoaded && calendarFrame) {
+        calendarLoaded = true;
+        calendarCard.classList.add('is-calendar-loading');
+        if (calendarStatus) {
+          calendarStatus.hidden = false;
+          calendarStatus.textContent = 'Loading live availability from Cal.com...';
+        }
+        calendarFrame.src = calendarFrame.dataset.src;
+      }
+
+      setTimeout(function() {
+        calendarPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 120);
+    }
+
+    refreshScrollLayout();
+  }
+
+  function getSectionRegistry() {
+    return window.__dotsSectionFilterRegistry || { sections: {} };
+  }
+
+  function getPinSpacer(el) {
+    if (!el || !el.parentElement) return null;
+    return el.parentElement.classList && el.parentElement.classList.contains('pin-spacer')
+      ? el.parentElement
+      : null;
+  }
+
+  function setSectionVisibility(id, shouldShow) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var spacer = getPinSpacer(el);
+    var registry = getSectionRegistry();
+    var entry = registry.sections && registry.sections[id];
+
+    if (shouldShow) {
+      if (spacer) spacer.style.display = '';
+      el.classList.remove('section-hidden');
+    }
+
+    if (entry && entry.triggers) {
+      entry.triggers.forEach(function(trigger) {
+        if (!trigger) return;
+        if (shouldShow) {
+          if (typeof trigger.enable === 'function') trigger.enable();
+        } else if (typeof trigger.disable === 'function') {
+          trigger.disable();
+        }
+      });
+    }
+
+    spacer = getPinSpacer(el);
+    if (shouldShow) {
+      if (spacer) spacer.style.display = '';
+    } else {
+      if (spacer) spacer.style.display = 'none';
+      el.classList.add('section-hidden');
+    }
+  }
+
+  function getScrollAnchor(sectionIds) {
+    var best = null;
+    sectionIds.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (!el || el.classList.contains('section-hidden')) return;
+      var pinSpacer = el.closest('.pin-spacer');
+      var target = pinSpacer || el;
+      var rect = target.getBoundingClientRect();
+      var distance = Math.abs(rect.top);
+      if (!best || distance < best.distance) {
+        best = {
+          id: id,
+          viewportTop: rect.top,
+          distance: distance
+        };
+      }
+    });
+    return best;
+  }
 
   // ── Show/hide nav based on scroll past hero ──
   // Show nav after scrolling past hero (account for pinned hero height)
   function updateNavVisibility() {
+    if (activeFilter !== 'all') {
+      nav.classList.remove('nav-hidden');
+      return;
+    }
     var heroEl = document.getElementById('hero');
     if (!heroEl) return;
     var heroBottom = heroEl.getBoundingClientRect().bottom;
@@ -2648,33 +4725,62 @@ a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .service-row
   }
   window.addEventListener('scroll', updateNavVisibility, { passive: true });
   updateNavVisibility();
+  applyContactVariant(activeFilter);
+  if (window.__dotsStoryThreadState && typeof window.__dotsStoryThreadState.set === 'function') {
+    window.__dotsStoryThreadState.set('hero', true);
+  }
+
+  if (calendarFrame) {
+    calendarFrame.addEventListener('load', function() {
+      if (!calendarCard) return;
+      calendarCard.classList.remove('is-calendar-loading');
+      calendarCard.classList.add('is-calendar-ready');
+      if (calendarStatus) {
+        calendarStatus.hidden = true;
+      }
+      refreshScrollLayout();
+    });
+  }
+
+  if (calendarToggle) {
+    calendarToggle.addEventListener('click', function() {
+      var nextState = !calendarCard || !calendarCard.classList.contains('is-calendar-open');
+      setCalendarOpen(nextState);
+    });
+  }
+
+  if (calendarClose) {
+    calendarClose.addEventListener('click', function() {
+      setCalendarOpen(false);
+    });
+  }
 
   // ── Filter click handlers ──
   filters.forEach(function(btn) {
     btn.addEventListener('click', function() {
       var filter = btn.dataset.filter;
       if (filter === activeFilter) return;
+      var previousFilter = activeFilter;
+      var anchor = previousFilter === 'all' ? null : getScrollAnchor(FILTER_MAP[previousFilter]);
       activeFilter = filter;
+      applyContactVariant(filter);
 
       // Update active pill
       filters.forEach(function(b) { b.classList.remove('active'); });
       btn.classList.add('active');
 
-      // Show/hide sections + their GSAP pin-spacers
+      // Show/hide sections using real ScrollTrigger enable/disable,
+      // so pinned sections stop leaving fake spacer height behind.
       var visible = FILTER_MAP[filter];
       ALL_SECTIONS.forEach(function(id) {
-        var el = document.getElementById(id);
-        if (!el) return;
-        // GSAP wraps pinned sections in a div with pin-spacer class
-        var pinSpacer = el.closest('.pin-spacer');
-        if (visible.indexOf(id) !== -1) {
-          el.classList.remove('section-hidden');
-          if (pinSpacer) pinSpacer.style.display = '';
-        } else {
-          el.classList.add('section-hidden');
-          if (pinSpacer) pinSpacer.style.display = 'none';
-        }
+        setSectionVisibility(id, visible.indexOf(id) !== -1);
       });
+      if (window.__dotsStoryThreadState && typeof window.__dotsStoryThreadState.set === 'function') {
+        var storyTarget = filter !== 'all'
+          ? visible[0]
+          : (anchor ? anchor.id : (previousFilter !== 'all' ? FILTER_MAP[previousFilter][0] : 'hero'));
+        window.__dotsStoryThreadState.set(storyTarget);
+      }
 
       // Refresh GSAP ScrollTrigger after layout change
       if (typeof ScrollTrigger !== 'undefined') {
@@ -2683,7 +4789,8 @@ a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .service-row
 
       // Scroll to first non-hero visible section
       if (filter !== 'all') {
-        var firstSection = visible[1]; // skip hero
+        updateNavVisibility();
+        var firstSection = visible[0];
         var target = document.getElementById(firstSection);
         // Account for pin-spacer wrapper
         var scrollTarget = target && target.closest('.pin-spacer') || target;
@@ -2693,7 +4800,18 @@ a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .service-row
           }, 50);
         }
       } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        updateNavVisibility();
+        var restoreId = anchor ? anchor.id : (previousFilter !== 'all' ? FILTER_MAP[previousFilter][0] : null);
+        if (restoreId) {
+          setTimeout(function() {
+            var anchorEl = document.getElementById(restoreId);
+            var anchorTarget = anchorEl && (anchorEl.closest('.pin-spacer') || anchorEl);
+            if (!anchorTarget) return;
+            var absoluteTop = anchorTarget.getBoundingClientRect().top + window.pageYOffset;
+            window.scrollTo({ top: absoluteTop, behavior: 'auto' });
+            updateNavVisibility();
+          }, 180);
+        }
       }
     });
   });
