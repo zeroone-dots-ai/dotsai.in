@@ -4962,7 +4962,7 @@ footer {
   }
   .proof-phase:last-of-type { margin-bottom: 0; }
 
-  /* ── 4. COPY AREAS: order 2, stacked cards ── */
+  /* ── 4. COPY AREAS: order 2, snap carousel ── */
   .platform-copy,
   .consulting-copy,
   .proof-copy,
@@ -4970,18 +4970,31 @@ footer {
     order: 2 !important;
     gap: 12px !important;
   }
-  /* Collapse the absolute-positioning context */
+  /* Convert copy stacks to horizontal snap slider */
   .platform-copy-stack,
   .consulting-copy-stack,
   .proof-copy-stack,
   .assist-copy-stack {
-    position: static !important;
+    position: relative !important;
     min-height: 0 !important;
     display: flex !important;
-    flex-direction: column !important;
-    gap: 0 !important;
+    flex-direction: row !important;
+    gap: 14px !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    scrollbar-width: none !important;
+    padding-bottom: 24px !important;
+    margin: 0 -18px !important;
+    padding: 10px 18px 24px !important;
+    -webkit-overflow-scrolling: touch;
   }
-  /* Cards: relative flow instead of overlapping absolute */
+  .platform-copy-stack::-webkit-scrollbar,
+  .consulting-copy-stack::-webkit-scrollbar,
+  .proof-copy-stack::-webkit-scrollbar,
+  .assist-copy-stack::-webkit-scrollbar {
+    display: none !important;
+  }
+  /* Cards: styled as 3D glass panels dropping inline */
   .platform-copy-card,
   .consulting-copy-card,
   .proof-copy-card,
@@ -4990,16 +5003,29 @@ footer {
     inset: auto !important;
     opacity: 1 !important;
     transform: none !important;
-    padding-bottom: 24px;
-    margin-bottom: 8px;
-    border-bottom: 1px solid rgba(128,128,128,0.10);
+    flex: 0 0 85% !important;
+    scroll-snap-align: center !important;
+    
+    background: rgba(18, 18, 22, 0.4) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    padding: 24px !important;
+    margin-bottom: 0 !important; 
+    border-bottom: none !important;
+    
+    display: flex !important;
+    flex-direction: column !important;
   }
   .platform-copy-card:last-child,
   .consulting-copy-card:last-child,
   .proof-copy-card:last-child,
   .assist-copy-card:last-child {
     border-bottom: none !important;
-    padding-bottom: 0;
-    margin-bottom: 0;
+    padding-bottom: 24px !important;
+    margin-bottom: 0 !important;
+    margin-right: 18px !important; /* Spacing for the right side block */
   }
 }
