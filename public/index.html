@@ -5125,5 +5125,49 @@ a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .service-row
 })();
 </script>
 
+<!-- ── Magnetic CTA ─────────────────────────────────────────────────── -->
+<script>
+(function() {
+  'use strict';
+  // Selectors for every CTA that gets the magnetic pull effect
+  var CTA_SELECTORS = [
+    '.nav-cta',                            // Let's Talk (nav)
+    '.btn-primary',                        // → Explore Platform
+    '.btn-secondary',                      // ↗ Let's Talk (platform section)
+    '.btn-wa',                             // ↗ WhatsApp Me (contact)
+    '.brief-cta',                          // Book session CTA (assist)
+    '.meet-redirect',                      // Meet personal redirect
+    '#contact-calendar-toggle',            // Open inline calendar
+    '.contact-schedule-action-secondary'   // Open in new tab (cal.com)
+  ];
+
+  var ctaEls = Array.from(document.querySelectorAll(CTA_SELECTORS.join(',')));
+  if (!ctaEls.length) return;
+
+  ctaEls.forEach(function(el) {
+    el.addEventListener('mousemove', function(e) {
+      var r  = el.getBoundingClientRect();
+      var dx = (e.clientX - (r.left + r.width  / 2)) * 0.30;
+      var dy = (e.clientY - (r.top  + r.height / 2)) * 0.30;
+      gsap.to(el, {
+        x: dx, y: dy,
+        duration: 0.25,
+        ease: 'power2.out',
+        overwrite: 'auto'
+      });
+    });
+
+    el.addEventListener('mouseleave', function() {
+      gsap.to(el, {
+        x: 0, y: 0,
+        duration: 0.80,
+        ease: 'elastic.out(1, 0.32)',
+        overwrite: 'auto'
+      });
+    });
+  });
+})();
+</script>
+
 </body>
 </html>
