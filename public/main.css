@@ -251,13 +251,10 @@ nav {
   align-items: center;
   justify-content: center;
   gap: 24px;
-  /* Frosted glass — prevents section content bleeding through */
-  background: rgba(6, 6, 10, 0.68);
-  backdrop-filter: blur(18px) saturate(160%);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  /* nav itself is transparent — pills float on canvas */
+  background: transparent;
   transition: transform 0.4s cubic-bezier(0.23,1,0.32,1),
-              opacity 0.4s cubic-bezier(0.23,1,0.32,1),
-              background 0.4s ease;
+              opacity 0.4s cubic-bezier(0.23,1,0.32,1);
 }
 
 /* Hidden state — slides up + fades out on hero */
@@ -276,8 +273,11 @@ nav.nav-hidden {
   max-width: calc(100vw - 200px);
   overflow-x: auto;
   overflow-y: hidden;
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.11);
+  /* Frosted glass lives here — pill bar only, not full nav width */
+  background: rgba(12, 12, 18, 0.72);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255,255,255,0.10);
   border-radius: 100px;
   padding: 4px;
   scrollbar-width: none;
@@ -320,14 +320,14 @@ nav.nav-hidden {
 
 /* Light variant for cream sections */
 nav.light {
-  background: rgba(247, 243, 237, 0.80);
-  backdrop-filter: blur(18px) saturate(180%);
-  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  background: transparent;
 }
 
 nav.light .nav-filters {
-  background: rgba(23,23,34,0.07);
-  border-color: rgba(23,23,34,0.13);
+  background: rgba(247, 243, 237, 0.88);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-color: rgba(23,23,34,0.14);
 }
 nav.light .nav-filter {
   color: rgba(23,23,34,0.60);
