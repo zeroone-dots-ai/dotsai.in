@@ -491,27 +491,26 @@ nav.light .nav-filter.active {
 
 .story-thread-step {
   font-family: 'Space Mono', monospace;
-  font-size: 8px;
-  letter-spacing: 0.20em;
+  font-size: 9px;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(67,48,95,0.48);
-  margin-bottom: 5px;
+  color: rgba(67,48,95,0.52);
+  margin-bottom: 4px;
 }
 
 .story-thread-name {
   font-family: 'DM Sans', sans-serif;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
-  color: rgba(23,23,34,0.72);
-  letter-spacing: 0.03em;
+  color: rgba(23,23,34,0.76);
 }
 
 #story-thread[data-skin="dark"] .story-thread-step {
-  color: rgba(255,255,255,0.45);
+  color: rgba(255,255,255,0.42);
 }
 
 #story-thread[data-skin="dark"] .story-thread-name {
-  color: rgba(255,255,255,0.85);
+  color: rgba(255,255,255,0.78);
 }
 
 #story-thread[data-skin="dark"] .story-thread-core {
@@ -587,7 +586,6 @@ nav.light .nav-filter.active {
   from { transform: rotate(360deg); }
   to { transform: rotate(0deg); }
 }
-
 
 /* Section filter transitions */
 section.section-hidden {
@@ -4452,280 +4450,6 @@ footer {
 
 #hero { cursor: none !important; }
 
-
-/* Head */
-.testimony-head {
-  text-align: center;
-  margin-bottom: clamp(48px, 7vw, 80px);
-}
-
-.testimony-label {
-  font-family: 'Space Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.32);
-  margin-bottom: 20px;
-}
-
-.testimony-title {
-  font-family: 'Instrument Serif', serif;
-  font-size: clamp(36px, 5.5vw, 64px);
-  font-weight: 400;
-  color: rgba(255,255,255,0.92);
-  line-height: 1.1;
-  margin-bottom: 20px;
-}
-
-.testimony-title em {
-  font-style: italic;
-  color: rgba(200,182,255,0.88);
-}
-
-.testimony-sub {
-  font-family: 'DM Sans', sans-serif;
-  font-size: clamp(14px, 1.6vw, 16px);
-  color: rgba(255,255,255,0.42);
-  max-width: 480px;
-  margin: 0 auto;
-  line-height: 1.65;
-}
-
-/* Grid */
-.testimony-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  align-items: start;
-}
-
-/* Card base */
-.tcard {
-  background: rgba(255,255,255,0.038);
-  border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 20px;
-  padding: 28px 26px 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-  opacity: 0;
-  transform: translateY(32px);
-  transition: border-color 0.3s ease;
-}
-
-.tcard:hover {
-  border-color: rgba(255,255,255,0.13);
-}
-
-/* Accent top line per card */
-.tcard--mint  { border-top: 2px solid rgba(184,224,210,0.5); }
-.tcard--peach { border-top: 2px solid rgba(255,205,178,0.5); }
-.tcard--lav   { border-top: 2px solid rgba(200,182,255,0.5); }
-
-/* Top row */
-.tcard-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.tcard-tag {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.38);
-}
-
-.tcard-tag-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  display: block;
-  flex-shrink: 0;
-}
-
-.tcard-verified {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 10px;
-  color: rgba(255,255,255,0.28);
-  letter-spacing: 0.02em;
-}
-
-/* Project block */
-.tcard-name {
-  font-family: 'Instrument Serif', serif;
-  font-size: clamp(18px, 2vw, 22px);
-  font-weight: 400;
-  color: rgba(255,255,255,0.88);
-  margin-bottom: 10px;
-  line-height: 1.2;
-}
-
-.tcard-build {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  color: rgba(255,255,255,0.44);
-  line-height: 1.6;
-}
-
-/* Chat */
-.tcard-chat {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  background: rgba(0,0,0,0.28);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 14px;
-  padding: 14px 14px 12px;
-}
-
-.tchat-msg {
-  background: rgba(255,255,255,0.07);
-  border-radius: 12px 12px 12px 3px;
-  padding: 10px 13px 8px;
-  opacity: 0;
-  transform: translateX(-8px);
-}
-
-.tchat-msg--bot {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.06);
-}
-
-.tchat-bot-header {
-  margin-bottom: 5px;
-}
-
-.tchat-bot-name {
-  font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.08em;
-  color: rgba(255,205,178,0.7);
-}
-
-.tchat-text {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  color: rgba(255,255,255,0.82);
-  line-height: 1.55;
-  margin: 0;
-}
-
-.tchat-meta {
-  display: block;
-  font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  color: rgba(255,255,255,0.24);
-  margin-top: 6px;
-  letter-spacing: 0.04em;
-}
-
-/* Outcome */
-.tcard-outcome {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 14px 16px;
-  border-radius: 12px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.06);
-}
-
-.tcard--mint  .tcard-outcome { border-color: rgba(184,224,210,0.14); background: rgba(184,224,210,0.05); }
-.tcard--peach .tcard-outcome { border-color: rgba(255,205,178,0.14); background: rgba(255,205,178,0.05); }
-.tcard--lav   .tcard-outcome { border-color: rgba(200,182,255,0.14); background: rgba(200,182,255,0.05); }
-
-.tcard-outcome-val {
-  font-family: 'Instrument Serif', serif;
-  font-size: clamp(17px, 2vw, 20px);
-  font-weight: 400;
-  color: rgba(255,255,255,0.88);
-  letter-spacing: -0.01em;
-}
-
-.tcard--mint  .tcard-outcome-val { color: #B8E0D2; }
-.tcard--peach .tcard-outcome-val { color: #FFCDB2; }
-.tcard--lav   .tcard-outcome-val { color: #C8B6FF; }
-
-.tcard-outcome-label {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 11px;
-  color: rgba(255,255,255,0.34);
-  letter-spacing: 0.02em;
-}
-
-/* Person */
-.tcard-person {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding-top: 4px;
-}
-
-.tcard-avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.04em;
-  flex-shrink: 0;
-  border: 1px solid rgba(255,255,255,0.08);
-}
-
-.tcard-person-name {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  color: rgba(255,255,255,0.72);
-  margin: 0 0 2px;
-}
-
-.tcard-person-role {
-  font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  color: rgba(255,255,255,0.3);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin: 0;
-}
-
-/* Footnote */
-.testimony-footnote {
-  text-align: center;
-  margin-top: clamp(40px, 5vw, 60px);
-  font-family: 'Space Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  color: rgba(255,255,255,0.22);
-  text-transform: uppercase;
-}
-
-/* Mobile */
-@media (max-width: 900px) {
-  .testimony-grid {
-    grid-template-columns: 1fr;
-    max-width: 480px;
-    margin: 0 auto;
-  }
-}
-
-@media (max-width: 640px) {
-  .tcard {
-    padding: 22px 18px 20px;
-  }
-}
-
 /* btn-testimony live state */
 .btn-testimony--live {
   opacity: 1;
@@ -4745,11 +4469,6 @@ footer {
   border: 1px solid rgba(200,182,255,0.2);
 }
 
-/* ══════════════════════════════════════════
-   TESTIMONY FLOATING OVERLAY
-   ══════════════════════════════════════════ */
-
-/* Backdrop */
 .toverlay {
   position: fixed;
   inset: 0;
