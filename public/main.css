@@ -4317,6 +4317,27 @@ footer {
     min-height: 680px;
   }
 
+  /* Hero headline — break 64px clamp floor on mobile */
+  .hero-h1 {
+    font-size: clamp(36px, 10vw, 60px);
+  }
+
+  .hero-sub {
+    font-size: 15px;
+    margin-bottom: 28px;
+  }
+
+  /* Contact title — break 48px clamp floor */
+  .contact-title {
+    font-size: clamp(28px, 8vw, 48px);
+    line-height: 1.08;
+  }
+
+  /* Meet label — tighten spacing */
+  .meet-label {
+    margin-bottom: 32px;
+  }
+
   footer {
     flex-direction: column;
     align-items: flex-start;
@@ -4335,11 +4356,38 @@ footer {
   }
 
   .manifesto-text {
-    font-size: 28px;
+    font-size: 24px;
+    line-height: 1.25;
   }
 
+  /* Hero — small phones */
   .hero-h1 {
-    font-size: 52px;
+    font-size: clamp(28px, 8.5vw, 38px);
+    margin-bottom: 18px;
+  }
+
+  .hero-sub {
+    font-size: 14px;
+    margin-bottom: 22px;
+  }
+
+  .hero-ctas {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    justify-content: center;
+    padding: 13px 20px;
+    font-size: 14px;
+  }
+
+  /* Contact */
+  .contact-title {
+    font-size: clamp(24px, 7.5vw, 36px);
   }
 
   .btn-wa,

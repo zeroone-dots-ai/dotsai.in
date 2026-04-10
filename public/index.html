@@ -4016,6 +4016,67 @@ function initMainPage() {
   color: rgba(243,240,255,0.85);
 }
 
+/* ── Labs mobile ── */
+@media (max-width: 768px) {
+  #labs-teaser {
+    padding: 80px 24px 56px;
+    min-height: auto;
+  }
+  .labs-teaser-shell {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    gap: 40px;
+    align-items: start;
+  }
+  .labs-teaser-copy {
+    gap: 14px;
+  }
+  .labs-teaser-title {
+    font-size: clamp(32px, 9vw, 52px);
+    line-height: 1.02;
+  }
+  .labs-teaser-sub {
+    font-size: 15px;
+  }
+  .labs-teaser-policy {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .labs-teaser-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .labs-teaser-card {
+    padding: 20px 18px;
+  }
+  .labs-teaser-all {
+    text-align: left;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  #labs-teaser {
+    padding: 64px 18px 44px;
+  }
+  .labs-teaser-title {
+    font-size: clamp(26px, 8vw, 36px);
+  }
+  .labs-teaser-sub {
+    font-size: 14px;
+  }
+  .labs-teaser-facts {
+    gap: 7px;
+  }
+  .labs-teaser-fact {
+    font-size: 9px;
+    padding: 6px 10px;
+  }
+  .labs-teaser-visual {
+    height: 90px;
+  }
+}
+
 /* ── Mini card visualizations ── */
 .ltv-chat {
   display: flex;
