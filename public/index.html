@@ -4971,73 +4971,92 @@ a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .service-row
   var trigger  = document.getElementById('btn-read-testimony');
   if (!overlay || !trigger) return;
 
-  var cards    = overlay.querySelectorAll('.tfloat');
-  var EASE     = 'cubic-bezier(0.23, 1, 0.32, 1)';
-  var isOpen   = false;
+  var cards = overlay.querySelectorAll('.tfloat');
+  var EASE  = 'cubic-bezier(0.23, 1, 0.32, 1)';
+  var isOpen = false;
 
-  // ── Drag-to-anywhere ──────────────────────────────────────────────
+  // ── Physics drag ─────────────────────────────────────────────────
   function makeDraggable(card) {
-    var drag = { active: false, startX: 0, startY: 0, origLeft: 0, origTop: 0 };
+    var active   = false;
+    var startPX  = 0, startPY = 0;   // pointer start
+    var baseX    = 0, baseY   = 0;   // gsap x/y at grab time
+    // velocity tracking (ring buffer, 3 frames)
+    var vBuf = [[0,0],[0,0],[0,0]], vIdx = 0;
+    var lastPX = 0, lastPY = 0, lastT = 0;
 
-    function onDown(e) {
-      // Don't start drag on the close button
+    function down(e) {
       if (e.target.closest('.tfloat-x')) return;
-      drag.active = true;
+      e.preventDefault();
+      active = true;
       card.setPointerCapture(e.pointerId);
 
-      var rect = card.getBoundingClientRect();
-      drag.startX  = e.clientX;
-      drag.startY  = e.clientY;
-      drag.origLeft = rect.left;
-      drag.origTop  = rect.top;
+      // Read GSAP's accumulated x/y — this is the ONLY correct base
+      // It avoids any jump because we never touch left/top/position
+      baseX = gsap.getProperty(card, 'x');
+      baseY = gsap.getProperty(card, 'y');
+      startPX = e.clientX;
+      startPY = e.clientY;
+      lastPX  = e.clientX;
+      lastPY  = e.clientY;
+      lastT   = performance.now();
+      vBuf    = [[0,0],[0,0],[0,0]];
 
-      // Switch to fixed absolute position so we can move freely
-      card.style.position = 'fixed';
-      card.style.left     = rect.left + 'px';
-      card.style.top      = rect.top  + 'px';
-      card.style.right    = 'auto';
-      card.style.bottom   = 'auto';
-      card.style.margin   = '0';
-      card.style.transform = 'none';
-      card.style.transition = 'none';
-      card.style.zIndex   = '9100';
-      card.style.cursor   = 'grabbing';
-      card.style.userSelect = 'none';
-      gsap.to(card, { scale: 1.04, boxShadow: '0 32px 64px rgba(0,0,0,0.38)', duration: 0.18, ease: 'power2.out' });
+      gsap.killTweensOf(card, 'x,y,scale,filter');
+      gsap.to(card, {
+        scale: 1.06,
+        filter: 'drop-shadow(0 24px 48px rgba(0,0,0,0.45))',
+        duration: 0.16, ease: 'power2.out'
+      });
+      card.style.zIndex = '9100';
+      card.style.cursor = 'grabbing';
     }
 
-    function onMove(e) {
-      if (!drag.active) return;
-      var dx = e.clientX - drag.startX;
-      var dy = e.clientY - drag.startY;
+    function move(e) {
+      if (!active) return;
+      var now = performance.now();
+      var dt  = Math.max(1, now - lastT);
+      // store velocity sample (px/ms → ×16 ≈ px/frame @60fps)
+      vBuf[vIdx % 3] = [(e.clientX - lastPX) / dt, (e.clientY - lastPY) / dt];
+      vIdx++;
+      lastPX = e.clientX; lastPY = e.clientY; lastT = now;
 
-      var newLeft = drag.origLeft + dx;
-      var newTop  = drag.origTop  + dy;
-
-      // Keep card inside viewport with 10px padding
-      var pad = 10;
-      var cw  = card.offsetWidth;
-      var ch  = card.offsetHeight;
-      newLeft = Math.max(pad, Math.min(window.innerWidth  - cw - pad, newLeft));
-      newTop  = Math.max(pad, Math.min(window.innerHeight - ch - pad, newTop));
-
-      card.style.left = newLeft + 'px';
-      card.style.top  = newTop  + 'px';
+      // Pure delta from grab origin — card follows finger exactly
+      gsap.set(card, {
+        x: baseX + (e.clientX - startPX),
+        y: baseY + (e.clientY - startPY)
+      });
     }
 
-    function onUp(e) {
-      if (!drag.active) return;
-      drag.active = false;
+    function up(e) {
+      if (!active) return;
+      active = false;
       card.releasePointerCapture(e.pointerId);
-      card.style.cursor   = 'grab';
-      card.style.zIndex   = '';
-      gsap.to(card, { scale: 1, boxShadow: '', duration: 0.24, ease: EASE });
+      card.style.cursor = 'grab';
+      card.style.zIndex = '';
+
+      // Average velocity over last 3 samples
+      var avg = vBuf.reduce(function(a,b){ return [a[0]+b[0], a[1]+b[1]]; }, [0,0]);
+      var vx = avg[0] / 3 * 16;   // px/frame
+      var vy = avg[1] / 3 * 16;
+
+      var curX = gsap.getProperty(card, 'x');
+      var curY = gsap.getProperty(card, 'y');
+
+      // Momentum coast + spring settle
+      gsap.to(card, {
+        x: curX + vx * 9,
+        y: curY + vy * 9,
+        scale: 1,
+        filter: 'none',
+        duration: 0.7,
+        ease: 'power3.out'
+      });
     }
 
-    card.addEventListener('pointerdown', onDown);
-    card.addEventListener('pointermove', onMove);
-    card.addEventListener('pointerup',   onUp);
-    card.addEventListener('pointercancel', onUp);
+    card.addEventListener('pointerdown',  down,   { passive: false });
+    card.addEventListener('pointermove',  move,   { passive: true  });
+    card.addEventListener('pointerup',    up);
+    card.addEventListener('pointercancel',up);
     card.style.cursor = 'grab';
   }
 
@@ -5051,23 +5070,17 @@ a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .service-row
     overlay.style.pointerEvents = 'auto';
     document.body.style.overflow = 'hidden';
 
-    // Reset cards to original CSS layout before re-animating
     cards.forEach(function(c) {
       c.style.display = '';
-      c.style.position = '';
-      c.style.left = '';
-      c.style.top  = '';
-      c.style.right = '';
-      c.style.bottom = '';
-      c.style.margin = '';
-      c.style.transform = '';
+      gsap.set(c, { clearProps: 'x,y,scale,filter,opacity' });
     });
 
     gsap.fromTo(backdrop, { opacity: 0 }, { opacity: 1, duration: 0.32 });
     cards.forEach(function(card, i) {
       gsap.fromTo(card,
         { opacity: 0, y: 40, scale: 0.92 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.62, delay: 0.06 + i * 0.1, ease: EASE }
+        { opacity: 1, y: 0,  scale: 1,    duration: 0.62,
+          delay: 0.06 + i * 0.1, ease: EASE }
       );
     });
   }
@@ -5076,7 +5089,8 @@ a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .service-row
     if (!isOpen) return;
     isOpen = false;
     gsap.to(backdrop, { opacity: 0, duration: 0.24 });
-    gsap.to(cards, { opacity: 0, y: -24, scale: 0.94, duration: 0.28,
+    gsap.to(cards, {
+      opacity: 0, y: -24, scale: 0.94, duration: 0.28,
       stagger: 0.06, ease: 'power2.in',
       onComplete: function() {
         overlay.setAttribute('aria-hidden', 'true');
@@ -5094,8 +5108,8 @@ a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .service-row
     btn.addEventListener('click', function(e) {
       e.stopPropagation();
       var card = btn.closest('.tfloat');
-      gsap.to(card, { opacity: 0, y: -20, scale: 0.93, duration: 0.26,
-        ease: 'power2.in',
+      gsap.to(card, {
+        opacity: 0, y: -20, scale: 0.93, duration: 0.26, ease: 'power2.in',
         onComplete: function() {
           card.style.display = 'none';
           var visible = overlay.querySelectorAll('.tfloat:not([style*="display: none"])').length;
