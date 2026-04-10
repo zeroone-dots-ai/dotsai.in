@@ -1219,10 +1219,10 @@
           <a href="https://wa.me/918320065658" target="_blank" rel="noopener" class="btn-wa">
             ↗ WhatsApp Me
           </a>
-          <span class="btn-testimony" aria-disabled="true">
+          <button id="btn-read-testimony" class="btn-testimony btn-testimony--live" type="button">
             Read Testimony
-            <span class="btn-testimony-badge">Coming Soon</span>
-          </span>
+            <span class="btn-testimony-badge btn-testimony-badge--live">3 Real Stories</span>
+          </button>
         </div>
       </div>
 
@@ -2452,372 +2452,8 @@ function initMainPage() {
   sectionFilterRegistry.ready = true
 }
 
-</script>
 
-<script>
-/* ══════════════════════════════════════════════════
-   HERO GALAXY v4
-   - Projected 3D galaxy disc with depth-sorted stars
-   - Mouse-tilted camera + click shockwaves
-   - 3D D.O.T.S companion with spring orbit physics
-   - Shared hero scene state drives canvas + content depth
-══════════════════════════════════════════════════ */
-(function () {
-  var canvas = document.getElementById('hero-physics');
-  if (!canvas) return;
-  var ctx = canvas.getContext('2d');
-  var heroEl = document.getElementById('hero');
-  var sceneDefaults = {
-    pointerX: 0,
-    pointerY: 0,
-    panX: 0,
-    panY: 0,
-    tiltX: 0,
-    tiltY: 0,
-    energy: 0,
-    orbitYaw: -0.18,
-    orbitPitch: 0.10,
-    orbitYawVel: 0,
-    orbitPitchVel: 0,
-    dragActive: false,
-    focusX: 0,
-    focusY: 0,
-    impulseX: 0,
-    impulseY: 0,
-    impulseLife: 0,
-  };
-  var sceneState = window.__dotsHeroScene || {};
-  for (var sceneKey in sceneDefaults) {
-    if (sceneState[sceneKey] == null) sceneState[sceneKey] = sceneDefaults[sceneKey];
-  }
-  window.__dotsHeroScene = sceneState;
-
-  var PALETTE = [
-    { r:200, g:182, b:255 },
-    { r:184, g:224, b:210 },
-    { r:255, g:205, b:178 },
-    { r:162, g:210, b:255 },
-    { r:255, g:181, b:194 },
-  ];
-
-  var DOTS = {
-    x: 0, y: 0, z: 0,
-    tx: 0, ty: 0, tz: 0,
-    vx: 0, vy: 0, vz: 0,
-    orbitAngle: 0.45,
-    orbitCx: 0, orbitCy: 0, orbitRx: 0, orbitRy: 0, orbitRz: 0,
-    shieldGlow: 0,
-    ripples: [],
-    screen: null,
-    dots:[
-      { r:215, g:207, b:240, ox:-18, oy:-8, oz: 16 },
-      { r:184, g:224, b:210, ox: 16, oy:-9, oz: -8 },
-      { r:241, g:198, b:174, ox:  2, oy: 15, oz: 10 },
-      { r:191, g:214, b:236, ox:  0, oy:-18, oz: -14 },
-    ]
-  };
-
-  var SINGULARITY = { x: -92, y: 18, z: -135, radius: 36 };
-  var ATLAS = { x: -214, y: -148, z: 118, radius: 28, orbitAngle: 0.1 };
-
-  var W, H, stars = [], nebulae = [], shockwaves = [], rafId, time = 0;
-  var dpr = Math.min(window.devicePixelRatio||1, 2);
-  var mouse = { x:-9999, y:-9999 };
-  var drag = { active: false, moved: false, lastX: 0, lastY: 0 };
-
-  function clamp(v, min, max) {
-    return Math.max(min, Math.min(max, v));
-  }
-
-  function rotateY(x, z, a) {
-    var c = Math.cos(a), s = Math.sin(a);
-    return { x: x * c - z * s, z: x * s + z * c };
-  }
-
-  function rotateX(y, z, a) {
-    var c = Math.cos(a), s = Math.sin(a);
-    return { y: y * c - z * s, z: y * s + z * c };
-  }
-
-  function projectPoint(px, py, pz, anchorX, anchorY, rotX, rotY, cameraDist) {
-    var yr = rotateY(px, pz, rotY);
-    var xr = rotateX(py, yr.z, rotX);
-    var depth = cameraDist / Math.max(150, cameraDist - xr.z);
-    return {
-      x: anchorX + yr.x * depth,
-      y: anchorY + xr.y * depth,
-      scale: depth,
-      z: xr.z,
-    };
-  }
-
-  function syncSceneState() {
-    var targetX = mouse.x < 0 ? 0 : ((mouse.x / W) - 0.5) * 2;
-    var targetY = mouse.y < 0 ? 0 : ((mouse.y / H) - 0.5) * 2;
-
-    sceneState.pointerX += (targetX - sceneState.pointerX) * 0.045;
-    sceneState.pointerY += (targetY - sceneState.pointerY) * 0.045;
-    sceneState.orbitYaw += sceneState.orbitYawVel;
-    sceneState.orbitPitch += sceneState.orbitPitchVel;
-    sceneState.orbitYawVel *= sceneState.dragActive ? 0.82 : 0.955;
-    sceneState.orbitPitchVel *= sceneState.dragActive ? 0.82 : 0.955;
-    sceneState.orbitPitch = clamp(sceneState.orbitPitch, -0.68, 0.68);
-    sceneState.panX += ((((mouse.x < 0 ? W * 0.5 : mouse.x) / W) - 0.5) * 36 + Math.sin(sceneState.orbitYaw) * 34 - sceneState.panX) * 0.06;
-    sceneState.panY += ((((mouse.y < 0 ? H * 0.5 : mouse.y) / H) - 0.5) * 22 + sceneState.orbitPitch * 34 - sceneState.panY) * 0.06;
-    sceneState.impulseLife *= 0.92;
-    sceneState.energy *= 0.965;
-    sceneState.tiltX = clamp((-sceneState.pointerY * 3.1) + sceneState.orbitPitch * 32, -22, 22);
-    sceneState.tiltY = clamp((sceneState.pointerX * 4.8) + sceneState.orbitYaw * 34, -28, 28);
-    var textTiltX = clamp(-sceneState.pointerY * 1.05, -2.2, 2.2);
-    var textTiltY = clamp(sceneState.pointerX * 1.45, -2.8, 2.8);
-    var textPanX = clamp(sceneState.pointerX * 10, -10, 10);
-    var textPanY = clamp(sceneState.pointerY * 7, -7, 7);
-
-    heroEl.style.setProperty('--hero-tilt-x', sceneState.tiltX.toFixed(3));
-    heroEl.style.setProperty('--hero-tilt-y', sceneState.tiltY.toFixed(3));
-    heroEl.style.setProperty('--hero-pan-x', sceneState.panX.toFixed(3));
-    heroEl.style.setProperty('--hero-pan-y', sceneState.panY.toFixed(3));
-    heroEl.style.setProperty('--hero-text-tilt-x', textTiltX.toFixed(3));
-    heroEl.style.setProperty('--hero-text-tilt-y', textTiltY.toFixed(3));
-    heroEl.style.setProperty('--hero-text-pan-x', textPanX.toFixed(3));
-    heroEl.style.setProperty('--hero-text-pan-y', textPanY.toFixed(3));
-    heroEl.classList.toggle('is-grabbing', !!sceneState.dragActive);
-  }
-
-  function resize() {
-    W = heroEl.offsetWidth; H = heroEl.offsetHeight;
-    if (!W||!H) { setTimeout(resize,100); return; }
-    canvas.width=W*dpr; canvas.height=H*dpr;
-    canvas.style.width=W+'px'; canvas.style.height=H+'px';
-    ctx.setTransform(1,0,0,1,0,0); ctx.scale(dpr,dpr);
-    buildGalaxy();
-  }
-
-  function buildGalaxy() {
-    var isMobile = W<768;
-    var COUNT = isMobile ? 1500 : 3600;
-    var maxRadius = Math.max(W, H) * (isMobile ? 0.72 : 0.84);
-    var armCount = 4;
-    stars = [];
-    nebulae = [
-      { x:-108, y:-12, z:-170, rx:W*0.19, ry:H*0.19, r:255,g:255,b:255, a:0.062, rot:0.18, speed:0.05 },
-      { x:-238, y:-136, z:-36, rx:W*0.22, ry:H*0.17, r:215,g:207,b:240, a:0.048, rot:-0.30, speed:0.08 },
-      { x:-198, y: 172, z: 82, rx:W*0.20, ry:H*0.15, r:184,g:224,b:210, a:0.034, rot:0.42, speed:0.07 },
-      { x: 312, y: -48, z:-120, rx:W*0.15, ry:H*0.11, r:162,g:210,b:255, a:0.024, rot:-0.14, speed:0.06 },
-      { x: 360, y: 160, z: 50, rx:W*0.18, ry:H*0.13, r:255,g:205,b:178, a:0.032, rot:0.28, speed:0.05 },
-    ];
-
-    DOTS.orbitCx = W * 0.76;
-    DOTS.orbitCy = H * 0.72;
-    DOTS.orbitRx = W * 0.060;
-    DOTS.orbitRy = H * 0.052;
-    DOTS.orbitRz = Math.min(W, H) * 0.11;
-
-    for (var i = 0; i < COUNT; i++) {
-      var mode = Math.random();
-      var radius, angle, x, y, z;
-
-      if (mode < 0.60) {
-        radius = Math.pow(Math.random(), 0.56) * maxRadius;
-        angle = radius * 0.028 + (i % armCount) * (Math.PI * 2 / armCount) + (Math.random() - 0.5) * 0.65;
-        x = Math.cos(angle) * radius + (Math.random() - 0.5) * radius * 0.18;
-        z = Math.sin(angle) * radius * 0.92 + (Math.random() - 0.5) * radius * 0.18;
-        y = (Math.random() - 0.5) * (18 + radius * 0.07);
-      } else if (mode < 0.80) {
-        radius = Math.pow(Math.random(), 2.2) * Math.min(W, H) * 0.18;
-        angle = Math.random() * Math.PI * 2;
-        x = Math.cos(angle) * radius;
-        z = Math.sin(angle) * radius * 0.9;
-        y = (Math.random() - 0.5) * (26 + radius * 0.08);
-      } else {
-        radius = (0.3 + Math.random() * 0.7) * maxRadius;
-        angle = Math.random() * Math.PI * 2;
-        x = Math.cos(angle) * radius;
-        z = Math.sin(angle) * radius;
-        y = (Math.random() - 0.5) * Math.min(W, H) * 0.42;
-      }
-
-      var depthBias = clamp((z + maxRadius) / (maxRadius * 2), 0, 1);
-      var isBig = depthBias > 0.68 && Math.random() < 0.09;
-      var size;
-      if (isBig) size = 1.8 + Math.random() * 2.9;
-      else if (depthBias > 0.62) size = 0.82 + Math.random() * 1.12;
-      else if (depthBias > 0.36) size = 0.38 + Math.random() * 0.72;
-      else size = 0.13 + Math.random() * 0.34;
-
-      var color;
-      if (depthBias < 0.24) {
-        var w2 = 210+Math.random()*38;
-        color = { r:w2, g:w2+5, b:Math.min(255,w2+32) };
-      } else {
-        color = PALETTE[Math.floor(Math.random()*PALETTE.length)];
-      }
-
-      var brightness = Math.min(0.16 + depthBias * 0.72 + Math.random() * 0.24, 1.0);
-      stars.push({
-        baseX: x,
-        baseY: y,
-        baseZ: z,
-        ox: 0,
-        oy: 0,
-        oz: 0,
-        vx: 0,
-        vy: 0,
-        vz: 0,
-        size: size,
-        color: color,
-        brightness: brightness,
-        phase: Math.random() * Math.PI * 2,
-        isBig: isBig,
-        sparkle: Math.random(),
-        mass: isBig ? 2.5 + Math.random() * 2.5 : 0.8 + Math.random() * 1.2,
-        twinkleRate: 0.018 + Math.random() * 0.022,
-        spinOffset: Math.random() * Math.PI * 2,
-        screenX: 0,
-        screenY: 0,
-      });
-    }
-
-    cancelAnimationFrame(rafId);
-    rafId = requestAnimationFrame(draw);
-  }
-
-  function drawSingularity(anchorX, anchorY, rotX, rotY) {
-    var proj = projectPoint(SINGULARITY.x, SINGULARITY.y, SINGULARITY.z, anchorX, anchorY, rotX, rotY, 960);
-    var radius = SINGULARITY.radius * proj.scale;
-
-    ctx.save();
-    ctx.translate(proj.x, proj.y);
-    ctx.rotate(time * 0.18 + sceneState.orbitYaw * 0.55);
-    ctx.scale(1, 0.42 + proj.scale * 0.08);
-
-    var accretion = ctx.createRadialGradient(0, 0, radius * 0.18, 0, 0, radius * 1.45);
-    accretion.addColorStop(0, 'rgba(255,255,255,0)');
-    accretion.addColorStop(0.38, 'rgba(255,205,178,0.22)');
-    accretion.addColorStop(0.62, 'rgba(162,210,255,0.14)');
-    accretion.addColorStop(0.84, 'rgba(215,207,240,0.08)');
-    accretion.addColorStop(1, 'rgba(0,0,0,0)');
-    ctx.fillStyle = accretion;
-    ctx.beginPath();
-    ctx.arc(0, 0, radius * 1.45, 0, Math.PI * 2);
-    ctx.fill();
-
-    ctx.beginPath();
-    ctx.arc(0, 0, radius * 0.90, 0, Math.PI * 2);
-    ctx.strokeStyle = 'rgba(255,240,230,0.34)';
-    ctx.lineWidth = Math.max(0.9, radius * 0.05);
-    ctx.stroke();
-
-    ctx.restore();
-
-    var lensGlow = ctx.createRadialGradient(proj.x, proj.y, 0, proj.x, proj.y, radius * 2.0);
-    lensGlow.addColorStop(0, 'rgba(16,18,30,0.82)');
-    lensGlow.addColorStop(0.32, 'rgba(12,14,24,0.76)');
-    lensGlow.addColorStop(0.62, 'rgba(8,10,18,0.20)');
-    lensGlow.addColorStop(1, 'rgba(8,10,18,0)');
-    ctx.fillStyle = lensGlow;
-    ctx.beginPath();
-    ctx.arc(proj.x, proj.y, radius * 2.0, 0, Math.PI * 2);
-    ctx.fill();
-
-    ctx.fillStyle = 'rgba(4,5,9,0.94)';
-    ctx.beginPath();
-    ctx.arc(proj.x, proj.y, radius * 0.54, 0, Math.PI * 2);
-    ctx.fill();
-  }
-
-  function drawAtlas(anchorX, anchorY, rotX, rotY) {
-    ATLAS.orbitAngle += 0.016;
-    var proj = projectPoint(ATLAS.x, ATLAS.y, ATLAS.z, anchorX, anchorY, rotX, rotY, 960);
-    var radius = ATLAS.radius * proj.scale;
-    var yaw = time * 0.22 + sceneState.orbitYaw * 0.55;
-    var orbitX = Math.cos(ATLAS.orbitAngle) * radius * 1.7;
-    var orbitY = Math.sin(ATLAS.orbitAngle * 1.2) * radius * 0.55;
-
-    ctx.save();
-    ctx.translate(proj.x, proj.y);
-    ctx.rotate(yaw * 0.22);
-    ctx.strokeStyle = 'rgba(184,224,210,0.30)';
-    ctx.lineWidth = Math.max(0.7, radius * 0.05);
-
-    ctx.beginPath();
-    ctx.arc(0, 0, radius, 0, Math.PI * 2);
-    ctx.stroke();
-
-    for (var lat = -1; lat <= 1; lat++) {
-      var ry = radius * (0.34 + Math.abs(lat) * 0.16);
-      ctx.beginPath();
-      ctx.ellipse(0, lat * radius * 0.26, radius, ry, 0, 0, Math.PI * 2);
-      ctx.stroke();
-    }
-
-    ctx.beginPath();
-    ctx.ellipse(0, 0, radius * 0.36, radius, 0, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.ellipse(0, 0, radius * 0.72, radius, 0, 0, Math.PI * 2);
-    ctx.stroke();
-
-    ctx.restore();
-
-    ctx.strokeStyle = 'rgba(184,224,210,0.16)';
-    ctx.lineWidth = 0.9;
-    ctx.beginPath();
-    ctx.arc(proj.x, proj.y, radius * 1.7, 0, Math.PI * 2);
-    ctx.stroke();
-
-    var beacon = ctx.createRadialGradient(proj.x + orbitX, proj.y + orbitY, 0, proj.x + orbitX, proj.y + orbitY, radius * 0.9);
-    beacon.addColorStop(0, 'rgba(184,224,210,0.72)');
-    beacon.addColorStop(1, 'rgba(184,224,210,0)');
-    ctx.fillStyle = beacon;
-    ctx.beginPath();
-    ctx.arc(proj.x + orbitX, proj.y + orbitY, radius * 0.9, 0, Math.PI * 2);
-    ctx.fill();
-
-    ctx.fillStyle = 'rgba(184,224,210,0.95)';
-    ctx.beginPath();
-    ctx.arc(proj.x + orbitX, proj.y + orbitY, Math.max(2.1, radius * 0.16), 0, Math.PI * 2);
-    ctx.fill();
-  }
-
-  function applyDragWake(x, y, dx, dy) {
-    var motion = Math.sqrt(dx * dx + dy * dy);
-    if (motion < 0.35) return;
-
-    sceneState.focusX = x;
-    sceneState.focusY = y;
-    sceneState.impulseX = dx;
-    sceneState.impulseY = dy;
-    sceneState.impulseLife = 1;
-    sceneState.energy = 1;
-
-    for (var i = 0; i < stars.length; i++) {
-      var s = stars[i];
-      var sx = s.screenX || -9999;
-      var sy = s.screenY || -9999;
-      var distX = sx - x;
-      var distY = sy - y;
-      var dist = Math.sqrt(distX * distX + distY * distY);
-      if (dist < 170 && dist > 0.001) {
-        var wake = Math.pow((170 - dist) / 170, 1.45) * motion * 0.045;
-        s.vx += (dx * 0.08 + (distX / dist) * wake) / s.mass;
-        s.vy += (dy * 0.06 + (distY / dist) * wake) / s.mass;
-        s.vz += wake * 0.85;
-      }
-    }
-
-    if (DOTS.screen) {
-      var ddx = DOTS.screen.x - x;
-      var ddy = DOTS.screen.y - y;
-      var ddist = Math.sqrt(ddx * ddx + ddy * ddy);
-      if (ddist < DOTS.screen.r * 2.4) {
-        DOTS.vx += dx * 0.06;
-        DOTS.vy += dy * 0.05;
-        DOTS.vz += motion * 0.12;
-        DOTS.shieldGlow = Math.min(1, DOTS.shieldGlow + 0.18);
-      }
-    }
-  }
+;(function() {
 
   function drawNebula(n, anchorX, anchorY, rotX, rotY) {
     var proj = projectPoint(n.x, n.y, n.z, anchorX, anchorY, rotX, rotY, 1040);
@@ -4827,6 +4463,208 @@ a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .service-row
         }
       }
     });
+  });
+})();
+</script>
+
+<!-- ─── TESTIMONY OVERLAY ─── -->
+<div id="testimony-overlay" class="toverlay" aria-hidden="true" aria-modal="true" role="dialog">
+  <div class="toverlay-backdrop" id="toverlay-backdrop"></div>
+
+  <!-- Card 1: NeoNir -->
+  <article class="tfloat tfloat--1 tfloat--mint">
+    <button class="tfloat-x" data-close-card="1" aria-label="Close">✕</button>
+    <div class="tcard-top">
+      <div class="tcard-tag">
+        <span class="tcard-tag-dot" style="background:#B8E0D2"></span>Water AI · 2025
+      </div>
+      <div class="tcard-verified">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="6" fill="#B8E0D2" fill-opacity="0.22"/><path d="M3.5 6l1.8 1.8 3.2-3.6" stroke="#B8E0D2" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Real client
+      </div>
+    </div>
+    <div class="tcard-project">
+      <h3 class="tcard-name">NeoNir Reporting Portal</h3>
+      <p class="tcard-build">Replaced manual Excel → Word → PDF with live multi-plant water treatment management. One system. Every client.</p>
+    </div>
+    <div class="tcard-chat">
+      <div class="tchat-msg">
+        <p class="tchat-text">My team started using it the same day. No training call, no manual. Just worked. 🙌</p>
+        <span class="tchat-meta">11:42 AM ✓✓</span>
+      </div>
+      <div class="tchat-msg">
+        <p class="tchat-text">Reports that used to take hours — minutes now.</p>
+        <span class="tchat-meta">11:43 AM ✓✓</span>
+      </div>
+    </div>
+    <div class="tcard-outcome">
+      <span class="tcard-outcome-val">Hours → Minutes</span>
+      <span class="tcard-outcome-label">per report · zero re-training</span>
+    </div>
+    <div class="tcard-person">
+      <div class="tcard-avatar" style="background:rgba(184,224,210,0.18);color:#B8E0D2;">NK</div>
+      <div>
+        <p class="tcard-person-name">Nishant Kapadia</p>
+        <p class="tcard-person-role">CEO · NeoNir</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- Card 2: SPL -->
+  <article class="tfloat tfloat--2 tfloat--peach">
+    <button class="tfloat-x" data-close-card="2" aria-label="Close">✕</button>
+    <div class="tcard-top">
+      <div class="tcard-tag">
+        <span class="tcard-tag-dot" style="background:#FFCDB2"></span>Fantasy Tech · 2026
+      </div>
+      <div class="tcard-verified">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="6" fill="#FFCDB2" fill-opacity="0.22"/><path d="M3.5 6l1.8 1.8 3.2-3.6" stroke="#FFCDB2" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Real group
+      </div>
+    </div>
+    <div class="tcard-project">
+      <h3 class="tcard-name">Saanp Premier League</h3>
+      <p class="tcard-build">Dream11-level fantasy cricket for 12 friends — live scoring, WhatsApp bot, prize money, award ceremony. Built for one group.</p>
+    </div>
+    <div class="tcard-chat">
+      <div class="tchat-msg tchat-msg--bot">
+        <div class="tchat-bot-header"><span class="tchat-bot-name">Infinity Max 🥷</span></div>
+        <p class="tchat-text">tera screenshot dekh liya Avdhesh, tu toh #4 pe hai with 491.5 points, Daddy Cool ke naam se jaana jaata hai tumhara team — aur woh bhi automatic hi hai 🏏</p>
+        <span class="tchat-meta">7:46 AM ✓✓</span>
+      </div>
+      <div class="tchat-msg tchat-msg--bot">
+        <div class="tchat-bot-header"><span class="tchat-bot-name">Infinity Max 🥷</span></div>
+        <p class="tchat-text">arre bhai, notifications to band nahi ho sakte — live match update ke liye zaroori hain, nahi to pata bhi nahi chalega kaun kitne points le raha hai 😂</p>
+        <span class="tchat-meta">7:46 AM ✓✓</span>
+      </div>
+      <div class="tchat-msg">
+        <p class="tchat-text">i can't believe yeh sirf hamare group ke liye hai 😭🔥</p>
+        <span class="tchat-meta">Prashast · 3:19 PM ✓✓</span>
+      </div>
+    </div>
+    <div class="tcard-outcome">
+      <span class="tcard-outcome-val">12 Players</span>
+      <span class="tcard-outcome-label">live scoring · bot · prize pool · ceremony</span>
+    </div>
+    <div class="tcard-person">
+      <div class="tcard-avatar" style="background:rgba(255,205,178,0.18);color:#FFCDB2;">SPL</div>
+      <div>
+        <p class="tcard-person-name">Avdhesh, Jayesh, Prashast + 9 more</p>
+        <p class="tcard-person-role">The Group · Season 1 · IPL 2026</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- Card 3: Memory Vault -->
+  <article class="tfloat tfloat--3 tfloat--lav">
+    <button class="tfloat-x" data-close-card="3" aria-label="Close">✕</button>
+    <div class="tcard-top">
+      <div class="tcard-tag">
+        <span class="tcard-tag-dot" style="background:#C8B6FF"></span>Personal AI · 2025
+      </div>
+      <div class="tcard-verified">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="6" fill="#C8B6FF" fill-opacity="0.22"/><path d="M3.5 6l1.8 1.8 3.2-3.6" stroke="#C8B6FF" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Real user
+      </div>
+    </div>
+    <div class="tcard-project">
+      <h3 class="tcard-name">Memory Vault</h3>
+      <p class="tcard-build">Dump anything — feeds, links, thoughts. AI indexes into mind-map tree. Search by feeling. Agents read from it.</p>
+    </div>
+    <div class="tcard-chat">
+      <div class="tchat-msg">
+        <p class="tchat-text">okay this is actually scary good 😭</p>
+        <span class="tchat-meta">10:08 AM ✓✓</span>
+      </div>
+      <div class="tchat-msg">
+        <p class="tchat-text">I typed something random from last month and it KNEW what I was thinking about</p>
+        <span class="tchat-meta">10:09 AM ✓✓</span>
+      </div>
+      <div class="tchat-msg">
+        <p class="tchat-text">It's like my brain finally has a home 🧠</p>
+        <span class="tchat-meta">10:10 AM ✓✓</span>
+      </div>
+    </div>
+    <div class="tcard-outcome">
+      <span class="tcard-outcome-val">Second Brain</span>
+      <span class="tcard-outcome-label">AI-indexed · searchable · agent-readable</span>
+    </div>
+    <div class="tcard-person">
+      <div class="tcard-avatar" style="background:rgba(200,182,255,0.18);color:#C8B6FF;">HG</div>
+      <div>
+        <p class="tcard-person-name">Honey Gondaliya</p>
+        <p class="tcard-person-role">Early User · Memory Vault</p>
+      </div>
+    </div>
+  </article>
+</div>
+
+<script>
+// ── Testimony overlay ──
+(function() {
+  var overlay  = document.getElementById('testimony-overlay');
+  var backdrop = document.getElementById('toverlay-backdrop');
+  var trigger  = document.getElementById('btn-read-testimony');
+  if (!overlay || !trigger) return;
+
+  var cards    = overlay.querySelectorAll('.tfloat');
+  var EASE     = 'cubic-bezier(0.23, 1, 0.32, 1)';
+  var isOpen   = false;
+
+  function openOverlay() {
+    if (isOpen) return;
+    isOpen = true;
+    overlay.removeAttribute('aria-hidden');
+    overlay.style.pointerEvents = 'auto';
+    document.body.style.overflow = 'hidden';
+
+    // Reset cards
+    cards.forEach(function(c) { c.style.display = ''; });
+
+    gsap.fromTo(backdrop, { opacity: 0 }, { opacity: 1, duration: 0.32 });
+    cards.forEach(function(card, i) {
+      gsap.fromTo(card,
+        { opacity: 0, y: 40, scale: 0.92 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.62, delay: 0.06 + i * 0.1, ease: EASE }
+      );
+    });
+  }
+
+  function closeOverlay() {
+    if (!isOpen) return;
+    isOpen = false;
+    gsap.to(backdrop, { opacity: 0, duration: 0.24 });
+    gsap.to(cards, { opacity: 0, y: -24, scale: 0.94, duration: 0.28,
+      stagger: 0.06, ease: 'power2.in',
+      onComplete: function() {
+        overlay.setAttribute('aria-hidden', 'true');
+        overlay.style.pointerEvents = 'none';
+        document.body.style.overflow = '';
+        cards.forEach(function(c) { gsap.set(c, { clearProps: 'all' }); });
+      }
+    });
+  }
+
+  trigger.addEventListener('click', openOverlay);
+  backdrop.addEventListener('click', closeOverlay);
+
+  overlay.querySelectorAll('.tfloat-x').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var card = btn.closest('.tfloat');
+      gsap.to(card, { opacity: 0, y: -20, scale: 0.93, duration: 0.26,
+        ease: 'power2.in',
+        onComplete: function() {
+          card.style.display = 'none';
+          var visible = overlay.querySelectorAll('.tfloat:not([style*="display: none"])').length;
+          if (visible === 0) closeOverlay();
+        }
+      });
+    });
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && isOpen) closeOverlay();
   });
 })();
 </script>

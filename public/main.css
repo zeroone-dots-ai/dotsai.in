@@ -4451,3 +4451,548 @@ footer {
 /* Remove old cursor glow - replaced */
 
 #hero { cursor: none !important; }
+
+
+/* Head */
+.testimony-head {
+  text-align: center;
+  margin-bottom: clamp(48px, 7vw, 80px);
+}
+
+.testimony-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.32);
+  margin-bottom: 20px;
+}
+
+.testimony-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(36px, 5.5vw, 64px);
+  font-weight: 400;
+  color: rgba(255,255,255,0.92);
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.testimony-title em {
+  font-style: italic;
+  color: rgba(200,182,255,0.88);
+}
+
+.testimony-sub {
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(14px, 1.6vw, 16px);
+  color: rgba(255,255,255,0.42);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+/* Grid */
+.testimony-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+/* Card base */
+.tcard {
+  background: rgba(255,255,255,0.038);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 20px;
+  padding: 28px 26px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  opacity: 0;
+  transform: translateY(32px);
+  transition: border-color 0.3s ease;
+}
+
+.tcard:hover {
+  border-color: rgba(255,255,255,0.13);
+}
+
+/* Accent top line per card */
+.tcard--mint  { border-top: 2px solid rgba(184,224,210,0.5); }
+.tcard--peach { border-top: 2px solid rgba(255,205,178,0.5); }
+.tcard--lav   { border-top: 2px solid rgba(200,182,255,0.5); }
+
+/* Top row */
+.tcard-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tcard-tag {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.38);
+}
+
+.tcard-tag-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: block;
+  flex-shrink: 0;
+}
+
+.tcard-verified {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  color: rgba(255,255,255,0.28);
+  letter-spacing: 0.02em;
+}
+
+/* Project block */
+.tcard-name {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 400;
+  color: rgba(255,255,255,0.88);
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.tcard-build {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: rgba(255,255,255,0.44);
+  line-height: 1.6;
+}
+
+/* Chat */
+.tcard-chat {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: rgba(0,0,0,0.28);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  padding: 14px 14px 12px;
+}
+
+.tchat-msg {
+  background: rgba(255,255,255,0.07);
+  border-radius: 12px 12px 12px 3px;
+  padding: 10px 13px 8px;
+  opacity: 0;
+  transform: translateX(-8px);
+}
+
+.tchat-msg--bot {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.tchat-bot-header {
+  margin-bottom: 5px;
+}
+
+.tchat-bot-name {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: rgba(255,205,178,0.7);
+}
+
+.tchat-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.tchat-meta {
+  display: block;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  color: rgba(255,255,255,0.24);
+  margin-top: 6px;
+  letter-spacing: 0.04em;
+}
+
+/* Outcome */
+.tcard-outcome {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.tcard--mint  .tcard-outcome { border-color: rgba(184,224,210,0.14); background: rgba(184,224,210,0.05); }
+.tcard--peach .tcard-outcome { border-color: rgba(255,205,178,0.14); background: rgba(255,205,178,0.05); }
+.tcard--lav   .tcard-outcome { border-color: rgba(200,182,255,0.14); background: rgba(200,182,255,0.05); }
+
+.tcard-outcome-val {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(17px, 2vw, 20px);
+  font-weight: 400;
+  color: rgba(255,255,255,0.88);
+  letter-spacing: -0.01em;
+}
+
+.tcard--mint  .tcard-outcome-val { color: #B8E0D2; }
+.tcard--peach .tcard-outcome-val { color: #FFCDB2; }
+.tcard--lav   .tcard-outcome-val { color: #C8B6FF; }
+
+.tcard-outcome-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  color: rgba(255,255,255,0.34);
+  letter-spacing: 0.02em;
+}
+
+/* Person */
+.tcard-person {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 4px;
+}
+
+.tcard-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.tcard-person-name {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.72);
+  margin: 0 0 2px;
+}
+
+.tcard-person-role {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* Footnote */
+.testimony-footnote {
+  text-align: center;
+  margin-top: clamp(40px, 5vw, 60px);
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.22);
+  text-transform: uppercase;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .testimony-grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .tcard {
+    padding: 22px 18px 20px;
+  }
+}
+
+/* btn-testimony live state */
+.btn-testimony--live {
+  opacity: 1;
+  cursor: pointer;
+  border-color: rgba(67,48,95,0.28);
+  transition: border-color 0.2s ease-out, transform 0.16s ease-out, box-shadow 0.2s ease-out;
+}
+.btn-testimony--live:hover {
+  border-color: rgba(200,182,255,0.4);
+  box-shadow: 0 0 18px rgba(200,182,255,0.1);
+  transform: translateY(-1px);
+}
+.btn-testimony--live:active { transform: scale(0.97); }
+.btn-testimony-badge--live {
+  background: rgba(200,182,255,0.15);
+  color: rgba(200,182,255,0.8);
+  border: 1px solid rgba(200,182,255,0.2);
+}
+
+/* ══════════════════════════════════════════
+   TESTIMONY FLOATING OVERLAY
+   ══════════════════════════════════════════ */
+
+/* Backdrop */
+.toverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.toverlay-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(4,4,8,0.82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+}
+
+/* Floating cards — scattered across viewport */
+.tfloat {
+  position: absolute;
+  width: 320px;
+  max-height: 88vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.1) transparent;
+  background: rgba(12,12,20,0.96);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 24px 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  opacity: 0;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
+}
+
+.tfloat--mint  { border-top: 2px solid rgba(184,224,210,0.55); }
+.tfloat--peach { border-top: 2px solid rgba(255,205,178,0.55); }
+.tfloat--lav   { border-top: 2px solid rgba(200,182,255,0.55); }
+
+/* Scattered positions (desktop) */
+.tfloat--1 {
+  left: clamp(12px, 4vw, 60px);
+  top: 50%;
+  transform: translateY(-50%) rotate(-2deg);
+}
+.tfloat--2 {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -52%) rotate(0.8deg);
+}
+.tfloat--3 {
+  right: clamp(12px, 4vw, 60px);
+  top: 50%;
+  transform: translateY(-48%) rotate(-1.5deg);
+}
+
+/* Close button */
+.tfloat-x {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.5);
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+  z-index: 2;
+  flex-shrink: 0;
+}
+.tfloat-x:hover { background: rgba(255,255,255,0.14); color: rgba(255,255,255,0.9); transform: scale(1.1); }
+.tfloat-x:active { transform: scale(0.94); }
+
+/* Shared card inner styles (reused from overlay) */
+.tcard-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 28px;
+}
+.tcard-tag {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.38);
+}
+.tcard-tag-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  display: block;
+  flex-shrink: 0;
+}
+.tcard-verified {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  color: rgba(255,255,255,0.28);
+}
+.tcard-name {
+  font-family: 'Instrument Serif', serif;
+  font-size: 19px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.88);
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+.tcard-build {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  color: rgba(255,255,255,0.44);
+  line-height: 1.6;
+}
+.tcard-chat {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 12px 12px 10px;
+}
+.tchat-msg {
+  background: rgba(255,255,255,0.07);
+  border-radius: 10px 10px 10px 3px;
+  padding: 9px 12px 7px;
+}
+.tchat-msg--bot {
+  background: rgba(255,205,178,0.06);
+  border: 1px solid rgba(255,205,178,0.1);
+}
+.tchat-bot-header { margin-bottom: 4px; }
+.tchat-bot-name {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  color: rgba(255,205,178,0.65);
+}
+.tchat-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.52;
+  margin: 0;
+}
+.tchat-meta {
+  display: block;
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  color: rgba(255,255,255,0.22);
+  margin-top: 5px;
+  letter-spacing: 0.03em;
+}
+.tcard-outcome {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.tfloat--mint  .tcard-outcome { border-color: rgba(184,224,210,0.14); background: rgba(184,224,210,0.05); }
+.tfloat--peach .tcard-outcome { border-color: rgba(255,205,178,0.14); background: rgba(255,205,178,0.05); }
+.tfloat--lav   .tcard-outcome { border-color: rgba(200,182,255,0.14); background: rgba(200,182,255,0.05); }
+.tcard-outcome-val {
+  font-family: 'Instrument Serif', serif;
+  font-size: 18px;
+  color: rgba(255,255,255,0.88);
+}
+.tfloat--mint  .tcard-outcome-val { color: #B8E0D2; }
+.tfloat--peach .tcard-outcome-val { color: #FFCDB2; }
+.tfloat--lav   .tcard-outcome-val { color: #C8B6FF; }
+.tcard-outcome-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  color: rgba(255,255,255,0.32);
+}
+.tcard-person {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.tcard-avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  flex-shrink: 0;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.tcard-person-name {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.7);
+  margin: 0 0 2px;
+}
+.tcard-person-role {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  color: rgba(255,255,255,0.28);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* Mobile — stack vertically */
+@media (max-width: 900px) {
+  .toverlay { overflow-y: auto; }
+  .toverlay-backdrop { position: fixed; }
+  .tfloat {
+    position: relative;
+    width: calc(100% - 32px);
+    max-width: 420px;
+    max-height: none;
+    margin: 0 auto;
+    transform: none !important;
+    rotate: none !important;
+  }
+  .toverlay {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 60px 16px 40px;
+    align-items: center;
+    overflow-y: auto;
+    pointer-events: none;
+  }
+}
