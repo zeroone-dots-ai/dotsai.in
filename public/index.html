@@ -1852,7 +1852,7 @@ function initMainPage() {
       ease: STORY_EASE
     })
     gsap.to(storyBadge, {
-      y: targetY,
+      y: targetY + 72,
       x: state.x * 0.65,
       duration: immediate ? 0 : 0.7,
       ease: STORY_EASE
@@ -1869,6 +1869,19 @@ function initMainPage() {
   }
   setStoryThreadState('hero', true)
   window.addEventListener('resize', () => setStoryThreadState(currentStoryState, true))
+
+  // ── Scroll-driven planet rotation ──
+  ;(function() {
+    const stThread = document.getElementById('story-thread')
+    let lastSY = window.scrollY
+    let pRot = 10
+    window.addEventListener('scroll', function() {
+      const sy = window.scrollY
+      pRot += (sy - lastSY) * 0.13
+      lastSY = sy
+      if (stThread) stThread.style.setProperty('--planet-rot', pRot + 'deg')
+    }, { passive: true })
+  })()
 
   // ══════════════════════════════════════════
   //  3-PANEL HERO SCROLL (pin + crossfade)
