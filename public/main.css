@@ -4489,6 +4489,8 @@ footer {
 /* Floating cards — scattered across viewport */
 .tfloat {
   position: absolute;
+  cursor: grab;
+  user-select: none;
   width: 320px;
   max-height: 88vh;
   overflow-y: auto;
