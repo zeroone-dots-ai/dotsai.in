@@ -2793,7 +2793,7 @@ nav.light .nav-cta {
 .manifesto-word {
   display: inline;
   opacity: 0;
-  transition: opacity 0.4s ease;
+  /* no CSS transition — GSAP timeline scrub drives opacity directly */
 }
 
 .manifesto-word.yours {
@@ -5294,16 +5294,69 @@ footer {
   body { padding-bottom: calc(var(--mobile-nav-offset, 72px) + 12px); }
 
   /* ── 2. MEET: static flow ── */
+  /* Meet stays pinned on mobile (matches desktop behavior).
+     GSAP pin-spacer wraps this section; inner content must fit 100svh. */
   #meet {
-    height: auto !important;
-    min-height: 100svh;
-    overflow: visible !important;
+    height: 100svh !important;
+    min-height: 100svh !important;
+    overflow: hidden !important;
     box-sizing: border-box !important;
-    padding-top: calc(var(--mobile-story-panel-reserve, 176px) + 28px) !important;
-    padding-bottom: calc(var(--mobile-nav-offset, 72px) + 28px) !important;
+    padding-top: calc(var(--mobile-story-panel-reserve, 176px) + 12px) !important;
+    padding-bottom: calc(var(--mobile-nav-offset, 72px) + 16px) !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+    display: flex !important;
+    align-items: flex-start !important;
   }
-  .manifesto-word, .meet-redirect, .credential-divider, .meet-credential {
-    opacity: 1 !important; transform: none !important; visibility: visible !important;
+  #meet .meet-inner {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+  }
+  /* manifesto + credentials are scroll-driven on mobile too — let GSAP control */
+  .manifesto-word { opacity: 0; }
+  .meet-redirect { opacity: 0; transform: translateY(16px); }
+  .meet-credential { opacity: 0; transform: translateY(24px); }
+  .credential-divider { opacity: 0; }
+  /* tagline + label stay static */
+  .meet-tagline, .meet-label { opacity: 1 !important; visibility: visible !important; }
+  /* shrink meet content so all 3 phases fit inside mobile viewport */
+  #meet .meet-label {
+    margin-bottom: 14px !important;
+    font-size: 9px !important;
+  }
+  #meet .manifesto-text {
+    font-size: 22px !important;
+    line-height: 1.22 !important;
+  }
+  #meet .meet-credentials {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 14px 20px !important;
+    margin-top: 22px !important;
+    padding-top: 18px !important;
+    flex-direction: initial !important;
+    border-top: 1px solid var(--bone);
+  }
+  #meet .credential-divider { display: none !important; }
+  #meet .credential-number {
+    font-size: 24px !important;
+  }
+  #meet .credential-text {
+    font-size: 11px !important;
+    line-height: 1.35 !important;
+  }
+  #meet .meet-tagline {
+    font-size: 13px !important;
+    margin-top: 18px !important;
+    line-height: 1.38 !important;
+  }
+  #meet .meet-redirect {
+    margin-top: 12px !important;
+    font-size: 10px !important;
+    padding: 8px 14px !important;
   }
 
   /* ── 3. SECTION SHELL: flex column, fills viewport ── */

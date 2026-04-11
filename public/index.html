@@ -2234,16 +2234,23 @@ function initMainPage() {
       scrub: 0.5,
       anticipatePin: 1,
       onUpdate: (self) => {
-        // Scroll 1 (0%–33%): word reveal
-        const p = self.progress
-        const wp = Math.min(p / 0.33, 1)
-        const show = Math.floor(wp * wordSpans.length)
-        wordSpans.forEach((s, i) => {
-          if (i <= show) gsap.to(s, { opacity: 1, duration: 0.15, ease: 'power2.out', overwrite: 'auto' })
-        })
+        // Mobile story panel variant progression driven by same pin scrub
+        if (window.innerWidth < 768 && window.__dotsStoryThreadState && typeof window.__dotsStoryThreadState.setMobile === 'function') {
+          const p = self.progress
+          const idx = p < 0.34 ? 0 : (p < 0.67 ? 1 : 2)
+          window.__dotsStoryThreadState.setMobile('meet', idx)
+        }
       }
     }
   })
+  // Scroll 1 (0%–33%): word reveal — real timeline tweens so scrub drives it
+  // (onUpdate callbacks can be finicky on mobile; tweens on the timeline are rock-solid)
+  {
+    const wordSlot = 0.33 / Math.max(1, wordSpans.length)
+    wordSpans.forEach((s, i) => {
+      meetTl.to(s, { opacity: 1, duration: wordSlot * 0.9, ease: 'power2.out' }, i * wordSlot)
+    })
+  }
   // Scroll 2 (33%–66%): first 2 credentials
   meetTl.to(credentials[0], { opacity: 1, y: 0, duration: 0.06, ease: EASE_OUT }, 0.35)
   meetTl.to(credentialDividers[0], { opacity: 1, scaleY: 1, duration: 0.04, ease: EASE_OUT }, 0.37)
@@ -2830,18 +2837,12 @@ function initMainPage() {
     applyMobilePanelMetrics()
     applyMobileCopyCompression()
 
-    // Kill all desktop fade-phase pin triggers (meet + content sections)
+    // Kill desktop fade-phase pin triggers EXCEPT hero and meet.
+    // Meet stays pinned on mobile so the manifesto word reveal + credentials + CTA
+    // progression works exactly like desktop (user request).
     ScrollTrigger.getAll().forEach(st => {
-      if (st.vars && st.vars.pin && st.trigger && st.trigger.id !== 'hero') st.kill(true)
+      if (st.vars && st.vars.pin && st.trigger && st.trigger.id !== 'hero' && st.trigger.id !== 'meet') st.kill(true)
     })
-
-    // Meet: show content that GSAP hid
-    if (meetSection) {
-      meetSection.style.height = 'auto'
-      meetSection.style.overflow = 'visible'
-      gsap.set([credentials, credentialDividers, meetRedirect], { clearProps: 'all' })
-      gsap.set(meetSection.querySelectorAll('.manifesto-word'), { clearProps: 'all' })
-    }
 
     // Generic horizontal snap setup for a pinned content section
     function setupMobileHSnap(sectionId, stack, cards, phases, label, glow, extraOpts) {
@@ -3116,20 +3117,9 @@ function initMainPage() {
       window.visualViewport.addEventListener('resize', queueMobileStoryRefresh, { passive: true })
     }
 
-    // Mobile: meet + contact variant progress (3 slides each)
+    // Mobile: contact variant progress (3 slides).
+    // Meet is driven by its pinned meetTl.onUpdate — see meetTl above.
     // Created AFTER mobile relayout + horizontal-snap setup so section bounds are final.
-    ScrollTrigger.create({
-      trigger: '#meet',
-      start: 'top top',
-      end: 'bottom top',
-      scrub: true,
-      onUpdate: (self) => {
-        if (!window.__dotsStoryThreadState || typeof window.__dotsStoryThreadState.setMobile !== 'function') return
-        const p = self.progress
-        const idx = p < 0.34 ? 0 : (p < 0.67 ? 1 : 2)
-        window.__dotsStoryThreadState.setMobile('meet', idx)
-      }
-    })
     ScrollTrigger.create({
       trigger: '#contact',
       start: 'top bottom',
