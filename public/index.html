@@ -3004,7 +3004,22 @@ function initMainPage() {
 
     setupMobileHSnap('platform',   platformEl.querySelector('.platform-copy-stack'),   pCards,      pPhases,      pLabel,      pGlow)
     setupMobileHSnap('consulting',  consultEl.querySelector('.consulting-copy-stack'),  cCards,      cPhases,      cLabel,      cGlow)
-    setupMobileHSnap('proof',       proofEl.querySelector('.proof-copy-stack'),         proofCards,  proofPhases,  proofLabel,  proofGlow, { onEnter: startProofCounters, onEnterBack: startProofCounters })
+    ;(function setupProofMobileHSnap() {
+      const proofCtaCluster = proofEl.querySelector('.proof-cta-cluster')
+      const activateProof = () => {
+        startProofCounters()
+        if (proofCtaCluster) proofCtaCluster.classList.add('is-proof-active')
+      }
+      const deactivateProof = () => {
+        if (proofCtaCluster) proofCtaCluster.classList.remove('is-proof-active')
+      }
+      setupMobileHSnap('proof', proofEl.querySelector('.proof-copy-stack'), proofCards, proofPhases, proofLabel, proofGlow, {
+        onEnter: activateProof,
+        onEnterBack: activateProof,
+        onLeave: deactivateProof,
+        onLeaveBack: deactivateProof
+      })
+    })()
     setupMobileHSnap('assist',      assistEl.querySelector('.assist-copy-stack'),       aCards,      aPhases,      aLabel,      aGlow)
 
     // Labs: build a mobile horizontal snap using .labs-mobile-card elements

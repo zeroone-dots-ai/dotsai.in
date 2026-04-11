@@ -3095,7 +3095,7 @@ nav.light .nav-cta {
 
 .proof-copy-stack {
   position: relative;
-  min-height: 420px;
+  min-height: 520px;
 }
 
 .proof-cta-cluster {
@@ -3103,7 +3103,9 @@ nav.light .nav-cta {
   flex-direction: column;
   align-items: flex-start;
   gap: 12px;
-  margin-top: 8px;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.06);
 }
 .proof-cta-testimony {
   align-self: flex-start;
@@ -4305,7 +4307,7 @@ footer {
   }
 
   .proof-copy-stack {
-    min-height: 380px;
+    min-height: 460px;
   }
 
   .proof-title {
@@ -5448,56 +5450,54 @@ footer {
     font-size: 12px !important;
   }
   #contact .contact-schedule-card {
-    padding: 14px 14px 12px !important;
-    border-radius: 18px !important;
+    padding: 12px 14px 12px !important;
+    border-radius: 16px !important;
     min-height: 0 !important;
+    gap: 6px !important;
   }
   #contact .contact-schedule-top {
-    margin-bottom: 6px !important;
+    margin-bottom: 4px !important;
   }
   #contact .contact-schedule-label,
   #contact .contact-schedule-badge {
     font-size: 9px !important;
+    min-height: 0 !important;
+    padding: 2px 8px !important;
   }
   #contact .contact-schedule-title {
-    font-size: 20px !important;
-    line-height: 1.15 !important;
-    margin-bottom: 6px !important;
+    font-size: 18px !important;
+    line-height: 1.12 !important;
+    margin: 0 0 4px !important;
   }
+  /* Schedule copy hidden on mobile — title + chips convey the point */
   #contact .contact-schedule-copy {
-    font-size: 12px !important;
-    line-height: 1.38 !important;
-    margin-bottom: 8px !important;
+    display: none !important;
   }
   #contact .contact-schedule-meta {
-    gap: 6px !important;
-    margin-bottom: 8px !important;
+    gap: 5px !important;
+    margin: 0 0 8px !important;
   }
   #contact .contact-schedule-chip {
     font-size: 9px !important;
     padding: 3px 7px !important;
+    min-height: 0 !important;
   }
+  /* Agenda rows hidden on mobile — actions row carries the conversion load */
   #contact .contact-schedule-agenda {
-    padding: 8px 10px !important;
-    gap: 4px !important;
-    margin-bottom: 8px !important;
-  }
-  #contact .contact-schedule-row {
-    gap: 8px !important;
-    font-size: 11px !important;
-  }
-  #contact .contact-schedule-topic,
-  #contact .contact-schedule-value {
-    font-size: 11px !important;
+    display: none !important;
   }
   #contact .contact-schedule-actions {
     gap: 6px !important;
-    flex-direction: column !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    margin: 0 !important;
   }
   #contact .contact-schedule-action {
-    width: 100% !important;
+    flex: 1 1 auto !important;
+    width: auto !important;
     padding: 9px 12px !important;
     font-size: 11px !important;
+    min-height: 0 !important;
   }
   /* Calendar iframe is opt-in (tap toggle) — stays hidden while pin plays */
   #contact .contact-schedule-frame-shell { display: none !important; }
@@ -5742,31 +5742,44 @@ footer {
     display: none !important;
   }
 
-  /* Proof CTA cluster: pin to bottom of #proof on mobile so Read Testimony
-     stays reachable without disrupting horizontal card swipe */
-  #proof { position: relative !important; }
+  /* Proof CTA cluster on mobile: fixed overlay, only visible while #proof is pinned.
+     Uses position:fixed to bypass any overflow:hidden ancestors and to survive
+     GSAP's pinType:fixed on #proof (which would conflict with absolute positioning). */
   .proof-cta-cluster {
-    position: absolute !important;
+    position: fixed !important;
     left: 0 !important;
     right: 0 !important;
-    bottom: calc(var(--mobile-nav-offset, 72px) + 14px) !important;
+    bottom: calc(var(--mobile-nav-offset, 72px) + 10px) !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    gap: 6px !important;
+    gap: 4px !important;
     padding: 0 18px !important;
     margin: 0 !important;
-    z-index: 20 !important;
+    border-top: 0 !important;
+    padding-top: 0 !important;
+    z-index: 45 !important;
+    pointer-events: none !important;
+    opacity: 0 !important;
+    transform: translateY(6px) !important;
+    transition: opacity 0.25s ease-out, transform 0.25s ease-out !important;
+  }
+  .proof-cta-cluster.is-proof-active {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
     pointer-events: auto !important;
   }
   .proof-cta-testimony {
-    padding: 10px 18px !important;
-    font-size: 12px !important;
+    padding: 9px 16px !important;
+    font-size: 11px !important;
+    pointer-events: auto !important;
   }
   .proof-cta-note {
     text-align: center !important;
     font-size: 9px !important;
-    max-width: 300px !important;
+    max-width: 280px !important;
+    margin: 0 !important;
+    color: rgba(255,255,255,0.72) !important;
   }
 
   /* ── 5. COPY AREA: fills remaining space ── */
