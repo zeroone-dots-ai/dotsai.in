@@ -180,7 +180,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-<link rel="stylesheet" href="/main.css?v=20260410-inline-cal-story">
+<link rel="stylesheet" href="/main.css?v=20260411-mobile-story-fix">
 </head>
 
 <body class="splash-active">
@@ -2472,6 +2472,19 @@ function initMainPage() {
   //  MOBILE — horizontal snap scroll per section
   // ══════════════════════════════════════════
   if (isMobile) {
+    const mobileStoryLayouts = []
+    let mobileStoryResizeRaf = null
+
+    function getMobileViewportHeight() {
+      return Math.round(window.visualViewport ? window.visualViewport.height : window.innerHeight)
+    }
+
+    function getMobileNavOffset() {
+      const navEl = document.querySelector('nav')
+      if (!navEl) return 72
+      return Math.ceil(navEl.getBoundingClientRect().height || 72)
+    }
+
     // Kill all desktop fade-phase pin triggers (meet + content sections)
     ScrollTrigger.getAll().forEach(st => {
       if (st.vars && st.vars.pin && st.trigger && st.trigger.id !== 'hero') st.kill(true)
@@ -2490,29 +2503,64 @@ function initMainPage() {
       const secEl = document.getElementById(sectionId)
       const N = cards.length
       if (!secEl || !stack || !N) return
+      const copyParent = stack.parentElement
+      const stageEl = secEl.querySelector('.platform-stage, .consulting-stage, .proof-stage, .assist-stage')
+      let currentWidth = 0
+      let currentHeight = 0
 
-      // Clear desktop GSAP inline styles
+      // Clear desktop GSAP inline styles so mobile phases can render statically.
+      const phaseDescendants = Array.from(phases).flatMap((ph) => Array.from(ph.querySelectorAll('*')))
       gsap.set([...cards, ...phases], { clearProps: 'opacity,transform,y,x,scale,visibility' })
+      if (phaseDescendants.length) gsap.set(phaseDescendants, { clearProps: 'opacity,transform,y,x,scale,visibility' })
+      phaseDescendants.forEach((el) => {
+        el.style.opacity = '1'
+        el.style.visibility = 'visible'
+      })
       if (label) gsap.set(label, { clearProps: 'opacity,transform,y' })
       if (glow)  gsap.set(glow,  { clearProps: 'opacity,transform,scale' })
 
-      // Section: viewport-height, clipped
-      secEl.style.height = window.innerHeight + 'px'
-      secEl.style.overflow = 'hidden'
+      function applyMobileStoryLayout() {
+        const viewportHeight = getMobileViewportHeight()
+        const navOffset = getMobileNavOffset()
+        const sectionPadding = navOffset + 16
 
-      // Copy parent: clips the horizontal strip
-      const copyParent = stack.parentElement
-      if (copyParent) {
-        copyParent.style.overflow = 'hidden'
-        copyParent.style.position = 'relative'
+        document.documentElement.style.setProperty('--mobile-nav-offset', navOffset + 'px')
+        secEl.style.setProperty('--mobile-nav-offset', sectionPadding + 'px')
+        secEl.style.height = viewportHeight + 'px'
+        secEl.style.overflow = 'hidden'
+        secEl.style.boxSizing = 'border-box'
+
+        if (copyParent) {
+          copyParent.style.overflow = 'hidden'
+          copyParent.style.position = 'relative'
+          copyParent.style.minHeight = '0'
+        }
+
+        const sectionStyles = getComputedStyle(secEl)
+        const paddingTop = parseFloat(sectionStyles.paddingTop) || 0
+        const paddingBottom = parseFloat(sectionStyles.paddingBottom) || 0
+        const stageHeight = stageEl ? Math.round(stageEl.getBoundingClientRect().height || 160) : 160
+        currentWidth = copyParent && copyParent.getBoundingClientRect().width > 0
+          ? Math.round(copyParent.getBoundingClientRect().width)
+          : window.innerWidth
+        currentHeight = Math.max(viewportHeight - paddingTop - paddingBottom - stageHeight, 220)
+
+        if (copyParent) {
+          copyParent.style.height = currentHeight + 'px'
+        }
+
+        stack.style.width = (N * currentWidth) + 'px'
+        stack.style.height = currentHeight + 'px'
+
+        Array.from(cards).forEach(c => {
+          c.style.width = currentWidth + 'px'
+          c.style.height = currentHeight + 'px'
+          c.style.flex = '0 0 ' + currentWidth + 'px'
+        })
       }
+      applyMobileStoryLayout()
 
-      // Measure slide width from the copy container (respects padding/margins)
-      const cW = (copyParent && copyParent.getBoundingClientRect().width > 0)
-        ? copyParent.getBoundingClientRect().width
-        : window.innerWidth
-
-      // Stack: full-width horizontal row
+      // Stack: full-width horizontal row, fills copy parent height
       stack.style.display = 'flex'
       stack.style.flexDirection = 'row'
       stack.style.flexWrap = 'nowrap'
@@ -2520,17 +2568,14 @@ function initMainPage() {
       stack.style.position = 'relative'
       stack.style.margin = '0'
       stack.style.padding = '0'
-      stack.style.width = (N * cW) + 'px'
       stack.style.willChange = 'transform'
 
-      // Cards: each fills one slide width
+      // Cards: each fills one full slide (width × height)
       Array.from(cards).forEach(c => {
         c.style.position = 'relative'
         c.style.inset = 'auto'
         c.style.opacity = '1'
         c.style.transform = 'none'
-        c.style.width = cW + 'px'
-        c.style.flex = '0 0 ' + cW + 'px'
         c.style.boxSizing = 'border-box'
       })
 
@@ -2539,13 +2584,14 @@ function initMainPage() {
         ph.style.opacity = i === 0 ? '1' : '0'
         ph.style.transform = 'none'
         ph.style.transition = 'opacity 0.3s ease'
+        ph.style.pointerEvents = i === 0 ? 'auto' : 'none'
       })
       if (label) { label.style.opacity = '1'; label.style.transform = 'none' }
       if (glow)  { glow.style.opacity = '0.8'; glow.style.transform = 'none' }
 
       // GSAP horizontal pin — vertical scroll drives x-translation
       const mST = gsap.to(stack, {
-        x: -(N - 1) * cW,
+        x: () => -(N - 1) * currentWidth,
         ease: 'none',
         scrollTrigger: Object.assign({
           trigger: '#' + sectionId,
@@ -2554,6 +2600,8 @@ function initMainPage() {
           pin: true,
           scrub: 0.8,
           anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onRefreshInit: applyMobileStoryLayout,
           snap: {
             snapTo: 1 / (N - 1),
             duration: { min: 0.2, max: 0.5 },
@@ -2564,17 +2612,39 @@ function initMainPage() {
             const idx = Math.round(self.progress * (N - 1))
             Array.from(phases).forEach(function(ph, i) {
               ph.style.opacity = i === idx ? '1' : '0'
+              ph.style.pointerEvents = i === idx ? 'auto' : 'none'
             })
           }
         }, extraOpts || {})
       })
       registerSectionTrigger(sectionId, mST.scrollTrigger)
+      mobileStoryLayouts.push(applyMobileStoryLayout)
     }
 
     setupMobileHSnap('platform',   platformEl.querySelector('.platform-copy-stack'),   pCards,      pPhases,      pLabel,      pGlow)
     setupMobileHSnap('consulting',  consultEl.querySelector('.consulting-copy-stack'),  cCards,      cPhases,      cLabel,      cGlow)
     setupMobileHSnap('proof',       proofEl.querySelector('.proof-copy-stack'),         proofCards,  proofPhases,  proofLabel,  proofGlow, { onEnter: startProofCounters, onEnterBack: startProofCounters })
     setupMobileHSnap('assist',      assistEl.querySelector('.assist-copy-stack'),       aCards,      aPhases,      aLabel,      aGlow)
+
+    function refreshMobileStoryLayouts() {
+      if (!mobileStoryLayouts.length) return
+      mobileStoryLayouts.forEach((applyLayout) => applyLayout())
+      ScrollTrigger.refresh()
+    }
+
+    function queueMobileStoryRefresh() {
+      if (mobileStoryResizeRaf) cancelAnimationFrame(mobileStoryResizeRaf)
+      mobileStoryResizeRaf = requestAnimationFrame(() => {
+        mobileStoryResizeRaf = null
+        refreshMobileStoryLayouts()
+      })
+    }
+
+    window.addEventListener('resize', queueMobileStoryRefresh, { passive: true })
+    window.addEventListener('orientationchange', queueMobileStoryRefresh, { passive: true })
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', queueMobileStoryRefresh, { passive: true })
+    }
 
     ScrollTrigger.refresh()
   }

@@ -4848,115 +4848,361 @@ footer {
     justify-content: center !important;
     border-top: 1px solid rgba(255,255,255,0.07);
   }
-  nav.nav-hidden {
-    transform: translateY(110%) !important;
-  }
-  body {
-    padding-bottom: 72px;
+  nav.nav-hidden { transform: translateY(110%) !important; }
+  body { padding-bottom: calc(var(--mobile-nav-offset, 72px) + 12px); }
+
+  /* ── 2. MEET: static flow ── */
+  #meet { height: auto !important; overflow: visible !important; }
+  .manifesto-word, .meet-redirect, .credential-divider, .meet-credential {
+    opacity: 1 !important; transform: none !important; visibility: visible !important;
   }
 
-  /* ── 2. MEET SECTION: flow layout ── */
-  #meet {
-    height: auto !important;
-    overflow: visible !important;
+  /* ── 3. SECTION SHELL: flex column, fills viewport ── */
+  #platform, #consulting, #proof, #assist {
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    padding-bottom: calc(var(--mobile-nav-offset, 72px) + 16px) !important;
   }
-  .manifesto-word,
-  .meet-redirect, .credential-divider, .meet-credential {
-    opacity: 1 !important;
-    transform: none !important;
-    visibility: visible !important;
-  }
-
-  /* ── 3. CONTENT SECTION GRIDS: single column ── */
-  .platform-grid,
-  .consulting-grid,
-  .proof-shell,
-  .assist-grid {
+  .platform-grid, .consulting-grid, .proof-shell, .assist-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+    width: 100% !important;
+    max-width: 100% !important;
     min-height: 0 !important;
-    grid-template-columns: 1fr !important;
-    grid-template-rows: auto !important;
     gap: 0 !important;
+    align-items: stretch !important;
+    grid-template-columns: unset !important;
+    grid-template-rows: unset !important;
   }
 
-  /* ── 4. STAGES: compact fixed height, stacked phases ── */
-  .platform-stage,
-  .consulting-stage,
-  .assist-stage {
+  /* ── 4. STAGE: 160px micro-visual strip ── */
+  .platform-stage, .consulting-stage, .proof-stage, .assist-stage {
     order: 1 !important;
-    height: 220px !important;
+    flex: 0 0 160px !important;
+    width: 100% !important;
+    height: 160px !important;
     min-height: 0 !important;
+    min-width: 0 !important;
+    max-height: 160px !important;
     overflow: hidden !important;
-    border-radius: 16px;
+    border-radius: 0 !important;
     position: relative !important;
   }
-  .proof-stage {
-    order: 1 !important;
-    height: 240px !important;
-    min-height: 0 !important;
-    overflow: hidden !important;
-    border-radius: 16px;
-    position: relative !important;
-  }
-  /* All phases: absolute-stack so JS can opacity-switch them */
-  .platform-phase,
-  .consulting-phase,
-  .assist-phase,
-  .proof-phase {
+  /* phases stack inside the 160px strip */
+  .platform-phase, .consulting-phase, .proof-phase, .assist-phase {
     position: absolute !important;
     inset: 0 !important;
-    height: 100% !important;
-    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     transition: opacity 0.3s ease !important;
   }
 
-  /* ── 5. COPY AREAS: clip container for GSAP x-scroll ── */
-  .platform-copy,
-  .consulting-copy,
-  .proof-copy,
-  .assist-copy {
+  /* ────── PLATFORM STAGE MICRO ────── */
+  /* Orbit: compact circle with spinning rings */
+  .platform-core-orbit {
+    width: 148px !important;
+    height: 148px !important;
+    aspect-ratio: 1 / 1 !important;
+    flex-shrink: 0 !important;
+  }
+  /* Rings: still animate, just smaller */
+  .platform-core-ring { border-width: 1px !important; }
+  /* Center card: tight */
+  .platform-core-center {
+    width: 72% !important;
+    padding: 10px 10px 8px !important;
+    border-radius: 16px !important;
+  }
+  .platform-core-center .platform-core-label {
+    font-size: 7px !important; letter-spacing: 0.18em !important; margin-bottom: 4px !important;
+  }
+  .platform-core-center strong {
+    font-size: 15px !important; line-height: 1.1 !important;
+  }
+  .platform-core-center p {
+    font-size: 8px !important; margin-top: 3px !important; line-height: 1.4 !important;
+  }
+  /* Peripheral signals + rail: hide (too cluttered at micro size) */
+  .platform-signal, .platform-core-rail { display: none !important; }
+
+  /* Suite phase: compact 4-item grid */
+  .platform-suite-frame {
+    width: 100% !important; padding: 10px 14px 6px !important;
+  }
+  .platform-suite-header {
+    display: flex !important; align-items: center !important; gap: 8px !important; margin-bottom: 8px !important;
+  }
+  .platform-suite-kicker { font-size: 8px !important; }
+  .platform-suite-badge { font-size: 7px !important; padding: 2px 7px !important; }
+  .platform-suite-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 5px !important;
+  }
+  .platform-suite-card {
+    padding: 7px 8px !important; border-radius: 10px !important; gap: 4px !important;
+  }
+  .platform-suite-card strong { font-size: 9px !important; }
+  .platform-suite-card p { display: none !important; }
+  .platform-suite-dot { width: 6px !important; height: 6px !important; }
+  .platform-suite-ribbon { display: none !important; }
+
+  /* Rollout phase: 3-column strip */
+  .platform-rollout-grid {
+    width: 100% !important; padding: 8px 14px !important;
+    display: flex !important; gap: 8px !important;
+    grid-template-columns: unset !important;
+  }
+  .platform-rollout-column {
+    flex: 1 !important; min-width: 0 !important;
+    padding: 8px !important; border-radius: 10px !important;
+  }
+  .platform-rollout-label { font-size: 7px !important; margin-bottom: 6px !important; }
+  .platform-doc-grid { grid-template-columns: 1fr 1fr !important; gap: 3px !important; }
+  .platform-doc-chip { font-size: 7px !important; padding: 3px 5px !important; }
+  .platform-agent-card { padding: 4px 6px !important; gap: 5px !important; }
+  .platform-agent-card strong { font-size: 8px !important; }
+  .platform-agent-card p { display: none !important; }
+  .platform-market-chip { font-size: 7px !important; padding: 3px 6px !important; }
+  .platform-rollout-stat { display: none !important; }
+
+  /* ────── CONSULTING STAGE MICRO ────── */
+  .consulting-journey-board,
+  .consulting-engine-board,
+  .consulting-outcome-board {
+    width: calc(100% - 24px) !important;
+    min-height: 148px !important;
+    height: 148px !important;
+    max-height: 148px !important;
+    overflow: hidden !important;
+    border-radius: 14px !important;
+    padding: 10px 12px !important;
+  }
+  .consulting-stage-label { font-size: 7px !important; margin-bottom: 6px !important; }
+  /* Journey note headline → compact */
+  .consulting-journey-note strong { font-size: 14px !important; line-height: 1.1 !important; }
+  .consulting-journey-note p { font-size: 9px !important; margin-top: 4px !important; display: -webkit-box !important; -webkit-line-clamp: 2 !important; -webkit-box-orient: vertical !important; overflow: hidden !important; }
+  .consulting-journey-list { gap: 4px !important; }
+  .consulting-journey-row { padding: 5px 8px !important; border-radius: 8px !important; gap: 8px !important; }
+  .consulting-journey-index { font-size: 9px !important; width: 18px !important; height: 18px !important; }
+  .consulting-journey-row strong { font-size: 9px !important; }
+  .consulting-journey-row p { display: none !important; }
+  .consulting-journey-footer { display: none !important; }
+  /* Engine board */
+  .consulting-engine-core strong { font-size: 14px !important; }
+  .consulting-engine-core p { font-size: 8px !important; display: -webkit-box !important; -webkit-line-clamp: 2 !important; -webkit-box-orient: vertical !important; overflow: hidden !important; }
+  .consulting-engine-board { position: relative !important; }
+  .consulting-engine-core {
+    width: min(50%, 150px) !important;
+    padding: 10px 8px !important;
+    border-radius: 10px !important;
+  }
+  .consulting-engine-card {
+    width: min(31vw, 112px) !important;
+    padding: 6px 8px !important;
+    border-radius: 8px !important;
+  }
+  .consulting-engine-dot { width: 6px !important; height: 6px !important; margin-bottom: 6px !important; }
+  .consulting-engine-card { padding: 6px 8px !important; border-radius: 8px !important; }
+  .consulting-engine-card strong { font-size: 8px !important; }
+  .consulting-engine-card p { display: none !important; }
+  .consulting-engine-connector { display: none !important; }
+  /* Outcome board */
+  .consulting-outcome-board { padding: 10px 12px !important; }
+  .consulting-outcome-column { padding: 8px !important; border-radius: 10px !important; }
+  .consulting-outcome-column-metrics,
+  .consulting-outcome-column-steps { gap: 4px !important; }
+  .consulting-outcome-row { padding: 5px 8px !important; gap: 6px !important; }
+  .consulting-outcome-row strong { font-size: 9px !important; }
+  .consulting-outcome-row span { display: none !important; }
+  .consulting-step-card { padding: 5px 8px !important; border-radius: 8px !important; }
+  .consulting-step-card strong { font-size: 8px !important; }
+  .consulting-step-card p { display: none !important; }
+  .consulting-outcome-footer { display: none !important; }
+
+  /* ────── PROOF STAGE MICRO ────── */
+  .proof-metrics-board, .proof-cases-board {
+    width: calc(100% - 24px) !important;
+    min-height: 148px !important;
+    height: 148px !important;
+    max-height: 148px !important;
+    overflow: hidden !important;
+    border-radius: 14px !important;
+    padding: 10px 12px !important;
+  }
+  .proof-metrics {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 6px !important;
+  }
+  .proof-metric-rail { gap: 6px !important; }
+  .proof-metric { padding: 8px 10px !important; border-radius: 10px !important; }
+  .proof-metric .metric-count { font-size: 22px !important; }
+  .proof-metric .metric-label { font-size: 8px !important; }
+  .proof-metric .metric-source { display: none !important; }
+  .proof-cases { gap: 6px !important; grid-template-columns: 1fr 1fr !important; align-content: start !important; }
+  .case-card { padding: 8px 10px !important; border-radius: 10px !important; }
+  .case-card .case-tag { font-size: 7px !important; margin-bottom: 6px !important; }
+  .case-card .case-title { font-size: 9px !important; line-height: 1.35 !important; margin-bottom: 6px !important; }
+  .case-card .case-outcome { font-size: 9px !important; }
+  .proof-case-note { display: none !important; }
+
+  /* ────── ASSIST STAGE MICRO ────── */
+  .assist-advantage-board,
+  .assist-tools-board,
+  .assist-partner-board {
+    width: calc(100% - 24px) !important;
+    min-height: 148px !important;
+    height: 148px !important;
+    max-height: 148px !important;
+    overflow: hidden !important;
+    border-radius: 14px !important;
+    padding: 10px 12px !important;
+  }
+  .assist-stage-label { font-size: 7px !important; margin-bottom: 6px !important; }
+  .assist-advantage-note { font-size: 9px !important; margin-bottom: 6px !important; }
+  .assist-advantage-grid { gap: 4px !important; grid-template-columns: 1fr 1fr !important; }
+  .assist-advantage-card { padding: 6px 8px !important; border-radius: 8px !important; }
+  .assist-advantage-card strong { font-size: 9px !important; }
+  .assist-advantage-card p { display: none !important; }
+  .assist-advantage-footer { display: none !important; }
+  .assist-tools-board { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 4px !important; align-content: start !important; }
+  .assist-tools-core {
+    grid-column: 1 / -1 !important;
+    padding: 8px !important;
+    border-radius: 8px !important;
+  }
+  .assist-tools-core strong { font-size: 14px !important; line-height: 1.1 !important; }
+  .assist-tools-core p { font-size: 8px !important; margin-top: 4px !important; display: -webkit-box !important; -webkit-line-clamp: 2 !important; -webkit-box-orient: vertical !important; overflow: hidden !important; }
+  .assist-tool-card { padding: 5px 8px !important; font-size: 8px !important; border-radius: 8px !important; }
+  .assist-partner-note { font-size: 9px !important; margin-bottom: 6px !important; }
+  .assist-partner-grid { gap: 4px !important; grid-template-columns: 1fr 1fr !important; }
+  .assist-partner-card { padding: 6px 8px !important; border-radius: 8px !important; }
+  .assist-partner-card strong { font-size: 8px !important; }
+  .assist-partner-card span { display: none !important; }
+  .assist-partner-footer { display: none !important; }
+
+  /* Section labels: hide on mobile — kicker in each card already identifies phase */
+  .platform-label, .consulting-label, .proof-label, .assist-label {
+    display: none !important;
+  }
+  /* CTAs inside copy: hide on mobile (contact section handles CTAs) */
+  .platform-cta-cluster, .consulting-cta-cluster, .assist-cta-cluster {
+    display: none !important;
+  }
+
+  /* ── 5. COPY AREA: fills remaining space ── */
+  .platform-copy, .consulting-copy, .proof-copy, .assist-copy {
     order: 2 !important;
+    flex: 1 !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    min-width: 0 !important;
     overflow: hidden !important;
     position: relative !important;
     padding: 0 !important;
   }
-
-  /* Copy stacks: horizontal flex — GSAP drives x-translation */
-  .platform-copy-stack,
-  .consulting-copy-stack,
-  .proof-copy-stack,
-  .assist-copy-stack {
+  /* Copy stacks: horizontal flex row — GSAP drives x-translation */
+  .platform-copy-stack, .consulting-copy-stack, .proof-copy-stack, .assist-copy-stack {
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
     overflow: visible !important;
     position: relative !important;
+    height: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
     gap: 0 !important;
     will-change: transform;
   }
-
-  /* Copy cards: slides in the horizontal strip */
-  .platform-copy-card,
-  .consulting-copy-card,
-  .proof-copy-card,
-  .assist-copy-card {
+  /* Cards: full-height premium panels — JS sets width inline */
+  .platform-copy-card, .consulting-copy-card, .proof-copy-card, .assist-copy-card {
     position: relative !important;
     inset: auto !important;
     flex-shrink: 0 !important;
+    height: 100% !important;
     box-sizing: border-box !important;
-    padding: 20px 18px !important;
+    padding: 24px 22px 28px !important;
     border-bottom: none !important;
     margin: 0 !important;
-    /* JS sets width and flex-basis inline */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    gap: 10px !important;
+    overflow: hidden !important;
+  }
+  /* Copy text sizing */
+  .platform-kicker, .consulting-kicker, .proof-kicker, .assist-kicker,
+  .platform-kicker, .brief-kicker {
+    font-size: 10px !important; letter-spacing: 0.14em !important; margin-bottom: 6px !important;
+  }
+  .platform-title, .consulting-title, .proof-title, .assist-title {
+    font-size: clamp(22px, 6.5vw, 30px) !important;
+    line-height: 1.12 !important;
+    margin-bottom: 10px !important;
+  }
+  .platform-desc, .consulting-desc, .proof-desc, .assist-desc {
+    font-size: 13px !important; line-height: 1.6 !important; margin-bottom: 12px !important;
+  }
+  .platform-facts, .consulting-facts, .proof-facts, .assist-facts {
+    gap: 6px !important; flex-wrap: wrap !important;
+  }
+  .platform-fact, .consulting-fact, .proof-fact, .assist-fact {
+    font-size: 9px !important; padding: 5px 10px !important;
+  }
+  .platform-cta-cluster, .consulting-cta-cluster, .assist-cta-cluster {
+    padding-top: 12px !important;
   }
 
-  /* Labs teaser: static content visible */
+  /* ── 6. LABS TEASER: static visible ── */
   .labs-teaser-label, .labs-teaser-title, .labs-teaser-sub,
-  .labs-teaser-fact, .labs-teaser-card, .labs-teaser-all,
-  .labs-teaser-policy-card {
-    opacity: 1 !important;
-    transform: none !important;
-    visibility: visible !important;
+  .labs-teaser-fact, .labs-teaser-card, .labs-teaser-all, .labs-teaser-policy-card {
+    opacity: 1 !important; transform: none !important; visibility: visible !important;
+  }
+}
+
+@media (max-width: 767px) and (max-height: 700px) {
+  .platform-stage, .consulting-stage, .proof-stage, .assist-stage {
+    flex-basis: 136px !important;
+    height: 136px !important;
+    max-height: 136px !important;
+  }
+
+  .platform-copy-card, .consulting-copy-card, .proof-copy-card, .assist-copy-card {
+    padding: 18px 18px 22px !important;
+    gap: 8px !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .platform-copy-card::-webkit-scrollbar,
+  .consulting-copy-card::-webkit-scrollbar,
+  .proof-copy-card::-webkit-scrollbar,
+  .assist-copy-card::-webkit-scrollbar {
+    display: none;
+  }
+
+  .platform-title, .consulting-title, .proof-title, .assist-title {
+    font-size: clamp(20px, 6.4vw, 26px) !important;
+    line-height: 1.08 !important;
+    margin-bottom: 8px !important;
+  }
+
+  .platform-desc, .consulting-desc, .proof-desc, .assist-desc {
+    font-size: 12px !important;
+    line-height: 1.52 !important;
+    margin-bottom: 10px !important;
+  }
+
+  .platform-facts, .consulting-facts, .proof-facts, .assist-facts {
+    gap: 4px !important;
+  }
+
+  .platform-fact, .consulting-fact, .proof-fact, .assist-fact {
+    font-size: 8px !important;
+    padding: 4px 8px !important;
   }
 }
