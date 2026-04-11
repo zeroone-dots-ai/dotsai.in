@@ -2469,21 +2469,113 @@ function initMainPage() {
   }))
 
   // ══════════════════════════════════════════
-  //  MOBILE — kill pin animations, show content
+  //  MOBILE — horizontal snap scroll per section
   // ══════════════════════════════════════════
   if (isMobile) {
-    const mPins = ['#meet','#platform','#consulting','#proof','#assist']
-    mPins.forEach(s => {
-      const el = document.querySelector(s)
-      if (!el) return
-      el.style.height = 'auto'
-      el.style.minHeight = ''
-      el.style.overflow = 'visible'
-    })
-    // Kill all pinned ScrollTriggers except hero — removes spacer divs (the empty scroll gaps)
+    // Kill all desktop fade-phase pin triggers (meet + content sections)
     ScrollTrigger.getAll().forEach(st => {
       if (st.vars && st.vars.pin && st.trigger && st.trigger.id !== 'hero') st.kill(true)
     })
+
+    // Meet: show content that GSAP hid
+    if (meetSection) {
+      meetSection.style.height = 'auto'
+      meetSection.style.overflow = 'visible'
+      gsap.set([credentials, credentialDividers, meetRedirect], { clearProps: 'all' })
+      gsap.set(meetSection.querySelectorAll('.manifesto-word'), { clearProps: 'all' })
+    }
+
+    // Generic horizontal snap setup for a pinned content section
+    function setupMobileHSnap(sectionId, stack, cards, phases, label, glow, extraOpts) {
+      const secEl = document.getElementById(sectionId)
+      const N = cards.length
+      if (!secEl || !stack || !N) return
+
+      // Clear desktop GSAP inline styles
+      gsap.set([...cards, ...phases], { clearProps: 'opacity,transform,y,x,scale,visibility' })
+      if (label) gsap.set(label, { clearProps: 'opacity,transform,y' })
+      if (glow)  gsap.set(glow,  { clearProps: 'opacity,transform,scale' })
+
+      // Section: viewport-height, clipped
+      secEl.style.height = window.innerHeight + 'px'
+      secEl.style.overflow = 'hidden'
+
+      // Copy parent: clips the horizontal strip
+      const copyParent = stack.parentElement
+      if (copyParent) {
+        copyParent.style.overflow = 'hidden'
+        copyParent.style.position = 'relative'
+      }
+
+      // Measure slide width from the copy container (respects padding/margins)
+      const cW = (copyParent && copyParent.getBoundingClientRect().width > 0)
+        ? copyParent.getBoundingClientRect().width
+        : window.innerWidth
+
+      // Stack: full-width horizontal row
+      stack.style.display = 'flex'
+      stack.style.flexDirection = 'row'
+      stack.style.flexWrap = 'nowrap'
+      stack.style.overflow = 'visible'
+      stack.style.position = 'relative'
+      stack.style.margin = '0'
+      stack.style.padding = '0'
+      stack.style.width = (N * cW) + 'px'
+      stack.style.willChange = 'transform'
+
+      // Cards: each fills one slide width
+      Array.from(cards).forEach(c => {
+        c.style.position = 'relative'
+        c.style.inset = 'auto'
+        c.style.opacity = '1'
+        c.style.transform = 'none'
+        c.style.width = cW + 'px'
+        c.style.flex = '0 0 ' + cW + 'px'
+        c.style.boxSizing = 'border-box'
+      })
+
+      // Phases: first visible, rest hidden — JS onUpdate switches them
+      Array.from(phases).forEach((ph, i) => {
+        ph.style.opacity = i === 0 ? '1' : '0'
+        ph.style.transform = 'none'
+        ph.style.transition = 'opacity 0.3s ease'
+      })
+      if (label) { label.style.opacity = '1'; label.style.transform = 'none' }
+      if (glow)  { glow.style.opacity = '0.8'; glow.style.transform = 'none' }
+
+      // GSAP horizontal pin — vertical scroll drives x-translation
+      const mST = gsap.to(stack, {
+        x: -(N - 1) * cW,
+        ease: 'none',
+        scrollTrigger: Object.assign({
+          trigger: '#' + sectionId,
+          start: 'top top',
+          end: '+=' + (N - 1) * 100 + '%',
+          pin: true,
+          scrub: 0.8,
+          anticipatePin: 1,
+          snap: {
+            snapTo: 1 / (N - 1),
+            duration: { min: 0.2, max: 0.5 },
+            delay: 0.05,
+            ease: 'power1.inOut'
+          },
+          onUpdate: function(self) {
+            const idx = Math.round(self.progress * (N - 1))
+            Array.from(phases).forEach(function(ph, i) {
+              ph.style.opacity = i === idx ? '1' : '0'
+            })
+          }
+        }, extraOpts || {})
+      })
+      registerSectionTrigger(sectionId, mST.scrollTrigger)
+    }
+
+    setupMobileHSnap('platform',   platformEl.querySelector('.platform-copy-stack'),   pCards,      pPhases,      pLabel,      pGlow)
+    setupMobileHSnap('consulting',  consultEl.querySelector('.consulting-copy-stack'),  cCards,      cPhases,      cLabel,      cGlow)
+    setupMobileHSnap('proof',       proofEl.querySelector('.proof-copy-stack'),         proofCards,  proofPhases,  proofLabel,  proofGlow, { onEnter: startProofCounters, onEnterBack: startProofCounters })
+    setupMobileHSnap('assist',      assistEl.querySelector('.assist-copy-stack'),       aCards,      aPhases,      aLabel,      aGlow)
+
     ScrollTrigger.refresh()
   }
 

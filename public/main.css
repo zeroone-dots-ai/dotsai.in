@@ -4833,58 +4833,7 @@ footer {
 }
 
 /* ───────────────────────────────────────────────
-   MOBILE OVERRIDE — ensure all animated content
-   is visible when GSAP pins are killed
-─────────────────────────────────────────────── */
-@media (max-width: 767px) {
-  /* Remove height/overflow constraints set by JS */
-  #meet, #platform, #consulting, #proof, #assist {
-    height: auto !important;
-    min-height: auto !important;
-    overflow: visible !important;
-  }
-
-  /* CSS initial-state classes that GSAP animates from */
-  .fade-up, .fade-in, .service-row,
-  .proof-metric, .case-card,
-  .meet-credential, .brief-service-item {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-  /* All GSAP-hidden elements in pinned sections */
-  .manifesto-word,
-  .meet-redirect, .credential-divider,
-  .platform-label, .platform-copy-card, .platform-phase,
-  .platform-signal, .platform-core-rail,
-  .platform-suite-kicker, .platform-suite-badge,
-  .platform-suite-card, .platform-suite-ribbon,
-  .platform-rollout-column, .platform-doc-chip,
-  .platform-agent-card, .platform-market-chip,
-  .platform-rollout-stat, .platform-cta-cluster,
-  .platform-stage-glow,
-  .consulting-label, .consulting-copy-card, .consulting-phase,
-  .consulting-engine-card, .consulting-outcome-row,
-  .consulting-step-card, .consulting-outcome-footer,
-  .consulting-cta-cluster, .consulting-stage-glow,
-  .proof-label, .proof-copy-card, .proof-phase,
-  .proof-case-note, .proof-stage-glow,
-  .assist-label, .assist-copy-card, .assist-phase,
-  .assist-tools-core, .assist-tool-card,
-  .assist-partner-note, .assist-partner-card,
-  .assist-partner-footer, .assist-cta-cluster,
-  .assist-stage-glow,
-  .labs-teaser-label, .labs-teaser-title, .labs-teaser-sub,
-  .labs-teaser-fact, .labs-teaser-card, .labs-teaser-all,
-  .labs-teaser-policy-card {
-    opacity: 1 !important;
-    transform: none !important;
-    visibility: visible !important;
-  }
-}
-
-/* ───────────────────────────────────────────────
-   MOBILE LAYOUT v2 — bottom nav + fix overlap
+   MOBILE — Bottom nav + Horizontal snap story
 ─────────────────────────────────────────────── */
 @media (max-width: 767px) {
 
@@ -4899,16 +4848,26 @@ footer {
     justify-content: center !important;
     border-top: 1px solid rgba(255,255,255,0.07);
   }
-  /* Hidden state: slide DOWN (not up) for bottom bar */
   nav.nav-hidden {
     transform: translateY(110%) !important;
   }
-  /* Give page breathing room above the bottom bar */
   body {
     padding-bottom: 72px;
   }
 
-  /* ── 2. SECTION GRIDS: no forced height, single column ── */
+  /* ── 2. MEET SECTION: flow layout ── */
+  #meet {
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .manifesto-word,
+  .meet-redirect, .credential-divider, .meet-credential {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+  }
+
+  /* ── 3. CONTENT SECTION GRIDS: single column ── */
   .platform-grid,
   .consulting-grid,
   .proof-shell,
@@ -4916,116 +4875,88 @@ footer {
     min-height: 0 !important;
     grid-template-columns: 1fr !important;
     grid-template-rows: auto !important;
-    gap: 20px !important;
+    gap: 0 !important;
   }
 
-  /* ── 3. STAGES: compact, show only first phase ── */
+  /* ── 4. STAGES: compact fixed height, stacked phases ── */
   .platform-stage,
   .consulting-stage,
   .assist-stage {
     order: 1 !important;
+    height: 220px !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    border-radius: 16px;
+    position: relative !important;
+  }
+  .proof-stage {
+    order: 1 !important;
     height: 240px !important;
     min-height: 0 !important;
     overflow: hidden !important;
-    border-radius: 20px;
-  }
-  /* Proof stage: show both boards stacked */
-  .proof-stage {
-    order: 1 !important;
-    height: auto !important;
-    min-height: 0 !important;
-    overflow: visible !important;
-  }
-  /* Hide phase 2 & 3 of stage on mobile for non-proof sections */
-  .platform-phase:not(:first-of-type),
-  .consulting-phase:not(:first-of-type),
-  .assist-phase:not(:first-of-type) {
-    display: none !important;
-  }
-  /* Force first stage phase visible */
-  .platform-phase:first-of-type,
-  .consulting-phase:first-of-type,
-  .assist-phase:first-of-type {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-  /* Proof phases: stack vertically */
-  .proof-phase {
+    border-radius: 16px;
     position: relative !important;
-    inset: auto !important;
-    opacity: 1 !important;
-    transform: none !important;
-    height: auto !important;
-    width: 100%;
-    display: block !important;
-    margin-bottom: 16px;
   }
-  .proof-phase:last-of-type { margin-bottom: 0; }
+  /* All phases: absolute-stack so JS can opacity-switch them */
+  .platform-phase,
+  .consulting-phase,
+  .assist-phase,
+  .proof-phase {
+    position: absolute !important;
+    inset: 0 !important;
+    height: 100% !important;
+    width: 100% !important;
+    transition: opacity 0.3s ease !important;
+  }
 
-  /* ── 4. COPY AREAS: order 2, snap carousel ── */
+  /* ── 5. COPY AREAS: clip container for GSAP x-scroll ── */
   .platform-copy,
   .consulting-copy,
   .proof-copy,
   .assist-copy {
     order: 2 !important;
-    gap: 12px !important;
+    overflow: hidden !important;
+    position: relative !important;
+    padding: 0 !important;
   }
-  /* Convert copy stacks to horizontal snap slider */
+
+  /* Copy stacks: horizontal flex — GSAP drives x-translation */
   .platform-copy-stack,
   .consulting-copy-stack,
   .proof-copy-stack,
   .assist-copy-stack {
-    position: relative !important;
-    min-height: 0 !important;
     display: flex !important;
     flex-direction: row !important;
-    gap: 14px !important;
-    overflow-x: auto !important;
-    scroll-snap-type: x mandatory !important;
-    scrollbar-width: none !important;
-    padding-bottom: 24px !important;
-    margin: 0 -18px !important;
-    padding: 10px 18px 24px !important;
-    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap !important;
+    overflow: visible !important;
+    position: relative !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 0 !important;
+    will-change: transform;
   }
-  .platform-copy-stack::-webkit-scrollbar,
-  .consulting-copy-stack::-webkit-scrollbar,
-  .proof-copy-stack::-webkit-scrollbar,
-  .assist-copy-stack::-webkit-scrollbar {
-    display: none !important;
-  }
-  /* Cards: styled as 3D glass panels dropping inline */
+
+  /* Copy cards: slides in the horizontal strip */
   .platform-copy-card,
   .consulting-copy-card,
   .proof-copy-card,
   .assist-copy-card {
     position: relative !important;
     inset: auto !important;
+    flex-shrink: 0 !important;
+    box-sizing: border-box !important;
+    padding: 20px 18px !important;
+    border-bottom: none !important;
+    margin: 0 !important;
+    /* JS sets width and flex-basis inline */
+  }
+
+  /* Labs teaser: static content visible */
+  .labs-teaser-label, .labs-teaser-title, .labs-teaser-sub,
+  .labs-teaser-fact, .labs-teaser-card, .labs-teaser-all,
+  .labs-teaser-policy-card {
     opacity: 1 !important;
     transform: none !important;
-    flex: 0 0 85% !important;
-    scroll-snap-align: center !important;
-    
-    background: rgba(18, 18, 22, 0.4) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    border-radius: 20px !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    padding: 24px !important;
-    margin-bottom: 0 !important; 
-    border-bottom: none !important;
-    
-    display: flex !important;
-    flex-direction: column !important;
-  }
-  .platform-copy-card:last-child,
-  .consulting-copy-card:last-child,
-  .proof-copy-card:last-child,
-  .assist-copy-card:last-child {
-    border-bottom: none !important;
-    padding-bottom: 24px !important;
-    margin-bottom: 0 !important;
-    margin-right: 18px !important; /* Spacing for the right side block */
+    visibility: visible !important;
   }
 }
