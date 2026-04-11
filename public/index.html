@@ -180,7 +180,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-<link rel="stylesheet" href="/main.css?v=20260411-mobile-story-fix">
+<link rel="stylesheet" href="/main.css?v=20260411-labs-mobile-snap">
 </head>
 
 <body class="splash-active">
@@ -271,6 +271,24 @@
     <div class="story-thread-badge" id="story-thread-badge">
       <span class="story-thread-step" id="story-thread-step">00</span>
       <span class="story-thread-name" id="story-thread-name">Hero</span>
+    </div>
+  </div>
+
+  <div id="mobile-story-panel" data-section="hero" data-skin="light" aria-hidden="true">
+    <div class="mobile-story-shell">
+      <div class="mobile-story-meta">
+        <span class="mobile-story-step" id="mobile-story-step">ACT 01</span>
+        <span class="mobile-story-section" id="mobile-story-section">Meet</span>
+      </div>
+      <div class="mobile-story-disc" id="mobile-story-disc">
+        <span class="mobile-story-halo mobile-story-halo-a"></span>
+        <span class="mobile-story-halo mobile-story-halo-b"></span>
+        <div class="mobile-story-core" id="mobile-story-core">Builder</div>
+        <span class="mobile-story-chip mobile-story-chip-a" id="mobile-story-chip-a">AI</span>
+        <span class="mobile-story-chip mobile-story-chip-b" id="mobile-story-chip-b">Systems</span>
+        <span class="mobile-story-chip mobile-story-chip-c" id="mobile-story-chip-c">Deploy</span>
+        <span class="mobile-story-chip mobile-story-chip-d" id="mobile-story-chip-d">Direct</span>
+      </div>
     </div>
   </div>
 
@@ -1129,10 +1147,11 @@
 
   <!-- ─── LABS TEASER ─── -->
   <section id="labs-teaser">
+    <!-- Desktop: original 2-col shell; Mobile: horizontal snap with labs-mobile-stack -->
     <div class="labs-teaser-shell">
-      <div class="labs-teaser-copy">
-        <p class="labs-teaser-label">// labs</p>
-        <h2 class="labs-teaser-title">Try the demos. <em>See the stack in motion.</em></h2>
+      <div class="labs-teaser-copy labs-mobile-card">
+        <p class="labs-teaser-label">// labs · ACT 06</p>
+        <h2 class="labs-teaser-title">Live demos. <em>Stack in motion.</em></h2>
         <p class="labs-teaser-sub">Explore live demos for visibility, document intelligence, and workflow operations. Each one shows how AI can be shaped into a practical business system.</p>
         <div class="labs-teaser-facts">
           <span class="labs-teaser-fact">Live demos</span>
@@ -1158,7 +1177,7 @@
 
       <div class="labs-teaser-grid">
 
-        <a href="/labs/seo-checker/" class="labs-teaser-card">
+        <a href="/labs/seo-checker/" class="labs-teaser-card labs-mobile-card">
           <div class="labs-teaser-visual">
             <div class="ltv-gauge">
               <div class="ltv-gauge-ring"></div>
@@ -1167,11 +1186,11 @@
           </div>
           <span class="labs-teaser-tag">01 · Visibility</span>
           <h3>SEO &amp; GEO Analyzer</h3>
-          <p>Show how a brand can be reviewed for search, answer engines, and market visibility before a full growth build.</p>
+          <p>How a brand gets found — search, answer engines, and market visibility.</p>
           <span class="labs-teaser-cta">Open demo &rarr;</span>
         </a>
 
-        <a href="/labs/doc-parser/" class="labs-teaser-card">
+        <a href="/labs/doc-parser/" class="labs-teaser-card labs-mobile-card">
           <div class="labs-teaser-visual">
             <div class="ltv-doc">
               <div class="ltv-line" style="width:80%"></div>
@@ -1182,11 +1201,11 @@
           </div>
           <span class="labs-teaser-tag">02 · Structured data</span>
           <h3>Document Intelligence</h3>
-          <p>Drop a file and watch how business-ready structured data can be extracted from messy documents.</p>
+          <p>Drop a file — watch messy data become structured and business-ready.</p>
           <span class="labs-teaser-cta">Open demo &rarr;</span>
         </a>
 
-        <a href="/labs/workflow-viz/" class="labs-teaser-card">
+        <a href="/labs/workflow-viz/" class="labs-teaser-card labs-mobile-card">
           <div class="labs-teaser-visual">
             <div class="ltv-wf">
               <div class="ltv-node" style="background:rgba(200,182,255,0.2)"><div class="ltv-nd" style="background:#C8B6FF"></div></div>
@@ -1198,7 +1217,7 @@
           </div>
           <span class="labs-teaser-tag">03 · Operations</span>
           <h3>Workflow Control Room</h3>
-          <p>See how handoffs, tasks, and automations can move together instead of living in disconnected tools.</p>
+          <p>Handoffs, tasks, and automations — together instead of disconnected.</p>
           <span class="labs-teaser-cta">Open demo &rarr;</span>
         </a>
 
@@ -1809,7 +1828,46 @@ function initMainPage() {
   const storyBadge = document.getElementById('story-thread-badge')
   const storyStep = document.getElementById('story-thread-step')
   const storyName = document.getElementById('story-thread-name')
+  const mobileStoryPanel = document.getElementById('mobile-story-panel')
+  const mobileStoryDisc = document.getElementById('mobile-story-disc')
+  const mobileStoryStep = document.getElementById('mobile-story-step')
+  const mobileStorySection = document.getElementById('mobile-story-section')
+  const mobileStoryCore = document.getElementById('mobile-story-core')
+  const mobileStoryChipA = document.getElementById('mobile-story-chip-a')
+  const mobileStoryChipB = document.getElementById('mobile-story-chip-b')
+  const mobileStoryChipC = document.getElementById('mobile-story-chip-c')
+  const mobileStoryChipD = document.getElementById('mobile-story-chip-d')
   const STORY_EASE = 'cubic-bezier(0.23, 1, 0.32, 1)'
+  const MOBILE_PANEL_STATES = {
+    hero: [{ visible: false, section: 'Hero', step: 'ACT 00', core: 'ZeroOne', chips: ['D.O.T.S', 'AI', 'Build', 'Own'], skin: 'light', accent: '#C8B6FF', accentSoft: 'rgba(200,182,255,0.20)', rotate: -10, scale: 0.96 }],
+    meet: [{ visible: true, section: 'Meet', step: 'ACT 01', core: 'Builder', chips: ['Private', 'Systems', 'Direct', 'End to end'], skin: 'light', accent: '#C8B6FF', accentSoft: 'rgba(200,182,255,0.22)', rotate: -10, scale: 0.98 }],
+    platform: [
+      { visible: true, section: 'Platform', step: 'ACT 02', core: 'Fabric', chips: ['Data', 'Private', 'Brand', 'Ops'], skin: 'dark', accent: '#A2D2FF', accentSoft: 'rgba(162,210,255,0.24)', rotate: -8, scale: 1.01 },
+      { visible: true, section: 'Platform', step: 'ACT 02', core: 'Modules', chips: ['Analytics', 'Automation', 'Docs', 'Storage'], skin: 'dark', accent: '#A2D2FF', accentSoft: 'rgba(162,210,255,0.24)', rotate: 10, scale: 1.04 },
+      { visible: true, section: 'Platform', step: 'ACT 02', core: 'Agents', chips: ['Teams', 'Vault', 'Rollout', 'Control'], skin: 'dark', accent: '#A2D2FF', accentSoft: 'rgba(162,210,255,0.24)', rotate: -14, scale: 1.02 }
+    ],
+    consulting: [
+      { visible: true, section: 'Consulting', step: 'ACT 03', core: 'Brand', chips: ['Offer', 'Market', 'Trust', 'Fit'], skin: 'light', accent: '#B28743', accentSoft: 'rgba(178,135,67,0.18)', rotate: 8, scale: 0.99 },
+      { visible: true, section: 'Consulting', step: 'ACT 03', core: 'Sync', chips: ['Automation', 'WhatsApp', 'SEO', 'ROI'], skin: 'light', accent: '#B28743', accentSoft: 'rgba(178,135,67,0.18)', rotate: -12, scale: 1.02 },
+      { visible: true, section: 'Consulting', step: 'ACT 03', core: 'Stack', chips: ['Custom', 'Private', 'Tools', 'Deploy'], skin: 'light', accent: '#B28743', accentSoft: 'rgba(178,135,67,0.18)', rotate: 12, scale: 1.01 }
+    ],
+    proof: [
+      { visible: true, section: 'Outcomes', step: 'ACT 04', core: 'Proof', chips: ['Savings', 'Accuracy', 'Private', 'Impact'], skin: 'dark', accent: '#FFCDB2', accentSoft: 'rgba(255,205,178,0.20)', rotate: -7, scale: 1.02 },
+      { visible: true, section: 'Outcomes', step: 'ACT 04', core: 'Evidence', chips: ['Context', 'Owner', 'Use-case', 'Year'], skin: 'dark', accent: '#FFCDB2', accentSoft: 'rgba(255,205,178,0.20)', rotate: 11, scale: 1.04 }
+    ],
+    assist: [
+      { visible: true, section: 'Assist', step: 'ACT 05', core: 'Leverage', chips: ['Founder', 'Private', 'Direct', 'Calm'], skin: 'light', accent: '#C8B6FF', accentSoft: 'rgba(200,182,255,0.22)', rotate: 8, scale: 1.02 },
+      { visible: true, section: 'Assist', step: 'ACT 05', core: 'Tools', chips: ['Claude', 'Scripts', 'Dashboards', 'Output'], skin: 'light', accent: '#C8B6FF', accentSoft: 'rgba(200,182,255,0.22)', rotate: -13, scale: 1.05 },
+      { visible: true, section: 'Assist', step: 'ACT 05', core: 'Partner', chips: ['Kind', 'Sharp', 'Discreet', 'Fast'], skin: 'light', accent: '#C8B6FF', accentSoft: 'rgba(200,182,255,0.22)', rotate: 10, scale: 1.01 }
+    ],
+    'labs-teaser': [
+      { visible: true,  section: 'Labs', step: 'ACT 06', core: 'Labs',    chips: ['Demos', 'Workflows', 'SEO', 'Ops'],     skin: 'dark', accent: '#B8E0D2', accentSoft: 'rgba(184,224,210,0.24)', rotate: 14,  scale: 0.98 },
+      { visible: true,  section: 'Labs', step: 'ACT 06', core: 'SEO',     chips: ['Visibility', 'GEO', 'Search', 'Find'],   skin: 'dark', accent: '#B8E0D2', accentSoft: 'rgba(184,224,210,0.24)', rotate: -8,  scale: 1.02 },
+      { visible: true,  section: 'Labs', step: 'ACT 06', core: 'Docs',    chips: ['Extract', 'Structure', 'Data', 'Output'], skin: 'dark', accent: '#B8E0D2', accentSoft: 'rgba(184,224,210,0.24)', rotate: 12,  scale: 1.01 },
+      { visible: true,  section: 'Labs', step: 'ACT 06', core: 'Workflow', chips: ['Ops', 'Handoff', 'Tasks', 'Flow'],      skin: 'dark', accent: '#B8E0D2', accentSoft: 'rgba(184,224,210,0.24)', rotate: -10, scale: 1.03 }
+    ],
+    contact: [{ visible: false, section: 'Call', step: 'ACT 07', core: 'Book', chips: ['Cal', 'Meet', 'Direct', 'Private'], skin: 'light', accent: '#43305F', accentSoft: 'rgba(67,48,95,0.18)', rotate: 0, scale: 0.96 }]
+  }
   const STORY_STATES = {
     hero: { visible: false, progress: 0.0, scale: 0.84, rotate: -14, x: 0, step: '00', name: 'Hero', skin: 'light', accent: '#C8B6FF', accentSoft: 'rgba(200,182,255,0.18)' },
     meet: { visible: true, progress: 0.08, scale: 0.92, rotate: -18, x: -10, step: '01', name: 'Meet', skin: 'light', accent: '#C8B6FF', accentSoft: 'rgba(200,182,255,0.22)' },
@@ -1821,8 +1879,63 @@ function initMainPage() {
     contact: { visible: true, progress: 0.95, scale: 0.90, rotate: 0, x: -14, step: '07', name: 'Contact', skin: 'light', accent: '#43305F', accentSoft: 'rgba(67,48,95,0.18)' }
   }
   let currentStoryState = 'hero'
+  let currentMobileStorySection = 'hero'
+  let currentMobileStoryIndex = 0
+
+  function getMobilePanelState(sectionId, slideIndex) {
+    const states = MOBILE_PANEL_STATES[sectionId] || MOBILE_PANEL_STATES.hero
+    const index = Math.max(0, Math.min(typeof slideIndex === 'number' ? slideIndex : 0, states.length - 1))
+    return states[index]
+  }
+
+  function setMobileStoryPanelState(sectionId, slideIndex, immediate) {
+    if (!mobileStoryPanel || !mobileStoryDisc || !mobileStoryStep || !mobileStorySection || !mobileStoryCore || !mobileStoryChipA || !mobileStoryChipB || !mobileStoryChipC || !mobileStoryChipD) return
+    const state = getMobilePanelState(sectionId, slideIndex)
+    currentMobileStorySection = sectionId
+    currentMobileStoryIndex = typeof slideIndex === 'number' ? slideIndex : 0
+
+    if (!(window.innerWidth < 768) || !state || !state.visible) {
+      document.body.classList.remove('mobile-story-panel-visible')
+      gsap.to(mobileStoryPanel, { autoAlpha: 0, y: -10, duration: immediate ? 0 : 0.22, ease: STORY_EASE })
+      return
+    }
+
+    document.body.classList.add('mobile-story-panel-visible')
+    mobileStoryPanel.dataset.section = sectionId
+    mobileStoryPanel.dataset.skin = state.skin || 'light'
+    mobileStoryPanel.style.setProperty('--mobile-panel-accent', state.accent || '#C8B6FF')
+    mobileStoryPanel.style.setProperty('--mobile-panel-accent-soft', state.accentSoft || 'rgba(200,182,255,0.20)')
+    mobileStoryStep.textContent = state.step
+    mobileStorySection.textContent = state.section
+    mobileStoryCore.textContent = state.core
+
+    const chipText = state.chips || ['AI', 'Systems', 'Deploy', 'Direct']
+    ;[mobileStoryChipA, mobileStoryChipB, mobileStoryChipC, mobileStoryChipD].forEach((chipEl, index) => {
+      chipEl.textContent = chipText[index] || ''
+    })
+
+    gsap.to(mobileStoryPanel, { autoAlpha: 1, y: 0, duration: immediate ? 0 : 0.28, ease: STORY_EASE })
+    gsap.to(mobileStoryDisc, {
+      rotate: state.rotate || 0,
+      scale: state.scale || 1,
+      duration: immediate ? 0 : 0.58,
+      ease: STORY_EASE
+    })
+    gsap.to(mobileStoryCore, {
+      rotate: (state.rotate || 0) * -0.22,
+      duration: immediate ? 0 : 0.58,
+      ease: STORY_EASE
+    })
+    gsap.to([mobileStoryChipA, mobileStoryChipB, mobileStoryChipC, mobileStoryChipD], {
+      rotate: (state.rotate || 0) * -0.12,
+      duration: immediate ? 0 : 0.58,
+      ease: STORY_EASE,
+      stagger: immediate ? 0 : 0.015
+    })
+  }
 
   function setStoryThreadState(sectionId, immediate) {
+    if (window.innerWidth < 768) setMobileStoryPanelState(sectionId, 0, immediate)
     if (!storyThread || !storyOrb || !storyBadge || !storyStep || !storyName) return
     const state = STORY_STATES[sectionId] || STORY_STATES.hero
     currentStoryState = sectionId
@@ -1863,8 +1976,14 @@ function initMainPage() {
     set(sectionId, immediate) {
       setStoryThreadState(sectionId, immediate)
     },
+    setMobile(sectionId, slideIndex, immediate) {
+      setMobileStoryPanelState(sectionId, slideIndex, immediate)
+    },
     getCurrent() {
       return currentStoryState
+    },
+    getCurrentMobile() {
+      return { section: currentMobileStorySection, index: currentMobileStoryIndex }
     }
   }
   setStoryThreadState('hero', true)
@@ -2427,43 +2546,43 @@ function initMainPage() {
   }))
   registerSectionTrigger('meet', ScrollTrigger.create({
     trigger: '#meet',
-    start: 'top 55%',
+    start: isMobile ? 'top top' : 'top 55%',
     onEnter: () => setStoryThreadState('meet'),
     onEnterBack: () => setStoryThreadState('meet'),
   }))
   registerSectionTrigger('platform', ScrollTrigger.create({
     trigger: '#platform',
-    start: 'top 55%',
+    start: isMobile ? 'top top' : 'top 55%',
     onEnter: () => setStoryThreadState('platform'),
     onEnterBack: () => setStoryThreadState('platform'),
   }))
   registerSectionTrigger('consulting', ScrollTrigger.create({
     trigger: '#consulting',
-    start: 'top 55%',
+    start: isMobile ? 'top top' : 'top 55%',
     onEnter: () => setStoryThreadState('consulting'),
     onEnterBack: () => setStoryThreadState('consulting'),
   }))
   registerSectionTrigger('proof', ScrollTrigger.create({
     trigger: '#proof',
-    start: 'top 55%',
+    start: isMobile ? 'top top' : 'top 55%',
     onEnter: () => setStoryThreadState('proof'),
     onEnterBack: () => setStoryThreadState('proof'),
   }))
   registerSectionTrigger('assist', ScrollTrigger.create({
     trigger: '#assist',
-    start: 'top 55%',
+    start: isMobile ? 'top top' : 'top 55%',
     onEnter: () => setStoryThreadState('assist'),
     onEnterBack: () => setStoryThreadState('assist'),
   }))
   registerSectionTrigger('labs-teaser', ScrollTrigger.create({
     trigger: '#labs-teaser',
-    start: 'top 55%',
+    start: isMobile ? 'top top' : 'top 55%',
     onEnter: () => setStoryThreadState('labs-teaser'),
     onEnterBack: () => setStoryThreadState('labs-teaser'),
   }))
   registerSectionTrigger('contact', ScrollTrigger.create({
     trigger: '#contact',
-    start: 'top 55%',
+    start: isMobile ? 'top top' : 'top 55%',
     onEnter: () => setStoryThreadState('contact'),
     onEnterBack: () => setStoryThreadState('contact'),
   }))
@@ -2485,6 +2604,131 @@ function initMainPage() {
       return Math.ceil(navEl.getBoundingClientRect().height || 72)
     }
 
+    function applyMobilePanelMetrics() {
+      const viewportHeight = getMobileViewportHeight()
+      const navOffset = getMobileNavOffset()
+      const panelTop = Math.max(10, Math.min(24, Math.round(viewportHeight * 0.024)))
+      const panelHeight = Math.max(112, Math.min(162, Math.round(viewportHeight * 0.24)))
+      const panelGap = Math.max(16, Math.min(26, Math.round(viewportHeight * 0.032)))
+      const panelReserve = panelTop + panelHeight + panelGap
+
+      document.documentElement.style.setProperty('--mobile-nav-offset', navOffset + 'px')
+      document.documentElement.style.setProperty('--mobile-story-panel-top', panelTop + 'px')
+      document.documentElement.style.setProperty('--mobile-story-panel-height', panelHeight + 'px')
+      document.documentElement.style.setProperty('--mobile-story-panel-reserve', panelReserve + 'px')
+
+      if (meetSection) {
+        meetSection.style.minHeight = viewportHeight + 'px'
+        meetSection.style.boxSizing = 'border-box'
+      }
+
+      return { viewportHeight, navOffset, panelReserve }
+    }
+
+    function setMobileText(selector, value) {
+      const node = document.querySelector(selector)
+      if (node) node.textContent = value
+    }
+
+    function setMobileHTML(selector, value) {
+      const node = document.querySelector(selector)
+      if (node) node.innerHTML = value
+    }
+
+    function setMobileList(selector, values) {
+      const nodes = document.querySelectorAll(selector)
+      nodes.forEach((node, index) => {
+        if (values[index]) {
+          node.textContent = values[index]
+          node.hidden = false
+        } else {
+          node.hidden = true
+        }
+      })
+    }
+
+    function applyMobileCopyCompression() {
+      setMobileText('#meet .meet-tagline', 'One builder. End to end. Direct with Meet.')
+      setMobileList('#meet .credential-text', [
+        'Years building systems',
+        'Years building AI',
+        'One builder end to end',
+        'Direct with Meet'
+      ])
+
+      setMobileText('#platform .platform-copy-card:nth-of-type(1) .platform-kicker', 'Act 01 · Private fabric')
+      setMobileHTML('#platform .platform-copy-card:nth-of-type(1) .platform-title', 'One private platform. <em>Built around your business.</em>')
+      setMobileText('#platform .platform-copy-card:nth-of-type(1) .platform-desc', 'Bring data, brand, and operations into one private system.')
+      setMobileList('#platform .platform-copy-card:nth-of-type(1) .platform-fact', ['Data', 'Private', 'White-label', 'Ops'])
+
+      setMobileText('#platform .platform-copy-card:nth-of-type(2) .platform-kicker', 'Act 02 · Product surface')
+      setMobileHTML('#platform .platform-copy-card:nth-of-type(2) .platform-title', 'Core tools. <em>One operating layer.</em>')
+      setMobileText('#platform .platform-copy-card:nth-of-type(2) .platform-desc', 'Analytics, automation, docs, and storage live in one product.')
+      setMobileList('#platform .platform-copy-card:nth-of-type(2) .platform-fact', ['Analytics', 'Automation', 'Docs', 'Storage'])
+
+      setMobileText('#platform .platform-copy-card:nth-of-type(3) .platform-kicker', 'Act 03 · Agent control')
+      setMobileHTML('#platform .platform-copy-card:nth-of-type(3) .platform-title', 'Agents with a home. <em>Still under your control.</em>')
+      setMobileText('#platform .platform-copy-card:nth-of-type(3) .platform-desc', 'Give every team a workspace, rollout rails, and the docs needed to run.')
+      setMobileList('#platform .platform-copy-card:nth-of-type(3) .platform-fact', ['Agent teams', 'Rollout', 'Vault', 'Private'])
+
+      setMobileText('#consulting .consulting-copy-card:nth-of-type(1) .consulting-kicker', 'Act 01 · Brand fit')
+      setMobileHTML('#consulting .consulting-copy-card:nth-of-type(1) .consulting-title', 'Design the business first. <em>Then build.</em>')
+      setMobileText('#consulting .consulting-copy-card:nth-of-type(1) .consulting-desc', 'Positioning, offer, market, and trust assets before scale.')
+      setMobileList('#consulting .consulting-copy-card:nth-of-type(1) .consulting-fact', ['Brand', 'Offer', 'Market', 'Trust'])
+
+      setMobileText('#consulting .consulting-copy-card:nth-of-type(2) .consulting-kicker', 'Act 02 · Sync + visibility')
+      setMobileHTML('#consulting .consulting-copy-card:nth-of-type(2) .consulting-title', 'Get operations in sync. <em>Then get seen.</em>')
+      setMobileText('#consulting .consulting-copy-card:nth-of-type(2) .consulting-desc', 'Leads, WhatsApp, CRM, SEO, GEO, and campaigns in one rhythm.')
+      setMobileList('#consulting .consulting-copy-card:nth-of-type(2) .consulting-fact', ['Automation', 'Ops sync', 'SEO/GEO', 'Campaigns'])
+
+      setMobileText('#consulting .consulting-copy-card:nth-of-type(3) .consulting-kicker', 'Act 03 · Exact stack')
+      setMobileHTML('#consulting .consulting-copy-card:nth-of-type(3) .consulting-title', 'Specific problem. <em>Specific stack.</em>')
+      setMobileText('#consulting .consulting-copy-card:nth-of-type(3) .consulting-desc', 'Custom tools, private systems, or paid software based on ROI.')
+      setMobileList('#consulting .consulting-copy-card:nth-of-type(3) .consulting-fact', ['Custom', 'Private', 'ROI tools', 'Handoff'])
+
+      setMobileText('#proof .proof-copy-card:nth-of-type(1) .proof-kicker', 'Phase 01 · Outcomes')
+      setMobileHTML('#proof .proof-copy-card:nth-of-type(1) .proof-title', 'Clear outcomes. <em>Numbers that moved the business.</em>')
+      setMobileText('#proof .proof-copy-card:nth-of-type(1) .proof-desc', 'Savings, accuracy, and operating lift tied to real delivery.')
+      setMobileList('#proof .proof-copy-card:nth-of-type(1) .proof-fact', ['Savings', 'Accuracy', 'Private', 'Impact'])
+
+      setMobileText('#proof .proof-copy-card:nth-of-type(2) .proof-kicker', 'Phase 02 · Evidence')
+      setMobileHTML('#proof .proof-copy-card:nth-of-type(2) .proof-title', 'Each number has <em>real delivery behind it.</em>')
+      setMobileText('#proof .proof-copy-card:nth-of-type(2) .proof-desc', 'The outcome matters more when you can see what caused it.')
+      setMobileList('#proof .proof-copy-card:nth-of-type(2) .proof-fact', ['Context', 'Owner', 'Use-case', 'Year'])
+
+      setMobileText('#assist .assist-copy-card:nth-of-type(1) .assist-kicker', 'Act 01 · Founder leverage')
+      setMobileHTML('#assist .assist-copy-card:nth-of-type(1) .assist-title', 'Private founder-side help. <em>Not generic AI service.</em>')
+      setMobileText('#assist .assist-copy-card:nth-of-type(1) .assist-desc', 'High-trust working sessions that turn vague leverage into usable structure.')
+      setMobileList('#assist .assist-copy-card:nth-of-type(1) .assist-fact', ['Founder', 'High-trust', 'Private', 'Direct'])
+
+      setMobileText('#assist .assist-copy-card:nth-of-type(2) .assist-kicker', 'Act 02 · Tiny tools')
+      setMobileHTML('#assist .assist-copy-card:nth-of-type(2) .assist-title', 'Learn Claude Code. <em>Ship tools that compound.</em>')
+      setMobileText('#assist .assist-copy-card:nth-of-type(2) .assist-desc', 'Small scripts, dashboards, and helpers that save time every day.')
+      setMobileList('#assist .assist-copy-card:nth-of-type(2) .assist-fact', ['Claude Code', 'Tooling', 'Compounding', 'Output'])
+
+      setMobileText('#assist .assist-copy-card:nth-of-type(3) .assist-kicker', 'Act 03 · Quiet No.2')
+      setMobileHTML('#assist .assist-copy-card:nth-of-type(3) .assist-title', 'Calm execution. <em>Sharp enough to ship.</em>')
+      setMobileText('#assist .assist-copy-card:nth-of-type(3) .assist-desc', 'You bring the ambition. I bring structure, speed, and low-ego delivery.')
+      setMobileList('#assist .assist-copy-card:nth-of-type(3) .assist-fact', ['Kind', 'Discreet', 'Fast', 'Leverage'])
+
+      // Labs mobile copy: compress for snap panels
+      const labsCopyEl = document.querySelector('#labs-teaser .labs-teaser-copy')
+      if (labsCopyEl) {
+        const labsTitleEl = labsCopyEl.querySelector('.labs-teaser-title')
+        if (labsTitleEl) labsTitleEl.innerHTML = 'Live demos. <em>Stack in motion.</em>'
+        const labsSubEl = labsCopyEl.querySelector('.labs-teaser-sub')
+        if (labsSubEl) labsSubEl.textContent = 'Three demos showing how AI fits into real business workflows.'
+        const labsFact = labsCopyEl.querySelectorAll('.labs-teaser-fact')
+        const shortFacts = ['SEO', 'Docs', 'Workflow', 'Ops']
+        labsFact.forEach((f, i) => { if (shortFacts[i]) f.textContent = shortFacts[i] })
+        const policyEl = labsCopyEl.querySelector('.labs-teaser-policy')
+        if (policyEl) policyEl.style.display = 'none'
+      }
+    }
+
+    applyMobilePanelMetrics()
+    applyMobileCopyCompression()
+
     // Kill all desktop fade-phase pin triggers (meet + content sections)
     ScrollTrigger.getAll().forEach(st => {
       if (st.vars && st.vars.pin && st.trigger && st.trigger.id !== 'hero') st.kill(true)
@@ -2504,7 +2748,11 @@ function initMainPage() {
       const N = cards.length
       if (!secEl || !stack || !N) return
       const copyParent = stack.parentElement
-      const stageEl = secEl.querySelector('.platform-stage, .consulting-stage, .proof-stage, .assist-stage')
+      const scrollOpts = Object.assign({}, extraOpts || {})
+      const extraOnEnter = scrollOpts.onEnter
+      const extraOnEnterBack = scrollOpts.onEnterBack
+      delete scrollOpts.onEnter
+      delete scrollOpts.onEnterBack
       let currentWidth = 0
       let currentHeight = 0
 
@@ -2520,13 +2768,9 @@ function initMainPage() {
       if (glow)  gsap.set(glow,  { clearProps: 'opacity,transform,scale' })
 
       function applyMobileStoryLayout() {
-        const viewportHeight = getMobileViewportHeight()
-        const navOffset = getMobileNavOffset()
-        const sectionPadding = navOffset + 16
-
-        document.documentElement.style.setProperty('--mobile-nav-offset', navOffset + 'px')
-        secEl.style.setProperty('--mobile-nav-offset', sectionPadding + 'px')
-        secEl.style.height = viewportHeight + 'px'
+        const metrics = applyMobilePanelMetrics()
+        secEl.style.setProperty('--mobile-nav-offset', (metrics.navOffset + 16) + 'px')
+        secEl.style.height = metrics.viewportHeight + 'px'
         secEl.style.overflow = 'hidden'
         secEl.style.boxSizing = 'border-box'
 
@@ -2539,11 +2783,10 @@ function initMainPage() {
         const sectionStyles = getComputedStyle(secEl)
         const paddingTop = parseFloat(sectionStyles.paddingTop) || 0
         const paddingBottom = parseFloat(sectionStyles.paddingBottom) || 0
-        const stageHeight = stageEl ? Math.round(stageEl.getBoundingClientRect().height || 160) : 160
         currentWidth = copyParent && copyParent.getBoundingClientRect().width > 0
           ? Math.round(copyParent.getBoundingClientRect().width)
           : window.innerWidth
-        currentHeight = Math.max(viewportHeight - paddingTop - paddingBottom - stageHeight, 220)
+        currentHeight = Math.max(120, Math.round(metrics.viewportHeight - paddingTop - paddingBottom))
 
         if (copyParent) {
           copyParent.style.height = currentHeight + 'px'
@@ -2602,6 +2845,23 @@ function initMainPage() {
           anticipatePin: 1,
           invalidateOnRefresh: true,
           onRefreshInit: applyMobileStoryLayout,
+          onEnter: function(self) {
+            if (window.__dotsStoryThreadState && typeof window.__dotsStoryThreadState.setMobile === 'function') {
+              window.__dotsStoryThreadState.setMobile(sectionId, 0, true)
+            }
+            if (typeof extraOnEnter === 'function') extraOnEnter(self)
+          },
+          onEnterBack: function(self) {
+            if (window.__dotsStoryThreadState && typeof window.__dotsStoryThreadState.setMobile === 'function') {
+              window.__dotsStoryThreadState.setMobile(sectionId, 0, true)
+            }
+            if (typeof extraOnEnterBack === 'function') extraOnEnterBack(self)
+          },
+          onToggle: function(self) {
+            if (self.isActive && window.__dotsStoryThreadState && typeof window.__dotsStoryThreadState.setMobile === 'function') {
+              window.__dotsStoryThreadState.setMobile(sectionId, 0, true)
+            }
+          },
           snap: {
             snapTo: 1 / (N - 1),
             duration: { min: 0.2, max: 0.5 },
@@ -2609,13 +2869,16 @@ function initMainPage() {
             ease: 'power1.inOut'
           },
           onUpdate: function(self) {
-            const idx = Math.round(self.progress * (N - 1))
+            const idx = Math.min(N - 1, Math.floor(self.progress * N))
             Array.from(phases).forEach(function(ph, i) {
               ph.style.opacity = i === idx ? '1' : '0'
               ph.style.pointerEvents = i === idx ? 'auto' : 'none'
             })
+            if (window.__dotsStoryThreadState && typeof window.__dotsStoryThreadState.setMobile === 'function') {
+              window.__dotsStoryThreadState.setMobile(sectionId, idx)
+            }
           }
-        }, extraOpts || {})
+        }, scrollOpts)
       })
       registerSectionTrigger(sectionId, mST.scrollTrigger)
       mobileStoryLayouts.push(applyMobileStoryLayout)
@@ -2626,9 +2889,115 @@ function initMainPage() {
     setupMobileHSnap('proof',       proofEl.querySelector('.proof-copy-stack'),         proofCards,  proofPhases,  proofLabel,  proofGlow, { onEnter: startProofCounters, onEnterBack: startProofCounters })
     setupMobileHSnap('assist',      assistEl.querySelector('.assist-copy-stack'),       aCards,      aPhases,      aLabel,      aGlow)
 
+    // Labs: build a mobile horizontal snap using .labs-mobile-card elements
+    ;(function setupLabsMobileSnap() {
+      const labsMobileEl = document.getElementById('labs-teaser')
+      if (!labsMobileEl) return
+
+      // Gather all .labs-mobile-card in order: copy card + 3 demo cards
+      const allLabsCards = Array.from(labsMobileEl.querySelectorAll('.labs-mobile-card'))
+      if (!allLabsCards.length) return
+
+      // Wrap in a stack container
+      const labsShell = labsMobileEl.querySelector('.labs-teaser-shell')
+      if (!labsShell) return
+
+      // Create the stack wrapper that acts as the horizontal rail
+      const labsStack = document.createElement('div')
+      labsStack.className = 'labs-mobile-stack'
+      labsShell.parentNode.insertBefore(labsStack, labsShell)
+      allLabsCards.forEach(c => labsStack.appendChild(c))
+      labsShell.remove()
+
+      // Also hide the all-labs link during snap (show it last slide)
+      const labsAllLink = labsMobileEl.querySelector('.labs-teaser-all')
+
+      // Hide desktop labs teaser trigger (already killed above)
+      // Use setupMobileHSnap logic manually for labs
+      function applyLabsMobileLayout() {
+        const metrics = applyMobilePanelMetrics()
+        const N = allLabsCards.length
+        labsMobileEl.style.height = metrics.viewportHeight + 'px'
+        labsMobileEl.style.overflow = 'hidden'
+        labsMobileEl.style.boxSizing = 'border-box'
+        const paddingTop = parseFloat(getComputedStyle(labsMobileEl).paddingTop) || 0
+        const paddingBottom = parseFloat(getComputedStyle(labsMobileEl).paddingBottom) || 0
+        const availH = Math.max(120, Math.round(metrics.viewportHeight - paddingTop - paddingBottom))
+        const availW = Math.round(window.innerWidth)
+
+        labsStack.style.width = (N * availW) + 'px'
+        labsStack.style.height = availH + 'px'
+        labsStack.style.display = 'flex'
+        labsStack.style.flexDirection = 'row'
+        labsStack.style.flexWrap = 'nowrap'
+        labsStack.style.overflow = 'visible'
+        labsStack.style.position = 'relative'
+        labsStack.style.willChange = 'transform'
+
+        allLabsCards.forEach(c => {
+          c.style.width = availW + 'px'
+          c.style.height = availH + 'px'
+          c.style.flex = '0 0 ' + availW + 'px'
+          c.style.boxSizing = 'border-box'
+          c.style.overflowY = 'auto'
+          c.style.display = 'flex'
+          c.style.flexDirection = 'column'
+          c.style.justifyContent = 'flex-start'
+          c.style.padding = '20px 20px 24px'
+          c.style.opacity = '1'
+          c.style.visibility = 'visible'
+          c.style.transform = 'none'
+        })
+      }
+      applyLabsMobileLayout()
+
+      const labsN = allLabsCards.length
+      const labsMST = gsap.to(labsStack, {
+        x: () => -(labsN - 1) * window.innerWidth,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#labs-teaser',
+          start: 'top top',
+          end: '+=' + (labsN - 1) * 100 + '%',
+          pin: true,
+          scrub: 0.8,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onRefreshInit: applyLabsMobileLayout,
+          onEnter: function() {
+            if (window.__dotsStoryThreadState) window.__dotsStoryThreadState.setMobile('labs-teaser', 0, true)
+          },
+          onEnterBack: function() {
+            if (window.__dotsStoryThreadState) window.__dotsStoryThreadState.setMobile('labs-teaser', 0, true)
+          },
+          snap: {
+            snapTo: 1 / (labsN - 1),
+            duration: { min: 0.2, max: 0.5 },
+            delay: 0.05,
+            ease: 'power1.inOut'
+          },
+          onUpdate: function(self) {
+            const idx = Math.min(labsN - 1, Math.floor(self.progress * labsN))
+            if (window.__dotsStoryThreadState) window.__dotsStoryThreadState.setMobile('labs-teaser', idx)
+            // Show all-labs link on last slide
+            if (labsAllLink) labsAllLink.style.display = idx === labsN - 1 ? 'block' : 'none'
+          }
+        }
+      })
+      registerSectionTrigger('labs-teaser', labsMST.scrollTrigger)
+      mobileStoryLayouts.push(applyLabsMobileLayout)
+    })()
+
     function refreshMobileStoryLayouts() {
+      applyMobilePanelMetrics()
       if (!mobileStoryLayouts.length) return
       mobileStoryLayouts.forEach((applyLayout) => applyLayout())
+      if (window.__dotsStoryThreadState && typeof window.__dotsStoryThreadState.setMobile === 'function') {
+        const currentMobileState = window.__dotsStoryThreadState.getCurrentMobile && window.__dotsStoryThreadState.getCurrentMobile()
+        if (currentMobileState) {
+          window.__dotsStoryThreadState.setMobile(currentMobileState.section, currentMobileState.index, true)
+        }
+      }
       ScrollTrigger.refresh()
     }
 
