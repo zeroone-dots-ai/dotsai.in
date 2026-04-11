@@ -968,6 +968,14 @@
             </div>
           </article>
         </div>
+
+        <div class="proof-cta-cluster">
+          <button id="btn-read-testimony-proof" class="btn-testimony btn-testimony--live proof-cta-testimony" type="button">
+            Read Testimony
+            <span class="btn-testimony-badge btn-testimony-badge--live">3 Real Stories</span>
+          </button>
+          <p class="proof-cta-note">Every number above is verified by the same real stories. Read them before you book.</p>
+        </div>
       </div>
 
       <div class="proof-stage">
@@ -2581,21 +2589,28 @@ function initMainPage() {
   contactEl.style.minHeight = '100vh'
   contactEl.style.overflow = 'visible'
 
-  const contactTl = gsap.timeline({
-    scrollTrigger: {
-      trigger: '#contact',
-      start: isMobile ? 'top 86%' : 'top 78%',
-      end: 'bottom bottom',
-      toggleActions: 'play none none reverse',
-    }
-  })
-  contactTl.from('.contact-label', { opacity: 0, y: 20, duration: 0.08, ease: EASE_OUT, immediateRender: false }, 0.02)
-  contactTl.from('.contact-title', { opacity: 0, y: 30, duration: 0.10, ease: EASE_OUT, immediateRender: false }, 0.10)
-  contactTl.from('.contact-sub', { opacity: 0, y: 16, duration: 0.08, ease: EASE_OUT, immediateRender: false }, 0.35)
-  contactTl.from('.contact-buttons', { opacity: 0, y: 14, duration: 0.12, ease: EASE_OUT, immediateRender: false }, 0.55)
-  contactTl.from('.contact-schedule-card', { opacity: 0, y: 22, scale: 0.97, duration: 0.14, ease: EASE_OUT, immediateRender: false }, 0.44)
-  contactTl.set({}, {}, 1)
-  registerSectionTrigger('contact', contactTl.scrollTrigger)
+  let contactTl
+  // NOTE: Mobile contactTl pin is created later (after all other mobile
+  // pins are set up) so ScrollTrigger computes its start/end after the
+  // other mobile pinSpacers are in place. See buildMobileContactPin() below.
+  if (!isMobile) {
+    // DESKTOP — one-shot reveal, no pin (unchanged behavior)
+    contactTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#contact',
+        start: 'top 78%',
+        end: 'bottom bottom',
+        toggleActions: 'play none none reverse',
+      }
+    })
+    contactTl.from('.contact-label', { opacity: 0, y: 20, duration: 0.08, ease: EASE_OUT, immediateRender: false }, 0.02)
+    contactTl.from('.contact-title', { opacity: 0, y: 30, duration: 0.10, ease: EASE_OUT, immediateRender: false }, 0.10)
+    contactTl.from('.contact-sub', { opacity: 0, y: 16, duration: 0.08, ease: EASE_OUT, immediateRender: false }, 0.35)
+    contactTl.from('.contact-buttons', { opacity: 0, y: 14, duration: 0.12, ease: EASE_OUT, immediateRender: false }, 0.55)
+    contactTl.from('.contact-schedule-card', { opacity: 0, y: 22, scale: 0.97, duration: 0.14, ease: EASE_OUT, immediateRender: false }, 0.44)
+    contactTl.set({}, {}, 1)
+    registerSectionTrigger('contact', contactTl.scrollTrigger)
+  }
 
   // ── Nav contrast: dark on hero, light on cream, dark on dark sections ──
   const nav = document.getElementById('nav')
@@ -2841,7 +2856,7 @@ function initMainPage() {
     // Meet stays pinned on mobile so the manifesto word reveal + credentials + CTA
     // progression works exactly like desktop (user request).
     ScrollTrigger.getAll().forEach(st => {
-      if (st.vars && st.vars.pin && st.trigger && st.trigger.id !== 'hero' && st.trigger.id !== 'meet') st.kill(true)
+      if (st.vars && st.vars.pin && st.trigger && st.trigger.id !== 'hero' && st.trigger.id !== 'meet' && st.trigger.id !== 'contact') st.kill(true)
     })
 
     // Generic horizontal snap setup for a pinned content section
@@ -2971,6 +2986,7 @@ function initMainPage() {
             ease: 'power1.inOut'
           },
           onUpdate: function(self) {
+            if (!self.isActive) return
             const idx = Math.min(N - 1, Math.floor(self.progress * N))
             Array.from(phases).forEach(function(ph, i) {
               ph.style.opacity = i === idx ? '1' : '0'
@@ -3079,6 +3095,7 @@ function initMainPage() {
             ease: 'power1.inOut'
           },
           onUpdate: function(self) {
+            if (!self.isActive) return
             const idx = Math.min(labsN - 1, Math.floor(self.progress * labsN))
             if (window.__dotsStoryThreadState) window.__dotsStoryThreadState.setMobile('labs-teaser', idx)
             // Show all-labs link on last slide
@@ -3088,6 +3105,61 @@ function initMainPage() {
       })
       registerSectionTrigger('labs-teaser', labsMST.scrollTrigger)
       mobileStoryLayouts.push(applyLabsMobileLayout)
+    })()
+
+    // ── Mobile CONTACT pin — created AFTER all other mobile pins so
+    //    ScrollTrigger computes its start/end after the other pinSpacers
+    //    are in place. 3 phases like Meet:
+    //      (1) label + title + sub
+    //      (2) buttons + schedule card header
+    //      (3) agenda rows + actions
+    ;(function setupContactMobilePin() {
+      gsap.set('.contact-label',          { opacity: 0, y: 20 })
+      gsap.set('.contact-title',          { opacity: 0, y: 30 })
+      gsap.set('.contact-sub',            { opacity: 0, y: 16 })
+      gsap.set('.contact-buttons',        { opacity: 0, y: 14 })
+      gsap.set('.contact-schedule-card',  { opacity: 0, y: 22, scale: 0.97 })
+      gsap.set('.contact-schedule-top',   { opacity: 0, y: 12 })
+      gsap.set('.contact-schedule-title', { opacity: 0, y: 14 })
+      gsap.set('.contact-schedule-copy',  { opacity: 0, y: 10 })
+      gsap.set('.contact-schedule-meta',  { opacity: 0, y: 10 })
+      gsap.set('.contact-schedule-agenda',{ opacity: 0, y: 18 })
+      gsap.set('.contact-schedule-actions',{ opacity: 0, y: 14 })
+
+      contactTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '#contact',
+          start: 'top top',
+          end: '+=200%',
+          pin: true,
+          scrub: 0.5,
+          anticipatePin: 1,
+          onUpdate: (self) => {
+            if (!self.isActive) return
+            if (window.__dotsStoryThreadState && typeof window.__dotsStoryThreadState.setMobile === 'function') {
+              const p = self.progress
+              const idx = p < 0.34 ? 0 : (p < 0.67 ? 1 : 2)
+              window.__dotsStoryThreadState.setMobile('contact', idx)
+            }
+          }
+        }
+      })
+      // Phase 1 (0%–33%): label + title + sub
+      contactTl.to('.contact-label', { opacity: 1, y: 0, duration: 0.06, ease: EASE_OUT }, 0.02)
+      contactTl.to('.contact-title', { opacity: 1, y: 0, duration: 0.10, ease: EASE_OUT }, 0.08)
+      contactTl.to('.contact-sub',   { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.22)
+      // Phase 2 (33%–66%): buttons + schedule card header
+      contactTl.to('.contact-buttons',        { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.36)
+      contactTl.to('.contact-schedule-card',  { opacity: 1, y: 0, scale: 1, duration: 0.10, ease: EASE_OUT }, 0.42)
+      contactTl.to('.contact-schedule-top',   { opacity: 1, y: 0, duration: 0.06, ease: EASE_OUT }, 0.46)
+      contactTl.to('.contact-schedule-title', { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.50)
+      contactTl.to('.contact-schedule-copy',  { opacity: 1, y: 0, duration: 0.06, ease: EASE_OUT }, 0.56)
+      contactTl.to('.contact-schedule-meta',  { opacity: 1, y: 0, duration: 0.06, ease: EASE_OUT }, 0.60)
+      // Phase 3 (66%–100%): agenda rows + actions
+      contactTl.to('.contact-schedule-agenda', { opacity: 1, y: 0, duration: 0.10, ease: EASE_OUT }, 0.70)
+      contactTl.to('.contact-schedule-actions',{ opacity: 1, y: 0, duration: 0.10, ease: EASE_OUT }, 0.82)
+      contactTl.set({}, {}, 1)
+      registerSectionTrigger('contact', contactTl.scrollTrigger)
     })()
 
     function refreshMobileStoryLayouts() {
@@ -3117,21 +3189,8 @@ function initMainPage() {
       window.visualViewport.addEventListener('resize', queueMobileStoryRefresh, { passive: true })
     }
 
-    // Mobile: contact variant progress (3 slides).
-    // Meet is driven by its pinned meetTl.onUpdate — see meetTl above.
-    // Created AFTER mobile relayout + horizontal-snap setup so section bounds are final.
-    ScrollTrigger.create({
-      trigger: '#contact',
-      start: 'top bottom',
-      end: 'bottom bottom',
-      scrub: true,
-      onUpdate: (self) => {
-        if (!window.__dotsStoryThreadState || typeof window.__dotsStoryThreadState.setMobile !== 'function') return
-        const p = self.progress
-        const idx = p < 0.34 ? 0 : (p < 0.67 ? 1 : 2)
-        window.__dotsStoryThreadState.setMobile('contact', idx)
-      }
-    })
+    // Meet + Contact mobile variant progress are driven by their own
+    // pinned timelines' onUpdate — see meetTl and contactTl above.
 
     ScrollTrigger.refresh()
   }
@@ -5737,8 +5796,8 @@ a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .service-row
 (function() {
   var overlay  = document.getElementById('testimony-overlay');
   var backdrop = document.getElementById('toverlay-backdrop');
-  var trigger  = document.getElementById('btn-read-testimony');
-  if (!overlay || !trigger) return;
+  var triggers = Array.prototype.slice.call(document.querySelectorAll('.btn-testimony'));
+  if (!overlay || !triggers.length) return;
 
   var cards = overlay.querySelectorAll('.tfloat');
   var EASE  = 'cubic-bezier(0.23, 1, 0.32, 1)';
@@ -5870,7 +5929,7 @@ a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .service-row
     });
   }
 
-  trigger.addEventListener('click', openOverlay);
+  triggers.forEach(function(t) { t.addEventListener('click', openOverlay); });
   backdrop.addEventListener('click', closeOverlay);
 
   overlay.querySelectorAll('.tfloat-x').forEach(function(btn) {
@@ -5967,6 +6026,7 @@ a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .service-row
     '.btn-primary',                        // → Explore Platform
     '.btn-secondary',                      // ↗ Let's Talk (platform section)
     '.btn-wa',                             // ↗ WhatsApp Me (contact)
+    '.btn-testimony',                      // Read Testimony (contact + outcome)
     '.brief-cta',                          // Book session CTA (assist)
     '.meet-redirect',                      // Meet personal redirect
     '#contact-calendar-toggle',            // Open inline calendar

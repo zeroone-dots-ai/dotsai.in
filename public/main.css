@@ -3098,6 +3098,39 @@ nav.light .nav-cta {
   min-height: 420px;
 }
 
+.proof-cta-cluster {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 8px;
+}
+.proof-cta-testimony {
+  align-self: flex-start;
+  color: rgba(255,255,255,0.88) !important;
+  border-color: rgba(255,255,255,0.22) !important;
+  background: rgba(255,255,255,0.03) !important;
+}
+.proof-cta-testimony:hover {
+  border-color: rgba(200,182,255,0.55) !important;
+  box-shadow: 0 0 24px rgba(200,182,255,0.14) !important;
+}
+.proof-cta-testimony .btn-testimony-badge--live {
+  background: rgba(200,182,255,0.18) !important;
+  color: rgba(215,207,240,0.95) !important;
+  border-color: rgba(200,182,255,0.32) !important;
+}
+.proof-cta-note {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  max-width: 360px;
+  line-height: 1.5;
+  margin: 0;
+}
+
 .proof-copy-card {
   position: absolute;
   inset: 0;
@@ -5359,6 +5392,127 @@ footer {
     padding: 8px 14px !important;
   }
 
+  /* ── 2b. CONTACT: pin-and-progress like Meet ── */
+  /* Contact pins on mobile so label/title/sub/buttons/schedule card
+     progressively fade in via 3 scroll phases. CONTACT_COPY swaps
+     textContent of existing nodes, so tweened opacity persists through
+     filter changes. */
+  #contact {
+    height: 100svh !important;
+    min-height: 100svh !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    padding-top: calc(var(--mobile-story-panel-reserve, 176px) + 8px) !important;
+    padding-bottom: calc(var(--mobile-nav-offset, 72px) + 12px) !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+    display: flex !important;
+    align-items: flex-start !important;
+  }
+  #contact .contact-shell {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 0 !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    align-items: start !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  #contact .contact-inner {
+    min-height: 0 !important;
+    justify-content: flex-start !important;
+  }
+  /* Tighten spacing so 3-phase content fits inside 100svh minus reserves */
+  #contact .contact-label {
+    margin-bottom: 10px !important;
+    font-size: 9px !important;
+  }
+  #contact .contact-title {
+    font-size: clamp(28px, 8.2vw, 36px) !important;
+    line-height: 1.08 !important;
+    margin-bottom: 10px !important;
+  }
+  #contact .contact-sub {
+    margin-bottom: 14px !important;
+    font-size: 13px !important;
+    line-height: 1.42 !important;
+  }
+  #contact .contact-buttons {
+    gap: 8px !important;
+    margin-bottom: 12px !important;
+  }
+  #contact .btn-wa,
+  #contact .btn-testimony {
+    padding: 10px 14px !important;
+    font-size: 12px !important;
+  }
+  #contact .contact-schedule-card {
+    padding: 14px 14px 12px !important;
+    border-radius: 18px !important;
+    min-height: 0 !important;
+  }
+  #contact .contact-schedule-top {
+    margin-bottom: 6px !important;
+  }
+  #contact .contact-schedule-label,
+  #contact .contact-schedule-badge {
+    font-size: 9px !important;
+  }
+  #contact .contact-schedule-title {
+    font-size: 20px !important;
+    line-height: 1.15 !important;
+    margin-bottom: 6px !important;
+  }
+  #contact .contact-schedule-copy {
+    font-size: 12px !important;
+    line-height: 1.38 !important;
+    margin-bottom: 8px !important;
+  }
+  #contact .contact-schedule-meta {
+    gap: 6px !important;
+    margin-bottom: 8px !important;
+  }
+  #contact .contact-schedule-chip {
+    font-size: 9px !important;
+    padding: 3px 7px !important;
+  }
+  #contact .contact-schedule-agenda {
+    padding: 8px 10px !important;
+    gap: 4px !important;
+    margin-bottom: 8px !important;
+  }
+  #contact .contact-schedule-row {
+    gap: 8px !important;
+    font-size: 11px !important;
+  }
+  #contact .contact-schedule-topic,
+  #contact .contact-schedule-value {
+    font-size: 11px !important;
+  }
+  #contact .contact-schedule-actions {
+    gap: 6px !important;
+    flex-direction: column !important;
+  }
+  #contact .contact-schedule-action {
+    width: 100% !important;
+    padding: 9px 12px !important;
+    font-size: 11px !important;
+  }
+  /* Calendar iframe is opt-in (tap toggle) — stays hidden while pin plays */
+  #contact .contact-schedule-frame-shell { display: none !important; }
+
+  /* When user opens the inline calendar, release the pin constraints
+     so the iframe can expand naturally */
+  #contact.contact-calendar-open {
+    height: auto !important;
+    min-height: 100svh !important;
+    overflow: visible !important;
+  }
+  #contact.contact-calendar-open .contact-schedule-frame-shell {
+    display: block !important;
+  }
+
   /* ── 3. SECTION SHELL: flex column, fills viewport ── */
   #platform, #consulting, #proof, #assist {
     display: flex !important;
@@ -5586,6 +5740,33 @@ footer {
   /* CTAs inside copy: hide on mobile (contact section handles CTAs) */
   .platform-cta-cluster, .consulting-cta-cluster, .assist-cta-cluster {
     display: none !important;
+  }
+
+  /* Proof CTA cluster: pin to bottom of #proof on mobile so Read Testimony
+     stays reachable without disrupting horizontal card swipe */
+  #proof { position: relative !important; }
+  .proof-cta-cluster {
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: calc(var(--mobile-nav-offset, 72px) + 14px) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 6px !important;
+    padding: 0 18px !important;
+    margin: 0 !important;
+    z-index: 20 !important;
+    pointer-events: auto !important;
+  }
+  .proof-cta-testimony {
+    padding: 10px 18px !important;
+    font-size: 12px !important;
+  }
+  .proof-cta-note {
+    text-align: center !important;
+    font-size: 9px !important;
+    max-width: 300px !important;
   }
 
   /* ── 5. COPY AREA: fills remaining space ── */
