@@ -276,19 +276,20 @@
 
   <div id="mobile-story-panel" data-section="hero" data-skin="light" aria-hidden="true">
     <div class="mobile-story-shell">
+      <div class="mobile-story-disc" id="mobile-story-disc">
+        <span class="mobile-story-halo mobile-story-halo-a"></span>
+        <span class="mobile-story-halo mobile-story-halo-b"></span>
+        <div class="mobile-story-core" id="mobile-story-core">01</div>
+      </div>
       <div class="mobile-story-meta">
         <span class="mobile-story-step" id="mobile-story-step">ACT 01</span>
         <span class="mobile-story-section" id="mobile-story-section">Meet</span>
       </div>
-      <div class="mobile-story-disc" id="mobile-story-disc">
-        <span class="mobile-story-halo mobile-story-halo-a"></span>
-        <span class="mobile-story-halo mobile-story-halo-b"></span>
-        <div class="mobile-story-core" id="mobile-story-core">Builder</div>
-        <span class="mobile-story-chip mobile-story-chip-a" id="mobile-story-chip-a">AI</span>
-        <span class="mobile-story-chip mobile-story-chip-b" id="mobile-story-chip-b">Systems</span>
-        <span class="mobile-story-chip mobile-story-chip-c" id="mobile-story-chip-c">Deploy</span>
-        <span class="mobile-story-chip mobile-story-chip-d" id="mobile-story-chip-d">Direct</span>
-      </div>
+      <!-- deprecated chips kept as hidden anchors for existing JS refs -->
+      <span class="mobile-story-chip mobile-story-chip-a" id="mobile-story-chip-a" hidden></span>
+      <span class="mobile-story-chip mobile-story-chip-b" id="mobile-story-chip-b" hidden></span>
+      <span class="mobile-story-chip mobile-story-chip-c" id="mobile-story-chip-c" hidden></span>
+      <span class="mobile-story-chip mobile-story-chip-d" id="mobile-story-chip-d" hidden></span>
     </div>
   </div>
 
@@ -431,6 +432,25 @@
   <!-- ─── PLATFORM (universal SaaS compartment) ─── -->
   <section id="platform" class="platform-section fade-up">
     <div class="platform-grid">
+      <div class="m-hero m-hero-platform" aria-hidden="true">
+        <div class="m-hero-head">
+          <span class="m-hero-kicker">// Act 02 · Platform</span>
+          <span class="m-hero-eyebrow">One private operating layer</span>
+        </div>
+        <div class="m-hero-grid m-hero-grid-6">
+          <div class="m-hero-tile" data-dot="data"><span class="m-hero-tile-dot"></span><strong>Data</strong><em>streams + lakes</em></div>
+          <div class="m-hero-tile" data-dot="ops"><span class="m-hero-tile-dot"></span><strong>Ops</strong><em>automation</em></div>
+          <div class="m-hero-tile" data-dot="tech"><span class="m-hero-tile-dot"></span><strong>Tech</strong><em>agents + tools</em></div>
+          <div class="m-hero-tile" data-dot="strategy"><span class="m-hero-tile-dot"></span><strong>Strategy</strong><em>analytics</em></div>
+          <div class="m-hero-tile" data-dot="data"><span class="m-hero-tile-dot"></span><strong>Docs</strong><em>+ guides + QA</em></div>
+          <div class="m-hero-tile" data-dot="tech"><span class="m-hero-tile-dot"></span><strong>Sandbox</strong><em>+ rollout</em></div>
+        </div>
+        <div class="m-hero-foot">
+          <span class="m-hero-pill">Private</span>
+          <span class="m-hero-pill">White-label</span>
+          <span class="m-hero-pill">Yours</span>
+        </div>
+      </div>
       <div class="platform-copy">
         <p class="platform-label">// universal SaaS platform</p>
 
@@ -652,6 +672,30 @@
   <!-- ─── CONSULTING (India-market operating system) ─── -->
   <section id="consulting" class="consulting-section fade-up">
     <div class="consulting-grid">
+      <div class="m-hero m-hero-consulting" aria-hidden="true">
+        <div class="m-hero-head">
+          <span class="m-hero-kicker">// Act 03 · Consulting</span>
+          <span class="m-hero-eyebrow">D.O.T.S progression</span>
+        </div>
+        <ol class="m-hero-steps">
+          <li data-dot="data">
+            <span class="m-hero-step-num">D</span>
+            <div><strong>Design the brand</strong><em>Positioning · offer · trust</em></div>
+          </li>
+          <li data-dot="ops">
+            <span class="m-hero-step-num">O</span>
+            <div><strong>Sync operations</strong><em>CRM · WhatsApp · flows</em></div>
+          </li>
+          <li data-dot="tech">
+            <span class="m-hero-step-num">T</span>
+            <div><strong>Ship exact stack</strong><em>Custom · open-source · paid</em></div>
+          </li>
+          <li data-dot="strategy">
+            <span class="m-hero-step-num">S</span>
+            <div><strong>Scale the margin</strong><em>Measured · compounding</em></div>
+          </li>
+        </ol>
+      </div>
       <div class="consulting-copy">
         <p class="consulting-label">// consulting for indian businesses</p>
 
@@ -867,6 +911,31 @@
   <!-- ─── PROOF ─── -->
   <section id="proof" class="proof-section">
     <div class="proof-shell">
+      <div class="m-hero m-hero-proof" aria-hidden="true">
+        <div class="m-hero-head">
+          <span class="m-hero-kicker">// Act 04 · Outcomes</span>
+          <span class="m-hero-eyebrow">Real business movement</span>
+        </div>
+        <div class="m-hero-metrics">
+          <div class="m-hero-metric" data-dot="data">
+            <span class="m-hero-metric-num">12<sup>+</sup></span>
+            <span class="m-hero-metric-lbl">Clients shipped</span>
+          </div>
+          <div class="m-hero-metric" data-dot="strategy">
+            <span class="m-hero-metric-num">$0.5<sub>M</sub></span>
+            <span class="m-hero-metric-lbl">Cost saved</span>
+          </div>
+          <div class="m-hero-metric" data-dot="tech">
+            <span class="m-hero-metric-num">5<sup>+</sup></span>
+            <span class="m-hero-metric-lbl">Industries</span>
+          </div>
+        </div>
+        <div class="m-hero-foot">
+          <span class="m-hero-pill">Private LLM</span>
+          <span class="m-hero-pill">OCR + LLM</span>
+          <span class="m-hero-pill">AI audit</span>
+        </div>
+      </div>
       <div class="proof-copy">
         <p class="proof-label">// outcomes</p>
 
@@ -976,6 +1045,22 @@
   <!-- ─── 1:1 ASSIST ─── -->
   <section id="assist" class="assist-section fade-up">
     <div class="assist-grid">
+      <div class="m-hero m-hero-assist" aria-hidden="true">
+        <div class="m-hero-head">
+          <span class="m-hero-kicker">// Act 05 · 1:1 Assist</span>
+          <span class="m-hero-eyebrow">Quiet No.2 energy</span>
+        </div>
+        <div class="m-hero-grid m-hero-grid-4">
+          <div class="m-hero-tile" data-dot="data"><span class="m-hero-tile-dot"></span><strong>Private</strong><em>discreet partner</em></div>
+          <div class="m-hero-tile" data-dot="ops"><span class="m-hero-tile-dot"></span><strong>Direct</strong><em>with Meet</em></div>
+          <div class="m-hero-tile" data-dot="tech"><span class="m-hero-tile-dot"></span><strong>Fast</strong><em>structure + tools</em></div>
+          <div class="m-hero-tile" data-dot="strategy"><span class="m-hero-tile-dot"></span><strong>Custom</strong><em>Claude Code tiny tools</em></div>
+        </div>
+        <div class="m-hero-foot">
+          <span class="m-hero-pill">High-trust</span>
+          <span class="m-hero-pill">Founder leverage</span>
+        </div>
+      </div>
       <div class="assist-copy">
         <p class="assist-label">// 1:1 assist</p>
 
@@ -1907,7 +1992,9 @@ function initMainPage() {
     mobileStoryPanel.style.setProperty('--mobile-panel-accent-soft', state.accentSoft || 'rgba(200,182,255,0.20)')
     mobileStoryStep.textContent = state.step
     mobileStorySection.textContent = state.section
-    mobileStoryCore.textContent = state.core
+    // Simplified disc: show act number (e.g. "01") instead of keyword core
+    const actMatch = (state.step || '').match(/(\d+)/)
+    mobileStoryCore.textContent = actMatch ? actMatch[1] : (state.core || '')
 
     const chipText = state.chips || ['AI', 'Systems', 'Deploy', 'Direct']
     ;[mobileStoryChipA, mobileStoryChipB, mobileStoryChipC, mobileStoryChipD].forEach((chipEl, index) => {
@@ -2607,9 +2694,9 @@ function initMainPage() {
     function applyMobilePanelMetrics() {
       const viewportHeight = getMobileViewportHeight()
       const navOffset = getMobileNavOffset()
-      const panelTop = Math.max(10, Math.min(24, Math.round(viewportHeight * 0.024)))
-      const panelHeight = Math.max(112, Math.min(162, Math.round(viewportHeight * 0.24)))
-      const panelGap = Math.max(16, Math.min(26, Math.round(viewportHeight * 0.032)))
+      const panelTop = Math.max(12, Math.min(20, Math.round(viewportHeight * 0.018)))
+      const panelHeight = 64
+      const panelGap = Math.max(12, Math.min(20, Math.round(viewportHeight * 0.02)))
       const panelReserve = panelTop + panelHeight + panelGap
 
       document.documentElement.style.setProperty('--mobile-nav-offset', navOffset + 'px')
