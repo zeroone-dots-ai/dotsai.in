@@ -1925,7 +1925,11 @@ function initMainPage() {
   const STORY_EASE = 'cubic-bezier(0.23, 1, 0.32, 1)'
   const MOBILE_PANEL_STATES = {
     hero: [{ visible: false, section: 'Hero', step: 'ACT 00', core: 'ZeroOne', chips: ['D.O.T.S', 'AI', 'Build', 'Own'], skin: 'light', accent: '#C8B6FF', accentSoft: 'rgba(200,182,255,0.20)', rotate: -10, scale: 0.96 }],
-    meet: [{ visible: true, section: 'Meet', step: 'ACT 01', core: 'Builder', chips: ['Private', 'Systems', 'Direct', 'End to end'], skin: 'light', accent: '#C8B6FF', accentSoft: 'rgba(200,182,255,0.22)', rotate: -10, scale: 0.98 }],
+    meet: [
+      { visible: true, section: 'Meet · Manifesto', step: 'ACT 01', core: 'Builder',     chips: ['Private', 'Systems', 'Direct', 'End to end'], skin: 'light', accent: '#C8B6FF', accentSoft: 'rgba(200,182,255,0.22)', rotate: -10, scale: 0.98 },
+      { visible: true, section: 'Meet · Credentials', step: 'ACT 01', core: 'Credentials', chips: ['5+ years', '2+ AI', 'Full stack', 'Shipped'],   skin: 'light', accent: '#C8B6FF', accentSoft: 'rgba(200,182,255,0.22)', rotate: 8,   scale: 1.00 },
+      { visible: true, section: 'Meet · Direct',      step: 'ACT 01', core: 'Direct',      chips: ['No middlemen', 'Talk to builder', 'End-to-end', 'Ship'], skin: 'light', accent: '#C8B6FF', accentSoft: 'rgba(200,182,255,0.22)', rotate: -6, scale: 1.02 }
+    ],
     platform: [
       { visible: true, section: 'Platform', step: 'ACT 02', core: 'Fabric', chips: ['Data', 'Private', 'Brand', 'Ops'], skin: 'dark', accent: '#A2D2FF', accentSoft: 'rgba(162,210,255,0.24)', rotate: -8, scale: 1.01 },
       { visible: true, section: 'Platform', step: 'ACT 02', core: 'Modules', chips: ['Analytics', 'Automation', 'Docs', 'Storage'], skin: 'dark', accent: '#A2D2FF', accentSoft: 'rgba(162,210,255,0.24)', rotate: 10, scale: 1.04 },
@@ -1951,7 +1955,11 @@ function initMainPage() {
       { visible: true,  section: 'Labs', step: 'ACT 06', core: 'Docs',    chips: ['Extract', 'Structure', 'Data', 'Output'], skin: 'dark', accent: '#B8E0D2', accentSoft: 'rgba(184,224,210,0.24)', rotate: 12,  scale: 1.01 },
       { visible: true,  section: 'Labs', step: 'ACT 06', core: 'Workflow', chips: ['Ops', 'Handoff', 'Tasks', 'Flow'],      skin: 'dark', accent: '#B8E0D2', accentSoft: 'rgba(184,224,210,0.24)', rotate: -10, scale: 1.03 }
     ],
-    contact: [{ visible: false, section: 'Call', step: 'ACT 07', core: 'Book', chips: ['Cal', 'Meet', 'Direct', 'Private'], skin: 'light', accent: '#43305F', accentSoft: 'rgba(67,48,95,0.18)', rotate: 0, scale: 0.96 }]
+    contact: [
+      { visible: true, section: 'Contact · Start',    step: 'ACT 07', core: 'Start',    chips: ['Pick path', 'Private', 'Direct', 'Simple'], skin: 'light', accent: '#43305F', accentSoft: 'rgba(67,48,95,0.18)', rotate: 0,  scale: 0.98 },
+      { visible: true, section: 'Contact · WhatsApp', step: 'ACT 07', core: 'WhatsApp', chips: ['Chat now', 'Fast reply', 'No forms', 'Direct'], skin: 'light', accent: '#43305F', accentSoft: 'rgba(67,48,95,0.18)', rotate: 6,  scale: 1.02 },
+      { visible: true, section: 'Contact · Book',     step: 'ACT 07', core: 'Book',     chips: ['Cal.com', 'Strategy call', '20 min', 'India'],  skin: 'light', accent: '#43305F', accentSoft: 'rgba(67,48,95,0.18)', rotate: -6, scale: 1.00 }
+    ]
   }
   const STORY_STATES = {
     hero: { visible: false, progress: 0.0, scale: 0.84, rotate: -14, x: 0, step: '00', name: 'Hero', skin: 'light', accent: '#C8B6FF', accentSoft: 'rgba(200,182,255,0.18)' },
@@ -2022,7 +2030,13 @@ function initMainPage() {
   }
 
   function setStoryThreadState(sectionId, immediate) {
-    if (window.innerWidth < 768) setMobileStoryPanelState(sectionId, 0, immediate)
+    // On mobile, only reset slideIndex to 0 when the section actually changes.
+    // Prevents onEnter observers from overriding the scroll-scrub progress for meet/contact.
+    if (window.innerWidth < 768) {
+      if (currentMobileStorySection !== sectionId) {
+        setMobileStoryPanelState(sectionId, 0, immediate)
+      }
+    }
     if (!storyThread || !storyOrb || !storyBadge || !storyStep || !storyName) return
     const state = STORY_STATES[sectionId] || STORY_STATES.hero
     currentStoryState = sectionId
@@ -3101,6 +3115,33 @@ function initMainPage() {
     if (window.visualViewport) {
       window.visualViewport.addEventListener('resize', queueMobileStoryRefresh, { passive: true })
     }
+
+    // Mobile: meet + contact variant progress (3 slides each)
+    // Created AFTER mobile relayout + horizontal-snap setup so section bounds are final.
+    ScrollTrigger.create({
+      trigger: '#meet',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: true,
+      onUpdate: (self) => {
+        if (!window.__dotsStoryThreadState || typeof window.__dotsStoryThreadState.setMobile !== 'function') return
+        const p = self.progress
+        const idx = p < 0.34 ? 0 : (p < 0.67 ? 1 : 2)
+        window.__dotsStoryThreadState.setMobile('meet', idx)
+      }
+    })
+    ScrollTrigger.create({
+      trigger: '#contact',
+      start: 'top bottom',
+      end: 'bottom bottom',
+      scrub: true,
+      onUpdate: (self) => {
+        if (!window.__dotsStoryThreadState || typeof window.__dotsStoryThreadState.setMobile !== 'function') return
+        const p = self.progress
+        const idx = p < 0.34 ? 0 : (p < 0.67 ? 1 : 2)
+        window.__dotsStoryThreadState.setMobile('contact', idx)
+      }
+    })
 
     ScrollTrigger.refresh()
   }
