@@ -2956,7 +2956,10 @@ function initMainPage() {
         scrollTrigger: Object.assign({
           trigger: '#' + sectionId,
           start: 'top top',
-          end: '+=' + (N - 1) * 100 + '%',
+          // Longer pin so each card has readable dwell time.
+          // N=2 → 180% (1.8 viewports, ~0.9vh per card)
+          // N=3 → 260% (2.6 viewports, ~0.87vh per card)
+          end: '+=' + (60 + N * 60) + '%',
           pin: true,
           scrub: 0.8,
           anticipatePin: 1,
@@ -3006,6 +3009,13 @@ function initMainPage() {
     setupMobileHSnap('consulting',  consultEl.querySelector('.consulting-copy-stack'),  cCards,      cPhases,      cLabel,      cGlow)
     ;(function setupProofMobileHSnap() {
       const proofCtaCluster = proofEl.querySelector('.proof-cta-cluster')
+      // Teleport cluster to <body> on mobile so position:fixed is viewport-relative.
+      // #proof gets transform (GSAP pin) + overflow:hidden (applyMobileStoryLayout),
+      // which makes it the containing block for fixed descendants AND clips them.
+      // Moving the cluster to body escapes that ancestor chain entirely.
+      if (proofCtaCluster && proofCtaCluster.parentElement !== document.body) {
+        document.body.appendChild(proofCtaCluster)
+      }
       const activateProof = () => {
         startProofCounters()
         if (proofCtaCluster) proofCtaCluster.classList.add('is-proof-active')
