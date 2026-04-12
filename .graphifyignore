@@ -1,0 +1,14 @@
+node_modules/
+.git/
+.next/
+dist/
+graphify-out/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.ico
+*.woff
+*.woff2
+*.ttf
