@@ -5757,9 +5757,7 @@ footer {
     display: none !important;
   }
 
-  /* Proof CTA cluster on mobile: fixed overlay, only visible while #proof is pinned.
-     Uses position:fixed to bypass any overflow:hidden ancestors and to survive
-     GSAP's pinType:fixed on #proof (which would conflict with absolute positioning). */
+  /* Proof CTA cluster on mobile: always visible — no longer tied to proof section active state */
   .proof-cta-cluster {
     position: fixed !important;
     left: 0 !important;
@@ -5774,15 +5772,9 @@ footer {
     border-top: 0 !important;
     padding-top: 0 !important;
     z-index: 45 !important;
-    pointer-events: none !important;
-    opacity: 0 !important;
-    transform: translateY(6px) !important;
-    transition: opacity 0.25s ease-out, transform 0.25s ease-out !important;
-  }
-  .proof-cta-cluster.is-proof-active {
+    pointer-events: auto !important;
     opacity: 1 !important;
     transform: translateY(0) !important;
-    pointer-events: auto !important;
   }
   .proof-cta-testimony {
     padding: 9px 16px !important;
