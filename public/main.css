@@ -5523,6 +5523,21 @@ footer {
     padding-top: calc(var(--mobile-story-panel-reserve, 176px) + 12px) !important;
     padding-bottom: calc(var(--mobile-nav-offset, 72px) + 16px) !important;
   }
+  /* Filter override — ID specificity must match the rule above to win */
+  #hero.section-hidden,
+  #meet.section-hidden,
+  #platform.section-hidden,
+  #consulting.section-hidden,
+  #proof.section-hidden,
+  #assist.section-hidden,
+  #labs-teaser.section-hidden,
+  #contact.section-hidden {
+    display: none !important;
+    min-height: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
   .platform-grid, .consulting-grid, .proof-shell, .assist-grid {
     display: flex !important;
     flex-direction: column !important;
