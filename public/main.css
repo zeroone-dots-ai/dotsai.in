@@ -3429,7 +3429,7 @@ nav.light .nav-cta {
   display: grid;
   grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
   gap: clamp(28px, 4vw, 72px);
-  align-items: center;
+  align-items: start;
 }
 
 .assist-copy {
@@ -3449,7 +3449,7 @@ nav.light .nav-cta {
 
 .assist-copy-stack {
   position: relative;
-  min-height: 540px;
+  min-height: 640px;
 }
 
 .assist-copy-card {
@@ -3884,8 +3884,10 @@ nav.light .nav-cta {
     radial-gradient(circle at 84% 18%, rgba(215,207,240,0.42), transparent 24%),
     radial-gradient(circle at 18% 100%, rgba(178,135,67,0.10), transparent 30%),
     linear-gradient(180deg, rgba(255,255,255,0.75) 0%, rgba(236,229,219,0.96) 100%);
+  transform: translateZ(0);
+  backface-visibility: hidden;
   box-shadow: 0 26px 70px rgba(36,29,51,0.10);
-  transition: transform 180ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 180ms cubic-bezier(0.23, 1, 0.32, 1), border-color 180ms ease-out;
+  transition: box-shadow 180ms cubic-bezier(0.23, 1, 0.32, 1), border-color 180ms ease-out;
 }
 
 .contact-schedule-card::before {
@@ -3898,7 +3900,6 @@ nav.light .nav-cta {
 }
 
 .contact-schedule-card:not(.is-calendar-open):hover {
-  transform: translateY(-4px);
   border-color: rgba(67,48,95,0.18);
   box-shadow: 0 34px 86px rgba(36,29,51,0.14);
 }
@@ -5752,29 +5753,18 @@ footer {
   .platform-label, .consulting-label, .proof-label, .assist-label {
     display: none !important;
   }
-  /* CTAs inside copy: hide on mobile (contact section handles CTAs) */
+  /* CTAs inside copy: permanently visible on mobile — same pattern as proof CTA */
   .platform-cta-cluster, .consulting-cta-cluster, .assist-cta-cluster {
-    display: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
   }
 
-  /* Proof CTA cluster on mobile: always visible — no longer tied to proof section active state */
+  /* Proof CTA cluster on mobile: visible within proof section only */
   .proof-cta-cluster {
-    position: fixed !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: calc(var(--mobile-nav-offset, 72px) + 10px) !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    gap: 4px !important;
-    padding: 0 18px !important;
-    margin: 0 !important;
-    border-top: 0 !important;
-    padding-top: 0 !important;
-    z-index: 45 !important;
-    pointer-events: auto !important;
     opacity: 1 !important;
-    transform: translateY(0) !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
   }
   .proof-cta-testimony {
     padding: 9px 16px !important;
@@ -5798,6 +5788,7 @@ footer {
     min-width: 0 !important;
     overflow: hidden !important;
     position: relative !important;
+    gap: 12px !important;
     padding: 0 !important;
   }
   /* Copy stacks: horizontal flex row — GSAP drives x-translation */
@@ -5808,6 +5799,7 @@ footer {
     overflow: visible !important;
     position: relative !important;
     height: 100% !important;
+    min-height: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
     gap: 0 !important;
@@ -5856,6 +5848,15 @@ footer {
   }
   .platform-cta-cluster, .consulting-cta-cluster, .assist-cta-cluster {
     padding-top: 12px !important;
+    gap: 0 !important;
+    flex-shrink: 0 !important;
+  }
+  .proof-cta-cluster {
+    gap: 0 !important;
+    flex-shrink: 0 !important;
+  }
+  .platform-cta-note, .consulting-cta-note, .proof-cta-note, .assist-cta-note {
+    display: none !important;
   }
 
   /* ── 6. LABS TEASER: mobile horizontal snap compartment ── */
@@ -6042,4 +6043,19 @@ footer {
     font-size: 8px !important;
     padding: 4px 8px !important;
   }
+}
+
+/* ── Accessibility: Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  #splash-overlay { display: none !important; }
+  body.splash-active { overflow: auto !important; }
+  #main-page { opacity: 1 !important; visibility: visible !important; }
+  canvas { display: none !important; }
+  .hero-slide { opacity: 1 !important; transform: none !important; }
 }

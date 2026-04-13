@@ -193,13 +193,70 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"></noscript>
+<noscript>
+<style>
+  #splash-overlay { display: none !important; }
+  body.splash-active { overflow: auto !important; }
+  #main-page { opacity: 1 !important; visibility: visible !important; }
+  .hero-slide { opacity: 1 !important; transform: none !important; }
+  canvas { display: none !important; }
+</style>
+</noscript>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-<link rel="stylesheet" href="/main.css?v=20260412-square-buttons">
+<!-- Critical CSS inlined for fast first paint -->
+<style>
+:root{--bg:#FDFCFA;--paper:#F7F3ED;--ink:#171722;--hero-bg:#06060a;--plum:#43305F;--lavender:#D7CFF0;--dots-data:#C8B6FF;--dots-ops:#B8E0D2;--dots-tech:#FFCDB2;--dots-strategy:#A2D2FF}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body.splash-active{overflow:hidden}
+#splash-overlay{position:fixed;inset:0;z-index:9999;background:#06060a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px;transition:opacity .8s ease}
+#splash-overlay.hiding{opacity:0;pointer-events:none}
+#s-galaxy{position:absolute;inset:0;z-index:1;display:none}
+#main-page{opacity:0;transition:opacity .6s ease .2s}
+#main-page.visible{opacity:1}
+/* Minimal tier: show content instantly */
+[data-perf-tier="minimal"] #splash-overlay{display:none!important}
+[data-perf-tier="minimal"] body.splash-active{overflow:auto!important}
+[data-perf-tier="minimal"] #main-page{opacity:1!important}
+[data-perf-tier="minimal"] canvas{display:none!important}
+</style>
+
+<!-- Full CSS lazy-loaded (non-blocking) -->
+<link rel="stylesheet" href="/main.css?v=20260413-perf">
 </head>
 
 <body class="splash-active">
+
+<!-- ═══════════════════════════════════════════════
+     PERFORMANCE TIER DETECTION (runs before anything else)
+     full  = desktop/high-end (all animations)
+     lite  = mid-range mobile (reduced particles, no cursor trail)
+     minimal = low-end (<2 cores, <2GB RAM, slow network, reduced-motion)
+════════════════════════════════════════════════ -->
+<script>
+(function() {
+  var cores = navigator.hardwareConcurrency || 2;
+  var mem = navigator.deviceMemory || 4;
+  var conn = (navigator.connection || {}).effectiveType || '4g';
+  var isTouch = window.matchMedia('(pointer: coarse)').matches;
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobileScreen = window.innerWidth < 768 && isTouch;
+  var slowNet = (conn === '2g' || conn === 'slow-2g');
+
+  var tier = 'full';
+  if (reduceMotion || cores < 2 || mem < 2 || slowNet) {
+    tier = 'minimal';
+  } else if (isMobileScreen || cores < 4 || mem < 4) {
+    tier = 'lite';
+  }
+
+  window.__dotsPerf = { tier: tier, cores: cores, mem: mem, conn: conn, isTouch: isTouch, reduceMotion: reduceMotion };
+  document.documentElement.dataset.perfTier = tier;
+})();
+</script>
 
 <!-- ═══════════════════════════════════════════════
      SPLASH SCREEN
@@ -337,10 +394,10 @@
       <!-- SLIDE 2: Recover Business Margins -->
       <div class="hero-slide" data-slide="1">
         <p class="hero-slide-eyebrow">02 · Consulting</p>
-        <h1 class="hero-slide-title">
+        <h2 class="hero-slide-title">
           Recover Business<br>
           <em>Margins.</em>
-        </h1>
+        </h2>
         <p class="hero-slide-sub">
           AI consulting that cuts cost, raises productivity,<br>
           and automates what slows you down.
@@ -356,10 +413,10 @@
       <!-- SLIDE 3: Platform -->
       <div class="hero-slide" data-slide="2">
         <p class="hero-slide-eyebrow">03 · Platform</p>
-        <h1 class="hero-slide-title">
+        <h2 class="hero-slide-title">
           Give Your Team<br>
           <em>Their Own Agents.</em>
-        </h1>
+        </h2>
         <p class="hero-slide-sub">
           Every employee gets their own agents.<br>
           Universal SaaS — built on your infrastructure.
@@ -1864,14 +1921,25 @@ function sRunV6() {
   tl.to([sD, sO, sT], { scale: 1.1, duration: 0.2, yoyo: true, repeat: 1, stagger: 0.06 }, 3.6)
 }
 
-// ── Splash dismiss ──
+// ── Splash dismiss (tier-aware) ──
 var _splashDismissed = false;
-function dismissSplash() {
+function dismissSplash(instant) {
   if (_splashDismissed) return;
   _splashDismissed = true;
   const overlay = document.getElementById('splash-overlay')
   const skipBtn = document.getElementById('splash-skip')
   const mainPage = document.getElementById('main-page')
+
+  if (instant) {
+    // Minimal/lite: skip fade animation, show content immediately
+    if (overlay) overlay.remove()
+    if (skipBtn) skipBtn.remove()
+    document.body.classList.remove('splash-active')
+    window.scrollTo(0, 0)
+    mainPage.classList.add('visible')
+    initMainPage()
+    return;
+  }
 
   if (overlay) overlay.classList.add('hiding')
   if (skipBtn) skipBtn.style.display = 'none'
@@ -1886,24 +1954,38 @@ function dismissSplash() {
   }, 800)
 }
 
-// ── Run random splash variant ──
+// ── Run splash variant (tier-aware) ──
+var _perfTier = (window.__dotsPerf || {}).tier || 'full';
+
 const sRunners = [sRunV1, sRunV2, sRunV3, sRunV4, sRunV5, sRunV6]
 function runSplash() {
+  // Minimal: skip splash entirely — show content immediately
+  if (_perfTier === 'minimal') {
+    dismissSplash(true);
+    return;
+  }
+
   const v = Math.floor(Math.random() * sRunners.length)
   sCurrent = v
   sRunners[v]()
 }
 
-// ── Auto-dismiss after 5s ──
-let splashTimer = setTimeout(dismissSplash, 5000)
+// ── Auto-dismiss timer (tier-aware) ──
+var _splashTimeout = _perfTier === 'lite' ? 1500 : 5000;
+let splashTimer = setTimeout(function() { dismissSplash(_perfTier === 'lite') }, _splashTimeout)
 
 document.getElementById('splash-skip').addEventListener('click', () => {
   clearTimeout(splashTimer)
-  dismissSplash()
+  dismissSplash(true)
 })
 
-// Start splash immediately
-runSplash()
+// Start splash when GSAP is ready (deferred loading)
+if (_perfTier === 'minimal') {
+  // Minimal: don't wait for GSAP, dismiss immediately
+  dismissSplash(true)
+} else {
+  runSplash()
+}
 
 
 // ─────────────────────────────────────────────────────────────────
@@ -3240,21 +3322,22 @@ function initMainPage() {
     ScrollTrigger.refresh()
   }
 
-  // Mobile Device Tilt for Galaxy & Text
-  if (isMobile && window.DeviceOrientationEvent) {
-    window.addEventListener('deviceorientation', function(e) {
-      if (e.gamma === null || e.beta === null) return;
-      var tiltX = Math.max(-15, Math.min(15, e.gamma || 0));
-      var tiltY = Math.max(-15, Math.min(15, (e.beta || 45) - 45));
-      var slidesEl = document.querySelector('.hero-slides');
-      if (slidesEl) {
-        slidesEl.style.setProperty('--tilt-x', tiltX);
-        slidesEl.style.setProperty('--tilt-y', tiltY);
-      }
-      window.__dotsHeroScene = window.__dotsHeroScene || {};
-      window.__dotsHeroScene.pointerX = tiltX / 15;
-      window.__dotsHeroScene.pointerY = tiltY / 15;
-    }, { passive: true });
+  // Mobile: touch-based tilt (replaces deviceorientation — no sensor needed)
+  if (isMobile) {
+    var slidesEl = document.querySelector('.hero-slides');
+    if (slidesEl) {
+      slidesEl.addEventListener('touchmove', function(e) {
+        var t = e.touches[0];
+        var rect = slidesEl.getBoundingClientRect();
+        var nx = (t.clientX - rect.left) / rect.width - 0.5;
+        var ny = (t.clientY - rect.top) / rect.height - 0.5;
+        slidesEl.style.setProperty('--tilt-x', (nx * 20).toFixed(1));
+        slidesEl.style.setProperty('--tilt-y', (ny * 20).toFixed(1));
+        window.__dotsHeroScene = window.__dotsHeroScene || {};
+        window.__dotsHeroScene.pointerX = nx * 2;
+        window.__dotsHeroScene.pointerY = ny * 2;
+      }, { passive: true });
+    }
   }
 
   sectionFilterRegistry.ready = true
@@ -3271,10 +3354,23 @@ function initMainPage() {
    - Shared hero scene state drives canvas + content depth
 ══════════════════════════════════════════════════ */
 (function () {
+  var _tier = (window.__dotsPerf || {}).tier || 'full';
+  if (_tier === 'minimal') return; // Skip all canvas animations on low-end devices
+
   var canvas = document.getElementById('hero-physics');
   if (!canvas) return;
   var ctx = canvas.getContext('2d');
   var heroEl = document.getElementById('hero');
+
+  // Pause when hero section is off-screen (saves CPU/GPU)
+  var _heroVisible = true;
+  if (heroEl && window.IntersectionObserver) {
+    new IntersectionObserver(function(entries) {
+      _heroVisible = entries[0].isIntersecting;
+      if (_heroVisible && !rafId) { rafId = requestAnimationFrame(draw); }
+    }, { rootMargin: '100px' }).observe(heroEl);
+  }
+
   var sceneDefaults = {
     pointerX: 0,
     pointerY: 0,
@@ -3406,7 +3502,8 @@ function initMainPage() {
 
   function buildGalaxy() {
     var isMobile = W<768;
-    var COUNT = isMobile ? 1500 : 3600;
+    var _t = (window.__dotsPerf || {}).tier || 'full';
+    var COUNT = _t === 'lite' ? (isMobile ? 400 : 800) : (isMobile ? 1500 : 3600);
     var maxRadius = Math.max(W, H) * (isMobile ? 0.72 : 0.84);
     var armCount = 4;
     stars = [];
@@ -3978,7 +4075,7 @@ function initMainPage() {
     drawDots(planet);
     drawShockwaves();
 
-    rafId=requestAnimationFrame(draw);
+    if (_heroVisible) { rafId=requestAnimationFrame(draw); } else { rafId=0; }
   }
 
   function getPos(e) {
@@ -4098,6 +4195,18 @@ function initMainPage() {
    - Uses shared hero scene tilt for unified motion
 ══════════════════════════════════════════════════ */
 (function () {
+  if ((window.__dotsPerf || {}).tier === 'minimal') return; // Skip on low-end
+
+  // Pause when hero is off-screen
+  var _meshVisible = true;
+  var _meshHero = document.getElementById('hero');
+  if (_meshHero && window.IntersectionObserver) {
+    new IntersectionObserver(function(entries) {
+      _meshVisible = entries[0].isIntersecting;
+      if (_meshVisible && !raf) { raf = requestAnimationFrame(draw); }
+    }, { rootMargin: '100px' }).observe(_meshHero);
+  }
+
   const COLORS = [
     [200, 182, 255],
     [184, 224, 210],
@@ -4195,8 +4304,9 @@ function initMainPage() {
     function buildParticles() {
       particles = [];
       var isMobile = W < 768;
-      var orbitCount   = isMobile ? 48 : 88;
-      var ambientCount = isMobile ? 24 : 56;
+      var _t = (window.__dotsPerf || {}).tier || 'full';
+      var orbitCount   = _t === 'lite' ? (isMobile ? 16 : 24) : (isMobile ? 48 : 88);
+      var ambientCount = _t === 'lite' ? (isMobile ? 8 : 12) : (isMobile ? 24 : 56);
 
       for (var i = 0; i < orbitCount; i++) {
         var phase = (i / orbitCount) * Math.PI * 2;
@@ -4364,7 +4474,7 @@ function initMainPage() {
       }
 
       ctx.globalAlpha = 1;
-      raf = requestAnimationFrame(draw);
+      if (_meshVisible) { raf = requestAnimationFrame(draw); } else { raf = 0; }
     }
 
     // Events
@@ -4411,6 +4521,8 @@ function initMainPage() {
    - Click: ring shrinks + 12-particle burst explosion
 ══════════════════════════════════════════════════ */
 (function () {
+  var _tier = (window.__dotsPerf || {}).tier || 'full';
+  if (_tier === 'minimal' || _tier === 'lite') return; // Cursor trail only on full tier (desktop)
   if ('ontouchstart' in window || !window.matchMedia) return;
   if (window.matchMedia('(pointer: coarse)').matches) return;
 
@@ -4558,8 +4670,18 @@ function initMainPage() {
       return true;
     });
 
-    requestAnimationFrame(draw);
+    if (!document.hidden) { requestAnimationFrame(draw); } else { _cursorRafActive = false; }
   }
+
+  // Pause cursor trail when tab is hidden
+  var _cursorRafActive = true;
+  document.addEventListener('visibilitychange', function() {
+    if (!document.hidden && !_cursorRafActive) {
+      _cursorRafActive = true;
+      requestAnimationFrame(draw);
+    }
+  });
+
   draw();
 })();
 </script>
@@ -5088,249 +5210,8 @@ function initMainPage() {
   }
 }
 
-/* ── Quantum Dot Cursor ── */
-body { cursor: none !important; }
-a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .service-row { cursor: none !important; }
-#qc-canvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 999999; pointer-events: none; }
+/* ── (Quantum Dot Cursor removed — using cursor-trail system instead) ── */
 </style>
-
-<canvas id="qc-canvas" aria-hidden="true"></canvas>
-
-<script>
-/* ══════════════════════════════════════════════════
-   QUANTUM DOT CURSOR
-   Brand-aware interactive cursor system for dotsai.in
-   - Inner dot: exact pos, D.O.T.S color pulse
-   - Outer ring: spring-physics lag, velocity stretch
-   - Nebula trail: 14-point comet tail
-   - Hover: ring morphs + label rotates around ring
-   - Click: nova burst of 12 particles
-══════════════════════════════════════════════════ */
-(function () {
-  var canvas = document.getElementById('qc-canvas');
-  var ctx = canvas.getContext('2d');
-
-  // D.O.T.S brand palette
-  var PALETTE = [
-    [200, 182, 255], // lavender (Data)
-    [184, 224, 210], // mint (Operations)
-    [255, 205, 178], // peach (Tech)
-    [162, 210, 255], // sky (Strategy)
-  ];
-
-  var W = window.innerWidth, H = window.innerHeight;
-  canvas.width  = W; canvas.height = H;
-  canvas.style.width  = W + 'px';
-  canvas.style.height = H + 'px';
-
-  window.addEventListener('resize', function () {
-    W = window.innerWidth; H = window.innerHeight;
-    canvas.width = W; canvas.height = H;
-    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
-  });
-
-  // --- State ---
-  var mx = -200, my = -200;         // raw mouse
-  var rx = -200, ry = -200;          // ring pos (lagged)
-  var rvx = 0,   rvy = 0;            // ring velocity
-  var trail = [];                     // [{ x, y, t }]
-  var burstParticles = [];            // click nova
-  var isHover = false;
-  var hoverLabel = '';
-  var colorT = 0;                     // palette cycle time
-  var TRAIL_LEN = 14;
-  var RING_R = 22;                    // ring radius at rest
-  var DOT_R  = 3.5;
-
-  // --- Mouse tracking ---
-  document.addEventListener('mousemove', function (e) {
-    mx = e.clientX; my = e.clientY;
-    trail.push({ x: mx, y: my, t: performance.now() });
-    if (trail.length > TRAIL_LEN) trail.shift();
-  }, { passive: true });
-
-  document.addEventListener('mouseleave', function () {
-    mx = -300; my = -300;
-  });
-
-  // Hover detection
-  document.addEventListener('mouseover', function (e) {
-    var el = e.target;
-    if (el.closest('a, button, [role="button"], .btn-primary, .btn-secondary, .service-row, .nav-cta')) {
-      isHover = true;
-      var found = el.closest('a, button, [role="button"]');
-      hoverLabel = found ? (found.textContent || '').trim().slice(0, 12).toUpperCase() : '';
-    }
-  });
-  document.addEventListener('mouseout', function (e) {
-    var el = e.target;
-    if (el.closest('a, button, [role="button"], .btn-primary, .btn-secondary, .service-row, .nav-cta')) {
-      isHover = false; hoverLabel = '';
-    }
-  });
-
-  // Click nova
-  document.addEventListener('click', function (e) {
-    var px = e.clientX, py = e.clientY;
-    for (var i = 0; i < 12; i++) {
-      var angle = (i / 12) * Math.PI * 2;
-      var speed = 3 + Math.random() * 5;
-      var ci = Math.floor(Math.random() * PALETTE.length);
-      burstParticles.push({
-        x: px, y: py,
-        vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed,
-        life: 1.0,
-        r: PALETTE[ci][0], g: PALETTE[ci][1], b: PALETTE[ci][2],
-        size: 1.5 + Math.random() * 2.5,
-      });
-    }
-  });
-
-  // --- Draw loop ---
-  var lastT = performance.now();
-
-  function lerp(a, b, t) { return a + (b - a) * t; }
-
-  function draw() {
-    requestAnimationFrame(draw);
-    var now = performance.now();
-    var dt = Math.min((now - lastT) / 16.67, 3); // normalized to 60fps
-    lastT = now;
-
-    ctx.clearRect(0, 0, W, H);
-
-    colorT += 0.008 * dt;
-    var cIdx   = Math.floor(colorT) % PALETTE.length;
-    var cNext  = (cIdx + 1) % PALETTE.length;
-    var cFrac  = colorT % 1;
-    var cr = lerp(PALETTE[cIdx][0], PALETTE[cNext][0], cFrac);
-    var cg = lerp(PALETTE[cIdx][1], PALETTE[cNext][1], cFrac);
-    var cb = lerp(PALETTE[cIdx][2], PALETTE[cNext][2], cFrac);
-
-    // Spring physics for ring
-    var stiffness = isHover ? 0.14 : 0.10;
-    var damping   = isHover ? 0.70 : 0.74;
-    rvx += (mx - rx) * stiffness * dt;
-    rvy += (my - ry) * stiffness * dt;
-    rvx *= Math.pow(damping, dt);
-    rvy *= Math.pow(damping, dt);
-    rx += rvx * dt;
-    ry += rvy * dt;
-
-    // Velocity magnitude for stretch
-    var speed = Math.sqrt(rvx * rvx + rvy * rvy);
-    var stretch = Math.min(speed * 0.06, 0.9); // how much to stretch
-    var angle   = Math.atan2(rvy, rvx);
-
-    // ── 1. Nebula trail ──
-    var now2 = performance.now();
-    for (var i = 0; i < trail.length; i++) {
-      var pt = trail[i];
-      var frac = i / trail.length;        // 0 = oldest, 1 = newest
-      var age  = (now2 - pt.t) / 350;    // age in 0-1 over 350ms
-      var a    = frac * (1 - Math.min(age, 1)) * 0.35;
-      if (a <= 0) continue;
-      var sz   = DOT_R * 0.5 * frac;
-      ctx.beginPath();
-      ctx.arc(pt.x, pt.y, Math.max(sz, 0.5), 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(' + Math.round(cr) + ',' + Math.round(cg) + ',' + Math.round(cb) + ',' + a.toFixed(3) + ')';
-      ctx.fill();
-    }
-
-    // Draw trail connecting line (subtle)
-    if (trail.length > 2) {
-      ctx.beginPath();
-      ctx.moveTo(trail[0].x, trail[0].y);
-      for (var i = 1; i < trail.length; i++) {
-        var frac = i / trail.length;
-        ctx.lineTo(trail[i].x, trail[i].y);
-      }
-      ctx.strokeStyle = 'rgba(' + Math.round(cr) + ',' + Math.round(cg) + ',' + Math.round(cb) + ',0.06)';
-      ctx.lineWidth = 1;
-      ctx.stroke();
-    }
-
-    // ── 2. Outer ring (stretched oval) ──
-    var ringAlpha = isHover ? 0.9 : 0.55;
-    ctx.save();
-    ctx.translate(rx, ry);
-    ctx.rotate(angle);
-    ctx.scale(1 + stretch, 1 - stretch * 0.4);
-    ctx.rotate(-angle);
-
-    // Ring glow
-    var grad = ctx.createRadialGradient(0, 0, RING_R - 4, 0, 0, RING_R + 10);
-    grad.addColorStop(0, 'rgba(' + Math.round(cr) + ',' + Math.round(cg) + ',' + Math.round(cb) + ',' + (ringAlpha * 0.15).toFixed(3) + ')');
-    grad.addColorStop(1, 'rgba(' + Math.round(cr) + ',' + Math.round(cg) + ',' + Math.round(cb) + ',0)');
-    ctx.fillStyle = grad;
-    ctx.beginPath();
-    ctx.arc(0, 0, RING_R + 10, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Ring stroke
-    ctx.beginPath();
-    ctx.arc(0, 0, RING_R, 0, Math.PI * 2);
-    if (isHover) {
-      ctx.fillStyle = 'rgba(' + Math.round(cr) + ',' + Math.round(cg) + ',' + Math.round(cb) + ',0.12)';
-      ctx.fill();
-    }
-    ctx.strokeStyle = 'rgba(' + Math.round(cr) + ',' + Math.round(cg) + ',' + Math.round(cb) + ',' + ringAlpha.toFixed(3) + ')';
-    ctx.lineWidth = isHover ? 1.5 : 1;
-    ctx.stroke();
-
-    // Hover: rotating text around ring
-    if (isHover && hoverLabel) {
-      var labelAngle = (now * 0.001) % (Math.PI * 2);
-      var chars = hoverLabel.split('');
-      ctx.font = '7px "Space Mono", monospace';
-      ctx.fillStyle = 'rgba(' + Math.round(cr) + ',' + Math.round(cg) + ',' + Math.round(cb) + ',0.7)';
-      for (var i = 0; i < chars.length; i++) {
-        var ca = labelAngle + (i / chars.length) * Math.PI * 2;
-        var cx2 = Math.cos(ca) * (RING_R + 10);
-        var cy2 = Math.sin(ca) * (RING_R + 10);
-        ctx.save();
-        ctx.translate(cx2, cy2);
-        ctx.rotate(ca + Math.PI / 2);
-        ctx.fillText(chars[i], -3, 3);
-        ctx.restore();
-      }
-    }
-    ctx.restore();
-
-    // ── 3. Inner dot ──
-    var dotGrad = ctx.createRadialGradient(mx, my, 0, mx, my, DOT_R * 3);
-    dotGrad.addColorStop(0, 'rgba(' + Math.round(cr) + ',' + Math.round(cg) + ',' + Math.round(cb) + ',1)');
-    dotGrad.addColorStop(0.4, 'rgba(' + Math.round(cr) + ',' + Math.round(cg) + ',' + Math.round(cb) + ',0.6)');
-    dotGrad.addColorStop(1, 'rgba(' + Math.round(cr) + ',' + Math.round(cg) + ',' + Math.round(cb) + ',0)');
-    ctx.fillStyle = dotGrad;
-    ctx.beginPath();
-    ctx.arc(mx, my, DOT_R * 3, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Solid core
-    ctx.fillStyle = 'rgb(' + Math.round(cr) + ',' + Math.round(cg) + ',' + Math.round(cb) + ')';
-    ctx.beginPath();
-    ctx.arc(mx, my, DOT_R, 0, Math.PI * 2);
-    ctx.fill();
-
-    // ── 4. Click nova burst ──
-    for (var i = burstParticles.length - 1; i >= 0; i--) {
-      var p = burstParticles[i];
-      p.x  += p.vx; p.y  += p.vy;
-      p.vx *= 0.92; p.vy *= 0.92;
-      p.life -= 0.04 * dt;
-      if (p.life <= 0) { burstParticles.splice(i, 1); continue; }
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(' + p.r + ',' + p.g + ',' + p.b + ',' + (p.life * 0.9).toFixed(3) + ')';
-      ctx.fill();
-    }
-  }
-
-  draw();
-})();
-</script>
 
 
 

@@ -9,9 +9,9 @@
     },
     {
       "name": "dotsai-static",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8000", "--directory", "/Users/meetdeshani/Desktop/dotsai.in/public"],
-      "port": 8000
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["--yes", "serve", "-l", "8080", "/Users/meetdeshani/Desktop/dotsai.in/public"],
+      "port": 8080
     }
   ]
 }
