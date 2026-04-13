@@ -3142,7 +3142,8 @@ function initMainPage() {
       // ── State ──
       var activeIdx = 0
       var autoTimer = null
-      var AUTOPLAY_MS = 4200
+      var AUTOPLAY_MS = 2000
+      var AFTER_TAP_MS = 4000
 
       function goTo(nextIdx) {
         var prevIdx = activeIdx
@@ -3185,7 +3186,8 @@ function initMainPage() {
 
       function startAutoplay() { clearInterval(autoTimer); autoTimer = setInterval(nextSlide, AUTOPLAY_MS) }
       function stopAutoplay()  { clearInterval(autoTimer) }
-      function resetAutoplay() { stopAutoplay(); startAutoplay() }
+      // After manual tap: wait 4s before resuming the 2s cycle
+      function tapResetAutoplay() { clearInterval(autoTimer); autoTimer = setTimeout(function() { startAutoplay() }, AFTER_TAP_MS) }
 
       // ── Touch swipe ──
       var touchStartX = 0, touchStartY = 0, swipeActive = false
@@ -3204,7 +3206,7 @@ function initMainPage() {
         var dx = e.changedTouches[0].clientX - touchStartX
         if (Math.abs(dx) > 40) {
           dx < 0 ? nextSlide() : prevSlide()
-          resetAutoplay()
+          tapResetAutoplay()
         }
       }, { passive: true })
 
@@ -3269,8 +3271,10 @@ function initMainPage() {
       const labsDots = buildCarouselDots('labs-teaser', labsMobileEl, labsN)
 
       function applyLabsMobileLayout() {
-        labsMobileEl.style.height = 'auto'
-        labsMobileEl.style.overflow = 'visible'
+        labsMobileEl.style.setProperty('height', 'auto', 'important')
+        labsMobileEl.style.setProperty('min-height', '0', 'important')
+        labsMobileEl.style.setProperty('overflow', 'visible', 'important')
+        labsMobileEl.style.setProperty('padding', '24px 0 32px', 'important')
         labsMobileEl.style.boxSizing = 'border-box'
 
         // CSS Grid stacking — height = tallest card automatically
@@ -3303,7 +3307,8 @@ function initMainPage() {
 
       var activeLabsIdx = 0
       var labsAutoTimer = null
-      var LABS_AUTOPLAY = 4200
+      var LABS_AUTOPLAY = 2000
+      var LABS_TAP_DELAY = 4000
 
       function labsGoTo(nextIdx) {
         var prevIdx = activeLabsIdx
@@ -3334,6 +3339,7 @@ function initMainPage() {
       function labsPrev() { labsGoTo(activeLabsIdx - 1 < 0 ? labsN - 1 : activeLabsIdx - 1) }
       function startLabsAutoplay() { clearInterval(labsAutoTimer); labsAutoTimer = setInterval(labsNext, LABS_AUTOPLAY) }
       function stopLabsAutoplay()  { clearInterval(labsAutoTimer) }
+      function tapResetLabsAutoplay() { clearInterval(labsAutoTimer); labsAutoTimer = setTimeout(function() { startLabsAutoplay() }, LABS_TAP_DELAY) }
 
       // Touch swipe
       var lTouchX = 0, lSwipe = false
@@ -3342,7 +3348,7 @@ function initMainPage() {
       labsStack.addEventListener('touchend', function(e) {
         if (!lSwipe) return
         var dx = e.changedTouches[0].clientX - lTouchX
-        if (Math.abs(dx) > 40) { dx < 0 ? labsNext() : labsPrev(); clearInterval(labsAutoTimer); startLabsAutoplay() }
+        if (Math.abs(dx) > 40) { dx < 0 ? labsNext() : labsPrev(); tapResetLabsAutoplay() }
       }, { passive: true })
 
       ScrollTrigger.create({
