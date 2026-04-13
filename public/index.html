@@ -6,7 +6,7 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/favicon.svg">
 <title>AI Agency India | Private AI & Automation Systems | ZeroOne D.O.T.S AI</title>
-<meta name="description" content="Founder-led AI agency in India by Meet Deshani. Private AI deployment, custom AI automation, and GEO for startups and enterprises — built on your infrastructure, zero vendor lock-in.">
+<meta name="description" content="Founder-led AI agency in India by Meet Deshani. Custom AI solutions for startups and enterprises: private AI deployment, AI automation systems, and GEO — built on your infrastructure, zero vendor lock-in.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta property="og:title" content="AI Agency India | Private AI & Automation Systems | ZeroOne D.O.T.S AI">
 <meta property="og:description" content="Custom AI automation agency in India. Private AI deployment, AI web systems, and GEO for serious businesses and startups — founded and built by Meet Deshani.">
@@ -167,6 +167,22 @@
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Yes. ZeroOne D.O.T.S AI is specifically built for founders, startups, and lean teams in India who need enterprise-quality AI without enterprise overhead. There are no account managers or junior developers — Meet Deshani designs and builds everything directly, which means faster delivery and lower cost than traditional AI agencies."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What makes ZeroOne D.O.T.S AI different from other AI agencies in India?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ZeroOne D.O.T.S AI is a solopreneur AI agency — one expert builds and deploys every system. No account managers, no junior developers, no hand-offs after the sale. Every AI solution is deployed on infrastructure you own, which means zero vendor lock-in and full data control. For Indian businesses that need high-conviction AI implementation without enterprise overhead, this is the model that makes sense."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can ZeroOne D.O.T.S AI build custom AI solutions for Indian businesses outside metro cities?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. ZeroOne D.O.T.S AI works fully remote with businesses across India — Gurugram, Mumbai, Bengaluru, Hyderabad, Pune, and beyond. All discovery, scoping, and delivery happens remotely. The custom AI solutions ZeroOne D.O.T.S AI builds — private LLMs, automation workflows, GEO systems — do not require on-site presence."
       }
     }
   ]
@@ -423,7 +439,7 @@
 
       <p class="meet-tagline">Builder by blood. I don’t pitch. I build. End to end.</p>
 
-      <a href="https://meet.dotsai.in" class="meet-redirect fade-up">
+      <a href="https://meet.dotsai.in" target="_blank" rel="noopener" class="meet-redirect fade-up">
         Full story → meet.dotsai.in <span class="service-arrow">↗</span>
       </a>
     </div>
@@ -1270,7 +1286,7 @@
 
       <div class="labs-teaser-grid">
 
-        <a href="/labs/seo-checker/" class="labs-teaser-card labs-mobile-card">
+        <a href="/labs/seo-checker/" target="_blank" rel="noopener" class="labs-teaser-card labs-mobile-card">
           <div class="labs-teaser-visual">
             <div class="ltv-gauge">
               <div class="ltv-gauge-ring"></div>
@@ -1283,7 +1299,7 @@
           <span class="labs-teaser-cta">Open demo &rarr;</span>
         </a>
 
-        <a href="/labs/doc-parser/" class="labs-teaser-card labs-mobile-card">
+        <a href="/labs/doc-parser/" target="_blank" rel="noopener" class="labs-teaser-card labs-mobile-card">
           <div class="labs-teaser-visual">
             <div class="ltv-doc">
               <div class="ltv-line" style="width:80%"></div>
@@ -1298,7 +1314,7 @@
           <span class="labs-teaser-cta">Open demo &rarr;</span>
         </a>
 
-        <a href="/labs/workflow-viz/" class="labs-teaser-card labs-mobile-card">
+        <a href="/labs/workflow-viz/" target="_blank" rel="noopener" class="labs-teaser-card labs-mobile-card">
           <div class="labs-teaser-visual">
             <div class="ltv-wf">
               <div class="ltv-node" style="background:rgba(200,182,255,0.2)"><div class="ltv-nd" style="background:#C8B6FF"></div></div>
@@ -1317,7 +1333,7 @@
       </div>
     </div>
 
-    <a href="/labs/" class="labs-teaser-all">Explore all labs &rarr;</a>
+    <a href="/labs/" target="_blank" rel="noopener" class="labs-teaser-all">Explore all labs &rarr;</a>
   </section>
 
   <!-- ─── CONTACT ─── -->
@@ -2302,7 +2318,7 @@ function initMainPage() {
   gsap.set(pAgentCards, { opacity: 0, y: 14, scale: 0.97 })
   gsap.set(pMarketChips, { opacity: 0, y: 12 })
   gsap.set(pRolloutStat, { opacity: 0, y: 18 })
-  gsap.set(pCta, { opacity: 0, y: 12 })
+  gsap.set(pCta, { opacity: 1, y: 0 })  // CTA visible from start
   gsap.set(pGlow, { opacity: 0.55, scale: 0.95 })
   gsap.set([pCards[0], pPhases[0]], { opacity: 1, y: 0, scale: 1 })
 
@@ -2334,7 +2350,7 @@ function initMainPage() {
   platformTl.to(pAgentCards, { opacity: 1, y: 0, scale: 1, stagger: 0.03, duration: 0.06, ease: EASE_OUT }, 0.92)
   platformTl.to(pMarketChips, { opacity: 1, y: 0, stagger: 0.02, duration: 0.06, ease: EASE_OUT }, 0.94)
   platformTl.to(pRolloutStat, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.97)
-  platformTl.to(pCta, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.98)
+  // CTA is visible from start — no animation needed
   platformTl.set({}, {}, 1)
   registerSectionTrigger('platform', platformTl.scrollTrigger)
 
@@ -2366,7 +2382,7 @@ function initMainPage() {
   gsap.set(cOutcomeRows, { opacity: 0, y: 16 })
   gsap.set(cStepCards, { opacity: 0, y: 16, scale: 0.97 })
   gsap.set(cOutcomeFooter, { opacity: 0, y: 14 })
-  gsap.set(cCta, { opacity: 0, y: 12 })
+  gsap.set(cCta, { opacity: 1, y: 0 })  // CTA visible from start
   gsap.set(cGlow, { opacity: 0.52, scale: 0.95 })
   gsap.set([cCards[0], cPhases[0]], { opacity: 1, y: 0, scale: 1 })
 
@@ -2394,7 +2410,7 @@ function initMainPage() {
   consultTl.to(cOutcomeRows, { opacity: 1, y: 0, stagger: 0.03, duration: 0.07, ease: EASE_OUT }, 0.88)
   consultTl.to(cStepCards, { opacity: 1, y: 0, scale: 1, stagger: 0.03, duration: 0.07, ease: EASE_OUT }, 0.90)
   consultTl.to(cOutcomeFooter, { opacity: 1, y: 0, duration: 0.06, ease: EASE_OUT }, 0.95)
-  consultTl.to(cCta, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.98)
+  // CTA is visible from start — no animation needed
   consultTl.set({}, {}, 1)
   registerSectionTrigger('consulting', consultTl.scrollTrigger)
 
@@ -2496,7 +2512,7 @@ function initMainPage() {
   gsap.set(aPartnerNote, { opacity: 0, y: 16 })
   gsap.set(aPartnerCards, { opacity: 0, y: 18, scale: 0.97 })
   gsap.set(aPartnerFooter, { opacity: 0, y: 14 })
-  gsap.set(aCta, { opacity: 0, y: 12 })
+  gsap.set(aCta, { opacity: 1, y: 0 })  // CTA visible from start
   gsap.set(aGlow, { opacity: 0.52, scale: 0.95 })
   gsap.set([aCards[0], aPhases[0]], { opacity: 1, y: 0, scale: 1 })
 
@@ -2525,7 +2541,7 @@ function initMainPage() {
   assistTl.to(aPartnerNote, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.88)
   assistTl.to(aPartnerCards, { opacity: 1, y: 0, scale: 1, stagger: 0.03, duration: 0.07, ease: EASE_OUT }, 0.90)
   assistTl.to(aPartnerFooter, { opacity: 1, y: 0, duration: 0.06, ease: EASE_OUT }, 0.95)
-  assistTl.to(aCta, { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.98)
+  // CTA is visible from start — no animation needed
   assistTl.set({}, {}, 1)
   registerSectionTrigger('assist', assistTl.scrollTrigger)
 
@@ -2898,15 +2914,35 @@ function initMainPage() {
         }
 
         const sectionStyles = getComputedStyle(secEl)
-        const paddingTop = parseFloat(sectionStyles.paddingTop) || 0
         const paddingBottom = parseFloat(sectionStyles.paddingBottom) || 0
         currentWidth = copyParent && copyParent.getBoundingClientRect().width > 0
           ? Math.round(copyParent.getBoundingClientRect().width)
           : window.innerWidth
-        currentHeight = Math.max(120, Math.round(metrics.viewportHeight - paddingTop - paddingBottom))
+
+        let copyAreaHeight = Math.max(160, Math.round(metrics.viewportHeight - paddingBottom))
+        let reservedHeight = 0
 
         if (copyParent) {
-          copyParent.style.height = currentHeight + 'px'
+          const secRect = secEl.getBoundingClientRect()
+          const copyRect = copyParent.getBoundingClientRect()
+          const copyTopOffset = Math.max(0, copyRect.top - secRect.top)
+          copyAreaHeight = Math.max(160, Math.round(metrics.viewportHeight - paddingBottom - copyTopOffset))
+
+          const copyStyles = getComputedStyle(copyParent)
+          const visibleChildren = Array.from(copyParent.children).filter((child) => {
+            const childStyles = getComputedStyle(child)
+            return childStyles.display !== 'none' && childStyles.visibility !== 'hidden'
+          })
+          const gapSize = parseFloat(copyStyles.rowGap || copyStyles.gap) || 0
+          const extraChildren = visibleChildren.filter((child) => child !== stack)
+          reservedHeight = extraChildren.reduce((total, child) => total + child.getBoundingClientRect().height, 0)
+          reservedHeight += Math.max(0, visibleChildren.length - 1) * gapSize
+        }
+
+        currentHeight = Math.max(140, Math.round(copyAreaHeight - reservedHeight))
+
+        if (copyParent) {
+          copyParent.style.height = copyAreaHeight + 'px'
         }
 
         stack.style.width = (N * currentWidth) + 'px'
@@ -3008,25 +3044,10 @@ function initMainPage() {
     setupMobileHSnap('platform',   platformEl.querySelector('.platform-copy-stack'),   pCards,      pPhases,      pLabel,      pGlow)
     setupMobileHSnap('consulting',  consultEl.querySelector('.consulting-copy-stack'),  cCards,      cPhases,      cLabel,      cGlow)
     ;(function setupProofMobileHSnap() {
-      const proofCtaCluster = proofEl.querySelector('.proof-cta-cluster')
-      // Teleport cluster to <body> on mobile so position:fixed is viewport-relative.
-      // #proof gets transform (GSAP pin) + overflow:hidden (applyMobileStoryLayout),
-      // which makes it the containing block for fixed descendants AND clips them.
-      // Moving the cluster to body escapes that ancestor chain entirely.
-      if (proofCtaCluster && proofCtaCluster.parentElement !== document.body) {
-        document.body.appendChild(proofCtaCluster)
-      }
-      const activateProof = () => {
-        startProofCounters()
-        if (proofCtaCluster) proofCtaCluster.classList.add('is-proof-active')
-      }
-      const deactivateProof = () => {
-        if (proofCtaCluster) proofCtaCluster.classList.remove('is-proof-active')
-      }
+      // Proof CTA stays in its section — no teleport, no fixed positioning
       setupMobileHSnap('proof', proofEl.querySelector('.proof-copy-stack'), proofCards, proofPhases, proofLabel, proofGlow, {
-        onEnter: activateProof,
-        onEnterBack: activateProof,
-        onLeaveBack: deactivateProof
+        onEnter: startProofCounters,
+        onEnterBack: startProofCounters
       })
     })()
     setupMobileHSnap('assist',      assistEl.querySelector('.assist-copy-stack'),       aCards,      aPhases,      aLabel,      aGlow)
