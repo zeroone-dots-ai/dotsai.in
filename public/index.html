@@ -202,8 +202,21 @@
   canvas { display: none !important; }
 </style>
 </noscript>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>(function(){
+  var isTouch = window.matchMedia('(pointer: coarse)').matches;
+  if (!isTouch) {
+    document.write('<scr'+'ipt src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"><\/scr'+'ipt>');
+    document.write('<scr'+'ipt src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"><\/scr'+'ipt>');
+  } else {
+    ['gsap.min.js','ScrollTrigger.min.js'].forEach(function(f){
+      var s = document.createElement('script');
+      s.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/' + f;
+      s.async = true;
+      document.head.appendChild(s);
+    });
+  }
+})();
+</script>
 
 <!-- Critical CSS inlined for fast first paint -->
 <style>
@@ -217,15 +230,20 @@ body.splash-active{overflow:hidden}
 #s-galaxy{position:absolute;inset:0;z-index:1;display:none}
 #main-page{opacity:0;transition:opacity .6s ease .2s}
 #main-page.visible{opacity:1}
-/* Minimal tier: show content instantly */
+/* Minimal + Lite tier: no splash on any touch/mobile device */
 [data-perf-tier="minimal"] #splash-overlay{display:none!important}
 [data-perf-tier="minimal"] body.splash-active{overflow:auto!important}
 [data-perf-tier="minimal"] #main-page{opacity:1!important}
 [data-perf-tier="minimal"] canvas{display:none!important}
+[data-perf-tier="lite"] #splash-overlay{display:none!important}
+[data-perf-tier="lite"] body.splash-active{overflow:auto!important}
+[data-perf-tier="lite"] #main-page{opacity:1!important}
+[data-perf-tier="lite"] canvas{display:none!important}
 </style>
 
 <!-- Full CSS lazy-loaded (non-blocking) -->
 <link rel="stylesheet" href="/main.css?v=20260413-perf">
+<script>if ('serviceWorker' in navigator) { window.addEventListener('load', function() { navigator.serviceWorker.register('/sw.js').catch(function(){}); }); }</script>
 </head>
 
 <body class="splash-active">
@@ -372,22 +390,23 @@ body.splash-active{overflow:hidden}
   <canvas id="hero-physics" aria-hidden="true"></canvas>
 
     <div class="hero-slides">
-      <!-- SLIDE 1: Private AI -->
+      <!-- SLIDE 1: Custom AI Models -->
       <div class="hero-slide" data-slide="0">
-        <p class="hero-slide-eyebrow">01 · Private AI</p>
+        <p class="hero-slide-eyebrow">01 · Custom AI Models</p>
         <h1 class="hero-slide-title">
-          Own Your AI.<br>
-          <em>Don't Rent It.</em>
+          I build AI that runs<br>
+          <em>on your infrastructure.</em>
         </h1>
+        <p class="hero-slide-expert-tag">AI · Analytics · Data Systems · System Design</p>
         <p class="hero-slide-sub">
-          Patent it. Build on it. Integrate with your systems.<br>
-          Your data never leaves your infrastructure.
+          Fine-tuned on your business data. Self-improving over time.<br>
+          Your competitors never see it. Your data never leaves.
         </p>
         <div class="hero-slide-tags">
-          <span class="hero-slide-tag" style="border-color: rgba(200,182,255,0.2); color: #C8B6FF;">Own Your AI</span>
-          <span class="hero-slide-tag" style="border-color: rgba(184,224,210,0.2); color: #B8E0D2;">Integrate</span>
-          <span class="hero-slide-tag" style="border-color: rgba(255,205,178,0.2); color: #FFCDB2;">Build Systems</span>
-          <span class="hero-slide-tag" style="border-color: rgba(162,210,255,0.2); color: #A2D2FF;">Improve</span>
+          <span class="hero-slide-tag" style="border-color: rgba(200,182,255,0.2); color: #C8B6FF;">Fine-tuned Models</span>
+          <span class="hero-slide-tag" style="border-color: rgba(184,224,210,0.2); color: #B8E0D2;">Private Deploy</span>
+          <span class="hero-slide-tag" style="border-color: rgba(255,205,178,0.2); color: #FFCDB2;">Self-Improving</span>
+          <span class="hero-slide-tag" style="border-color: rgba(162,210,255,0.2); color: #A2D2FF;">Zero Lock-in</span>
         </div>
       </div>
 
@@ -494,7 +513,7 @@ body.splash-active{overflow:hidden}
         </div>
       </div>
 
-      <p class="meet-tagline">Builder by blood. I don’t pitch. I build. End to end.</p>
+      <p class="meet-tagline">AI + Analytics + Data Systems + System Design. One builder. End to end.</p>
 
       <a href="https://meet.dotsai.in" target="_blank" rel="noopener" class="meet-redirect fade-up">
         Full story → meet.dotsai.in <span class="service-arrow">↗</span>
@@ -815,6 +834,34 @@ body.splash-active{overflow:hidden}
             </div>
           </article>
         </div>
+
+        <details class="consulting-services-expand">
+          <summary class="consulting-services-toggle">
+            <span>19 Services We Deliver</span>
+            <span class="consulting-services-arrow">See all →</span>
+          </summary>
+          <div class="consulting-services-grid">
+            <span>AI Agents</span>
+            <span>Analysing Complex Data to Recover Margins</span>
+            <span>Full Product Strategy Build</span>
+            <span>Data Architecture + 1M User Scaling</span>
+            <span>Web Apps</span>
+            <span>iOS / Android App</span>
+            <span>Mac Application</span>
+            <span>Windows Software</span>
+            <span>Voice Agents</span>
+            <span>Video Agents</span>
+            <span>N8N / Custom AI Workflow</span>
+            <span>SEO / GEO / AEO</span>
+            <span>Margin Recovery: Scope to Outcome</span>
+            <span>Fine-Tune Existing Model</span>
+            <span>Build Private Model From Scratch</span>
+            <span>Customised Full Suites + Ecosystems</span>
+            <span>AI Video Editors</span>
+            <span>AI Influencers</span>
+            <span>Social Media Automations</span>
+          </div>
+        </details>
 
         <div class="consulting-cta-cluster">
           <a href="https://zeroonedotsai.consulting" target="_blank" rel="noopener" class="brief-cta brief-cta-light consulting-cta">
@@ -1522,6 +1569,15 @@ body.splash-active{overflow:hidden}
 
 </div><!-- #main-page -->
 
+<!-- Mobile sticky WhatsApp CTA -->
+<div id="mobile-wa-sticky">
+  <a href="https://wa.me/918320065658" target="_blank" rel="noopener" id="mobile-wa-sticky-link">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+    <span>WhatsApp Meet</span>
+    <span id="mobile-wa-number">+91 83200 65658</span>
+  </a>
+</div>
+
 <!-- ═══════════════════════════════════════════════
      JAVASCRIPT
 ════════════════════════════════════════════════ -->
@@ -1956,11 +2012,12 @@ function dismissSplash(instant) {
 
 // ── Run splash variant (tier-aware) ──
 var _perfTier = (window.__dotsPerf || {}).tier || 'full';
+var _isTouch = (window.__dotsPerf || {}).isTouch;
 
 const sRunners = [sRunV1, sRunV2, sRunV3, sRunV4, sRunV5, sRunV6]
 function runSplash() {
-  // Minimal: skip splash entirely — show content immediately
-  if (_perfTier === 'minimal') {
+  // Minimal or any touch device: skip splash entirely — show content immediately
+  if (_perfTier === 'minimal' || _isTouch) {
     dismissSplash(true);
     return;
   }
@@ -1970,18 +2027,20 @@ function runSplash() {
   sRunners[v]()
 }
 
-// ── Auto-dismiss timer (tier-aware) ──
-var _splashTimeout = _perfTier === 'lite' ? 1500 : 5000;
-let splashTimer = setTimeout(function() { dismissSplash(_perfTier === 'lite') }, _splashTimeout)
+// ── Auto-dismiss timer (desktop only, 2s max) ──
+if (!_isTouch && _perfTier !== 'minimal') {
+  var _splashTimeout = 2000;
+  var splashTimer = setTimeout(function() { dismissSplash(false) }, _splashTimeout)
 
-document.getElementById('splash-skip').addEventListener('click', () => {
-  clearTimeout(splashTimer)
-  dismissSplash(true)
-})
+  document.getElementById('splash-skip').addEventListener('click', function() {
+    clearTimeout(splashTimer)
+    dismissSplash(true)
+  })
+}
 
 // Start splash when GSAP is ready (deferred loading)
-if (_perfTier === 'minimal') {
-  // Minimal: don't wait for GSAP, dismiss immediately
+if (_perfTier === 'minimal' || _isTouch) {
+  // Minimal / touch: dismiss immediately, no splash
   dismissSplash(true)
 } else {
   runSplash()
@@ -1993,6 +2052,15 @@ if (_perfTier === 'minimal') {
 // ─────────────────────────────────────────────────────────────────
 
 function initMainPage() {
+  if (typeof gsap === 'undefined') {
+    var _retries = 0;
+    var _wait = setInterval(function() {
+      _retries++;
+      if (typeof gsap !== 'undefined') { clearInterval(_wait); initMainPage(); }
+      else if (_retries > 60) { clearInterval(_wait); } // 3s max, give up gracefully
+    }, 50);
+    return;
+  }
   gsap.registerPlugin(ScrollTrigger)
   const sectionFilterRegistry = window.__dotsSectionFilterRegistry = window.__dotsSectionFilterRegistry || { sections: {}, ready: false }
 
@@ -3323,6 +3391,17 @@ function initMainPage() {
   }
 
   // Mobile: touch-based tilt (replaces deviceorientation — no sensor needed)
+  if (isMobile) {
+    var waSticky = document.getElementById('mobile-wa-sticky');
+    if (waSticky && typeof ScrollTrigger !== 'undefined') {
+      ScrollTrigger.create({
+        trigger: '#contact', start: 'top 85%',
+        onEnter: function() { waSticky.style.opacity = '0'; waSticky.style.pointerEvents = 'none'; },
+        onLeaveBack: function() { waSticky.style.opacity = '1'; waSticky.style.pointerEvents = 'auto'; }
+      });
+    }
+  }
+
   if (isMobile) {
     var slidesEl = document.querySelector('.hero-slides');
     if (slidesEl) {
