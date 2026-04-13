@@ -6010,20 +6010,25 @@ footer {
   }
 
   .mobile-carousel-arrow {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 32px !important;
+    height: 32px !important;
     background: none !important;
     border: none !important;
-    padding: 4px 8px !important;
-    font-size: 22px !important;
-    line-height: 1 !important;
+    padding: 0 !important;
     color: currentColor !important;
-    opacity: 0.28 !important;
+    opacity: 0.32 !important;
+    flex-shrink: 0 !important;
     cursor: pointer !important;
     touch-action: manipulation !important;
     transition: opacity 0.15s ease !important;
     -webkit-tap-highlight-color: transparent !important;
     user-select: none !important;
   }
-  .mobile-carousel-arrow:active { opacity: 0.75 !important; }
+  .mobile-carousel-arrow:active { opacity: 0.8 !important; }
+  .mobile-carousel-arrow svg { display: block !important; }
 
   .mobile-carousel-dots {
     display: flex !important;
@@ -6032,12 +6037,12 @@ footer {
   }
 
   .mobile-carousel-dot {
-    width: 6px !important;
-    height: 6px !important;
+    width: 5px !important;
+    height: 5px !important;
     border-radius: 50% !important;
     background: currentColor !important;
-    opacity: 0.22 !important;
-    transition: opacity 0.25s ease, transform 0.25s ease !important;
+    opacity: 0.28 !important;
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34,1.56,0.64,1) !important;
     flex-shrink: 0 !important;
     cursor: pointer !important;
     touch-action: manipulation !important;
@@ -6046,7 +6051,7 @@ footer {
 
   .mobile-carousel-dot.is-active {
     opacity: 1 !important;
-    transform: scale(1.5) !important;
+    transform: scale(1.8) !important;
   }
 
   /* Dark sections: lighter nav */

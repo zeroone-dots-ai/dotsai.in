@@ -2946,8 +2946,22 @@ function initMainPage() {
       var navEl = document.createElement('div')
       navEl.className = 'mobile-carousel-nav'
       navEl.setAttribute('data-for', sectionId)
+      // Force flex layout + correct color via inline important — CSS media rules lose to browser block default
+      var darkSections = ['platform', 'proof', 'assist', 'labs-teaser']
+      var navColor = darkSections.indexOf(sectionId) > -1 ? 'rgba(215,207,240,0.85)' : 'rgba(67,48,95,0.7)'
+      navEl.style.setProperty('display', 'flex', 'important')
+      navEl.style.setProperty('align-items', 'center', 'important')
+      navEl.style.setProperty('justify-content', 'center', 'important')
+      navEl.style.setProperty('gap', '16px', 'important')
+      navEl.style.setProperty('padding', '14px 0 10px', 'important')
+      navEl.style.setProperty('width', '100%', 'important')
+      navEl.style.setProperty('color', navColor, 'important')
       var dotsEl = document.createElement('div')
       dotsEl.className = 'mobile-carousel-dots'
+      dotsEl.style.setProperty('display', 'flex', 'important')
+      dotsEl.style.setProperty('align-items', 'center', 'important')
+      dotsEl.style.setProperty('gap', '8px', 'important')
+      dotsEl.style.setProperty('flex-shrink', '0', 'important')
       for (var i = 0; i < N; i++) {
         var dot = document.createElement('span')
         dot.className = 'mobile-carousel-dot' + (i === 0 ? ' is-active' : '')
@@ -2959,26 +2973,52 @@ function initMainPage() {
       return dotsEl
     }
 
+    var SVG_CHEVRON_L = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>'
+    var SVG_CHEVRON_R = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>'
+
+    function makeCarouselArrow(svgHtml, label, onClickFn) {
+      var btn = document.createElement('button')
+      btn.setAttribute('aria-label', label)
+      btn.innerHTML = svgHtml
+      btn.style.setProperty('display', 'flex', 'important')
+      btn.style.setProperty('align-items', 'center', 'important')
+      btn.style.setProperty('justify-content', 'center', 'important')
+      btn.style.setProperty('width', '32px', 'important')
+      btn.style.setProperty('height', '32px', 'important')
+      btn.style.setProperty('background', 'none', 'important')
+      btn.style.setProperty('border', 'none', 'important')
+      btn.style.setProperty('padding', '0', 'important')
+      btn.style.setProperty('margin', '0', 'important')
+      btn.style.setProperty('opacity', '0.42', 'important')
+      btn.style.setProperty('color', 'inherit', 'important')
+      btn.style.setProperty('flex-shrink', '0', 'important')
+      btn.style.setProperty('cursor', 'pointer', 'important')
+      btn.style.setProperty('touch-action', 'manipulation', 'important')
+      btn.style.setProperty('-webkit-tap-highlight-color', 'transparent', 'important')
+      btn.style.setProperty('transition', 'opacity 0.15s ease, transform 0.1s ease', 'important')
+      btn.addEventListener('touchstart', function() {
+        btn.style.setProperty('opacity', '0.9', 'important')
+        btn.style.setProperty('transform', 'scale(0.88)', 'important')
+      }, { passive: true })
+      btn.addEventListener('touchend', function() {
+        btn.style.setProperty('transform', 'scale(1)', 'important')
+        setTimeout(function() { btn.style.setProperty('opacity', '0.42', 'important') }, 200)
+      }, { passive: true })
+      btn.addEventListener('click', onClickFn)
+      return btn
+    }
+
     function wireCarouselNav(dots, goToFn, prevFn, nextFn, tapResetFn) {
       if (!dots) return
-      // Clickable dots
+      // Clickable dots — jump directly to that card
       dots.querySelectorAll('.mobile-carousel-dot').forEach(function(d, i) {
         d.addEventListener('click', function() { goToFn(i); tapResetFn() })
       })
-      // Prev / Next buttons injected around the dots
       var navEl = dots.parentElement
       if (!navEl) return
-      var prevBtn = document.createElement('button')
-      prevBtn.className = 'mobile-carousel-arrow is-prev'
-      prevBtn.setAttribute('aria-label', 'Previous')
-      prevBtn.textContent = '‹'
-      prevBtn.addEventListener('click', function() { prevFn(); tapResetFn() })
+      var prevBtn = makeCarouselArrow(SVG_CHEVRON_L, 'Previous', function() { prevFn(); tapResetFn() })
+      var nextBtn = makeCarouselArrow(SVG_CHEVRON_R, 'Next', function() { nextFn(); tapResetFn() })
       navEl.insertBefore(prevBtn, dots)
-      var nextBtn = document.createElement('button')
-      nextBtn.className = 'mobile-carousel-arrow is-next'
-      nextBtn.setAttribute('aria-label', 'Next')
-      nextBtn.textContent = '›'
-      nextBtn.addEventListener('click', function() { nextFn(); tapResetFn() })
       navEl.appendChild(nextBtn)
     }
 
