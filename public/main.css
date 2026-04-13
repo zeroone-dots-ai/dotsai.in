@@ -6102,20 +6102,7 @@ footer {
   .consulting-services-grid span { font-size: 11px; padding: 6px 8px; }
 }
 
-/* ── Mobile Section Order: Proof before Platform ── */
-@media (max-width: 767px) {
-  #main-page { display: flex; flex-direction: column; }
-  nav { order: -1; }
-  #hero { order: 0; }
-  #meet { order: 1; }
-  #proof { order: 2; }
-  #platform { order: 3; }
-  #consulting { order: 4; }
-  #assist { order: 5; }
-  #labs-teaser { order: 6; }
-  #contact { order: 7; }
-  footer { order: 8; }
-}
+/* Mobile section reorder removed — conflicts with GSAP ScrollTrigger pin positions */
 
 /* ── Mobile Sticky WhatsApp CTA ── */
 #mobile-wa-sticky {

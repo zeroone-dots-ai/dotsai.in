@@ -2052,6 +2052,7 @@ if (_perfTier === 'minimal' || _isTouch) {
 // ─────────────────────────────────────────────────────────────────
 
 function initMainPage() {
+  if (window.__dotsMainInited) return;
   if (typeof gsap === 'undefined') {
     var _retries = 0;
     var _wait = setInterval(function() {
@@ -2061,6 +2062,7 @@ function initMainPage() {
     }, 50);
     return;
   }
+  window.__dotsMainInited = true;
   gsap.registerPlugin(ScrollTrigger)
   const sectionFilterRegistry = window.__dotsSectionFilterRegistry = window.__dotsSectionFilterRegistry || { sections: {}, ready: false }
 
