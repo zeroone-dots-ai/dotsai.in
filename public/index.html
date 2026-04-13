@@ -2940,18 +2940,46 @@ function initMainPage() {
     // ── MOBILE: Carousel dot helpers ──────────────────────────────
     function buildCarouselDots(sectionId, hostEl, N) {
       if (!hostEl || N < 2) return null
-      var existing = hostEl.querySelector('.mobile-carousel-dots[data-for="' + sectionId + '"]')
+      var existing = hostEl.querySelector('.mobile-carousel-nav[data-for="' + sectionId + '"]')
       if (existing) existing.remove()
+      // Nav wrapper: [←] [dots] [→]
+      var navEl = document.createElement('div')
+      navEl.className = 'mobile-carousel-nav'
+      navEl.setAttribute('data-for', sectionId)
       var dotsEl = document.createElement('div')
       dotsEl.className = 'mobile-carousel-dots'
-      dotsEl.setAttribute('data-for', sectionId)
       for (var i = 0; i < N; i++) {
         var dot = document.createElement('span')
         dot.className = 'mobile-carousel-dot' + (i === 0 ? ' is-active' : '')
+        dot.setAttribute('data-index', String(i))
         dotsEl.appendChild(dot)
       }
-      hostEl.appendChild(dotsEl)
+      navEl.appendChild(dotsEl)
+      hostEl.appendChild(navEl)
       return dotsEl
+    }
+
+    function wireCarouselNav(dots, goToFn, prevFn, nextFn, tapResetFn) {
+      if (!dots) return
+      // Clickable dots
+      dots.querySelectorAll('.mobile-carousel-dot').forEach(function(d, i) {
+        d.addEventListener('click', function() { goToFn(i); tapResetFn() })
+      })
+      // Prev / Next buttons injected around the dots
+      var navEl = dots.parentElement
+      if (!navEl) return
+      var prevBtn = document.createElement('button')
+      prevBtn.className = 'mobile-carousel-arrow is-prev'
+      prevBtn.setAttribute('aria-label', 'Previous')
+      prevBtn.textContent = '‹'
+      prevBtn.addEventListener('click', function() { prevFn(); tapResetFn() })
+      navEl.insertBefore(prevBtn, dots)
+      var nextBtn = document.createElement('button')
+      nextBtn.className = 'mobile-carousel-arrow is-next'
+      nextBtn.setAttribute('aria-label', 'Next')
+      nextBtn.textContent = '›'
+      nextBtn.addEventListener('click', function() { nextFn(); tapResetFn() })
+      navEl.appendChild(nextBtn)
     }
 
     function updateCarouselDots(dotsEl, activeIdx) {
@@ -3142,8 +3170,8 @@ function initMainPage() {
       // ── State ──
       var activeIdx = 0
       var autoTimer = null
-      var AUTOPLAY_MS = 2000
-      var AFTER_TAP_MS = 4000
+      var AUTOPLAY_MS = 4000
+      var AFTER_TAP_MS = 6000
 
       function goTo(nextIdx) {
         var prevIdx = activeIdx
@@ -3209,6 +3237,9 @@ function initMainPage() {
           tapResetAutoplay()
         }
       }, { passive: true })
+
+      // ── Wire clickable dots + prev/next arrows ──
+      wireCarouselNav(dots, goTo, prevSlide, nextSlide, tapResetAutoplay)
 
       // ── ScrollTrigger: autoplay while in viewport ──
       var mST = ScrollTrigger.create(Object.assign({
@@ -3307,8 +3338,8 @@ function initMainPage() {
 
       var activeLabsIdx = 0
       var labsAutoTimer = null
-      var LABS_AUTOPLAY = 2000
-      var LABS_TAP_DELAY = 4000
+      var LABS_AUTOPLAY = 4000
+      var LABS_TAP_DELAY = 6000
 
       function labsGoTo(nextIdx) {
         var prevIdx = activeLabsIdx
@@ -3350,6 +3381,8 @@ function initMainPage() {
         var dx = e.changedTouches[0].clientX - lTouchX
         if (Math.abs(dx) > 40) { dx < 0 ? labsNext() : labsPrev(); tapResetLabsAutoplay() }
       }, { passive: true })
+
+      wireCarouselNav(labsDots, labsGoTo, labsPrev, labsNext, tapResetLabsAutoplay)
 
       ScrollTrigger.create({
         trigger: '#labs-teaser', start: 'top 80%',
@@ -3404,22 +3437,7 @@ function initMainPage() {
     }
   }
 
-  if (isMobile) {
-    var slidesEl = document.querySelector('.hero-slides');
-    if (slidesEl) {
-      slidesEl.addEventListener('touchmove', function(e) {
-        var t = e.touches[0];
-        var rect = slidesEl.getBoundingClientRect();
-        var nx = (t.clientX - rect.left) / rect.width - 0.5;
-        var ny = (t.clientY - rect.top) / rect.height - 0.5;
-        slidesEl.style.setProperty('--tilt-x', (nx * 20).toFixed(1));
-        slidesEl.style.setProperty('--tilt-y', (ny * 20).toFixed(1));
-        window.__dotsHeroScene = window.__dotsHeroScene || {};
-        window.__dotsHeroScene.pointerX = nx * 2;
-        window.__dotsHeroScene.pointerY = ny * 2;
-      }, { passive: true });
-    }
-  }
+  // Hero tilt on touchmove intentionally disabled on mobile — it fights native scroll
 
   sectionFilterRegistry.ready = true
 }
