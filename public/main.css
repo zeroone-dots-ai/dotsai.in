@@ -5410,9 +5410,9 @@ footer {
      textContent of existing nodes, so tweened opacity persists through
      filter changes. */
   #contact {
-    height: 100svh !important;
+    height: auto !important;
     min-height: 100svh !important;
-    overflow: hidden !important;
+    overflow: visible !important;
     box-sizing: border-box !important;
     padding-top: calc(var(--mobile-story-panel-reserve, 176px) + 8px) !important;
     padding-bottom: calc(var(--mobile-nav-offset, 72px) + 12px) !important;
@@ -5527,8 +5527,9 @@ footer {
   #platform, #consulting, #proof, #assist {
     display: flex !important;
     flex-direction: column !important;
-    overflow: hidden !important;
+    overflow: visible !important;
     box-sizing: border-box !important;
+    height: auto !important;
     min-height: 100svh !important;
     padding-top: calc(var(--mobile-story-panel-reserve, 176px) + 12px) !important;
     padding-bottom: calc(var(--mobile-nav-offset, 72px) + 16px) !important;
@@ -5795,36 +5796,30 @@ footer {
     width: 100% !important;
     min-height: 0 !important;
     min-width: 0 !important;
-    overflow: hidden !important;
+    overflow: visible !important;
     position: relative !important;
     gap: 12px !important;
     padding: 0 !important;
   }
-  /* Copy stacks: horizontal flex row — GSAP drives x-translation */
+  /* ── Copy stacks: CSS Grid carousel — overflow:hidden clips translated cards ── */
   .platform-copy-stack, .consulting-copy-stack, .proof-copy-stack, .assist-copy-stack {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    overflow-x: scroll !important;
-    overflow-y: hidden !important;
-    scroll-snap-type: x mandatory !important;
-    -webkit-overflow-scrolling: touch !important;
-    scrollbar-width: none !important;
+    display: grid !important;
+    overflow: hidden !important;
     position: relative !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    height: auto !important;
     margin: 0 !important;
     padding: 0 !important;
     gap: 0 !important;
   }
-  .platform-copy-stack::-webkit-scrollbar,
-  .consulting-copy-stack::-webkit-scrollbar,
-  .proof-copy-stack::-webkit-scrollbar,
-  .assist-copy-stack::-webkit-scrollbar { display: none; }
-  /* Cards: full-height premium panels — JS sets width inline */
+  /* ── Cards: all in same grid cell (1/1) → stack height = tallest card ── */
   .platform-copy-card, .consulting-copy-card, .proof-copy-card, .assist-copy-card {
+    grid-area: 1 / 1 !important;
     position: relative !important;
     inset: auto !important;
-    flex-shrink: 0 !important;
-    height: 100% !important;
+    width: 100% !important;
+    height: auto !important;
     box-sizing: border-box !important;
     padding: 20px 18px 24px !important;
     border-bottom: none !important;
@@ -5833,7 +5828,8 @@ footer {
     flex-direction: column !important;
     justify-content: flex-start !important;
     gap: 8px !important;
-    overflow: hidden !important;
+    overflow: visible !important;
+    will-change: transform, opacity;
   }
   /* Copy text sizing */
   .platform-kicker, .consulting-kicker, .proof-kicker, .assist-kicker,
@@ -5877,7 +5873,7 @@ footer {
   #labs-teaser {
     display: flex !important;
     flex-direction: column !important;
-    overflow: hidden !important;
+    overflow: visible !important;
     box-sizing: border-box !important;
     padding-top: calc(var(--mobile-story-panel-reserve, 176px) + 12px) !important;
     padding-bottom: calc(var(--mobile-nav-offset, 72px) + 16px) !important;
@@ -5891,33 +5887,30 @@ footer {
   }
 
   /* Mobile stack: JS-built horizontal rail */
+  /* ── Labs mobile stack: CSS Grid carousel ── */
   .labs-mobile-stack {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    overflow: visible !important;
+    display: grid !important;
+    overflow: hidden !important;
     position: relative !important;
-    will-change: transform;
+    width: 100% !important;
+    min-height: 0 !important;
   }
 
-  /* Each mobile card (intro copy + 3 demo cards) */
+  /* Each mobile card: all share grid cell 1/1 */
   .labs-mobile-card {
+    grid-area: 1 / 1 !important;
     position: relative !important;
-    flex-shrink: 0 !important;
+    inset: auto !important;
     box-sizing: border-box !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-start !important;
     gap: 14px !important;
-    overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+    overflow: visible !important;
     visibility: visible !important;
-    opacity: 1 !important;
-    transform: none !important;
+    width: 100% !important;
+    will-change: transform, opacity;
   }
-
-  .labs-mobile-card::-webkit-scrollbar { display: none; }
 
   /* Intro copy panel: compact text */
   #labs-teaser .labs-teaser-copy.labs-mobile-card .labs-teaser-label {
@@ -5994,17 +5987,48 @@ footer {
     color: #B8E0D2 !important;
   }
 
-  /* All-labs link: hidden until last slide (JS shows it) */
+  /* All-labs link: keep visible below the mobile rail */
   #labs-teaser .labs-teaser-all {
-    display: none !important;
-    position: fixed !important;
-    bottom: calc(var(--mobile-nav-offset, 72px) + 12px) !important;
-    left: 20px !important;
-    right: 20px !important;
-    text-align: center !important;
+    display: block !important;
+    position: static !important;
+    margin: 10px 20px 0 !important;
+    text-align: left !important;
     font-size: 13px !important;
     color: rgba(184,224,210,0.7) !important;
-    z-index: 20 !important;
+  }
+
+  /* ── Carousel progress dots ── */
+  .mobile-carousel-dots {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 7px !important;
+    padding: 14px 0 6px !important;
+    width: 100% !important;
+    color: rgba(67,48,95,0.6) !important;
+  }
+
+  .mobile-carousel-dot {
+    width: 5px !important;
+    height: 5px !important;
+    border-radius: 50% !important;
+    background: currentColor !important;
+    opacity: 0.22 !important;
+    transition: opacity 0.25s ease, transform 0.25s ease !important;
+    flex-shrink: 0 !important;
+  }
+
+  .mobile-carousel-dot.is-active {
+    opacity: 1 !important;
+    transform: scale(1.5) !important;
+  }
+
+  /* Dark sections: lighter dots */
+  #platform .mobile-carousel-dots,
+  #proof .mobile-carousel-dots,
+  #assist .mobile-carousel-dots,
+  #labs-teaser .mobile-carousel-dots {
+    color: rgba(243,240,255,0.75) !important;
   }
 }
 
@@ -6024,8 +6048,7 @@ footer {
   .labs-mobile-card {
     padding: 18px 18px 22px !important;
     gap: 8px !important;
-    overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch;
+    overflow: visible !important;
     scrollbar-width: none;
   }
 

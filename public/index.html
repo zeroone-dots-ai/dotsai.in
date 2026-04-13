@@ -2405,7 +2405,7 @@ function initMainPage() {
     scrollTrigger: {
       trigger: '#meet',
       start: 'top top',
-      end: isMobile ? '+=200%' : '+=300%',
+      end: isMobile ? '+=240%' : '+=300%',
       pin: true,
       scrub: 0.5,
       anticipatePin: 1,
@@ -2758,9 +2758,8 @@ function initMainPage() {
   contactEl.style.overflow = 'visible'
 
   let contactTl
-  // NOTE: Mobile contactTl pin is created later (after all other mobile
-  // pins are set up) so ScrollTrigger computes its start/end after the
-  // other mobile pinSpacers are in place. See buildMobileContactPin() below.
+  // Mobile keeps contact in normal document flow so the full CTA block
+  // can be read without another pinned section.
   if (!isMobile) {
     // DESKTOP — one-shot reveal, no pin (unchanged behavior)
     contactTl = gsap.timeline({
@@ -2938,6 +2937,45 @@ function initMainPage() {
       })
     }
 
+    // ── MOBILE: Carousel dot helpers ──────────────────────────────
+    function buildCarouselDots(sectionId, hostEl, N) {
+      if (!hostEl || N < 2) return null
+      var existing = hostEl.querySelector('.mobile-carousel-dots[data-for="' + sectionId + '"]')
+      if (existing) existing.remove()
+      var dotsEl = document.createElement('div')
+      dotsEl.className = 'mobile-carousel-dots'
+      dotsEl.setAttribute('data-for', sectionId)
+      for (var i = 0; i < N; i++) {
+        var dot = document.createElement('span')
+        dot.className = 'mobile-carousel-dot' + (i === 0 ? ' is-active' : '')
+        dotsEl.appendChild(dot)
+      }
+      hostEl.appendChild(dotsEl)
+      return dotsEl
+    }
+
+    function updateCarouselDots(dotsEl, activeIdx) {
+      if (!dotsEl) return
+      dotsEl.querySelectorAll('.mobile-carousel-dot').forEach(function(d, i) {
+        d.classList.toggle('is-active', i === activeIdx)
+      })
+    }
+
+    function setupConsultingServicesDisclosure() {
+      const detailsEl = consultEl && consultEl.querySelector('.consulting-services-expand')
+      if (!detailsEl) return
+      const arrowEl = detailsEl.querySelector('.consulting-services-arrow')
+      const syncDisclosure = () => {
+        if (arrowEl) arrowEl.textContent = detailsEl.open ? 'Hide ↑' : 'See all →'
+      }
+      if (!detailsEl.dataset.mobileDisclosureBound) {
+        detailsEl.addEventListener('toggle', syncDisclosure)
+        detailsEl.dataset.mobileDisclosureBound = '1'
+      }
+      detailsEl.open = true
+      syncDisclosure()
+    }
+
     function applyMobileCopyCompression() {
       setMobileText('#meet .meet-tagline', 'One builder. End to end. Direct with Meet.')
       setMobileList('#meet .credential-text', [
@@ -3019,101 +3057,77 @@ function initMainPage() {
 
     applyMobilePanelMetrics()
     applyMobileCopyCompression()
+    setupConsultingServicesDisclosure()
 
     // Kill desktop fade-phase pin triggers EXCEPT hero and meet.
     // Meet stays pinned on mobile so the manifesto word reveal + credentials + CTA
     // progression works exactly like desktop (user request).
     ScrollTrigger.getAll().forEach(st => {
-      if (st.vars && st.vars.pin && st.trigger && st.trigger.id !== 'hero' && st.trigger.id !== 'meet' && st.trigger.id !== 'contact') st.kill(true)
+      if (st.vars && st.vars.pin && st.trigger && st.trigger.id !== 'hero' && st.trigger.id !== 'meet') st.kill(true)
     })
 
-    // Generic horizontal snap setup for a pinned content section
-    function setupMobileHSnap(sectionId, stack, cards, phases, label, glow, extraOpts) {
-      const secEl = document.getElementById(sectionId)
-      const N = cards.length
+    // Generic horizontal snap setup for a mobile compartment
+    // ── MOBILE: Auto-rotating carousel (replaces CSS scroll-snap) ────────────
+    // Cards slide in/out with translateX. Auto-advances every 4.2s.
+    // Touch swipe left/right for manual nav. Infinite loop. CSS Grid trick
+    // gives the stack the height of the tallest card automatically.
+    function setupMobileCarousel(sectionId, stack, cards, phases, label, glow, extraOpts) {
+      var secEl = document.getElementById(sectionId)
+      var N = cards.length
       if (!secEl || !stack || !N) return
-      const copyParent = stack.parentElement
-      const scrollOpts = Object.assign({}, extraOpts || {})
-      const extraOnEnter = scrollOpts.onEnter
-      const extraOnEnterBack = scrollOpts.onEnterBack
+      var copyParent = stack.parentElement
+      var scrollOpts = Object.assign({}, extraOpts || {})
+      var extraOnEnter = scrollOpts.onEnter
+      var extraOnEnterBack = scrollOpts.onEnterBack
       delete scrollOpts.onEnter
       delete scrollOpts.onEnterBack
-      let currentWidth = 0
-      let currentHeight = 0
 
-      // Clear desktop GSAP inline styles so mobile phases can render statically.
-      const phaseDescendants = Array.from(phases).flatMap((ph) => Array.from(ph.querySelectorAll('*')))
-      gsap.set([...cards, ...phases], { clearProps: 'opacity,transform,y,x,scale,visibility' })
+      // ── Clear desktop GSAP styles so mobile can render cleanly ──
+      var phaseDescendants = Array.from(phases).flatMap(function(ph) { return Array.from(ph.querySelectorAll('*')) })
+      gsap.set(Array.from(cards).concat(Array.from(phases)), { clearProps: 'opacity,transform,y,x,scale,visibility' })
       if (phaseDescendants.length) gsap.set(phaseDescendants, { clearProps: 'opacity,transform,y,x,scale,visibility' })
-      phaseDescendants.forEach((el) => {
-        el.style.opacity = '1'
-        el.style.visibility = 'visible'
-      })
+      phaseDescendants.forEach(function(el) { el.style.opacity = '1'; el.style.visibility = 'visible' })
       if (label) gsap.set(label, { clearProps: 'opacity,transform,y' })
       if (glow)  gsap.set(glow,  { clearProps: 'opacity,transform,scale' })
 
-      function applyMobileStoryLayout() {
-        const metrics = applyMobilePanelMetrics()
-        secEl.style.setProperty('--mobile-nav-offset', (metrics.navOffset + 16) + 'px')
-        // Native snap: don't clamp section height — let content flow naturally
+      // ── Section + parent: natural flow, no clipping of services/CTA below ──
+      function applyLayout() {
         secEl.style.height = 'auto'
         secEl.style.overflow = 'visible'
         secEl.style.boxSizing = 'border-box'
-
         if (copyParent) {
-          // Don't clip parent — details/CTA below the stack must remain visible
           copyParent.style.overflow = 'visible'
           copyParent.style.position = 'relative'
-          copyParent.style.minHeight = '0'
           copyParent.style.height = 'auto'
         }
-
-        currentWidth = copyParent && copyParent.getBoundingClientRect().width > 0
-          ? Math.round(copyParent.getBoundingClientRect().width)
-          : window.innerWidth
-
-        // Cards: viewport-width wide, auto height so content isn't clipped
-        currentHeight = Math.round(metrics.viewportHeight * 0.72)
-
-        stack.style.width = (N * currentWidth) + 'px'
-        stack.style.height = currentHeight + 'px'
-
-        Array.from(cards).forEach(c => {
-          c.style.width = currentWidth + 'px'
-          c.style.height = currentHeight + 'px'
-          c.style.flex = '0 0 ' + currentWidth + 'px'
-        })
       }
-      applyMobileStoryLayout()
+      applyLayout()
 
-      // Stack: native CSS horizontal scroll-snap (no GSAP scrub)
-      stack.style.display = 'flex'
-      stack.style.flexDirection = 'row'
-      stack.style.flexWrap = 'nowrap'
-      stack.style.overflowX = 'scroll'
-      stack.style.overflowY = 'hidden'
-      stack.style.scrollSnapType = 'x mandatory'
-      stack.style.webkitOverflowScrolling = 'touch'
-      stack.style.scrollbarWidth = 'none'
-      stack.style.msOverflowStyle = 'none'
+      // ── Stack: CSS Grid — all cards share cell 1/1, height = tallest card ──
+      stack.style.setProperty('display', 'grid', 'important')
+      stack.style.setProperty('overflow', 'hidden', 'important')
       stack.style.position = 'relative'
+      stack.style.width = '100%'
+      stack.style.minHeight = '0'
+      stack.style.height = 'auto'
       stack.style.margin = '0'
       stack.style.padding = '0'
 
-      // Cards: each snap to viewport width
-      Array.from(cards).forEach(c => {
-        c.style.scrollSnapAlign = 'start'
-        c.style.scrollSnapStop = 'always'
+      // ── Cards: stacked in same grid cell, carousel via translateX ──
+      Array.from(cards).forEach(function(c, i) {
+        c.style.gridArea = '1 / 1'
         c.style.position = 'relative'
         c.style.inset = 'auto'
-        c.style.opacity = '1'
-        c.style.transform = 'none'
+        c.style.width = '100%'
         c.style.boxSizing = 'border-box'
-        c.style.flexShrink = '0'
+        c.style.transition = 'none'
+        c.style.transform = i === 0 ? 'translateX(0)' : 'translateX(105%)'
+        c.style.opacity = i === 0 ? '1' : '0'
+        c.style.pointerEvents = i === 0 ? 'auto' : 'none'
       })
 
-      // Phases: first visible, rest hidden — scroll event switches them
-      Array.from(phases).forEach((ph, i) => {
+      // ── Phases: sync with active card ──
+      Array.from(phases).forEach(function(ph, i) {
         ph.style.opacity = i === 0 ? '1' : '0'
         ph.style.transform = 'none'
         ph.style.transition = 'opacity 0.3s ease'
@@ -3122,206 +3136,222 @@ function initMainPage() {
       if (label) { label.style.opacity = '1'; label.style.transform = 'none' }
       if (glow)  { glow.style.opacity = '0.8'; glow.style.transform = 'none' }
 
-      // Update phases on horizontal swipe
-      var _activeIdx = 0
-      stack.addEventListener('scroll', function() {
-        var idx = Math.min(N - 1, Math.round(stack.scrollLeft / currentWidth))
-        if (idx === _activeIdx) return
-        _activeIdx = idx
+      // ── Progress dots ──
+      var dots = buildCarouselDots(sectionId, copyParent || secEl, N)
+
+      // ── State ──
+      var activeIdx = 0
+      var autoTimer = null
+      var AUTOPLAY_MS = 4200
+
+      function goTo(nextIdx) {
+        var prevIdx = activeIdx
+        nextIdx = ((nextIdx % N) + N) % N
+        if (nextIdx === prevIdx) return
+        activeIdx = nextIdx
+        var dir = nextIdx > prevIdx ? 1 : -1
+
+        // Exit: slide current card out
+        cards[prevIdx].style.transition = 'transform 0.42s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease'
+        cards[prevIdx].style.transform = 'translateX(' + (dir * -105) + '%)'
+        cards[prevIdx].style.opacity = '0'
+        cards[prevIdx].style.pointerEvents = 'none'
+
+        // Enter: position new card at opposite side, then slide in
+        cards[activeIdx].style.transition = 'none'
+        cards[activeIdx].style.transform = 'translateX(' + (dir * 105) + '%)'
+        cards[activeIdx].style.opacity = '0'
+        cards[activeIdx].getBoundingClientRect() // force reflow
+        cards[activeIdx].style.transition = 'transform 0.42s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease'
+        cards[activeIdx].style.transform = 'translateX(0)'
+        cards[activeIdx].style.opacity = '1'
+        cards[activeIdx].style.pointerEvents = 'auto'
+
+        // Sync right-side phases
         Array.from(phases).forEach(function(ph, i) {
-          ph.style.opacity = i === idx ? '1' : '0'
-          ph.style.pointerEvents = i === idx ? 'auto' : 'none'
+          ph.style.opacity = i === activeIdx ? '1' : '0'
+          ph.style.pointerEvents = i === activeIdx ? 'auto' : 'none'
         })
+
+        updateCarouselDots(dots, activeIdx)
+
         if (window.__dotsStoryThreadState && typeof window.__dotsStoryThreadState.setMobile === 'function') {
-          window.__dotsStoryThreadState.setMobile(sectionId, idx)
+          window.__dotsStoryThreadState.setMobile(sectionId, activeIdx)
+        }
+      }
+
+      function nextSlide() { goTo(activeIdx + 1 >= N ? 0 : activeIdx + 1) }
+      function prevSlide() { goTo(activeIdx - 1 < 0 ? N - 1 : activeIdx - 1) }
+
+      function startAutoplay() { clearInterval(autoTimer); autoTimer = setInterval(nextSlide, AUTOPLAY_MS) }
+      function stopAutoplay()  { clearInterval(autoTimer) }
+      function resetAutoplay() { stopAutoplay(); startAutoplay() }
+
+      // ── Touch swipe ──
+      var touchStartX = 0, touchStartY = 0, swipeActive = false
+      stack.addEventListener('touchstart', function(e) {
+        touchStartX = e.touches[0].clientX
+        touchStartY = e.touches[0].clientY
+        swipeActive = false
+      }, { passive: true })
+      stack.addEventListener('touchmove', function(e) {
+        var dx = Math.abs(e.touches[0].clientX - touchStartX)
+        var dy = Math.abs(e.touches[0].clientY - touchStartY)
+        if (dx > dy && dx > 8) swipeActive = true
+      }, { passive: true })
+      stack.addEventListener('touchend', function(e) {
+        if (!swipeActive) return
+        var dx = e.changedTouches[0].clientX - touchStartX
+        if (Math.abs(dx) > 40) {
+          dx < 0 ? nextSlide() : prevSlide()
+          resetAutoplay()
         }
       }, { passive: true })
 
-      // Lightweight ScrollTrigger — story thread entry, proof counters, NO pin/scrub
+      // ── ScrollTrigger: autoplay while in viewport ──
       var mST = ScrollTrigger.create(Object.assign({
         trigger: '#' + sectionId,
         start: 'top 80%',
         onEnter: function(self) {
+          startAutoplay()
+          updateCarouselDots(dots, activeIdx)
           if (window.__dotsStoryThreadState && typeof window.__dotsStoryThreadState.setMobile === 'function') {
-            window.__dotsStoryThreadState.setMobile(sectionId, 0, true)
+            window.__dotsStoryThreadState.setMobile(sectionId, activeIdx, true)
           }
           if (typeof extraOnEnter === 'function') extraOnEnter(self)
         },
         onEnterBack: function(self) {
+          startAutoplay()
+          updateCarouselDots(dots, activeIdx)
           if (window.__dotsStoryThreadState && typeof window.__dotsStoryThreadState.setMobile === 'function') {
-            window.__dotsStoryThreadState.setMobile(sectionId, 0, true)
+            window.__dotsStoryThreadState.setMobile(sectionId, activeIdx, true)
           }
           if (typeof extraOnEnterBack === 'function') extraOnEnterBack(self)
-        }
+        },
+        onLeave:     function() { stopAutoplay() },
+        onLeaveBack: function() { stopAutoplay() }
       }, scrollOpts))
       registerSectionTrigger(sectionId, mST)
-      mobileStoryLayouts.push(applyMobileStoryLayout)
+      mobileStoryLayouts.push(applyLayout)
     }
 
-    setupMobileHSnap('platform',   platformEl.querySelector('.platform-copy-stack'),   pCards,      pPhases,      pLabel,      pGlow)
-    setupMobileHSnap('consulting',  consultEl.querySelector('.consulting-copy-stack'),  cCards,      cPhases,      cLabel,      cGlow)
-    ;(function setupProofMobileHSnap() {
-      // Proof CTA stays in its section — no teleport, no fixed positioning
-      setupMobileHSnap('proof', proofEl.querySelector('.proof-copy-stack'), proofCards, proofPhases, proofLabel, proofGlow, {
+    // ── Wire up carousels: platform, consulting, proof, assist ──────────────
+    setupMobileCarousel('platform',   platformEl.querySelector('.platform-copy-stack'),   pCards,      pPhases,      pLabel,      pGlow)
+    setupMobileCarousel('consulting',  consultEl.querySelector('.consulting-copy-stack'),  cCards,      cPhases,      cLabel,      cGlow)
+    ;(function() {
+      setupMobileCarousel('proof', proofEl.querySelector('.proof-copy-stack'), proofCards, proofPhases, proofLabel, proofGlow, {
         onEnter: startProofCounters,
         onEnterBack: startProofCounters
       })
     })()
-    setupMobileHSnap('assist',      assistEl.querySelector('.assist-copy-stack'),       aCards,      aPhases,      aLabel,      aGlow)
+    setupMobileCarousel('assist',      assistEl.querySelector('.assist-copy-stack'),       aCards,      aPhases,      aLabel,      aGlow)
 
     // Labs: build a mobile horizontal snap using .labs-mobile-card elements
-    ;(function setupLabsMobileSnap() {
+    // ── Labs: auto-rotating carousel (same pattern as other sections) ────────
+    ;(function setupLabsMobileCarousel() {
       const labsMobileEl = document.getElementById('labs-teaser')
       if (!labsMobileEl) return
 
-      // Gather all .labs-mobile-card in order: copy card + 3 demo cards
       const allLabsCards = Array.from(labsMobileEl.querySelectorAll('.labs-mobile-card'))
       if (!allLabsCards.length) return
 
-      // Wrap in a stack container
       const labsShell = labsMobileEl.querySelector('.labs-teaser-shell')
       if (!labsShell) return
 
-      // Create the stack wrapper that acts as the horizontal rail
+      // Move cards into a new carousel stack container
       const labsStack = document.createElement('div')
       labsStack.className = 'labs-mobile-stack'
       labsShell.parentNode.insertBefore(labsStack, labsShell)
       allLabsCards.forEach(c => labsStack.appendChild(c))
       labsShell.remove()
 
-      // Also hide the all-labs link during snap (show it last slide)
-      const labsAllLink = labsMobileEl.querySelector('.labs-teaser-all')
+      const labsN = allLabsCards.length
+      const labsDots = buildCarouselDots('labs-teaser', labsMobileEl, labsN)
 
-      // Hide desktop labs teaser trigger (already killed above)
-      // Use setupMobileHSnap logic manually for labs
       function applyLabsMobileLayout() {
-        const metrics = applyMobilePanelMetrics()
-        const N = allLabsCards.length
-        labsMobileEl.style.height = metrics.viewportHeight + 'px'
-        labsMobileEl.style.overflow = 'hidden'
+        labsMobileEl.style.height = 'auto'
+        labsMobileEl.style.overflow = 'visible'
         labsMobileEl.style.boxSizing = 'border-box'
-        const paddingTop = parseFloat(getComputedStyle(labsMobileEl).paddingTop) || 0
-        const paddingBottom = parseFloat(getComputedStyle(labsMobileEl).paddingBottom) || 0
-        const availH = Math.max(120, Math.round(metrics.viewportHeight - paddingTop - paddingBottom))
-        const availW = Math.round(window.innerWidth)
 
-        labsStack.style.width = (N * availW) + 'px'
-        labsStack.style.height = availH + 'px'
-        labsStack.style.display = 'flex'
-        labsStack.style.flexDirection = 'row'
-        labsStack.style.flexWrap = 'nowrap'
-        labsStack.style.overflow = 'visible'
+        // CSS Grid stacking — height = tallest card automatically
+        labsStack.style.setProperty('display', 'grid', 'important')
+        labsStack.style.setProperty('overflow', 'hidden', 'important')
         labsStack.style.position = 'relative'
-        labsStack.style.willChange = 'transform'
+        labsStack.style.width = '100%'
+        labsStack.style.minHeight = '0'
 
-        allLabsCards.forEach(c => {
-          c.style.width = availW + 'px'
-          c.style.height = availH + 'px'
-          c.style.flex = '0 0 ' + availW + 'px'
+        allLabsCards.forEach(function(c, i) {
+          c.style.gridArea = '1 / 1'
+          c.style.width = '100%'
           c.style.boxSizing = 'border-box'
-          c.style.overflowY = 'auto'
+          c.style.overflow = 'visible'
           c.style.display = 'flex'
           c.style.flexDirection = 'column'
           c.style.justifyContent = 'flex-start'
           c.style.padding = '20px 20px 24px'
-          c.style.opacity = '1'
+          c.style.transition = 'none'
+          c.style.transform = i === 0 ? 'translateX(0)' : 'translateX(105%)'
+          c.style.opacity = i === 0 ? '1' : '0'
+          c.style.pointerEvents = i === 0 ? 'auto' : 'none'
           c.style.visibility = 'visible'
-          c.style.transform = 'none'
+          // Remove scroll-snap attributes no longer needed
+          c.style.scrollSnapAlign = ''
+          c.style.scrollSnapStop = ''
         })
       }
       applyLabsMobileLayout()
 
-      const labsN = allLabsCards.length
-      const labsMST = gsap.to(labsStack, {
-        x: () => -(labsN - 1) * window.innerWidth,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: '#labs-teaser',
-          start: 'top top',
-          end: '+=' + (labsN - 1) * 100 + '%',
-          pin: true,
-          scrub: 0.8,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-          onRefreshInit: applyLabsMobileLayout,
-          onEnter: function() {
-            if (window.__dotsStoryThreadState) window.__dotsStoryThreadState.setMobile('labs-teaser', 0, true)
-          },
-          onEnterBack: function() {
-            if (window.__dotsStoryThreadState) window.__dotsStoryThreadState.setMobile('labs-teaser', 0, true)
-          },
-          snap: {
-            snapTo: 1 / (labsN - 1),
-            duration: { min: 0.2, max: 0.5 },
-            delay: 0.05,
-            ease: 'power1.inOut'
-          },
-          onUpdate: function(self) {
-            if (!self.isActive) return
-            const idx = Math.min(labsN - 1, Math.floor(self.progress * labsN))
-            if (window.__dotsStoryThreadState) window.__dotsStoryThreadState.setMobile('labs-teaser', idx)
-            // Show all-labs link on last slide
-            if (labsAllLink) labsAllLink.style.display = idx === labsN - 1 ? 'block' : 'none'
-          }
-        }
+      var activeLabsIdx = 0
+      var labsAutoTimer = null
+      var LABS_AUTOPLAY = 4200
+
+      function labsGoTo(nextIdx) {
+        var prevIdx = activeLabsIdx
+        nextIdx = ((nextIdx % labsN) + labsN) % labsN
+        if (nextIdx === prevIdx) return
+        activeLabsIdx = nextIdx
+        var dir = nextIdx > prevIdx ? 1 : -1
+
+        allLabsCards[prevIdx].style.transition = 'transform 0.42s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease'
+        allLabsCards[prevIdx].style.transform = 'translateX(' + (dir * -105) + '%)'
+        allLabsCards[prevIdx].style.opacity = '0'
+        allLabsCards[prevIdx].style.pointerEvents = 'none'
+
+        allLabsCards[activeLabsIdx].style.transition = 'none'
+        allLabsCards[activeLabsIdx].style.transform = 'translateX(' + (dir * 105) + '%)'
+        allLabsCards[activeLabsIdx].style.opacity = '0'
+        allLabsCards[activeLabsIdx].getBoundingClientRect()
+        allLabsCards[activeLabsIdx].style.transition = 'transform 0.42s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease'
+        allLabsCards[activeLabsIdx].style.transform = 'translateX(0)'
+        allLabsCards[activeLabsIdx].style.opacity = '1'
+        allLabsCards[activeLabsIdx].style.pointerEvents = 'auto'
+
+        updateCarouselDots(labsDots, activeLabsIdx)
+        if (window.__dotsStoryThreadState) window.__dotsStoryThreadState.setMobile('labs-teaser', activeLabsIdx)
+      }
+
+      function labsNext() { labsGoTo(activeLabsIdx + 1 >= labsN ? 0 : activeLabsIdx + 1) }
+      function labsPrev() { labsGoTo(activeLabsIdx - 1 < 0 ? labsN - 1 : activeLabsIdx - 1) }
+      function startLabsAutoplay() { clearInterval(labsAutoTimer); labsAutoTimer = setInterval(labsNext, LABS_AUTOPLAY) }
+      function stopLabsAutoplay()  { clearInterval(labsAutoTimer) }
+
+      // Touch swipe
+      var lTouchX = 0, lSwipe = false
+      labsStack.addEventListener('touchstart', function(e) { lTouchX = e.touches[0].clientX; lSwipe = false }, { passive: true })
+      labsStack.addEventListener('touchmove',  function(e) { if (Math.abs(e.touches[0].clientX - lTouchX) > 8) lSwipe = true }, { passive: true })
+      labsStack.addEventListener('touchend', function(e) {
+        if (!lSwipe) return
+        var dx = e.changedTouches[0].clientX - lTouchX
+        if (Math.abs(dx) > 40) { dx < 0 ? labsNext() : labsPrev(); clearInterval(labsAutoTimer); startLabsAutoplay() }
+      }, { passive: true })
+
+      ScrollTrigger.create({
+        trigger: '#labs-teaser', start: 'top 80%',
+        onEnter:     function() { startLabsAutoplay(); updateCarouselDots(labsDots, activeLabsIdx) },
+        onEnterBack: function() { startLabsAutoplay(); updateCarouselDots(labsDots, activeLabsIdx) },
+        onLeave: stopLabsAutoplay, onLeaveBack: stopLabsAutoplay
       })
-      registerSectionTrigger('labs-teaser', labsMST.scrollTrigger)
       mobileStoryLayouts.push(applyLabsMobileLayout)
-    })()
-
-    // ── Mobile CONTACT pin — created AFTER all other mobile pins so
-    //    ScrollTrigger computes its start/end after the other pinSpacers
-    //    are in place. 3 phases like Meet:
-    //      (1) label + title + sub
-    //      (2) buttons + schedule card header
-    //      (3) agenda rows + actions
-    ;(function setupContactMobilePin() {
-      gsap.set('.contact-label',          { opacity: 0, y: 20 })
-      gsap.set('.contact-title',          { opacity: 0, y: 30 })
-      gsap.set('.contact-sub',            { opacity: 0, y: 16 })
-      gsap.set('.contact-buttons',        { opacity: 0, y: 14 })
-      gsap.set('.contact-schedule-card',  { opacity: 0, y: 22, scale: 0.97 })
-      gsap.set('.contact-schedule-top',   { opacity: 0, y: 12 })
-      gsap.set('.contact-schedule-title', { opacity: 0, y: 14 })
-      gsap.set('.contact-schedule-copy',  { opacity: 0, y: 10 })
-      gsap.set('.contact-schedule-meta',  { opacity: 0, y: 10 })
-      gsap.set('.contact-schedule-agenda',{ opacity: 0, y: 18 })
-      gsap.set('.contact-schedule-actions',{ opacity: 0, y: 14 })
-
-      contactTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: '#contact',
-          start: 'top top',
-          end: '+=200%',
-          pin: true,
-          scrub: 0.5,
-          anticipatePin: 1,
-          onUpdate: (self) => {
-            if (!self.isActive) return
-            if (window.__dotsStoryThreadState && typeof window.__dotsStoryThreadState.setMobile === 'function') {
-              const p = self.progress
-              const idx = p < 0.34 ? 0 : (p < 0.67 ? 1 : 2)
-              window.__dotsStoryThreadState.setMobile('contact', idx)
-            }
-          }
-        }
-      })
-      // Phase 1 (0%–33%): label + title + sub
-      contactTl.to('.contact-label', { opacity: 1, y: 0, duration: 0.06, ease: EASE_OUT }, 0.02)
-      contactTl.to('.contact-title', { opacity: 1, y: 0, duration: 0.10, ease: EASE_OUT }, 0.08)
-      contactTl.to('.contact-sub',   { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.22)
-      // Phase 2 (33%–66%): buttons + schedule card header
-      contactTl.to('.contact-buttons',        { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.36)
-      contactTl.to('.contact-schedule-card',  { opacity: 1, y: 0, scale: 1, duration: 0.10, ease: EASE_OUT }, 0.42)
-      contactTl.to('.contact-schedule-top',   { opacity: 1, y: 0, duration: 0.06, ease: EASE_OUT }, 0.46)
-      contactTl.to('.contact-schedule-title', { opacity: 1, y: 0, duration: 0.08, ease: EASE_OUT }, 0.50)
-      contactTl.to('.contact-schedule-copy',  { opacity: 1, y: 0, duration: 0.06, ease: EASE_OUT }, 0.56)
-      contactTl.to('.contact-schedule-meta',  { opacity: 1, y: 0, duration: 0.06, ease: EASE_OUT }, 0.60)
-      // Phase 3 (66%–100%): agenda rows + actions
-      contactTl.to('.contact-schedule-agenda', { opacity: 1, y: 0, duration: 0.10, ease: EASE_OUT }, 0.70)
-      contactTl.to('.contact-schedule-actions',{ opacity: 1, y: 0, duration: 0.10, ease: EASE_OUT }, 0.82)
-      contactTl.set({}, {}, 1)
-      registerSectionTrigger('contact', contactTl.scrollTrigger)
     })()
 
     function refreshMobileStoryLayouts() {
@@ -3351,8 +3381,7 @@ function initMainPage() {
       window.visualViewport.addEventListener('resize', queueMobileStoryRefresh, { passive: true })
     }
 
-    // Meet + Contact mobile variant progress are driven by their own
-    // pinned timelines' onUpdate — see meetTl and contactTl above.
+    // Meet mobile variant progress is still driven by its pinned timeline.
 
     ScrollTrigger.refresh()
   }
