@@ -3055,47 +3055,25 @@ function initMainPage() {
       function applyMobileStoryLayout() {
         const metrics = applyMobilePanelMetrics()
         secEl.style.setProperty('--mobile-nav-offset', (metrics.navOffset + 16) + 'px')
-        secEl.style.height = metrics.viewportHeight + 'px'
-        secEl.style.overflow = 'hidden'
+        // Native snap: don't clamp section height — let content flow naturally
+        secEl.style.height = 'auto'
+        secEl.style.overflow = 'visible'
         secEl.style.boxSizing = 'border-box'
 
         if (copyParent) {
-          copyParent.style.overflow = 'hidden'
+          // Don't clip parent — details/CTA below the stack must remain visible
+          copyParent.style.overflow = 'visible'
           copyParent.style.position = 'relative'
           copyParent.style.minHeight = '0'
+          copyParent.style.height = 'auto'
         }
 
-        const sectionStyles = getComputedStyle(secEl)
-        const paddingBottom = parseFloat(sectionStyles.paddingBottom) || 0
         currentWidth = copyParent && copyParent.getBoundingClientRect().width > 0
           ? Math.round(copyParent.getBoundingClientRect().width)
           : window.innerWidth
 
-        let copyAreaHeight = Math.max(160, Math.round(metrics.viewportHeight - paddingBottom))
-        let reservedHeight = 0
-
-        if (copyParent) {
-          const secRect = secEl.getBoundingClientRect()
-          const copyRect = copyParent.getBoundingClientRect()
-          const copyTopOffset = Math.max(0, copyRect.top - secRect.top)
-          copyAreaHeight = Math.max(160, Math.round(metrics.viewportHeight - paddingBottom - copyTopOffset))
-
-          const copyStyles = getComputedStyle(copyParent)
-          const visibleChildren = Array.from(copyParent.children).filter((child) => {
-            const childStyles = getComputedStyle(child)
-            return childStyles.display !== 'none' && childStyles.visibility !== 'hidden'
-          })
-          const gapSize = parseFloat(copyStyles.rowGap || copyStyles.gap) || 0
-          const extraChildren = visibleChildren.filter((child) => child !== stack)
-          reservedHeight = extraChildren.reduce((total, child) => total + child.getBoundingClientRect().height, 0)
-          reservedHeight += Math.max(0, visibleChildren.length - 1) * gapSize
-        }
-
-        currentHeight = Math.max(140, Math.round(copyAreaHeight - reservedHeight))
-
-        if (copyParent) {
-          copyParent.style.height = copyAreaHeight + 'px'
-        }
+        // Cards: viewport-width wide, auto height so content isn't clipped
+        currentHeight = Math.round(metrics.viewportHeight * 0.72)
 
         stack.style.width = (N * currentWidth) + 'px'
         stack.style.height = currentHeight + 'px'
@@ -3108,26 +3086,33 @@ function initMainPage() {
       }
       applyMobileStoryLayout()
 
-      // Stack: full-width horizontal row, fills copy parent height
+      // Stack: native CSS horizontal scroll-snap (no GSAP scrub)
       stack.style.display = 'flex'
       stack.style.flexDirection = 'row'
       stack.style.flexWrap = 'nowrap'
-      stack.style.overflow = 'visible'
+      stack.style.overflowX = 'scroll'
+      stack.style.overflowY = 'hidden'
+      stack.style.scrollSnapType = 'x mandatory'
+      stack.style.webkitOverflowScrolling = 'touch'
+      stack.style.scrollbarWidth = 'none'
+      stack.style.msOverflowStyle = 'none'
       stack.style.position = 'relative'
       stack.style.margin = '0'
       stack.style.padding = '0'
-      stack.style.willChange = 'transform'
 
-      // Cards: each fills one full slide (width × height)
+      // Cards: each snap to viewport width
       Array.from(cards).forEach(c => {
+        c.style.scrollSnapAlign = 'start'
+        c.style.scrollSnapStop = 'always'
         c.style.position = 'relative'
         c.style.inset = 'auto'
         c.style.opacity = '1'
         c.style.transform = 'none'
         c.style.boxSizing = 'border-box'
+        c.style.flexShrink = '0'
       })
 
-      // Phases: first visible, rest hidden — JS onUpdate switches them
+      // Phases: first visible, rest hidden — scroll event switches them
       Array.from(phases).forEach((ph, i) => {
         ph.style.opacity = i === 0 ? '1' : '0'
         ph.style.transform = 'none'
@@ -3137,59 +3122,39 @@ function initMainPage() {
       if (label) { label.style.opacity = '1'; label.style.transform = 'none' }
       if (glow)  { glow.style.opacity = '0.8'; glow.style.transform = 'none' }
 
-      // GSAP horizontal pin — vertical scroll drives x-translation
-      const mST = gsap.to(stack, {
-        x: () => -(N - 1) * currentWidth,
-        ease: 'none',
-        scrollTrigger: Object.assign({
-          trigger: '#' + sectionId,
-          start: 'top top',
-          // Longer pin so each card has readable dwell time.
-          // N=2 → 180% (1.8 viewports, ~0.9vh per card)
-          // N=3 → 260% (2.6 viewports, ~0.87vh per card)
-          end: '+=' + (60 + N * 60) + '%',
-          pin: true,
-          scrub: 0.8,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-          onRefreshInit: applyMobileStoryLayout,
-          onEnter: function(self) {
-            if (window.__dotsStoryThreadState && typeof window.__dotsStoryThreadState.setMobile === 'function') {
-              window.__dotsStoryThreadState.setMobile(sectionId, 0, true)
-            }
-            if (typeof extraOnEnter === 'function') extraOnEnter(self)
-          },
-          onEnterBack: function(self) {
-            if (window.__dotsStoryThreadState && typeof window.__dotsStoryThreadState.setMobile === 'function') {
-              window.__dotsStoryThreadState.setMobile(sectionId, 0, true)
-            }
-            if (typeof extraOnEnterBack === 'function') extraOnEnterBack(self)
-          },
-          onToggle: function(self) {
-            if (self.isActive && window.__dotsStoryThreadState && typeof window.__dotsStoryThreadState.setMobile === 'function') {
-              window.__dotsStoryThreadState.setMobile(sectionId, 0, true)
-            }
-          },
-          snap: {
-            snapTo: 1 / (N - 1),
-            duration: { min: 0.2, max: 0.5 },
-            delay: 0.05,
-            ease: 'power1.inOut'
-          },
-          onUpdate: function(self) {
-            if (!self.isActive) return
-            const idx = Math.min(N - 1, Math.floor(self.progress * N))
-            Array.from(phases).forEach(function(ph, i) {
-              ph.style.opacity = i === idx ? '1' : '0'
-              ph.style.pointerEvents = i === idx ? 'auto' : 'none'
-            })
-            if (window.__dotsStoryThreadState && typeof window.__dotsStoryThreadState.setMobile === 'function') {
-              window.__dotsStoryThreadState.setMobile(sectionId, idx)
-            }
+      // Update phases on horizontal swipe
+      var _activeIdx = 0
+      stack.addEventListener('scroll', function() {
+        var idx = Math.min(N - 1, Math.round(stack.scrollLeft / currentWidth))
+        if (idx === _activeIdx) return
+        _activeIdx = idx
+        Array.from(phases).forEach(function(ph, i) {
+          ph.style.opacity = i === idx ? '1' : '0'
+          ph.style.pointerEvents = i === idx ? 'auto' : 'none'
+        })
+        if (window.__dotsStoryThreadState && typeof window.__dotsStoryThreadState.setMobile === 'function') {
+          window.__dotsStoryThreadState.setMobile(sectionId, idx)
+        }
+      }, { passive: true })
+
+      // Lightweight ScrollTrigger — story thread entry, proof counters, NO pin/scrub
+      var mST = ScrollTrigger.create(Object.assign({
+        trigger: '#' + sectionId,
+        start: 'top 80%',
+        onEnter: function(self) {
+          if (window.__dotsStoryThreadState && typeof window.__dotsStoryThreadState.setMobile === 'function') {
+            window.__dotsStoryThreadState.setMobile(sectionId, 0, true)
           }
-        }, scrollOpts)
-      })
-      registerSectionTrigger(sectionId, mST.scrollTrigger)
+          if (typeof extraOnEnter === 'function') extraOnEnter(self)
+        },
+        onEnterBack: function(self) {
+          if (window.__dotsStoryThreadState && typeof window.__dotsStoryThreadState.setMobile === 'function') {
+            window.__dotsStoryThreadState.setMobile(sectionId, 0, true)
+          }
+          if (typeof extraOnEnterBack === 'function') extraOnEnterBack(self)
+        }
+      }, scrollOpts))
+      registerSectionTrigger(sectionId, mST)
       mobileStoryLayouts.push(applyMobileStoryLayout)
     }
 

@@ -5805,15 +5805,20 @@ footer {
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
-    overflow: visible !important;
+    overflow-x: scroll !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
     position: relative !important;
-    height: 100% !important;
-    min-height: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
     gap: 0 !important;
-    will-change: transform;
   }
+  .platform-copy-stack::-webkit-scrollbar,
+  .consulting-copy-stack::-webkit-scrollbar,
+  .proof-copy-stack::-webkit-scrollbar,
+  .assist-copy-stack::-webkit-scrollbar { display: none; }
   /* Cards: full-height premium panels — JS sets width inline */
   .platform-copy-card, .consulting-copy-card, .proof-copy-card, .assist-copy-card {
     position: relative !important;
