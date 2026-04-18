@@ -26,6 +26,9 @@ Allow: /
 User-agent: Googlebot
 Allow: /
 
+User-agent: Google-Extended
+Allow: /
+
 User-agent: Bingbot
 Allow: /
 

@@ -435,9 +435,28 @@ img {
   flex-wrap: wrap;
 }
 
+.footer-inner-rich {
+  align-items: flex-start;
+}
+
+.footer-stack {
+  display: grid;
+  gap: 8px;
+}
+
 .footer-copy {
   color: rgba(23, 23, 34, 0.5);
   font-size: 13px;
+}
+
+.footer-address {
+  color: rgba(23, 23, 34, 0.62);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.footer-address a {
+  color: rgba(23, 23, 34, 0.78);
 }
 
 .footer-links {
