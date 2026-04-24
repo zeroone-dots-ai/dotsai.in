@@ -438,8 +438,6 @@ body{margin:0;overflow-x:hidden;background:var(--cream-50)}
   position:absolute;inset:0;z-index:0;
   width:100%;height:100%;object-fit:cover;
   opacity:.55;
-  /* Gentle ken-burns over the 14.25s native slo-mo loop. */
-  animation:heroVidBreathe 72s ease-in-out infinite alternate;
 }
 .hero-readability{
   position:absolute;inset:0;z-index:1;pointer-events:none;
@@ -644,7 +642,7 @@ section{padding:var(--section-y) 0;position:relative}
              text-transform:uppercase;color:var(--stone-500);line-height:1.55;
              margin:0;padding:0;display:block;min-height:2.8em}
 .metric .lab::before{content:"";display:block;width:24px;height:1px;
-                     background:var(--plum);opacity:.5;margin-bottom:10px}
+                     background:var(--plum);opacity:.5;margin:0 auto 10px}
 @media (max-width:767px){
   .metric{padding:var(--sp-5) var(--sp-4);gap:var(--sp-3)}
   .metric .num{font-size:30px}
