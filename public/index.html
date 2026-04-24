@@ -3439,21 +3439,21 @@ pill.addEventListener('click', () => {
     audio.muted = false;
     tryPlay().then(ok => {
       if (!ok) {
-        /* Autoplay blocked — pill shows muted state; first interaction unlocks. */
+        /* Autoplay blocked — first interaction unlocks, UNLESS user has already
+           clicked the pill off (localStorage) or has clicked the pill at all. */
         pill.setAttribute('data-playing', 'false');
         setTip('Tap to play music');
-        const unlock = () => {
-          tryPlay().then(ok => {
-            if (ok) {
-              ['pointerdown','scroll','click','touchstart','keydown','mousemove'].forEach(ev =>
-                document.removeEventListener(ev, unlock, true)
-              );
-            }
-          });
+        const EVS = ['pointerdown','scroll','click','touchstart','keydown','mousemove'];
+        const remove = () => EVS.forEach(ev => document.removeEventListener(ev, unlock, true));
+        const unlock = (e) => {
+          /* Respect explicit opt-out and avoid double-firing when the pill itself is clicked. */
+          if (localStorage.getItem('zo_ambient') === '0') { remove(); return; }
+          if (e && e.target && e.target.closest && e.target.closest('#musicPill')) { remove(); return; }
+          tryPlay().then(ok => { if (ok) remove(); });
         };
-        ['pointerdown','scroll','click','touchstart','keydown','mousemove'].forEach(ev =>
-          document.addEventListener(ev, unlock, { capture: true, passive: true })
-        );
+        EVS.forEach(ev => document.addEventListener(ev, unlock, { capture: true, passive: true }));
+        /* Also remove the listener as soon as the user explicitly toggles the pill. */
+        pill.addEventListener('click', remove, { once: true });
       }
     });
   };
