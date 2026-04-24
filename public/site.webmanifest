@@ -1,0 +1,13 @@
+{
+  "name": "ZeroOne D·O·T·S AI",
+  "short_name": "ZeroOne",
+  "description": "Private AI — built for you. One operator, full stack, zero middlemen.",
+  "icons": [
+    { "src": "/assets/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/assets/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#191924",
+  "background_color": "#06060a",
+  "display": "standalone",
+  "start_url": "/"
+}

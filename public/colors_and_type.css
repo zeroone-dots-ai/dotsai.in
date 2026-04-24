@@ -1,0 +1,422 @@
+/* ═══════════════════════════════════════════════════════════════
+   ZEROONE D·O·T·S AI — Design Tokens
+   Colors, typography, spacing, radii, shadows, motion
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Self-hosted brand face: Orbitron (display) ── */
+@font-face { font-family:'Orbitron'; font-style:normal; font-weight:400; font-display:swap;
+  src:url('fonts/orbitron-400-normal.woff2') format('woff2'); }
+@font-face { font-family:'Orbitron'; font-style:normal; font-weight:500; font-display:swap;
+  src:url('fonts/orbitron-500-normal.woff2') format('woff2'); }
+@font-face { font-family:'Orbitron'; font-style:normal; font-weight:600; font-display:swap;
+  src:url('fonts/orbitron-600-normal.woff2') format('woff2'); }
+@font-face { font-family:'Orbitron'; font-style:normal; font-weight:700; font-display:swap;
+  src:url('fonts/orbitron-700-normal.woff2') format('woff2'); }
+@font-face { font-family:'Orbitron'; font-style:normal; font-weight:800; font-display:swap;
+  src:url('fonts/orbitron-800-normal.woff2') format('woff2'); }
+@font-face { font-family:'Orbitron'; font-style:normal; font-weight:900; font-display:swap;
+  src:url('fonts/orbitron-900-normal.woff2') format('woff2'); }
+
+/* ── Self-hosted brand face: Satoshi (body / UI) ── */
+@font-face { font-family:'Satoshi'; font-style:normal; font-weight:300 900; font-display:swap;
+  src:url('fonts/Satoshi-Variable.ttf') format('truetype-variations'); }
+@font-face { font-family:'Satoshi'; font-style:italic; font-weight:300 900; font-display:swap;
+  src:url('fonts/Satoshi-VariableItalic.ttf') format('truetype-variations'); }
+
+/* ── Self-hosted brand face: Space Mono (labels / UI) ── */
+@font-face { font-family:'Space Mono'; font-style:normal; font-weight:400; font-display:swap;
+  src:url('fonts/space-mono-400-normal.woff2') format('woff2'); }
+@font-face { font-family:'Space Mono'; font-style:italic; font-weight:400; font-display:swap;
+  src:url('fonts/space-mono-400-italic.woff2') format('woff2'); }
+@font-face { font-family:'Space Mono'; font-style:normal; font-weight:700; font-display:swap;
+  src:url('fonts/space-mono-700-normal.woff2') format('woff2'); }
+@font-face { font-family:'Space Mono'; font-style:italic; font-weight:700; font-display:swap;
+  src:url('fonts/space-mono-700-italic.woff2') format('woff2'); }
+
+/* ── Clash Display (primary display — Option A) ── */
+@font-face { font-family:'Clash Display'; font-style:normal; font-weight:200 700; font-display:swap;
+  src:url('fonts/ClashDisplay-Variable.ttf') format('truetype-variations'); }
+
+/* ── Cabinet Grotesk (bold editorial — Option B) ── */
+@font-face { font-family:'Cabinet Grotesk'; font-style:normal; font-weight:100 900; font-display:swap;
+  src:url('fonts/CabinetGrotesk-Variable.ttf') format('truetype-variations'); }
+
+/* ── General Sans (technical premium — Option C) ── */
+@font-face { font-family:'General Sans'; font-style:normal; font-weight:200 700; font-display:swap;
+  src:url('fonts/GeneralSans-Variable.ttf') format('truetype-variations'); }
+
+/* ── JetBrains Mono (upgraded mono — Options A/C) ── */
+@font-face { font-family:'JetBrains Mono'; font-style:normal; font-weight:400; font-display:swap;
+  src:url('fonts/jetbrains-mono-400.woff2') format('woff2'); }
+@font-face { font-family:'JetBrains Mono'; font-style:normal; font-weight:700; font-display:swap;
+  src:url('fonts/jetbrains-mono-700.woff2') format('woff2'); }
+
+/* ── Plus Jakarta Sans (body — Option C) ── */
+@font-face { font-family:'Plus Jakarta Sans'; font-style:normal; font-weight:400; font-display:swap;
+  src:url('fonts/plus-jakarta-400.woff2') format('woff2'); }
+@font-face { font-family:'Plus Jakarta Sans'; font-style:normal; font-weight:700; font-display:swap;
+  src:url('fonts/plus-jakarta-700.woff2') format('woff2'); }
+
+/* ── Bebas Neue (condensed stat accent — Option B) ── */
+@font-face { font-family:'Bebas Neue'; font-style:normal; font-weight:400; font-display:swap;
+  src:url('fonts/bebas-neue-400.woff2') format('woff2'); }
+
+/* ── Syne (character accent — Option B body / A,C accent) ── */
+@font-face { font-family:'Syne'; font-style:normal; font-weight:500; font-display:swap;
+  src:url('fonts/syne-500.woff2') format('woff2'); }
+@font-face { font-family:'Syne'; font-style:normal; font-weight:700; font-display:swap;
+  src:url('fonts/syne-700.woff2') format('woff2'); }
+
+:root {
+  /* ── D.O.T.S. Pillar Pastels (mapped to framework) ── */
+  --lavender: #C8B6FF;   /* D · Data */
+  --mint:     #B8E0D2;   /* O · Operations */
+  --peach:    #FFCDB2;   /* T · Tech */
+  --sky:      #A2D2FF;   /* S · Strategy */
+  --rose:     #FFB5C2;   /* Accent · Creative */
+  --lemon:    #FFF3B0;   /* Highlight */
+
+  /* Pillar aliases (semantic) */
+  --pillar-data:       var(--lavender);
+  --pillar-operations: var(--mint);
+  --pillar-tech:       var(--peach);
+  --pillar-strategy:   var(--sky);
+
+  /* ── Pillar tonal ladders — 5 steps per pillar, tint → base → shade ──
+     Use tints (20/40) for backgrounds + fills on light; use shades (80/95)
+     for text + icons on light. The base (60) is the identity pastel. */
+
+  /* Data · Lavender family */
+  --data-20:  #EDE6FF;   /* Very light tint — surface */
+  --data-40:  #D3C5FF;   /* Soft tint — fill */
+  --data-60:  #C8B6FF;   /* BASE — identity */
+  --data-80:  #5B3FD4;   /* Shade — text, icons, strokes */
+  --data-95:  #2D1B4E;   /* Deep — plum, italic, hero ink */
+
+  /* Operations · Mint family */
+  --ops-20:   #E5F3EC;
+  --ops-40:   #CCE9DC;
+  --ops-60:   #B8E0D2;   /* BASE */
+  --ops-80:   #1F7A5C;
+  --ops-95:   #0F3D2E;
+
+  /* Tech · Peach family */
+  --tech-20:  #FFEFE3;
+  --tech-40:  #FFDFC8;
+  --tech-60:  #FFCDB2;   /* BASE */
+  --tech-80:  #A8521A;
+  --tech-95:  #5C2A0D;
+
+  /* Strategy · Sky family */
+  --strat-20: #E5F1FF;
+  --strat-40: #C5E0FF;
+  --strat-60: #A2D2FF;   /* BASE */
+  --strat-80: #1E5B9C;
+  --strat-95: #0F2E4F;
+
+  /* ── Mid-value neutral anchors (warm + cool slate) ──
+     Bridge between cream surfaces and ink dark. Useful for filled panels,
+     nested cards, hero sub-sections that need depth without pure black. */
+  --slate-warm:  #3A3D4A;   /* Warm slate — cards on dark hero */
+  --slate-cool:  #27425D;   /* Cool slate — info panels, editorial */
+
+  /* ── Pillar "deep" variants — WCAG-safe for text + icons on light canvas ──
+     The pastels (above) are IDENTITY colors: use as dots, tint backgrounds,
+     borders, and pillar-accent strokes. They FAIL contrast as foreground.
+     The deep variants (below) are FUNCTIONAL colors: use for text, icon
+     strokes, and filled elements on cream/white. All pass AA at 14px+. */
+  --pillar-data-deep:       #5B3FD4;  /* Lavender → Deep violet */
+  --pillar-operations-deep: #1F7A5C;  /* Mint    → Deep green */
+  --pillar-tech-deep:       #A8521A;  /* Peach   → Burnt sienna */
+  --pillar-strategy-deep:   #1E5B9C;  /* Sky     → Deep blue */
+
+  /* ── Deep Anchors ── */
+  --ink:      #191924;   /* Primary text, dark BGs */
+  --plum:     #2D1B4E;   /* Hovers, premium */
+  --charcoal: #2A2A3C;   /* Footer, dark borders */
+
+  /* ── Warm Neutrals (Anthropic-style editorial) ── */
+  --cream-50:  #FDFCFA;
+  --cream-100: #F8F7F4;
+  --cream-150: #F2F0EC;
+  --sand-200:  #E8E6E0;
+  --sand-300:  #D4D1C9;
+  --stone-400: #B5B1A7;
+  --stone-500: #918D82;
+  --stone-600: #6E6B62;
+  --slate-700: #4A4842;
+  --slate-800: #2E2D29;
+
+  /* ── Sidebar (dark shell) ── */
+  --sidebar-bg:          #13131D;
+  --sidebar-hover:       #1E1E2E;
+  --sidebar-active:      #252538;
+  --sidebar-border:      #2A2A3C;
+  --sidebar-text:        #A8A6B0;
+  --sidebar-text-active: #FDFCFA;
+
+  /* ── Semantic ── */
+  --teal:        #4ECDC4;
+  --teal-hover:  #3DB8B0;
+  --amber:       #D4A574;
+  --gold:        #F5C542;
+  --danger:      #EF4444;
+  --success:     #10B981;
+
+  /* Foreground / Background aliases */
+  --bg:           var(--cream-50);
+  --bg-surface:   #FFFFFF;
+  --bg-elevated:  var(--cream-100);
+  --fg:           var(--ink);
+  --fg-muted:     var(--stone-600);
+  --fg-subtle:    var(--stone-500);
+  --border:       var(--sand-200);
+  --border-hover: var(--sand-300);
+
+  /* ── Brand Gradients ── */
+  --g-aurora: linear-gradient(135deg, #C8B6FF, #A2D2FF, #B8E0D2);
+  --g-warmth: linear-gradient(135deg, #FFCDB2, #FFB5C2, #C8B6FF);
+  --g-cosmos: linear-gradient(135deg, #191924, #2D1B4E);
+
+  /* ── Typography — Fonts ──
+     Display = Orbitron (self-hosted). Geometric, tech-forward — use UPPERCASE
+       for impact (letterspaced ~1–3px for small sizes, tighter for large).
+     Body   = DM Sans (humanist foil to Orbitron's geometry).
+     Mono   = Space Mono (labels, eyebrows, numeric UI, code). */
+  --font-display: 'Orbitron', 'Space Grotesk', system-ui, sans-serif;
+  --font-body:    'Satoshi', system-ui, -apple-system, sans-serif;
+  --font-mono:    'Space Mono', ui-monospace, 'JetBrains Mono', monospace;
+
+  /* ── Breakpoints (mobile-first) ── */
+  --bp-xs:  360px;   /* Small phones (iPhone SE, older Android) */
+  --bp-sm:  480px;   /* Large phones / phablet */
+  --bp-md:  768px;   /* Tablet portrait */
+  --bp-lg:  1024px;  /* Tablet landscape / small laptop */
+  --bp-xl:  1280px;  /* Desktop */
+  --bp-2xl: 1536px;  /* Wide desktop */
+
+  /* ── Touch targets (iOS HIG 44pt / Material 48dp) ── */
+  --touch-min:     44px;   /* Minimum hit area — any tap target */
+  --touch-comfort: 48px;   /* Comfort — primary CTAs, nav */
+  --touch-large:   56px;   /* Hero CTAs, bottom-nav tabs */
+
+  /* ── Fluid type scale (mobile 360 → desktop 1280) ──
+     Fixed px tokens below REMAIN for desktop-only layouts; the fluid
+     tokens (*-fl) are mobile-safe and auto-scale. Use --fl-* on anything
+     that renders below 768px. */
+  --text-xs:   11px;
+  --text-sm:   13px;
+  --text-base: 15px;
+  --text-md:   17px;
+  --text-lg:   20px;
+  --text-xl:   28px;
+  --text-2xl:  36px;
+  --text-3xl:  52px;
+  --text-4xl:  76px;
+
+  /* Fluid (responsive) scale — use these on mobile+responsive surfaces */
+  --fl-xs:    clamp(10px, 0.7vw + 8px,  11px);
+  --fl-sm:    clamp(12px, 0.4vw + 11px, 13px);
+  --fl-base:  clamp(14px, 0.4vw + 13px, 16px);
+  --fl-md:    clamp(15px, 0.6vw + 13px, 18px);
+  --fl-lg:    clamp(17px, 0.8vw + 14px, 22px);
+  --fl-xl:    clamp(22px, 2vw + 14px,   32px);
+  --fl-2xl:   clamp(28px, 3vw + 14px,   44px);
+  --fl-3xl:   clamp(34px, 4vw + 14px,   60px);
+  --fl-4xl:   clamp(40px, 6vw + 14px,   84px);
+
+  /* ── Spacing (8px grid) ── */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  20px;
+  --sp-6:  24px;
+  --sp-8:  32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+  --sp-24: 96px;
+
+  /* ── Fluid spacing (mobile → desktop) ──
+     Use these for section padding, gaps, hero margins on responsive pages.
+     They collapse gracefully at 360px and open up at 1280px+. */
+  --sp-fl-xs:  clamp(4px,  0.4vw + 3px,  6px);
+  --sp-fl-sm:  clamp(8px,  0.8vw + 5px,  12px);
+  --sp-fl-md:  clamp(12px, 1vw + 8px,    20px);
+  --sp-fl-lg:  clamp(16px, 2vw + 10px,   32px);
+  --sp-fl-xl:  clamp(24px, 3vw + 12px,   48px);
+  --sp-fl-2xl: clamp(32px, 4vw + 16px,   72px);
+  --sp-fl-3xl: clamp(40px, 6vw + 20px,   112px);
+
+  /* Section padding recipes — use on <section> wrappers */
+  --section-x: clamp(16px, 5vw, 80px);        /* horizontal page gutter */
+  --section-y: clamp(48px, 7vw, 120px);       /* vertical section rhythm */
+  --container-max: 1280px;                    /* max content width */
+
+  /* ── Safe-area insets (iOS notch / home indicator / Android nav) ── */
+  --safe-top:    env(safe-area-inset-top, 0px);
+  --safe-right:  env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left:   env(safe-area-inset-left, 0px);
+
+  /* ── Radius ── */
+  --r-sm:   6px;
+  --r-md:   8px;
+  --r-lg:   12px;
+  --r-xl:   16px;
+  --r-2xl:  24px;
+  --r-full: 999px;
+
+  /* ── Shadows ── */
+  --shadow-sm:  0 1px 2px rgba(25,25,36,.04);
+  --shadow-md:  0 4px 12px rgba(25,25,36,.06);
+  --shadow-lg:  0 10px 32px rgba(25,25,36,.08);
+  --shadow-xl:  0 20px 50px rgba(25,25,36,.10);
+  --shadow-2xl: 0 30px 80px rgba(25,25,36,.14);
+  --shadow-focus: 0 0 0 4px rgba(200,182,255,.20);
+
+  /* ── Motion ── */
+  --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snap: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast: 150ms;
+  --dur-med:  250ms;
+  --dur-slow: 400ms;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SEMANTIC TYPOGRAPHY — drop-in element styles
+   ═══════════════════════════════════════════════════════════════ */
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.65;
+  color: var(--fg);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Orbitron is a geometric display face — it performs best UPPERCASE at
+   600–800 weight, tightly tracked at large sizes. H1–H3 use it that way.
+   The "italic plum" highlight moves onto the body face (DM Sans italic)
+   since Orbitron has no italic. */
+h1, .h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(40px, 6.5vw, var(--text-4xl));
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+h2, .h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(30px, 4.5vw, var(--text-3xl));
+  line-height: 1.08;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+}
+h3, .h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-xl);
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+h4, .h4 {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-md);
+  line-height: 1.4;
+}
+
+/* Display accents: italic highlight lives in DM Sans (Orbitron has no italic) */
+h1 em, h2 em, h3 em, .display em {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--plum);
+}
+em, .italic { font-style: italic; color: var(--plum); }
+
+p, .body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.75;
+  color: var(--fg-muted);
+}
+
+.lead {
+  font-size: var(--text-md);
+  line-height: 1.8;
+  color: var(--fg-muted);
+}
+
+small, .caption {
+  font-size: var(--text-sm);
+  color: var(--fg-subtle);
+}
+
+/* Mono labels / eyebrows / tags */
+.mono, code, kbd, pre {
+  font-family: var(--font-mono);
+}
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--stone-500);
+}
+
+::selection { background: var(--lavender); color: var(--ink); }
+*:focus-visible { outline: 2px solid var(--lavender); outline-offset: 2px; }
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE UTILITIES — responsive helpers
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Page container — handles gutter + max width + safe-area */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding-left: max(var(--section-x), var(--safe-left));
+  padding-right: max(var(--section-x), var(--safe-right));
+  box-sizing: border-box;
+}
+.section { padding-top: var(--section-y); padding-bottom: var(--section-y); }
+
+/* Touch-target enforcement */
+.tap    { min-height: var(--touch-min);     min-width: var(--touch-min);     }
+.tap-lg { min-height: var(--touch-comfort); min-width: var(--touch-comfort); }
+
+/* Safe-area helpers — bottom tab bars, modal sheets, etc. */
+.pb-safe { padding-bottom: calc(var(--sp-4) + var(--safe-bottom)); }
+.pt-safe { padding-top:    calc(var(--sp-4) + var(--safe-top)); }
+
+/* Show/hide by breakpoint */
+.mobile-only  { display: block; }
+.desktop-only { display: none;  }
+@media (min-width: 768px) {
+  .mobile-only  { display: none;  }
+  .desktop-only { display: block; }
+}
+
+/* Responsive hero + body — mobile defaults, desktop overrides */
+.h1-fluid { font-family: var(--font-display); font-weight: 700;
+  font-size: var(--fl-4xl); line-height: 1.02; letter-spacing: -0.015em; }
+.h2-fluid { font-family: var(--font-display); font-weight: 600;
+  font-size: var(--fl-3xl); line-height: 1.08; letter-spacing: -0.005em; }
+.body-fluid { font-size: var(--fl-base); line-height: 1.6; }
+
+/* Stack on mobile, row on desktop */
+.stack-to-row { display: flex; flex-direction: column; gap: var(--sp-fl-md); }
+@media (min-width: 768px) { .stack-to-row { flex-direction: row; } }
