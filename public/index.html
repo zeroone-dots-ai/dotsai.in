@@ -411,22 +411,36 @@ body{margin:0;overflow-x:hidden;background:var(--cream-50)}
                radial-gradient(circle at 20% 30%, rgba(200,182,255,.15), transparent 40%),
                radial-gradient(circle at 80% 60%, rgba(162,210,255,.12), transparent 45%),
                radial-gradient(circle at 50% 90%, rgba(184,224,210,.10), transparent 50%)}
-.hero-poster::after{content:"";position:absolute;inset:0;
-     background-image:
-       radial-gradient(circle at center, rgba(255,255,255,.35) 1px, transparent 1px);
-     background-size:24px 24px;opacity:.05;
-     /* Dot grid is now masked AWAY from the left text zone so it doesn't compete
-        with the hero copy. Only appears on the right side of the viewport. */
-     mask-image:radial-gradient(ellipse at 78% 55%, black 15%, transparent 55%);
-     -webkit-mask-image:radial-gradient(ellipse at 78% 55%, black 15%, transparent 55%)}
+/* Dot grid removed entirely — the video carries the atmosphere.
+   hero-poster::after kept empty in case a future flourish needs the slot. */
+.hero-poster::after{content:none}
+
+/* Creative replacement: two slow-drifting radial blooms in brand hues,
+   anchored in the right third so they never touch the hero copy on the
+   left. 60-80s cycles — atmospheric, not rhythmic. */
+.hero-glow{position:absolute;inset:0;z-index:1;pointer-events:none;
+           mix-blend-mode:screen;opacity:.55;
+           background:
+             radial-gradient(ellipse 28% 40% at 78% 38%, rgba(200,182,255,.45), transparent 70%),
+             radial-gradient(ellipse 22% 30% at 88% 72%, rgba(162,210,255,.35), transparent 70%);
+           animation:heroGlow 48s ease-in-out infinite alternate}
+@keyframes heroGlow{
+  0%   {transform:translate(0,0) scale(1);    opacity:.5}
+  50%  {transform:translate(-1%,1%) scale(1.08); opacity:.65}
+  100% {transform:translate(1%,-1%) scale(1.02); opacity:.45}
+}
+@media (prefers-reduced-motion:reduce){.hero-glow{animation:none;opacity:.35}}
+/* Kill the #webgl canvas on the hero — video is the atmosphere now */
+.hero #webgl{display:none !important}
 
 /* ── Hero ambient video + readability overlay ── */
 .hero-video{
   position:absolute;inset:0;z-index:0;
   width:100%;height:100%;object-fit:cover;
   opacity:.55;
-  /* Subtle zoom-in loop so a single 8 s video doesn't read as static */
-  animation:heroVidBreathe 36s ease-in-out infinite alternate;
+  /* Slower, softer zoom. Paired with playbackRate 0.5 in JS to give the 8s
+     video ~16s of perceived runtime per loop — feels ambient, not cycling. */
+  animation:heroVidBreathe 72s ease-in-out infinite alternate;
 }
 .hero-readability{
   position:absolute;inset:0;z-index:1;pointer-events:none;
@@ -2065,14 +2079,29 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
   <!-- Desktop-only ambient video backdrop. Muted, looped, silent, paused under
        prefers-reduced-motion. Poster = the fal.ai hero.jpg so first paint is
        instant while the mp4 loads. -->
-  <video class="hero-video" autoplay muted loop playsinline preload="metadata"
+  <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="metadata"
          poster="./assets/themes/02-crystal/hero.jpg"
          aria-hidden="true">
     <source src="./assets/hero-bg.mp4" type="video/mp4">
   </video>
+  <script>
+    /* Slow the hero video to 0.5× so an 8 s clip reads as 16 s of ambient
+       motion per loop — matches the slow breathe animation above. */
+    (function(){
+      var v=document.getElementById('heroVideo');
+      if(!v) return;
+      var apply=function(){ try{ v.playbackRate=0.5; }catch(e){} };
+      apply();
+      v.addEventListener('loadedmetadata', apply, {once:true});
+      v.addEventListener('play', apply);
+    })();
+  </script>
   <!-- Readability overlay — darkens the left ~55% where the hero copy sits,
        fades to transparent toward the right where the video gets to breathe. -->
   <div class="hero-readability" aria-hidden="true"></div>
+  <!-- Ambient brand-color blooms — slow, non-rhythmic, anchored in the right
+       third so they never touch the hero text. Replaces the old dot grid. -->
+  <div class="hero-glow" aria-hidden="true"></div>
   <div class="hero-poster" aria-hidden="true"></div>
   <canvas id="webgl" aria-hidden="true"></canvas>
 
@@ -3558,7 +3587,11 @@ pill.addEventListener('click', () => {
 const isDesktop = window.matchMedia('(min-width: 768px)').matches;
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-if (isDesktop && !reducedMotion) {
+/* WebGL dot-matrix pillar scene disabled — the ambient hero video now
+   carries the atmosphere and the dot pillars were fighting the text.
+   Three.js scene + canvas stay in the DOM for potential future reuse
+   but are short-circuited here. Canvas also hidden via CSS. */
+if (false && isDesktop && !reducedMotion) {
   (async () => {
     const THREE = await import('https://unpkg.com/three@0.160.0/build/three.module.js');
     const canvas = document.getElementById('webgl');
