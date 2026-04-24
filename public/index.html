@@ -784,11 +784,19 @@ section{padding:var(--section-y) 0;position:relative}
                  font-family:var(--font-mono);font-size:10px;letter-spacing:2px;
                  text-transform:uppercase;color:var(--stone-500)}
 /* LinkedIn trust-link inside a cite */
-.case-quote cite .cite-link{color:var(--ink);text-decoration:none;
-                            border-bottom:1px solid var(--sand-200);padding-bottom:1px;
-                            transition:color 160ms var(--ease-out),border-color 160ms var(--ease-out)}
-.case-quote cite .cite-link:hover{color:var(--plum);border-bottom-color:var(--plum)}
-.case-quote cite .cite-link:focus-visible{outline:2px solid var(--plum);outline-offset:3px}
+/* cite-link — used in both <cite> under quotes AND inside .case-meta.
+   Earlier selector was scoped only to .case-quote cite which left the
+   Ankur LinkedIn in case-meta with default blue/underlined browser styling. */
+.cite-link{color:var(--ink);text-decoration:none;
+           border-bottom:1px solid var(--sand-200);padding-bottom:1px;
+           transition:color 160ms var(--ease-out),border-color 160ms var(--ease-out)}
+.cite-link:hover{color:var(--plum);border-bottom-color:var(--plum)}
+.cite-link:focus-visible{outline:2px solid var(--plum);outline-offset:3px}
+/* In case-meta the surrounding text is stone-500, so tone down the link
+   too — it should feel like part of the muted metadata line, not a CTA. */
+.case-meta .cite-link{color:var(--stone-600);font-weight:500;
+                      border-bottom-color:rgba(67,48,95,.18)}
+.case-meta .cite-link:hover{color:var(--plum);border-bottom-color:var(--plum)}
 
 /* Client name on each case badge — clickable to client website */
 .case-badge h3 a.case-client-link{color:inherit;text-decoration:none;
@@ -819,33 +827,36 @@ section{padding:var(--section-y) 0;position:relative}
 @media (min-width:640px){.regions-grid{grid-template-columns:repeat(2,1fr);
                                         border-left:1px solid var(--sand-200)}}
 @media (min-width:1024px){.regions-grid{grid-template-columns:repeat(3,1fr)}}
-/* Region card — explicit 4-row template so TAG (top) and PRIORITY (bottom)
-   anchor to the same edge across every card regardless of hook/body length.
-   Before: body had flex:1 but hook lines varied (some wrap, some don't),
-   so priority rows at different y-heights across the grid. */
+/* Region card — vertical + horizontal centered content per Meet's ask.
+   Grid: top-tag line | centered content block | bottom-priority line.
+   Hook + body sit in the middle, centered both axes. Tag pins top, Priority pins bottom. */
 .region-card{padding:var(--sp-7);background:transparent;
              border-right:1px solid var(--sand-200);
              border-bottom:1px solid var(--sand-200);
-             display:grid;grid-template-rows:auto auto 1fr auto;gap:var(--sp-3);
-             transition:background 200ms var(--ease-out);height:100%}
+             display:grid;grid-template-rows:auto 1fr auto;
+             transition:background 200ms var(--ease-out);min-height:320px;
+             text-align:center}
 @media (max-width:639px){.region-card{border-right:0}}
 .region-card:hover{background:rgba(67,48,95,.03)}
 .region-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:3px;
-            text-transform:uppercase;color:var(--plum);justify-self:start;
+            text-transform:uppercase;color:var(--plum);justify-self:center;
             padding:0 0 4px;border:0;background:transparent;
             border-bottom:1px solid var(--plum);margin:0}
+/* Middle row — center hook+body vertically AND horizontally */
+.region-middle{display:flex;flex-direction:column;justify-content:center;
+               align-items:center;gap:var(--sp-3);padding:var(--sp-5) 0}
 .region-hook{font-family:var(--font-display);font-weight:400;
              font-size:clamp(20px,2vw,26px);line-height:1.25;
-             color:var(--ink);margin:var(--sp-2) 0 0;letter-spacing:-.01em;
-             text-transform:none;min-height:2.6em}
+             color:var(--ink);margin:0;letter-spacing:-.01em;
+             text-transform:none;text-align:center;max-width:26ch}
 .region-hook em{font-style:italic;color:var(--plum)}
 .region-body{font-family:var(--font-body);font-size:14px;line-height:1.65;
-             color:var(--stone-600);margin:0;align-self:start}
+             color:var(--stone-600);margin:0;text-align:center;max-width:34ch}
 .region-priority{font-family:var(--font-body);font-size:12px;line-height:1.5;
                  color:var(--ink);margin:0;padding-top:var(--sp-4);
-                 border-top:1px solid var(--sand-200);align-self:end}
+                 border-top:1px solid var(--sand-200);text-align:center}
 .region-priority span{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;
-                      text-transform:uppercase;color:var(--plum);margin-right:8px}
+                      text-transform:uppercase;color:var(--plum);margin-right:8px;display:block;margin-bottom:4px}
 
 .compliance-strip{margin-top:var(--sp-12);padding:var(--sp-8) var(--sp-6);
                   background:var(--ink);text-align:center}
@@ -2512,43 +2523,37 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
     <div class="regions-grid">
       <article class="region-card rv" data-r="india">
         <div class="region-tag">INDIA · HQ</div>
-        <h3 class="region-hook">Built here. <em>Shipped from here.</em></h3>
-        <p class="region-body">DPDP-compliant. Rupee-first pricing. Founder on every call from Ahmedabad.</p>
+        <div class="region-middle"><h3 class="region-hook">Built here. <em>Shipped from here.</em></h3><p class="region-body">DPDP-compliant. Rupee-first pricing. Founder on every call from Ahmedabad.</p></div>
         <p class="region-priority"><span>PRIORITY</span>Fintech · D2C ops · SME transformation</p>
       </article>
 
       <article class="region-card rv" data-r="uae">
         <div class="region-tag">UAE · GCC</div>
-        <h3 class="region-hook">Multilingual <em>by default.</em></h3>
-        <p class="region-body">PDPL-ready. Arabic + English interfaces. Free-zone entity structures and UAE-hosted infra where the regulator requires it.</p>
+        <div class="region-middle"><h3 class="region-hook">Multilingual <em>by default.</em></h3><p class="region-body">PDPL-ready. Arabic + English interfaces. Free-zone entity structures and UAE-hosted infra where the regulator requires it.</p></div>
         <p class="region-priority"><span>PRIORITY</span>Family office · Concierge ops · Trade finance</p>
       </article>
 
       <article class="region-card rv" data-r="uk">
         <div class="region-tag">UNITED KINGDOM</div>
-        <h3 class="region-hook">Where the regulator <em>writes the playbook.</em></h3>
-        <p class="region-body">GDPR + FCA SS1/23 for financial services. BoE third-party outsourcing alignment. Compliance gates mapped before code ships.</p>
+        <div class="region-middle"><h3 class="region-hook">Where the regulator <em>writes the playbook.</em></h3><p class="region-body">GDPR + FCA SS1/23 for financial services. BoE third-party outsourcing alignment. Compliance gates mapped before code ships.</p></div>
         <p class="region-priority"><span>PRIORITY</span>Fintech · Insurance · Regulated SaaS</p>
       </article>
 
       <article class="region-card rv" data-r="usa">
         <div class="region-tag">UNITED STATES</div>
-        <h3 class="region-hook">Fastest <em>regulatory pace.</em></h3>
-        <p class="region-body">SOC 2 + HIPAA-aligned builds for regulated verticals. East-coast hours, West-coast product pace, India build cost.</p>
+        <div class="region-middle"><h3 class="region-hook">Fastest <em>regulatory pace.</em></h3><p class="region-body">SOC 2 + HIPAA-aligned builds for regulated verticals. East-coast hours, West-coast product pace, India build cost.</p></div>
         <p class="region-priority"><span>PRIORITY</span>Healthcare · Fintech · Enterprise ops</p>
       </article>
 
       <article class="region-card rv" data-r="sa">
         <div class="region-tag">SOUTH AFRICA</div>
-        <h3 class="region-hook">Emerging AI. <em>Early adopters.</em></h3>
-        <p class="region-body">POPIA-compliant. Banking and insurance modernisation where the stack is still being chosen — not retrofitted.</p>
+        <div class="region-middle"><h3 class="region-hook">Emerging AI. <em>Early adopters.</em></h3><p class="region-body">POPIA-compliant. Banking and insurance modernisation where the stack is still being chosen — not retrofitted.</p></div>
         <p class="region-priority"><span>PRIORITY</span>Banking · Insurance · Mining ops</p>
       </article>
 
       <article class="region-card rv" data-r="id">
         <div class="region-tag">INDONESIA</div>
-        <h3 class="region-hook">270M mobile-first users. <em>OJK in the room.</em></h3>
-        <p class="region-body">OJK-aligned for financial services. Bahasa Indonesia interfaces. Local payment rail integration as standard — not "next phase".</p>
+        <div class="region-middle"><h3 class="region-hook">270M mobile-first users. <em>OJK in the room.</em></h3><p class="region-body">OJK-aligned for financial services. Bahasa Indonesia interfaces. Local payment rail integration as standard — not "next phase".</p></div>
         <p class="region-priority"><span>PRIORITY</span>Fintech · Super-apps · Gig-economy ops</p>
       </article>
     </div>
