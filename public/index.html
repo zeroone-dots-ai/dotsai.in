@@ -1109,11 +1109,16 @@ section{padding:var(--section-y) 0;position:relative}
 .contact-cal,.contact-map{display:flex;flex-direction:column;gap:var(--sp-4)}
 .contact-lab{font-family:var(--font-mono);font-size:10.5px;letter-spacing:2.5px;
              text-transform:uppercase;color:var(--plum);font-weight:500}
-/* Cal.com embed container — reserves height so layout doesn't shift on hydration.
-   Lower min-height since side-by-side layout uses less vertical space. */
-.cal-inline{min-height:540px;width:100%;
+/* Cal.com embed container — week_view hydrates slightly taller than our
+   min-height; cap the rendered iframe height so the section doesn't explode
+   past a phone-height chunk. Cal.com's own scroll handles overflow inside. */
+.cal-inline{min-height:540px;max-height:680px;width:100%;
             background:#fff;border:1px solid var(--sand-200);overflow:hidden}
-@media (min-width:960px){.cal-inline{min-height:560px}}
+.cal-inline iframe{max-height:680px !important;height:680px !important}
+@media (min-width:960px){
+  .cal-inline{min-height:580px;max-height:620px}
+  .cal-inline iframe{max-height:620px !important;height:620px !important}
+}
 .contact-fallback{font-family:var(--font-body);font-size:13px;color:var(--stone-500);
                   margin:0}
 .contact-fallback a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink);
@@ -2757,7 +2762,7 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
         <div
           class="cal-inline"
           data-cal-link="meetdeshani/30min"
-          data-cal-config='{"layout":"column_view","theme":"auto"}'
+          data-cal-config='{"layout":"week_view","theme":"auto"}'
           aria-label="Cal.com booking calendar — Meet Deshani, 30-minute scoping call"></div>
         <p class="contact-fallback">
           Calendar not loading? Book directly at
@@ -2795,10 +2800,11 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
 <script>
 (function(C,A,L){let p=function(a,ar){a.q.push(ar);};let d=C.document;C.Cal=C.Cal||function(){let cal=C.Cal,ar=arguments;if(!cal.loaded){cal.ns={};cal.q=cal.q||[];d.head.appendChild(d.createElement("script")).src=A;cal.loaded=true;}if(ar[0]===L){const api=function(){p(api,arguments);};const namespace=ar[1];api.q=api.q||[];if(typeof namespace==="string"){cal.ns[namespace]=cal.ns[namespace]||api;p(cal.ns[namespace],ar);p(cal,["initNamespace",namespace]);}else p(cal,ar);return;}p(cal,ar);};})(window,"https://app.cal.com/embed/embed.js","init");
 Cal("init","30min",{origin:"https://app.cal.com"});
-Cal.ns["30min"]("inline",{elementOrSelector:".cal-inline","config":{"layout":"month_view","theme":"auto"},calLink:"meetdeshani/30min"});
-/* month_view on wide screens auto-expands to side-by-side (calendar grid + slot column).
-   hideEventTypeDetails:true trims the header chrome so the useful bit fits without scroll. */
-Cal.ns["30min"]("ui",{"hideEventTypeDetails":true,"layout":"month_view","styles":{"branding":{"brandColor":"#C8B6FF"}}});
+/* week_view: calendar grid ALWAYS sits side-by-side with the slot column at
+   any width — the 'side by side to kill scroll' ask. month_view only goes
+   side-by-side above ~900px container width, which we don't have. */
+Cal.ns["30min"]("inline",{elementOrSelector:".cal-inline","config":{"layout":"week_view","theme":"auto"},calLink:"meetdeshani/30min"});
+Cal.ns["30min"]("ui",{"hideEventTypeDetails":true,"layout":"week_view","styles":{"branding":{"brandColor":"#C8B6FF"}}});
 </script>
 
 <!-- ============ FAQ ============ -->
