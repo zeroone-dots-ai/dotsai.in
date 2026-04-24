@@ -1517,14 +1517,13 @@ body::before{
   border-radius:0;
   padding:clamp(32px,4vw,64px) clamp(28px,3.5vw,56px) clamp(32px,4vw,60px) clamp(40px,5vw,80px);
   position:relative;overflow:hidden;
-  text-decoration:none;color:inherit;
+  color:inherit;cursor:default;
   display:block;
-  transition:background 260ms var(--ease-out), border-color 260ms var(--ease-out), transform 260ms var(--ease-out);
+  transition:background 260ms var(--ease-out), border-color 260ms var(--ease-out);
 }
 .fp:hover{
   background:linear-gradient(180deg, rgba(255,255,255,.055) 0%, rgba(255,255,255,.015) 100%);
   border-color:rgba(255,255,255,.16);
-  transform:translateY(-2px);
 }
 .fp:hover .fp-title{color:#fff}
 .fp:hover .fp-spine{width:5px}
@@ -1627,14 +1626,18 @@ body::before{
                 color:#B8E0D2;font-size:20px;line-height:1;opacity:.9}
 .fp-cat:hover{background:rgba(184,224,210,.08);color:#fff}
 
+.fp-footer{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-top:var(--sp-5);gap:var(--sp-4);flex-wrap:wrap;
+}
 .fp-link{
   display:inline-flex;align-items:center;gap:10px;
-  margin-top:var(--sp-6);
   font-family:var(--font-mono);font-size:11px;letter-spacing:2.5px;
   text-transform:uppercase;color:var(--fp-num-color, var(--lavender));
-  padding:10px 0 8px;
+  padding:10px 0 8px;text-decoration:none;
   border-bottom:1px solid var(--fp-num-color, var(--lavender));
   transition:gap 220ms var(--ease-out),filter 220ms var(--ease-out);
+  align-self:flex-end;margin-left:auto;
 }
 .fp:hover .fp-link{gap:16px;filter:drop-shadow(0 0 10px var(--fp-num-color, rgba(200,182,255,.5)))}
 .fp-link span{font-size:14px}
@@ -2179,7 +2182,7 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
     <div class="fp-stack">
 
       <!-- ========== PILLAR 01 · CUSTOM MODELS — ai.dotsai.in ========== -->
-      <a class="fp rv" data-fp="01" href="https://ai.dotsai.in" target="_blank" rel="noopener">
+      <div class="fp rv" data-fp="01">
         <span class="fp-spine" aria-hidden="true"></span>
         <header class="fp-head">
           <span class="fp-num">01</span>
@@ -2206,18 +2209,20 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
           <span class="fp-tag fp-tag--more" hidden>Synthetic training data</span>
           <span class="fp-tag fp-tag--more" hidden>Eval harness + continuous retraining</span>
         </div>
-        <button type="button" class="fp-toggle fp-toggle--stack" data-fp-tags-toggle
-                aria-expanded="false"
-                aria-label="Show the full technical stack">
-          <span class="fp-toggle-open">See the stack</span>
-          <span class="fp-toggle-close" hidden>Hide stack</span>
-          <span class="chev" aria-hidden="true">↓</span>
-        </button>
-        <span class="fp-link">Open ai.dotsai.in <span>→</span></span>
-      </a>
+        <div class="fp-footer">
+          <button type="button" class="fp-toggle fp-toggle--stack" data-fp-tags-toggle
+                  aria-expanded="false"
+                  aria-label="Show the full technical stack">
+            <span class="fp-toggle-open">See the stack</span>
+            <span class="fp-toggle-close" hidden>Hide stack</span>
+            <span class="chev" aria-hidden="true">↓</span>
+          </button>
+          <a class="fp-link" href="https://ai.dotsai.in" target="_blank" rel="noopener">Open ai.dotsai.in <span>→</span></a>
+        </div>
+      </div>
 
       <!-- ========== PILLAR 02 · MARGIN TOOLS — zeroonedotsai.consulting ========== -->
-      <a class="fp rv" data-fp="02" href="https://zeroonedotsai.consulting" target="_blank" rel="noopener">
+      <div class="fp rv" data-fp="02">
         <span class="fp-spine" aria-hidden="true"></span>
         <header class="fp-head">
           <span class="fp-num">02</span>
@@ -2255,21 +2260,20 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
           <span class="fp-cat fp-cat--more" role="listitem" hidden>Product training suites</span>
           <span class="fp-cat fp-cat--more" role="listitem" hidden>Product launch video</span>
         </div>
-        <!-- Toggle button lives inside the card's <a> anchor. HTML-spec purists dislike
-             button-inside-anchor; in practice all browsers render it fine and we trap
-             the click with stopPropagation so the anchor doesn't navigate on toggle. -->
-        <button type="button" class="fp-toggle" data-fp-catalog-toggle
-                aria-expanded="false"
-                aria-label="Show all 22 services">
-          <span class="fp-toggle-open">See all 22 services</span>
-          <span class="fp-toggle-close" hidden>Show 6 headline services</span>
-          <span class="chev" aria-hidden="true">↓</span>
-        </button>
-        <span class="fp-link">Open zeroonedotsai.consulting <span>→</span></span>
-      </a>
+        <div class="fp-footer">
+          <button type="button" class="fp-toggle" data-fp-catalog-toggle
+                  aria-expanded="false"
+                  aria-label="Show all 22 services">
+            <span class="fp-toggle-open">See all 22 services</span>
+            <span class="fp-toggle-close" hidden>Show 6 headline services</span>
+            <span class="chev" aria-hidden="true">↓</span>
+          </button>
+          <a class="fp-link" href="https://zeroonedotsai.consulting" target="_blank" rel="noopener">Open zeroonedotsai.consulting <span>→</span></a>
+        </div>
+      </div>
 
       <!-- ========== PILLAR 03 · INFINITY NEXUS — dotsai.cloud ========== -->
-      <a class="fp rv" data-fp="03" href="https://dotsai.cloud" target="_blank" rel="noopener">
+      <div class="fp rv" data-fp="03">
         <span class="fp-spine" aria-hidden="true"></span>
         <header class="fp-head">
           <span class="fp-num">03</span>
@@ -2293,18 +2297,20 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
           <span class="fp-tag fp-tag--more" hidden>Long-term memory · audit trail</span>
           <span class="fp-tag fp-tag--more" hidden>Alignment scoring</span>
         </div>
-        <button type="button" class="fp-toggle fp-toggle--stack" data-fp-tags-toggle
-                aria-expanded="false"
-                aria-label="Show the full technical stack">
-          <span class="fp-toggle-open">See the stack</span>
-          <span class="fp-toggle-close" hidden>Hide stack</span>
-          <span class="chev" aria-hidden="true">↓</span>
-        </button>
-        <span class="fp-link">Open dotsai.cloud <span>→</span></span>
-      </a>
+        <div class="fp-footer">
+          <button type="button" class="fp-toggle fp-toggle--stack" data-fp-tags-toggle
+                  aria-expanded="false"
+                  aria-label="Show the full technical stack">
+            <span class="fp-toggle-open">See the stack</span>
+            <span class="fp-toggle-close" hidden>Hide stack</span>
+            <span class="chev" aria-hidden="true">↓</span>
+          </button>
+          <a class="fp-link" href="https://dotsai.cloud" target="_blank" rel="noopener">Open dotsai.cloud <span>→</span></a>
+        </div>
+      </div>
 
       <!-- ========== PILLAR 04 · 1:1 AI PARTNERSHIP — assist.dotsai.in ========== -->
-      <a class="fp rv" data-fp="04" href="https://assist.dotsai.in" target="_blank" rel="noopener">
+      <div class="fp rv" data-fp="04">
         <span class="fp-spine" aria-hidden="true"></span>
         <header class="fp-head">
           <span class="fp-num">04</span>
@@ -2332,15 +2338,17 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
           <span class="fp-tag fp-tag--more" hidden>Vendor · tool selection (bias for open)</span>
           <span class="fp-tag fp-tag--more" hidden>Training for your in-house team</span>
         </div>
-        <button type="button" class="fp-toggle fp-toggle--stack" data-fp-tags-toggle
-                aria-expanded="false"
-                aria-label="Show the full engagement cadence">
-          <span class="fp-toggle-open">See the cadence</span>
-          <span class="fp-toggle-close" hidden>Hide cadence</span>
-          <span class="chev" aria-hidden="true">↓</span>
-        </button>
-        <span class="fp-link">Open assist.dotsai.in <span>→</span></span>
-      </a>
+        <div class="fp-footer">
+          <button type="button" class="fp-toggle fp-toggle--stack" data-fp-tags-toggle
+                  aria-expanded="false"
+                  aria-label="Show the full engagement cadence">
+            <span class="fp-toggle-open">See the cadence</span>
+            <span class="fp-toggle-close" hidden>Hide cadence</span>
+            <span class="chev" aria-hidden="true">↓</span>
+          </button>
+          <a class="fp-link" href="https://assist.dotsai.in" target="_blank" rel="noopener">Open assist.dotsai.in <span>→</span></a>
+        </div>
+      </div>
 
     </div>
   </div>
