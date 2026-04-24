@@ -414,9 +414,39 @@ body{margin:0;overflow-x:hidden;background:var(--cream-50)}
 .hero-poster::after{content:"";position:absolute;inset:0;
      background-image:
        radial-gradient(circle at center, rgba(255,255,255,.35) 1px, transparent 1px);
-     background-size:24px 24px;opacity:.08;
-     mask-image:radial-gradient(ellipse at center, black 40%, transparent 75%);
-     -webkit-mask-image:radial-gradient(ellipse at center, black 40%, transparent 75%)}
+     background-size:24px 24px;opacity:.05;
+     /* Dot grid is now masked AWAY from the left text zone so it doesn't compete
+        with the hero copy. Only appears on the right side of the viewport. */
+     mask-image:radial-gradient(ellipse at 78% 55%, black 15%, transparent 55%);
+     -webkit-mask-image:radial-gradient(ellipse at 78% 55%, black 15%, transparent 55%)}
+
+/* ── Hero ambient video + readability overlay ── */
+.hero-video{
+  position:absolute;inset:0;z-index:0;
+  width:100%;height:100%;object-fit:cover;
+  opacity:.55;
+  /* Subtle zoom-in loop so a single 8 s video doesn't read as static */
+  animation:heroVidBreathe 36s ease-in-out infinite alternate;
+}
+.hero-readability{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(90deg, rgba(6,6,10,.88) 0%, rgba(6,6,10,.72) 30%, rgba(6,6,10,.38) 60%, rgba(6,6,10,.12) 85%, rgba(6,6,10,.5) 100%),
+    linear-gradient(180deg, rgba(6,6,10,.35) 0%, transparent 30%, rgba(6,6,10,.55) 100%);
+}
+@keyframes heroVidBreathe{
+  0%   {transform:scale(1.00) translateX(0)}
+  100% {transform:scale(1.06) translateX(-1.2%)}
+}
+/* Mobile / small tablet: skip the video entirely. Poster fallback is already
+   served by the parallax engine + hero-poster dot wash. Keeps data bill low. */
+@media (max-width:899px){
+  .hero-video{display:none}
+}
+/* Respect reduced-motion */
+@media (prefers-reduced-motion:reduce){
+  .hero-video{animation:none}
+}
 
 .hero-content{position:relative;z-index:3;width:100%;
               max-width:var(--container-max);margin:0 auto;
@@ -2032,6 +2062,17 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
     <img class="pbg-img" src="" alt="" loading="lazy" decoding="async" role="presentation">
     <div class="pbg-overlay"></div>
   </div>
+  <!-- Desktop-only ambient video backdrop. Muted, looped, silent, paused under
+       prefers-reduced-motion. Poster = the fal.ai hero.jpg so first paint is
+       instant while the mp4 loads. -->
+  <video class="hero-video" autoplay muted loop playsinline preload="metadata"
+         poster="./assets/themes/02-crystal/hero.jpg"
+         aria-hidden="true">
+    <source src="./assets/hero-bg.mp4" type="video/mp4">
+  </video>
+  <!-- Readability overlay — darkens the left ~55% where the hero copy sits,
+       fades to transparent toward the right where the video gets to breathe. -->
+  <div class="hero-readability" aria-hidden="true"></div>
   <div class="hero-poster" aria-hidden="true"></div>
   <canvas id="webgl" aria-hidden="true"></canvas>
 
