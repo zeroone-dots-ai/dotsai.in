@@ -438,8 +438,7 @@ body{margin:0;overflow-x:hidden;background:var(--cream-50)}
   position:absolute;inset:0;z-index:0;
   width:100%;height:100%;object-fit:cover;
   opacity:.55;
-  /* Slower, softer zoom. Paired with playbackRate 0.5 in JS to give the 8s
-     video ~16s of perceived runtime per loop — feels ambient, not cycling. */
+  /* Gentle ken-burns over the 14.25s native slo-mo loop. */
   animation:heroVidBreathe 72s ease-in-out infinite alternate;
 }
 .hero-readability{
@@ -2084,18 +2083,10 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
          aria-hidden="true">
     <source src="./assets/hero-bg.mp4" type="video/mp4">
   </video>
-  <script>
-    /* Slow the hero video to 0.5× so an 8 s clip reads as 16 s of ambient
-       motion per loop — matches the slow breathe animation above. */
-    (function(){
-      var v=document.getElementById('heroVideo');
-      if(!v) return;
-      var apply=function(){ try{ v.playbackRate=0.5; }catch(e){} };
-      apply();
-      v.addEventListener('loadedmetadata', apply, {once:true});
-      v.addEventListener('play', apply);
-    })();
-  </script>
+  <!-- Video is pre-slowed at encode time (setpts=1.8×, minterpolate to 48fps).
+       Plays at native speed for buttery-smooth slow motion; no playbackRate
+       hack needed (which would've dropped perceived framerate to 12 fps). -->
+
   <!-- Readability overlay — darkens the left ~55% where the hero copy sits,
        fades to transparent toward the right where the video gets to breathe. -->
   <div class="hero-readability" aria-hidden="true"></div>
