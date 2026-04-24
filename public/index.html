@@ -3889,11 +3889,11 @@ if (false && isDesktop && !reducedMotion) {
     });
   }
   document.querySelectorAll('[data-fp-catalog-toggle]').forEach(function(btn){
-    var list = btn.parentElement.querySelector('[data-fp-catalog]');
+    var list = btn.closest('.fp').querySelector('[data-fp-catalog]');
     if(list) wirePillarToggle(btn, list, '.fp-cat--more');
   });
   document.querySelectorAll('[data-fp-tags-toggle]').forEach(function(btn){
-    var tags = btn.parentElement.querySelector('[data-fp-tags]');
+    var tags = btn.closest('.fp').querySelector('[data-fp-tags]');
     if(tags) wirePillarToggle(btn, tags, '.fp-tag--more');
   });
 
