@@ -472,22 +472,48 @@ body{margin:0;overflow-x:hidden;background:var(--cream-50)}
 .btn-dark{background:var(--ink);color:#fff;border-color:var(--ink)}
 .btn-dark:hover{background:var(--plum);border-color:var(--plum)}
 
-/* Music pill — bottom right, subtle 36px icon-only */
+/* Music pill — bottom right. Now self-describing: icon + state label + pulse dot
+   so users know (a) music is playing, (b) they can tap to stop. */
 .music-pill{position:fixed;right:16px;bottom:calc(16px + var(--safe-bottom));
-            z-index:40;width:36px;height:36px;padding:0;
-            background:rgba(25,25,36,.6);color:#fff;
-            border:1px solid rgba(255,255,255,.12);cursor:pointer;
-            backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-            display:inline-flex;align-items:center;justify-content:center;
-            border-radius:0;opacity:.55;
-            transition:opacity 200ms var(--ease-out),transform 160ms var(--ease-out),
-                       background 200ms var(--ease-out),border-color 200ms var(--ease-out)}
-.music-pill:hover{opacity:1;background:rgba(45,27,78,.75);border-color:rgba(200,182,255,.35)}
-.music-pill:active{transform:scale(.95)}
-.music-pill .mp-label{display:none}
-.music-pill .dot-sound{width:6px;height:6px;background:rgba(200,182,255,.55)}
-.music-pill[data-playing="true"]{opacity:.85}
-.music-pill[data-playing="true"] .dot-sound{background:var(--lavender);box-shadow:0 0 8px var(--lavender);animation:pulse 1.2s ease-in-out infinite}
+            z-index:40;height:36px;padding:0 14px;
+            background:rgba(25,25,36,.72);color:#fff;
+            border:1px solid rgba(200,182,255,.22);cursor:pointer;
+            backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+            display:inline-flex;align-items:center;gap:10px;
+            border-radius:999px;opacity:.82;
+            font-family:var(--font-mono);font-size:10px;letter-spacing:2px;
+            text-transform:uppercase;
+            box-shadow:0 4px 18px rgba(0,0,0,.35), 0 0 0 1px rgba(0,0,0,.15) inset;
+            transition:opacity 220ms var(--ease-out),transform 180ms var(--ease-out),
+                       background 220ms var(--ease-out),border-color 220ms var(--ease-out),
+                       padding 220ms var(--ease-out)}
+.music-pill:hover{opacity:1;background:rgba(45,27,78,.88);
+                  border-color:rgba(200,182,255,.55);transform:translateY(-1px)}
+.music-pill:active{transform:scale(.97)}
+.music-pill:focus-visible{outline:2px solid var(--lavender);outline-offset:3px}
+.music-pill .mp-icon{display:inline-block;font-size:13px;line-height:1;
+                     color:var(--lavender)}
+.music-pill .mp-label{display:inline-block;color:rgba(255,255,255,.9);
+                      font-weight:500}
+/* Hide the legacy OFF copy when playing, show the TAP-TO-STOP hint on hover */
+.music-pill .mp-on{display:inline}
+.music-pill .mp-off{display:none}
+.music-pill[data-playing="false"] .mp-on{display:none}
+.music-pill[data-playing="false"] .mp-off{display:inline}
+.music-pill[data-playing="false"] .mp-icon{color:rgba(255,255,255,.5)}
+.music-pill[data-playing="false"]{opacity:.7;border-color:rgba(255,255,255,.14)}
+
+.music-pill .dot-sound{width:7px;height:7px;border-radius:999px;
+                       background:rgba(200,182,255,.5);
+                       transition:background 180ms var(--ease-out)}
+.music-pill[data-playing="true"] .dot-sound{
+  background:var(--lavender);
+  box-shadow:0 0 10px var(--lavender);
+  animation:pulse 1.2s ease-in-out infinite
+}
+.music-pill[data-playing="false"] .dot-sound{
+  background:rgba(255,255,255,.3);box-shadow:none
+}
 @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.5}}
 
 /* Scroll cue */
@@ -1258,9 +1284,10 @@ footer{background:var(--ink);color:rgba(255,255,255,.8);
   .hero-eyebrow .he-tag{font-size:9.5px;letter-spacing:2.5px}
   .hero-eyebrow .he-sub{font-size:15px;line-height:1.4}
 
-  /* Music pill already set above to 32x32 via the previous rule */
+  /* Music pill — tighter on mobile but keeps text so users still understand what it is */
   .music-pill{right:12px;bottom:calc(12px + var(--safe-bottom));
-              width:32px;height:32px}
+              height:32px;padding:0 10px;gap:7px;font-size:9.5px;letter-spacing:1.5px}
+  .music-pill .mp-icon{font-size:12px}
 
   /* Kill scroll cue on mobile (wastes vertical space) */
   .scroll-cue{display:none}
@@ -1369,10 +1396,16 @@ body::before{
 /* =========================================================
    FOUR-PILLAR STACK — notebook chapters (strip all card chrome)
    ========================================================= */
+/* Four Pillars — full-dark section. Huge brand-colored numbers dominate
+   as the visual anchor. Cards are ink with subtle gradient washes per
+   pillar's accent hue. Glow on hover. Content stays fully visible for
+   SEO + crawlability; the drawers handle depth-on-demand. */
 .four-pillars{
-  background:linear-gradient(to bottom,
-    #000 0%, #0a0612 30%, #1a0c2e 55%, var(--cream-50) 100%);
-  padding-top:calc(var(--section-y) * 1.3);padding-bottom:var(--section-y);
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 0%, rgba(67,48,95,.45), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 85% 100%, rgba(45,27,78,.38), transparent 60%),
+    linear-gradient(to bottom, #050507 0%, #0a0612 40%, #0d0816 100%);
+  padding-top:calc(var(--section-y) * 1.3);padding-bottom:calc(var(--section-y) * 1.1);
 }
 .four-pillars .section-head h2,
 .four-pillars .section-head h2 em,
@@ -1380,146 +1413,163 @@ body::before{
 .four-pillars .eyebrow{color:#fff}
 .four-pillars .section-head h2 em{color:var(--lavender)}
 .four-pillars .eyebrow{color:var(--lavender);opacity:.9}
+.four-pillars .section-lead{color:rgba(255,255,255,.7)}
 
-.fp-stack{display:grid;gap:0;margin-top:var(--sp-10);
-          background:rgba(253,252,250,.98);
-          border-top:1px solid var(--sand-200)}
+.fp-stack{display:grid;gap:clamp(16px,2vw,28px);margin-top:var(--sp-10)}
 
 .fp{
-  background:transparent;
-  border-bottom:1px solid var(--sand-200);
-  padding:clamp(28px,4vw,56px);
+  background:linear-gradient(180deg, rgba(255,255,255,.025) 0%, rgba(255,255,255,.008) 100%);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:0;
+  padding:clamp(32px,4vw,64px) clamp(28px,3.5vw,56px) clamp(32px,4vw,60px) clamp(40px,5vw,80px);
   position:relative;overflow:hidden;
   text-decoration:none;color:inherit;
   display:block;
-  transition:background 240ms var(--ease-out);
+  transition:background 260ms var(--ease-out), border-color 260ms var(--ease-out), transform 260ms var(--ease-out);
 }
-.fp:hover{background:rgba(67,48,95,.03)}
-.fp:hover .fp-title{color:var(--plum)}
-.fp:hover .fp-spine{width:6px}
+.fp:hover{
+  background:linear-gradient(180deg, rgba(255,255,255,.055) 0%, rgba(255,255,255,.015) 100%);
+  border-color:rgba(255,255,255,.16);
+  transform:translateY(-2px);
+}
+.fp:hover .fp-title{color:#fff}
+.fp:hover .fp-spine{width:5px}
 
-/* Accent spine — vertical line per pillar, gradient sweep */
+/* Per-pillar glow wash in background — faint, reveals on hover */
+.fp::after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:0;
+  transition:opacity 260ms var(--ease-out);
+  background:radial-gradient(ellipse 70% 50% at 100% 0%, var(--fp-glow, rgba(200,182,255,.12)), transparent 60%);
+}
+.fp:hover::after{opacity:1}
+.fp[data-fp="01"]{--fp-glow:rgba(200,182,255,.18)}
+.fp[data-fp="02"]{--fp-glow:rgba(184,224,210,.18)}
+.fp[data-fp="03"]{--fp-glow:rgba(255,205,178,.20)}
+.fp[data-fp="04"]{--fp-glow:rgba(162,210,255,.18)}
+
+/* Accent spine — vertical line per pillar, now with subtle glow on dark */
 .fp-spine{
   content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
   background:linear-gradient(to bottom, var(--lavender), var(--plum));
-  opacity:.85;transition:width 240ms var(--ease-out);
+  opacity:.9;transition:width 260ms var(--ease-out);
+  filter:drop-shadow(0 0 6px currentColor);
 }
-.fp[data-fp="01"] .fp-spine{background:linear-gradient(to bottom, #C8B6FF, #5B3FD4)}
-.fp[data-fp="02"] .fp-spine{background:linear-gradient(to bottom, #B8E0D2, #1F7A5C)}
-.fp[data-fp="03"] .fp-spine{background:linear-gradient(to bottom, #FFCDB2, #A8521A)}
-.fp[data-fp="04"] .fp-spine{background:linear-gradient(to bottom, #A2D2FF, #1E5B9C)}
+.fp[data-fp="01"] .fp-spine{background:linear-gradient(to bottom, #C8B6FF, #5B3FD4);box-shadow:0 0 18px rgba(200,182,255,.45)}
+.fp[data-fp="02"] .fp-spine{background:linear-gradient(to bottom, #B8E0D2, #1F7A5C);box-shadow:0 0 18px rgba(184,224,210,.45)}
+.fp[data-fp="03"] .fp-spine{background:linear-gradient(to bottom, #FFCDB2, #A8521A);box-shadow:0 0 18px rgba(255,205,178,.45)}
+.fp[data-fp="04"] .fp-spine{background:linear-gradient(to bottom, #A2D2FF, #1E5B9C);box-shadow:0 0 18px rgba(162,210,255,.45)}
 
-.fp-head{display:flex;gap:var(--sp-5);align-items:flex-start;
-         margin-bottom:var(--sp-5);flex-wrap:wrap}
-.fp-num{font-family:var(--font-mono);font-size:11px;letter-spacing:3px;
-        text-transform:uppercase;color:var(--plum);
-        padding:8px 12px;border:1px solid var(--plum);
-        background:transparent;
-        display:inline-flex;align-items:center;min-width:54px;justify-content:center}
-.fp-kind{font-family:var(--font-mono);font-size:10px;letter-spacing:2.5px;
-         text-transform:uppercase;color:var(--stone-500);
-         display:block;margin-bottom:4px}
+/* Head: oversized number + kind + title. Number now dominates as the anchor. */
+.fp-head{display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,2.5vw,36px);
+         align-items:baseline;margin-bottom:var(--sp-6)}
+.fp-num{font-family:var(--font-display);font-weight:400;font-style:normal;
+        font-size:clamp(72px,9vw,128px);line-height:.85;letter-spacing:-.04em;
+        text-transform:none;
+        padding:0;border:none;background:transparent;
+        display:block;min-width:auto;
+        color:var(--fp-num-color, #C8B6FF);
+        text-shadow:0 0 40px var(--fp-num-glow, rgba(200,182,255,.3));
+        transition:text-shadow 260ms var(--ease-out)}
+.fp[data-fp="01"] .fp-num{--fp-num-color:#C8B6FF;--fp-num-glow:rgba(200,182,255,.35)}
+.fp[data-fp="02"] .fp-num{--fp-num-color:#B8E0D2;--fp-num-glow:rgba(184,224,210,.35)}
+.fp[data-fp="03"] .fp-num{--fp-num-color:#FFCDB2;--fp-num-glow:rgba(255,205,178,.40)}
+.fp[data-fp="04"] .fp-num{--fp-num-color:#A2D2FF;--fp-num-glow:rgba(162,210,255,.35)}
+.fp:hover .fp-num{text-shadow:0 0 60px var(--fp-num-glow, rgba(200,182,255,.5))}
+
+.fp-kind{font-family:var(--font-mono);font-size:10.5px;letter-spacing:2.5px;
+         text-transform:uppercase;color:var(--fp-num-color, rgba(255,255,255,.55));
+         display:block;margin-bottom:8px;opacity:.85}
 .fp-title{font-family:var(--font-display);font-weight:400;font-style:normal;
-          font-size:clamp(26px,3vw,38px);line-height:1.1;
-          letter-spacing:-.015em;color:var(--ink);margin:0;text-transform:none;
-          transition:color 240ms var(--ease-out)}
+          font-size:clamp(28px,3.2vw,42px);line-height:1.1;
+          letter-spacing:-.015em;color:#fff;margin:0;text-transform:none;
+          transition:color 260ms var(--ease-out)}
 
 .fp-lead{font-family:var(--font-display);font-style:italic;font-weight:400;
-         font-size:clamp(17px,1.6vw,21px);line-height:1.5;
-         color:var(--ink);margin:0 0 var(--sp-5);max-width:720px}
+         font-size:clamp(17px,1.6vw,21px);line-height:1.55;
+         color:rgba(255,255,255,.92);margin:0 0 var(--sp-5);max-width:760px}
 .fp-lead em{font-family:var(--font-body);font-style:italic;font-weight:500;
-            color:var(--plum)}
-.fp-body{font-family:var(--font-body);font-size:15px;line-height:1.7;
-         color:var(--stone-600);margin:0 0 var(--sp-4);max-width:720px}
-.fp-body em{color:var(--plum);font-style:italic}
-.fp-body.fp-muted{font-size:13.5px;color:var(--stone-500);
-                  font-style:italic;border-left:2px solid var(--sand-200);
+            color:var(--fp-num-color, var(--lavender))}
+.fp-body{font-family:var(--font-body);font-size:15px;line-height:1.75;
+         color:rgba(255,255,255,.72);margin:0 0 var(--sp-4);max-width:760px}
+.fp-body em{color:var(--fp-num-color, var(--lavender));font-style:italic}
+.fp-body.fp-muted{font-size:13.5px;color:rgba(255,255,255,.55);
+                  font-style:italic;border-left:2px solid rgba(255,255,255,.15);
                   padding-left:var(--sp-4);margin-top:var(--sp-4)}
 
+/* Tags — dark pill grid, brand-accented */
 .fp-tags{display:flex;flex-wrap:wrap;gap:0;margin-top:var(--sp-6);
-         border-top:1px solid var(--sand-200);
-         border-left:1px solid var(--sand-200);
-         max-width:720px}
+         border-top:1px solid rgba(255,255,255,.08);
+         border-left:1px solid rgba(255,255,255,.08);
+         max-width:760px}
 .fp-tag{font-family:var(--font-mono);font-size:11px;letter-spacing:1.5px;
-        text-transform:uppercase;color:var(--ink);
-        padding:10px 14px;background:transparent;
-        border-right:1px solid var(--sand-200);
-        border-bottom:1px solid var(--sand-200);
-        line-height:1.2;transition:background 160ms var(--ease-out)}
-.fp[data-fp="01"] .fp-tag:hover{background:rgba(200,182,255,.12)}
-.fp[data-fp="02"] .fp-tag:hover{background:rgba(184,224,210,.15)}
-.fp[data-fp="03"] .fp-tag:hover{background:rgba(255,205,178,.15)}
-.fp[data-fp="04"] .fp-tag:hover{background:rgba(162,210,255,.15)}
+        text-transform:uppercase;color:rgba(255,255,255,.8);
+        padding:10px 14px;background:rgba(255,255,255,.015);
+        border-right:1px solid rgba(255,255,255,.08);
+        border-bottom:1px solid rgba(255,255,255,.08);
+        line-height:1.2;transition:background 180ms var(--ease-out),color 180ms var(--ease-out)}
+.fp[data-fp="01"] .fp-tag:hover{background:rgba(200,182,255,.10);color:#fff}
+.fp[data-fp="02"] .fp-tag:hover{background:rgba(184,224,210,.10);color:#fff}
+.fp[data-fp="03"] .fp-tag:hover{background:rgba(255,205,178,.12);color:#fff}
+.fp[data-fp="04"] .fp-tag:hover{background:rgba(162,210,255,.10);color:#fff}
 
-/* 22-item catalog for pillar 02 — dense notebook grid */
+/* 22-item catalog — dark grid matching the tags */
 .fp-catalog{
   display:grid;grid-template-columns:1fr;gap:0;
   margin-top:var(--sp-6);
-  border-top:1px solid var(--sand-200);
-  border-left:1px solid var(--sand-200);
+  border-top:1px solid rgba(255,255,255,.08);
+  border-left:1px solid rgba(255,255,255,.08);
   max-width:900px;
 }
 @media (min-width:640px){.fp-catalog{grid-template-columns:repeat(2,1fr)}}
 @media (min-width:960px){.fp-catalog{grid-template-columns:repeat(3,1fr)}}
 .fp-cat{font-family:var(--font-body);font-size:13px;line-height:1.4;
-        color:var(--ink);padding:12px 16px;
-        background:transparent;
-        border-right:1px solid var(--sand-200);
-        border-bottom:1px solid var(--sand-200);
+        color:rgba(255,255,255,.82);padding:12px 16px;
+        background:rgba(255,255,255,.015);
+        border-right:1px solid rgba(255,255,255,.08);
+        border-bottom:1px solid rgba(255,255,255,.08);
         position:relative;padding-left:28px;
-        transition:background 160ms var(--ease-out)}
+        transition:background 180ms var(--ease-out),color 180ms var(--ease-out)}
 .fp-cat::before{content:"·";position:absolute;left:14px;top:10px;
-                color:#1F7A5C;font-size:20px;line-height:1}
-.fp-cat:hover{background:rgba(184,224,210,.08)}
+                color:#B8E0D2;font-size:20px;line-height:1;opacity:.9}
+.fp-cat:hover{background:rgba(184,224,210,.08);color:#fff}
 
 .fp-link{
-  display:inline-flex;align-items:center;gap:8px;
+  display:inline-flex;align-items:center;gap:10px;
   margin-top:var(--sp-6);
-  font-family:var(--font-mono);font-size:11px;letter-spacing:2px;
-  text-transform:uppercase;color:var(--plum);
-  padding:10px 0;
-  border-bottom:1px solid var(--plum);
-  transition:gap 200ms var(--ease-out),color 200ms var(--ease-out);
+  font-family:var(--font-mono);font-size:11px;letter-spacing:2.5px;
+  text-transform:uppercase;color:var(--fp-num-color, var(--lavender));
+  padding:10px 0 8px;
+  border-bottom:1px solid var(--fp-num-color, var(--lavender));
+  transition:gap 220ms var(--ease-out),filter 220ms var(--ease-out);
 }
-.fp:hover .fp-link{gap:14px}
+.fp:hover .fp-link{gap:16px;filter:drop-shadow(0 0 10px var(--fp-num-color, rgba(200,182,255,.5)))}
 .fp-link span{font-size:14px}
 
 .fp-cta{margin-top:var(--sp-6)}
 
 /* Pillar · "See all / See the stack" toggle —
-   lives inside the pillar <a>; JS traps its click so the card doesn't navigate.
-   Pillar cards sit on a CREAM background (.fp-stack), so dark-on-cream
-   mirrors the palette used by .fp-num and .fp-link. */
+   Pillars are now on DARK background. Light-on-dark pill with brand-accent hover. */
 .fp-toggle{appearance:none;-webkit-appearance:none;cursor:pointer;
            display:inline-flex;align-items:center;gap:8px;
            margin:var(--sp-5) 0 0;padding:8px 14px;
-           background:transparent;
-           border:1px solid var(--sand-200);
+           background:rgba(255,255,255,.04);
+           border:1px solid rgba(255,255,255,.15);
            border-radius:999px;
            font-family:var(--font-mono);font-size:10.5px;letter-spacing:2px;
-           text-transform:uppercase;color:var(--ink);font-weight:500;
+           text-transform:uppercase;color:rgba(255,255,255,.85);font-weight:500;
            transition:border-color 180ms var(--ease-out),
                       background 180ms var(--ease-out),
                       color 180ms var(--ease-out),
                       transform 160ms var(--ease-out)}
-.fp-toggle:hover{border-color:var(--plum);color:var(--plum);
-                 background:rgba(67,48,95,.04);transform:translateY(-1px)}
+.fp-toggle:hover{border-color:var(--fp-num-color, var(--lavender));
+                 color:#fff;
+                 background:rgba(255,255,255,.07);transform:translateY(-1px)}
 .fp-toggle:active{transform:scale(0.98)}
-.fp-toggle:focus-visible{outline:2px solid var(--plum);outline-offset:3px}
-.fp-toggle .chev{font-size:12px;color:var(--plum);
+.fp-toggle:focus-visible{outline:2px solid var(--fp-num-color, var(--lavender));outline-offset:3px}
+.fp-toggle .chev{font-size:12px;color:var(--fp-num-color, var(--lavender));
                  transition:transform 220ms var(--ease-out)}
 .fp-toggle[aria-expanded="true"] .chev{transform:rotate(180deg)}
 .fp-toggle--stack{margin-top:var(--sp-4)}
-
-/* Per-pillar accent so the toggle hover matches the card's spine gradient */
-.fp[data-fp="01"] .fp-toggle:hover{border-color:#5B3FD4;color:#5B3FD4;background:rgba(200,182,255,.10)}
-.fp[data-fp="01"] .fp-toggle:hover .chev{color:#5B3FD4}
-.fp[data-fp="02"] .fp-toggle:hover{border-color:#1F7A5C;color:#1F7A5C;background:rgba(184,224,210,.12)}
-.fp[data-fp="02"] .fp-toggle:hover .chev{color:#1F7A5C}
-.fp[data-fp="03"] .fp-toggle:hover{border-color:#A8521A;color:#A8521A;background:rgba(255,205,178,.15)}
-.fp[data-fp="03"] .fp-toggle:hover .chev{color:#A8521A}
-.fp[data-fp="04"] .fp-toggle:hover{border-color:#1E5B9C;color:#1E5B9C;background:rgba(162,210,255,.14)}
-.fp[data-fp="04"] .fp-toggle:hover .chev{color:#1E5B9C}
 
 /* Newly-revealed items animate in unless reduced-motion */
 .fp-cat--more,.fp-tag--more{animation:fp-pill-in 260ms var(--ease-out) both}
@@ -1834,34 +1884,37 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
   background:var(--pbg-overlay,transparent);
 }
 
-/* ── Zone tokens — dark sections are vivid, light ones are whisper-quiet ── */
-.hero          {--pbg-op:.45;--pbg-overlay:rgba(4,4,10,.28);
+/* ── Zone tokens — post-polish · opacity ~½ of launch values to silence
+   zone-to-zone theme seams in 02-crystal. Dark sections stay felt; light
+   sections are pure texture now. Crank these back up when a continuous
+   theme (e.g. 03-neural, 01-cosmos) ships. ── */
+.hero          {--pbg-op:.22;--pbg-overlay:rgba(4,4,10,.38);
                 --pbg-fallback:radial-gradient(ellipse at 55% 30%,rgba(67,48,95,.55),rgba(4,4,10,1) 70%)}
-.four-pillars  {--pbg-op:.38;--pbg-overlay:rgba(4,4,10,.40);
-                --pbg-fallback:linear-gradient(to bottom,rgba(4,4,10,.9),rgba(26,12,46,.8),rgba(253,252,250,.05))}
-.proof         {--pbg-op:.07;--pbg-overlay:rgba(253,252,250,.88);
-                --pbg-fallback:radial-gradient(ellipse at 80% 20%,rgba(200,182,255,.12),transparent 55%)}
-.cases         {--pbg-op:.08;--pbg-overlay:rgba(253,252,250,.86);
-                --pbg-fallback:radial-gradient(ellipse at 20% 70%,rgba(184,224,210,.14),transparent 50%)}
-.regions       {--pbg-op:.07;--pbg-overlay:rgba(253,252,250,.88);
-                --pbg-fallback:radial-gradient(ellipse at 60% 40%,rgba(162,210,255,.12),transparent 55%)}
-.pricing       {--pbg-op:.06;--pbg-overlay:rgba(248,247,244,.91);
-                --pbg-fallback:radial-gradient(ellipse at 30% 60%,rgba(200,182,255,.10),transparent 50%)}
-.lfs           {--pbg-op:.07;--pbg-overlay:rgba(242,240,236,.89);
-                --pbg-fallback:radial-gradient(ellipse at 70% 30%,rgba(184,224,210,.12),transparent 55%)}
-.founder       {--pbg-op:.40;--pbg-overlay:rgba(23,23,36,.50);
-                --pbg-fallback:radial-gradient(ellipse at 40% 50%,rgba(67,48,95,.65),rgba(23,23,36,.95) 70%)}
-.faq           {--pbg-op:.06;--pbg-overlay:rgba(253,252,250,.91);
-                --pbg-fallback:radial-gradient(ellipse at 55% 80%,rgba(255,205,178,.11),transparent 50%)}
-.cta-strip     {--pbg-op:.30;--pbg-overlay:rgba(45,27,78,.58);
-                --pbg-fallback:radial-gradient(ellipse at 50% 40%,rgba(100,70,160,.6),rgba(45,27,78,.9) 70%)}
+.four-pillars  {--pbg-op:.18;--pbg-overlay:rgba(4,4,10,.55);
+                --pbg-fallback:linear-gradient(to bottom,rgba(4,4,10,.92),rgba(26,12,46,.85),rgba(4,4,10,.9))}
+.proof         {--pbg-op:.04;--pbg-overlay:rgba(253,252,250,.92);
+                --pbg-fallback:radial-gradient(ellipse at 80% 20%,rgba(200,182,255,.08),transparent 55%)}
+.cases         {--pbg-op:.05;--pbg-overlay:rgba(253,252,250,.90);
+                --pbg-fallback:radial-gradient(ellipse at 20% 70%,rgba(184,224,210,.08),transparent 50%)}
+.regions       {--pbg-op:.04;--pbg-overlay:rgba(253,252,250,.92);
+                --pbg-fallback:radial-gradient(ellipse at 60% 40%,rgba(162,210,255,.07),transparent 55%)}
+.pricing       {--pbg-op:.04;--pbg-overlay:rgba(248,247,244,.94);
+                --pbg-fallback:radial-gradient(ellipse at 30% 60%,rgba(200,182,255,.06),transparent 50%)}
+.lfs           {--pbg-op:.04;--pbg-overlay:rgba(242,240,236,.92);
+                --pbg-fallback:radial-gradient(ellipse at 70% 30%,rgba(184,224,210,.07),transparent 55%)}
+.founder       {--pbg-op:.18;--pbg-overlay:rgba(23,23,36,.68);
+                --pbg-fallback:radial-gradient(ellipse at 40% 50%,rgba(67,48,95,.55),rgba(23,23,36,.95) 70%)}
+.faq           {--pbg-op:.04;--pbg-overlay:rgba(253,252,250,.94);
+                --pbg-fallback:radial-gradient(ellipse at 55% 80%,rgba(255,205,178,.07),transparent 50%)}
+.cta-strip     {--pbg-op:.15;--pbg-overlay:rgba(45,27,78,.72);
+                --pbg-fallback:radial-gradient(ellipse at 50% 40%,rgba(100,70,160,.5),rgba(45,27,78,.92) 70%)}
 
-/* Mobile: pull opacity down slightly to keep text crisp */
+/* Mobile: further dampen so text stays crisp on small viewports */
 @media (max-width:767px){
-  .hero        {--pbg-op:.35}
-  .four-pillars{--pbg-op:.28}
-  .founder     {--pbg-op:.32}
-  .cta-strip   {--pbg-op:.25}
+  .hero        {--pbg-op:.16}
+  .four-pillars{--pbg-op:.14}
+  .founder     {--pbg-op:.14}
+  .cta-strip   {--pbg-op:.12}
 }
 
 /* Reduced motion: disable parallax movement; static image stays */
@@ -3182,9 +3235,10 @@ Cal.ns["30min"]("ui",{"hideEventTypeDetails":false,"layout":"month_view"});
 
 <!-- ============ AUDIO + MUSIC PILL ============ -->
 <audio id="ambient" src="./assets/ambient.mp3" loop preload="auto"></audio>
-<button class="music-pill" id="musicPill" data-playing="true" aria-label="Toggle ambient music" title="Ambient music">
+<button class="music-pill" id="musicPill" data-playing="true" aria-label="Tap to stop ambient music" title="Tap to stop / play ambient music">
+  <span class="mp-icon" aria-hidden="true">♪</span>
+  <span class="mp-label"><span class="mp-on">Music · Tap to stop</span><span class="mp-off">Music · Off</span></span>
   <span class="dot-sound" aria-hidden="true"></span>
-  <span class="mp-label" id="musicLabel">AMBIENT · ON</span>
 </button>
 
 <script>
