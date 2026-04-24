@@ -1404,10 +1404,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.8);
 /* Subtle dot-matrix ground on light body sections */
 .proof,.cases,.regions,.pricing,.lfs,.founder,.faq{
   position:relative;
-  background:
-    radial-gradient(circle at 1px 1px, rgba(67,48,95,.07) 1px, transparent 0),
-    var(--cream-50);
-  background-size:28px 28px, auto;
+  background:var(--cream-50);
 }
 
 /* Film grain overlay — fixed, affects entire page softly */
@@ -1732,9 +1729,8 @@ body::before{
 .report-pattern::before{
   content:"";position:absolute;inset:0;pointer-events:none;
   background:
-    radial-gradient(ellipse at 25% 60%, rgba(67,48,95,.7) 0%, transparent 55%),
-    radial-gradient(circle at 1px 1px, rgba(200,182,255,.04) 1px, transparent 0);
-  background-size:auto, 28px 28px;
+    radial-gradient(ellipse at 25% 60%, rgba(67,48,95,.7) 0%, transparent 55%);
+  background-size:auto;
 }
 .report-pattern .eyebrow{color:var(--lavender);opacity:.9}
 .rp-head{margin-bottom:var(--sp-8);position:relative;z-index:1}
@@ -1865,11 +1861,9 @@ body::before{
   border-radius:4px;
   padding:clamp(28px, 4vw, 56px) clamp(24px, 4vw, 56px);
   max-height:90vh;overflow-y:auto;overflow-x:hidden;
-  /* Re-apply the radial glow + dot grid atmosphere */
   background-image:
-    radial-gradient(ellipse at 22% 64%, rgba(67,48,95,.62) 0%, transparent 55%),
-    radial-gradient(circle at 1px 1px, rgba(200,182,255,.045) 1px, transparent 0);
-  background-size:auto, 26px 26px;
+    radial-gradient(ellipse at 22% 64%, rgba(67,48,95,.62) 0%, transparent 55%);
+  background-size:auto;
   box-shadow:
     0 40px 120px rgba(0,0,0,.55),
     0 0 0 1px rgba(255,255,255,.04) inset;
