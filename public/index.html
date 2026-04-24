@@ -581,12 +581,15 @@ section{padding:var(--section-y) 0;position:relative}
 @media (min-width:768px){.proof-grid{grid-template-columns:repeat(3,1fr)}}
 @media (min-width:1024px){.proof-grid{grid-template-columns:repeat(5,1fr)}}
 
-.metric{padding:var(--sp-7) var(--sp-5);
+/* Metric ledger — composed so number → rule → label sit as one tight unit.
+   Previously: justify-content:space-between + min-height:172 created empty
+   middle space in every card. Now: tight top-aligned stack, grid auto-sizes
+   all cards in a row to the same height via CSS grid row sizing. */
+.metric{padding:var(--sp-7) var(--sp-5) var(--sp-6);
         border-right:1px solid var(--sand-200);
         border-bottom:1px solid var(--sand-200);
         background:var(--cream-50);
-        display:flex;flex-direction:column;justify-content:space-between;
-        min-height:172px;
+        display:flex;flex-direction:column;gap:var(--sp-4);
         transition:background 200ms var(--ease-out)}
 .metric:hover{background:rgba(67,48,95,.04)}
 .metric .num{font-family:var(--font-display);font-weight:700;
@@ -594,15 +597,14 @@ section{padding:var(--section-y) 0;position:relative}
              color:var(--plum);margin:0;letter-spacing:-.02em;
              display:block;font-feature-settings:"tnum" 1,"lnum" 1}
 .metric .lab{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;
-             text-transform:uppercase;color:var(--stone-500);line-height:1.5;
-             margin-top:auto;padding-top:var(--sp-6);
-             display:block}
-.metric .lab::before{content:"";display:block;width:20px;height:1px;
-                     background:var(--sand-200);margin-bottom:10px}
+             text-transform:uppercase;color:var(--stone-500);line-height:1.55;
+             margin:0;padding:0;display:block;min-height:2.8em}
+.metric .lab::before{content:"";display:block;width:24px;height:1px;
+                     background:var(--plum);opacity:.5;margin-bottom:10px}
 @media (max-width:767px){
-  .metric{padding:var(--sp-5) var(--sp-4);min-height:140px}
+  .metric{padding:var(--sp-5) var(--sp-4);gap:var(--sp-3)}
   .metric .num{font-size:30px}
-  .metric .lab{padding-top:var(--sp-4);font-size:9.5px}
+  .metric .lab{font-size:9.5px;min-height:2.4em}
 }
 
 /* =========================================================
@@ -774,27 +776,31 @@ section{padding:var(--section-y) 0;position:relative}
 @media (min-width:640px){.regions-grid{grid-template-columns:repeat(2,1fr);
                                         border-left:1px solid var(--sand-200)}}
 @media (min-width:1024px){.regions-grid{grid-template-columns:repeat(3,1fr)}}
+/* Region card — explicit 4-row template so TAG (top) and PRIORITY (bottom)
+   anchor to the same edge across every card regardless of hook/body length.
+   Before: body had flex:1 but hook lines varied (some wrap, some don't),
+   so priority rows at different y-heights across the grid. */
 .region-card{padding:var(--sp-7);background:transparent;
              border-right:1px solid var(--sand-200);
              border-bottom:1px solid var(--sand-200);
-             display:flex;flex-direction:column;gap:var(--sp-3);
-             transition:background 200ms var(--ease-out)}
+             display:grid;grid-template-rows:auto auto 1fr auto;gap:var(--sp-3);
+             transition:background 200ms var(--ease-out);height:100%}
 @media (max-width:639px){.region-card{border-right:0}}
 .region-card:hover{background:rgba(67,48,95,.03)}
 .region-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:3px;
-            text-transform:uppercase;color:var(--plum);align-self:flex-start;
-            padding:0;border:0;background:transparent;
-            padding-bottom:4px;border-bottom:1px solid var(--plum)}
+            text-transform:uppercase;color:var(--plum);justify-self:start;
+            padding:0 0 4px;border:0;background:transparent;
+            border-bottom:1px solid var(--plum);margin:0}
 .region-hook{font-family:var(--font-display);font-weight:400;
              font-size:clamp(20px,2vw,26px);line-height:1.25;
-             color:var(--ink);margin:var(--sp-3) 0 0;letter-spacing:-.01em;
-             text-transform:none}
+             color:var(--ink);margin:var(--sp-2) 0 0;letter-spacing:-.01em;
+             text-transform:none;min-height:2.6em}
 .region-hook em{font-style:italic;color:var(--plum)}
 .region-body{font-family:var(--font-body);font-size:14px;line-height:1.65;
-             color:var(--stone-600);margin:0;flex:1}
+             color:var(--stone-600);margin:0;align-self:start}
 .region-priority{font-family:var(--font-body);font-size:12px;line-height:1.5;
                  color:var(--ink);margin:0;padding-top:var(--sp-4);
-                 border-top:1px solid var(--sand-200)}
+                 border-top:1px solid var(--sand-200);align-self:end}
 .region-priority span{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;
                       text-transform:uppercase;color:var(--plum);margin-right:8px}
 
