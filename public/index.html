@@ -1604,9 +1604,13 @@ body::before{
    RESPONSIVE
    ========================================================= */
 @media (max-width:767px){
-  .fp{padding:24px 20px}
-  .fp-head{gap:var(--sp-3)}
-  .fp-num{min-width:44px;padding:6px 10px;font-size:10px}
+  /* Pillar cards on mobile — tighter padding but KEEP the huge brand-color number
+     (clamp() in the main rule handles the viewport-aware size). The old override
+     here from the pre-dark-reskin design was clobbering that clamp — now removed. */
+  .fp{padding:28px 22px}
+  .fp-head{gap:var(--sp-3);grid-template-columns:auto 1fr;align-items:start}
+  .fp-num{font-size:clamp(64px, 18vw, 92px) !important;line-height:.82}
+  .fp-title{font-size:clamp(24px, 6vw, 32px)}
   .hero-four{margin-top:var(--sp-8)}
   .hf-item{padding:14px 16px}
   .hf-label{font-size:17px}
