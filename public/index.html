@@ -472,49 +472,57 @@ body{margin:0;overflow-x:hidden;background:var(--cream-50)}
 .btn-dark{background:var(--ink);color:#fff;border-color:var(--ink)}
 .btn-dark:hover{background:var(--plum);border-color:var(--plum)}
 
-/* Music pill — bottom right. Now self-describing: icon + state label + pulse dot
-   so users know (a) music is playing, (b) they can tap to stop. */
+/* Music pill — compact circular icon.
+   Circle indicates state (lavender pulse = playing, dim = muted).
+   Tooltip on hover clarifies it's a toggle. Icon swaps ♪ ↔ ♪̸ via CSS. */
 .music-pill{position:fixed;right:16px;bottom:calc(16px + var(--safe-bottom));
-            z-index:40;height:36px;padding:0 14px;
-            background:rgba(25,25,36,.72);color:#fff;
+            z-index:40;width:42px;height:42px;padding:0;
+            background:rgba(25,25,36,.78);color:#fff;
             border:1px solid rgba(200,182,255,.22);cursor:pointer;
             backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-            display:inline-flex;align-items:center;gap:10px;
-            border-radius:999px;opacity:.82;
-            font-family:var(--font-mono);font-size:10px;letter-spacing:2px;
-            text-transform:uppercase;
-            box-shadow:0 4px 18px rgba(0,0,0,.35), 0 0 0 1px rgba(0,0,0,.15) inset;
+            display:inline-flex;align-items:center;justify-content:center;
+            border-radius:999px;opacity:.78;
+            box-shadow:0 4px 14px rgba(0,0,0,.35);
             transition:opacity 220ms var(--ease-out),transform 180ms var(--ease-out),
-                       background 220ms var(--ease-out),border-color 220ms var(--ease-out),
-                       padding 220ms var(--ease-out)}
-.music-pill:hover{opacity:1;background:rgba(45,27,78,.88);
+                       background 220ms var(--ease-out),border-color 220ms var(--ease-out)}
+.music-pill:hover{opacity:1;background:rgba(45,27,78,.9);
                   border-color:rgba(200,182,255,.55);transform:translateY(-1px)}
-.music-pill:active{transform:scale(.97)}
+.music-pill:active{transform:scale(.94)}
 .music-pill:focus-visible{outline:2px solid var(--lavender);outline-offset:3px}
-.music-pill .mp-icon{display:inline-block;font-size:13px;line-height:1;
-                     color:var(--lavender)}
-.music-pill .mp-label{display:inline-block;color:rgba(255,255,255,.9);
-                      font-weight:500}
-/* Hide the legacy OFF copy when playing, show the TAP-TO-STOP hint on hover */
-.music-pill .mp-on{display:inline}
-.music-pill .mp-off{display:none}
-.music-pill[data-playing="false"] .mp-on{display:none}
-.music-pill[data-playing="false"] .mp-off{display:inline}
-.music-pill[data-playing="false"] .mp-icon{color:rgba(255,255,255,.5)}
-.music-pill[data-playing="false"]{opacity:.7;border-color:rgba(255,255,255,.14)}
 
-.music-pill .dot-sound{width:7px;height:7px;border-radius:999px;
-                       background:rgba(200,182,255,.5);
+/* Icon — music note, swaps symbol by state via CSS pseudo content */
+.music-pill .mp-icon{font-size:15px;line-height:1;display:inline-flex;
+                     color:var(--lavender);pointer-events:none}
+.music-pill[data-playing="false"] .mp-icon{color:rgba(255,255,255,.45)}
+.music-pill .mp-icon::before{content:"♪"}
+.music-pill[data-playing="false"] .mp-icon::before{
+  content:"♪"; text-decoration:line-through; opacity:.7}
+
+/* Pulsing dot overlay — top-right of the circular pill, signals "something is live here" */
+.music-pill .dot-sound{position:absolute;top:4px;right:4px;
+                       width:6px;height:6px;border-radius:999px;
+                       background:rgba(200,182,255,.45);
                        transition:background 180ms var(--ease-out)}
 .music-pill[data-playing="true"] .dot-sound{
   background:var(--lavender);
-  box-shadow:0 0 10px var(--lavender);
+  box-shadow:0 0 8px var(--lavender);
   animation:pulse 1.2s ease-in-out infinite
 }
 .music-pill[data-playing="false"] .dot-sound{
-  background:rgba(255,255,255,.3);box-shadow:none
+  background:rgba(255,255,255,.25);box-shadow:none;animation:none
 }
-@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.5}}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.6);opacity:.5}}
+
+/* Tooltip on hover so users understand the toggle without permanent label clutter */
+.music-pill::after{
+  content:attr(data-tip);
+  position:absolute;right:calc(100% + 10px);top:50%;transform:translateY(-50%);
+  font-family:var(--font-mono);font-size:10px;letter-spacing:1.5px;
+  text-transform:uppercase;color:#fff;
+  background:rgba(25,25,36,.92);padding:6px 10px;border-radius:6px;
+  white-space:nowrap;pointer-events:none;
+  opacity:0;transition:opacity 180ms var(--ease-out)}
+.music-pill:hover::after,.music-pill:focus-visible::after{opacity:1}
 
 /* Scroll cue */
 .scroll-cue{position:absolute;left:50%;bottom:var(--sp-6);z-index:3;
@@ -1284,10 +1292,10 @@ footer{background:var(--ink);color:rgba(255,255,255,.8);
   .hero-eyebrow .he-tag{font-size:9.5px;letter-spacing:2.5px}
   .hero-eyebrow .he-sub{font-size:15px;line-height:1.4}
 
-  /* Music pill — tighter on mobile but keeps text so users still understand what it is */
+  /* Music pill — slightly smaller on mobile */
   .music-pill{right:12px;bottom:calc(12px + var(--safe-bottom));
-              height:32px;padding:0 10px;gap:7px;font-size:9.5px;letter-spacing:1.5px}
-  .music-pill .mp-icon{font-size:12px}
+              width:38px;height:38px}
+  .music-pill .mp-icon{font-size:14px}
 
   /* Kill scroll cue on mobile (wastes vertical space) */
   .scroll-cue{display:none}
@@ -3235,9 +3243,9 @@ Cal.ns["30min"]("ui",{"hideEventTypeDetails":false,"layout":"month_view"});
 
 <!-- ============ AUDIO + MUSIC PILL ============ -->
 <audio id="ambient" src="./assets/ambient.mp3" loop preload="auto"></audio>
-<button class="music-pill" id="musicPill" data-playing="true" aria-label="Tap to stop ambient music" title="Tap to stop / play ambient music">
-  <span class="mp-icon" aria-hidden="true">♪</span>
-  <span class="mp-label"><span class="mp-on">Music · Tap to stop</span><span class="mp-off">Music · Off</span></span>
+<button class="music-pill" id="musicPill" data-playing="true" data-tip="Tap to stop music"
+        aria-label="Toggle ambient music" title="Toggle ambient music">
+  <span class="mp-icon" aria-hidden="true"></span>
   <span class="dot-sound" aria-hidden="true"></span>
 </button>
 
@@ -3378,27 +3386,31 @@ const io = new IntersectionObserver((entries) => {
 rvs.forEach(el => io.observe(el));
 
 /* ============================================================
-   MUSIC PILL — tap to enable, localStorage persists preference
+   MUSIC PILL — tap to enable, localStorage persists preference.
+   Visual state is driven entirely by the `data-playing` attribute;
+   CSS handles the icon + dot + tooltip swap.
    ============================================================ */
 const audio = document.getElementById('ambient');
 const pill = document.getElementById('musicPill');
-const label = document.getElementById('musicLabel');
 audio.volume = 0.35;
 
+function setTip(txt) { if (pill) pill.setAttribute('data-tip', txt); }
+
 function setPlayState(on) {
+  if (!pill) return;
   if (on) {
     audio.play().then(() => {
       pill.setAttribute('data-playing', 'true');
-      label.textContent = 'AMBIENT · ON';
+      setTip('Tap to stop music');
       localStorage.setItem('zo_ambient', '1');
     }).catch(() => {
       pill.setAttribute('data-playing', 'false');
-      label.textContent = 'TAP FOR AMBIENT';
+      setTip('Tap to play music');
     });
   } else {
     audio.pause();
     pill.setAttribute('data-playing', 'false');
-    label.textContent = 'AMBIENT · OFF';
+    setTip('Tap to play music');
     localStorage.setItem('zo_ambient', '0');
   }
 }
@@ -3412,25 +3424,24 @@ pill.addEventListener('click', () => {
   const userMuted = localStorage.getItem('zo_ambient') === '0';
   if (userMuted) {
     pill.setAttribute('data-playing', 'false');
-    label.textContent = 'TAP FOR AMBIENT';
+    setTip('Tap to play music');
     return;
   }
 
   const tryPlay = () => audio.play().then(() => {
     pill.setAttribute('data-playing', 'true');
-    label.textContent = 'AMBIENT · ON';
+    setTip('Tap to stop music');
     localStorage.setItem('zo_ambient', '1');
     return true;
   }).catch(() => false);
 
-  /* Attempt silent autoplay on load (muted-first trick for Chrome/Safari). */
   const attemptAutoplay = () => {
     audio.muted = false;
     tryPlay().then(ok => {
       if (!ok) {
-        /* Autoplay blocked — arm one-shot listener on first interaction. */
+        /* Autoplay blocked — pill shows muted state; first interaction unlocks. */
         pill.setAttribute('data-playing', 'false');
-        label.textContent = 'AMBIENT · ON';
+        setTip('Tap to play music');
         const unlock = () => {
           tryPlay().then(ok => {
             if (ok) {
