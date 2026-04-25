@@ -18,6 +18,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Audit — nav order matches scroll order
+        run: bash scripts/audit-nav-order.sh
+
       - name: Resolve target
         id: target
         run: |
