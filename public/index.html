@@ -10,10 +10,10 @@
      Title + description + OG + canonical + JSON-LD are the exact strings Google has indexed.
      Design refresh ships without changing these until the auto-SEO loop iterates them. -->
 <title>AI Agency India | Private AI & Automation Systems | ZeroOne D.O.T.S AI</title>
-<meta name="description" content="Founder-led AI agency in India by Meet Deshani. Custom AI solutions for startups and enterprises: private AI deployment, AI automation systems, and GEO — built on your infrastructure, zero vendor lock-in.">
+<meta name="description" content="India's founder-led solopreneur AI agency. Custom AI solutions, private AI deployment, AI automation systems, and GEO for Indian startups — built directly by Meet Deshani on your own infrastructure, with zero vendor lock-in.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta property="og:title" content="AI Agency India | Private AI & Automation Systems | ZeroOne D.O.T.S AI">
-<meta property="og:description" content="Custom AI automation agency in India. Private AI deployment, AI web systems, and GEO for serious businesses and startups — founded and built by Meet Deshani.">
+<meta property="og:description" content="Solopreneur AI agency in India by Meet Deshani. Custom AI solutions, private AI deployment, AI automation agency services, and GEO — for Indian startups and founders who own their infrastructure.">
 <meta property="og:url" content="https://dotsai.in">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://dotsai.in/og-image.png">
@@ -25,7 +25,7 @@
 <link rel="preload" as="audio" href="./assets/ambient.mp3" type="audio/mpeg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=Space+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap">
 
 <link rel="stylesheet" href="./colors_and_type.css">
 <!-- Favicon — shared canonical across the ZeroOne ecosystem.
@@ -57,11 +57,34 @@
   "@graph": [
     {
       "@type": "Organization",
+      "additionalType": "https://schema.org/ProfessionalService",
       "@id": "https://dotsai.in/#organization",
       "name": "ZeroOne D.O.T.S AI",
+      "alternateName": ["ZeroOne DOTS AI", "DotsAI", "ZeroOne D·O·T·S AI", "ZeroOne Dots", "dotsai.in"],
+      "slogan": "Own your AI. Don't rent it.",
       "url": "https://dotsai.in",
       "logo": "https://dotsai.in/favicon.svg",
-      "description": "Founder-led private AI agency building private AI systems, automation, GEO, and premium AI web experiences. HQ in Ahmedabad, India — delivering globally.",
+      "description": "India's founder-led solopreneur AI agency. Builds private AI systems, AI automation, GEO, and premium AI web experiences — directly on your own infrastructure, with zero vendor lock-in. HQ in Ahmedabad, India — delivering globally.",
+      "knowsAbout": [
+        "Private AI deployment India",
+        "Solopreneur AI agency India",
+        "AI automation agency India",
+        "Custom AI solutions India",
+        "AI agency for startups India",
+        "On-premise LLM deployment",
+        "Sovereign AI India",
+        "Air-gapped AI",
+        "DPDP Act compliant AI",
+        "Generative Engine Optimisation (GEO)",
+        "AI web experiences"
+      ],
+      "serviceType": [
+        "Private AI deployment",
+        "AI automation systems",
+        "Custom AI solutions",
+        "Generative Engine Optimisation",
+        "AI web experiences"
+      ],
       "areaServed": "Worldwide",
       "address": {
         "@type": "PostalAddress",
@@ -89,7 +112,9 @@
       "url": "https://dotsai.in",
       "sameAs": [
         "https://www.linkedin.com/in/meet-deshani-436575147/",
-        "https://github.com/zeroone-dots-ai"
+        "https://github.com/zeroone-dots-ai",
+        "https://www.threads.com/@meet_ninja_here",
+        "https://www.youtube.com/@meetdeshani"
       ],
       "worksFor": {
         "@id": "https://dotsai.in/#organization"
@@ -158,7 +183,7 @@
    ========================================================= */
 :root{
   --font-display:'Instrument Serif', Georgia, serif;
-  --font-body:'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-body:'Satoshi', system-ui, -apple-system, sans-serif;
   --font-mono:'Space Mono', ui-monospace, 'JetBrains Mono', monospace;
   --ink:#171722;
   --plum:#43305F;
@@ -473,7 +498,7 @@ body{margin:0;overflow-x:hidden;background:var(--cream-50)}
                       color:rgba(255,255,255,.88)}
 
 .hero h1{font-family:var(--font-display);font-weight:700;
-         font-size:clamp(40px, 9vw, 96px);line-height:.98;
+         font-size:clamp(36px, 7vw, 72px);line-height:.98;
          letter-spacing:-.02em;text-transform:uppercase;
          color:#fff;margin:0 0 var(--sp-6);
          opacity:0;animation:fadeUp 1s var(--ease-out) 2.85s forwards}
@@ -495,6 +520,44 @@ body{margin:0;overflow-x:hidden;background:var(--cream-50)}
 
 .hero-ctas{display:flex;flex-wrap:wrap;gap:var(--sp-4);align-items:center;
            opacity:0;animation:fadeUp 1s var(--ease-out) 3.2s forwards}
+
+/* Proof bar — 4 production metrics directly below CTAs */
+.hero-proof-bar{
+  display:flex;gap:28px;flex-wrap:wrap;align-items:flex-start;
+  margin-top:var(--sp-8);padding-top:var(--sp-6);
+  border-top:1px solid rgba(255,255,255,.07);
+  opacity:0;animation:fadeUp 1s var(--ease-out) 3.35s forwards}
+.hero-proof-bar .ps{display:flex;flex-direction:column;gap:3px}
+.hero-proof-bar .ps-num{
+  font-family:var(--font-mono);font-weight:700;font-size:17px;
+  line-height:1;color:var(--lavender);letter-spacing:-.5px}
+.hero-proof-bar .ps-lab{
+  font-family:var(--font-mono);font-size:8.5px;
+  letter-spacing:2.5px;text-transform:uppercase;
+  color:rgba(255,255,255,.38);line-height:1.3}
+
+/* Trust band — slim strip between hero and pillars, inherits dark hero tone */
+.trust-band{
+  background:#06060a;
+  border-top:1px solid rgba(255,255,255,.06);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  padding:14px var(--section-x);
+  display:flex;align-items:center;gap:24px;overflow:hidden}
+.trust-band-label{
+  font-family:var(--font-mono);font-size:8px;letter-spacing:3px;
+  text-transform:uppercase;color:rgba(255,255,255,.3);
+  white-space:nowrap;flex-shrink:0}
+.trust-marquee{overflow:hidden;flex:1;mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent)}
+.tm-track{
+  display:flex;gap:0;white-space:nowrap;width:max-content;
+  animation:marquee 28s linear infinite}
+.tm-track span{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:2.5px;
+  text-transform:uppercase;color:rgba(255,255,255,.45);
+  padding:0 28px;border-right:1px solid rgba(255,255,255,.1)}
+.tm-track span:last-child{border-right:none}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.tm-track{animation:none}}
 
 .btn{font-family:var(--font-mono);font-weight:500;font-size:12px;
      letter-spacing:2px;text-transform:uppercase;
@@ -815,6 +878,22 @@ section{padding:var(--section-y) 0;position:relative}
            color:var(--stone-500)}
 .case-meta-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;
                text-transform:uppercase;color:var(--plum);margin-right:8px}
+
+/* Case metrics — before/after callout strip inside each case body */
+.case-metrics{display:flex;flex-wrap:wrap;gap:0;
+              margin:var(--sp-5) 0;
+              border-top:1px solid var(--sand-200);
+              border-bottom:1px solid var(--sand-200)}
+.cm{display:flex;flex-direction:column;gap:5px;
+    padding:var(--sp-4) var(--sp-5) var(--sp-4) 0;
+    margin-right:var(--sp-5);border-right:1px solid var(--sand-200)}
+.cm:last-child{border-right:0;margin-right:0}
+.cm-val{font-family:var(--font-display);font-size:clamp(20px,2.5vw,32px);
+        font-weight:700;letter-spacing:-.03em;line-height:1;
+        color:var(--ink)}
+.cm-val em{font-style:normal;color:var(--plum)}
+.cm-lab{font-family:var(--font-mono);font-size:9px;letter-spacing:2px;
+        text-transform:uppercase;color:var(--stone-500);line-height:1.4;margin-top:2px}
 
 /* =========================================================
    REGIONS — notebook ledger entries
@@ -1554,7 +1633,7 @@ body::before{
 
 /* Head: oversized number + kind + title. Number now dominates as the anchor. */
 .fp-head{display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,2.5vw,36px);
-         align-items:baseline;margin-bottom:var(--sp-6)}
+         align-items:start;margin-bottom:var(--sp-6)}
 .fp-num{font-family:var(--font-display);font-weight:400;font-style:normal;
         font-size:clamp(72px,9vw,128px);line-height:.85;letter-spacing:-.04em;
         text-transform:none;
@@ -2020,6 +2099,188 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
 
 /* Theme-switch crossfade */
 .pbg-img.switching{transition:opacity .3s ease}
+
+/* =========================================================
+   THE WORKSTYLE · OPERATING LOOP — vertical journey rail
+   Spine runs through 5 stages (large dots) + career path
+   (small dots), unified visual narrative top→bottom.
+   ========================================================= */
+.workstyle{padding:var(--sp-12) 0 calc(var(--sp-12) + var(--sp-4));position:relative;background:#06060a;color:#fff}
+.workstyle .section-head .eyebrow{color:rgba(255,255,255,.55)}
+.workstyle .section-head h2{color:#fff}
+.workstyle .section-head .section-lead{color:rgba(255,255,255,.7)}
+
+/* The rail container — all nodes hang off this single spine */
+.wj-rail{position:relative;margin:var(--sp-10) auto 0;max-width:920px;
+         padding:8px 0 8px 56px}
+.wj-rail::before{
+  content:"";
+  position:absolute;left:19px;top:0;bottom:0;width:1px;
+  background:linear-gradient(to bottom,
+    transparent 0%,
+    rgba(255,255,255,.05) 4%,
+    rgba(255,255,255,.14) 18%,
+    rgba(255,255,255,.14) 82%,
+    rgba(255,255,255,.05) 96%,
+    transparent 100%);
+}
+
+/* Every node — stage or milestone — sits on the spine */
+.wj-node{position:relative;padding:0 0 var(--sp-8)}
+.wj-node:last-child{padding-bottom:0}
+
+/* Dots */
+.wj-dot{position:absolute;left:-44px;top:6px;display:block}
+.wj-dot-stage{
+  width:14px;height:14px;border-radius:50%;
+  background:var(--wj-accent,var(--lavender));
+  margin-left:-2px;margin-top:-1px;
+  box-shadow:
+    0 0 0 4px #06060a,
+    0 0 18px var(--wj-accent-glow,rgba(200,182,255,.45));
+  transition:transform 280ms var(--ease-out),box-shadow 280ms var(--ease-out)}
+.wj-dot-mile{
+  width:7px;height:7px;border-radius:50%;
+  border:1px solid rgba(200,182,255,.65);
+  background:#06060a;
+  margin-left:1.5px;margin-top:2px;
+  transition:border-color 280ms var(--ease-out),
+             background 280ms var(--ease-out)}
+
+.wj-stage[data-ws="01"]{--wj-accent:#C8B6FF;--wj-accent-glow:rgba(200,182,255,.50)}
+.wj-stage[data-ws="02"]{--wj-accent:#B8E0D2;--wj-accent-glow:rgba(184,224,210,.50)}
+.wj-stage[data-ws="03"]{--wj-accent:#FFCDB2;--wj-accent-glow:rgba(255,205,178,.55)}
+.wj-stage[data-ws="04"]{--wj-accent:#A2D2FF;--wj-accent-glow:rgba(162,210,255,.50)}
+.wj-stage[data-ws="05"]{--wj-accent:#D3C3FF;--wj-accent-glow:rgba(211,195,255,.50)}
+
+/* Stage content */
+.wj-stage:hover .wj-dot-stage{
+  transform:scale(1.18);
+  box-shadow:
+    0 0 0 4px #06060a,
+    0 0 28px var(--wj-accent-glow,rgba(200,182,255,.7))}
+.wj-num{font-family:var(--font-mono);font-size:11px;letter-spacing:2.5px;
+        color:var(--wj-accent,var(--lavender));text-transform:uppercase;
+        display:block;margin-bottom:10px;opacity:.92}
+.wj-title{font-family:var(--font-display);font-weight:400;
+          font-size:clamp(22px,2vw,30px);line-height:1.15;letter-spacing:-.01em;
+          color:#fff;margin:0 0 12px;text-transform:none}
+.wj-body{font-family:var(--font-body);font-size:15px;line-height:1.7;
+         color:rgba(255,255,255,.78);margin:0;max-width:680px}
+.wj-body em{color:var(--wj-accent,var(--lavender));font-style:italic}
+
+/* Phase divider — between stages and career path */
+.wj-divider{position:relative;margin:var(--sp-2) 0 var(--sp-3);padding:14px 0 0}
+.wj-divider::before{
+  content:"";position:absolute;left:-44px;top:23px;
+  width:24px;height:1px;background:rgba(255,255,255,.32)}
+.wj-divider-lab{display:inline-block;
+  font-family:var(--font-mono);font-size:10.5px;letter-spacing:2.5px;
+  text-transform:uppercase;color:rgba(255,255,255,.6);
+  padding:7px 14px;background:#06060a;
+  border:1px solid rgba(255,255,255,.16);
+  position:relative;z-index:1;margin-left:-14px}
+
+/* Milestone content (career row) */
+.wj-mile{padding-bottom:var(--sp-6)}
+.wj-mile-line{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--sp-3);
+              margin-bottom:6px}
+.wj-mile-yr{font-family:var(--font-mono);font-size:11px;letter-spacing:2px;
+            color:rgba(255,255,255,.5);text-transform:uppercase;white-space:nowrap}
+.wj-mile-co{font-family:var(--font-display);font-size:19px;line-height:1.2;
+            color:#fff;font-weight:400}
+.wj-mile-co em{font-family:var(--font-mono);font-size:10px;
+               letter-spacing:1.5px;color:var(--lavender);
+               text-transform:uppercase;font-style:normal;margin-left:6px;
+               font-weight:400;opacity:.85}
+.wj-mile-mult{font-family:var(--font-mono);font-size:10.5px;letter-spacing:2px;
+              text-transform:uppercase;color:var(--lavender);
+              padding:4px 10px;border:1px solid rgba(200,182,255,.28);
+              white-space:nowrap}
+.wj-mile-current .wj-mile-mult{color:#FFCDB2;border-color:rgba(255,205,178,.32)}
+.wj-mile-current .wj-dot-mile{
+  border-color:rgba(255,205,178,.85);
+  background:rgba(255,205,178,.12)}
+
+/* "Now" terminal node — ZeroOne (the present) */
+.wj-mile-now{padding-top:var(--sp-3);margin-top:var(--sp-2)}
+.wj-mile-now::before{
+  /* Subtle terminus — a horizontal accent bar across the spine to signal "the journey arrives here" */
+  content:"";position:absolute;left:-49px;top:-2px;
+  width:34px;height:1px;
+  background:linear-gradient(to right, transparent, var(--lavender) 40%, transparent);
+  opacity:.7}
+.wj-dot-now{
+  width:11px;height:11px;border-radius:50%;
+  background:var(--lavender);
+  margin-left:0;margin-top:1px;
+  box-shadow:
+    0 0 0 4px #06060a,
+    0 0 22px rgba(200,182,255,.65),
+    0 0 0 9px rgba(200,182,255,.08);
+  animation:wj-now-pulse 4.2s ease-in-out infinite}
+@keyframes wj-now-pulse{
+  0%,100%{box-shadow:0 0 0 4px #06060a,0 0 22px rgba(200,182,255,.55),0 0 0 9px rgba(200,182,255,.08)}
+  50%{box-shadow:0 0 0 4px #06060a,0 0 28px rgba(200,182,255,.85),0 0 0 13px rgba(200,182,255,.04)}
+}
+.wj-mile-now .wj-mile-co{font-size:21px}
+.wj-mile-now .wj-mile-mult{
+  color:#06060a;
+  background:var(--lavender);
+  border-color:var(--lavender);
+  font-weight:600}
+.wj-mile-now .wj-mile-meta{color:rgba(255,255,255,.72)}
+
+@media (prefers-reduced-motion:reduce){
+  .wj-dot-now{animation:none}
+}
+.wj-mile-meta{font-family:var(--font-body);font-size:13.5px;line-height:1.65;
+              color:rgba(255,255,255,.6);margin:0;max-width:680px}
+
+/* Footnote below the rail */
+.wj-note{font-family:var(--font-body);font-size:12px;
+         color:rgba(255,255,255,.4);font-style:italic;
+         margin:var(--sp-6) 0 0;max-width:680px;
+         padding-left:56px}
+
+/* Mobile — tighter spine, condensed milestone line */
+@media (max-width:639px){
+  .wj-rail{padding-left:36px;max-width:none}
+  .wj-rail::before{left:12px}
+  .wj-dot{left:-30px}
+  .wj-dot-stage{width:12px;height:12px}
+  .wj-divider::before{left:-30px;top:22px;width:18px}
+  .wj-divider-lab{font-size:9.5px;letter-spacing:1.8px;padding:6px 12px;margin-left:-12px}
+  .wj-title{font-size:clamp(20px,5.6vw,26px)}
+  .wj-body{font-size:14px}
+  .wj-mile-co{font-size:17px}
+  .wj-note{padding-left:36px}
+}
+@media (max-width:1023px) and (min-width:640px){
+  .wj-rail{padding-left:48px}
+  .wj-rail::before{left:15px}
+  .wj-dot{left:-37px}
+  .wj-divider::before{left:-37px}
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion:reduce){
+  .wj-dot-stage,.wj-dot-mile{transition:none}
+  .wj-stage:hover .wj-dot-stage{transform:none}
+}
+
+/* Footer tagline strip */
+.foot-workstyle{padding:20px 0 24px;
+                border-bottom:1px solid rgba(255,255,255,.06);
+                margin-bottom:var(--sp-6)}
+.foot-workstyle-lab{font-family:var(--font-mono);font-size:10px;letter-spacing:2.5px;
+                    color:rgba(255,255,255,.45);text-transform:uppercase;
+                    display:block;margin-bottom:10px}
+.foot-workstyle-chain{font-family:var(--font-display);font-size:clamp(15px,1.4vw,20px);
+                      line-height:1.5;color:rgba(255,255,255,.85);margin:0;
+                      letter-spacing:-.005em}
+.foot-workstyle-chain span{color:var(--lavender);margin:0 8px;
+                           font-family:var(--font-body);opacity:.7;font-size:.85em}
 </style>
 </head>
 <body>
@@ -2067,7 +2328,7 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
   <div class="nav-pill" role="tablist" aria-label="Section navigation">
     <span class="nav-pill-indicator" aria-hidden="true"></span>
     <a class="nav-link" href="#pillars" data-pillar="lavender">Framework</a>
-    <a class="nav-link" href="#work"    data-pillar="mint">Work</a>
+    <a class="nav-link" href="#workstyle" data-pillar="mint">Work</a>
     <a class="nav-link" href="#cases"   data-pillar="peach">Cases</a>
     <a class="nav-link" href="#lfs"     data-pillar="sky">Support</a>
     <a class="nav-link" href="#faq"     data-pillar="lavender">FAQ</a>
@@ -2123,6 +2384,14 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
       <a class="btn btn-ghost" href="#cases">See the work</a>
     </div>
 
+    <!-- Proof bar — production numbers, above the fold -->
+    <div class="hero-proof-bar" aria-label="Production metrics">
+      <div class="ps"><span class="ps-num">400 → 9K</span><span class="ps-lab">Cars / Month · Automobile Ops</span></div>
+      <div class="ps"><span class="ps-num">350+</span><span class="ps-lab">Telecom Systems Shipped</span></div>
+      <div class="ps"><span class="ps-num">8 Lakh</span><span class="ps-lab">Calls Audited / Day</span></div>
+      <div class="ps"><span class="ps-num">38 → 25%</span><span class="ps-lab">BPO Attrition Reduction</span></div>
+    </div>
+
     <!-- Hero index · editorial one-line rows. Pure typography, no boxes.
          Reads as a newspaper contents page — what's in the ecosystem, each
          row tinted by its pillar hue. The rich dark cards live further down
@@ -2164,6 +2433,29 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
     <div class="bar"></div>
   </div>
 </section>
+
+<!-- ============ TRUST BAND ============ -->
+<div class="trust-band" aria-hidden="true">
+  <span class="trust-band-label">In Production At</span>
+  <div class="trust-marquee">
+    <div class="tm-track">
+      <span>NeoNir · Vasu Chemical</span>
+      <span>WORO Global</span>
+      <span>Aamdhanee Fintech</span>
+      <span>Automobile Ops</span>
+      <span>BPO Voice Audit</span>
+      <span>Telecom Infra</span>
+      <span>Enterprise Reporting</span>
+      <span>NeoNir · Vasu Chemical</span>
+      <span>WORO Global</span>
+      <span>Aamdhanee Fintech</span>
+      <span>Automobile Ops</span>
+      <span>BPO Voice Audit</span>
+      <span>Telecom Infra</span>
+      <span>Enterprise Reporting</span>
+    </div>
+  </div>
+</div>
 
 <!-- ============ FOUR PILLARS ============ -->
 <section class="pillars four-pillars" id="pillars" data-bg-zone="pillars">
@@ -2354,6 +2646,139 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
   </div>
 </section>
 
+<!-- ============ THE WORKSTYLE · OPERATING LOOP ============ -->
+<section class="workstyle" id="workstyle" data-bg-zone="workstyle">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="eyebrow">WORK · THE OPERATING LOOP</span>
+      <h2>How I actually work — <em>five compounding steps.</em></h2>
+      <p class="section-lead">Not theory. Not a deck. This is the pipeline I run on every engagement, every week.</p>
+    </div>
+
+    <!-- Single vertical rail: 5 skill stages (large brand-color dots),
+         phase divider, then 6 career milestones (small lavender outline dots).
+         Spine glows top to bottom, connecting the journey end-to-end. -->
+    <div class="wj-rail">
+
+      <!-- ===== Phase 1 · The five skill stages ===== -->
+      <article class="wj-node wj-stage rv" data-ws="01">
+        <span class="wj-dot wj-dot-stage" aria-hidden="true"></span>
+        <span class="wj-num">01 · Ideation</span>
+        <h3 class="wj-title">Builder by instinct.</h3>
+        <p class="wj-body">Four to five hours a day in the idea-tinkering loop — GTM angles, user empathy, edge cases. <em>The system you ship is downstream of how clearly you can see the problem.</em></p>
+      </article>
+
+      <article class="wj-node wj-stage rv" data-ws="02">
+        <span class="wj-dot wj-dot-stage" aria-hidden="true"></span>
+        <span class="wj-num">02 · Product Design</span>
+        <h3 class="wj-title">High-ticket consumer reflex.</h3>
+        <p class="wj-body">Nearly three years inside Spinny taught me what high-spend buyers actually expect. Minimum clicks, maximum signal, <em>every step optimised so the next one compounds.</em> That's the bar I design to.</p>
+      </article>
+
+      <article class="wj-node wj-stage rv" data-ws="03">
+        <span class="wj-dot wj-dot-stage" aria-hidden="true"></span>
+        <span class="wj-num">03 · Engineering</span>
+        <h3 class="wj-title">Where AI and human handoff.</h3>
+        <p class="wj-body">I run my own training stack and ship a production service every week, solo. Built to hold for <em>1 user or 1M users</em> — zero downtime, zero overheats, no server bloat. Same code path, same discipline.</p>
+      </article>
+
+      <article class="wj-node wj-stage rv" data-ws="04">
+        <span class="wj-dot wj-dot-stage" aria-hidden="true"></span>
+        <span class="wj-num">04 · Ops · AI Automations</span>
+        <h3 class="wj-title">Pre-AI automation reps.</h3>
+        <p class="wj-body">I've been automating operations since 2018 — when "AI" meant Python, scrapers, and rate-limited APIs running on an i3 with 4 GB RAM. <em>Seven-plus years of doing this before it was easy.</em></p>
+      </article>
+
+      <article class="wj-node wj-stage rv" data-ws="05">
+        <span class="wj-dot wj-dot-stage" aria-hidden="true"></span>
+        <span class="wj-num">05 · Reliable · Human-Free · Profitable Scale</span>
+        <h3 class="wj-title">Survival of the system at scale.</h3>
+        <p class="wj-body">Scale isn't <em>can it grow</em> — it's whether the system survives at multiples. <em>Five platforms before ZeroOne</em> ran me through that test, from machinery automation at JSW to a 20× user-scale window at Spinny.</p>
+      </article>
+
+      <!-- ===== Phase divider ===== -->
+      <div class="wj-divider rv" role="separator" aria-label="Career path before ZeroOne">
+        <span class="wj-divider-lab">CAREER PATH · WHERE THIS CAME FROM</span>
+      </div>
+
+      <!-- ===== Phase 2 · Six career milestones, chronological ===== -->
+      <article class="wj-node wj-mile rv">
+        <span class="wj-dot wj-dot-mile" aria-hidden="true"></span>
+        <div class="wj-mile-line">
+          <span class="wj-mile-yr">2019–20</span>
+          <span class="wj-mile-co">JSW</span>
+          <span class="wj-mile-mult">7.2% throughput lift</span>
+        </div>
+        <p class="wj-mile-meta">Manufacturing-machinery process automation at global-manufacturer scale (coke-oven plants, MTPA-grade output) · fastest promoted in cohort.</p>
+      </article>
+
+      <article class="wj-node wj-mile rv">
+        <span class="wj-dot wj-dot-mile" aria-hidden="true"></span>
+        <div class="wj-mile-line">
+          <span class="wj-mile-yr">2020–21</span>
+          <span class="wj-mile-co">Comcast <em>USA remote</em></span>
+          <span class="wj-mile-mult">3× scale window</span>
+        </div>
+        <p class="wj-mile-meta">1M+ telecom-user marketing funnel.</p>
+      </article>
+
+      <article class="wj-node wj-mile rv">
+        <span class="wj-dot wj-dot-mile" aria-hidden="true"></span>
+        <div class="wj-mile-line">
+          <span class="wj-mile-yr">2021–24</span>
+          <span class="wj-mile-co">Spinny <em>~2.7 yrs</em></span>
+          <span class="wj-mile-mult">20× scale window</span>
+        </div>
+        <p class="wj-mile-meta">Used-car platform · 20k+ active monthly buyers and sellers.</p>
+      </article>
+
+      <article class="wj-node wj-mile rv">
+        <span class="wj-dot wj-dot-mile" aria-hidden="true"></span>
+        <div class="wj-mile-line">
+          <span class="wj-mile-yr">2024</span>
+          <span class="wj-mile-co">Agrim</span>
+          <span class="wj-mile-mult">7× scale window</span>
+        </div>
+        <p class="wj-mile-meta">B2B marketplace · 1L+ suppliers and distributors.</p>
+      </article>
+
+      <article class="wj-node wj-mile rv">
+        <span class="wj-dot wj-dot-mile" aria-hidden="true"></span>
+        <div class="wj-mile-line">
+          <span class="wj-mile-yr">2025</span>
+          <span class="wj-mile-co">CredResolve</span>
+          <span class="wj-mile-mult">3× scale window</span>
+        </div>
+        <p class="wj-mile-meta">Collections platform · 10L+ borrower interactions.</p>
+      </article>
+
+      <article class="wj-node wj-mile wj-mile-current rv">
+        <span class="wj-dot wj-dot-mile" aria-hidden="true"></span>
+        <div class="wj-mile-line">
+          <span class="wj-mile-yr">2026</span>
+          <span class="wj-mile-co">NeoNir <em>ZeroOne client · live</em></span>
+          <span class="wj-mile-mult">live engagement</span>
+        </div>
+        <p class="wj-mile-meta">Water-treatment reporting · 50 plant operators submitting into 1k+ enterprise reviewers across Reliance, IOCL, Aarti Industries, IPL Biologicals.</p>
+      </article>
+
+      <!-- ===== Terminus · ZeroOne (the present) ===== -->
+      <article class="wj-node wj-mile wj-mile-now rv">
+        <span class="wj-dot wj-dot-now" aria-hidden="true"></span>
+        <div class="wj-mile-line">
+          <span class="wj-mile-yr">2026 →</span>
+          <span class="wj-mile-co">ZeroOne D·O·T·S AI <em>founder &amp; sole operator</em></span>
+          <span class="wj-mile-mult">5+ clients · live in production</span>
+        </div>
+        <p class="wj-mile-meta">Where the journey converges. One person, full stack — the same hands ship every system end-to-end across NeoNir, WORO, Aamdhanee, and the rest of the active book.</p>
+      </article>
+
+    </div>
+
+    <p class="wj-note rv">Scale window = the multiple of growth the platform crossed during my tenure. Numbers reflect platform-wide activity, not personal credit.</p>
+  </div>
+</section>
+
 <!-- ============ WORK · NUMBERS ============ -->
 <section class="proof" id="work" data-bg-zone="work">
   <div class="pbg" aria-hidden="true">
@@ -2409,6 +2834,11 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
         </div>
         <div class="case-body">
           <p class="case-outcome">A reporting portal that lets a chemical specialist <em>submit field sample analytics to its enterprise clients</em> at Fortune-500 vendor posture — not paper-and-email across three cities.</p>
+          <div class="case-metrics">
+            <div class="cm"><span class="cm-val">3 cities <em>→</em> 1</span><span class="cm-lab">Paper chase → unified portal</span></div>
+            <div class="cm"><span class="cm-val">Fortune-500</span><span class="cm-lab">Client submission grade</span></div>
+            <div class="cm"><span class="cm-val">6 modules</span><span class="cm-lab">In production · Sept 2025</span></div>
+          </div>
           <details class="delivs-drawer">
             <summary>
               <span class="delivs-peek">See what we shipped</span>
@@ -2443,6 +2873,11 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
         </div>
         <div class="case-body">
           <p class="case-outcome">A full AI operating system for a <em>global IT services firm</em> — custom infrastructure, ad management, and every margin-adjacent workflow end to end.</p>
+          <div class="case-metrics">
+            <div class="cm"><span class="cm-val">6 brands</span><span class="cm-lab">Multi-property AI ops</span></div>
+            <div class="cm"><span class="cm-val">8 modules</span><span class="cm-lab">Shipped · infra → funnel</span></div>
+            <div class="cm"><span class="cm-val">360°</span><span class="cm-lab">Ads + content + web + revenue</span></div>
+          </div>
           <details class="delivs-drawer">
             <summary>
               <span class="delivs-peek">See what we shipped</span>
@@ -2479,6 +2914,11 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
         </div>
         <div class="case-body">
           <p class="case-outcome">End-to-end loan disbursement for gig workers, <em>running on an isolated private environment</em> — real loans, real disbursements, not a pilot.</p>
+          <div class="case-metrics">
+            <div class="cm"><span class="cm-val">1 iteration</span><span class="cm-lab">Concept → live disbursement</span></div>
+            <div class="cm"><span class="cm-val">100% private</span><span class="cm-lab">Zero data leaves VPC</span></div>
+            <div class="cm"><span class="cm-val">Live loans</span><span class="cm-lab">Actual gig-worker disbursals</span></div>
+          </div>
           <details class="delivs-drawer">
             <summary>
               <span class="delivs-peek">See what we shipped</span>
@@ -2994,6 +3434,12 @@ Cal.ns["30min"]("ui",{"hideEventTypeDetails":true,"layout":"week_view","styles":
 <!-- ============ FOOTER ============ -->
 <footer>
   <div class="wrap">
+    <div class="foot-workstyle">
+      <span class="foot-workstyle-lab">THE WORKSTYLE</span>
+      <p class="foot-workstyle-chain">
+        Ideation <span aria-hidden="true">→</span> Product Design <span aria-hidden="true">→</span> Engineering <span aria-hidden="true">→</span> Ops / AI Automations <span aria-hidden="true">→</span> Reliable, Human-Free, Profitable Scale.
+      </p>
+    </div>
     <div class="foot-top">
       <div class="foot-brand">
         <div class="foot-logo">
@@ -3020,28 +3466,27 @@ Cal.ns["30min"]("ui",{"hideEventTypeDetails":true,"layout":"week_view","styles":
         <div class="foot-tier">
           <h5>TIER 1 · LAUNCH-CRITICAL</h5>
           <ul>
-            <li><a href="https://dotsai.in" target="_blank" rel="noopener">dotsai.in — India hub</a></li>
-            <li><a href="https://ai.dotsai.in" target="_blank" rel="noopener">ai.dotsai.in — Custom models</a></li>
-            <li><a href="https://assist.dotsai.in" target="_blank" rel="noopener">assist.dotsai.in — 1:1 partnership</a></li>
-            <li><a href="https://zeroonedotsai.consulting" target="_blank" rel="noopener">zeroonedotsai.consulting</a></li>
+            <li><a href="https://dotsai.in" target="_blank" rel="noopener">ZeroOne India — Home</a></li>
+            <li><a href="https://ai.dotsai.in" target="_blank" rel="noopener">AI Studio — Custom Models</a></li>
+            <li><a href="https://assist.dotsai.in" target="_blank" rel="noopener">AI Assistant — 1:1 Partnership</a></li>
+            <li><a href="https://zeroonedotsai.consulting" target="_blank" rel="noopener">Consulting — Strategy &amp; Services</a></li>
           </ul>
         </div>
         <div class="foot-tier">
           <h5>TIER 2 · GROWTH</h5>
           <ul>
-            <li><a href="https://dotsai.cloud" target="_blank" rel="noopener">dotsai.cloud — Platform</a></li>
-            <li><a href="https://meet.dotsai.in" target="_blank" rel="noopener">meet.dotsai.in — Life OS</a></li>
-            <li><a href="https://work.dotsai.in" target="_blank" rel="noopener">work.dotsai.in — Services</a></li>
-            <li><a href="https://blogs.dotsai.in" target="_blank" rel="noopener">blogs.dotsai.in</a></li>
+            <li><a href="https://dotsai.cloud" target="_blank" rel="noopener">Infinity Nexus — Platform</a></li>
+            <li><a href="https://meet.dotsai.in" target="_blank" rel="noopener">Life OS — Dashboard</a></li>
+            <li><a href="https://work.dotsai.in" target="_blank" rel="noopener">Portfolio — All Services</a></li>
+            <li><a href="https://blogs.dotsai.in" target="_blank" rel="noopener">Blog — Insights &amp; Takes</a></li>
           </ul>
         </div>
         <div class="foot-tier">
           <h5>TIER 3 · SCALE</h5>
           <ul>
-            <li><a href="https://community.dotsai.in" target="_blank" rel="noopener">community.dotsai.in</a></li>
-            <li><a href="https://wiki.dotsai.in" target="_blank" rel="noopener">wiki.dotsai.in</a></li>
-            <li><a href="https://memory.dotsai.cloud" target="_blank" rel="noopener">memory.dotsai.cloud</a></li>
-            <li><a href="https://review.dotsai.in" target="_blank" rel="noopener">review.dotsai.in</a></li>
+            <li><a href="https://community.dotsai.in" target="_blank" rel="noopener">Community — ZeroOne Network</a></li>
+            <li><a href="https://wiki.dotsai.in" target="_blank" rel="noopener">Wiki — Knowledge Base</a></li>
+            <li><a href="https://memory.dotsai.cloud" target="_blank" rel="noopener">Memory — AI Notes</a></li>
           </ul>
         </div>
       </div>
@@ -3066,6 +3511,9 @@ Cal.ns["30min"]("ui",{"hideEventTypeDetails":true,"layout":"week_view","styles":
       </a>
       <a class="foot-social" href="https://www.reddit.com/user/owln1nja/" target="_blank" rel="noopener" aria-label="Reddit — u/owln1nja">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12.5c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>Reddit
+      </a>
+      <a class="foot-social" href="https://www.threads.com/@meet_ninja_here" target="_blank" rel="noopener" aria-label="Threads — @meet_ninja_here">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.605 11.106a8.85 8.85 0 0 0-.327-.148c-.192-3.535-2.124-5.56-5.366-5.581h-.044c-1.94 0-3.553.828-4.546 2.336l1.785 1.224c.742-1.126 1.906-1.367 2.762-1.367h.029c1.066.007 1.871.317 2.392.923.379.441.633 1.05.76 1.819-.961-.163-2.001-.213-3.114-.149-3.135.181-5.151 2.009-5.016 4.55.069 1.289.71 2.398 1.806 3.121.926.611 2.12.91 3.361.842 1.638-.09 2.923-.713 3.82-1.853.681-.866 1.112-1.988 1.302-3.395.78.471 1.358 1.091 1.677 1.836.541 1.266.573 3.347-1.123 5.04-1.485 1.483-3.27 2.124-5.967 2.144-2.99-.022-5.252-.98-6.722-2.847-1.376-1.748-2.087-4.272-2.114-7.504.027-3.232.738-5.756 2.114-7.504 1.47-1.867 3.732-2.825 6.722-2.847 3.011.022 5.313.984 6.844 2.858.751.918 1.317 2.072 1.689 3.416l2.144-.572c-.45-1.654-1.158-3.08-2.116-4.252-1.964-2.404-4.835-3.636-8.531-3.661h-.014c-3.69.025-6.526 1.262-8.43 3.676C1.347 5.967.435 8.876.404 12.495v.018c.031 3.62.943 6.528 2.71 8.643 1.904 2.413 4.74 3.65 8.43 3.677h.014c3.282-.023 5.595-.882 7.5-2.787 2.493-2.491 2.418-5.612 1.596-7.531-.589-1.376-1.711-2.494-3.245-3.234zm-5.59 5.043c-1.374.077-2.802-.54-2.872-1.843-.052-.967.687-2.045 2.957-2.176.26-.015.515-.022.766-.022.824 0 1.595.08 2.296.234-.262 3.27-1.797 3.733-3.147 3.807z"/></svg>Threads
       </a>
     </div>
 
@@ -3107,10 +3555,10 @@ Cal.ns["30min"]("ui",{"hideEventTypeDetails":true,"layout":"week_view","styles":
         <div class="foot-dives-col">
           <span class="foot-dives-col-lab">Ecosystem</span>
           <ul>
-            <li><a href="https://dotsai.cloud" target="_blank" rel="noopener">dotsai.cloud — Platform</a></li>
-            <li><a href="https://zeroonedotsai.consulting" target="_blank" rel="noopener">zeroonedotsai.consulting</a></li>
-            <li><a href="https://ai.dotsai.in" target="_blank" rel="noopener">ai.dotsai.in — Models</a></li>
-            <li><a href="https://assist.dotsai.in" target="_blank" rel="noopener">assist.dotsai.in — 1:1</a></li>
+            <li><a href="https://dotsai.cloud" target="_blank" rel="noopener">Infinity Nexus — Platform</a></li>
+            <li><a href="https://zeroonedotsai.consulting" target="_blank" rel="noopener">Consulting — Strategy &amp; Services</a></li>
+            <li><a href="https://ai.dotsai.in" target="_blank" rel="noopener">AI Studio — Custom Models</a></li>
+            <li><a href="https://assist.dotsai.in" target="_blank" rel="noopener">AI Assistant — 1:1</a></li>
           </ul>
         </div>
       </div>
@@ -3434,15 +3882,16 @@ Cal.ns["30min"]("ui",{"hideEventTypeDetails":true,"layout":"week_view","styles":
   /* ---------- scrollspy + theme detection ---------- */
   function detectTheme(){
     const y = 80;
+    const DARK_ZONES = new Set(['hero','workstyle','founder','cta']);
     const sections = document.querySelectorAll('[data-bg-zone]');
     for (let i = 0; i < sections.length; i++){
       const s = sections[i];
       const r = s.getBoundingClientRect();
       if (r.top <= y && r.bottom >= y){
         const zone = s.dataset.bgZone;
-        if (zone === 'hero') return 'dark';
+        if (DARK_ZONES.has(zone)) return 'dark';
         if (zone === 'pillars'){
-          /* Pillars section gradients from dark → cream at ~60% through */
+          /* Pillars gradients from dark → cream at ~60% through */
           const progress = (y - r.top) / r.height;
           return progress < 0.55 ? 'dark' : 'light';
         }

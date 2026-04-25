@@ -1,3 +1,18 @@
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/assets/fonts/Satoshi-Variable.ttf') format('truetype');
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/assets/fonts/Satoshi-VariableItalic.ttf') format('truetype');
+  font-weight: 300 900;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
   --paper: #f7f3ed;
   --paper-deep: #efe7dc;
@@ -6,10 +21,11 @@
   --hero: #06060a;
   --plum: #43305f;
   --plum-deep: #241d33;
-  --lavender: #d7cff0;
-  --mint: #c9ded4;
-  --peach: #f1c6ae;
-  --sky: #bfd6ec;
+  /* canonical brand pastels — match colors_and_type.css exactly */
+  --lavender: #C8B6FF;
+  --mint:     #B8E0D2;
+  --peach:    #FFCDB2;
+  --sky:      #A2D2FF;
   --gold: #b28743;
   --line: rgba(23, 23, 34, 0.1);
   --panel: rgba(255, 255, 255, 0.72);
@@ -33,7 +49,7 @@ body {
     radial-gradient(circle at bottom right, rgba(191, 214, 236, 0.18), transparent 24%),
     var(--paper);
   color: var(--ink);
-  font-family: "DM Sans", sans-serif;
+  font-family: 'Satoshi', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

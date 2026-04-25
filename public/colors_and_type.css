@@ -1,10 +1,44 @@
 /* ═══════════════════════════════════════════════════════════════
-   Font declarations removed — all typography on this page loads from
-   Google Fonts (DM Sans, Instrument Serif, Space Mono) via the
-   <link rel="stylesheet"> in index.html. The self-hosted @font-face
-   rules were legacy from earlier exploration and shipped 9+ 404s.
-   Design-token variables below are the load-bearing part of this file.
+   Self-hosted font declarations — files live in ./assets/fonts/.
+   Satoshi (variable), Orbitron (700), Space Mono (400 + 700).
+   Instrument Serif loads from Google Fonts (no self-hosted copy).
    ═══════════════════════════════════════════════════════════════ */
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('./assets/fonts/Satoshi-Variable.ttf') format('truetype');
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('./assets/fonts/Satoshi-VariableItalic.ttf') format('truetype');
+  font-weight: 300 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Orbitron';
+  src: url('./assets/fonts/orbitron-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Space Mono';
+  src: url('./assets/fonts/space-mono-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Space Mono';
+  src: url('./assets/fonts/space-mono-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
   /* ── D.O.T.S. Pillar Pastels (mapped to framework) ── */
@@ -118,10 +152,10 @@
   --g-cosmos: linear-gradient(135deg, #191924, #2D1B4E);
 
   /* ── Typography — Fonts ──
-     Display = Orbitron (self-hosted). Geometric, tech-forward — use UPPERCASE
+     Display = Orbitron (self-hosted woff2). Geometric, tech-forward — use UPPERCASE
        for impact (letterspaced ~1–3px for small sizes, tighter for large).
-     Body   = DM Sans (humanist foil to Orbitron's geometry).
-     Mono   = Space Mono (labels, eyebrows, numeric UI, code). */
+     Body   = Satoshi (self-hosted variable TTF). Humanist geometric, brand standard.
+     Mono   = Space Mono (self-hosted woff2 — labels, eyebrows, numeric UI, code). */
   --font-display: 'Orbitron', 'Space Grotesk', system-ui, sans-serif;
   --font-body:    'Satoshi', system-ui, -apple-system, sans-serif;
   --font-mono:    'Space Mono', ui-monospace, 'JetBrains Mono', monospace;
@@ -274,7 +308,7 @@ h4, .h4 {
   line-height: 1.4;
 }
 
-/* Display accents: italic highlight lives in DM Sans (Orbitron has no italic) */
+/* Display accents: italic highlight lives in Satoshi italic (Orbitron has no italic) */
 h1 em, h2 em, h3 em, .display em {
   font-family: var(--font-body);
   font-style: italic;
