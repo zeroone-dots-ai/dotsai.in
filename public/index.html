@@ -2181,6 +2181,51 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
   border:1px solid rgba(255,255,255,.16);
   position:relative;z-index:1;margin-left:-14px}
 
+/* === Career timeline · collapsible toggle === */
+.wj-divider-toggle{
+  display:flex;flex-direction:column;gap:14px;
+  width:100%;background:transparent;border:0;cursor:pointer;
+  text-align:left;font:inherit;color:inherit;
+  padding:14px 0 16px;margin:var(--sp-2) 0 var(--sp-3);
+  transition:opacity .2s ease}
+.wj-divider-toggle:hover .wj-divider-lab{color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.32)}
+.wj-divider-toggle:focus-visible{outline:1px solid var(--lavender);outline-offset:6px}
+.wj-divider-toggle .wj-divider-lab{align-self:flex-start}
+.wj-mile-strip{
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 14px;
+  padding-left:0;margin-top:2px}
+.wj-strip-item{display:inline-flex;align-items:baseline;gap:8px}
+.wj-strip-yr{font-family:var(--font-mono);font-size:10.5px;letter-spacing:1.8px;
+             color:rgba(255,255,255,.42);text-transform:uppercase}
+.wj-strip-co{font-family:var(--font-display);font-size:17px;line-height:1.1;
+             color:rgba(255,255,255,.86);font-weight:400}
+.wj-strip-sep{color:rgba(255,255,255,.22);font-size:14px}
+.wj-strip-now .wj-strip-co{color:#FFCDB2}
+.wj-strip-now .wj-strip-yr{color:rgba(255,205,178,.6)}
+.wj-toggle-cue{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--font-mono);font-size:10.5px;letter-spacing:2px;
+  text-transform:uppercase;color:var(--lavender);
+  margin-top:2px}
+.wj-toggle-cue-arrow{display:inline-block;transition:transform .25s ease}
+.wj-divider-toggle[aria-expanded="true"] .wj-mile-strip{display:none}
+.wj-divider-toggle[aria-expanded="true"] .wj-toggle-cue-show{display:none}
+.wj-divider-toggle[aria-expanded="false"] .wj-toggle-cue-hide{display:none}
+.wj-divider-toggle[aria-expanded="true"] .wj-toggle-cue-arrow{transform:rotate(180deg)}
+.wj-career-detail[hidden]{display:none}
+.wj-career-detail{display:block;animation:wjFade .35s ease both}
+@keyframes wjFade{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+@media (max-width:768px){
+  .wj-mile-strip{gap:8px 10px}
+  .wj-strip-co{font-size:15px}
+  .wj-strip-yr{font-size:9.5px;letter-spacing:1.4px}
+  .wj-strip-sep{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .wj-career-detail{animation:none}
+  .wj-toggle-cue-arrow{transition:none}
+}
+
 /* Milestone content (career row) */
 .wj-mile{padding-bottom:var(--sp-6)}
 .wj-mile-line{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--sp-3);
@@ -2646,162 +2691,6 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
   </div>
 </section>
 
-<!-- ============ THE WORKSTYLE · OPERATING LOOP ============ -->
-<section class="workstyle" id="workstyle" data-bg-zone="workstyle">
-  <div class="wrap">
-    <div class="section-head rv">
-      <span class="eyebrow">WORK · THE OPERATING LOOP</span>
-      <h2>How I actually work — <em>five compounding steps.</em></h2>
-      <p class="section-lead">Not theory. Not a deck. This is the pipeline I run on every engagement, every week.</p>
-    </div>
-
-    <!-- Single vertical rail: 5 skill stages (large brand-color dots),
-         phase divider, then 6 career milestones (small lavender outline dots).
-         Spine glows top to bottom, connecting the journey end-to-end. -->
-    <div class="wj-rail">
-
-      <!-- ===== Phase 1 · The five skill stages ===== -->
-      <article class="wj-node wj-stage rv" data-ws="01">
-        <span class="wj-dot wj-dot-stage" aria-hidden="true"></span>
-        <span class="wj-num">01 · Ideation</span>
-        <h3 class="wj-title">Builder by instinct.</h3>
-        <p class="wj-body">Four to five hours a day in the idea-tinkering loop — GTM angles, user empathy, edge cases. <em>The system you ship is downstream of how clearly you can see the problem.</em></p>
-      </article>
-
-      <article class="wj-node wj-stage rv" data-ws="02">
-        <span class="wj-dot wj-dot-stage" aria-hidden="true"></span>
-        <span class="wj-num">02 · Product Design</span>
-        <h3 class="wj-title">High-ticket consumer reflex.</h3>
-        <p class="wj-body">Nearly three years inside Spinny taught me what high-spend buyers actually expect. Minimum clicks, maximum signal, <em>every step optimised so the next one compounds.</em> That's the bar I design to.</p>
-      </article>
-
-      <article class="wj-node wj-stage rv" data-ws="03">
-        <span class="wj-dot wj-dot-stage" aria-hidden="true"></span>
-        <span class="wj-num">03 · Engineering</span>
-        <h3 class="wj-title">Where AI and human handoff.</h3>
-        <p class="wj-body">I run my own training stack and ship a production service every week, solo. Built to hold for <em>1 user or 1M users</em> — zero downtime, zero overheats, no server bloat. Same code path, same discipline.</p>
-      </article>
-
-      <article class="wj-node wj-stage rv" data-ws="04">
-        <span class="wj-dot wj-dot-stage" aria-hidden="true"></span>
-        <span class="wj-num">04 · Ops · AI Automations</span>
-        <h3 class="wj-title">Pre-AI automation reps.</h3>
-        <p class="wj-body">I've been automating operations since 2018 — when "AI" meant Python, scrapers, and rate-limited APIs running on an i3 with 4 GB RAM. <em>Seven-plus years of doing this before it was easy.</em></p>
-      </article>
-
-      <article class="wj-node wj-stage rv" data-ws="05">
-        <span class="wj-dot wj-dot-stage" aria-hidden="true"></span>
-        <span class="wj-num">05 · Reliable · Human-Free · Profitable Scale</span>
-        <h3 class="wj-title">Survival of the system at scale.</h3>
-        <p class="wj-body">Scale isn't <em>can it grow</em> — it's whether the system survives at multiples. <em>Five platforms before ZeroOne</em> ran me through that test, from machinery automation at JSW to a 20× user-scale window at Spinny.</p>
-      </article>
-
-      <!-- ===== Phase divider ===== -->
-      <div class="wj-divider rv" role="separator" aria-label="Career path before ZeroOne">
-        <span class="wj-divider-lab">CAREER PATH · WHERE THIS CAME FROM</span>
-      </div>
-
-      <!-- ===== Phase 2 · Six career milestones, chronological ===== -->
-      <article class="wj-node wj-mile rv">
-        <span class="wj-dot wj-dot-mile" aria-hidden="true"></span>
-        <div class="wj-mile-line">
-          <span class="wj-mile-yr">2019–20</span>
-          <span class="wj-mile-co">JSW</span>
-          <span class="wj-mile-mult">7.2% throughput lift</span>
-        </div>
-        <p class="wj-mile-meta">Manufacturing-machinery process automation at global-manufacturer scale (coke-oven plants, MTPA-grade output) · fastest promoted in cohort.</p>
-      </article>
-
-      <article class="wj-node wj-mile rv">
-        <span class="wj-dot wj-dot-mile" aria-hidden="true"></span>
-        <div class="wj-mile-line">
-          <span class="wj-mile-yr">2020–21</span>
-          <span class="wj-mile-co">Comcast <em>USA remote</em></span>
-          <span class="wj-mile-mult">3× scale window</span>
-        </div>
-        <p class="wj-mile-meta">1M+ telecom-user marketing funnel.</p>
-      </article>
-
-      <article class="wj-node wj-mile rv">
-        <span class="wj-dot wj-dot-mile" aria-hidden="true"></span>
-        <div class="wj-mile-line">
-          <span class="wj-mile-yr">2021–24</span>
-          <span class="wj-mile-co">Spinny <em>~2.7 yrs</em></span>
-          <span class="wj-mile-mult">20× scale window</span>
-        </div>
-        <p class="wj-mile-meta">Used-car platform · 20k+ active monthly buyers and sellers.</p>
-      </article>
-
-      <article class="wj-node wj-mile rv">
-        <span class="wj-dot wj-dot-mile" aria-hidden="true"></span>
-        <div class="wj-mile-line">
-          <span class="wj-mile-yr">2024</span>
-          <span class="wj-mile-co">Agrim</span>
-          <span class="wj-mile-mult">7× scale window</span>
-        </div>
-        <p class="wj-mile-meta">B2B marketplace · 1L+ suppliers and distributors.</p>
-      </article>
-
-      <article class="wj-node wj-mile rv">
-        <span class="wj-dot wj-dot-mile" aria-hidden="true"></span>
-        <div class="wj-mile-line">
-          <span class="wj-mile-yr">2025</span>
-          <span class="wj-mile-co">CredResolve</span>
-          <span class="wj-mile-mult">3× scale window</span>
-        </div>
-        <p class="wj-mile-meta">Collections platform · 10L+ borrower interactions.</p>
-      </article>
-
-      <article class="wj-node wj-mile wj-mile-current rv">
-        <span class="wj-dot wj-dot-mile" aria-hidden="true"></span>
-        <div class="wj-mile-line">
-          <span class="wj-mile-yr">2026</span>
-          <span class="wj-mile-co">NeoNir <em>ZeroOne client · live</em></span>
-          <span class="wj-mile-mult">live engagement</span>
-        </div>
-        <p class="wj-mile-meta">Water-treatment reporting · 50 plant operators submitting into 1k+ enterprise reviewers across Reliance, IOCL, Aarti Industries, IPL Biologicals.</p>
-      </article>
-
-      <!-- ===== Terminus · ZeroOne (the present) ===== -->
-      <article class="wj-node wj-mile wj-mile-now rv">
-        <span class="wj-dot wj-dot-now" aria-hidden="true"></span>
-        <div class="wj-mile-line">
-          <span class="wj-mile-yr">2026 →</span>
-          <span class="wj-mile-co">ZeroOne D·O·T·S AI <em>founder &amp; sole operator</em></span>
-          <span class="wj-mile-mult">5+ clients · live in production</span>
-        </div>
-        <p class="wj-mile-meta">Where the journey converges. One person, full stack — the same hands ship every system end-to-end across NeoNir, WORO, Aamdhanee, and the rest of the active book.</p>
-      </article>
-
-    </div>
-
-    <p class="wj-note rv">Scale window = the multiple of growth the platform crossed during my tenure. Numbers reflect platform-wide activity, not personal credit.</p>
-  </div>
-</section>
-
-<!-- ============ WORK · NUMBERS ============ -->
-<section class="proof" id="work" data-bg-zone="work">
-  <div class="pbg" aria-hidden="true">
-    <div class="pbg-grad"></div>
-    <img class="pbg-img" src="" alt="" loading="lazy" decoding="async" role="presentation">
-    <div class="pbg-overlay"></div>
-  </div>
-  <div class="wrap">
-    <div class="section-head rv">
-      <span class="eyebrow">WORK · NUMBERS THAT MOVED</span>
-      <h2>What the systems actually <em>did for the P&amp;L.</em></h2>
-      <p class="section-lead">Not hypothetical. Not "benchmarks". Production numbers from live engagements.</p>
-    </div>
-    <div class="proof-grid">
-      <div class="metric rv"><div class="num">400 → 9K</div><div class="lab">CARS / MONTH<br>AUTOMOBILE OPS</div></div>
-      <div class="metric rv"><div class="num">350+</div><div class="lab">TELECOM SYSTEMS<br>SHIPPED</div></div>
-      <div class="metric rv"><div class="num">8 Lakh</div><div class="lab">CALLS / DAY<br>BPO VOICE AUDIT</div></div>
-      <div class="metric rv"><div class="num">38 → 25%</div><div class="lab">ATTRITION<br>REDUCTION</div></div>
-      <div class="metric rv"><div class="num">10 → 2 min</div><div class="lab">AUDIT TIME<br>PER CALL</div></div>
-    </div>
-  </div>
-</section>
-
 <!-- ============ WORK · CASE STUDIES ============ -->
 <section class="cases" id="cases" data-bg-zone="cases">
   <div class="pbg" aria-hidden="true">
@@ -2945,6 +2834,185 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
       </article>
 
     </div>
+  </div>
+</section>
+
+<!-- ============ WORK · NUMBERS ============ -->
+<section class="proof" id="work" data-bg-zone="work">
+  <div class="pbg" aria-hidden="true">
+    <div class="pbg-grad"></div>
+    <img class="pbg-img" src="" alt="" loading="lazy" decoding="async" role="presentation">
+    <div class="pbg-overlay"></div>
+  </div>
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="eyebrow">WORK · NUMBERS THAT MOVED</span>
+      <h2>What the systems actually <em>did for the P&amp;L.</em></h2>
+      <p class="section-lead">Not hypothetical. Not "benchmarks". Production numbers from live engagements.</p>
+    </div>
+    <div class="proof-grid">
+      <div class="metric rv"><div class="num">400 → 9K</div><div class="lab">CARS / MONTH<br>AUTOMOBILE OPS</div></div>
+      <div class="metric rv"><div class="num">350+</div><div class="lab">TELECOM SYSTEMS<br>SHIPPED</div></div>
+      <div class="metric rv"><div class="num">8 Lakh</div><div class="lab">CALLS / DAY<br>BPO VOICE AUDIT</div></div>
+      <div class="metric rv"><div class="num">38 → 25%</div><div class="lab">ATTRITION<br>REDUCTION</div></div>
+      <div class="metric rv"><div class="num">10 → 2 min</div><div class="lab">AUDIT TIME<br>PER CALL</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE WORKSTYLE · OPERATING LOOP ============ -->
+<section class="workstyle" id="workstyle" data-bg-zone="workstyle">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="eyebrow">WORK · THE OPERATING LOOP</span>
+      <h2>How I actually work — <em>five compounding steps.</em></h2>
+      <p class="section-lead">Not theory. Not a deck. This is the pipeline I run on every engagement, every week.</p>
+    </div>
+
+    <!-- Single vertical rail: 5 skill stages (large brand-color dots),
+         phase divider, then 6 career milestones (small lavender outline dots).
+         Spine glows top to bottom, connecting the journey end-to-end. -->
+    <div class="wj-rail">
+
+      <!-- ===== Phase 1 · The five skill stages ===== -->
+      <article class="wj-node wj-stage rv" data-ws="01">
+        <span class="wj-dot wj-dot-stage" aria-hidden="true"></span>
+        <span class="wj-num">01 · Ideation</span>
+        <h3 class="wj-title">Builder by instinct.</h3>
+        <p class="wj-body">Four to five hours a day in the idea-tinkering loop — GTM angles, user empathy, edge cases. <em>The system you ship is downstream of how clearly you can see the problem.</em></p>
+      </article>
+
+      <article class="wj-node wj-stage rv" data-ws="02">
+        <span class="wj-dot wj-dot-stage" aria-hidden="true"></span>
+        <span class="wj-num">02 · Product Design</span>
+        <h3 class="wj-title">High-ticket consumer reflex.</h3>
+        <p class="wj-body">Nearly three years inside Spinny taught me what high-spend buyers actually expect. Minimum clicks, maximum signal, <em>every step optimised so the next one compounds.</em> That's the bar I design to.</p>
+      </article>
+
+      <article class="wj-node wj-stage rv" data-ws="03">
+        <span class="wj-dot wj-dot-stage" aria-hidden="true"></span>
+        <span class="wj-num">03 · Engineering</span>
+        <h3 class="wj-title">Where AI and human handoff.</h3>
+        <p class="wj-body">I run my own training stack and ship a production service every week, solo. Built to hold for <em>1 user or 1M users</em> — zero downtime, zero overheats, no server bloat. Same code path, same discipline.</p>
+      </article>
+
+      <article class="wj-node wj-stage rv" data-ws="04">
+        <span class="wj-dot wj-dot-stage" aria-hidden="true"></span>
+        <span class="wj-num">04 · Ops · AI Automations</span>
+        <h3 class="wj-title">Pre-AI automation reps.</h3>
+        <p class="wj-body">I've been automating operations since 2018 — when "AI" meant Python, scrapers, and rate-limited APIs running on an i3 with 4 GB RAM. <em>Seven-plus years of doing this before it was easy.</em></p>
+      </article>
+
+      <article class="wj-node wj-stage rv" data-ws="05">
+        <span class="wj-dot wj-dot-stage" aria-hidden="true"></span>
+        <span class="wj-num">05 · Reliable · Human-Free · Profitable Scale</span>
+        <h3 class="wj-title">Survival of the system at scale.</h3>
+        <p class="wj-body">Scale isn't <em>can it grow</em> — it's whether the system survives at multiples. <em>Five platforms before ZeroOne</em> ran me through that test, from machinery automation at JSW to a 20× user-scale window at Spinny.</p>
+      </article>
+
+      <!-- ===== Phase divider · COLLAPSIBLE TOGGLE ===== -->
+      <button class="wj-divider wj-divider-toggle rv" type="button" aria-expanded="false" aria-controls="wj-career-detail">
+        <span class="wj-divider-lab">CAREER PATH · WHERE THIS CAME FROM</span>
+        <span class="wj-mile-strip" aria-hidden="true">
+          <span class="wj-strip-item"><span class="wj-strip-yr">2019</span><span class="wj-strip-co">JSW</span></span>
+          <span class="wj-strip-sep">·</span>
+          <span class="wj-strip-item"><span class="wj-strip-yr">2020</span><span class="wj-strip-co">Comcast</span></span>
+          <span class="wj-strip-sep">·</span>
+          <span class="wj-strip-item"><span class="wj-strip-yr">2021</span><span class="wj-strip-co">Spinny</span></span>
+          <span class="wj-strip-sep">·</span>
+          <span class="wj-strip-item"><span class="wj-strip-yr">2024</span><span class="wj-strip-co">Agrim</span></span>
+          <span class="wj-strip-sep">·</span>
+          <span class="wj-strip-item"><span class="wj-strip-yr">2025</span><span class="wj-strip-co">CredResolve</span></span>
+          <span class="wj-strip-sep">·</span>
+          <span class="wj-strip-item"><span class="wj-strip-yr">2026</span><span class="wj-strip-co">NeoNir</span></span>
+          <span class="wj-strip-sep">·</span>
+          <span class="wj-strip-item wj-strip-now"><span class="wj-strip-yr">now</span><span class="wj-strip-co">ZeroOne</span></span>
+        </span>
+        <span class="wj-toggle-cue" aria-hidden="true">
+          <span class="wj-toggle-cue-show">Show full timeline</span>
+          <span class="wj-toggle-cue-hide">Hide timeline</span>
+          <span class="wj-toggle-cue-arrow">↓</span>
+        </span>
+      </button>
+
+      <!-- ===== Phase 2 · Six career milestones, chronological — COLLAPSIBLE ===== -->
+      <div id="wj-career-detail" class="wj-career-detail" hidden>
+      <article class="wj-node wj-mile rv">
+        <span class="wj-dot wj-dot-mile" aria-hidden="true"></span>
+        <div class="wj-mile-line">
+          <span class="wj-mile-yr">2019–20</span>
+          <span class="wj-mile-co">JSW</span>
+          <span class="wj-mile-mult">7.2% throughput lift</span>
+        </div>
+        <p class="wj-mile-meta">Manufacturing-machinery process automation at global-manufacturer scale (coke-oven plants, MTPA-grade output) · fastest promoted in cohort.</p>
+      </article>
+
+      <article class="wj-node wj-mile rv">
+        <span class="wj-dot wj-dot-mile" aria-hidden="true"></span>
+        <div class="wj-mile-line">
+          <span class="wj-mile-yr">2020–21</span>
+          <span class="wj-mile-co">Comcast <em>USA remote</em></span>
+          <span class="wj-mile-mult">3× scale window</span>
+        </div>
+        <p class="wj-mile-meta">1M+ telecom-user marketing funnel.</p>
+      </article>
+
+      <article class="wj-node wj-mile rv">
+        <span class="wj-dot wj-dot-mile" aria-hidden="true"></span>
+        <div class="wj-mile-line">
+          <span class="wj-mile-yr">2021–24</span>
+          <span class="wj-mile-co">Spinny <em>~2.7 yrs</em></span>
+          <span class="wj-mile-mult">20× scale window</span>
+        </div>
+        <p class="wj-mile-meta">Used-car platform · 20k+ active monthly buyers and sellers.</p>
+      </article>
+
+      <article class="wj-node wj-mile rv">
+        <span class="wj-dot wj-dot-mile" aria-hidden="true"></span>
+        <div class="wj-mile-line">
+          <span class="wj-mile-yr">2024</span>
+          <span class="wj-mile-co">Agrim</span>
+          <span class="wj-mile-mult">7× scale window</span>
+        </div>
+        <p class="wj-mile-meta">B2B marketplace · 1L+ suppliers and distributors.</p>
+      </article>
+
+      <article class="wj-node wj-mile rv">
+        <span class="wj-dot wj-dot-mile" aria-hidden="true"></span>
+        <div class="wj-mile-line">
+          <span class="wj-mile-yr">2025</span>
+          <span class="wj-mile-co">CredResolve</span>
+          <span class="wj-mile-mult">3× scale window</span>
+        </div>
+        <p class="wj-mile-meta">Collections platform · 10L+ borrower interactions.</p>
+      </article>
+
+      <article class="wj-node wj-mile wj-mile-current rv">
+        <span class="wj-dot wj-dot-mile" aria-hidden="true"></span>
+        <div class="wj-mile-line">
+          <span class="wj-mile-yr">2026</span>
+          <span class="wj-mile-co">NeoNir <em>ZeroOne client · live</em></span>
+          <span class="wj-mile-mult">live engagement</span>
+        </div>
+        <p class="wj-mile-meta">Water-treatment reporting · 50 plant operators submitting into 1k+ enterprise reviewers across Reliance, IOCL, Aarti Industries, IPL Biologicals.</p>
+      </article>
+
+      <!-- ===== Terminus · ZeroOne (the present) ===== -->
+      <article class="wj-node wj-mile wj-mile-now rv">
+        <span class="wj-dot wj-dot-now" aria-hidden="true"></span>
+        <div class="wj-mile-line">
+          <span class="wj-mile-yr">2026 →</span>
+          <span class="wj-mile-co">ZeroOne D·O·T·S AI <em>founder &amp; sole operator</em></span>
+          <span class="wj-mile-mult">5+ clients · live in production</span>
+        </div>
+        <p class="wj-mile-meta">Where the journey converges. One person, full stack — the same hands ship every system end-to-end across NeoNir, WORO, Aamdhanee, and the rest of the active book.</p>
+      </article>
+
+      </div><!-- /wj-career-detail -->
+
+    </div>
+
+    <p class="wj-note rv">Scale window = the multiple of growth the platform crossed during my tenure. Numbers reflect platform-wide activity, not personal credit.</p>
   </div>
 </section>
 
@@ -3139,146 +3207,6 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
       <div class="meta-item"><span class="meta-lab">WHATSAPP</span><span class="meta-val"><a class="plausible-event-name=WhatsApp_Founder" href="https://wa.me/918320065658">+91 83200 65658</a></span></div>
       <div class="meta-item"><span class="meta-lab">BOOK A CALL</span><span class="meta-val"><a class="plausible-event-name=Book_Founder" href="https://cal.com/meetdeshani" target="_blank" rel="noopener">cal.com/meetdeshani</a></span></div>
     </div>
-  </div>
-</section>
-
-<!-- ============ COMMUNITY · AI MASTERS ============ -->
-<section class="community" id="community" data-bg-zone="community">
-  <div class="pbg" aria-hidden="true">
-    <div class="pbg-grad"></div>
-    <img class="pbg-img" src="" alt="" loading="lazy" decoding="async" role="presentation">
-    <div class="pbg-overlay"></div>
-  </div>
-  <div class="wrap">
-    <div class="section-head rv">
-      <span class="eyebrow">COMMUNITY · AI MASTERS</span>
-      <h2>Seven specialists. <em>One call away.</em></h2>
-    </div>
-
-    <details class="community-drawer rv">
-      <summary aria-label="Open or close the Community AI Masters panel">
-        <span class="drawer-teaser">
-          <span class="drawer-count">1 founder</span>
-          <span class="drawer-sep">·</span>
-          <span class="drawer-count">3 face-public SMEs</span>
-          <span class="drawer-sep">·</span>
-          <span class="drawer-count">3 under NDA</span>
-        </span>
-        <span class="drawer-cta">
-          <span class="drawer-cta-open">Open the team</span>
-          <span class="drawer-cta-close">Close</span>
-          <span class="chev" aria-hidden="true">↓</span>
-        </span>
-      </summary>
-
-      <div class="drawer-body">
-        <p class="community-lead">When a project needs a Varicent expert, a consumer-product PM, an education-research anchor, or an industry-specific SME — I pull from the <em>ZeroOne D·O·T·S AI community</em>. Not employees. Senior operators who vouch into the engagement when the craft matches. Some are face-public below; three stay private by choice and are introduced on a sales call, under NDA.</p>
-
-    <!-- FACE-PUBLIC · featured founder + 3 SME anchors -->
-    <div class="team-anchors rv">
-
-      <article class="anchor anchor--lead" data-face="founder">
-        <span class="anchor-tag">FOUNDER · FULL-STACK OPERATOR</span>
-        <h3>Meet Deshani</h3>
-        <p class="anchor-role">One throat to choke. Ahmedabad · India.</p>
-        <p class="anchor-line">Scopes, codes, ships, supports every engagement. On every call from scoping through five-year support — no account manager translating your problem to an engineer you'll never meet.</p>
-        <div class="coverage" aria-label="Meet's personal coverage">
-          <div class="coverage-row">
-            <span class="coverage-lab">Craft</span>
-            <ul class="coverage-tags">
-              <li>AI Compute &amp; Infra</li>
-              <li>System Design</li>
-              <li>Engineering</li>
-              <li>Product Design</li>
-            </ul>
-          </div>
-          <div class="coverage-row">
-            <span class="coverage-lab">GTM</span>
-            <ul class="coverage-tags">
-              <li>Business Solving</li>
-              <li>Distribution</li>
-              <li>Ad Management</li>
-            </ul>
-          </div>
-          <div class="coverage-row">
-            <span class="coverage-lab">Verticals shipped</span>
-            <ul class="coverage-tags">
-              <li>Voice</li>
-              <li>Fintech</li>
-              <li>Marketplace</li>
-              <li>B2B</li><li>B2C</li><li>D2C</li>
-              <li>Telecom Infra</li>
-              <li>Automobile</li>
-              <li>Resell Market</li>
-              <li>Tele-performance</li>
-            </ul>
-          </div>
-        </div>
-        <a class="anchor-li" href="https://www.linkedin.com/in/meet-deshani-436575147/" target="_blank" rel="noopener" aria-label="Meet Deshani on LinkedIn">LinkedIn →</a>
-      </article>
-
-      <article class="anchor" data-face="sme">
-        <span class="anchor-tag">SME · REVOPS · SAAS BILLING</span>
-        <h3>Shubham Sharma</h3>
-        <p class="anchor-role">Varicent Expert · 7+ yr · client-side at Deloitte &amp; Guardian-tier insurers</p>
-        <p class="anchor-line">Healthcare · Insurance · SaaS Billing. Commission and compensation systems at enterprise scale — the kind of Varicent engagement where a misplaced rule costs a quarter.</p>
-        <a class="anchor-li" href="https://www.linkedin.com/in/shubham-sharma-3a11b4140/" target="_blank" rel="noopener" aria-label="Shubham Sharma on LinkedIn">LinkedIn →</a>
-      </article>
-
-      <article class="anchor" data-face="sme">
-        <span class="anchor-tag">SME · CONSUMER PM</span>
-        <h3>Prashast Dadu</h3>
-        <p class="anchor-role">PM · Atlys · ex-Zepto · ex-Spinny · ex-Box8</p>
-        <p class="anchor-line">Travel · Food · Lifestyle · Retail. Consumer-product PM across four unicorn-tier operations — the instinct for where users actually drop off, not where the roadmap claims they do.</p>
-        <a class="anchor-li" href="https://www.linkedin.com/in/prashast-dadu/" target="_blank" rel="noopener" aria-label="Prashast Dadu on LinkedIn">LinkedIn →</a>
-      </article>
-
-      <article class="anchor" data-face="sme">
-        <span class="anchor-tag">SME · EDUCATION · RESEARCH</span>
-        <h3>Mili Gondaliya</h3>
-        <p class="anchor-role">PhD · NET-JRF · GSET · M.Sc. M.Ed. (Chemistry) · Central-Govt-level researcher · Author</p>
-        <p class="anchor-line">Education · Research · Indian pedagogy. Research-grade domain specificity — the kind of content and curriculum rigour that stands up to central-government review.</p>
-        <a class="anchor-li" href="https://www.linkedin.com/in/mili-gondaliya-1b0957282/" target="_blank" rel="noopener" aria-label="Mili Gondaliya on LinkedIn">LinkedIn →</a>
-      </article>
-
-    </div>
-
-    <!-- PRIVATE · industry coverage grid -->
-    <div class="team-grid rv">
-      <div class="grid-head">
-        <span class="grid-eyebrow">+ 3 MORE · UNDER NDA</span>
-        <p>Three additional community members keep their profiles private — a choice we respect and structure the engagement around. The industries below are real coverage; named introductions happen on a sales call once the scope is agreed.</p>
-      </div>
-      <ul class="industry-grid">
-        <li><span class="ind">Healthcare · Insurance · SaaS Billing</span><span class="ind-anchor">Anchor: Shubham Sharma · Varicent</span></li>
-        <li><span class="ind">Travel · Food · Lifestyle · Retail</span><span class="ind-anchor">Anchor: Prashast Dadu · Consumer PM</span></li>
-        <li><span class="ind">Education · Research · Central-Govt grade</span><span class="ind-anchor">Anchor: Mili Gondaliya · PhD Chemistry</span></li>
-        <li class="ind-open"><span class="ind">Sports · Performance &amp; Broadcast</span><span class="ind-anchor">Anchor under NDA · introduced on call</span></li>
-        <li class="ind-open"><span class="ind">Robotics · Hardware · Embedded Systems</span><span class="ind-anchor">Anchor under NDA · introduced on call</span></li>
-        <li class="ind-open"><span class="ind">3D Printing · Blender · Creative Tech</span><span class="ind-anchor">Anchor under NDA · introduced on call</span></li>
-      </ul>
-      <p class="grid-foot">Regional reach: <strong>India · UAE · Indonesia · UK · South Africa</strong></p>
-    </div>
-
-    <!-- "Read the pattern" teaser -->
-    <button type="button" class="case-more" data-open-pattern="community-model" aria-haspopup="dialog" aria-controls="pattern-modal">
-      <span class="case-more-label">Read the pattern</span>
-      <span class="case-more-sub">Why a <em>7-person specialist community</em> outperforms a 70-person agency — and why your data never leaves the infrastructure you own</span>
-      <span class="case-more-arrow" aria-hidden="true">→</span>
-    </button>
-
-    <!-- Close-at-end — so the reader doesn't have to scroll back to the top to collapse -->
-    <div class="drawer-close-row">
-      <button type="button" class="drawer-close-btn" data-drawer-close aria-label="Close the Community panel">
-        <span class="chev chev-up" aria-hidden="true">↑</span>
-        Close the team
-      </button>
-      <span class="drawer-close-hint">You scrolled the full team — close and keep reading.</span>
-    </div>
-
-      </div><!-- /.drawer-body -->
-    </details>
-
   </div>
 </section>
 
@@ -3574,6 +3502,22 @@ Cal.ns["30min"]("ui",{"hideEventTypeDetails":true,"layout":"week_view","styles":
     </div>
   </div>
 </footer>
+
+<!-- ============ CAREER TIMELINE · COLLAPSIBLE TOGGLE ============ -->
+<script>
+(function(){
+  var btn = document.querySelector('.wj-divider-toggle');
+  if(!btn) return;
+  var detail = document.getElementById(btn.getAttribute('aria-controls'));
+  if(!detail) return;
+  btn.addEventListener('click', function(){
+    var open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!open));
+    if(open){ detail.setAttribute('hidden',''); }
+    else   { detail.removeAttribute('hidden'); }
+  });
+})();
+</script>
 
 <!-- ============ PARALLAX BACKGROUND ENGINE ============ -->
 <script>
