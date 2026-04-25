@@ -170,11 +170,7 @@
     { "@type": "Question", "name": "Does ZeroOne D.O.T.S AI help Indian businesses comply with the DPDP Act?",
       "acceptedAnswer": { "@type": "Answer", "text": "Yes. India's Digital Personal Data Protection (DPDP) Act requires businesses to control how personal data is processed and stored. Private AI deployment — where LLMs and agents run on your own infrastructure — is the clearest path to DPDP Act compliance for AI workflows. ZeroOne D.O.T.S AI designs every system so your data never reaches a third-party API, meeting DPDP requirements for BFSI, healthcare, and enterprise use cases." } },
     { "@type": "Question", "name": "What AI automation services are available for solopreneurs in India?",
-      "acceptedAnswer": { "@type": "Answer", "text": "ZeroOne D.O.T.S AI offers a solopreneur-first engagement model: scoped AI automation systems built for one-person businesses and small founding teams in India. Typical systems include inbox and lead triage, document summarisation pipelines, client onboarding automation, and custom AI assistants. The work is done directly by Meet Deshani — no junior hand-offs, priced for founder budgets." } },
-    { "@type": "Question", "name": "Can ZeroOne D.O.T.S AI build air-gapped or sovereign AI systems for Indian businesses?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes. ZeroOne D.O.T.S AI builds air-gapped and sovereign AI deployments for Indian enterprises in BFSI, healthcare, and regulated sectors where data cannot leave on-prem infrastructure. This includes self-hosted LLMs, private vector stores, and on-prem MCP servers — fully isolated from the public internet, designed to meet DPDP Act and RBI cloud governance requirements without depending on hyperscaler cloud." } },
-    { "@type": "Question", "name": "How does ZeroOne D.O.T.S AI compare to large AI agencies and platforms in India?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Large AI platforms like Sarvam, TCS, Infosys, and Aeologic are built for enterprise contracts and large engagements. ZeroOne D.O.T.S AI is built for the opposite shape: a solopreneur AI agency in India serving startups, founders, and lean teams who need custom AI solutions delivered directly — without account managers, junior developers, or six-figure minimums. Same private AI engineering rigour, founder-budget pricing." } }
+      "acceptedAnswer": { "@type": "Answer", "text": "ZeroOne D.O.T.S AI offers a solopreneur-first engagement model: scoped AI automation systems built for one-person businesses and small founding teams in India. Typical systems include inbox and lead triage, document summarisation pipelines, client onboarding automation, and custom AI assistants. The work is done directly by Meet Deshani — no junior hand-offs, priced for founder budgets." } }
   ]
 }
 </script>
@@ -2047,6 +2043,88 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
 
 /* Theme-switch crossfade */
 .pbg-img.switching{transition:opacity .3s ease}
+
+/* =========================================================
+   THE WORKSTYLE · OPERATING LOOP
+   ========================================================= */
+.workstyle{padding:var(--sp-12) 0;position:relative;background:#06060a;color:#fff}
+.workstyle .section-head .eyebrow{color:rgba(255,255,255,.55)}
+.workstyle .section-head h2{color:#fff}
+.workstyle .section-head .section-lead{color:rgba(255,255,255,.7)}
+.ws-loop{list-style:none;padding:0;margin:var(--sp-8) 0 0;
+         display:grid;grid-template-columns:repeat(5,1fr);gap:var(--sp-3)}
+.ws-stage{position:relative;padding:24px 20px;
+          background:rgba(255,255,255,.02);
+          border:1px solid rgba(255,255,255,.06);
+          border-top:2px solid var(--ws-accent,var(--lavender));
+          transition:border-color 240ms var(--ease-out),
+                     background 240ms var(--ease-out),
+                     transform 240ms var(--ease-out)}
+.ws-stage:hover{background:rgba(255,255,255,.04);
+                border-color:rgba(255,255,255,.16);
+                transform:translateY(-2px)}
+.ws-stage[data-ws="01"]{--ws-accent:#C8B6FF}
+.ws-stage[data-ws="02"]{--ws-accent:#B8E0D2}
+.ws-stage[data-ws="03"]{--ws-accent:#FFCDB2}
+.ws-stage[data-ws="04"]{--ws-accent:#A2D2FF}
+.ws-stage[data-ws="05"]{--ws-accent:#D3C3FF}
+.ws-num{font-family:var(--font-mono);font-size:11px;letter-spacing:2.5px;
+        color:var(--ws-accent,var(--lavender));text-transform:uppercase;
+        display:block;margin-bottom:14px;opacity:.9}
+.ws-title{font-family:var(--font-display);font-weight:400;
+          font-size:clamp(20px,1.6vw,26px);line-height:1.15;letter-spacing:-.01em;
+          color:#fff;margin:0 0 12px;text-transform:none}
+.ws-body{font-family:var(--font-body);font-size:14px;line-height:1.7;
+         color:rgba(255,255,255,.78);margin:0}
+.ws-body em{color:var(--ws-accent,var(--lavender));font-style:italic}
+
+.ws-history{margin-top:var(--sp-10);padding-top:var(--sp-8);
+            border-top:1px solid rgba(255,255,255,.08)}
+.ws-history-lab{display:block;margin-bottom:var(--sp-4);color:rgba(255,255,255,.55)}
+.ws-history-list{list-style:none;padding:0;margin:0;
+                 display:grid;grid-template-columns:1fr 1fr;
+                 gap:var(--sp-3) var(--sp-6)}
+.ws-hist{display:grid;grid-template-columns:auto auto 1fr;
+         gap:var(--sp-3);align-items:baseline;
+         padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.ws-hist-co{font-family:var(--font-display);font-size:18px;
+            color:#fff;font-weight:400}
+.ws-hist-co em{font-family:var(--font-mono);font-size:10px;
+               letter-spacing:1.5px;color:var(--lavender);
+               text-transform:uppercase;font-style:normal;margin-left:6px;
+               font-weight:400}
+.ws-hist-mult{font-family:var(--font-mono);font-size:11px;letter-spacing:2px;
+              text-transform:uppercase;color:var(--lavender);
+              padding:4px 10px;border:1px solid rgba(200,182,255,.25);
+              white-space:nowrap}
+.ws-hist-current .ws-hist-mult{color:#FFCDB2;border-color:rgba(255,205,178,.3)}
+.ws-hist-meta{font-family:var(--font-body);font-size:13px;line-height:1.5;
+              color:rgba(255,255,255,.6)}
+.ws-history-note{font-family:var(--font-body);font-size:12px;
+                 color:rgba(255,255,255,.4);font-style:italic;
+                 margin:var(--sp-4) 0 0;max-width:680px}
+
+@media (max-width:1023px){
+  .ws-loop{grid-template-columns:repeat(2,1fr)}
+  .ws-history-list{grid-template-columns:1fr}
+}
+@media (max-width:639px){
+  .ws-loop{grid-template-columns:1fr}
+  .ws-hist{grid-template-columns:1fr;gap:6px}
+}
+
+/* Footer tagline strip */
+.foot-workstyle{padding:20px 0 24px;
+                border-bottom:1px solid rgba(255,255,255,.06);
+                margin-bottom:var(--sp-6)}
+.foot-workstyle-lab{font-family:var(--font-mono);font-size:10px;letter-spacing:2.5px;
+                    color:rgba(255,255,255,.45);text-transform:uppercase;
+                    display:block;margin-bottom:10px}
+.foot-workstyle-chain{font-family:var(--font-display);font-size:clamp(15px,1.4vw,20px);
+                      line-height:1.5;color:rgba(255,255,255,.85);margin:0;
+                      letter-spacing:-.005em}
+.foot-workstyle-chain span{color:var(--lavender);margin:0 8px;
+                           font-family:var(--font-body);opacity:.7;font-size:.85em}
 </style>
 </head>
 <body>
@@ -2377,6 +2455,86 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
         </div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE WORKSTYLE · OPERATING LOOP ============ -->
+<section class="workstyle" id="workstyle" data-bg-zone="workstyle">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="eyebrow">THE WORKSTYLE · OPERATING LOOP</span>
+      <h2>How I actually work — <em>five compounding steps.</em></h2>
+      <p class="section-lead">Not theory. Not a deck. This is the pipeline I run on every engagement, every week.</p>
+    </div>
+
+    <ol class="ws-loop">
+      <li class="ws-stage rv" data-ws="01">
+        <span class="ws-num">01 · Ideation</span>
+        <h3 class="ws-title">Builder by instinct.</h3>
+        <p class="ws-body">Four to five hours a day in the idea-tinkering loop — GTM angles, user empathy, edge cases. <em>The system you ship is downstream of how clearly you can see the problem.</em></p>
+      </li>
+
+      <li class="ws-stage rv" data-ws="02">
+        <span class="ws-num">02 · Product Design</span>
+        <h3 class="ws-title">High-ticket consumer reflex.</h3>
+        <p class="ws-body">Years inside Spinny taught me what high-spend buyers actually expect. Minimum clicks, maximum signal, <em>every step optimised so the next one compounds.</em> That's the bar I design to.</p>
+      </li>
+
+      <li class="ws-stage rv" data-ws="03">
+        <span class="ws-num">03 · Engineering</span>
+        <h3 class="ws-title">Where AI and human handoff.</h3>
+        <p class="ws-body">I run my own training stack and ship a production service every week, solo. Built to hold for <em>1 user or 1M users</em> — zero downtime, zero overheats, no server bloat. Same code path, same discipline.</p>
+      </li>
+
+      <li class="ws-stage rv" data-ws="04">
+        <span class="ws-num">04 · Ops · AI Automations</span>
+        <h3 class="ws-title">Pre-AI automation reps.</h3>
+        <p class="ws-body">I've been automating operations since 2018 — when "AI" meant Python, scrapers, and rate-limited APIs running on an i3 with 4 GB RAM. <em>Seven-plus years of doing this before it was easy.</em></p>
+      </li>
+
+      <li class="ws-stage rv" data-ws="05">
+        <span class="ws-num">05 · Reliable · Human-Free · Profitable Scale</span>
+        <h3 class="ws-title">Survival of the system at scale.</h3>
+        <p class="ws-body">Scale isn't <em>can it grow</em> — it's whether the system survives at multiples. <em>Five platforms before ZeroOne</em> ran me through that test, from machinery automation at JSW to a 20× user-scale window at Spinny.</p>
+      </li>
+    </ol>
+
+    <div class="ws-history rv">
+      <span class="eyebrow ws-history-lab">SCALE WINDOWS · WHERE I BUILT BEFORE ZEROONE</span>
+      <ul class="ws-history-list">
+        <li class="ws-hist">
+          <span class="ws-hist-co">JSW <em>2019–20</em></span>
+          <span class="ws-hist-mult">7.2% throughput lift</span>
+          <span class="ws-hist-meta">Manufacturing-machinery process automation at global-manufacturer scale (coke-oven plants, MTPA-grade output) · fastest promoted in cohort.</span>
+        </li>
+        <li class="ws-hist">
+          <span class="ws-hist-co">Comcast <em>2020–21 · USA remote</em></span>
+          <span class="ws-hist-mult">3× scale window</span>
+          <span class="ws-hist-meta">1M+ telecom-user marketing funnel.</span>
+        </li>
+        <li class="ws-hist">
+          <span class="ws-hist-co">Spinny <em>2021–23</em></span>
+          <span class="ws-hist-mult">20× scale window</span>
+          <span class="ws-hist-meta">Used-car platform · 20k+ active monthly buyers and sellers.</span>
+        </li>
+        <li class="ws-hist">
+          <span class="ws-hist-co">Agrim <em>2024</em></span>
+          <span class="ws-hist-mult">7× scale window</span>
+          <span class="ws-hist-meta">B2B marketplace · 1L+ suppliers and distributors.</span>
+        </li>
+        <li class="ws-hist">
+          <span class="ws-hist-co">CredResolve <em>2025</em></span>
+          <span class="ws-hist-mult">3× scale window</span>
+          <span class="ws-hist-meta">Collections platform · 10L+ borrower interactions.</span>
+        </li>
+        <li class="ws-hist ws-hist-current">
+          <span class="ws-hist-co">NeoNir <em>2026 · live · ZeroOne client</em></span>
+          <span class="ws-hist-mult">live engagement</span>
+          <span class="ws-hist-meta">Water-treatment reporting · 50 plant operators submitting into 1k+ enterprise reviewers across Reliance, IOCL, Aarti Industries, IPL Biologicals.</span>
+        </li>
+      </ul>
+      <p class="ws-history-note">Scale window = the multiple of growth the platform crossed during my tenure. Numbers reflect platform-wide activity, not personal credit.</p>
     </div>
   </div>
 </section>
@@ -3021,6 +3179,12 @@ Cal.ns["30min"]("ui",{"hideEventTypeDetails":true,"layout":"week_view","styles":
 <!-- ============ FOOTER ============ -->
 <footer>
   <div class="wrap">
+    <div class="foot-workstyle">
+      <span class="foot-workstyle-lab">THE WORKSTYLE</span>
+      <p class="foot-workstyle-chain">
+        Ideation <span aria-hidden="true">→</span> Product Design <span aria-hidden="true">→</span> Engineering <span aria-hidden="true">→</span> Ops / AI Automations <span aria-hidden="true">→</span> Reliable, Human-Free, Profitable Scale.
+      </p>
+    </div>
     <div class="foot-top">
       <div class="foot-brand">
         <div class="foot-logo">
