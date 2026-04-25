@@ -18,8 +18,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Audit — nav order matches scroll order
-        run: bash scripts/audit-nav-order.sh
+      - name: Audit — pre-deploy gate (nav order, assets, anchors, html balance, render-blocking JS)
+        run: bash scripts/audit-all.sh
 
       - name: Resolve target
         id: target
