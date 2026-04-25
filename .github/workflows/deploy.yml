@@ -5,6 +5,7 @@ on:
     branches: [main, master]
     paths:
       - 'public/**'
+      - 'scripts/**'
       - '.github/workflows/deploy.yml'
   workflow_dispatch:
 
@@ -15,10 +16,19 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
+    # Capture context once at the top so notification steps can reuse it
+    env:
+      COMMIT_SHA_SHORT: ${{ github.sha }}
+      COMMIT_MSG: ${{ github.event.head_commit.message }}
+      ACTOR: ${{ github.actor }}
+      RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
     steps:
       - uses: actions/checkout@v4
 
       - name: Audit — pre-deploy gate (nav order, assets, anchors, html balance, render-blocking JS)
+        id: audit
         run: bash scripts/audit-all.sh
 
       - name: Resolve target
@@ -27,12 +37,17 @@ jobs:
           if [ "${{ github.ref }}" = "refs/heads/main" ]; then
             echo "path=/opt/services/nginx/html/dotsai.in/" >> $GITHUB_OUTPUT
             echo "domain=dotsai.in" >> $GITHUB_OUTPUT
+            echo "env=production" >> $GITHUB_OUTPUT
+            echo "emoji=:rocket:" >> $GITHUB_OUTPUT
           else
             echo "path=/opt/services/nginx/html/test.dotsai.in/" >> $GITHUB_OUTPUT
             echo "domain=test.dotsai.in" >> $GITHUB_OUTPUT
+            echo "env=test" >> $GITHUB_OUTPUT
+            echo "emoji=:test_tube:" >> $GITHUB_OUTPUT
           fi
 
       - name: Setup SSH
+        id: ssh
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_ed25519
@@ -40,6 +55,7 @@ jobs:
           ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts 2>/dev/null
 
       - name: Rsync public/ to VPS
+        id: rsync
         run: |
           rsync -avz --delete \
             -e "ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no" \
@@ -47,6 +63,7 @@ jobs:
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:${{ steps.target.outputs.path }}
 
       - name: Verify HTTP 200
+        id: verify
         run: |
           sleep 2
           code=$(curl -s -o /dev/null -w "%{http_code}" "https://${{ steps.target.outputs.domain }}/")
@@ -56,3 +73,22 @@ jobs:
       - name: Cleanup SSH key
         if: always()
         run: rm -f ~/.ssh/id_ed25519
+
+      # ─────────────────────────────────────────────────────────────────────
+      # Notifications
+      # Slack: every deploy event (success and failure) — work channel
+      # Telegram: failures only — wakes the operator
+      # ─────────────────────────────────────────────────────────────────────
+
+      - name: Notify channels
+        if: always()
+        env:
+          OUTCOME: ${{ job.status }}
+          DOMAIN: ${{ steps.target.outputs.domain }}
+          ENVNAME: ${{ steps.target.outputs.env }}
+          EMOJI: ${{ steps.target.outputs.emoji }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL: ${{ secrets.SLACK_DEPLOY_CHANNEL_ID }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python3 scripts/notify-deploy.py
