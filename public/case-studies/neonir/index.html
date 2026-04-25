@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NeoNir Case Study | Water-Treatment Reporting Portal | ZeroOne D.O.T.S AI</title>
+  <meta name="description" content="How ZeroOne D.O.T.S AI replaced Excel-to-Word-to-PDF manual water-treatment reporting for NeoNir (Vasu Chemical group) with a live multi-plant portal — 50 operators, 1000+ enterprise reviewers, hours-to-minutes turnaround.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://dotsai.in/case-studies/neonir/">
+  <meta property="og:title" content="NeoNir Water-Treatment Reporting Portal — ZeroOne D.O.T.S AI Case Study">
+  <meta property="og:description" content="50 plant operators. 1,000+ enterprise reviewers. Hours collapsed to minutes. How ZeroOne built NeoNir's compliance reporting portal for Reliance, IOCL, Aarti Industries, and IPL Biologicals.">
+  <meta property="og:url" content="https://dotsai.in/case-studies/neonir/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://dotsai.in/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NeoNir Water-Treatment Reporting Portal — ZeroOne D.O.T.S AI">
+  <meta name="twitter:description" content="50 operators, 1000+ enterprise reviewers, hours-to-minutes. Water-treatment compliance portal built for Fortune-500 submission.">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/site.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "NeoNir Water-Treatment Reporting Portal — ZeroOne D.O.T.S AI Case Study",
+    "author": {"@type": "Person", "name": "Meet Deshani"},
+    "publisher": {"@type": "Organization", "name": "ZeroOne D.O.T.S AI", "url": "https://dotsai.in"},
+    "url": "https://dotsai.in/case-studies/neonir/",
+    "description": "How ZeroOne D.O.T.S AI replaced Excel-to-Word-to-PDF manual water-treatment reporting for NeoNir (Vasu Chemical group) with a live multi-plant portal — 50 operators, 1000+ enterprise reviewers, hours-to-minutes turnaround."
+  }
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dotsai.in/"},{"@type":"ListItem","position":2,"name":"Case Studies","item":"https://dotsai.in/case-studies/"},{"@type":"ListItem","position":3,"name":"NeoNir","item":"https://dotsai.in/case-studies/neonir/"}]}
+  </script>
+  <style>
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+    }
+
+    /* ── Breadcrumb (light, above hero) ── */
+    .breadcrumb-bar {
+      padding: 18px 0 0;
+    }
+    .breadcrumb-bar .breadcrumbs {
+      color: rgba(23, 23, 34, 0.48);
+    }
+    .breadcrumb-bar .breadcrumbs a {
+      color: rgba(23, 23, 34, 0.48);
+    }
+    .breadcrumb-bar .breadcrumbs a:hover {
+      color: var(--ink);
+    }
+
+    /* ── Hero ── */
+    .cs-hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 22%, rgba(215, 207, 240, 0.22), transparent 24%),
+        radial-gradient(circle at 82% 18%, rgba(191, 214, 236, 0.12), transparent 18%),
+        linear-gradient(180deg, rgba(23, 23, 34, 0.98), rgba(36, 29, 51, 0.98));
+      color: #f3f0ff;
+      padding: 80px 0 72px;
+    }
+
+    .cs-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(241, 198, 174, 0.08), transparent 18%),
+        radial-gradient(circle at 90% 72%, rgba(201, 222, 212, 0.08), transparent 20%);
+      pointer-events: none;
+    }
+
+    .cs-hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cs-client-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+      font-family: "Space Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .cs-client-tag span {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: var(--mint);
+    }
+
+    .cs-headline {
+      margin: 0 0 12px;
+      font-family: "Instrument Serif", serif;
+      font-size: clamp(64px, 10vw, 120px);
+      line-height: 0.88;
+      letter-spacing: -0.06em;
+      color: #f3f0ff;
+    }
+
+    .cs-subhead {
+      margin: 0 0 48px;
+      font-family: "Instrument Serif", serif;
+      font-size: clamp(22px, 3vw, 34px);
+      line-height: 1.2;
+      color: rgba(243, 240, 255, 0.6);
+      font-style: italic;
+      letter-spacing: -0.02em;
+    }
+
+    /* ── Hero metrics strip ── */
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 2px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .hero-metric {
+      padding: 20px 22px;
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .hero-metric:last-child {
+      border-right: 0;
+    }
+
+    .hero-metric-value {
+      display: block;
+      font-family: "Instrument Serif", serif;
+      font-size: clamp(26px, 3.5vw, 40px);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: #f3f0ff;
+    }
+
+    .hero-metric-label {
+      display: block;
+      margin-top: 6px;
+      font-family: "Space Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(243, 240, 255, 0.44);
+    }
+
+    /* ── Body section defaults ── */
+    .cs-body {
+      padding: 0 0 80px;
+    }
+
+    .cs-section {
+      padding: 72px 0;
+      border-top: 1px solid rgba(23, 23, 34, 0.07);
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+      font-family: "Space Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(23, 23, 34, 0.4);
+    }
+
+    .section-label::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: rgba(23, 23, 34, 0.08);
+    }
+
+    .cs-section h2 {
+      margin: 0 0 20px;
+      font-family: "Instrument Serif", serif;
+      font-size: clamp(32px, 5vw, 56px);
+      line-height: 0.96;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+    }
+
+    .cs-section p {
+      max-width: 720px;
+      font-size: 17px;
+      line-height: 1.72;
+      color: rgba(23, 23, 34, 0.72);
+      margin: 0 0 16px;
+    }
+
+    .cs-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ── Problem section ── */
+    .problem-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .problem-copy p {
+      font-size: 17px;
+      line-height: 1.72;
+      color: rgba(23, 23, 34, 0.72);
+      margin: 0 0 16px;
+    }
+
+    .pain-list {
+      margin: 28px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    .pain-list li {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 16px 18px;
+      border: 1px solid rgba(23, 23, 34, 0.08);
+      background: rgba(255, 255, 255, 0.6);
+    }
+
+    .pain-list li .pain-icon {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      font-family: "Space Mono", monospace;
+      font-size: 11px;
+      color: rgba(23, 23, 34, 0.35);
+    }
+
+    .pain-list li .pain-text {
+      font-size: 15px;
+      line-height: 1.6;
+      color: rgba(23, 23, 34, 0.75);
+    }
+
+    .before-after {
+      padding: 24px;
+      border: 1px solid rgba(23, 23, 34, 0.08);
+      background: rgba(255, 255, 255, 0.55);
+    }
+
+    .before-after-label {
+      font-family: "Space Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(23, 23, 34, 0.38);
+      margin-bottom: 16px;
+    }
+
+    .flow-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .flow-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .flow-step {
+      padding: 8px 12px;
+      border: 1px solid rgba(23, 23, 34, 0.12);
+      background: rgba(255, 255, 255, 0.8);
+      font-size: 13px;
+      color: rgba(23, 23, 34, 0.72);
+      font-family: "Space Mono", monospace;
+    }
+
+    .flow-step.old {
+      background: rgba(255, 80, 80, 0.05);
+      border-color: rgba(200, 60, 60, 0.18);
+      color: rgba(160, 40, 40, 0.75);
+    }
+
+    .flow-step.new {
+      background: rgba(184, 224, 210, 0.2);
+      border-color: rgba(80, 160, 130, 0.25);
+      color: rgba(30, 100, 80, 0.85);
+    }
+
+    .flow-arrow {
+      font-family: "Space Mono", monospace;
+      font-size: 11px;
+      color: rgba(23, 23, 34, 0.3);
+    }
+
+    /* ── Solution modules ── */
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2px;
+      background: rgba(23, 23, 34, 0.06);
+    }
+
+    .module-card {
+      padding: 28px;
+      background: var(--paper);
+      position: relative;
+    }
+
+    .module-num {
+      display: block;
+      font-family: "Space Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(23, 23, 34, 0.3);
+      margin-bottom: 14px;
+    }
+
+    .module-card h3 {
+      margin: 0 0 10px;
+      font-family: "Instrument Serif", serif;
+      font-size: 22px;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .module-card p {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.65;
+      color: rgba(23, 23, 34, 0.64);
+    }
+
+    .module-card .module-accent {
+      position: absolute;
+      top: 28px;
+      right: 28px;
+      width: 8px;
+      height: 8px;
+      background: var(--mint);
+    }
+
+    /* ── Metrics section ── */
+    .outcome-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 2px;
+      background: rgba(23, 23, 34, 0.06);
+      margin-top: 40px;
+    }
+
+    .outcome-cell {
+      padding: 32px 28px;
+      background: var(--paper);
+    }
+
+    .outcome-value {
+      display: block;
+      font-family: "Instrument Serif", serif;
+      font-size: clamp(40px, 6vw, 64px);
+      line-height: 1;
+      letter-spacing: -0.06em;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+
+    .outcome-value em {
+      font-style: italic;
+      color: var(--plum);
+    }
+
+    .outcome-desc {
+      font-size: 14px;
+      line-height: 1.6;
+      color: rgba(23, 23, 34, 0.58);
+    }
+
+    /* ── Testimonial ── */
+    .testimonial-block {
+      background: linear-gradient(160deg, rgba(36, 29, 51, 0.98), rgba(67, 48, 95, 0.96));
+      padding: 64px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .testimonial-block::before {
+      content: "\201C";
+      position: absolute;
+      top: -20px;
+      left: 40px;
+      font-family: "Instrument Serif", serif;
+      font-size: 260px;
+      line-height: 1;
+      color: rgba(200, 182, 255, 0.07);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .testimonial-quote {
+      position: relative;
+      z-index: 1;
+      font-family: "Instrument Serif", serif;
+      font-size: clamp(22px, 3.2vw, 32px);
+      line-height: 1.45;
+      letter-spacing: -0.02em;
+      color: #f3f0ff;
+      margin: 0 0 32px;
+      max-width: 800px;
+    }
+
+    .testimonial-attr {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .testimonial-attr-line {
+      width: 32px;
+      height: 1px;
+      background: rgba(200, 182, 255, 0.4);
+    }
+
+    .testimonial-attr-text {
+      font-family: "Space Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(200, 182, 255, 0.65);
+    }
+
+    /* ── Enterprise clients strip ── */
+    .clients-strip {
+      padding: 48px 0;
+    }
+
+    .clients-label {
+      font-family: "Space Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(23, 23, 34, 0.38);
+      margin-bottom: 28px;
+    }
+
+    .clients-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px;
+    }
+
+    .client-badge {
+      padding: 14px 24px;
+      border: 1px solid rgba(23, 23, 34, 0.1);
+      background: rgba(255, 255, 255, 0.55);
+      font-family: "Space Mono", monospace;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(23, 23, 34, 0.65);
+    }
+
+    /* ── Leadership strip ── */
+    .leadership-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px;
+      margin-top: 40px;
+    }
+
+    .leadership-card {
+      flex: 1;
+      min-width: 200px;
+      padding: 22px 24px;
+      border: 1px solid rgba(23, 23, 34, 0.08);
+      background: rgba(255, 255, 255, 0.55);
+    }
+
+    .leadership-role {
+      font-family: "Space Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(23, 23, 34, 0.38);
+      margin-bottom: 6px;
+    }
+
+    .leadership-name {
+      font-family: "Instrument Serif", serif;
+      font-size: 20px;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .leadership-name a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: rgba(23, 23, 34, 0.2);
+    }
+
+    .leadership-name a:hover {
+      text-decoration-color: var(--ink);
+    }
+
+    /* ── Tech strip ── */
+    .tech-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .tech-tag {
+      padding: 6px 12px;
+      border: 1px solid rgba(23, 23, 34, 0.1);
+      font-family: "Space Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: rgba(23, 23, 34, 0.55);
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    /* ── CTA section ── */
+    .cs-cta {
+      padding: 80px 0;
+      border-top: 1px solid rgba(23, 23, 34, 0.07);
+      text-align: center;
+    }
+
+    .cs-cta h2 {
+      font-family: "Instrument Serif", serif;
+      font-size: clamp(36px, 6vw, 64px);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+      color: var(--ink);
+      margin: 0 0 20px;
+    }
+
+    .cs-cta h2 em {
+      color: var(--plum);
+      font-style: italic;
+    }
+
+    .cs-cta p {
+      font-size: 17px;
+      line-height: 1.65;
+      color: rgba(23, 23, 34, 0.6);
+      max-width: 540px;
+      margin: 0 auto 36px;
+    }
+
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 28px;
+      background: var(--plum);
+      color: #f3f0ff;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .btn-cta:hover {
+      transform: translateY(-2px);
+      opacity: 0.92;
+    }
+
+    /* ── Next case study ── */
+    .next-cs {
+      padding: 48px 0;
+      border-top: 1px solid rgba(23, 23, 34, 0.07);
+    }
+
+    .next-cs-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .next-cs-label {
+      font-family: "Space Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(23, 23, 34, 0.38);
+      margin-bottom: 8px;
+    }
+
+    .next-cs-title {
+      font-family: "Instrument Serif", serif;
+      font-size: 28px;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+
+    .next-cs-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      border: 1px solid rgba(23, 23, 34, 0.15);
+      font-family: "Space Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(23, 23, 34, 0.65);
+      transition: border-color 0.2s ease, color 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .next-cs-link:hover {
+      border-color: var(--ink);
+      color: var(--ink);
+    }
+
+    /* ── Nav btn-cta ── */
+    .topbar .btn-cta {
+      padding: 10px 18px;
+      font-size: 13px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 860px) {
+      .problem-grid,
+      .modules-grid,
+      .outcome-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero-metric {
+        border-right: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .hero-metric:nth-child(2n) {
+        border-right: 0;
+      }
+
+      .hero-metric:last-child,
+      .hero-metric:nth-last-child(2) {
+        border-bottom: 0;
+      }
+
+      .testimonial-block {
+        padding: 40px 28px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .hero-metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .modules-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="grain">
+
+  <!-- ── Topbar ── -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="/" class="brand-lockup">
+        <img class="brand-mark" src="/brand/zeroone-dark-icon.svg" alt="ZeroOne D.O.T.S AI">
+        <span class="brand-word">ZeroOne D.O.T.S AI</span>
+      </a>
+      <nav class="nav-links">
+        <a href="/ai-agency-india/">AI Agency India</a>
+        <a href="/private-ai/">Private AI</a>
+        <a href="/case-studies/" aria-current="page">Case Studies</a>
+        <a href="/about/">About</a>
+      </nav>
+      <a href="https://cal.com/meetdeshani" target="_blank" rel="noopener" class="btn-cta">Book a Call</a>
+    </div>
+  </header>
+
+  <!-- ── Breadcrumb ── -->
+  <div class="shell breadcrumb-bar">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span>/</span>
+      <a href="/case-studies/">Case Studies</a>
+      <span>/</span>
+      <span>NeoNir</span>
+    </nav>
+  </div>
+
+  <!-- ── Hero ── -->
+  <section class="cs-hero">
+    <div class="shell cs-hero-inner">
+      <div class="cs-client-tag">
+        <span></span>
+        NeoNir · Vasu Chemical Group · India · Live 2026
+      </div>
+      <h1 class="cs-headline">NEONIR</h1>
+      <p class="cs-subhead">Water-Treatment Reporting Portal</p>
+
+      <div class="hero-metrics">
+        <div class="hero-metric">
+          <span class="hero-metric-value">50</span>
+          <span class="hero-metric-label">Plant Operators</span>
+        </div>
+        <div class="hero-metric">
+          <span class="hero-metric-value">1,000+</span>
+          <span class="hero-metric-label">Enterprise Reviewers</span>
+        </div>
+        <div class="hero-metric">
+          <span class="hero-metric-value">Hours→Min</span>
+          <span class="hero-metric-label">Report Turnaround</span>
+        </div>
+        <div class="hero-metric">
+          <span class="hero-metric-value">Live 2026</span>
+          <span class="hero-metric-label">Production Status</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Body ── -->
+  <main class="cs-body">
+
+    <!-- ── Problem ── -->
+    <section class="cs-section shell">
+      <div class="section-label">01 — The Problem</div>
+
+      <div class="problem-grid">
+        <div class="problem-copy">
+          <h2>Excel. Word.<br>PDF. Repeat.</h2>
+          <p>NeoNir's field engineers visit industrial plants for Reliance, IOCL, Aarti Industries, and IPL Biologicals. After each visit, they needed to file a compliance report with every parameter reading, every observation, and every recommendation — formatted to each client's standard.</p>
+          <p>The process was entirely manual. An engineer would pull readings from a clipboard into Excel, copy-paste into a Word template, export to PDF, and email it out. Three cities, twelve field engineers, zero consistency.</p>
+          <p>Worse: recipient ordering in the report mattered. Enterprise clients have strict chain-of-command expectations. A report addressed to the wrong person first was not a formatting error — it was a credibility problem.</p>
+
+          <ul class="pain-list">
+            <li>
+              <span class="pain-icon">01</span>
+              <span class="pain-text">Each report took hours to assemble from raw field notes — no standard template, no automation</span>
+            </li>
+            <li>
+              <span class="pain-icon">02</span>
+              <span class="pain-text">Parameter readings were scattered across spreadsheets with no way to flag out-of-limit values in real time</span>
+            </li>
+            <li>
+              <span class="pain-icon">03</span>
+              <span class="pain-text">Twelve separate field notes arrived from engineers — leadership had no consolidated plant view</span>
+            </li>
+            <li>
+              <span class="pain-icon">04</span>
+              <span class="pain-text">Recipient order in PDFs was inconsistent — breaking enterprise chain-of-command expectations</span>
+            </li>
+            <li>
+              <span class="pain-icon">05</span>
+              <span class="pain-text">No trend visibility: no charts, no min/max bands, no historical context across visits</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="before-after">
+            <div class="before-after-label">Before — The old workflow</div>
+            <div class="flow-row">
+              <span class="flow-step old">Field clipboard</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step old">Excel</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step old">Word template</span>
+            </div>
+            <div class="flow-row">
+              <span class="flow-step old">Manual format</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step old">Export PDF</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step old">Email</span>
+            </div>
+            <div class="flow-row">
+              <span class="flow-step old">Hours per report</span>
+              <span class="flow-arrow">·</span>
+              <span class="flow-step old">No trends</span>
+              <span class="flow-arrow">·</span>
+              <span class="flow-step old">No flags</span>
+            </div>
+          </div>
+
+          <div class="before-after" style="margin-top: 2px;">
+            <div class="before-after-label">After — NeoNir Reporting Portal</div>
+            <div class="flow-row">
+              <span class="flow-step new">Portal form</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step new">Auto-matrix</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step new">Trend charts</span>
+            </div>
+            <div class="flow-row">
+              <span class="flow-step new">Out-of-limit flags</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step new">Hierarchy order</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step new">PDF</span>
+            </div>
+            <div class="flow-row">
+              <span class="flow-step new">Minutes per report</span>
+              <span class="flow-arrow">·</span>
+              <span class="flow-step new">Multi-plant</span>
+              <span class="flow-arrow">·</span>
+              <span class="flow-step new">Live</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Solution ── -->
+    <section class="cs-section shell">
+      <div class="section-label">02 — What We Built</div>
+      <h2>Six modules.<br>One portal.</h2>
+      <p style="margin-bottom: 36px;">The NeoNir Reporting Portal consolidates the entire field-to-client reporting chain into a single system — built for enterprise submission, not internal filing.</p>
+
+      <div class="modules-grid">
+        <div class="module-card">
+          <span class="module-accent"></span>
+          <span class="module-num">Module 01</span>
+          <h3>Visit Observation Report Portal</h3>
+          <p>Structured form submission for every plant visit. Engineers log observations directly — no clipboard transcription, no copy-paste. Built for enterprise-client submission from day one.</p>
+        </div>
+
+        <div class="module-card">
+          <span class="module-accent"></span>
+          <span class="module-num">Module 02</span>
+          <h3>Per-System Parameter Matrix</h3>
+          <p>Every water treatment parameter tracked against defined control limits. Out-of-limit readings surface as red flags — instantly visible in the portal and carried into the PDF. No reading gets lost in a spreadsheet row.</p>
+        </div>
+
+        <div class="module-card">
+          <span class="module-accent"></span>
+          <span class="module-num">Module 03</span>
+          <h3>Parameter Trend Charts</h3>
+          <p>Actual readings plotted against min and max control bands, embedded in every PDF. Reviewers at Reliance and IOCL see not just today's reading — but whether the system is drifting, stable, or recovering.</p>
+        </div>
+
+        <div class="module-card">
+          <span class="module-accent"></span>
+          <span class="module-num">Module 04</span>
+          <h3>Hierarchy-Aware Recipient Ordering</h3>
+          <p>Reports address recipients in the exact order that mirrors the enterprise client's chain of command — never alphabetized, never reordered by the system. This was a non-negotiable for Fortune-500 client relationships.</p>
+        </div>
+
+        <div class="module-card">
+          <span class="module-accent"></span>
+          <span class="module-num">Module 05</span>
+          <h3>POC Consolidation</h3>
+          <p>All field engineer notes from a single plant visit consolidated into one authoritative leadership report. No more twelve fragmented files landing in a manager's inbox. One plant. One document.</p>
+        </div>
+
+        <div class="module-card">
+          <span class="module-accent"></span>
+          <span class="module-num">Module 06</span>
+          <h3>Multi-Plant Management</h3>
+          <p>A single portal for 50 operators across all plants. Each plant's data is isolated, each report scoped correctly, but leadership gets a unified view. Scales as NeoNir adds new enterprise accounts.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Outcomes ── -->
+    <section class="cs-section shell">
+      <div class="section-label">03 — Outcomes</div>
+      <h2>The numbers<br>that matter.</h2>
+      <p>Adoption was same-day. No re-training required. The system was built to fit the way field engineers already think about their work — not the other way around.</p>
+
+      <div class="outcome-grid">
+        <div class="outcome-cell">
+          <span class="outcome-value">50</span>
+          <div class="outcome-desc">Plant operators onboarded to the portal — same-day adoption, zero re-training required</div>
+        </div>
+        <div class="outcome-cell">
+          <span class="outcome-value">1,000<em>+</em></span>
+          <div class="outcome-desc">Enterprise reviewers now receiving structured, chart-rich compliance reports with correct hierarchy ordering</div>
+        </div>
+        <div class="outcome-cell">
+          <span class="outcome-value"><em>Hrs</em>→Min</span>
+          <div class="outcome-desc">Report assembly time per visit — from hours of copy-paste to minutes of structured form submission</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 32px;">
+        <p style="font-size: 15px; color: rgba(23,23,34,0.55);">Tech stack inferred from system requirements:</p>
+        <div class="tech-strip">
+          <span class="tech-tag">Next.js</span>
+          <span class="tech-tag">SQLite</span>
+          <span class="tech-tag">PDF Generation</span>
+          <span class="tech-tag">Parameter Matrix Engine</span>
+          <span class="tech-tag">Trend Chart Rendering</span>
+          <span class="tech-tag">Multi-Plant Architecture</span>
+          <span class="tech-tag">Hierarchy-Aware Ordering</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Testimonial ── -->
+    <section class="shell">
+      <div class="testimonial-block">
+        <p class="testimonial-quote">"We used to chase paper forms across three cities. Now every field visit becomes a data point in the same dashboard. We caught issues we didn't know existed."</p>
+        <div class="testimonial-attr">
+          <div class="testimonial-attr-line"></div>
+          <span class="testimonial-attr-text">Nishant Kapadia &nbsp;·&nbsp; CEO, NeoNir (Vasu Chemical group)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Enterprise clients strip ── -->
+    <section class="cs-section shell">
+      <div class="section-label">04 — Enterprise Clients Served</div>
+      <h2>Reports submitted to</h2>
+      <p>NeoNir's compliance reports now reach India's largest industrial operators — formatted, structured, and delivered in the order that matters to each enterprise's leadership chain.</p>
+
+      <div class="clients-row" style="margin-top: 28px;">
+        <div class="client-badge">Reliance Industries</div>
+        <div class="client-badge">IOCL — Indian Oil Corporation</div>
+        <div class="client-badge">Aarti Industries</div>
+        <div class="client-badge">IPL Biologicals</div>
+      </div>
+
+      <!-- Leadership strip -->
+      <div class="leadership-strip">
+        <div class="leadership-card">
+          <div class="leadership-role">CEO</div>
+          <div class="leadership-name">Nishant Kapadia</div>
+        </div>
+        <div class="leadership-card">
+          <div class="leadership-role">Owner</div>
+          <div class="leadership-name">
+            <a href="https://www.linkedin.com/in/hemish-kapadia/" target="_blank" rel="noopener">Hemish Kapadia</a>
+          </div>
+        </div>
+        <div class="leadership-card">
+          <div class="leadership-role">Group</div>
+          <div class="leadership-name">Vasu Chemical</div>
+        </div>
+        <div class="leadership-card">
+          <div class="leadership-role">Sector</div>
+          <div class="leadership-name">Water Treatment</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA ── -->
+    <section class="cs-cta shell">
+      <h2>Build something<br><em>similar.</em></h2>
+      <p>If your team is producing compliance reports, audit documents, or structured data submissions manually — this is exactly the kind of work ZeroOne D.O.T.S AI is built for.</p>
+      <a href="https://cal.com/meetdeshani" target="_blank" rel="noopener" class="btn-cta">
+        Book a Call with Meet
+        <span aria-hidden="true">→</span>
+      </a>
+    </section>
+
+    <!-- ── Next case study ── -->
+    <div class="next-cs shell">
+      <div class="next-cs-inner">
+        <div>
+          <div class="next-cs-label">Next Case Study</div>
+          <div class="next-cs-title">WORO — AI-Led Digital Agency</div>
+        </div>
+        <a href="/case-studies/woro/" class="next-cs-link">
+          Read Case Study <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <div class="shell footer-inner">
+      <div class="footer-copy">
+        &copy; 2026 ZeroOne D.O.T.S AI &mdash; NeoNir Case Study
+      </div>
+      <div class="footer-links">
+        <a href="/case-studies/">All Case Studies</a>
+        <a href="/private-ai/">Private AI</a>
+        <a href="/ai-agency-india/">AI Agency India</a>
+        <a href="/about/">About</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

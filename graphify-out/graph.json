@@ -1,0 +1,17 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "sw.js",
+      "file_type": "code",
+      "source_file": "public/sw.js",
+      "source_location": "L1",
+      "id": "sw",
+      "community": 0
+    }
+  ],
+  "links": [],
+  "hyperedges": []
+}
