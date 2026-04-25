@@ -2,7 +2,8 @@
 """
 notify-deploy.py
 ────────────────
-Posts a deploy outcome to Slack (always) and Telegram (failures only).
+Posts a deploy outcome to Telegram (primary) and Slack (secondary).
+Both channels receive both success and failure events.
 
 Driven entirely by env vars so it's identically callable from GitHub Actions
 or a local terminal:
@@ -119,9 +120,15 @@ def build_messages():
             f"`{sha}` {msg}\n"
             f"by _{actor}_ · <{run_url}|run>"
         )
-        return slack_text, None  # no telegram on success
+        tg_text = (
+            f"✅ *{domain}* deployed _({envname})_\n"
+            f"`{sha}` {msg}\n"
+            f"by _{actor}_\n"
+            f"[view run]({run_url})"
+        )
+        return slack_text, tg_text
 
-    # failure or cancelled — alert both
+    # failure or cancelled — alert both, with louder framing
     label = "FAILED" if outcome == "failure" else outcome.upper()
     slack_text = (
         f":x: *{domain}* deploy {label} ({envname})\n"
@@ -129,7 +136,7 @@ def build_messages():
         f"by _{actor}_ · <{run_url}|investigate>"
     )
     tg_text = (
-        f"🔴 *{domain}* deploy {label} ({envname})\n"
+        f"🔴 *{domain}* deploy {label} _({envname})_\n"
         f"`{sha}` {msg}\n"
         f"by _{actor}_\n"
         f"[investigate]({run_url})"
