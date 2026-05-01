@@ -45,94 +45,31 @@ body {
 }
 
 /* ── Nav (dark mode override) ── */
-.labs-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  padding: 20px 48px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  backdrop-filter: blur(20px);
-  background: rgba(6,6,10,0.72);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-}
 
-.labs-nav .nav-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  color: inherit;
-}
 
-.labs-nav .nav-dot-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 4px;
-}
 
-.labs-nav .nav-dot {
-  width: 5px; height: 5px;
-  border-radius: 50%;
-}
-.labs-nav .nav-dot.ghost { background: rgba(255,255,255,0.15); }
-.labs-nav .nav-dot.data  { background: #C8B6FF; }
-.labs-nav .nav-dot.ops   { background: #B8E0D2; }
-.labs-nav .nav-dot.tech  { background: #FFCDB2; }
 
-.labs-nav .nav-logo-text {
-  font-family: 'Space Mono', monospace;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  color: rgba(255,255,255,0.9);
-}
 
-.labs-nav .nav-links {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-}
 
-.labs-nav .nav-link {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: 0.03em;
-  color: rgba(255,255,255,0.45);
-  text-decoration: none;
-  transition: color 0.25s ease;
-}
 
-.labs-nav .nav-link:hover {
-  color: rgba(255,255,255,0.85);
-}
 
-.labs-nav .nav-link.active {
-  color: rgba(255,255,255,0.9);
-}
 
-.labs-nav .nav-cta {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  color: rgba(255,255,255,0.6);
-  text-decoration: none;
-  padding: 8px 20px;
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 4px;
-  transition: color 0.2s ease-out, border-color 0.2s ease-out, background 0.2s ease-out, transform 0.16s ease-out;
-}
-.labs-nav .nav-cta:hover {
-  color: #fff;
-  border-color: rgba(255,255,255,0.3);
-  background: rgba(255,255,255,0.05);
-}
-.labs-nav .nav-cta:active {
-  transform: scale(0.97);
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* ── Hero header ── */
 .labs-hero {
@@ -620,81 +557,33 @@ body {
 }
 
 /* ── Footer ── */
-.labs-footer {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 32px 48px 54px;
-  border-top: 1px solid rgba(255,255,255,0.06);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 18px;
-}
 
-.labs-footer .footer-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
 
-.labs-footer .footer-dot-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 3px;
-}
 
-.labs-footer .footer-dot {
-  width: 4px; height: 4px;
-  border-radius: 50%;
-}
-.labs-footer .footer-dot.ghost { background: rgba(255,255,255,0.1); }
-.labs-footer .footer-dot.data  { background: rgba(200,182,255,0.6); }
-.labs-footer .footer-dot.ops   { background: rgba(184,224,210,0.6); }
-.labs-footer .footer-dot.tech  { background: rgba(255,205,178,0.6); }
 
-.labs-footer .footer-brand {
-  font-family: 'Space Mono', monospace;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  color: rgba(255,255,255,0.5);
-}
 
-.labs-footer .footer-copy {
-  font-size: 13px;
-  color: rgba(255,255,255,0.3);
-}
 
-.labs-footer .footer-links {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-}
 
-.labs-footer .footer-link {
-  font-size: 13px;
-  color: rgba(255,255,255,0.35);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
 
-.labs-footer .footer-link:hover {
-  color: rgba(255,255,255,0.6);
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* ── Responsive ── */
 @media (max-width: 900px) {
-  .labs-nav {
-    padding: 14px 20px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
+  
 
-  .labs-nav .nav-links {
-    gap: 16px;
-  }
+  
 
   .labs-hero {
     padding: 130px 20px 60px;
@@ -709,11 +598,7 @@ body {
     padding: 0 20px 80px;
   }
 
-  .labs-footer {
-    padding: 32px 20px 40px;
-    flex-direction: column;
-    align-items: flex-start;
-  }
+  
 }
 
 @media (max-width: 480px) {
@@ -773,6 +658,71 @@ footer{background:#191924;color:rgba(255,255,255,.8);padding:80px 0 32px}
 .foot-bot{padding-top:24px;border-top:1px solid rgba(255,255,255,.08);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,.5);letter-spacing:1px}
 .foot-bot a{color:rgba(255,255,255,.6);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:1px}
 .foot-bot a:hover{color:#C8B6FF;border-bottom-color:#C8B6FF}
+
+/* ── Shared nav (subpages) ─────────────────────────────────── */
+.dot-bg{fill:#191924}
+.nav .zo-logo{height:32px}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;
+     padding:18px clamp(20px,4vw,60px) 0;
+     display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+     pointer-events:none;
+     transition:padding 300ms ease}
+.nav.scrolled{padding-top:12px}
+.nav>*{pointer-events:auto}
+.nav-brand{justify-self:start;display:inline-flex;align-items:center;
+           text-decoration:none;color:#fdfcfa;
+           transition:color 240ms ease}
+.nav.on-light .nav-brand{color:#191924}
+.nav-brand .zo-logo{transition:transform 200ms ease}
+.nav-brand:hover .zo-logo{transform:scale(1.02)}
+.nav.on-light .zo-logo{color:#191924}
+.nav.on-light .zo-logo .d-dot{fill:#5B3FD4}
+.nav.on-light .zo-logo .o-dot{fill:#1F7A5C}
+.nav.on-light .zo-logo .t-dot{fill:#A8521A}
+.nav.on-light .zo-logo .d-ltr{fill:#5B3FD4}
+.nav.on-light .zo-logo .o-ltr{fill:#1F7A5C}
+.nav.on-light .zo-logo .t-ltr{fill:#A8521A}
+.nav.on-light .zo-logo .s-ltr{fill:#1E5B9C}
+.nav-pill{display:none;position:relative;justify-self:center;
+          padding:5px;
+          background-color:rgba(10,10,16,.55);
+          border:1px solid rgba(255,255,255,.08);
+          border-radius:999px;
+          backdrop-filter:blur(18px) saturate(140%);
+          -webkit-backdrop-filter:blur(18px) saturate(140%);
+          box-shadow:0 10px 36px rgba(0,0,0,.28)}
+@media(min-width:900px){.nav-pill{display:inline-flex;align-items:center;gap:0}}
+.nav-pill.on-light{
+          background-color:rgba(253,252,250,.82);
+          border-color:rgba(25,25,36,.08);
+          box-shadow:0 14px 44px rgba(25,25,36,.08)}
+.nav-link{position:relative;z-index:1;display:inline-flex;align-items:center;
+          font-family:'Space Mono','Courier New',monospace;font-size:10.5px;letter-spacing:1.8px;
+          text-transform:uppercase;color:rgba(255,255,255,.68);
+          text-decoration:none;
+          padding:10px 18px;border-radius:999px;
+          transition:color 220ms ease}
+.nav-link:hover{color:#fff}
+.nav-pill.on-light .nav-link{color:rgba(25,25,36,.62)}
+.nav-pill.on-light .nav-link:hover{color:#191924}
+.nav-cta{justify-self:end;
+         font-family:'Space Mono','Courier New',monospace;font-size:10.5px;letter-spacing:1.8px;
+         text-transform:uppercase;
+         padding:12px 20px;border-radius:999px;
+         background-color:#C8B6FF;color:#191924;
+         text-decoration:none;border:1px solid #C8B6FF;
+         box-shadow:0 10px 28px rgba(200,182,255,.22);
+         display:inline-flex;align-items:center;gap:6px;
+         transition:transform 180ms ease,background-color 220ms ease,box-shadow 220ms ease}
+.nav-cta:hover{transform:translateY(-1px);background-color:#D3C3FF;
+               box-shadow:0 12px 34px rgba(200,182,255,.32)}
+.nav-cta:active{transform:translateY(0) scale(.98)}
+.nav-cta.on-light{background-color:#191924;color:#fdfcfa;border-color:#191924;
+                  box-shadow:0 10px 28px rgba(25,25,36,.18)}
+.nav-cta.on-light:hover{background-color:#2D1B4E;border-color:#2D1B4E}
+@media(max-width:599px){
+  .nav-cta{padding:10px 14px;font-size:9.5px;letter-spacing:1.2px}
+}
 </style>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dotsai.in/"},{"@type":"ListItem","position":2,"name":"Labs","item":"https://dotsai.in/labs/"}]}
@@ -781,29 +731,32 @@ footer{background:#191924;color:rgba(255,255,255,.8);padding:80px 0 32px}
 <body>
 
   <!-- NAV -->
-  <nav class="labs-nav">
-    <a href="/" class="nav-logo">
-      <div class="nav-dot-grid">
-        <div class="nav-dot data"></div>
-        <div class="nav-dot ghost"></div>
-        <div class="nav-dot ghost"></div>
-        <div class="nav-dot ghost"></div>
-        <div class="nav-dot ops"></div>
-        <div class="nav-dot ghost"></div>
-        <div class="nav-dot ghost"></div>
-        <div class="nav-dot ghost"></div>
-        <div class="nav-dot tech"></div>
-      </div>
-      <span class="nav-logo-text">ZEROONE D.O.T.S AI</span>
-    </a>
-    <div class="nav-links">
-      <a href="/#meet" class="nav-link">Meet</a>
-      <a href="/#consulting" class="nav-link">Consulting</a>
-      <a href="/#platform" class="nav-link">Platform</a>
-      <a href="/labs/" class="nav-link active">Labs</a>
-    </div>
-    <a href="https://wa.me/918320065658" target="_blank" rel="noopener" class="nav-cta">&#8599; Let's Talk</a>
-  </nav>
+  <nav class="nav" id="nav">
+  <a class="nav-brand" href="https://dotsai.in" aria-label="ZeroOne D·O·T·S AI — home">
+    <svg class="zo-logo" viewBox="0 0 480 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
+      <circle class="d-dot" cx="30" cy="24" r="11" fill="#C8B6FF"/>
+      <circle class="dot-bg" cx="56" cy="24" r="11" fill="currentColor"/>
+      <circle class="dot-bg" cx="82" cy="24" r="11" fill="currentColor"/>
+      <circle class="dot-bg" cx="30" cy="50" r="11" fill="currentColor"/>
+      <circle class="o-dot" cx="56" cy="50" r="11" fill="#B8E0D2"/>
+      <circle class="dot-bg" cx="82" cy="50" r="11" fill="currentColor"/>
+      <circle class="dot-bg" cx="30" cy="76" r="11" fill="currentColor"/>
+      <circle class="dot-bg" cx="56" cy="76" r="11" fill="currentColor"/>
+      <circle class="t-dot" cx="82" cy="76" r="11" fill="#FFCDB2"/>
+      <text x="112" y="42" font-family="'Space Mono', 'Courier New', monospace" font-weight="700" font-size="22" letter-spacing="3" fill="currentColor">ZEROONE</text>
+      <text x="112" y="72" font-family="'Space Mono', 'Courier New', monospace" font-weight="700" font-size="22" letter-spacing="3">
+        <tspan class="d-ltr" fill="#C8B6FF">D</tspan><tspan class="sep" fill="currentColor">·</tspan><tspan class="o-ltr" fill="#B8E0D2">O</tspan><tspan class="sep" fill="currentColor">·</tspan><tspan class="t-ltr" fill="#FFCDB2">T</tspan><tspan class="sep" fill="currentColor">·</tspan><tspan class="s-ltr" fill="#A2D2FF">S</tspan><tspan fill="currentColor" dx="12">AI</tspan>
+      </text>
+    </svg>
+  </a>
+  <div class="nav-pill" role="tablist" aria-label="Site navigation">
+    <a class="nav-link" href="https://dotsai.in/#pillars">Services</a>
+    <a class="nav-link" href="https://dotsai.in/case-studies/">Case Studies</a>
+    <a class="nav-link" href="https://dotsai.in/pricing/">Pricing</a>
+    <a class="nav-link" href="https://dotsai.in/about/">About</a>
+  </div>
+  <a class="nav-cta" href="https://cal.com/meetdeshani" target="_blank" rel="noopener">Book Meet →</a>
+</nav>
 
   <!-- HERO -->
   <header class="labs-hero">
@@ -1040,5 +993,40 @@ footer{background:#191924;color:rgba(255,255,255,.8);padding:80px 0 32px}
     // Animations handled by CSS @keyframes (more reliable than gsap.from for page-load entrances)
   </script>
 
+<script>
+(function(){
+  var nav  = document.getElementById('nav');
+  var pill = nav && nav.querySelector('.nav-pill');
+  var cta  = nav && nav.querySelector('.nav-cta');
+  if (!nav) return;
+
+  function update(){
+    var scrolled = window.scrollY > 40;
+    nav.classList.toggle('scrolled', scrolled);
+
+    /* on-light: detect if the element just below the nav is light-bg */
+    var y = 80;
+    var el = document.elementFromPoint(window.innerWidth / 2, y);
+    var light = false;
+    if (el) {
+      var bg = getComputedStyle(el).backgroundColor;
+      /* crude check — cream/white backgrounds */
+      var m = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+      if (m) {
+        var r=+m[1],g=+m[2],b=+m[3];
+        var lum = (r*299+g*587+b*114)/1000;
+        light = lum > 160;
+      }
+    }
+    nav.classList.toggle('on-light', light);
+    if (pill) pill.classList.toggle('on-light', light);
+    if (cta)  cta.classList.toggle('on-light',  light);
+  }
+
+  window.addEventListener('scroll', update, {passive:true});
+  window.addEventListener('load', update);
+  update();
+})();
+</script>
 </body>
 </html>
