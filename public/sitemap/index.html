@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sitemap — ZeroOne D.O.T.S AI | Every page on dotsai.in, mapped</title>
+  <meta name="description" content="Full site index for dotsai.in. Every page, every nested route, every service line — mapped as a tree. Click anything to jump there. Updated 2026-04-29.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://dotsai.in/sitemap/">
+  <meta property="og:title" content="Sitemap — ZeroOne D.O.T.S AI">
+  <meta property="og:description" content="Every page on dotsai.in, mapped as a clickable tree. 22 routes across 4 trees.">
+  <meta property="og:url" content="https://dotsai.in/sitemap/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://dotsai.in/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/colors_and_type.css">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dotsai.in/"},{"@type":"ListItem","position":2,"name":"Sitemap","item":"https://dotsai.in/sitemap/"}]}
+  </script>
+  <style>
+    :root{
+      --font-display:'Instrument Serif',Georgia,serif;
+      --font-body:'Satoshi',system-ui,sans-serif;
+      --font-mono:'Space Mono',ui-monospace,monospace;
+      --ink:#191924; --plum:#2D1B4E;
+      --lavender:#C8B6FF; --mint:#B8E0D2; --peach:#FFCDB2; --sky:#A2D2FF;
+      --cream-50:#FDFCFA; --cream-100:#F8F7F4;
+      --sand-200:#E8E6E0; --sand-300:#D4D1C9;
+      --stone-500:#918D82; --stone-600:#6E6B62;
+      --ease-out:cubic-bezier(0.23,1,0.32,1);
+      --container-max:1280px;
+      --section-x:clamp(20px,4vw,60px);
+      --sp-3:12px; --sp-4:16px; --sp-5:20px; --sp-6:24px; --sp-8:32px;
+      --sp-10:40px; --sp-12:48px; --sp-16:64px;
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;overflow-x:hidden;background:var(--cream-50);font-family:var(--font-body);color:var(--ink)}
+    .wrap{width:100%;max-width:var(--container-max);margin:0 auto;padding-left:var(--section-x);padding-right:var(--section-x)}
+
+    .page-nav{display:flex;align-items:center;justify-content:space-between;
+              padding:24px var(--section-x);border-bottom:1px solid var(--sand-200)}
+    .back-link{font-family:var(--font-mono);font-size:10px;letter-spacing:2.5px;
+               text-transform:uppercase;color:var(--stone-500);text-decoration:none;
+               border-bottom:1px solid transparent;padding-bottom:2px;
+               transition:color 160ms,border-color 160ms}
+    .back-link:hover{color:var(--ink);border-bottom-color:var(--sand-300)}
+    .nav-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;
+             text-transform:uppercase;color:var(--stone-500)}
+
+    .sm-hero{padding:var(--sp-16) 0 var(--sp-12);border-bottom:1px solid var(--sand-200)}
+    .sm-eyebrow{font-family:var(--font-mono);font-size:10px;letter-spacing:3px;
+                text-transform:uppercase;color:var(--stone-500);
+                display:block;margin-bottom:var(--sp-5)}
+    .sm-hero h1{font-family:var(--font-display);font-size:clamp(40px,7vw,72px);
+                font-weight:400;line-height:1.05;color:var(--ink);margin:0 0 var(--sp-6)}
+    .sm-hero h1 em{font-style:italic;color:#5B3FD4}
+    .sm-hero p{font-size:17px;line-height:1.7;color:var(--stone-600);max-width:680px;margin:0}
+
+    .sm-meta{display:flex;flex-wrap:wrap;gap:var(--sp-4);margin-top:var(--sp-6);
+             font-family:var(--font-mono);font-size:11px;letter-spacing:1.5px;
+             color:var(--stone-500)}
+    .sm-meta-pill{padding:5px 10px;background:var(--cream-100);border:1px solid var(--sand-200);
+                  text-transform:uppercase;letter-spacing:2px;color:var(--ink)}
+    .sm-meta-pill strong{color:#5B3FD4;font-weight:700}
+
+    /* Tree section */
+    .sm-trees{padding:var(--sp-16) 0}
+    .sm-tree{margin-bottom:var(--sp-12);background:#fff;border:1px solid var(--sand-200);
+             padding:var(--sp-8) var(--sp-7);position:relative}
+    .sm-tree::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;
+                     background:var(--accent,var(--lavender))}
+    .sm-tree[data-t="core"]{--accent:var(--lavender)}
+    .sm-tree[data-t="services"]{--accent:var(--mint)}
+    .sm-tree[data-t="seo"]{--accent:var(--peach)}
+    .sm-tree[data-t="labs"]{--accent:var(--sky)}
+    .sm-tree[data-t="orphan"]{--accent:#FF6B6B}
+
+    .sm-tree-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--sp-4);
+                  margin-bottom:var(--sp-6);padding-bottom:var(--sp-4);
+                  border-bottom:1px solid var(--sand-200)}
+    .sm-tree-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:2.5px;
+                 text-transform:uppercase;color:var(--accent,var(--plum));font-weight:700}
+    .sm-tree h2{font-family:var(--font-display);font-size:clamp(22px,2.6vw,30px);
+                font-weight:700;line-height:1.15;margin:0;color:var(--ink);letter-spacing:-.005em}
+    .sm-tree h2 em{font-style:italic;color:var(--accent,#5B3FD4)}
+    .sm-tree-count{font-family:var(--font-mono);font-size:10px;letter-spacing:1.5px;
+                   text-transform:uppercase;color:var(--stone-500);margin-left:auto}
+
+    /* Tree list — ASCII-style indents */
+    .sm-list{list-style:none;padding:0;margin:0;font-family:var(--font-mono);font-size:13.5px;line-height:1.9}
+    .sm-list ul{list-style:none;padding:0 0 0 24px;margin:0;
+                border-left:1px dashed var(--sand-300)}
+    .sm-list li{position:relative;padding:2px 0}
+    .sm-list ul li::before{content:"\2514\2500\2500";position:absolute;left:-24px;top:6px;
+                            color:var(--stone-500);font-size:11px;letter-spacing:0;line-height:1.3}
+    .sm-list ul li:not(:last-child)::before{content:"\251C\2500\2500"}
+    .sm-list ul li::after{display:none}
+
+    .sm-link{display:inline-flex;align-items:baseline;gap:10px;
+             color:var(--ink);text-decoration:none;
+             padding:2px 6px;margin-left:-6px;
+             border-radius:2px;
+             transition:background 160ms var(--ease-out),color 160ms var(--ease-out)}
+    .sm-link:hover{background:rgba(91,63,212,.08);color:#5B3FD4}
+    .sm-link-route{color:var(--ink);font-weight:700}
+    .sm-link:hover .sm-link-route{color:#5B3FD4}
+    .sm-link-desc{color:var(--stone-600);font-size:12.5px;
+                  font-family:var(--font-body);font-weight:400;letter-spacing:0}
+    .sm-link:hover .sm-link-desc{color:var(--ink)}
+    .sm-link-tag{font-size:9.5px;letter-spacing:1.5px;color:var(--accent,var(--stone-500));
+                 padding:2px 6px;background:var(--cream-100);border:1px solid var(--sand-200);
+                 text-transform:uppercase;font-weight:700}
+
+    /* Orphan check note */
+    .sm-orphan-note{padding:var(--sp-6);background:var(--cream-100);
+                    border:1px dashed var(--sand-300);
+                    font-family:var(--font-mono);font-size:12px;line-height:1.7;
+                    color:var(--stone-600);text-align:center}
+    .sm-orphan-note strong{color:#5B3FD4}
+
+    /* CTA */
+    .sm-cta{padding:var(--sp-12) 0 var(--sp-16);border-top:1px solid var(--sand-200);text-align:center}
+    .sm-cta h2{font-family:var(--font-display);font-size:clamp(28px,4vw,40px);
+               font-weight:400;line-height:1.1;margin:0 0 var(--sp-4);max-width:600px;margin-left:auto;margin-right:auto}
+    .sm-cta h2 em{font-style:italic;color:#5B3FD4}
+    .sm-cta p{font-size:15px;line-height:1.7;color:var(--stone-600);margin:0 0 var(--sp-6);max-width:520px;margin-left:auto;margin-right:auto}
+    .btn-primary{font-family:var(--font-mono);font-size:11px;letter-spacing:2px;
+      text-transform:uppercase;text-decoration:none;
+      padding:14px 22px;display:inline-flex;align-items:center;gap:8px;
+      background:var(--ink);color:#fff;border:1px solid var(--ink);
+      transition:background 180ms,border-color 180ms,transform 180ms}
+    .btn-primary:hover{background:#5B3FD4;border-color:#5B3FD4;transform:translateY(-1px)}
+
+    footer{background:var(--ink);color:rgba(255,255,255,.7);padding:var(--sp-12) 0}
+    .foot-bot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;
+              gap:var(--sp-4);font-family:var(--font-mono);font-size:10px;
+              letter-spacing:1.5px;color:rgba(255,255,255,.45);text-transform:uppercase}
+    .foot-bot a{color:rgba(255,255,255,.7);text-decoration:none}
+    .foot-bot a:hover{color:#fff}
+
+    @media(max-width:640px){
+      .sm-list{font-size:12.5px}
+      .sm-link-desc{font-size:11.5px;display:block;margin-left:0;margin-top:1px}
+      .sm-link{flex-wrap:wrap}
+    }
+  </style>
+  <link rel="stylesheet" href="/footer.css">
+</head>
+<body>
+
+<style id="uni-nav-css">
+.uni-nav{position:sticky;top:0;z-index:100;backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);background:rgba(247,243,237,.9);border-bottom:1px solid rgba(23,23,34,.07);transition:box-shadow 200ms ease}
+.uni-nav.scrolled{box-shadow:0 2px 24px rgba(23,23,34,.09)}
+.uni-nav-inner{width:min(1120px,calc(100vw - 32px));height:64px;margin:0 auto;display:flex;align-items:center;gap:16px}
+.uni-nav-brand{display:inline-flex;align-items:center;flex-shrink:0;text-decoration:none;color:#171722;margin-right:auto}
+.uni-nav-brand svg.zo-logo{height:32px !important;width:auto !important;display:block;flex-shrink:0}
+.uni-nav-links{display:flex;align-items:center;gap:2px;flex-wrap:nowrap;margin-right:auto}
+.uni-nav-links a{padding:7px 13px;border-radius:999px;font-size:13px;color:rgba(23,23,34,.56);text-decoration:none;transition:color 140ms ease,background 140ms ease;white-space:nowrap}
+.uni-nav-links a:hover{color:#171722;background:rgba(23,23,34,.06)}
+.uni-nav-links a.is-active{color:#171722;background:rgba(23,23,34,.08);font-weight:500}
+.uni-nav-cta{display:inline-flex;align-items:center;flex-shrink:0;padding:10px 20px;border-radius:999px;background:#171722;color:#fff !important;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:transform 150ms ease,opacity 150ms ease;white-space:nowrap}
+.uni-nav-cta:hover{transform:translateY(-1px);opacity:.88}
+.uni-nav-cta:active{transform:scale(.97)}
+@media(max-width:900px){.uni-nav-links{display:none}.uni-nav-inner{height:58px}}
+</style>
+<nav class="uni-nav" id="uni-nav" aria-label="Site navigation">
+  <div class="uni-nav-inner">
+    <a class="uni-nav-brand" href="/" aria-label="ZeroOne D·O·T·S AI — home">
+      <svg class="zo-logo" viewBox="0 0 480 100" height="32" width="auto" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img"><circle cx="30" cy="24" r="11" fill="#C8B6FF"/><circle cx="56" cy="24" r="11" fill="currentColor" opacity=".18"/><circle cx="82" cy="24" r="11" fill="currentColor" opacity=".18"/><circle cx="30" cy="50" r="11" fill="currentColor" opacity=".18"/><circle cx="56" cy="50" r="11" fill="#B8E0D2"/><circle cx="82" cy="50" r="11" fill="currentColor" opacity=".18"/><circle cx="30" cy="76" r="11" fill="currentColor" opacity=".18"/><circle cx="56" cy="76" r="11" fill="currentColor" opacity=".18"/><circle cx="82" cy="76" r="11" fill="#FFCDB2"/><text x="112" y="42" font-family="'Space Mono','Courier New',monospace" font-weight="700" font-size="22" letter-spacing="3" fill="currentColor">ZEROONE</text><text x="112" y="72" font-family="'Space Mono','Courier New',monospace" font-weight="700" font-size="22" letter-spacing="3"><tspan fill="#C8B6FF">D</tspan><tspan fill="currentColor">·</tspan><tspan fill="#B8E0D2">O</tspan><tspan fill="currentColor">·</tspan><tspan fill="#FFCDB2">T</tspan><tspan fill="currentColor">·</tspan><tspan fill="#A2D2FF">S</tspan><tspan fill="currentColor" dx="12">AI</tspan></text></svg>
+    </a>
+    <div class="uni-nav-links" role="navigation" aria-label="Page sections">
+      <a href="#site-tree">Site Tree</a>
+    </div>
+    <a class="uni-nav-cta" href="https://cal.com/meetdeshani" target="_blank" rel="noopener">Book Meet →</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="sm-hero">
+    <span class="sm-eyebrow">Site index &middot; Every page mapped</span>
+    <h1>The whole site,<br><em>one tree.</em></h1>
+    <p>Every public page on dotsai.in, organized by purpose. Click anything to jump there. If a page exists in the file system but isn't linked anywhere on the site, it'll show up under "Orphan routes" with its own subtree.</p>
+<!-- META_PILLS_START -->
+    <div class="sm-meta">
+      <span class="sm-meta-pill"><strong>25</strong> &middot; pages live</span>
+      <span class="sm-meta-pill"><strong>5</strong> &middot; trees</span>
+      <span class="sm-meta-pill"><strong>3</strong> &middot; orphans</span>
+      <span class="sm-meta-pill">Last checked 2026-05-01 10:00 UTC</span>
+    </div>
+    <!-- META_PILLS_END -->
+  </header>
+
+  <section class="sm-trees" aria-label="Site tree" id="site-tree">
+
+    <!-- ========================================
+         CORE TREE — main routes any visitor uses
+         ======================================== -->
+    <div class="sm-tree" data-t="core">
+      <div class="sm-tree-head">
+        <span class="sm-tree-tag">Core</span>
+        <h2>Main routes <em>&mdash; what most visitors use</em></h2>
+        <span class="sm-tree-count">11 pages</span>
+      </div>
+      <ul class="sm-list">
+        <li>
+          <a class="sm-link" href="/">
+            <span class="sm-link-route">/</span>
+            <span class="sm-link-desc">Home &mdash; "Own your AI. Don't rent it."</span>
+          </a>
+          <ul>
+            <li><a class="sm-link" href="/pricing/"><span class="sm-link-route">/pricing/</span><span class="sm-link-desc">4-tier engagement matrix &middot; DOTS Series &middot; Founding Partner story</span></a></li>
+            <li><a class="sm-link" href="/case-studies/">
+              <span class="sm-link-route">/case-studies/</span><span class="sm-link-desc">3 named live clients &middot; CEO refs under NDA</span>
+            </a>
+              <ul>
+                <li><a class="sm-link" href="/case-studies/neonir/"><span class="sm-link-route">/case-studies/neonir/</span><span class="sm-link-desc">Reporting DOTS &middot; Vasu Chemical Group &middot; Reliance + IOCL vendor</span><span class="sm-link-tag">Founding Partner</span></a></li>
+                <li><a class="sm-link" href="/case-studies/aamdhanee/"><span class="sm-link-route">/case-studies/aamdhanee/</span><span class="sm-link-desc">Fintech DOTS &middot; GigScore&trade; &middot; gig-worker lending</span><span class="sm-link-tag">Live</span></a></li>
+                <li><a class="sm-link" href="/case-studies/woro/"><span class="sm-link-route">/case-studies/woro/</span><span class="sm-link-desc">Brand DOTS &middot; Dubai B2B agency &middot; 6 brand sites + Meta Ads</span><span class="sm-link-tag">Live</span></a></li>
+              </ul>
+            </li>
+            <li><a class="sm-link" href="/team/"><span class="sm-link-route">/team/</span><span class="sm-link-desc">Flat hierarchy &middot; founder + AI Builder per project</span></a></li>
+            <li><a class="sm-link" href="/careers/"><span class="sm-link-route">/careers/</span><span class="sm-link-desc">6 open positions &middot; 3 countries</span><span class="sm-link-tag">Hiring</span></a></li>
+            <li><a class="sm-link" href="/regions/"><span class="sm-link-route">/regions/</span><span class="sm-link-desc">6 markets &middot; local compliance &middot; global build</span></a></li>
+            <li><a class="sm-link" href="/about/"><span class="sm-link-route">/about/</span><span class="sm-link-desc">About section &middot; canonical points to /about/meetdeshani/</span></a>
+              <ul>
+                <li><a class="sm-link" href="/about/meetdeshani/"><span class="sm-link-route">/about/meetdeshani/</span><span class="sm-link-desc">Meet Deshani &middot; D.O.T.S framework &middot; career timeline &middot; full bio</span><span class="sm-link-tag">Founder</span></a></li>
+              </ul>
+            </li>
+            <li><a class="sm-link" href="/insights/"><span class="sm-link-route">/insights/</span><span class="sm-link-desc">Articles &middot; takes &middot; long-form</span></a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ========================================
+         SERVICES TREE — productized service pages
+         ======================================== -->
+    <div class="sm-tree" data-t="services">
+      <div class="sm-tree-head">
+        <span class="sm-tree-tag">Services</span>
+        <h2>Productized service pages <em>&mdash; one per offering</em></h2>
+        <span class="sm-tree-count">5 pages</span>
+      </div>
+      <ul class="sm-list">
+        <li>
+          <a class="sm-link" href="/private-ai/">
+            <span class="sm-link-route">/private-ai/</span>
+            <span class="sm-link-desc">Private AI Deployment &middot; the core thesis page</span>
+          </a>
+        </li>
+        <li>
+          <a class="sm-link" href="/ai-automation/">
+            <span class="sm-link-route">/ai-automation/</span>
+            <span class="sm-link-desc">AI Automation &middot; workflow + ops layer</span>
+          </a>
+        </li>
+        <li>
+          <a class="sm-link" href="/geo-ai/">
+            <span class="sm-link-route">/geo-ai/</span>
+            <span class="sm-link-desc">GEO AI &middot; generative engine optimization</span>
+          </a>
+        </li>
+        <li>
+          <a class="sm-link" href="/web-ai-experiences/">
+            <span class="sm-link-route">/web-ai-experiences/</span>
+            <span class="sm-link-desc">AI Web Experiences &middot; conversion-first builds</span>
+          </a>
+        </li>
+        <li>
+          <a class="sm-link" href="/platform-engineering/">
+            <span class="sm-link-route">/platform-engineering/</span>
+            <span class="sm-link-desc">Platform Engineering &middot; infra &middot; deployment &middot; reliability</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ========================================
+         SEO REGION TREE — locality-targeted pages
+         ======================================== -->
+    <div class="sm-tree" data-t="seo">
+      <div class="sm-tree-head">
+        <span class="sm-tree-tag">Region SEO</span>
+        <h2>Locality landing pages <em>&mdash; Indian search intent</em></h2>
+        <span class="sm-tree-count">2 pages</span>
+      </div>
+      <ul class="sm-list">
+        <li>
+          <a class="sm-link" href="/ai-agency-india/">
+            <span class="sm-link-route">/ai-agency-india/</span>
+            <span class="sm-link-desc">AI Agency &mdash; India &middot; primary commercial SEO target</span>
+          </a>
+        </li>
+        <li>
+          <a class="sm-link" href="/ai-agency-gurugram/">
+            <span class="sm-link-route">/ai-agency-gurugram/</span>
+            <span class="sm-link-desc">AI Agency &mdash; Gurugram &middot; NCR-specific landing</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ========================================
+         LABS TREE — interactive tools
+         ======================================== -->
+    <div class="sm-tree" data-t="labs">
+      <div class="sm-tree-head">
+        <span class="sm-tree-tag">Labs</span>
+        <h2>Live tools <em>&mdash; play with the work</em></h2>
+        <span class="sm-tree-count">5 pages (1 parent + 4 tools)</span>
+      </div>
+      <ul class="sm-list">
+        <li>
+          <a class="sm-link" href="/labs/">
+            <span class="sm-link-route">/labs/</span>
+            <span class="sm-link-desc">Labs index &middot; pick a tool</span>
+          </a>
+          <ul>
+            <li><a class="sm-link" href="/labs/ai-chat/"><span class="sm-link-route">/labs/ai-chat/</span><span class="sm-link-desc">AI Chat &middot; interactive demo</span></a></li>
+            <li><a class="sm-link" href="/labs/doc-parser/"><span class="sm-link-route">/labs/doc-parser/</span><span class="sm-link-desc">Doc Parser &middot; PDF / DOCX extraction</span></a></li>
+            <li><a class="sm-link" href="/labs/seo-checker/"><span class="sm-link-route">/labs/seo-checker/</span><span class="sm-link-desc">SEO Checker &middot; on-page audit</span></a></li>
+            <li><a class="sm-link" href="/labs/workflow-viz/"><span class="sm-link-route">/labs/workflow-viz/</span><span class="sm-link-desc">Workflow Viz &middot; flow-diagram builder</span></a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+<!-- ORPHAN_TREE_START — auto-updated hourly by /opt/services/scripts/sitemap-orphan-check.sh -->
+    <div class="sm-tree" data-t="orphan">
+      <div class="sm-tree-head">
+        <span class="sm-tree-tag" style="color:#FF6B6B">Orphans</span>
+        <h2>Unlinked routes <em>&mdash; pages with no inbound links</em></h2>
+        <span class="sm-tree-count">3 found &middot; auto-checked 2026-05-01 10:00 UTC</span>
+      </div>
+      <ul class="sm-list">
+        <li><a class="sm-link" href="/regions/"><span class="sm-link-route">/regions/</span><span class="sm-link-desc">Auto-detected orphan &middot; not linked from anywhere on the site</span></a></li>
+        <li><a class="sm-link" href="/sitemap/"><span class="sm-link-route">/sitemap/</span><span class="sm-link-desc">Auto-detected orphan &middot; not linked from anywhere on the site</span></a></li>
+        <li><a class="sm-link" href="/team/"><span class="sm-link-route">/team/</span><span class="sm-link-desc">Auto-detected orphan &middot; not linked from anywhere on the site</span></a></li>
+      </ul>
+      <div class="sm-orphan-note" style="margin-top:24px">
+        <strong>These pages exist on disk but no other page links to them.</strong> Either link them from the main tree, or accept them as intentional dark-launch routes (A/B test variants, gated experiments).
+      </div>
+    </div>
+    <!-- ORPHAN_TREE_END -->
+
+  </section>
+
+  <!-- Crawler-friendly note + XML sitemap link -->
+  <section style="padding:var(--sp-8) 0;border-top:1px solid var(--sand-200);font-family:var(--font-mono);font-size:11.5px;letter-spacing:1.2px;color:var(--stone-600);text-align:center;line-height:1.7">
+    For machine crawlers: <a href="/sitemap.xml" style="color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:1px;text-decoration:none">/sitemap.xml</a>
+    &nbsp;&middot;&nbsp;
+    LLM crawler hints: <a href="/llms.txt" style="color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:1px;text-decoration:none">/llms.txt</a>
+    &nbsp;&middot;&nbsp;
+    Robots: <a href="/robots.txt" style="color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:1px;text-decoration:none">/robots.txt</a>
+  </section>
+
+  <section class="sm-cta">
+    <h2>Found what you needed?<br><em>Or got lost?</em></h2>
+    <p>30-min discovery call &middot; no script, no slide deck. We figure out if we're the right partner for your problem.</p>
+    <a class="btn-primary" href="https://cal.com/meetdeshani" target="_blank" rel="noopener">Book 30 min with Meet &rarr;</a>
+  </section>
+</div>
+
+<footer class="footer">
+  <div class="shell footer-inner">
+    <div class="footer-copy">&copy; 2025 ZeroOne D&middot;O&middot;T&middot;S AI &mdash; Meet Deshani &middot; Ahmedabad, India</div>
+    <nav class="footer-links" aria-label="Site pages">
+      <a href="/">Home</a>
+      <a href="/private-ai/">Private AI</a>
+      <a href="/ai-agency-india/">AI Agency</a>
+      <a href="/ai-automation/">Automation</a>
+      <a href="/geo-ai/">GEO</a>
+      <a href="/case-studies/">Case Studies</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/about/">About</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var nav = document.getElementById('uni-nav');
+  if (!nav) return;
+  window.addEventListener('scroll', function () {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+  var links = Array.from(nav.querySelectorAll('.uni-nav-links a[href^="#"]'));
+  if (!links.length) return;
+  var secs = links.map(function (a) {
+    return document.querySelector(a.getAttribute('href'));
+  }).filter(Boolean);
+  function update() {
+    var y = window.scrollY + 90;
+    var active = secs[0];
+    secs.forEach(function (s) { if (s && s.offsetTop <= y) active = s; });
+    links.forEach(function (a) {
+      a.classList.toggle('is-active', active && a.getAttribute('href') === '#' + active.id);
+    });
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+}());
+</script>
+</body>
+</html>

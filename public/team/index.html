@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team — ZeroOne D.O.T.S AI | Flat Hierarchy · Founder + AI Builder per project</title>
+  <meta name="description" content="ZeroOne D.O.T.S AI runs a flat team — one mindset, one founder. Every project gets personal attention from Meet Deshani + a dedicated AI Builder. Industry experts and specialists plug in only where the work needs them. Hiring 6 across India, UAE, Indonesia.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://dotsai.in/team/">
+  <meta property="og:title" content="Team — ZeroOne D.O.T.S AI">
+  <meta property="og:description" content="Flat hierarchy. One mindset. One founder. Every project gets the founder + a dedicated AI Builder. Hiring 6 positions across 3 countries.">
+  <meta property="og:url" content="https://dotsai.in/team/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://dotsai.in/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/colors_and_type.css">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dotsai.in/"},{"@type":"ListItem","position":2,"name":"Team","item":"https://dotsai.in/team/"}]}
+  </script>
+  <style>
+    /* ── Base tokens (from index.html) ── */
+    :root{
+      --font-display:'Instrument Serif',Georgia,serif;
+      --font-body:'Satoshi',system-ui,sans-serif;
+      --font-mono:'Space Mono',ui-monospace,monospace;
+      --ink:#191924; --plum:#2D1B4E;
+      --lavender:#C8B6FF; --mint:#B8E0D2; --peach:#FFCDB2; --sky:#A2D2FF;
+      --cream-50:#FDFCFA; --cream-100:#F8F7F4;
+      --sand-200:#E8E6E0; --sand-300:#D4D1C9;
+      --stone-500:#918D82; --stone-600:#6E6B62;
+      --ease-out:cubic-bezier(0.23,1,0.32,1);
+      --container-max:1280px;
+      --section-x:clamp(20px,4vw,60px);
+      --section-y:clamp(56px,8vw,96px);
+      --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:20px;
+      --sp-6:24px; --sp-7:28px; --sp-8:32px; --sp-9:36px;
+      --sp-10:40px; --sp-12:48px; --sp-16:64px;
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;overflow-x:hidden;background:var(--cream-50);
+         font-family:var(--font-body);color:var(--ink)}
+
+    .wrap{width:100%;max-width:var(--container-max);margin:0 auto;
+          padding-left:var(--section-x);padding-right:var(--section-x)}
+
+    /* ── Simple top nav ── */
+    .page-nav{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:24px var(--section-x);
+      border-bottom:1px solid var(--sand-200);
+    }
+    .back-link{font-family:var(--font-mono);font-size:10px;letter-spacing:2.5px;
+               text-transform:uppercase;color:var(--stone-500);text-decoration:none;
+               border-bottom:1px solid transparent;padding-bottom:2px;
+               transition:color 160ms,border-color 160ms}
+    .back-link:hover{color:var(--ink);border-bottom-color:var(--sand-300)}
+    .nav-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;
+             text-transform:uppercase;color:var(--stone-500)}
+
+    /* ── Hero ── */
+    .team-hero{padding:var(--sp-16) 0 var(--sp-12);border-bottom:1px solid var(--sand-200)}
+    .team-eyebrow{font-family:var(--font-mono);font-size:10px;letter-spacing:3px;
+                  text-transform:uppercase;color:var(--stone-500);
+                  display:block;margin-bottom:var(--sp-5)}
+    .team-hero h1{font-family:var(--font-display);font-size:clamp(40px,7vw,72px);
+                  font-weight:400;line-height:1.05;color:var(--ink);margin:0 0 var(--sp-6)}
+    .team-hero h1 em{font-style:italic;color:#5B3FD4}
+    .team-hero p{font-size:17px;line-height:1.7;color:var(--stone-600);
+                 max-width:600px;margin:0}
+
+    /* ── Anchor grid ── */
+    .team-section{padding:var(--sp-12) 0}
+    .team-anchors{display:grid;grid-template-columns:1fr;gap:16px}
+    @media(min-width:820px){.team-anchors{grid-template-columns:repeat(3,1fr);gap:12px}}
+
+    .anchor{background:#fff;border:1px solid var(--sand-200);
+            padding:28px;position:relative;
+            display:flex;flex-direction:column;gap:12px;
+            transition:border-color 200ms var(--ease-out),
+                       transform 200ms var(--ease-out),
+                       box-shadow 240ms var(--ease-out)}
+    .anchor:hover{border-color:var(--lavender);transform:translateY(-2px);
+                  box-shadow:0 14px 40px -24px rgba(23,23,34,.25)}
+    .anchor[data-face="founder"]::before{content:"";position:absolute;
+      inset:0 0 auto 0;height:3px;background:var(--lavender)}
+    .anchor[data-face="sme"]::before{content:"";position:absolute;
+      inset:0 0 auto 0;height:3px;background:var(--stone-500);opacity:.35}
+
+    .anchor--lead{grid-column:1/-1;padding:40px 36px}
+    @media(min-width:820px){
+      .anchor--lead{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:start}
+      .anchor--lead>.anchor-portrait,
+      .anchor--lead>.anchor-tag,
+      .anchor--lead>h3,
+      .anchor--lead>.anchor-role,
+      .anchor--lead>.anchor-line,
+      .anchor--lead>.anchor-socials{grid-column:1}
+      .anchor--lead>.coverage{grid-column:2;grid-row:1/8;
+                               padding-left:40px;border-left:1px solid var(--sand-200)}
+    }
+    .anchor--lead h3{font-size:44px}
+
+    .anchor-portrait{width:84px;height:84px;border-radius:50%;object-fit:cover;
+                     border:2px solid var(--lavender);background:var(--cream-100);
+                     margin-bottom:8px;display:block}
+
+    .anchor-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:2.5px;
+                text-transform:uppercase;color:var(--stone-500);margin-top:8px}
+    .anchor h3{font-family:var(--font-display);font-size:30px;font-weight:700;
+               line-height:1;margin:4px 0 0;color:var(--ink)}
+    .anchor-role{font-size:13px;color:var(--stone-600);margin:0;
+                 font-weight:500;line-height:1.45}
+    .anchor-line{font-size:14px;color:var(--stone-600);margin:8px 0 0;line-height:1.55}
+
+    /* Social links row (Meet's card) */
+    .anchor-socials{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+    .anchor-social{font-family:var(--font-mono);font-size:10px;letter-spacing:1.5px;
+                   text-transform:uppercase;color:var(--ink);text-decoration:none;
+                   display:inline-flex;align-items:center;gap:6px;
+                   padding:5px 10px;border:1px solid var(--sand-200);
+                   transition:border-color 160ms,color 160ms,background 160ms}
+    .anchor-social:hover{border-color:var(--lavender);color:#5B3FD4;
+                         background:rgba(200,182,255,.07)}
+    .anchor-social svg{width:12px;height:12px;fill:currentColor;flex-shrink:0}
+
+    .anchor-li{font-family:var(--font-mono);font-size:10.5px;letter-spacing:2px;
+               text-transform:uppercase;color:var(--ink);text-decoration:none;
+               border-bottom:1px solid var(--ink);padding-bottom:2px;
+               align-self:flex-start;margin-top:auto;
+               transition:color 160ms,border-color 160ms}
+    .anchor-li:hover{color:#5B3FD4;border-bottom-color:var(--lavender)}
+    .anchor-li.private{color:var(--stone-500);border-bottom-color:transparent;
+                       cursor:default;font-style:italic;font-family:var(--font-display);
+                       text-transform:none;letter-spacing:0;font-size:13px}
+
+    /* Coverage panel (Meet's card) */
+    .coverage{display:flex;flex-direction:column;gap:16px}
+    .coverage-row{display:flex;flex-direction:column;gap:8px}
+    .coverage-lab{font-family:var(--font-mono);font-size:10px;letter-spacing:2.5px;
+                  text-transform:uppercase;color:var(--lavender)}
+    .coverage-tags{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px}
+    .coverage-tags li{font-family:var(--font-mono);font-size:10.5px;letter-spacing:1.2px;
+                      text-transform:uppercase;color:var(--stone-600);
+                      background:rgba(23,23,34,.04);padding:6px 10px;
+                      border:1px solid var(--sand-200);
+                      transition:border-color 160ms,color 160ms,background 160ms}
+    .coverage-tags li:hover{border-color:var(--lavender);color:var(--ink);
+                            background:rgba(200,182,255,.12)}
+
+    /* ── Industry grid ── */
+    .team-grid{padding:var(--sp-12) 0;border-top:1px solid var(--sand-200)}
+    .grid-head{display:flex;flex-direction:column;gap:12px;max-width:720px;
+               margin-bottom:var(--sp-10)}
+    .grid-eyebrow{font-family:var(--font-mono);font-size:10px;letter-spacing:3px;
+                  text-transform:uppercase;color:#5B3FD4}
+    .grid-head h2{font-family:var(--font-display);font-size:clamp(28px,4vw,40px);
+                  font-weight:400;color:var(--ink);margin:0}
+    .grid-head h2 em{font-style:italic;color:#5B3FD4}
+    .grid-head p{font-size:15px;line-height:1.7;color:var(--stone-600);margin:0}
+
+    .industry-grid{list-style:none;padding:0;margin:0;
+                   display:grid;grid-template-columns:1fr;gap:0;
+                   border-top:1px solid var(--sand-200)}
+    @media(min-width:720px){.industry-grid{grid-template-columns:repeat(2,1fr)}}
+    .industry-grid li{display:flex;flex-direction:column;gap:4px;
+                      padding:20px 24px 20px 0;border-bottom:1px solid var(--sand-200)}
+    @media(min-width:720px){
+      .industry-grid li{padding-left:24px}
+      .industry-grid li:nth-child(odd){border-right:1px solid var(--sand-200);padding-left:0}
+    }
+    .ind{font-family:var(--font-display);font-size:22px;
+         line-height:1.15;color:var(--ink);font-weight:500}
+    .ind-anchor{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;
+                text-transform:uppercase;color:var(--stone-500)}
+    .ind-open .ind{color:var(--stone-500);font-style:italic}
+    .ind-open .ind-anchor{color:var(--lavender)}
+    .grid-foot{font-family:var(--font-mono);font-size:11px;letter-spacing:2px;
+               text-transform:uppercase;color:var(--stone-500);margin:24px 0 0}
+    .grid-foot strong{color:var(--ink);font-weight:500}
+
+    /* ══════════════════════════════════════════════════════
+       FOOTER — copied from index.html (same CSS as homepage)
+       ══════════════════════════════════════════════════════ */
+    footer{background:var(--ink);color:rgba(255,255,255,.8);
+           padding:var(--section-y) 0 var(--sp-8)}
+    .foot-workstyle{margin-bottom:var(--sp-12);padding-bottom:var(--sp-8);
+                    border-bottom:1px solid rgba(255,255,255,.06)}
+    .foot-workstyle-lab{font-family:var(--font-mono);font-size:10px;letter-spacing:3px;
+                        text-transform:uppercase;color:rgba(255,255,255,.35);
+                        display:block;margin-bottom:var(--sp-3)}
+    .foot-workstyle-chain{font-family:var(--font-display);font-style:italic;
+                          font-size:14px;color:rgba(255,255,255,.55);margin:0;line-height:1.6}
+    .foot-top{display:grid;gap:var(--sp-10);grid-template-columns:1fr;
+              margin-bottom:var(--sp-12)}
+    @media(min-width:900px){.foot-top{grid-template-columns:1.2fr 2fr}}
+    .foot-brand{display:flex;flex-direction:column;gap:var(--sp-4)}
+    .foot-logo{display:flex;align-items:center}
+    .foot-tag{font-family:var(--font-body);font-size:14px;line-height:1.7;
+              color:rgba(255,255,255,.55);max-width:320px;margin:0}
+    .foot-props{display:grid;gap:var(--sp-6)}
+    .foot-tier h5{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;
+                  text-transform:uppercase;color:rgba(255,255,255,.4);
+                  margin:0 0 var(--sp-3);font-weight:500;
+                  padding-bottom:var(--sp-2);border-bottom:1px solid rgba(255,255,255,.08)}
+    .foot-tier ul{list-style:none;padding:0;margin:0;display:grid;
+                  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+    .foot-tier a{font-family:var(--font-mono);font-size:12px;color:rgba(255,255,255,.75);
+                 text-decoration:none;transition:color 160ms;
+                 display:flex;align-items:center;gap:6px;
+                 border-bottom:1px solid transparent;padding-bottom:2px}
+    .foot-tier a::before{content:"·";color:var(--lavender);font-weight:700;font-size:16px}
+    .foot-tier a:hover{color:#fff;border-bottom-color:rgba(255,255,255,.3)}
+    .foot-socials{padding:var(--sp-5) 0;border-top:1px solid rgba(255,255,255,.08);
+                  display:flex;flex-wrap:wrap;gap:var(--sp-3) var(--sp-5);align-items:center}
+    .foot-socials-label{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;
+                        text-transform:uppercase;color:rgba(255,255,255,.4);
+                        margin-right:var(--sp-2)}
+    .foot-social{display:inline-flex;align-items:center;gap:8px;
+                 font-family:var(--font-mono);font-size:11px;letter-spacing:.5px;
+                 color:rgba(255,255,255,.7);text-decoration:none;
+                 transition:color 160ms,transform 180ms}
+    .foot-social svg{width:14px;height:14px;fill:currentColor;flex-shrink:0}
+    .foot-social:hover{color:var(--lavender);transform:translateY(-1px)}
+    .zo-logo{display:inline-block;color:#fff;height:38px;width:auto}
+    .zo-logo .dot-bg{opacity:.12}
+    .zo-logo .sep{opacity:.35}
+    .foot-dives{margin-top:var(--sp-10);padding-top:var(--sp-8);
+                border-top:1px solid rgba(255,255,255,.08)}
+    .foot-dives-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--sp-4);
+                     margin-bottom:var(--sp-7)}
+    .foot-dives-lab{font-family:var(--font-mono);font-size:10.5px;letter-spacing:3px;
+                    text-transform:uppercase;color:var(--lavender)}
+    .foot-dives-tag{font-family:var(--font-display);font-style:italic;font-size:14px;
+                    color:rgba(255,255,255,.55)}
+    .foot-dives-grid{display:grid;grid-template-columns:1fr;gap:var(--sp-6)}
+    @media(min-width:640px){.foot-dives-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:960px){.foot-dives-grid{grid-template-columns:repeat(4,1fr)}}
+    .foot-dives-col{display:flex;flex-direction:column;gap:var(--sp-3)}
+    .foot-dives-col-lab{font-family:var(--font-mono);font-size:10px;letter-spacing:2.5px;
+                        text-transform:uppercase;color:rgba(255,255,255,.45);
+                        padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.06)}
+    .foot-dives-col ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+    .foot-dives-col a{font-family:var(--font-body);font-size:13.5px;line-height:1.4;
+                      color:rgba(255,255,255,.75);text-decoration:none;
+                      border-bottom:1px solid transparent;padding-bottom:1px;
+                      transition:color 160ms,border-color 160ms}
+    .foot-dives-col a:hover{color:var(--lavender);border-bottom-color:var(--lavender)}
+    .foot-bot{padding-top:var(--sp-6);border-top:1px solid rgba(255,255,255,.08);
+              display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;
+              gap:var(--sp-4);font-family:var(--font-mono);font-size:11px;
+              color:rgba(255,255,255,.5);letter-spacing:1px}
+    .foot-bot a{color:rgba(255,255,255,.6);text-decoration:none;
+                border-bottom:1px solid transparent;padding-bottom:1px}
+    .foot-bot a:hover{color:var(--lavender);border-bottom-color:var(--lavender)}
+  </style>
+  <link rel="stylesheet" href="/footer.css">
+</head>
+<body>
+
+<!-- ── Nav ── -->
+<style id="uni-nav-css">
+.uni-nav{position:sticky;top:0;z-index:100;backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);background:rgba(247,243,237,.9);border-bottom:1px solid rgba(23,23,34,.07);transition:box-shadow 200ms ease}
+.uni-nav.scrolled{box-shadow:0 2px 24px rgba(23,23,34,.09)}
+.uni-nav-inner{width:min(1120px,calc(100vw - 32px));height:64px;margin:0 auto;display:flex;align-items:center;gap:16px}
+.uni-nav-brand{display:inline-flex;align-items:center;flex-shrink:0;text-decoration:none;color:#171722;margin-right:auto}
+.uni-nav-brand svg.zo-logo{height:32px !important;width:auto !important;display:block;flex-shrink:0}
+.uni-nav-links{display:flex;align-items:center;gap:2px;flex-wrap:nowrap;margin-right:auto}
+.uni-nav-links a{padding:7px 13px;border-radius:999px;font-size:13px;color:rgba(23,23,34,.56);text-decoration:none;transition:color 140ms ease,background 140ms ease;white-space:nowrap}
+.uni-nav-links a:hover{color:#171722;background:rgba(23,23,34,.06)}
+.uni-nav-links a.is-active{color:#171722;background:rgba(23,23,34,.08);font-weight:500}
+.uni-nav-cta{display:inline-flex;align-items:center;flex-shrink:0;padding:10px 20px;border-radius:999px;background:#171722;color:#fff !important;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:transform 150ms ease,opacity 150ms ease;white-space:nowrap}
+.uni-nav-cta:hover{transform:translateY(-1px);opacity:.88}
+.uni-nav-cta:active{transform:scale(.97)}
+@media(max-width:900px){.uni-nav-links{display:none}.uni-nav-inner{height:58px}}
+</style>
+<nav class="uni-nav" id="uni-nav" aria-label="Site navigation">
+  <div class="uni-nav-inner">
+    <a class="uni-nav-brand" href="/" aria-label="ZeroOne D·O·T·S AI — home">
+      <svg class="zo-logo" viewBox="0 0 480 100" height="32" width="auto" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img"><circle cx="30" cy="24" r="11" fill="#C8B6FF"/><circle cx="56" cy="24" r="11" fill="currentColor" opacity=".18"/><circle cx="82" cy="24" r="11" fill="currentColor" opacity=".18"/><circle cx="30" cy="50" r="11" fill="currentColor" opacity=".18"/><circle cx="56" cy="50" r="11" fill="#B8E0D2"/><circle cx="82" cy="50" r="11" fill="currentColor" opacity=".18"/><circle cx="30" cy="76" r="11" fill="currentColor" opacity=".18"/><circle cx="56" cy="76" r="11" fill="currentColor" opacity=".18"/><circle cx="82" cy="76" r="11" fill="#FFCDB2"/><text x="112" y="42" font-family="'Space Mono','Courier New',monospace" font-weight="700" font-size="22" letter-spacing="3" fill="currentColor">ZEROONE</text><text x="112" y="72" font-family="'Space Mono','Courier New',monospace" font-weight="700" font-size="22" letter-spacing="3"><tspan fill="#C8B6FF">D</tspan><tspan fill="currentColor">·</tspan><tspan fill="#B8E0D2">O</tspan><tspan fill="currentColor">·</tspan><tspan fill="#FFCDB2">T</tspan><tspan fill="currentColor">·</tspan><tspan fill="#A2D2FF">S</tspan><tspan fill="currentColor" dx="12">AI</tspan></text></svg>
+    </a>
+    <div class="uni-nav-links" role="navigation" aria-label="Page sections">
+      <a href="#team">Team</a>
+    </div>
+    <a class="uni-nav-cta" href="https://cal.com/meetdeshani" target="_blank" rel="noopener">Book Meet →</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- ── Hero ── -->
+  <header class="team-hero">
+    <span class="team-eyebrow">Who builds the work</span>
+    <h1>Flat team. <em>One mindset. One founder.</em></h1>
+    <p>No middle managers. No account managers. No junior hand-offs. <strong>Every project gets personal attention from the founder + a dedicated AI Builder</strong> who carries it end-to-end. Industry expertise and skill-specific specialists — researcher, video, robotics — are pulled in only where the work genuinely needs them. AI builders and AI researchers are the core; everyone else amplifies.</p>
+    <p style="margin-top:var(--sp-4);font-family:var(--font-mono);font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:var(--stone-500)">
+      <a href="/careers/" style="color:var(--ink);text-decoration:none;border-bottom:1px solid var(--sand-300);padding-bottom:2px;transition:color 160ms,border-color 160ms" onmouseover="this.style.color='#5B3FD4';this.style.borderBottomColor='#5B3FD4'" onmouseout="this.style.color='';this.style.borderBottomColor=''">We're hiring 6 positions across 3 countries &rarr;</a>
+    </p>
+  </header>
+
+  <!-- ── Cards ── -->
+  <section class="team-section" aria-label="Team members" id="team">
+    <div class="team-anchors">
+
+      <!-- Meet Deshani — founder lead -->
+      <div class="anchor anchor--lead" data-face="founder">
+        <img class="anchor-portrait" src="/assets/people/meet.jpg" alt="Meet Deshani — Founder, ZeroOne D.O.T.S AI" width="84" height="84" loading="eager" decoding="async">
+        <span class="anchor-tag">Founder · Full-Stack</span>
+        <h3>Meet Deshani</h3>
+        <p class="anchor-role">AI Engineer &amp; Founder — ZeroOne D·O·T·S AI · Ahmedabad, India</p>
+        <p class="anchor-line">5+ years shipping automation and AI systems. Every deliverable — architecture, code, deploy, support — goes through one person. That's the model.</p>
+        <div class="anchor-socials">
+          <a class="anchor-social" href="https://www.linkedin.com/in/meet-deshani-436575147/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+          <a class="anchor-social" href="https://github.com/zeroone-dots-ai" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            GitHub
+          </a>
+          <a class="anchor-social" href="https://www.threads.com/@meet_ninja_here" target="_blank" rel="noopener" aria-label="Threads">
+            <svg viewBox="0 0 24 24"><path d="M17.605 11.106a8.85 8.85 0 0 0-.327-.148c-.192-3.535-2.124-5.56-5.366-5.581h-.044c-1.94 0-3.553.828-4.546 2.336l1.785 1.224c.742-1.126 1.906-1.367 2.762-1.367h.029c1.066.007 1.871.317 2.392.923.379.441.633 1.05.76 1.819-.961-.163-2.001-.213-3.114-.149-3.135.181-5.151 2.009-5.016 4.55.069 1.289.71 2.398 1.806 3.121.926.611 2.12.91 3.361.842 1.638-.09 2.923-.713 3.82-1.853.681-.866 1.112-1.988 1.302-3.395.78.471 1.358 1.091 1.677 1.836.541 1.266.573 3.347-1.123 5.04-1.485 1.483-3.27 2.124-5.967 2.144-2.99-.022-5.252-.98-6.722-2.847-1.376-1.748-2.087-4.272-2.114-7.504.027-3.232.738-5.756 2.114-7.504 1.47-1.867 3.732-2.825 6.722-2.847 3.011.022 5.313.984 6.844 2.858.751.918 1.317 2.072 1.689 3.416l2.144-.572c-.45-1.654-1.158-3.08-2.116-4.252-1.964-2.404-4.835-3.636-8.531-3.661h-.014c-3.69.025-6.526 1.262-8.43 3.676C1.347 5.967.435 8.876.404 12.495v.018c.031 3.62.943 6.528 2.71 8.643 1.904 2.413 4.74 3.65 8.43 3.677h.014c3.282-.023 5.595-.882 7.5-2.787 2.493-2.491 2.418-5.612 1.596-7.531-.589-1.376-1.711-2.494-3.245-3.234zm-5.59 5.043c-1.374.077-2.802-.54-2.872-1.843-.052-.967.687-2.045 2.957-2.176.26-.015.515-.022.766-.022.824 0 1.595.08 2.296.234-.262 3.27-1.797 3.733-3.147 3.807z"/></svg>
+            Threads
+          </a>
+          <a class="anchor-social" href="https://www.youtube.com/@meetdeshani" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            YouTube
+          </a>
+        </div>
+        <div class="coverage">
+          <div class="coverage-row">
+            <span class="coverage-lab">Ships</span>
+            <ul class="coverage-tags">
+              <li>Private AI Models</li><li>AI Agents</li>
+              <li>Full-Stack Apps</li><li>Voice &amp; Vision</li>
+              <li>Data Pipelines</li><li>Mobile Apps</li>
+            </ul>
+          </div>
+          <div class="coverage-row">
+            <span class="coverage-lab">On record</span>
+            <ul class="coverage-tags">
+              <li>JSW Group</li><li>Comcast</li>
+              <li>Spinny</li><li>Agrim</li>
+              <li>NeoNir</li><li>WORO</li>
+            </ul>
+          </div>
+        </div>
+        <a class="anchor-li" href="/about/meetdeshani/">Full profile →</a>
+      </div>
+
+      <!-- SME 1 -->
+      <div class="anchor" data-face="sme">
+        <span class="anchor-tag">AI Master · India</span>
+        <h3>ML Engineering</h3>
+        <p class="anchor-role">Fine-tuning · Synthetic data · Eval harness</p>
+        <p class="anchor-line">Specialist in training domain-specific LLMs on sparse enterprise datasets. Engages on custom model projects.</p>
+        <span class="anchor-li private">Identity on NDA</span>
+      </div>
+
+      <!-- SME 2 -->
+      <div class="anchor" data-face="sme">
+        <span class="anchor-tag">AI Master · UAE</span>
+        <h3>Voice AI</h3>
+        <p class="anchor-role">Real-time voice agents · TTS/ASR · Telephony</p>
+        <p class="anchor-line">Builds production-grade voice pipelines for inbound and outbound call automation across Arabic and English.</p>
+        <span class="anchor-li private">Identity on NDA</span>
+      </div>
+
+      <!-- SME 3 -->
+      <div class="anchor" data-face="sme">
+        <span class="anchor-tag">AI Master · Indonesia</span>
+        <h3>Data Architecture</h3>
+        <p class="anchor-role">1M-user scale · Stream processing · BI pipelines</p>
+        <p class="anchor-line">Designs the data layer for AI systems that need to ingest, store, and serve high-volume operational data.</p>
+        <span class="anchor-li private">Identity on NDA</span>
+      </div>
+
+      <!-- SME 4 -->
+      <div class="anchor" data-face="sme">
+        <span class="anchor-tag">AI Master · UK</span>
+        <h3>Video &amp; Media AI</h3>
+        <p class="anchor-role">AI video generation · Avatar pipelines · Post-production</p>
+        <p class="anchor-line">Powers automated video production workflows — from script to distribution — for content-heavy brands.</p>
+        <span class="anchor-li private">Identity on NDA</span>
+      </div>
+
+      <!-- SME 5 -->
+      <div class="anchor" data-face="sme">
+        <span class="anchor-tag">AI Master · South Africa</span>
+        <h3>AI Security</h3>
+        <p class="anchor-role">Threat modelling · On-prem hardening · Compliance</p>
+        <p class="anchor-line">Reviews every private deployment for attack surface — especially air-gapped and VPC-isolated systems.</p>
+        <span class="anchor-li private">Identity on NDA</span>
+      </div>
+
+      <!-- SME 6 -->
+      <div class="anchor" data-face="sme">
+        <span class="anchor-tag">AI Master · India</span>
+        <h3>Mobile Engineering</h3>
+        <p class="anchor-role">iOS · Android · React Native · Flutter</p>
+        <p class="anchor-line">Builds the mobile layer when the AI system needs a native app interface — on-device inference included.</p>
+        <span class="anchor-li private">Identity on NDA</span>
+      </div>
+
+      <!-- SME 7 -->
+      <div class="anchor" data-face="sme">
+        <span class="anchor-tag">AI Master · India</span>
+        <h3>AI Strategy</h3>
+        <p class="anchor-role">Roadmap · ROI modelling · Board-level comms</p>
+        <p class="anchor-line">Translates technical AI systems into business cases for founders and leadership teams closing funding or large contracts.</p>
+        <span class="anchor-li private">Identity on NDA</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Industry coverage ── -->
+  <div class="team-grid">
+    <div class="grid-head">
+      <span class="grid-eyebrow">Collective coverage</span>
+      <h2>Industries we've <em>shipped in.</em></h2>
+      <p>The team's combined track record spans 12 verticals. Where a ZeroOne engagement touches an industry, at least one specialist has built production systems in it before.</p>
+    </div>
+    <ul class="industry-grid">
+      <li><span class="ind">Fintech &amp; Lending</span><span class="ind-anchor">Bank-grade data · Gig-worker credit · Statement parsing</span></li>
+      <li><span class="ind">Automotive Retail</span><span class="ind-anchor">Used-car platforms · Voice CX · Lead qualification</span></li>
+      <li><span class="ind">Industrial &amp; Chemical</span><span class="ind-anchor">Water quality · Lab reporting · Compliance dashboards</span></li>
+      <li><span class="ind">Consulting &amp; Services</span><span class="ind-anchor">AI strategy · Ops automation · Knowledge management</span></li>
+      <li><span class="ind">Media &amp; Content</span><span class="ind-anchor">AI video · Social automation · Brand identity systems</span></li>
+      <li><span class="ind">E-Commerce &amp; D2C</span><span class="ind-anchor">Inventory intelligence · Customer agents · Margin recovery</span></li>
+      <li><span class="ind">Healthcare &amp; Diagnostics</span><span class="ind-anchor">Private model deployment · Report automation</span></li>
+      <li class="ind-open"><span class="ind">Your industry</span><span class="ind-anchor">Open slot — taking qualified enquiries</span></li>
+    </ul>
+    <p class="grid-foot">7 AI Masters · <strong>Ahmedabad HQ</strong> · India · UAE · Indonesia · UK · South Africa</p>
+  </div>
+
+</div><!-- /.wrap -->
+
+<!-- ══════════════════════════════════════════════════
+     FULL FOOTER — identical to homepage
+     ══════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="shell footer-inner">
+    <div class="footer-copy">&copy; 2025 ZeroOne D&middot;O&middot;T&middot;S AI &mdash; Meet Deshani &middot; Ahmedabad, India</div>
+    <nav class="footer-links" aria-label="Site pages">
+      <a href="/">Home</a>
+      <a href="/private-ai/">Private AI</a>
+      <a href="/ai-agency-india/">AI Agency</a>
+      <a href="/ai-automation/">Automation</a>
+      <a href="/geo-ai/">GEO</a>
+      <a href="/case-studies/">Case Studies</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/about/">About</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var nav = document.getElementById('uni-nav');
+  if (!nav) return;
+  window.addEventListener('scroll', function () {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+  var links = Array.from(nav.querySelectorAll('.uni-nav-links a[href^="#"]'));
+  if (!links.length) return;
+  var secs = links.map(function (a) {
+    return document.querySelector(a.getAttribute('href'));
+  }).filter(Boolean);
+  function update() {
+    var y = window.scrollY + 90;
+    var active = secs[0];
+    secs.forEach(function (s) { if (s && s.offsetTop <= y) active = s; });
+    links.forEach(function (a) {
+      a.classList.toggle('is-active', active && a.getAttribute('href') === '#' + active.id);
+    });
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+}());
+</script>
+</body>
+</html>
