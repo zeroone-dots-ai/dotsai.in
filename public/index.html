@@ -2104,55 +2104,6 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
 .pbg-img.switching{transition:opacity .3s ease}
 
 
-/* =========================================================
-   REVIEWS — on-record client quotes
-   ========================================================= */
-.reviews{padding:var(--section-y) 0;background:var(--cream-50)}
-.reviews .section-head{max-width:680px}
-.reviews-grid{display:grid;gap:28px;margin-top:var(--sp-10)}
-@media (min-width:768px){.reviews-grid{grid-template-columns:repeat(3,1fr)}}
-.review-card{
-  background:#fff;
-  border:1px solid var(--sand-200);
-  border-top:3px solid var(--review-accent,var(--lavender));
-  padding:var(--sp-7) var(--sp-6);
-  display:flex;flex-direction:column;gap:var(--sp-5);
-  transition:box-shadow 200ms ease}
-.review-card:hover{box-shadow:0 4px 28px rgba(0,0,0,.07)}
-.review-quote{
-  font-family:var(--font-display);font-style:italic;
-  font-size:clamp(15px,1.25vw,18px);line-height:1.7;
-  color:var(--ink);flex:1}
-.review-meta{display:flex;align-items:center;gap:var(--sp-3)}
-.review-avatar-wrap{position:relative;flex-shrink:0}
-.review-avatar{
-  width:44px;height:44px;border-radius:50%;
-  background:var(--review-accent,var(--lavender));
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--font-mono);font-size:17px;font-weight:700;
-  color:var(--ink)}
-.review-li-badge{
-  position:absolute;bottom:-3px;right:-3px;
-  width:18px;height:18px;border-radius:50%;
-  background:#0077B5;
-  display:flex;align-items:center;justify-content:center;
-  font-size:8.5px;font-weight:700;color:#fff;font-family:var(--font-mono);
-  border:2px solid var(--cream-50);text-decoration:none;
-  transition:background 150ms ease}
-.review-li-badge:hover{background:#005c8e}
-.review-info{flex:1;min-width:0}
-.review-name-link{color:inherit;text-decoration:none;display:block}
-.review-name-link:hover .review-name{color:var(--plum)}
-.review-name{font-family:var(--font-mono);font-size:11px;letter-spacing:1.5px;
-             text-transform:uppercase;color:var(--ink);font-weight:700;
-             display:block;margin-bottom:3px}
-.review-role{font-family:var(--font-body);font-size:12.5px;color:var(--stone-600);
-             display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.review-tag{font-family:var(--font-mono);font-size:9.5px;letter-spacing:1.5px;
-            text-transform:uppercase;color:var(--plum);
-            background:rgba(94,106,210,.07);padding:4px 10px;
-            align-self:flex-start;margin-top:auto}
-
 /* ── Workstyle stages — horizontal scroll track ── */
 .ws-stages-track{
   display:flex;
@@ -3119,68 +3070,6 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
     </div>
 
     <p class="wj-note rv">Scale window = the multiple of growth the platform crossed during my tenure. Numbers reflect platform-wide activity, not personal credit.</p>
-  </div>
-</section>
-
-<!-- ============ REVIEWS · ON-RECORD ============ -->
-<section class="reviews" id="reviews" data-bg-zone="reviews">
-  <div class="wrap">
-    <div class="section-head rv">
-      <span class="eyebrow">REVIEWS · ON-RECORD</span>
-      <h2>What clients say — <em>after the system is live.</em></h2>
-      <p class="section-lead">Not before. Not "in progress". After. Every quote here is from a founder or operator who has a working system in production.</p>
-    </div>
-    <div class="reviews-grid">
-
-      <div class="review-card rv" style="--review-accent:#C8B6FF">
-        <div class="review-quote">"Meet replaced what would've been a 4-person ops team. The call audit system processes 8 lakh calls a day — it just runs. Zero handholding after handoff."</div>
-        <div class="review-meta">
-          <div class="review-avatar-wrap">
-            <div class="review-avatar">H</div>
-            <a class="review-li-badge" href="https://www.linkedin.com/in/harshitworo/" target="_blank" rel="noopener" aria-label="Harshit on LinkedIn">in</a>
-          </div>
-          <div class="review-info">
-            <a class="review-name-link" href="https://www.linkedin.com/in/harshitworo/" target="_blank" rel="noopener">
-              <span class="review-name">Harshit Sharma</span>
-            </a>
-            <span class="review-role">Founder, WORO</span>
-          </div>
-        </div>
-        <span class="review-tag">Voice AI · Ops Automation</span>
-      </div>
-
-      <div class="review-card rv" style="--review-accent:#B8E0D2">
-        <div class="review-quote">"The water quality portal went from spreadsheets and manual site visits to a live reporting system that Reliance and IOCL actually use. Delivered in weeks, not months."</div>
-        <div class="review-meta">
-          <div class="review-avatar-wrap">
-            <div class="review-avatar">N</div>
-          </div>
-          <div class="review-info">
-            <span class="review-name">Nishant</span>
-            <span class="review-role">CEO, NeoNir (Vasu Chemical Group)</span>
-          </div>
-        </div>
-        <span class="review-tag">Custom Platform · Private AI</span>
-      </div>
-
-      <div class="review-card rv" style="--review-accent:#FFCDB2">
-        <div class="review-quote">"We needed an AI system that understood gig-worker lending — not generic fintech AI. Meet built it on our infrastructure, trained on our data. It's ours now."</div>
-        <div class="review-meta">
-          <div class="review-avatar-wrap">
-            <div class="review-avatar">A</div>
-            <a class="review-li-badge" href="https://www.linkedin.com/in/ankur-thakur-a4bab579/" target="_blank" rel="noopener" aria-label="Ankur on LinkedIn">in</a>
-          </div>
-          <div class="review-info">
-            <a class="review-name-link" href="https://www.linkedin.com/in/ankur-thakur-a4bab579/" target="_blank" rel="noopener">
-              <span class="review-name">Ankur Thakur</span>
-            </a>
-            <span class="review-role">CEO, Aamdhanee</span>
-          </div>
-        </div>
-        <span class="review-tag">Private AI · Fintech</span>
-      </div>
-
-    </div>
   </div>
 </section>
 
