@@ -15,14 +15,32 @@
   <link rel="stylesheet" href="/site.css?v=20260502">
 </head>
 <body class="grain">
-  <header class="topbar">
-    <div class="topbar-inner">
-      <a href="/" class="brand-lockup">
-        <img class="brand-mark" src="/brand/zeroone-dark-icon.svg" alt="ZeroOne D.O.T.S AI">
-        <span class="brand-word">ZeroOne D.O.T.S AI</span>
-      </a>
-    </div>
-  </header>
+  <nav class="nav" id="nav">
+  <a class="nav-brand" href="https://dotsai.in" aria-label="ZeroOne D·O·T·S AI — home">
+    <svg class="zo-logo" viewBox="0 0 480 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
+      <circle class="d-dot" cx="30" cy="24" r="11" fill="#C8B6FF"/>
+      <circle class="dot-bg" cx="56" cy="24" r="11" fill="currentColor"/>
+      <circle class="dot-bg" cx="82" cy="24" r="11" fill="currentColor"/>
+      <circle class="dot-bg" cx="30" cy="50" r="11" fill="currentColor"/>
+      <circle class="o-dot" cx="56" cy="50" r="11" fill="#B8E0D2"/>
+      <circle class="dot-bg" cx="82" cy="50" r="11" fill="currentColor"/>
+      <circle class="dot-bg" cx="30" cy="76" r="11" fill="currentColor"/>
+      <circle class="dot-bg" cx="56" cy="76" r="11" fill="currentColor"/>
+      <circle class="t-dot" cx="82" cy="76" r="11" fill="#FFCDB2"/>
+      <text x="112" y="42" font-family="'Space Mono', 'Courier New', monospace" font-weight="700" font-size="22" letter-spacing="3" fill="currentColor">ZEROONE</text>
+      <text x="112" y="72" font-family="'Space Mono', 'Courier New', monospace" font-weight="700" font-size="22" letter-spacing="3">
+        <tspan class="d-ltr" fill="#C8B6FF">D</tspan><tspan class="sep" fill="currentColor">·</tspan><tspan class="o-ltr" fill="#B8E0D2">O</tspan><tspan class="sep" fill="currentColor">·</tspan><tspan class="t-ltr" fill="#FFCDB2">T</tspan><tspan class="sep" fill="currentColor">·</tspan><tspan class="s-ltr" fill="#A2D2FF">S</tspan><tspan fill="currentColor" dx="12">AI</tspan>
+      </text>
+    </svg>
+  </a>
+  <div class="nav-pill" role="tablist" aria-label="Site navigation">
+    <a class="nav-link" href="/">← Home</a>
+    <a class="nav-link" href="/case-studies/">Case Studies</a>
+    <a class="nav-link" href="/pricing/">Pricing</a>
+    <a class="nav-link" href="/about/">About</a>
+  </div>
+  <a class="nav-cta" href="https://cal.com/meetdeshani" target="_blank" rel="noopener">Book Meet →</a>
+</nav>
 
   <main class="shell empty-state">
     <div class="content-card stack">
@@ -36,5 +54,18 @@
     </div>
   </main>
 <script src="/assets/js/i18n.js" defer></script>
+<script>
+(function(){
+  var nav=document.getElementById('nav'),pill=nav&&nav.querySelector('.nav-pill'),cta=nav&&nav.querySelector('.nav-cta');
+  if(!nav)return;
+  function update(){
+    nav.classList.toggle('scrolled',window.scrollY>40);
+    var el=document.elementFromPoint(window.innerWidth/2,80),light=false;
+    if(el){var m=getComputedStyle(el).backgroundColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);if(m)light=(+m[1]*299+ +m[2]*587+ +m[3]*114)/1000>160;}
+    nav.classList.toggle('on-light',light);if(pill)pill.classList.toggle('on-light',light);if(cta)cta.classList.toggle('on-light',light);
+  }
+  window.addEventListener('scroll',update,{passive:true});window.addEventListener('load',update);update();
+})();
+</script>
 </body>
 </html>
