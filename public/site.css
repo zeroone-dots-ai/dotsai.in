@@ -30,7 +30,21 @@
   --line: rgba(23, 23, 34, 0.1);
   --panel: rgba(255, 255, 255, 0.72);
   --shadow: 0 24px 60px rgba(28, 20, 39, 0.12);
+  /* layout */
+  --container-max: 1240px;
+  --section-x: 20px;
+  --section-y: 56px;
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
 }
+@media(min-width:680px){:root{--section-x:32px}}
+@media(min-width:900px){:root{--section-x:56px;--section-y:80px}}
+@media(min-width:1200px){:root{--section-x:72px;--section-y:120px}}
+
+/* Shared layout container — used by footer and all page sections */
+.wrap{width:100%;max-width:var(--container-max);margin:0 auto;
+      padding-left:max(var(--section-x),var(--safe-left));
+      padding-right:max(var(--section-x),var(--safe-right))}
 
 *,
 *::before,
