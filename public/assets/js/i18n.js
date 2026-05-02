@@ -16,7 +16,7 @@
   display:inline-flex;align-items:center;gap:2px;
   background:rgba(255,255,255,.07);
   border:1px solid rgba(255,255,255,.13);
-  border-radius:5px;padding:3px;margin-right:10px;
+  border-radius:5px;padding:3px;
   flex-shrink:0;
 }
 .nav.on-light .lang-switcher{
@@ -41,11 +41,12 @@
 .nav.on-light .lang-btn.is-active{
   background:rgba(25,25,36,.11);color:#191924;
 }
-@media(max-width:899px){.lang-switcher{display:none;}}
-@media(min-width:900px){
-  .nav{grid-template-columns:1fr auto auto auto !important;}
-  .nav-cta{justify-self:end;}
+/* Nav right slot — holds switcher + CTA together, flush right */
+.nav-right-slot{
+  display:inline-flex;align-items:center;gap:12px;
+  justify-self:end;
 }
+@media(max-width:899px){.lang-switcher{display:none;}}
 `;
   const styleEl = document.createElement('style');
   styleEl.textContent = css;
@@ -75,7 +76,7 @@
       return;
     }
 
-    fetch('/assets/i18n/' + lang + '.json?v=2')
+    fetch('/assets/i18n/' + lang + '.json?v=3')
       .then(function (r) { return r.json(); })
       .then(function (t) {
         document.querySelectorAll('[data-i18n]').forEach(function (el) {
@@ -131,10 +132,15 @@
   document.addEventListener('DOMContentLoaded', function () {
     snapshot();
 
-    // Inject before the Book Meet CTA in every page's nav
+    // Wrap lang-switcher + nav-cta in a right-slot so the 3-column
+    // nav grid (1fr auto 1fr) stays intact and CTA stays flush right
     var navCta = document.querySelector('.nav-cta');
     if (navCta && navCta.parentNode) {
-      navCta.parentNode.insertBefore(buildSwitcher(), navCta);
+      var slot = document.createElement('div');
+      slot.className = 'nav-right-slot';
+      navCta.parentNode.replaceChild(slot, navCta);
+      slot.appendChild(buildSwitcher());
+      slot.appendChild(navCta);
     }
 
     var lang = getLang();
