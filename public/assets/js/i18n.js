@@ -42,6 +42,10 @@
   background:rgba(25,25,36,.11);color:#191924;
 }
 @media(max-width:899px){.lang-switcher{display:none;}}
+@media(min-width:900px){
+  .nav{grid-template-columns:1fr auto auto auto !important;}
+  .nav-cta{justify-self:end;}
+}
 `;
   const styleEl = document.createElement('style');
   styleEl.textContent = css;
