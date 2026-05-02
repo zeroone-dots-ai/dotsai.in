@@ -1,0 +1,60 @@
+{
+  "nav.services":   "सेवाएं",
+  "nav.cases":      "Case Studies",
+  "nav.works":      "कैसे काम करता है",
+  "nav.lfs":        "आजीवन Support",
+  "nav.faq":        "सवाल-जवाब",
+  "nav.cta":        "Meet से बात करें →",
+
+  "hero.tag":       "अध्याय 01 · फ़लसफ़ा",
+  "hero.sub.eyebrow": "उन Founders के लिए जो margin बनाते हैं — tools नहीं जोड़ते।",
+  "hero.h1":        "अपना AI खुद रखो।<br><em>किराये पर मत लो।</em>",
+  "hero.body":      "On <em>पहले दिन</em>, किराये का AI लगभग हर काम में बेहतर लगता है। <em>365वें दिन</em>, आपके खास business के लिए private AI आगे निकल जाता है। <em>730वें दिन</em>, मुक़ाबला ही नहीं रहता।",
+  "hero.tagline":   "AI आपकी infrastructure है। एक operator, शुरू से अंत तक, कोई बिचौलिया नहीं।",
+  "hero.cta.book":  "Meet के साथ 30 मिनट बुक करें",
+  "hero.cta.see":   "काम देखें",
+
+  "trust.label":    "इनके यहाँ Production में",
+
+  "pillars.eyebrow": "हम क्या बनाते हैं · चार तरीक़े",
+  "pillars.h2":     "एक operator। <em>चार compounding layers।</em>",
+  "pillars.lead":   "Expertise। Cashflow। Platform। जुनून। एक चुनो, चारों चुनो — हर engagement का अंत एक deployed system से होता है, किसी deck से नहीं।",
+
+  "cases.eyebrow":  "काम · Production में चल रहे Cases",
+  "cases.h2":       "Ship हो गया। चल रहा है। <em>Compounding हो रहा है।</em>",
+  "cases.lead":     "तीन engagements अभी production में हैं। हर एक ने एक missing department की जगह ली — कोई tool नहीं। नीचे landing pages और live references दिए हैं।",
+
+  "workstyle.eyebrow": "काम · Operating Loop",
+  "workstyle.h2":   "मैं असल में कैसे काम करता हूं — <em>पाँच compounding steps।</em>",
+  "workstyle.lead": "कोई theory नहीं। कोई deck नहीं। यही वो pipeline है जो मैं हर engagement में, हर हफ़्ते चलाता हूं।",
+
+  "pricing.eyebrow": "Engagement Model",
+  "pricing.h2":     "Regional pricing, <em>global build quality।</em>",
+  "pricing.lead":   "तीन engagement sizes। छह currencies में regional pricing — India के build पर Bay Area का overhead नहीं, UAE के build पर India का risk discount नहीं।",
+
+  "lfs.eyebrow":    "जो हमें अलग बनाता है",
+  "lfs.h2":         "जीवनभर <em>मुफ़्त</em> support।",
+  "lfs.lead":       "Industry standard है build cost का 15–25% — हर साल, हमेशा के लिए, 'maintenance' के नाम पर। ZeroOne वो number zero रखता है। जो system हम ship करते हैं, उसे हम उसकी पूरी life support करते हैं।",
+
+  "founder.eyebrow": "Founder की तरफ़ से",
+  "founder.h2":     "एक इंसान। <em>Full stack।</em> कोई बिचौलिया नहीं।",
+  "founder.p1":     "मैंने ZeroOne इसलिए शुरू किया क्योंकि मैंने founders को agencies को decks के लिए और vendors को किराये के tools के लिए पैसे देते देखा। दोनों ने उन्हें कभी कोई ऐसा system नहीं दिया जो उनका हो।",
+  "founder.p2":     "पाँच साल production systems बनाए। दो साल AI ship की। हर call पर एक full-stack operator — कोई account manager नहीं जो आपकी problem किसी ऐसे engineer को translate करे जो आपसे कभी मिलेगा नहीं।",
+  "founder.p3":     "<em>अगर हम साथ काम करते हैं, तो मैं वो इंसान हूं जो scope करता है, code करता है, ship करता है, और support करता है।</em> HQ Ahmedabad में है, साथ ही India, UAE, Indonesia, UK और South Africa में 7 AI Masters हैं जब किसी project को specialist की ज़रूरत पड़े।",
+  "founder.p4":     "अगर मेरी पहली बातचीत आपको उस system की साफ़ तस्वीर नहीं देती जो आपको चाहिए — चाहे आप engage करें या नहीं — call मुफ़्त थी और मैंने अपना नहीं, आपका वक़्त बर्बाद किया।",
+
+  "faq.eyebrow":    "जवाब",
+  "faq.h2":         "वो सवाल <em>जो founders सच में पूछते हैं।</em>",
+  "faq.q1":         "ZeroOne, ChatGPT, Claude या किसी generic AI consultant से कैसे अलग है?",
+  "faq.q2":         "'Private AI' का असल मतलब क्या है?",
+  "faq.q3":         "Lifetime Free Support सच में होता है?",
+  "faq.q4":         "काम असल में कौन करता है?",
+  "faq.q5":         "मैं शुरुआत कैसे करूं?",
+  "faq.q6":         "आप किस size की company के साथ काम करते हैं?",
+
+  "cta.h2":         "तीस मिनट। <em>मुफ़्त scoping।</em>",
+  "cta.lead":       "Call के बाद system की साफ़ तस्वीर लेकर जाएं — चाहे ZeroOne engage करें या नहीं। यही deal है।",
+  "cta.book":       "Meet से बुक करें",
+
+  "foot.tag":       "Private AI, आपके लिए बनाया। एक founder, full-stack, कोई बिचौलिया नहीं। Ahmedabad HQ · दुनियाभर में 7 AI Masters।"
+}

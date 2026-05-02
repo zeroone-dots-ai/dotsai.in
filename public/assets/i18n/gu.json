@@ -1,0 +1,60 @@
+{
+  "nav.services":   "સેવાઓ",
+  "nav.cases":      "Case Studies",
+  "nav.works":      "કેવી રીતે કામ કરે",
+  "nav.lfs":        "આજીવન Support",
+  "nav.faq":        "સવાલ-જવાબ",
+  "nav.cta":        "Meet સાથે વાત કરો →",
+
+  "hero.tag":       "પ્રકરણ 01 · ફિલસૂફી",
+  "hero.sub.eyebrow": "એ Founders માટે જે margin બનાવે — tools ભેગા ન કરે.",
+  "hero.h1":        "તમારું AI ખુદ રાખો।<br><em>ભાડે ન લો।</em>",
+  "hero.body":      "<em>પહેલા દિવસે</em>, ભાડાનું AI લગભગ દરેક કામમાં સારું લાગે. <em>365મા દિવસે</em>, તમારા ખાસ business ને માટે private AI આગળ નીકળી જાય. <em>730મા દિવસે</em>, સ્પર્ધા જ ન રહે.",
+  "hero.tagline":   "AI તમારી infrastructure છે. એક operator, શરૂથી અંત સુધી, કોઈ વચેટિયો નહીં.",
+  "hero.cta.book":  "Meet સાથે 30 મિનિટ Book કરો",
+  "hero.cta.see":   "કામ જુઓ",
+
+  "trust.label":    "Production માં",
+
+  "pillars.eyebrow": "અમે શું બનાવીએ · ચાર રીત",
+  "pillars.h2":     "એક operator. <em>ચાર compounding layers.</em>",
+  "pillars.lead":   "Expertise. Cashflow. Platform. જુસ્સો. એક પસંદ, ચાર પસંદ — દરેક engagement નો અંત deployed system સાથે, deck સાથે નહીં.",
+
+  "cases.eyebrow":  "કામ · Production માં ચાલતા Cases",
+  "cases.h2":       "Ship. ચાલે છે. <em>Compounding.</em>",
+  "cases.lead":     "ત્રણ engagements હાલ production માં. દરેકે missing department ની જગ્યા લીધી — tool ની નહીં. નીચે landing pages ને live references.",
+
+  "workstyle.eyebrow": "કામ · Operating Loop",
+  "workstyle.h2":   "હું ખરેખર કેવી રીતે કામ કરું — <em>પાંચ compounding steps.</em>",
+  "workstyle.lead": "Theory નહીં. Deck નહીં. આ છે pipeline જે હું દરેક engagement માં, દર અઠવાડિયે ચલાવું.",
+
+  "pricing.eyebrow": "Engagement Model",
+  "pricing.h2":     "Regional pricing, <em>global build quality.</em>",
+  "pricing.lead":   "ત્રણ engagement sizes. છ currencies માં regional pricing — India ના build પર Bay Area નો overhead નહીં, UAE ના build પર India નો risk discount નહીં.",
+
+  "lfs.eyebrow":    "જે આપણને અલગ પાડે",
+  "lfs.h2":         "આજીવન <em>મફત</em> support.",
+  "lfs.lead":       "Industry standard છે build cost ના 15–25% — દર વર્ષ, 'maintenance' ના નામે. ZeroOne એ number zero રાખે. જે system ship કર્યું, તેને life ભર support.",
+
+  "founder.eyebrow": "Founder તરફથી",
+  "founder.h2":     "એક વ્યક્તિ. <em>Full stack.</em> કોઈ વચેટિયો નહીં.",
+  "founder.p1":     "ZeroOne ની શરૂઆત ત્યારે કરી જ્યારે founders ને agencies ને decks માટે ને vendors ને ભાડાના tools માટે પૈસા આપતા જોયા. બેમાંથી કોઈએ તેમને પોતાનો system ન આપ્યો.",
+  "founder.p2":     "પાંચ વર્ષ production systems. બે વર્ષ AI ship. દરેક call પર એક full-stack operator — કોઈ account manager નહીં.",
+  "founder.p3":     "<em>જો સાથે કામ કરીએ, તો scope, code, ship ને support — હું જ.</em> HQ Ahmedabad માં. India, UAE, Indonesia, UK ને South Africa માં 7 AI Masters — specialist reach ને.",
+  "founder.p4":     "જો પહેલી વાતથી system ની picture clear ન થાય — engage કરો કે ન કરો — call free. Time મારો, તમારો નહીં.",
+
+  "faq.eyebrow":    "જવાબ",
+  "faq.h2":         "સવાલ <em>જે founders ખરેખર પૂછે.</em>",
+  "faq.q1":         "ZeroOne, ChatGPT, Claude કે generic AI consultant થી કેવી રીતે અલગ?",
+  "faq.q2":         "'Private AI' નો ખરો અર્થ?",
+  "faq.q3":         "Lifetime Free Support સાચે?",
+  "faq.q4":         "કામ ખરેખર કોણ કરે?",
+  "faq.q5":         "હું ક્યાંથી શરૂ કરું?",
+  "faq.q6":         "તમે ક્યા size ની company સાથે કામ કરો?",
+
+  "cta.h2":         "ત્રીસ મિનિટ. <em>Free scoping.</em>",
+  "cta.lead":       "Call પછી system ની clear picture — engage કરો કે ન કરો. આ deal.",
+  "cta.book":       "Meet સાથે Book કરો",
+
+  "foot.tag":       "Private AI, તમારા માટે. એક founder, full-stack, કોઈ વચેટિયો નહીં. Ahmedabad HQ · 7 AI Masters."
+}
