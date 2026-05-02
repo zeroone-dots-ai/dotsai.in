@@ -523,3 +523,149 @@ img {
     gap: 12px;
   }
 }
+
+/* =========================================================
+   GLASS PILL NAV — shared across all pages
+   (duplicated from index.html inline style for subpage reuse)
+   ========================================================= */
+.dot-bg{fill:#191924}
+.nav .zo-logo{height:32px}
+@media (max-width:767px){.nav .zo-logo{height:26px}}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;
+     padding:18px clamp(20px,4vw,60px) 0;
+     display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+     pointer-events:none;
+     transition:padding 300ms ease}
+.nav.scrolled{padding-top:12px}
+.nav>*{pointer-events:auto}
+.nav-brand{justify-self:start;display:inline-flex;align-items:center;
+           text-decoration:none;color:#fdfcfa;
+           transition:color 240ms ease}
+.nav.on-light .nav-brand{color:#191924}
+.nav-brand .zo-logo{transition:transform 200ms ease}
+.nav-brand:hover .zo-logo{transform:scale(1.02)}
+.nav.on-light .zo-logo{color:#191924}
+.nav.on-light .zo-logo .d-dot{fill:#5B3FD4}
+.nav.on-light .zo-logo .o-dot{fill:#1F7A5C}
+.nav.on-light .zo-logo .t-dot{fill:#A8521A}
+.nav.on-light .zo-logo .d-ltr{fill:#5B3FD4}
+.nav.on-light .zo-logo .o-ltr{fill:#1F7A5C}
+.nav.on-light .zo-logo .t-ltr{fill:#A8521A}
+.nav.on-light .zo-logo .s-ltr{fill:#1E5B9C}
+.nav-pill{display:none;position:relative;justify-self:center;
+          padding:5px;
+          background-color:rgba(10,10,16,.55);
+          border:1px solid rgba(255,255,255,.08);
+          border-radius:999px;
+          backdrop-filter:blur(18px) saturate(140%);
+          -webkit-backdrop-filter:blur(18px) saturate(140%);
+          box-shadow:0 10px 36px rgba(0,0,0,.28)}
+@media(min-width:900px){.nav-pill{display:inline-flex;align-items:center;gap:0}}
+.nav-pill.on-light{
+          background-color:rgba(253,252,250,.82);
+          border-color:rgba(25,25,36,.08);
+          box-shadow:0 14px 44px rgba(25,25,36,.08)}
+.nav-link{position:relative;z-index:1;display:inline-flex;align-items:center;
+          font-family:'Space Mono','Courier New',monospace;font-size:10.5px;letter-spacing:1.8px;
+          text-transform:uppercase;color:rgba(255,255,255,.68);
+          text-decoration:none;
+          padding:10px 18px;border-radius:999px;
+          transition:color 220ms ease}
+.nav-link:hover{color:#fff}
+.nav-link.is-active{color:#fff}
+.nav-pill.on-light .nav-link{color:rgba(25,25,36,.62)}
+.nav-pill.on-light .nav-link:hover,.nav-pill.on-light .nav-link.is-active{color:#191924}
+.nav-right-slot{display:inline-flex;align-items:center;gap:12px;justify-self:end}
+.nav-cta{justify-self:end;
+         font-family:'Space Mono','Courier New',monospace;font-size:10.5px;letter-spacing:1.8px;
+         text-transform:uppercase;
+         padding:12px 20px;border-radius:999px;
+         background-color:#C8B6FF;color:#191924;
+         text-decoration:none;border:1px solid #C8B6FF;
+         box-shadow:0 10px 28px rgba(200,182,255,.22);
+         display:inline-flex;align-items:center;gap:6px;
+         transition:transform 180ms ease,background-color 220ms ease,box-shadow 220ms ease}
+.nav-cta:hover{transform:translateY(-1px);background-color:#D3C3FF;
+               box-shadow:0 12px 34px rgba(200,182,255,.32)}
+.nav-cta:active{transform:translateY(0) scale(.98)}
+.nav-cta.on-light{background-color:#191924;color:#fdfcfa;border-color:#191924;
+                  box-shadow:0 10px 28px rgba(25,25,36,.18)}
+.nav-cta.on-light:hover{background-color:#2D1B4E;border-color:#2D1B4E}
+@media(max-width:599px){
+  .nav-cta{padding:10px 14px;font-size:9.5px;letter-spacing:1.2px}
+}
+
+/* =========================================================
+   RICH FOOTER — shared across all pages
+   ========================================================= */
+.zo-logo{color:#fdfcfa}
+footer{background:#191924;color:rgba(255,255,255,.8);padding:80px 0 32px}
+.foot-workstyle{padding:20px 0 24px;
+                border-bottom:1px solid rgba(255,255,255,.06);
+                margin-bottom:32px}
+.foot-workstyle-lab{font-family:'Space Mono','Courier New',monospace;font-size:10px;letter-spacing:2.5px;
+                    color:rgba(255,255,255,.45);text-transform:uppercase;
+                    display:block;margin-bottom:10px}
+.foot-workstyle-chain{font-family:'Instrument Serif',Georgia,serif;font-size:clamp(15px,1.4vw,20px);
+                      line-height:1.5;color:rgba(255,255,255,.85);margin:0;letter-spacing:-.005em}
+.foot-workstyle-chain span{color:#C8B6FF;margin:0 8px;
+                           font-family:'DM Sans',sans-serif;opacity:.7;font-size:.85em}
+.foot-top{display:grid;gap:40px;grid-template-columns:1fr;margin-bottom:48px}
+@media(min-width:900px){.foot-top{grid-template-columns:1.2fr 2fr}}
+.foot-brand{display:flex;flex-direction:column;gap:16px}
+.foot-logo{display:flex;align-items:center}
+.foot-logo .zo-logo{height:44px}
+@media(max-width:767px){.foot-logo .zo-logo{height:38px}}
+.foot-tag{font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.7;
+          color:rgba(255,255,255,.55);max-width:320px;margin:0}
+.foot-props{display:grid;gap:24px}
+.foot-tier h5{font-family:'Space Mono','Courier New',monospace;font-size:10px;letter-spacing:2px;
+              text-transform:uppercase;color:rgba(255,255,255,.4);
+              margin:0 0 12px;font-weight:500;
+              padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.08)}
+.foot-tier ul{list-style:none;padding:0;margin:0;display:grid;
+              grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.foot-tier a{font-family:'Space Mono','Courier New',monospace;font-size:12px;color:rgba(255,255,255,.75);
+             text-decoration:none;transition:color 160ms ease;
+             display:flex;align-items:center;gap:6px;
+             border-bottom:1px solid transparent;padding-bottom:2px}
+.foot-tier a::before{content:"·";color:#C8B6FF;font-weight:700;font-size:16px}
+.foot-tier a:hover{color:#fff;border-bottom-color:rgba(255,255,255,.3)}
+.foot-tier a:hover::before{color:#B8E0D2}
+.foot-socials{padding:20px 0;border-top:1px solid rgba(255,255,255,.08);
+              display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center}
+.foot-socials-label{font-family:'Space Mono','Courier New',monospace;font-size:10px;letter-spacing:2px;
+                    text-transform:uppercase;color:rgba(255,255,255,.4);margin-right:8px}
+.foot-social{display:inline-flex;align-items:center;gap:8px;
+             font-family:'Space Mono','Courier New',monospace;font-size:11px;letter-spacing:.5px;
+             color:rgba(255,255,255,.7);text-decoration:none;
+             transition:color 160ms ease,transform 180ms ease}
+.foot-social svg{width:14px;height:14px;fill:currentColor;flex-shrink:0}
+.foot-social:hover{color:#C8B6FF;transform:translateY(-1px)}
+.foot-dives{margin-top:40px;padding-top:32px;border-top:1px solid rgba(255,255,255,.08)}
+.foot-dives-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:16px;margin-bottom:28px}
+.foot-dives-lab{font-family:'Space Mono','Courier New',monospace;font-size:10.5px;letter-spacing:3px;
+                text-transform:uppercase;color:#C8B6FF}
+.foot-dives-tag{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:14px;
+                color:rgba(255,255,255,.55)}
+.foot-dives-tag em{color:rgba(255,255,255,.75);font-style:italic}
+.foot-dives-grid{display:grid;grid-template-columns:1fr;gap:24px}
+@media(min-width:640px){.foot-dives-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:960px){.foot-dives-grid{grid-template-columns:repeat(4,1fr)}}
+.foot-dives-col{display:flex;flex-direction:column;gap:12px}
+.foot-dives-col-lab{font-family:'Space Mono','Courier New',monospace;font-size:10px;letter-spacing:2.5px;
+                    text-transform:uppercase;color:rgba(255,255,255,.45);
+                    padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.06)}
+.foot-dives-col ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+.foot-dives-col a{font-family:'DM Sans',sans-serif;font-size:13.5px;line-height:1.4;
+                  color:rgba(255,255,255,.75);text-decoration:none;
+                  border-bottom:1px solid transparent;padding-bottom:1px;
+                  transition:color 160ms ease,border-color 160ms ease}
+.foot-dives-col a:hover{color:#C8B6FF;border-bottom-color:#C8B6FF}
+.foot-bot{padding-top:24px;border-top:1px solid rgba(255,255,255,.08);
+          display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;
+          gap:16px;font-family:'Space Mono','Courier New',monospace;font-size:11px;
+          color:rgba(255,255,255,.5);letter-spacing:1px}
+.foot-bot a{color:rgba(255,255,255,.6);text-decoration:none;
+            border-bottom:1px solid transparent;padding-bottom:1px}
+.foot-bot a:hover{color:#C8B6FF;border-bottom-color:#C8B6FF}

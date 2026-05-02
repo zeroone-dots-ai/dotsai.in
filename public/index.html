@@ -679,6 +679,30 @@ section{padding:var(--section-y) 0;position:relative}
 /* =========================================================
    PROOF — notebook metric ledger (no cards, just hairlines)
    ========================================================= */
+/* ── Reviews / Testimonials ── */
+.reviews{background:var(--ink);color:#fff;padding:var(--section-y) 0;position:relative;z-index:1}
+.reviews-grid{display:grid;grid-template-columns:1fr;gap:24px;margin-top:var(--sp-10)}
+@media (min-width:768px){.reviews-grid{grid-template-columns:repeat(3,1fr)}}
+.review-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+             padding:var(--sp-7) var(--sp-6);display:flex;flex-direction:column;gap:var(--sp-5);
+             transition:border-color 200ms ease,background 200ms ease}
+.review-card:hover{background:rgba(255,255,255,.07);border-color:rgba(200,182,255,.3)}
+.review-quote{font-family:var(--font-display);font-size:clamp(16px,1.3vw,19px);line-height:1.65;
+              color:rgba(255,255,255,.88);font-style:italic;flex:1}
+.review-quote::before{content:'"';font-size:2em;line-height:0;vertical-align:-0.4em;
+                       color:var(--lavender);margin-right:4px;font-style:normal}
+.review-meta{display:flex;align-items:center;gap:var(--sp-3);flex-wrap:wrap}
+.review-avatar{width:36px;height:36px;border-radius:50%;background:var(--lavender);
+               color:var(--ink);font-family:var(--font-mono);font-size:14px;font-weight:700;
+               display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.review-info{display:flex;flex-direction:column;gap:2px;flex:1}
+.review-name{font-family:var(--font-mono);font-size:12px;letter-spacing:1.2px;
+             text-transform:uppercase;color:#fff;font-weight:700}
+.review-role{font-family:var(--font-body);font-size:12px;color:rgba(255,255,255,.5)}
+.review-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;
+            color:var(--lavender);background:rgba(200,182,255,.1);
+            padding:4px 10px;margin-left:auto}
+
 .proof{background:var(--cream-50);padding-top:var(--section-y);position:relative;z-index:1}
 .proof::before{content:"";position:absolute;inset:0;background:var(--cream-50);z-index:-1}
 .proof-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0;
@@ -2865,6 +2889,56 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
       <div class="metric rv"><div class="num">8 Lakh</div><div class="lab">CALLS / DAY<br>BPO VOICE AUDIT</div></div>
       <div class="metric rv"><div class="num">38 → 25%</div><div class="lab">ATTRITION<br>REDUCTION</div></div>
       <div class="metric rv"><div class="num">10 → 2 min</div><div class="lab">AUDIT TIME<br>PER CALL</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REVIEWS · CLIENT TESTIMONIALS ============ -->
+<section class="reviews" id="reviews" data-bg-zone="reviews">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="eyebrow">REVIEWS · ON-RECORD</span>
+      <h2>What clients say — <em>after the system is live.</em></h2>
+      <p class="section-lead">Not before. Not "in progress". After. Every quote here is from a founder or operator who has a working system in production.</p>
+    </div>
+    <div class="reviews-grid">
+
+      <div class="review-card rv">
+        <div class="review-quote">"Meet replaced what would've been a 4-person ops team. The call audit system processes 8 lakh calls a day — it just runs. Zero handholding after handoff."</div>
+        <div class="review-meta">
+          <div class="review-avatar" aria-hidden="true">H</div>
+          <div class="review-info">
+            <span class="review-name">Harshit</span>
+            <span class="review-role">Founder, WORO</span>
+          </div>
+          <div class="review-tag">Voice AI · Ops Automation</div>
+        </div>
+      </div>
+
+      <div class="review-card rv">
+        <div class="review-quote">"The water quality portal went from spreadsheets and manual site visits to a live reporting system that Reliance and IOCL actually use. Delivered in weeks, not months."</div>
+        <div class="review-meta">
+          <div class="review-avatar" aria-hidden="true">N</div>
+          <div class="review-info">
+            <span class="review-name">Nishant</span>
+            <span class="review-role">CEO, NeoNir (Vasu Chemical Group)</span>
+          </div>
+          <div class="review-tag">Custom Platform · Private AI</div>
+        </div>
+      </div>
+
+      <div class="review-card rv">
+        <div class="review-quote">"We needed an AI system that understood gig-worker lending — not generic fintech AI. Meet built it on our infrastructure, trained on our data. It's ours now."</div>
+        <div class="review-meta">
+          <div class="review-avatar" aria-hidden="true">A</div>
+          <div class="review-info">
+            <span class="review-name">Ankur</span>
+            <span class="review-role">Founder, Aamdhanee</span>
+          </div>
+          <div class="review-tag">Private AI · Fintech</div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
