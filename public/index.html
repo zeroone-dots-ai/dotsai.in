@@ -2103,6 +2103,102 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
 /* Theme-switch crossfade */
 .pbg-img.switching{transition:opacity .3s ease}
 
+
+/* =========================================================
+   REVIEWS — on-record client quotes
+   ========================================================= */
+.reviews{padding:var(--section-y) 0;background:var(--cream-50)}
+.reviews .section-head{max-width:680px}
+.reviews-grid{display:grid;gap:28px;margin-top:var(--sp-10)}
+@media (min-width:768px){.reviews-grid{grid-template-columns:repeat(3,1fr)}}
+.review-card{
+  background:#fff;
+  border:1px solid var(--sand-200);
+  border-top:3px solid var(--review-accent,var(--lavender));
+  padding:var(--sp-7) var(--sp-6);
+  display:flex;flex-direction:column;gap:var(--sp-5);
+  transition:box-shadow 200ms ease}
+.review-card:hover{box-shadow:0 4px 28px rgba(0,0,0,.07)}
+.review-quote{
+  font-family:var(--font-display);font-style:italic;
+  font-size:clamp(15px,1.25vw,18px);line-height:1.7;
+  color:var(--ink);flex:1}
+.review-meta{display:flex;align-items:center;gap:var(--sp-3)}
+.review-avatar-wrap{position:relative;flex-shrink:0}
+.review-avatar{
+  width:44px;height:44px;border-radius:50%;
+  background:var(--review-accent,var(--lavender));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-mono);font-size:17px;font-weight:700;
+  color:var(--ink)}
+.review-li-badge{
+  position:absolute;bottom:-3px;right:-3px;
+  width:18px;height:18px;border-radius:50%;
+  background:#0077B5;
+  display:flex;align-items:center;justify-content:center;
+  font-size:8.5px;font-weight:700;color:#fff;font-family:var(--font-mono);
+  border:2px solid var(--cream-50);text-decoration:none;
+  transition:background 150ms ease}
+.review-li-badge:hover{background:#005c8e}
+.review-info{flex:1;min-width:0}
+.review-name-link{color:inherit;text-decoration:none;display:block}
+.review-name-link:hover .review-name{color:var(--plum)}
+.review-name{font-family:var(--font-mono);font-size:11px;letter-spacing:1.5px;
+             text-transform:uppercase;color:var(--ink);font-weight:700;
+             display:block;margin-bottom:3px}
+.review-role{font-family:var(--font-body);font-size:12.5px;color:var(--stone-600);
+             display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.review-tag{font-family:var(--font-mono);font-size:9.5px;letter-spacing:1.5px;
+            text-transform:uppercase;color:var(--plum);
+            background:rgba(94,106,210,.07);padding:4px 10px;
+            align-self:flex-start;margin-top:auto}
+
+/* ── Workstyle stages — horizontal scroll track ── */
+.ws-stages-track{
+  display:flex;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  gap:16px;
+  padding:var(--sp-8) 0 var(--sp-4);
+  margin:0 calc(-1 * clamp(20px,4vw,60px));
+  padding-left:clamp(20px,4vw,60px);
+  padding-right:clamp(20px,4vw,60px)}
+.ws-stages-track::-webkit-scrollbar{display:none}
+.ws-stages-track .wj-stage{
+  flex:0 0 min(340px,75vw);
+  scroll-snap-align:start;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.1);
+  border-top:3px solid var(--wj-accent,var(--lavender));
+  padding:var(--sp-6) var(--sp-5);
+  margin:0;position:static}
+.ws-stages-track .wj-dot{display:none}
+@media (min-width:1024px){
+  .ws-stages-track{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    overflow-x:visible;
+    scroll-snap-type:none;
+    gap:16px;
+    margin:0;
+    padding:var(--sp-8) 0 var(--sp-4)}
+  .ws-stages-track .wj-stage{flex:unset;min-width:0}}
+
+/* ── Regions — mobile horizontal scroll ── */
+@media (max-width:767px){
+  .regions-grid{
+    display:flex;flex-wrap:nowrap;
+    overflow-x:auto;scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;
+    gap:16px;padding-bottom:16px;
+    margin:0 calc(-1 * clamp(20px,4vw,60px));
+    padding-left:clamp(20px,4vw,60px);
+    padding-right:clamp(20px,4vw,60px)}
+  .regions-grid::-webkit-scrollbar{display:none}
+  .region-card{flex:0 0 min(300px,82vw);scroll-snap-align:start}}
+
 /* =========================================================
    THE WORKSTYLE · OPERATING LOOP — vertical journey rail
    Spine runs through 5 stages (large dots) + career path
@@ -2881,9 +2977,8 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
     <!-- Single vertical rail: 5 skill stages (large brand-color dots),
          phase divider, then 6 career milestones (small lavender outline dots).
          Spine glows top to bottom, connecting the journey end-to-end. -->
-    <div class="wj-rail">
-
-      <!-- ===== Phase 1 · The five skill stages ===== -->
+    <!-- Horizontal scroll track for the 5 skill stages -->
+    <div class="ws-stages-track">
       <article class="wj-node wj-stage rv" data-ws="01">
         <span class="wj-dot wj-dot-stage" aria-hidden="true"></span>
         <span class="wj-num">01 · Ideation</span>
@@ -2918,6 +3013,10 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
         <h3 class="wj-title">Survival of the system at scale.</h3>
         <p class="wj-body">Scale isn't <em>can it grow</em> — it's whether the system survives at multiples. <em>Five platforms before ZeroOne</em> ran me through that test, from machinery automation at JSW to a 20× user-scale window at Spinny.</p>
       </article>
+    </div>
+
+    <!-- Career timeline vertical rail -->
+    <div class="wj-rail">
 
       <!-- ===== Phase divider · COLLAPSIBLE TOGGLE ===== -->
       <button class="wj-divider wj-divider-toggle rv" type="button" aria-expanded="false" aria-controls="wj-career-detail">
@@ -3020,6 +3119,68 @@ section>.compliance-strip,section>.foot-top,section>.foot-bot{
     </div>
 
     <p class="wj-note rv">Scale window = the multiple of growth the platform crossed during my tenure. Numbers reflect platform-wide activity, not personal credit.</p>
+  </div>
+</section>
+
+<!-- ============ REVIEWS · ON-RECORD ============ -->
+<section class="reviews" id="reviews" data-bg-zone="reviews">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="eyebrow">REVIEWS · ON-RECORD</span>
+      <h2>What clients say — <em>after the system is live.</em></h2>
+      <p class="section-lead">Not before. Not "in progress". After. Every quote here is from a founder or operator who has a working system in production.</p>
+    </div>
+    <div class="reviews-grid">
+
+      <div class="review-card rv" style="--review-accent:#C8B6FF">
+        <div class="review-quote">"Meet replaced what would've been a 4-person ops team. The call audit system processes 8 lakh calls a day — it just runs. Zero handholding after handoff."</div>
+        <div class="review-meta">
+          <div class="review-avatar-wrap">
+            <div class="review-avatar">H</div>
+            <a class="review-li-badge" href="https://www.linkedin.com/in/harshitworo/" target="_blank" rel="noopener" aria-label="Harshit on LinkedIn">in</a>
+          </div>
+          <div class="review-info">
+            <a class="review-name-link" href="https://www.linkedin.com/in/harshitworo/" target="_blank" rel="noopener">
+              <span class="review-name">Harshit Sharma</span>
+            </a>
+            <span class="review-role">Founder, WORO</span>
+          </div>
+        </div>
+        <span class="review-tag">Voice AI · Ops Automation</span>
+      </div>
+
+      <div class="review-card rv" style="--review-accent:#B8E0D2">
+        <div class="review-quote">"The water quality portal went from spreadsheets and manual site visits to a live reporting system that Reliance and IOCL actually use. Delivered in weeks, not months."</div>
+        <div class="review-meta">
+          <div class="review-avatar-wrap">
+            <div class="review-avatar">N</div>
+          </div>
+          <div class="review-info">
+            <span class="review-name">Nishant</span>
+            <span class="review-role">CEO, NeoNir (Vasu Chemical Group)</span>
+          </div>
+        </div>
+        <span class="review-tag">Custom Platform · Private AI</span>
+      </div>
+
+      <div class="review-card rv" style="--review-accent:#FFCDB2">
+        <div class="review-quote">"We needed an AI system that understood gig-worker lending — not generic fintech AI. Meet built it on our infrastructure, trained on our data. It's ours now."</div>
+        <div class="review-meta">
+          <div class="review-avatar-wrap">
+            <div class="review-avatar">A</div>
+            <a class="review-li-badge" href="https://www.linkedin.com/in/ankur-thakur-a4bab579/" target="_blank" rel="noopener" aria-label="Ankur on LinkedIn">in</a>
+          </div>
+          <div class="review-info">
+            <a class="review-name-link" href="https://www.linkedin.com/in/ankur-thakur-a4bab579/" target="_blank" rel="noopener">
+              <span class="review-name">Ankur Thakur</span>
+            </a>
+            <span class="review-role">CEO, Aamdhanee</span>
+          </div>
+        </div>
+        <span class="review-tag">Private AI · Fintech</span>
+      </div>
+
+    </div>
   </div>
 </section>
 
