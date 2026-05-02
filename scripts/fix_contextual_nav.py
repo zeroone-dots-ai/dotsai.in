@@ -128,31 +128,31 @@ PAGES = {
         link('AI Chat', '/labs/ai-chat/'),
         link('Doc Parser', '/labs/doc-parser/'),
         link('SEO Checker', '/labs/seo-checker/'),
-        link('Workflow Viz', '/labs/workflow-viz/'),
+        link('Pricing', '/pricing/'),
     ],
     'labs/ai-chat/index.html': [
         link('← Labs', '/labs/'),
         link('Doc Parser', '/labs/doc-parser/'),
         link('SEO Checker', '/labs/seo-checker/'),
-        link('Services', '/#pillars'),
+        link('Pricing', '/pricing/'),
     ],
     'labs/doc-parser/index.html': [
         link('← Labs', '/labs/'),
         link('AI Chat', '/labs/ai-chat/'),
         link('SEO Checker', '/labs/seo-checker/'),
-        link('Services', '/#pillars'),
+        link('Pricing', '/pricing/'),
     ],
     'labs/seo-checker/index.html': [
         link('← Labs', '/labs/'),
         link('AI Chat', '/labs/ai-chat/'),
         link('Doc Parser', '/labs/doc-parser/'),
-        link('Services', '/#pillars'),
+        link('Pricing', '/pricing/'),
     ],
     'labs/workflow-viz/index.html': [
         link('← Labs', '/labs/'),
         link('AI Chat', '/labs/ai-chat/'),
         link('SEO Checker', '/labs/seo-checker/'),
-        link('Services', '/#pillars'),
+        link('Pricing', '/pricing/'),
     ],
 
     # ── Company ───────────────────────────────────────────────────────────
