@@ -21,6 +21,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/site.css?v=20260502b">
+  <script async src="https://plausible.io/js/pa-1J16YIsIPX_GTbYxxXRUP.js"></script>
+  <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)};window.plausible.init=window.plausible.init||function(i){plausible.o=i||{}};window.plausible.init();</script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -515,7 +517,7 @@
     <a class="nav-link" href="/case-studies/">Case Studies</a>
     <a class="nav-link" href="/pricing/">Pricing</a>
   </div>
-  <a class="nav-cta" href="https://cal.com/meetdeshani" target="_blank" rel="noopener">Book Meet →</a>
+  <a class="nav-cta plausible-event-name=Book_Nav" href="https://cal.com/meetdeshani" target="_blank" rel="noopener">Book Meet →</a>
 </nav>
 
   <!-- ── Hero ── -->
@@ -526,8 +528,8 @@
       <h1 class="about-hero-name">MEET<br><em>DESHANI</em></h1>
       <p class="about-hero-copy">Solo AI engineer. Ships every system end-to-end — from data model to deployed product. 7+ years in automation before it was easy. Now building private AI and automation systems for businesses that demand real outcomes.</p>
       <div class="about-hero-links">
-        <a href="https://cal.com/meetdeshani" target="_blank" rel="noopener" class="btn-cta">↗ Book a Call</a>
-        <a href="https://www.linkedin.com/in/meet-deshani-436575147/" target="_blank" rel="noopener" class="link-chip">↗ LinkedIn</a>
+        <a href="https://cal.com/meetdeshani" target="_blank" rel="noopener" class="btn-cta plausible-event-name=About_Book_Hero">↗ Book a Call</a>
+        <a href="https://www.linkedin.com/in/meet-deshani-436575147/" target="_blank" rel="noopener" class="link-chip plausible-event-name=About_LinkedIn_Click">↗ LinkedIn</a>
         <a href="https://github.com/zeroone-dots-ai" target="_blank" rel="noopener" class="link-chip">↗ GitHub</a>
         <a href="mailto:meet@dotsai.in" class="link-chip">meet@dotsai.in</a>
       </div>
@@ -757,7 +759,7 @@
       <p style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(243,240,255,0.42);margin:0 0 16px;">Work with me</p>
       <h2>Let's build something<br><em style="color:var(--lavender);font-style:italic;">that ships.</em></h2>
       <p>One engineer. Full accountability. Every system from first conversation to deployed product — scoped, built, and running in production.</p>
-      <a href="https://cal.com/meetdeshani" target="_blank" rel="noopener" class="cta-btn-primary">↗ Book a Call — cal.com/meetdeshani</a>
+      <a href="https://cal.com/meetdeshani" target="_blank" rel="noopener" class="cta-btn-primary plausible-event-name=About_Book_CTA">↗ Book a Call — cal.com/meetdeshani</a>
       <div class="contact-grid">
         <a href="mailto:meet@dotsai.in" class="contact-link">meet@dotsai.in</a>
         <a href="https://www.linkedin.com/in/meet-deshani-436575147/" target="_blank" rel="noopener" class="contact-link">↗ LinkedIn</a>
@@ -893,8 +895,8 @@
     <div class="foot-bot">
       <span>&copy; 2026 ZEROONE D·O·T·S AI &nbsp;·&nbsp; AHMEDABAD · INDIA &nbsp;·&nbsp; DELIVERING GLOBALLY</span>
       <span>
-        <a href="https://cal.com/meetdeshani" target="_blank" rel="noopener">Book</a> &nbsp;·&nbsp;
-        <a href="https://wa.me/918320065658" target="_blank" rel="noopener">WhatsApp</a> &nbsp;·&nbsp;
+        <a href="https://cal.com/meetdeshani" target="_blank" rel="noopener" class="plausible-event-name=Book_Footer">Book</a> &nbsp;·&nbsp;
+        <a href="https://wa.me/918320065658" target="_blank" rel="noopener" class="plausible-event-name=WhatsApp_Footer">WhatsApp</a> &nbsp;·&nbsp;
         <a href="mailto:meet@dotsai.in">Email</a>
       </span>
     </div>
@@ -928,6 +930,22 @@
   window.addEventListener('scroll', update, {passive:true});
   window.addEventListener('load', update);
   update();
+})();
+</script>
+<script>
+(function(){
+  'use strict';
+  function p(ev,opts){ if(typeof window.plausible==='function') window.plausible(ev,opts); }
+  var fired={};
+  function checkDepth(){
+    var total=document.documentElement.scrollHeight-window.innerHeight;
+    if(total<=0) return;
+    var pct=Math.round(window.scrollY/total*100);
+    [25,50,75,100].forEach(function(m){
+      if(!fired['s'+m]&&pct>=m){ fired['s'+m]=true; p('About_Scroll_'+m+'pct'); }
+    });
+  }
+  window.addEventListener('scroll',checkDepth,{passive:true});
 })();
 </script>
 <script src="/assets/js/i18n.js" defer></script>

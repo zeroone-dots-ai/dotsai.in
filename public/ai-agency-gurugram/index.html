@@ -24,6 +24,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/site.css?v=20260502b">
+  <script async src="https://plausible.io/js/pa-1J16YIsIPX_GTbYxxXRUP.js"></script>
+  <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)};window.plausible.init=window.plausible.init||function(i){plausible.o=i||{}};window.plausible.init();</script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -144,7 +146,7 @@
     <a class="nav-link" href="/case-studies/">Case Studies</a>
     <a class="nav-link" href="/pricing/">Pricing</a>
   </div>
-  <a class="nav-cta" href="https://cal.com/meetdeshani" target="_blank" rel="noopener">Book Meet →</a>
+  <a class="nav-cta plausible-event-name=Book_Nav" href="https://cal.com/meetdeshani" target="_blank" rel="noopener">Book Meet →</a>
 </nav>
 
   <section class="hero">
@@ -158,7 +160,7 @@
           One founder-engineer. Direct implementation. No handoff to a junior team.
         </p>
         <div class="button-row">
-          <a class="button button-primary" href="https://wa.me/918320065658" target="_blank" rel="noopener">&#8599; Talk on WhatsApp</a>
+          <a class="button button-primary plausible-event-name=SEO_WhatsApp_Hero" href="https://wa.me/918320065658" target="_blank" rel="noopener">&#8599; Talk on WhatsApp</a>
           <a class="button button-secondary" href="/case-studies/">See proof</a>
         </div>
       </div>
@@ -248,7 +250,7 @@
       <h2>Start with the highest-leverage bottleneck.</h2>
       <p>If you already know the problem, we can start there. If not, the first step is still practical: identify which workflow, dataset, or discovery problem is costing your Gurugram business the most money or attention right now.</p>
       <div class="button-row">
-        <a class="button button-primary" href="https://cal.com/meetdeshani" target="_blank" rel="noopener">&rarr; Book a call</a>
+        <a class="button button-primary plausible-event-name=SEO_Book_CTA" href="https://cal.com/meetdeshani" target="_blank" rel="noopener">&rarr; Book a call</a>
         <a class="button button-secondary" href="/ai-agency-india/">See all India services</a>
       </div>
     </section>
@@ -380,8 +382,8 @@
     <div class="foot-bot">
       <span>&copy; 2026 ZEROONE D·O·T·S AI &nbsp;·&nbsp; AHMEDABAD · INDIA &nbsp;·&nbsp; DELIVERING GLOBALLY</span>
       <span>
-        <a href="https://cal.com/meetdeshani" target="_blank" rel="noopener">Book</a> &nbsp;·&nbsp;
-        <a href="https://wa.me/918320065658" target="_blank" rel="noopener">WhatsApp</a> &nbsp;·&nbsp;
+        <a href="https://cal.com/meetdeshani" target="_blank" rel="noopener" class="plausible-event-name=Book_Footer">Book</a> &nbsp;·&nbsp;
+        <a href="https://wa.me/918320065658" target="_blank" rel="noopener" class="plausible-event-name=WhatsApp_Footer">WhatsApp</a> &nbsp;·&nbsp;
         <a href="mailto:meet@dotsai.in">Email</a>
       </span>
     </div>
@@ -414,6 +416,22 @@
   window.addEventListener('scroll', update, {passive:true});
   window.addEventListener('load', update);
   update();
+})();
+</script>
+<script>
+(function(){
+  'use strict';
+  function p(ev,opts){ if(typeof window.plausible==='function') window.plausible(ev,opts); }
+  var fired={};
+  function checkDepth(){
+    var total=document.documentElement.scrollHeight-window.innerHeight;
+    if(total<=0) return;
+    var pct=Math.round(window.scrollY/total*100);
+    [25,50,75,100].forEach(function(m){
+      if(!fired['s'+m]&&pct>=m){ fired['s'+m]=true; p('SEO_Gurugram_Scroll_'+m+'pct'); }
+    });
+  }
+  window.addEventListener('scroll',checkDepth,{passive:true});
 })();
 </script>
 <script src="/assets/js/i18n.js" defer></script>

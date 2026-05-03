@@ -18,6 +18,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/site.css?v=20260502b">
+  <script async src="https://plausible.io/js/pa-1J16YIsIPX_GTbYxxXRUP.js"></script>
+  <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)};window.plausible.init=window.plausible.init||function(i){plausible.o=i||{}};window.plausible.init();</script>
 
   <script type="application/ld+json">
   {
@@ -448,7 +450,7 @@
     <a class="nav-link" href="/case-studies/aamdhanee/">Aamdhanee</a>
     <a class="nav-link" href="/pricing/">Pricing</a>
   </div>
-  <a class="nav-cta" href="https://cal.com/meetdeshani" target="_blank" rel="noopener">Book Meet →</a>
+  <a class="nav-cta plausible-event-name=Book_Nav" href="https://cal.com/meetdeshani" target="_blank" rel="noopener">Book Meet →</a>
 </nav>
 
   <!-- HERO -->
@@ -744,7 +746,7 @@
         <p class="kicker" style="text-align:center; margin-bottom:14px;">// What's next</p>
         <h2>Build your<br><em>AI operating system.</em></h2>
         <p>If you're managing multiple products, markets, or brands and the infrastructure hasn't caught up — that's exactly the problem ZeroOne is built for.</p>
-        <a href="https://cal.com/meetdeshani" target="_blank" rel="noopener" class="btn-primary-lg">
+        <a href="https://cal.com/meetdeshani" target="_blank" rel="noopener" class="btn-primary-lg plausible-event-name=CaseStudy_Book_CTA">
           Book a call → cal.com/meetdeshani
         </a>
       </div>
@@ -893,8 +895,8 @@
     <div class="foot-bot">
       <span>&copy; 2026 ZEROONE D·O·T·S AI &nbsp;·&nbsp; AHMEDABAD · INDIA &nbsp;·&nbsp; DELIVERING GLOBALLY</span>
       <span>
-        <a href="https://cal.com/meetdeshani" target="_blank" rel="noopener">Book</a> &nbsp;·&nbsp;
-        <a href="https://wa.me/918320065658" target="_blank" rel="noopener">WhatsApp</a> &nbsp;·&nbsp;
+        <a href="https://cal.com/meetdeshani" target="_blank" rel="noopener" class="plausible-event-name=Book_Footer">Book</a> &nbsp;·&nbsp;
+        <a href="https://wa.me/918320065658" target="_blank" rel="noopener" class="plausible-event-name=WhatsApp_Footer">WhatsApp</a> &nbsp;·&nbsp;
         <a href="mailto:meet@dotsai.in">Email</a>
       </span>
     </div>
@@ -928,6 +930,26 @@
   window.addEventListener('scroll', update, {passive:true});
   window.addEventListener('load', update);
   update();
+})();
+</script>
+<script>
+/* Plausible funnel — case study · woro · scroll depth + CTA */
+(function(){
+  'use strict';
+  var CLIENT = 'woro';
+  function p(ev,opts){ if(typeof window.plausible==='function') window.plausible(ev,opts); }
+  var fired = {};
+
+  /* Scroll depth */
+  function checkDepth(){
+    var total = document.documentElement.scrollHeight - window.innerHeight;
+    if(total<=0) return;
+    var pct = Math.round(window.scrollY/total*100);
+    [50,75,100].forEach(function(m){
+      if(!fired['s'+m]&&pct>=m){ fired['s'+m]=true; p('CaseStudy_Scroll_'+m+'pct',{props:{client:CLIENT}}); }
+    });
+  }
+  window.addEventListener('scroll', checkDepth, {passive:true});
 })();
 </script>
 <script src="/assets/js/i18n.js" defer></script>

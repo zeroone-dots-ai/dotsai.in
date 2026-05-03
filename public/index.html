@@ -4405,5 +4405,91 @@ if (false && isDesktop && !reducedMotion) {
 })();
 </script>
 <script src="/assets/js/i18n.js" defer></script>
+<script>
+/* -----------------------------------------------------------------------
+   Plausible — Funnel Intelligence Layer · dotsai.in homepage
+   Adds: scroll depth · section entry · FAQ opens · case click · service expand · nav click
+   All signals fire ONCE per page load (fired guard).
+   Feeds 5 funnels configured in Plausible dashboard — see docs/ANALYTICS.md
+   ----------------------------------------------------------------------- */
+(function(){
+  'use strict';
+  function p(ev,opts){ if(typeof window.plausible==='function') window.plausible(ev,opts); }
+  var fired = {};
+
+  /* ── 1. Scroll depth ─────────────────────────────────────────────────── */
+  function checkDepth(){
+    var total = document.documentElement.scrollHeight - window.innerHeight;
+    if(total <= 0) return;
+    var pct = Math.round(window.scrollY / total * 100);
+    [25,50,75,90].forEach(function(m){
+      if(!fired['s'+m] && pct >= m){ fired['s'+m]=true; p('Scroll_'+m+'pct'); }
+    });
+  }
+  window.addEventListener('scroll', checkDepth, {passive:true});
+
+  /* ── 2. Section entry (one-shot IntersectionObserver per zone) ───────── */
+  var ZONES = {
+    hero:'Section_Hero', pillars:'Section_Services', cases:'Section_Cases',
+    work:'Section_Proof', workstyle:'Section_HowItWorks', regions:'Section_Regions',
+    pricing:'Section_Pricing', lfs:'Section_LFS', founder:'Section_Founder',
+    contact:'Section_Contact', faq:'Section_FAQ', cta:'Section_CTAStrip'
+  };
+  var secIO = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var z = e.target.dataset.bgZone;
+      if(!z || fired['z_'+z]) return;
+      fired['z_'+z] = true;
+      if(ZONES[z]) p(ZONES[z]);
+      secIO.unobserve(e.target);
+    });
+  },{threshold:0.3});
+  document.querySelectorAll('[data-bg-zone]').forEach(function(s){ secIO.observe(s); });
+
+  /* ── 3. FAQ opens — which question the visitor actually wanted answered ─ */
+  document.querySelectorAll('.faq-item').forEach(function(det){
+    det.addEventListener('toggle', function(){
+      if(!det.open) return;
+      var span = det.querySelector('summary span[data-i18n]');
+      var q = span ? span.textContent.trim().substring(0,80) : 'unknown';
+      p('FAQ_Open', {props:{question:q}});
+    });
+  });
+
+  /* ── 4. Case study card — deep-read intent signal ────────────────────── */
+  document.querySelectorAll('article.case').forEach(function(card){
+    var once = true;
+    card.addEventListener('click', function(e){
+      if(!once) return;
+      var link = e.target.closest('a[href*="case-studies"]');
+      if(!link) return;
+      once = false;
+      p('CaseStudy_Click', {props:{client:card.dataset.c||'unknown'}});
+    });
+  });
+
+  /* ── 5. Service pillar expand — bottom-of-funnel interest in a service ─ */
+  document.querySelectorAll('[data-fp-catalog-toggle]').forEach(function(btn){
+    var once = true;
+    btn.addEventListener('click', function(){
+      if(!once) return; once = false;
+      var fp = btn.closest('.fp');
+      var el = fp && (fp.querySelector('.fp-name') || fp.querySelector('h3'));
+      var name = el ? el.textContent.trim().substring(0,40) : 'unknown';
+      p('Service_Expand', {props:{service:name}});
+    });
+  });
+
+  /* ── 6. Internal nav clicks — which section drives bounce vs. engage ─── */
+  document.querySelectorAll('.nav-link[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(){
+      var el = a.querySelector('[data-i18n]') || a;
+      p('Nav_Click', {props:{section:el.textContent.trim()}});
+    });
+  });
+
+})();
+</script>
 </body>
 </html>
