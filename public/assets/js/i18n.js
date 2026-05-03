@@ -46,7 +46,7 @@
   display:inline-flex;align-items:center;gap:12px;
   justify-self:end;
 }
-@media(max-width:899px){.lang-switcher{display:none;}}
+@media(max-width:899px){.nav-right-slot{gap:6px;}}
 `;
   const styleEl = document.createElement('style');
   styleEl.textContent = css;
