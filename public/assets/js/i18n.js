@@ -46,7 +46,17 @@
   display:inline-flex;align-items:center;gap:12px;
   justify-self:end;
 }
-@media(max-width:899px){.nav-right-slot{gap:6px;}}
+/* Mobile: handle both the slot wrapper AND the raw 4-child fallback */
+@media(max-width:899px){
+  .nav-right-slot{gap:5px;}
+  .lang-switcher{padding:2px;}
+  .lang-btn{padding:3px 5px;font-size:9px;}
+  /* If lang-switcher is a direct nav child (insertBefore path),
+     pin it + CTA to columns 3 & 4 so they stay on the same row */
+  #nav{grid-template-columns:auto 1fr auto auto !important;}
+  #nav>.lang-switcher{grid-column:3;grid-row:1;}
+  #nav>.nav-cta{grid-column:4;grid-row:1;}
+}
 `;
   const styleEl = document.createElement('style');
   styleEl.textContent = css;
