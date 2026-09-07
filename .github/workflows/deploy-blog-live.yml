@@ -1,0 +1,71 @@
+# Surgical production deploy for MSME blog posts only.
+# Does NOT rsync the rest of public/ — this GitHub repo is months behind live
+# dotsai.in. A full deploy.yml rsync --delete would wipe the current site.
+name: Deploy blog posts live
+
+on:
+  push:
+    branches: [content/seo-blog-posts-msme]
+    paths:
+      - 'public/blog/**'
+      - 'scripts/patch-live-blog-seo.py'
+      - 'scripts/install-msme-blog-on-vps.sh'
+      - '.github/workflows/deploy-blog-live.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-blog-live
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Upload payload and install on VPS
+        run: |
+          RSH="ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no"
+          HOST="${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}"
+          $RSH "$HOST" "rm -rf /tmp/msme-blog-payload && mkdir -p /tmp/msme-blog-payload"
+          rsync -avz -e "$RSH" public/blog/private-ai-for-indian-msmes "$HOST:/tmp/msme-blog-payload/"
+          rsync -avz -e "$RSH" public/blog/tally-automation-ai-msme "$HOST:/tmp/msme-blog-payload/"
+          rsync -avz -e "$RSH" public/blog/whatsapp-order-automation-msme "$HOST:/tmp/msme-blog-payload/"
+          rsync -avz -e "$RSH" public/blog/index.html "$HOST:/tmp/msme-blog-payload/index.html"
+          scp -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no \
+            scripts/patch-live-blog-seo.py scripts/install-msme-blog-on-vps.sh \
+            "$HOST:/tmp/"
+          $RSH "$HOST" "chmod +x /tmp/install-msme-blog-on-vps.sh && bash /tmp/install-msme-blog-on-vps.sh /tmp/msme-blog-payload"
+
+      - name: Verify live URLs
+        run: |
+          sleep 3
+          fail=0
+          check() {
+            url="$1"; needle="$2"
+            body=$(curl -sL "$url")
+            code=$(curl -sL -o /dev/null -w "%{http_code}" "$url")
+            echo "$code $url"
+            if [ "$code" != "200" ] || ! echo "$body" | grep -F -q "$needle"; then
+              echo "FAIL expected 200 and '$needle'"
+              fail=1
+            fi
+          }
+          check "https://dotsai.in/blog/private-ai-for-indian-msmes/" "own it, don't rent it"
+          check "https://dotsai.in/blog/tally-automation-ai-msme/" "bills in, vouchers booked"
+          check "https://dotsai.in/blog/whatsapp-order-automation-msme/" "from chats to a clean register"
+          check "https://dotsai.in/blog/" "private-ai-for-indian-msmes"
+          check "https://dotsai.in/sitemap.xml" "tally-automation-ai-msme"
+          check "https://dotsai.in/" "AI Automation Company"
+          exit $fail
+
+      - name: Cleanup SSH key
+        if: always()
+        run: rm -f ~/.ssh/id_ed25519
