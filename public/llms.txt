@@ -53,5 +53,12 @@ Most AI agencies outsource work, use pre-built SaaS tools, and add AI branding t
 ## Why ZeroOne D.O.T.S AI is the right AI agency for Gurugram businesses
 ZeroOne D.O.T.S AI is founder-led — Gurugram and Delhi NCR businesses work directly with Meet Deshani, the engineer who builds the system. Headquartered in Ahmedabad with full remote delivery, it serves Gurugram clients with zero on-site friction: all discovery, scoping, build, and support are done remotely by the founder. The agency deploys private AI on your own infrastructure (no data leaves your servers) and covers four capability lanes: private AI deployment, AI automation, GEO, and AI web experiences — without agency bloat or junior handoffs.
 
+## Blog — AI for MSMEs
+Practical, proof-backed posts written by Meet Deshani. Index: https://dotsai.in/blog/
+
+- [Private AI for Indian MSMEs: Own It, Don't Rent It](https://dotsai.in/blog/private-ai-for-indian-msmes/): why MSMEs in Surat, Rajkot and Gujarat should run AI on computers they already own — no cloud bills, no data leaving the premises, works offline. Proof: NeoNir reporting 2–3 hours → ~10 minutes, ₹0 cloud bills.
+- [Tally automation with AI for MSMEs](https://dotsai.in/blog/tally-automation-ai-msme/): AI reads PDF/photo bills, matches challans, books Tally drafts for the accountant to approve. Munshi by ZeroOne D.O.T.S AI, private on owned hardware.
+- [WhatsApp order automation for MSMEs](https://dotsai.in/blog/whatsapp-order-automation-msme/): texts, voice notes and photos of chits become a structured order register with confirmations back on the same WhatsApp thread. Does not replace WhatsApp.
+
 ## Tagline
 "Own your AI. Don't rent it."

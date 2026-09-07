@@ -3,26 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Insights | Private AI, GEO, and Automation Thinking | DotsAI</title>
-  <meta name="description" content="Insights from DotsAI on private AI, AI automation, GEO, search visibility, and founder-led implementation strategy.">
+  <title>AI for MSMEs — Blog | ZeroOne D.O.T.S AI</title>
+  <meta name="description" content="Practical, proof-backed posts on private AI, Tally automation and WhatsApp order workflows for Indian MSMEs. Written by Meet Deshani at ZeroOne DOTS AI.">
   <meta name="robots" content="index, follow, max-image-preview:large">
-  <link rel="canonical" href="https://dotsai.in/insights/">
-  <meta property="og:title" content="AI Insights | DotsAI">
-  <meta property="og:description" content="Private AI, GEO, and automation insights from a founder-led implementation perspective.">
-  <meta property="og:url" content="https://dotsai.in/insights/">
+  <link rel="canonical" href="https://dotsai.in/blog/">
+  <meta name="author" content="Meet Deshani">
+  <meta property="og:title" content="AI for MSMEs — Blog | ZeroOne D.O.T.S AI">
+  <meta property="og:description" content="Private AI, Tally and WhatsApp workflows for Indian MSMEs — proof-backed, founder-written.">
+  <meta property="og:url" content="https://dotsai.in/blog/">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ZeroOne D.O.T.S AI">
   <meta property="og:image" content="https://dotsai.in/og-image.png">
+  <meta property="og:locale" content="en_IN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@reflection11_11">
+  <meta name="twitter:title" content="AI for MSMEs — Blog | ZeroOne D.O.T.S AI">
+  <meta name="twitter:description" content="Private AI, Tally and WhatsApp workflows for Indian MSMEs — proof-backed, founder-written.">
+  <meta name="twitter:image" content="https://dotsai.in/og-image.png">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="apple-touch-icon" href="/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/site.css?v=20260502b">
+  <style>
+    .post-hero { padding: 110px 0 72px; }
+    .post-hero h1 { font-size: clamp(36px, 6vw, 68px); }
+    .post-meta { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 22px;
+      font-family: "Space Mono", monospace; font-size: 11px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(243, 240, 255, 0.56); }
+    .post-article { max-width: 760px; }
+    .post-article h2 { margin: 0 0 16px; font-family: "Instrument Serif", serif;
+      font-size: clamp(28px, 4vw, 42px); line-height: 1.05; letter-spacing: -0.03em; }
+    .post-article p { max-width: 720px; }
+    .post-article a { color: var(--plum); text-decoration: underline; text-underline-offset: 3px; }
+    .post-article a:hover { color: var(--ink); }
+    .compare-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 18px; background: var(--panel); }
+    .compare-table { width: 100%; border-collapse: collapse; min-width: 520px; }
+    .compare-table th, .compare-table td { padding: 14px 16px; text-align: left; vertical-align: top;
+      border-bottom: 1px solid rgba(23, 23, 34, 0.08); font-size: 15px; line-height: 1.55; }
+    .compare-table th { font-family: "Space Mono", monospace; font-size: 11px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(23, 23, 34, 0.5); background: rgba(23, 23, 34, 0.03); }
+    .compare-table tr:last-child td { border-bottom: 0; }
+    .faq-list { display: grid; gap: 14px; }
+    .faq-item h3 { margin: 0 0 8px; font-family: "Instrument Serif", serif; font-size: 22px; line-height: 1.2; }
+    .faq-item p { margin: 0; }
+    .post-cta { padding: 32px; border-radius: 24px;
+      background: linear-gradient(180deg, rgba(67, 48, 95, 0.96), rgba(36, 29, 51, 0.98)); color: #f3f0ff; }
+    .post-cta h2 { color: #f3f0ff; }
+    .post-cta p { color: rgba(243, 240, 255, 0.78); }
+    .post-cta .button-primary { background: #F7F3ED; color: var(--ink); }
+    .post-cta .button-secondary { background: transparent; color: #f3f0ff; border-color: rgba(255,255,255,.2); }
+    .blog-card { display: block; color: inherit; transition: transform 0.25s ease, border-color 0.25s ease; }
+    .blog-card:hover { transform: translateY(-2px); }
+    .blog-card h2 { margin: 0 0 10px; font-family: "Instrument Serif", serif;
+      font-size: clamp(24px, 3vw, 34px); line-height: 1.12; }
+    .blog-card p { margin: 0 0 14px; }
+    .blog-card .read-more { font-family: "Space Mono", monospace; font-size: 11px;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--plum); }
+    .accent-lavender { border-left: 3px solid #C8B6FF; }
+    .accent-mint { border-left: 3px solid #B8E0D2; }
+    .accent-peach { border-left: 3px solid #FFCDB2; }
+    .accent-sky { border-left: 3px solid #A2D2FF; }
+  </style>
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Blog","name":"AI Insights by ZeroOne D.O.T.S AI","url":"https://dotsai.in/insights/","description":"Insights on private AI, GEO, AI automation, and founder-led implementation strategy from ZeroOne D.O.T.S AI, the best AI agency in Gurugram.","publisher":{"@type":"Organization","@id":"https://dotsai.in/#organization","name":"ZeroOne D.O.T.S AI","url":"https://dotsai.in"}}
+  {"@context":"https://schema.org","@type":"Blog","@id":"https://dotsai.in/blog/#blog","name":"AI for MSMEs — Blog | ZeroOne D.O.T.S AI","url":"https://dotsai.in/blog/","description":"Practical, proof-backed posts on private AI, Tally automation and WhatsApp order workflows for Indian MSMEs. Written by Meet Deshani.","publisher":{"@type":"Organization","@id":"https://dotsai.in/#organization","name":"ZeroOne D.O.T.S AI","url":"https://dotsai.in"}}
   </script>
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dotsai.in/"},{"@type":"ListItem","position":2,"name":"Insights","item":"https://dotsai.in/insights/"}]}
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dotsai.in/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://dotsai.in/blog/"}]}
   </script>
 </head>
 <body class="grain">
@@ -47,72 +95,60 @@
   <div class="nav-pill" role="tablist" aria-label="Site navigation">
     <a class="nav-link" href="/">← Home</a>
     <a class="nav-link" href="/blog/">Blog</a>
-    <a class="nav-link" href="/#pillars">Services</a>
+    <a class="nav-link" href="/insights/">Insights</a>
     <a class="nav-link" href="/case-studies/">Case Studies</a>
     <a class="nav-link" href="/pricing/">Pricing</a>
   </div>
   <a class="nav-cta" href="https://cal.com/meetdeshani" target="_blank" rel="noopener">Book Meet →</a>
 </nav>
 
-  <section class="hero">
-    <div class="shell hero-grid">
-      <div>
-        <div class="breadcrumbs"><a href="/">Home</a> / <span>Insights</span></div>
-        <div class="eyebrow" style="margin-top:18px;">Thinking in public</div>
-        <h1>Practical AI thinking for teams that care about <em>ownership and outcomes.</em></h1>
-        <p class="hero-copy">This section is where DotsAI explains the why behind the build work: what private AI is good for, where GEO is misunderstood, and how to structure AI projects so they survive contact with real operations.</p>
-      </div>
-      <aside class="hero-panel">
-        <h2>Current themes</h2>
-        <ul>
-          <li>Private AI versus rented AI</li>
-          <li>How answer-engine visibility is actually earned</li>
-          <li>What makes AI automation durable in production</li>
-        </ul>
-      </aside>
+  <section class="hero post-hero">
+    <div class="shell">
+      <div class="breadcrumbs"><a href="/">Home</a> / <span>Blog</span></div>
+      <div class="eyebrow" style="margin-top:18px;">Thinking in public · MSMEs</div>
+      <h1>Practical <em>AI for Indian MSMEs.</em></h1>
+      <p class="hero-copy">Posts on private AI, Tally and WhatsApp workflows — written by the founder who builds them. Every post is backed by a live deployment, not a theory deck.</p>
     </div>
   </section>
 
   <main class="shell">
     <section class="section">
+      <p class="kicker">// latest</p>
       <div class="stack">
-        <div class="content-card stack">
-          <p class="kicker">// insight 01</p>
-          <h2>Why private AI matters when the workflow is strategic</h2>
-          <p>If the work touches sensitive internal documents, recurring decisions, or proprietary operating knowledge, then private deployment is not a luxury preference. It becomes a control decision.</p>
-        </div>
-        <div class="content-card stack">
-          <p class="kicker">// insight 02</p>
-          <h2>GEO is not an SEO replacement. It is an extension of clarity.</h2>
-          <p>LLM and answer-engine visibility improves when a business has clean technical signals, explicit service pages, proof-rich public content, and factual statements that can be quoted without guesswork.</p>
-        </div>
-        <div class="content-card stack">
-          <p class="kicker">// insight 03</p>
-          <h2>AI automation breaks when ownership is vague</h2>
-          <p>The real challenge is usually not model quality alone. It is who owns the workflow, what the escalation path is, which tools the system can touch, and how exceptions are handled.</p>
-        </div>
-      </div>
-    </section>
-    <section class="section">
-      <p class="kicker">// MSME posts</p>
-      <h2>From the blog</h2>
-      <p>Founder-to-owner notes on private AI, Tally and WhatsApp — the same workflows we deploy in Surat and across Gujarat. Full index: <a href="/blog/" style="color:var(--plum);text-decoration:underline;text-underline-offset:3px;">/blog/</a>.</p>
-      <div class="stack" style="margin-top:24px;">
-        <a class="content-card stack" href="/blog/private-ai-for-indian-msmes/">
-          <p class="kicker">7 Sep 2026 · Private AI</p>
+        <a class="content-card blog-card accent-lavender" href="/blog/private-ai-for-indian-msmes/">
+          <p class="kicker">Private AI · 7 Sep 2026</p>
           <h2>Private AI for Indian MSMEs: own it, don't rent it</h2>
-          <p>Why MSMEs should run AI on computers they already own — no cloud bills, no data leaving the premises, works offline.</p>
+          <p>Why Surat and Gujarat MSMEs should run AI on computers they already own — no cloud bills, no data leaving the premises, works offline.</p>
+          <span class="read-more">Read the post →</span>
         </a>
-        <a class="content-card stack" href="/blog/tally-automation-ai-msme/">
-          <p class="kicker">7 Sep 2026 · Tally</p>
+        <a class="content-card blog-card accent-peach" href="/blog/tally-automation-ai-msme/">
+          <p class="kicker">Tally · 7 Sep 2026</p>
           <h2>Tally automation with AI: bills in, vouchers booked</h2>
           <p>AI reads PDFs and photos, matches challans, and books Tally drafts for your accountant to approve. Munshi, on your machines.</p>
+          <span class="read-more">Read the post →</span>
         </a>
-        <a class="content-card stack" href="/blog/whatsapp-order-automation-msme/">
-          <p class="kicker">7 Sep 2026 · WhatsApp</p>
+        <a class="content-card blog-card accent-mint" href="/blog/whatsapp-order-automation-msme/">
+          <p class="kicker">WhatsApp · 7 Sep 2026</p>
           <h2>WhatsApp order automation: from chats to a clean register</h2>
-          <p>Texts, voice notes and photos of chits become a structured order book, with confirmations back on the same thread.</p>
+          <p>Texts, voice notes and photos of chits become a structured order book, with confirmations back on the same WhatsApp thread.</p>
+          <span class="read-more">Read the post →</span>
         </a>
+        <a class="content-card blog-card accent-sky" href="/blog/ai-for-textile-industry-surat/">
+          <p class="kicker">Textiles · Surat · 16 Aug 2026</p>
+          <h2>AI for the textile industry in Surat: 5 workflows that actually pay</h2>
+          <p>WhatsApp orders, daily production reports, job-work billing into Tally, yarn and grey stock, payment follow-ups — inside a loom unit or trading office.</p>
+          <span class="read-more">Read the post →</span>
+        </a>
+      </div>
+    </section>
+    <section class="section post-article">
+            <div class="post-cta stack">
+        <h2>Have a workflow in mind?</h2>
+        <p>Tell us the one process that eats your day — we'll map it together, no obligation.</p>
+        <div class="button-row">
+          <a class="button button-primary" href="/contact/">Talk to Meet →</a>
+          <a class="button button-secondary" href="https://wa.me/918320065658" target="_blank" rel="noopener">WhatsApp +91 83200 65658</a>
+        </div>
       </div>
     </section>
   </main>
@@ -162,7 +198,7 @@
             <li><a href="https://dotsai.cloud" target="_blank" rel="noopener">Infinity Nexus — Platform</a></li>
             <li><a href="https://meet.dotsai.in" target="_blank" rel="noopener">Life OS — Dashboard</a></li>
             <li><a href="https://portfolio.dotsai.in" target="_blank" rel="noopener">Portfolio — All Services</a></li>
-            <li><a href="https://blogs.dotsai.in" target="_blank" rel="noopener">Blog — Insights &amp; Takes</a></li>
+            <li><a href="/blog/">Blog — AI for MSMEs</a></li>
           </ul>
         </div>
         <div class="foot-tier">
@@ -227,7 +263,6 @@
             <li><a href="/team/">Team — Our People</a></li>
             <li><a href="/sitemap/">Site Map</a></li>
             <li><a href="/labs/">Labs — live tools</a></li>
-            <li><a href="/labs/ai-chat/">Labs · AI chat</a></li>
           </ul>
         </div>
         <div class="foot-dives-col">
@@ -244,6 +279,7 @@
     <div class="foot-bot">
       <span>&copy; 2026 ZEROONE D·O·T·S AI &nbsp;·&nbsp; AHMEDABAD · INDIA &nbsp;·&nbsp; DELIVERING GLOBALLY</span>
       <span>
+        <a href="/contact/">Contact</a> &nbsp;·&nbsp;
         <a href="https://cal.com/meetdeshani" target="_blank" rel="noopener">Book</a> &nbsp;·&nbsp;
         <a href="https://wa.me/918320065658" target="_blank" rel="noopener">WhatsApp</a> &nbsp;·&nbsp;
         <a href="mailto:meet@dotsai.in">Email</a>
