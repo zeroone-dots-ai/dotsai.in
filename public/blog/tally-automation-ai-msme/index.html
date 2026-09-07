@@ -1,394 +1,306 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tally Automation with AI for MSMEs: Bills In, Vouchers Booked | ZeroOne D.O.T.S AI</title>
-  <meta name="description" content="Stop retyping bills into Tally. How AI reads PDFs and photos, matches challans, and books vouchers for your accountant to approve — private, on your machines. Munshi by ZeroOne DOTS AI.">
-  <meta name="robots" content="index, follow, max-image-preview:large">
-  <link rel="canonical" href="https://dotsai.in/blog/tally-automation-ai-msme/">
-  <meta name="author" content="Meet Deshani">
-  <meta property="og:title" content="Tally Automation with AI for MSMEs: Bills In, Vouchers Booked">
-  <meta property="og:description" content="Stop retyping bills into Tally. How AI reads PDFs and photos, matches challans, and books vouchers for your accountant to approve — private, on your machines. Munshi by ZeroOne DOTS AI.">
-  <meta property="og:url" content="https://dotsai.in/blog/tally-automation-ai-msme/">
-  <meta property="og:type" content="article">
-  <meta property="og:site_name" content="ZeroOne D.O.T.S AI">
-  <meta property="og:image" content="https://dotsai.in/og-image.png">
-  <meta property="og:locale" content="en_IN">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@reflection11_11">
-  <meta name="twitter:title" content="Tally Automation with AI for MSMEs: Bills In, Vouchers Booked">
-  <meta name="twitter:description" content="Stop retyping bills into Tally. How AI reads PDFs and photos, matches challans, and books vouchers for your accountant to approve — private, on your machines. Munshi by ZeroOne DOTS AI.">
-  <meta name="twitter:image" content="https://dotsai.in/og-image.png">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="apple-touch-icon" href="/favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/site.css?v=20260502b">
-  <style>
-    .post-hero { padding: 110px 0 72px; }
-    .post-hero h1 { font-size: clamp(36px, 6vw, 68px); }
-    .post-meta { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 22px;
-      font-family: "Space Mono", monospace; font-size: 11px; letter-spacing: 0.12em;
-      text-transform: uppercase; color: rgba(243, 240, 255, 0.56); }
-    .post-article { max-width: 760px; }
-    .post-article h2 { margin: 0 0 16px; font-family: "Instrument Serif", serif;
-      font-size: clamp(28px, 4vw, 42px); line-height: 1.05; letter-spacing: -0.03em; }
-    .post-article p { max-width: 720px; }
-    .post-article a { color: var(--plum); text-decoration: underline; text-underline-offset: 3px; }
-    .post-article a:hover { color: var(--ink); }
-    .compare-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 18px; background: var(--panel); }
-    .compare-table { width: 100%; border-collapse: collapse; min-width: 520px; }
-    .compare-table th, .compare-table td { padding: 14px 16px; text-align: left; vertical-align: top;
-      border-bottom: 1px solid rgba(23, 23, 34, 0.08); font-size: 15px; line-height: 1.55; }
-    .compare-table th { font-family: "Space Mono", monospace; font-size: 11px; letter-spacing: 0.12em;
-      text-transform: uppercase; color: rgba(23, 23, 34, 0.5); background: rgba(23, 23, 34, 0.03); }
-    .compare-table tr:last-child td { border-bottom: 0; }
-    .faq-list { display: grid; gap: 14px; }
-    .faq-item h3 { margin: 0 0 8px; font-family: "Instrument Serif", serif; font-size: 22px; line-height: 1.2; }
-    .faq-item p { margin: 0; }
-    .post-cta { padding: 32px; border-radius: 24px;
-      background: linear-gradient(180deg, rgba(67, 48, 95, 0.96), rgba(36, 29, 51, 0.98)); color: #f3f0ff; }
-    .post-cta h2 { color: #f3f0ff; }
-    .post-cta p { color: rgba(243, 240, 255, 0.78); }
-    .post-cta .button-primary { background: #F7F3ED; color: var(--ink); }
-    .post-cta .button-secondary { background: transparent; color: #f3f0ff; border-color: rgba(255,255,255,.2); }
-    .blog-card { display: block; color: inherit; transition: transform 0.25s ease, border-color 0.25s ease; }
-    .blog-card:hover { transform: translateY(-2px); }
-    .blog-card h2 { margin: 0 0 10px; font-family: "Instrument Serif", serif;
-      font-size: clamp(24px, 3vw, 34px); line-height: 1.12; }
-    .blog-card p { margin: 0 0 14px; }
-    .blog-card .read-more { font-family: "Space Mono", monospace; font-size: 11px;
-      letter-spacing: 0.14em; text-transform: uppercase; color: var(--plum); }
-    .accent-lavender { border-left: 3px solid #C8B6FF; }
-    .accent-mint { border-left: 3px solid #B8E0D2; }
-    .accent-peach { border-left: 3px solid #FFCDB2; }
-    .accent-sky { border-left: 3px solid #A2D2FF; }
-  </style>
-  <meta property="article:published_time" content="2026-09-07">
-  <meta property="article:author" content="Meet Deshani">
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"BlogPosting","@id":"https://dotsai.in/blog/tally-automation-ai-msme/#post","mainEntityOfPage":"https://dotsai.in/blog/tally-automation-ai-msme/","headline":"Tally automation with AI — bills in, vouchers booked","description":"Stop retyping bills into Tally. How AI reads PDFs and photos, matches challans, and books vouchers for your accountant to approve — private, on your machines. Munshi by ZeroOne DOTS AI.","url":"https://dotsai.in/blog/tally-automation-ai-msme/","image":"https://dotsai.in/og-image.png","datePublished":"2026-09-07","dateModified":"2026-09-07","inLanguage":"en-IN","articleSection":"Tally","keywords":["Tally automation","AI for Tally","Munshi","MSME accounting","bill to voucher"],"author":{"@type":"Person","name":"Meet Deshani","url":"https://dotsai.in/about/"},"publisher":{"@type":"Organization","@id":"https://dotsai.in/#organization","name":"ZeroOne D.O.T.S AI","url":"https://dotsai.in","logo":"https://dotsai.in/og-image.png"},"isPartOf":{"@id":"https://dotsai.in/blog/#blog"}}
-  </script>
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"FAQPage","@id":"https://dotsai.in/blog/tally-automation-ai-msme/#faq","mainEntity":[{"@type":"Question","name":"Can it read Gujarati or Hindi stamps and bill text?","acceptedAnswer":{"@type":"Answer","text":"Yes. A large share of the bills we see from Gujarat traders and job-workers have Gujarati or Hindi stamps, item names and notes. Those stay in the draft for your accountant — they are not skipped just because they are not in English."}},{"@type":"Question","name":"What if the AI misreads a bill?","acceptedAnswer":{"@type":"Answer","text":"Misreads stay a draft. Nothing posts to Tally until your accountant approves. The point is to stop retyping, not to remove the person who knows when a GST rate looks wrong."}},{"@type":"Question","name":"Do I need new hardware?","acceptedAnswer":{"@type":"Answer","text":"Usually no. Ordinary office machines are enough for bill reading and draft booking. The workflow is private by default — ledgers stay on-prem."}},{"@type":"Question","name":"Is this only for textile units?","acceptedAnswer":{"@type":"Answer","text":"No. Textile is where we see a lot of job-work bills, but trading, manufacturing and services offices have the same pile: PDF bills, WhatsApp photos, challans that do not match, and a month-end backlog."}}]}
-  </script>
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dotsai.in/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://dotsai.in/blog/"},{"@type":"ListItem","position":3,"name":"Tally automation with AI","item":"https://dotsai.in/blog/tally-automation-ai-msme/"}]}
-  </script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tally Automation with AI for MSMEs: Bills In, Vouchers Booked | ZeroOne</title>
+<meta name="description" content="Stop retyping bills into Tally. How AI reads PDFs and photos, matches challans, and books vouchers for your accountant to approve — private, on your machines. Munshi by ZeroOne DOTS AI.">
+<link rel="canonical" href="https://dotsai.in/blog/tally-automation-ai-msme/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#FDFCFA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#13131D" media="(prefers-color-scheme: dark)">
+<meta name="author" content="Meet Deshani">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ZeroOne D·O·T·S AI">
+<meta property="og:title" content="Tally Automation with AI for MSMEs: Bills In, Vouchers Booked">
+<meta property="og:description" content="Stop retyping bills into Tally. AI reads PDFs and photos, matches challans, and books drafts for your accountant to approve — private, on your machines.">
+<meta property="og:url" content="https://dotsai.in/blog/tally-automation-ai-msme/">
+<meta property="og:image" content="https://dotsai.in/assets/img/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Tally automation with AI for MSMEs — ZeroOne DOTS AI">
+<meta property="og:locale" content="en_IN">
+<meta property="article:published_time" content="2026-09-07">
+<meta property="article:author" content="Meet Deshani">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@reflection11_11">
+<meta name="twitter:title" content="Tally Automation with AI for MSMEs: Bills In, Vouchers Booked">
+<meta name="twitter:description" content="Stop retyping bills into Tally. AI reads PDFs and photos, matches challans, and books drafts for your accountant to approve — private, on your machines.">
+<meta name="twitter:image" content="https://dotsai.in/assets/img/og-card.png">
+<link rel="icon" href="/favicon.svg?v=dev" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png?v=dev">
+<link rel="preload" href="/assets/fonts/Chubbo-Variable.woff2?v=dev" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/Satoshi-Variable.woff2?v=dev" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/tokens.css?v=dev">
+<link rel="stylesheet" href="/assets/css/home.css?v=dev">
+<link rel="stylesheet" href="/assets/css/shell.css?v=dev">
+<script>try{if(localStorage.getItem('o1-dark')==='1')document.documentElement.classList.add('dark');}catch(e){}</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://dotsai.in/#organization","name":"ZeroOne D·O·T·S AI","legalName":"Zeroone AI Ventures Private Limited","url":"https://dotsai.in","logo":"https://dotsai.in/assets/img/logo-main.png","email":"meet@dotsai.in","telephone":"+91-83200-65658","identifier":{"@type":"PropertyValue","propertyID":"CIN","value":"U58201GJ2026PTC178606"},"founder":{"@id":"https://dotsai.in/about/#meet-deshani"},"address":{"@type":"PostalAddress","streetAddress":"A-36, 3rd Floor, Udhna–Navsari Main Road, Citi Industrial Estate, Udhna Udhyog Nagar","addressLocality":"Surat","addressRegion":"Gujarat","postalCode":"394210","addressCountry":"IN"}},{"@type":"BlogPosting","@id":"https://dotsai.in/blog/tally-automation-ai-msme/#post","mainEntityOfPage":"https://dotsai.in/blog/tally-automation-ai-msme/","headline":"Tally automation with AI — bills in, vouchers booked","description":"Stop retyping bills into Tally. How AI reads PDFs and photos, matches challans, and books vouchers for your accountant to approve — private, on your machines. Munshi by ZeroOne DOTS AI.","url":"https://dotsai.in/blog/tally-automation-ai-msme/","image":"https://dotsai.in/assets/img/og-card.png","datePublished":"2026-09-07","dateModified":"2026-09-07","inLanguage":"en-IN","articleSection":"Tally","keywords":["Tally automation","AI for Tally","Munshi","MSME accounting","bill to voucher"],"author":{"@id":"https://dotsai.in/about/#meet-deshani"},"publisher":{"@id":"https://dotsai.in/#organization"},"isPartOf":{"@id":"https://dotsai.in/blog/#blog"}}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","@id":"https://dotsai.in/blog/tally-automation-ai-msme/#faq","mainEntity":[{"@type":"Question","name":"Can it read Gujarati or Hindi stamps and bill text?","acceptedAnswer":{"@type":"Answer","text":"Yes. A large share of the bills we see from Gujarat traders and job-workers have Gujarati or Hindi stamps, item names and notes. Those stay in the draft for your accountant — they are not skipped just because they are not in English."}},{"@type":"Question","name":"What if the AI misreads a bill?","acceptedAnswer":{"@type":"Answer","text":"Misreads stay a draft. Nothing posts to Tally until your accountant approves. The point is to stop retyping, not to remove the person who knows when a GST rate looks wrong."}},{"@type":"Question","name":"Do I need new hardware?","acceptedAnswer":{"@type":"Answer","text":"Usually no. Ordinary office machines are enough for bill reading and draft booking. The workflow is private by default — ledgers stay on-prem."}},{"@type":"Question","name":"Is this only for textile units?","acceptedAnswer":{"@type":"Answer","text":"No. Textile is where we see a lot of job-work bills, but trading, manufacturing and services offices have the same pile: PDF bills, WhatsApp photos, challans that do not match, and a month-end backlog."}}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dotsai.in/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://dotsai.in/blog/"},{"@type":"ListItem","position":3,"name":"Tally automation with AI","item":"https://dotsai.in/blog/tally-automation-ai-msme/"}]}
+</script>
 </head>
-<body class="grain">
-  <nav class="nav" id="nav">
-  <a class="nav-brand" href="https://dotsai.in" aria-label="ZeroOne D·O·T·S AI — home">
-    <svg class="zo-logo" viewBox="0 0 480 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
-      <circle class="d-dot" cx="30" cy="24" r="11" fill="#C8B6FF"/>
-      <circle class="dot-bg" cx="56" cy="24" r="11" fill="currentColor"/>
-      <circle class="dot-bg" cx="82" cy="24" r="11" fill="currentColor"/>
-      <circle class="dot-bg" cx="30" cy="50" r="11" fill="currentColor"/>
-      <circle class="o-dot" cx="56" cy="50" r="11" fill="#B8E0D2"/>
-      <circle class="dot-bg" cx="82" cy="50" r="11" fill="currentColor"/>
-      <circle class="dot-bg" cx="30" cy="76" r="11" fill="currentColor"/>
-      <circle class="dot-bg" cx="56" cy="76" r="11" fill="currentColor"/>
-      <circle class="t-dot" cx="82" cy="76" r="11" fill="#FFCDB2"/>
-      <text x="112" y="42" font-family="'Space Mono', 'Courier New', monospace" font-weight="700" font-size="22" letter-spacing="3" fill="currentColor">ZEROONE</text>
-      <text x="112" y="72" font-family="'Space Mono', 'Courier New', monospace" font-weight="700" font-size="22" letter-spacing="3">
-        <tspan class="d-ltr" fill="#C8B6FF">D</tspan><tspan class="sep" fill="currentColor">·</tspan><tspan class="o-ltr" fill="#B8E0D2">O</tspan><tspan class="sep" fill="currentColor">·</tspan><tspan class="t-ltr" fill="#FFCDB2">T</tspan><tspan class="sep" fill="currentColor">·</tspan><tspan class="s-ltr" fill="#A2D2FF">S</tspan><tspan fill="currentColor" dx="12">AI</tspan>
-      </text>
-    </svg>
-  </a>
-  <div class="nav-pill" role="tablist" aria-label="Site navigation">
-    <a class="nav-link" href="/">← Home</a>
-    <a class="nav-link" href="/blog/">Blog</a>
-    <a class="nav-link" href="/insights/">Insights</a>
-    <a class="nav-link" href="/case-studies/">Case Studies</a>
-    <a class="nav-link" href="/pricing/">Pricing</a>
-  </div>
-  <a class="nav-cta" href="https://cal.com/meetdeshani" target="_blank" rel="noopener">Book Meet →</a>
-</nav>
-
-  <section class="hero post-hero">
-    <div class="shell">
-      <div class="breadcrumbs"><a href="/">Home</a> / <a href="/blog/">Blog</a> / <span>Tally</span></div>
-      <div class="eyebrow" style="margin-top:18px;">Munshi · Tally on your machines</div>
-      <h1>Tally automation with AI — <em>bills in, vouchers booked.</em></h1>
-      <p class="hero-copy">AI reads the bill, proposes the voucher, drops a draft in Tally, and your accountant approves. We do not replace Tally. We stop the retyping.</p>
-      <div class="post-meta"><span>Tally · MSME accounts</span><span>7 Sep 2026 · Meet Deshani</span></div>
+<body>
+<div id="ds-root">
+<!-- Shared shell nav (SSI-included by every inner page). Absolute paths only. -->
+<header style="position:sticky; top:18px; z-index:50; padding:0 20px;">
+  <nav style="max-width:1180px; margin:0 auto; height:64px; padding:0 14px 0 26px; display:flex; align-items:center; justify-content:space-between; background-color:var(--navbg,rgba(253,252,250,.82)); backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px); border:1px solid var(--border,#E8E6E0); border-radius:18px; box-shadow:0 12px 36px rgba(25,25,36,.10);">
+    <a href="/" aria-label="ZeroOne D·O·T·S AI — home" style="display:inline-flex; text-decoration:none;">
+      <span class="o1-logo o1-logo-sm" aria-hidden="true">
+        <span class="dots"><span class="ld"></span><span></span><span></span><span></span><span class="lo"></span><span></span><span></span><span></span><span class="lt"></span></span>
+        <span class="word"><span class="l1">ZEROONE</span><span class="l2"><span class="cd">D</span><span class="sep"> · </span><span class="co">O</span><span class="sep"> · </span><span class="ct">T</span><span class="sep"> · </span><span class="cs">S</span><span class="ai">AI</span></span></span>
+      </span>
+    </a>
+    <div class="ds-navlinks" style="display:flex; gap:26px; align-items:center;">
+      <a href="/services/" data-nav="services" style="font-size:14px; font-weight:500; color:var(--navlink,#4A4842); text-decoration:none;">Services</a>
+      <a href="/products/" data-nav="products" style="font-size:14px; font-weight:500; color:var(--navlink,#4A4842); text-decoration:none;">Products</a>
+      <a href="/models/" data-nav="models" style="font-size:14px; font-weight:500; color:var(--navlink,#4A4842); text-decoration:none;">Models</a>
+      <a href="/case-studies/" data-nav="case" style="font-size:14px; font-weight:500; color:var(--navlink,#4A4842); text-decoration:none;">Case Studies</a>
+      <a href="/faq/" data-nav="faq" style="font-size:14px; font-weight:500; color:var(--navlink,#4A4842); text-decoration:none;">FAQ</a>
     </div>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <div class="ds-only-desk" style="position:relative;">
+        <button id="ds-lang-btn" type="button" aria-haspopup="listbox" aria-expanded="false" style="display:inline-flex; align-items:center; gap:6px; font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:600; letter-spacing:.04em; color:var(--navlink,#4A4842); background:transparent; border:none; padding:8px 10px; border-radius:999px; cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg><span class="langcode">EN</span> <span style="font-size:9px; opacity:.55;">▾</span></button>
+        <div id="ds-langmenu" role="listbox" style="position:absolute; top:calc(100% + 10px); right:0; background-color:var(--surface,#FDFCFA); border:1px solid var(--border,#E8E6E0); border-radius:12px; box-shadow:0 14px 36px rgba(25,25,36,.18); padding:6px; min-width:184px; z-index:60; display:none; flex-direction:column; gap:2px;">
+          <button type="button" data-lang="EN" role="option" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; font-family:'Satoshi',sans-serif; font-size:13px; font-weight:500; color:var(--fg,#191924); background:rgba(91,63,212,.10); border:none; padding:9px 12px; border-radius:8px; cursor:pointer;"><span>English</span><span style="font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--faint,#918D82);">EN</span></button>
+          <button type="button" data-lang="HI" role="option" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; font-family:'Satoshi',sans-serif; font-size:13px; font-weight:500; color:var(--fg,#191924); background:transparent; border:none; padding:9px 12px; border-radius:8px; cursor:pointer;"><span>हिन्दी</span><span style="font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--faint,#918D82);">HI</span></button>
+          <button type="button" data-lang="GU" role="option" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; font-family:'Satoshi',sans-serif; font-size:13px; font-weight:500; color:var(--fg,#191924); background:transparent; border:none; padding:9px 12px; border-radius:8px; cursor:pointer;"><span>ગુજરાતી</span><span style="font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--faint,#918D82);">GU</span></button>
+          <button type="button" data-lang="BN" role="option" aria-disabled="true" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; font-family:'Satoshi',sans-serif; font-size:13px; font-weight:500; color:var(--fg,#191924); background:transparent; border:none; padding:9px 12px; border-radius:8px; cursor:pointer; opacity:.45; cursor:not-allowed;"><span>বাংলা</span><span style="font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--faint,#918D82);">Soon</span></button>
+          <button type="button" data-lang="MR" role="option" aria-disabled="true" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; font-family:'Satoshi',sans-serif; font-size:13px; font-weight:500; color:var(--fg,#191924); background:transparent; border:none; padding:9px 12px; border-radius:8px; cursor:pointer; opacity:.45; cursor:not-allowed;"><span>मराठी</span><span style="font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--faint,#918D82);">Soon</span></button>
+          <button type="button" data-lang="TE" role="option" aria-disabled="true" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; font-family:'Satoshi',sans-serif; font-size:13px; font-weight:500; color:var(--fg,#191924); background:transparent; border:none; padding:9px 12px; border-radius:8px; cursor:pointer; opacity:.45; cursor:not-allowed;"><span>తెలుగు</span><span style="font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--faint,#918D82);">Soon</span></button>
+          <button type="button" data-lang="KN" role="option" aria-disabled="true" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; font-family:'Satoshi',sans-serif; font-size:13px; font-weight:500; color:var(--fg,#191924); background:transparent; border:none; padding:9px 12px; border-radius:8px; cursor:pointer; opacity:.45; cursor:not-allowed;"><span>ಕನ್ನಡ</span><span style="font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--faint,#918D82);">Soon</span></button>
+          <button type="button" data-lang="TA" role="option" aria-disabled="true" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; font-family:'Satoshi',sans-serif; font-size:13px; font-weight:500; color:var(--fg,#191924); background:transparent; border:none; padding:9px 12px; border-radius:8px; cursor:pointer; opacity:.45; cursor:not-allowed;"><span>தமிழ்</span><span style="font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--faint,#918D82);">Soon</span></button>
+          <button type="button" data-lang="ML" role="option" aria-disabled="true" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; font-family:'Satoshi',sans-serif; font-size:13px; font-weight:500; color:var(--fg,#191924); background:transparent; border:none; padding:9px 12px; border-radius:8px; cursor:pointer; opacity:.45; cursor:not-allowed;"><span>മലയാളം</span><span style="font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--faint,#918D82);">Soon</span></button>
+        </div>
+      </div>
+      <button id="ds-theme-toggle" type="button" role="switch" aria-label="Toggle dark mode" style="position:relative; width:54px; height:28px; border-radius:999px; border:1px solid var(--border,#E8E6E0); background:transparent; padding:0; flex:none; cursor:pointer;">
+        <svg style="position:absolute; left:8px; top:50%; transform:translateY(-50%); color:var(--faint,#918D82);" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 3v2M12 19v2M5 5l1.4 1.4M17.6 17.6L19 19M3 12h2M19 12h2M5 19l1.4-1.4M17.6 6.4L19 5"></path></svg>
+        <svg style="position:absolute; right:9px; top:50%; transform:translateY(-50%); color:var(--faint,#918D82);" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+        <span id="ds-knob" style="position:absolute; top:2px; width:22px; height:22px; border-radius:50%; box-shadow:0 1px 4px rgba(0,0,0,.25); transition:left .3s cubic-bezier(.16,1,.3,1), background-color .3s;"></span>
+      </button>
+      <span class="ds-only-desk" style="position:relative; display:inline-flex;">
+        <button type="button" data-vanira-trigger data-vanira-agent="ff10aa93-92a9-4238-a9ce-1727412448f6" data-vanira-key="pk_live_25bd495c-7514-442e-9fd2-b9e402ddc787"
+               
+                style="position:relative; display:inline-flex; align-items:center; gap:7px; font-size:13.5px; font-weight:600; color:var(--eb,#5B3FD4); background:transparent; border:1px solid var(--eb,#5B3FD4); padding:9px 16px; border-radius:999px; cursor:pointer; white-space:nowrap; transition:background .2s ease, color .2s ease;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line></svg><span data-vanira-label>Talk to Z9S</span></button>
+      </span>
+      <a class="ds-only-desk plausible-event-name=Book_Nav" href="/contact/" style="display:inline-flex; align-items:center; gap:7px; font-size:14px; font-weight:700; background-color:var(--fg,#191924); color:var(--bg,#FDFCFA); padding:11px 22px; border-radius:999px; text-decoration:none; margin-left:2px; transition:opacity .2s;" style-hover="opacity:.85;">Contact <span>→</span></a>
+      <button id="ds-burger" class="ds-burger" type="button" aria-label="Menu" aria-expanded="false" style="width:42px; height:42px; align-items:center; justify-content:center; background:transparent; border:1px solid var(--border,#E8E6E0); border-radius:12px; cursor:pointer; flex:none; color:var(--fg,#191924); padding:0;">
+        <svg id="ds-burger-open" style="display:block" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="17" x2="21" y2="17"></line></svg>
+        <svg id="ds-burger-close" style="display:none" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg>
+      </button>
+    </div>
+  </nav>
+  <div id="ds-mobilemenu" class="ds-mobile-menu" style="max-width:1180px; margin:10px auto 0; padding:14px; background-color:var(--surface,#FDFCFA); border:1px solid var(--border,#E8E6E0); border-radius:18px; box-shadow:0 18px 44px rgba(25,25,36,.16); display:none; flex-direction:column; gap:4px;">
+    <a href="/services/" style="display:flex; align-items:center; justify-content:space-between; padding:13px 14px; font-size:16px; font-weight:600; color:var(--fg,#191924); text-decoration:none; border-radius:10px;">Services<span style="color:var(--eb,#5B3FD4);">→</span></a>
+    <a href="/products/" style="display:flex; align-items:center; justify-content:space-between; padding:13px 14px; font-size:16px; font-weight:600; color:var(--fg,#191924); text-decoration:none; border-radius:10px;">Products<span style="color:var(--eb,#5B3FD4);">→</span></a>
+    <a href="/models/" style="display:flex; align-items:center; justify-content:space-between; padding:13px 14px; font-size:16px; font-weight:600; color:var(--fg,#191924); text-decoration:none; border-radius:10px;">Models<span style="color:var(--eb,#5B3FD4);">→</span></a>
+    <a href="/case-studies/" style="display:flex; align-items:center; justify-content:space-between; padding:13px 14px; font-size:16px; font-weight:600; color:var(--fg,#191924); text-decoration:none; border-radius:10px;">Case Studies<span style="color:var(--eb,#5B3FD4);">→</span></a>
+    <a href="/faq/" style="display:flex; align-items:center; justify-content:space-between; padding:13px 14px; font-size:16px; font-weight:600; color:var(--fg,#191924); text-decoration:none; border-radius:10px;">FAQ<span style="color:var(--eb,#5B3FD4);">→</span></a>
+    <div style="height:1px; background-color:var(--border,#E8E6E0); margin:8px 4px;"></div>
+    <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--faint,#918D82); padding:2px 6px 8px;">Language</div>
+    <div style="display:flex; flex-wrap:wrap; gap:7px; padding:0 4px 4px;">
+      <button type="button" data-lang="EN" style="font-family:'Satoshi',sans-serif; font-size:13px; font-weight:500; color:var(--fg,#191924); background:rgba(91,63,212,.10); border:1px solid var(--border,#E8E6E0); padding:8px 13px; border-radius:999px; cursor:pointer;">English</button>
+      <button type="button" data-lang="HI" style="font-family:'Satoshi',sans-serif; font-size:13px; font-weight:500; color:var(--fg,#191924); background:transparent; border:1px solid var(--border,#E8E6E0); padding:8px 13px; border-radius:999px; cursor:pointer;">हिन्दी</button>
+      <button type="button" data-lang="GU" style="font-family:'Satoshi',sans-serif; font-size:13px; font-weight:500; color:var(--fg,#191924); background:transparent; border:1px solid var(--border,#E8E6E0); padding:8px 13px; border-radius:999px; cursor:pointer;">ગુજરાતી</button>
+      <button type="button" data-lang="BN" aria-disabled="true" style="font-family:'Satoshi',sans-serif; font-size:13px; font-weight:500; color:var(--fg,#191924); background:transparent; border:1px solid var(--border,#E8E6E0); padding:8px 13px; border-radius:999px; cursor:pointer; opacity:.45; cursor:not-allowed;">বাংলা · Soon</button>
+      <button type="button" data-lang="MR" aria-disabled="true" style="font-family:'Satoshi',sans-serif; font-size:13px; font-weight:500; color:var(--fg,#191924); background:transparent; border:1px solid var(--border,#E8E6E0); padding:8px 13px; border-radius:999px; cursor:pointer; opacity:.45; cursor:not-allowed;">मराठी · Soon</button>
+      <button type="button" data-lang="TE" aria-disabled="true" style="font-family:'Satoshi',sans-serif; font-size:13px; font-weight:500; color:var(--fg,#191924); background:transparent; border:1px solid var(--border,#E8E6E0); padding:8px 13px; border-radius:999px; cursor:pointer; opacity:.45; cursor:not-allowed;">తెలుగు · Soon</button>
+      <button type="button" data-lang="KN" aria-disabled="true" style="font-family:'Satoshi',sans-serif; font-size:13px; font-weight:500; color:var(--fg,#191924); background:transparent; border:1px solid var(--border,#E8E6E0); padding:8px 13px; border-radius:999px; cursor:pointer; opacity:.45; cursor:not-allowed;">ಕನ್ನಡ · Soon</button>
+      <button type="button" data-lang="TA" aria-disabled="true" style="font-family:'Satoshi',sans-serif; font-size:13px; font-weight:500; color:var(--fg,#191924); background:transparent; border:1px solid var(--border,#E8E6E0); padding:8px 13px; border-radius:999px; cursor:pointer; opacity:.45; cursor:not-allowed;">தமிழ் · Soon</button>
+      <button type="button" data-lang="ML" aria-disabled="true" style="font-family:'Satoshi',sans-serif; font-size:13px; font-weight:500; color:var(--fg,#191924); background:transparent; border:1px solid var(--border,#E8E6E0); padding:8px 13px; border-radius:999px; cursor:pointer; opacity:.45; cursor:not-allowed;">മലയാളം · Soon</button>
+    </div>
+    <button type="button" data-vanira-trigger
+            style="display:flex; align-items:center; justify-content:center; gap:9px; margin-top:10px; width:100%; font-family:'Satoshi',sans-serif; font-size:15px; font-weight:700; color:var(--eb,#5B3FD4); background:transparent; border:1px solid var(--eb,#5B3FD4); padding:14px; border-radius:999px; cursor:pointer;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line></svg><span data-vanira-label>Talk to Z9S Receptionist</span></button>
+    <a href="/contact/" class="plausible-event-name=Book_MobileMenu" style="display:flex; align-items:center; justify-content:center; gap:8px; margin-top:10px; font-size:15px; font-weight:700; background-color:var(--fg,#191924); color:var(--bg,#FDFCFA); padding:14px; border-radius:999px; text-decoration:none;">Contact us <span>→</span></a>
+  </div>
+</header>
+<script type="importmap">
+{"imports":{"react":"https://esm.sh/react@19.1.0","react/jsx-runtime":"https://esm.sh/react@19.1.0/jsx-runtime","react/jsx-dev-runtime":"https://esm.sh/react@19.1.0/jsx-dev-runtime","react-dom":"https://esm.sh/react-dom@19.1.0","react-dom/client":"https://esm.sh/react-dom@19.1.0/client"}}
+</script>
+<script type="module" src="/assets/js/vanira-callbox.js?v=dev"></script>
+
+<main>
+  <article>
+  <section style="max-width:880px; margin:0 auto; padding:clamp(60px,8vh,96px) 40px clamp(32px,4vh,44px);">
+    <div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px 18px; margin-bottom:22px;">
+      <a href="/blog/" style="font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--eb,#5B3FD4); text-decoration:none;">← Blog</a>
+      <span style="font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--eb,#5B3FD4);">Tally · Munshi</span>
+      <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.1em; color:var(--faint,#918D82);">7 Sep 2026 · Meet Deshani</span>
+    </div>
+    <h1 style="font-family:'Chubbo',serif; font-weight:700; font-size:clamp(30px,4.4vw,52px); line-height:1.08; letter-spacing:-0.03em; color:var(--fg,#191924); margin:0 0 18px; text-wrap:balance;">Tally automation with AI — <span style="font-style:italic; color:var(--eb,#5B3FD4);">bills in, vouchers booked.</span></h1>
+    <p style="font-family:'Supreme',sans-serif; font-size:clamp(16px,1.5vw,19px); line-height:1.65; color:var(--muted,#56524A); margin:0; max-width:700px;">AI reads the bill, proposes the voucher, drops a draft in Tally, and your accountant approves. We do not replace Tally. We stop the retyping.</p>
   </section>
 
-  <main class="shell">
-    <article class="section post-article stack">
-      <p>The bill arrives as a PDF, a photo, or a WhatsApp forward. Someone in accounts retypes it into Tally — party, GSTIN, HSN, qty, rate — and hopes the challan matches. At month-end the pile is still there.</p>
-      <p>The workflow we deploy is narrower than the pitch you hear from “AI accounting” tools. AI reads the bill. It proposes a voucher. Tally gets a <em>draft</em>. Your accountant approves. We do not replace Tally, and we do not auto-post into a live book.</p>
-    </article>
-
-    <section class="section post-article">
-      <p class="kicker">// what breaks today</p>
-      <h2>Where the hours actually go</h2>
-      <ul class="list">
-        <li><strong>PDF, photo and WhatsApp bills</strong> — three formats, one retype job, every day.</li>
-        <li><strong>Challan mismatch</strong> — job-work and trading offices spend the afternoon hunting the right inward number.</li>
-        <li><strong>GST typos</strong> — a wrong HSN or tax rate that only shows up when the return is being filed.</li>
-        <li><strong>Month-end backlog</strong> — the books close late because entry never kept up with the inbox.</li>
-      </ul>
-    </section>
-
-    <section class="section post-article">
-      <p class="kicker">// the flow</p>
-      <h2>Capture → Read → Match → Book draft → Approve</h2>
-      <div class="service-table">
-        <div class="service-row"><div class="service-label">01 · capture</div><div><h3>The bill as it already arrives</h3><p>Email PDF, phone photo, WhatsApp forward. Nobody scans into a new portal.</p></div></div>
-        <div class="service-row"><div class="service-label">02 · read</div><div><h3>AI pulls the fields</h3><p>Party, GSTIN, line items, qty, rate, tax. Gujarati and Hindi stamps stay in the record, not in a “could not read” pile.</p></div></div>
-        <div class="service-row"><div class="service-label">03 · match</div><div><h3>Challan and party against your books</h3><p>The draft is tied to the inward or job-work challan where one exists. Exceptions get flagged, not quietly guessed.</p></div></div>
-        <div class="service-row"><div class="service-label">04 · book draft</div><div><h3>A voucher waiting in Tally</h3><p>Your accountant sees a draft they already know how to review — not a new screen to learn.</p></div></div>
-        <div class="service-row"><div class="service-label">05 · approve</div><div><h3>A human still owns the books</h3><p>Nothing is live until someone who knows the ledger says yes.</p></div></div>
-      </div>
-    </section>
-
-    <section class="section post-article">
-      <p class="kicker">// the product</p>
-      <h2>Munshi — productised Tally bill booking</h2>
-      <div class="content-card stack accent-peach">
-        <p>Munshi is ZeroOne D.O.T.S AI's productised version of this workflow. It reads bills and vouchers and books them into Tally for approval. It runs private on hardware you own — ledgers do not go to a cloud bookkeeping app.</p>
-        <p>It is the same method as the rest of our <a href="/ai-automation/">AI automation</a>: sit inside the office, fix one bill type, then expand. If you want the ownership story behind that, read <a href="/blog/private-ai-for-indian-msmes/">private AI for Indian MSMEs</a>.</p>
-      </div>
-    </section>
-
-    <section class="section post-article">
-      <p class="kicker">// who benefits</p>
-      <h2>Who this is for</h2>
-      <div class="compare-wrap">
-        <table class="compare-table">
-          <thead>
-            <tr><th>Kind of MSME</th><th>What the pile looks like</th><th>What Munshi takes first</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Textile / job-work</td><td>Dyeing, printing, embroidery bills against grey challans</td><td>Job-work purchase bills and GST lines</td></tr>
-            <tr><td>Trading</td><td>Purchase bills on WhatsApp, sales already in Tally</td><td>Inward bills + party match</td></tr>
-            <tr><td>Manufacturing</td><td>RM bills, job-work out, freight</td><td>One vendor or one bill type, then expand</td></tr>
-            <tr><td>Services</td><td>Vendor invoices and retainers retyped every month</td><td>Recurring vendor bills</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p style="margin-top:18px;">Textile units in Surat see this most loudly — we wrote that up as <a href="/blog/ai-for-textile-industry-surat/">five workflows that actually pay</a>. The Tally piece is the same in a trading office.</p>
-    </section>
-
-    <section class="section post-article">
-      <p class="kicker">// private by default</p>
-      <h2>Ledgers stay on-prem</h2>
-      <p>Your books are the business. Munshi runs on machines you own. Bills are read locally. Drafts land in <em>your</em> Tally. That is the same rule as the rest of our private AI work — no third-party ledger, no training a public model on your parties and rates.</p>
-    </section>
-
-    <section class="section post-article">
-      <p class="kicker">// rollout</p>
-      <h2>One bill type, then the next</h2>
-      <div class="service-table">
-        <div class="service-row"><div class="service-label">01</div><div><h3>Pick one bill type</h3><p>One vendor, one job-work process, or one inward series — not “all of accounts” on day one.</p></div></div>
-        <div class="service-row"><div class="service-label">02</div><div><h3>Run samples</h3><p>We read a real stack with your accountant in the room and mark what must never be guessed.</p></div></div>
-        <div class="service-row"><div class="service-label">03</div><div><h3>Write the rules</h3><p>GST, party matching, challan links, and what becomes an exception.</p></div></div>
-        <div class="service-row"><div class="service-label">04</div><div><h3>Draft + approve</h3><p>Live only after the drafts are trusted. Then we expand to the next bill type.</p></div></div>
-      </div>
-    </section>
-
-    <section class="section post-article">
-      <p class="kicker">// questions owners ask</p>
-      <h2>FAQ</h2>
-      <div class="faq-list">
-        <div class="content-card faq-item">
-          <h3>Can it read Gujarati or Hindi stamps and bill text?</h3>
-          <p>Yes. A large share of the bills we see from Gujarat traders and job-workers have Gujarati or Hindi stamps, item names and notes. Those stay in the draft for your accountant — they are not skipped just because they are not in English.</p>
-        </div>
-        <div class="content-card faq-item">
-          <h3>What if the AI misreads a bill?</h3>
-          <p>Misreads stay a draft. Nothing posts to Tally until your accountant approves. The point is to stop retyping, not to remove the person who knows when a GST rate looks wrong.</p>
-        </div>
-        <div class="content-card faq-item">
-          <h3>Do I need new hardware?</h3>
-          <p>Usually no. Ordinary office machines are enough for bill reading and draft booking. The workflow is private by default — ledgers stay on-prem. See <a href="/blog/private-ai-for-indian-msmes/">private AI for Indian MSMEs</a>.</p>
-        </div>
-        <div class="content-card faq-item">
-          <h3>Is this only for textile units?</h3>
-          <p>No. Textile is where we see a lot of job-work bills, but trading, manufacturing and services offices have the same pile: PDF bills, WhatsApp photos, challans that do not match, and a month-end backlog.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section post-article">
-            <div class="post-cta stack">
-        <h2>Want bills to stop eating the month?</h2>
-        <p>We're in Udhna. Bring one messy bill type — we'll map the draft-and-approve flow, no obligation.</p>
-        <div class="button-row">
-          <a class="button button-primary" href="/contact/">Talk to Meet →</a>
-          <a class="button button-secondary" href="https://wa.me/918320065658" target="_blank" rel="noopener">WhatsApp +91 83200 65658</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-  <div class="wrap">
-    <div class="foot-workstyle">
-      <span class="foot-workstyle-lab">THE WORKSTYLE</span>
-      <p class="foot-workstyle-chain">
-        Ideation <span aria-hidden="true">→</span> Product Design <span aria-hidden="true">→</span> Engineering <span aria-hidden="true">→</span> Ops / AI Automations <span aria-hidden="true">→</span> Reliable, Human-Free, Profitable Scale.
-      </p>
+  <section style="max-width:880px; margin:0 auto; padding:0 40px clamp(48px,6vh,72px); display:flex; flex-direction:column; gap:18px;">
+    <p style="font-family:'Supreme',sans-serif; font-size:16px; line-height:1.7; color:var(--muted,#56524A); margin:0 0 12px; max-width:720px;">The bill arrives as a PDF, a photo, or a WhatsApp forward. Someone in accounts retypes it into Tally — party, GSTIN, HSN, qty, rate — and hopes the challan matches. At month-end the pile is still there.</p>
+    <div style="border:1px solid var(--border,#E8E6E0); border-radius:14px; padding:clamp(24px,3.5vw,36px); border-left:3px solid #FFCDB2; background:rgba(255,205,178,.1);">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--eb,#5B3FD4); margin-bottom:10px;">What breaks today</div>
+      <h2 style="font-family:'Chubbo',serif; font-weight:700; font-size:clamp(21px,2.6vw,30px); line-height:1.14; letter-spacing:-0.02em; color:var(--fg,#191924); margin:0 0 12px;">Where the hours actually go</h2>
+      <p style="font-family:'Supreme',sans-serif; font-size:16px; line-height:1.7; color:var(--muted,#56524A); margin:0 0 12px; max-width:720px;">PDF, photo and WhatsApp bills. Challan mismatch. GST typos. A month-end backlog because entry never kept up with the inbox.</p>
     </div>
-    <div class="foot-top">
-      <div class="foot-brand">
-        <div class="foot-logo">
-          <svg class="zo-logo" viewBox="0 0 480 100" xmlns="http://www.w3.org/2000/svg" aria-label="ZeroOne D·O·T·S AI" role="img">
-            <circle cx="30" cy="24" r="11" fill="#C8B6FF"/>
-            <circle class="dot-bg" cx="56" cy="24" r="11" fill="currentColor"/>
-            <circle class="dot-bg" cx="82" cy="24" r="11" fill="currentColor"/>
-            <circle class="dot-bg" cx="30" cy="50" r="11" fill="currentColor"/>
-            <circle cx="56" cy="50" r="11" fill="#B8E0D2"/>
-            <circle class="dot-bg" cx="82" cy="50" r="11" fill="currentColor"/>
-            <circle class="dot-bg" cx="30" cy="76" r="11" fill="currentColor"/>
-            <circle class="dot-bg" cx="56" cy="76" r="11" fill="currentColor"/>
-            <circle cx="82" cy="76" r="11" fill="#FFCDB2"/>
-            <text x="112" y="42" font-family="'Space Mono', 'Courier New', monospace" font-weight="700" font-size="22" letter-spacing="3" fill="currentColor">ZEROONE</text>
-            <text x="112" y="72" font-family="'Space Mono', 'Courier New', monospace" font-weight="700" font-size="22" letter-spacing="3">
-              <tspan fill="#C8B6FF">D</tspan><tspan class="sep" fill="currentColor">·</tspan><tspan fill="#B8E0D2">O</tspan><tspan class="sep" fill="currentColor">·</tspan><tspan fill="#FFCDB2">T</tspan><tspan class="sep" fill="currentColor">·</tspan><tspan fill="#A2D2FF">S</tspan><tspan fill="currentColor" dx="12">AI</tspan>
-            </text>
-          </svg>
-        </div>
-        <p class="foot-tag" data-i18n="foot.tag">Private AI, built for you. One founder, full-stack, zero middlemen. Ahmedabad HQ · 7 AI Masters globally.</p>
+
+    <div style="border:1px solid var(--border,#E8E6E0); border-radius:14px; padding:clamp(24px,3.5vw,36px); border-left:3px solid #C8B6FF; background:rgba(200,182,255,.06);">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--eb,#5B3FD4); margin-bottom:10px;">The flow</div>
+      <h2 style="font-family:'Chubbo',serif; font-weight:700; font-size:clamp(21px,2.6vw,30px); line-height:1.14; letter-spacing:-0.02em; color:var(--fg,#191924); margin:0 0 12px;">Capture → Read → Match → Book draft → Approve</h2>
+      <p style="font-family:'Supreme',sans-serif; font-size:16px; line-height:1.7; color:var(--muted,#56524A); margin:0 0 12px; max-width:720px;">The bill as it already arrives. AI pulls the fields. Challan and party against your books. A voucher waiting in Tally. Nothing is live until someone who knows the ledger says yes.</p>
+    </div>
+
+    <div style="border:1px solid var(--border,#E8E6E0); border-radius:14px; padding:clamp(24px,3.5vw,36px); border-left:3px solid #B8E0D2; background:rgba(184,224,210,.08);">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--eb,#5B3FD4); margin-bottom:10px;">The product</div>
+      <h2 style="font-family:'Chubbo',serif; font-weight:700; font-size:clamp(21px,2.6vw,30px); line-height:1.14; letter-spacing:-0.02em; color:var(--fg,#191924); margin:0 0 12px;">Munshi — productised Tally bill booking</h2>
+      <p style="font-family:'Supreme',sans-serif; font-size:16px; line-height:1.7; color:var(--muted,#56524A); margin:0 0 12px; max-width:720px;">Munshi is ZeroOne D.O.T.S AI's productised version of this workflow. It reads bills and vouchers and books them into Tally for approval, private on hardware you own. <a href='/products/#munshi' style='color:var(--eb,#5B3FD4); text-decoration:none;'>Munshi on the products page →</a> · <a href='/blog/private-ai-for-indian-msmes/' style='color:var(--eb,#5B3FD4); text-decoration:none;'>Why it stays private →</a></p>
+    </div>
+
+  </section>
+  <section style="max-width:880px; margin:0 auto; padding:0 40px clamp(48px,6vh,72px);">
+    <h2 style="font-family:'Chubbo',serif; font-weight:700; font-size:clamp(21px,2.6vw,30px); line-height:1.14; letter-spacing:-0.02em; color:var(--fg,#191924); margin:0 0 12px;">Who this is for</h2>
+    <div style="overflow-x:auto; border:1px solid var(--border,#E8E6E0); border-radius:14px;">
+      <table style="width:100%; border-collapse:collapse; min-width:520px;">
+        <thead><tr><th style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint,#918D82); text-align:left; padding:12px 14px; border-bottom:1px solid var(--border,#E8E6E0); background:rgba(25,25,36,.03);">Kind of MSME</th><th style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint,#918D82); text-align:left; padding:12px 14px; border-bottom:1px solid var(--border,#E8E6E0); background:rgba(25,25,36,.03);">What the pile looks like</th><th style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint,#918D82); text-align:left; padding:12px 14px; border-bottom:1px solid var(--border,#E8E6E0); background:rgba(25,25,36,.03);">What Munshi takes first</th></tr></thead>
+        <tbody>
+          <tr><td style="font-family:'Supreme',sans-serif; font-size:15px; line-height:1.55; color:var(--muted,#56524A); padding:12px 14px; border-bottom:1px solid var(--border,#E8E6E0); vertical-align:top;">Textile / job-work</td><td style="font-family:'Supreme',sans-serif; font-size:15px; line-height:1.55; color:var(--muted,#56524A); padding:12px 14px; border-bottom:1px solid var(--border,#E8E6E0); vertical-align:top;">Dyeing, printing, embroidery bills against grey challans</td><td style="font-family:'Supreme',sans-serif; font-size:15px; line-height:1.55; color:var(--muted,#56524A); padding:12px 14px; border-bottom:1px solid var(--border,#E8E6E0); vertical-align:top;">Job-work purchase bills and GST lines</td></tr>
+<tr><td style="font-family:'Supreme',sans-serif; font-size:15px; line-height:1.55; color:var(--muted,#56524A); padding:12px 14px; border-bottom:1px solid var(--border,#E8E6E0); vertical-align:top;">Trading</td><td style="font-family:'Supreme',sans-serif; font-size:15px; line-height:1.55; color:var(--muted,#56524A); padding:12px 14px; border-bottom:1px solid var(--border,#E8E6E0); vertical-align:top;">Purchase bills on WhatsApp, sales already in Tally</td><td style="font-family:'Supreme',sans-serif; font-size:15px; line-height:1.55; color:var(--muted,#56524A); padding:12px 14px; border-bottom:1px solid var(--border,#E8E6E0); vertical-align:top;">Inward bills + party match</td></tr>
+<tr><td style="font-family:'Supreme',sans-serif; font-size:15px; line-height:1.55; color:var(--muted,#56524A); padding:12px 14px; border-bottom:1px solid var(--border,#E8E6E0); vertical-align:top;">Manufacturing</td><td style="font-family:'Supreme',sans-serif; font-size:15px; line-height:1.55; color:var(--muted,#56524A); padding:12px 14px; border-bottom:1px solid var(--border,#E8E6E0); vertical-align:top;">RM bills, job-work out, freight</td><td style="font-family:'Supreme',sans-serif; font-size:15px; line-height:1.55; color:var(--muted,#56524A); padding:12px 14px; border-bottom:1px solid var(--border,#E8E6E0); vertical-align:top;">One vendor or one bill type, then expand</td></tr>
+<tr><td style="font-family:'Supreme',sans-serif; font-size:15px; line-height:1.55; color:var(--muted,#56524A); padding:12px 14px; border-bottom:1px solid var(--border,#E8E6E0); vertical-align:top;">Services</td><td style="font-family:'Supreme',sans-serif; font-size:15px; line-height:1.55; color:var(--muted,#56524A); padding:12px 14px; border-bottom:1px solid var(--border,#E8E6E0); vertical-align:top;">Vendor invoices and retainers retyped every month</td><td style="font-family:'Supreme',sans-serif; font-size:15px; line-height:1.55; color:var(--muted,#56524A); padding:12px 14px; border-bottom:1px solid var(--border,#E8E6E0); vertical-align:top;">Recurring vendor bills</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-family:'Supreme',sans-serif; font-size:16px; line-height:1.7; color:var(--muted,#56524A); margin:0 0 12px; max-width:720px; margin-top:18px;">Textile units in Surat see this most loudly — we wrote that up as <a href="/blog/ai-for-textile-industry-surat/" style="color:var(--eb,#5B3FD4); text-decoration:none;">five workflows that actually pay</a>.</p>
+  </section>
+  <section style="max-width:880px; margin:0 auto; padding:0 40px clamp(48px,6vh,72px);">
+    <h2 style="font-family:'Chubbo',serif; font-weight:700; font-size:clamp(21px,2.6vw,30px); line-height:1.14; letter-spacing:-0.02em; color:var(--fg,#191924); margin:0 0 12px;">One bill type, then the next</h2>
+    <p style="font-family:'Supreme',sans-serif; font-size:16px; line-height:1.7; color:var(--muted,#56524A); margin:0 0 12px; max-width:720px;">Pick one vendor or one inward series. Run samples with your accountant in the room. Write the rules. Draft + approve. Then expand. Ledgers stay on-prem — same rule as <a href="/blog/private-ai-for-indian-msmes/" style="color:var(--eb,#5B3FD4); text-decoration:none;">owning the model</a>.</p>
+  </section>
+  <section style="max-width:880px; margin:0 auto; padding:0 40px clamp(48px,6vh,72px);">
+    <div style="display:inline-flex; align-items:center; gap:11px; margin-bottom:20px;"><span style="width:24px; height:1px; background:#C9BCF0;"></span><span style="font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:var(--eb,#5B3FD4);">Questions owners ask</span></div>
+    <div style="display:flex; flex-direction:column; gap:14px;">
+      <div style="border:1px solid var(--border,#E8E6E0); border-radius:14px; padding:22px 24px;">
+        <h3 style="font-family:'Chubbo',serif; font-weight:700; font-size:18px; line-height:1.3; color:var(--fg,#191924); margin:0 0 8px;">Can it read Gujarati or Hindi stamps and bill text?</h3>
+        <p style="font-family:'Supreme',sans-serif; font-size:15px; line-height:1.65; color:var(--muted,#56524A); margin:0;">Yes. A large share of the bills we see from Gujarat traders and job-workers have Gujarati or Hindi stamps, item names and notes. Those stay in the draft for your accountant — they are not skipped just because they are not in English.</p>
       </div>
-      <div class="foot-props">
-        <div class="foot-tier">
-          <h5>TIER 1 · LAUNCH-CRITICAL</h5>
-          <ul>
-            <li><a href="https://dotsai.in" target="_blank" rel="noopener">ZeroOne India — Home</a></li>
-            <li><a href="https://ai.dotsai.in" target="_blank" rel="noopener">AI Studio — Custom Models</a></li>
-            <li><a href="https://assist.dotsai.in" target="_blank" rel="noopener">AI Assistant — 1:1 Partnership</a></li>
-            <li><a href="https://zeroonedotsai.consulting" target="_blank" rel="noopener">Consulting — Strategy &amp; Services</a></li>
-          </ul>
-        </div>
-        <div class="foot-tier">
-          <h5>TIER 2 · GROWTH</h5>
-          <ul>
-            <li><a href="https://dotsai.cloud" target="_blank" rel="noopener">Infinity Nexus — Platform</a></li>
-            <li><a href="https://meet.dotsai.in" target="_blank" rel="noopener">Life OS — Dashboard</a></li>
-            <li><a href="https://portfolio.dotsai.in" target="_blank" rel="noopener">Portfolio — All Services</a></li>
-            <li><a href="/blog/">Blog — AI for MSMEs</a></li>
-          </ul>
-        </div>
-        <div class="foot-tier">
-          <h5>TIER 3 · SCALE</h5>
-          <ul>
-            <li><a href="/about/">About — Meet Deshani</a></li>
-            <li><a href="/pricing/">Pricing — All 24 Services</a></li>
-            <li><a href="/case-studies/">Case Studies — Live Work</a></li>
-            <li><a href="https://wiki.dotsai.in" target="_blank" rel="noopener">Wiki — Knowledge Base</a></li>
-          </ul>
-        </div>
+      <div style="border:1px solid var(--border,#E8E6E0); border-radius:14px; padding:22px 24px;">
+        <h3 style="font-family:'Chubbo',serif; font-weight:700; font-size:18px; line-height:1.3; color:var(--fg,#191924); margin:0 0 8px;">What if the AI misreads a bill?</h3>
+        <p style="font-family:'Supreme',sans-serif; font-size:15px; line-height:1.65; color:var(--muted,#56524A); margin:0;">Misreads stay a draft. Nothing posts to Tally until your accountant approves. The point is to stop retyping, not to remove the person who knows when a GST rate looks wrong.</p>
+      </div>
+      <div style="border:1px solid var(--border,#E8E6E0); border-radius:14px; padding:22px 24px;">
+        <h3 style="font-family:'Chubbo',serif; font-weight:700; font-size:18px; line-height:1.3; color:var(--fg,#191924); margin:0 0 8px;">Do I need new hardware?</h3>
+        <p style="font-family:'Supreme',sans-serif; font-size:15px; line-height:1.65; color:var(--muted,#56524A); margin:0;">Usually no. Ordinary office machines are enough for bill reading and draft booking. The workflow is private by default — ledgers stay on-prem.</p>
+      </div>
+      <div style="border:1px solid var(--border,#E8E6E0); border-radius:14px; padding:22px 24px;">
+        <h3 style="font-family:'Chubbo',serif; font-weight:700; font-size:18px; line-height:1.3; color:var(--fg,#191924); margin:0 0 8px;">Is this only for textile units?</h3>
+        <p style="font-family:'Supreme',sans-serif; font-size:15px; line-height:1.65; color:var(--muted,#56524A); margin:0;">No. Textile is where we see a lot of job-work bills, but trading, manufacturing and services offices have the same pile: PDF bills, WhatsApp photos, challans that do not match, and a month-end backlog.</p>
       </div>
     </div>
-    <div class="foot-socials">
-      <span class="foot-socials-label">Follow</span>
-      <a class="foot-social" href="https://www.linkedin.com/in/meet-deshani-436575147/" target="_blank" rel="noopener" aria-label="LinkedIn">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn
-      </a>
-      <a class="foot-social" href="https://www.instagram.com/zeroonedotsai/" target="_blank" rel="noopener" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>Instagram
-      </a>
-      <a class="foot-social" href="https://github.com/zeroone-dots-ai" target="_blank" rel="noopener" aria-label="GitHub">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>GitHub
-      </a>
-      <a class="foot-social" href="https://www.youtube.com/@meetdeshani" target="_blank" rel="noopener" aria-label="YouTube">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube
-      </a>
-      <a class="foot-social" href="https://x.com/reflection11_11" target="_blank" rel="noopener" aria-label="X / Twitter">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>X
-      </a>
+  </section>
+  <section style="max-width:880px; margin:0 auto; padding:0 40px clamp(72px,9vh,110px);">
+    <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:22px; background:#191924; border-radius:24px; padding:clamp(28px,4vw,48px); position:relative; overflow:hidden;">
+      <div style="position:absolute; inset:0; background-image:radial-gradient(rgba(184,224,210,.5) 1px,transparent 1px); background-size:22px 22px; opacity:.08;"></div>
+      <div style="position:relative;"><h2 style="font-family:'Chubbo',serif; font-weight:700; font-size:clamp(24px,2.8vw,34px); line-height:1.12; color:#FDFCFA; margin:0 0 8px;">Want bills to stop eating the month?</h2><p style="font-family:'Supreme',sans-serif; font-size:15px; color:#A8A6B4; margin:0; max-width:440px;">We're in Udhna. Bring one messy bill type — we'll map the draft-and-approve flow, no obligation.</p></div>
+      <div style="position:relative; display:flex; flex-wrap:wrap; gap:10px;">
+        <a href="/contact/" style="display:inline-flex; align-items:center; gap:8px; font-family:'Satoshi',sans-serif; font-weight:700; font-size:15px; padding:15px 28px; border-radius:999px; background:#FDFCFA; color:#191924; text-decoration:none;">Book a meeting <span>→</span></a>
+        <a href="https://wa.me/918320065658" class="plausible-event-name=WhatsApp_Blog" style="display:inline-flex; align-items:center; gap:8px; font-family:'Satoshi',sans-serif; font-weight:700; font-size:15px; padding:15px 22px; border-radius:999px; background:transparent; color:#FDFCFA; border:1px solid rgba(253,252,250,.25); text-decoration:none;">WhatsApp</a>
+      </div>
     </div>
-    <nav class="foot-dives" aria-label="Deep dives — all pages">
-      <div class="foot-dives-head">
-        <span class="foot-dives-lab">DEEP DIVES</span>
-        <span class="foot-dives-tag">Our full work — <em>indexed for humans &amp; AI crawlers</em></span>
+  </section>
+  </article>
+</main>
+<!-- Shared shell footer (SSI-included by every inner page). Absolute paths only. -->
+<footer style="background-color:var(--footbg,#F4F2EC); color:var(--muted,#4A4842); border-top:1px solid var(--border,#E8E6E0); padding:56px 40px 0;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="ds-foot-grid" style="display:grid; grid-template-columns:1.6fr 1fr 1.2fr 1.1fr 1.2fr; gap:40px; padding-bottom:48px;">
+      <div>
+        <a href="/" aria-label="ZeroOne D·O·T·S AI — home" style="display:inline-flex; margin-bottom:18px; text-decoration:none;">
+          <span class="o1-logo o1-logo-md" aria-hidden="true">
+            <span class="dots"><span class="ld"></span><span></span><span></span><span></span><span class="lo"></span><span></span><span></span><span></span><span class="lt"></span></span>
+            <span class="word"><span class="l1">ZEROONE</span><span class="l2"><span class="cd">D</span><span class="sep"> · </span><span class="co">O</span><span class="sep"> · </span><span class="ct">T</span><span class="sep"> · </span><span class="cs">S</span><span class="ai">AI</span></span></span>
+          </span>
+        </a>
+        <p style="font-family:'Chubbo',serif; font-weight:700; font-size:20px; color:var(--fg,#191924); line-height:1.25; margin:0 0 6px;">Own Your AI. <span style="font-style:italic; color:var(--slogan,#2D1B4E);">Don't Rent It.</span></p>
+        <p style="font-family:'Supreme',sans-serif; font-size:13.5px; color:var(--faint,#918D82); margin:0 0 22px; max-width:300px;">Custom workflow solutions for Indian MSMEs — we design and automate business workflows in the tools you already use, powered by private AI you own.</p>
+        <a href="https://wa.me/918320065658" class="plausible-event-name=WhatsApp_Footer" style="display:inline-flex; align-items:center; gap:9px; padding:10px 18px; background-color:var(--fg,#191924); border:1px solid var(--fg,#191924); border-radius:999px; text-decoration:none; transition:opacity .25s, transform .25s;" style-hover="opacity:.85; transform:translateY(-2px);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#25D366"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2zm5.8 14.18c-.25.69-1.43 1.32-1.97 1.4-.5.07-1.15.1-1.85-.12-.43-.13-.98-.31-1.68-.62-2.96-1.28-4.9-4.26-5.05-4.46-.15-.2-1.2-1.6-1.2-3.05s.76-2.16 1.04-2.46c.27-.3.6-.37.8-.37l.57.01c.18.01.43-.07.67.51.25.6.85 2.06.92 2.21.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.6.17.3.77 1.27 1.65 2.06 1.14 1.01 2.1 1.33 2.4 1.48.3.15.47.12.64-.07.17-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.7.8 2 .95.3.15.5.22.57.35.07.12.07.72-.18 1.42z"/></svg>
+          <span style="font-family:'Satoshi',sans-serif; font-weight:600; font-size:13.5px; color:var(--bg,#FDFCFA);">Chat on WhatsApp</span>
+        </a>
       </div>
-      <div class="foot-dives-grid">
-        <div class="foot-dives-col">
-          <span class="foot-dives-col-lab">Services</span>
-          <ul>
-            <li><a href="/private-ai/">Private AI Deployment</a></li>
-            <li><a href="/ai-automation/">AI Automation</a></li>
-            <li><a href="/geo-ai/">GEO AI</a></li>
-            <li><a href="/web-ai-experiences/">AI Web Experiences</a></li>
-            <li><a href="/platform-engineering/">Platform Engineering</a></li>
-          </ul>
-        </div>
-        <div class="foot-dives-col">
-          <span class="foot-dives-col-lab">By region</span>
-          <ul>
-            <li><a href="/ai-agency-india/">AI Agency — India</a></li>
-            <li><a href="/ai-agency-gurugram/">AI Agency — Gurugram</a></li>
-            <li><a href="/regions/">All Regions — Overview</a></li>
-          </ul>
-        </div>
-        <div class="foot-dives-col">
-          <span class="foot-dives-col-lab">Brand &amp; studio</span>
-          <ul>
-            <li><a href="/case-studies/">Case studies</a></li>
-            <li><a href="/blog/">Blog — AI for MSMEs</a></li>
-            <li><a href="/insights/">Insights</a></li>
-            <li><a href="/team/">Team — Our People</a></li>
-            <li><a href="/sitemap/">Site Map</a></li>
-            <li><a href="/labs/">Labs — live tools</a></li>
-          </ul>
-        </div>
-        <div class="foot-dives-col">
-          <span class="foot-dives-col-lab">Ecosystem</span>
-          <ul>
-            <li><a href="https://dotsai.cloud" target="_blank" rel="noopener">Infinity Nexus — Platform</a></li>
-            <li><a href="https://zeroonedotsai.consulting" target="_blank" rel="noopener">Consulting — Strategy</a></li>
-            <li><a href="https://ai.dotsai.in" target="_blank" rel="noopener">AI Studio — Custom Models</a></li>
-            <li><a href="https://assist.dotsai.in" target="_blank" rel="noopener">AI Assistant — 1:1</a></li>
-          </ul>
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--faint,#918D82); margin-bottom:16px;">Contact</div>
+        <div style="display:flex; flex-direction:column; gap:13px; font-family:'JetBrains Mono',monospace; font-size:13px;">
+          <a href="mailto:meet@dotsai.in" style="color:var(--muted,#4A4842); text-decoration:none;" style-hover="color:#C8B6FF;">meet@dotsai.in</a>
+          <a href="tel:+918320065658" style="color:var(--muted,#4A4842); text-decoration:none;" style-hover="color:#C8B6FF;">+91 83200 65658</a>
+          <a href="https://dotsai.in" style="color:var(--muted,#4A4842); text-decoration:none;" style-hover="color:#C8B6FF;">dotsai.in</a>
         </div>
       </div>
-    </nav>
-    <div class="foot-bot">
-      <span>&copy; 2026 ZEROONE D·O·T·S AI &nbsp;·&nbsp; AHMEDABAD · INDIA &nbsp;·&nbsp; DELIVERING GLOBALLY</span>
-      <span>
-        <a href="/contact/">Contact</a> &nbsp;·&nbsp;
-        <a href="https://cal.com/meetdeshani" target="_blank" rel="noopener">Book</a> &nbsp;·&nbsp;
-        <a href="https://wa.me/918320065658" target="_blank" rel="noopener">WhatsApp</a> &nbsp;·&nbsp;
-        <a href="mailto:meet@dotsai.in">Email</a>
-      </span>
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--faint,#918D82); margin-bottom:16px;">Explore</div>
+        <div style="display:flex; flex-direction:column; gap:13px;">
+          <a href="/services/" style="font-size:14px; color:var(--muted,#4A4842); text-decoration:none;" style-hover="color:#C8B6FF;">Workflow Automation Services</a>
+          <a href="/products/" style="font-size:14px; color:var(--muted,#4A4842); text-decoration:none;" style-hover="color:#C8B6FF;">Ready-Made MSME Products</a>
+          <a href="/models/" style="font-size:14px; color:var(--muted,#4A4842); text-decoration:none;" style-hover="color:#C8B6FF;">Private AI Models</a>
+          <a href="/case-studies/" style="font-size:14px; color:var(--muted,#4A4842); text-decoration:none;" style-hover="color:#C8B6FF;">MSME Case Studies</a>
+          <a href="/faq/" style="font-size:14px; color:var(--muted,#4A4842); text-decoration:none;" style-hover="color:#C8B6FF;">FAQ</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--faint,#918D82); margin-bottom:16px;">Ecosystem</div>
+        <div style="display:flex; flex-direction:column; gap:13px;">
+          <a href="https://dotsai.cloud" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:11px; font-size:14px; color:var(--muted,#4A4842); text-decoration:none;" style-hover="color:#C8B6FF;"><span style="width:7px; height:7px; border-radius:50%; background:#C8B6FF; flex:none;"></span>Private AI Platform</a>
+          <a href="https://zeroonedotsai.consulting" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:11px; font-size:14px; color:var(--muted,#4A4842); text-decoration:none;" style-hover="color:#C8B6FF;"><span style="width:7px; height:7px; border-radius:50%; background:#B8E0D2; flex:none;"></span>Consult your Business</a>
+          <a href="https://meet.dotsai.in" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:11px; font-size:14px; color:var(--muted,#4A4842); text-decoration:none;" style-hover="color:#C8B6FF;"><span style="width:7px; height:7px; border-radius:50%; background:#FFCDB2; flex:none;"></span>Who is Meet Deshani?</a>
+          <a href="/blog/" style="display:inline-flex; align-items:center; gap:11px; font-size:14px; color:var(--muted,#4A4842); text-decoration:none;" style-hover="color:#C8B6FF;"><span style="width:7px; height:7px; border-radius:50%; background:#A2D2FF; flex:none;"></span>Blogs by ZeroOne DOTS AI</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--faint,#918D82); margin-bottom:16px;">Entity</div>
+        <p style="font-family:'Supreme',sans-serif; font-size:13px; line-height:1.75; color:var(--faint,#918D82); margin:0;">Zeroone AI Ventures Pvt Ltd<br>CIN U58201GJ2026PTC178606</p>
+        <p style="font-family:'Supreme',sans-serif; font-size:13px; line-height:1.7; color:var(--faint,#918D82); margin:12px 0 0;"><span style="color:var(--fg,#191924); font-weight:600;">HQ — Surat, Gujarat</span><br>A-36, 3rd Floor, Udhna–Navsari Main Road, nr. Swami Narayan Temple, Citi Industrial Estate, Udhna Udhyog Nagar, Surat 394210</p>
+        <a href="https://maps.app.goo.gl/eynsiFdbQnN8J2hq7" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:6px; margin-top:12px; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--eb,#5B3FD4); text-decoration:none;">Get directions →</a>
+      </div>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; align-items:center; gap:14px 36px; padding:24px 0; border-top:1px solid var(--border,#E8E6E0);">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--faint,#918D82);">Follow</div>
+      <div style="display:flex; flex-wrap:wrap; align-items:center; gap:14px 26px;">
+        <a href="https://www.linkedin.com/in/meet-deshani-436575147/" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:9px; font-size:14px; color:var(--muted,#4A4842); text-decoration:none;" style-hover="color:#C8B6FF;"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5.01A2.5 2.5 0 014.98 3.5zM3 8.98h4V21H3V8.98zM9 8.98h3.83v1.64h.05c.53-1 1.84-2.06 3.79-2.06C20.6 8.56 22 10.5 22 14.04V21h-4v-6.2c0-1.48-.03-3.38-2.06-3.38-2.06 0-2.38 1.61-2.38 3.27V21H9V8.98z"/></svg>LinkedIn</a>
+        <a href="https://www.instagram.com/zeroonedotsai/" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:9px; font-size:14px; color:var(--muted,#4A4842); text-decoration:none;" style-hover="color:#C8B6FF;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>Instagram</a>
+        <a href="https://github.com/zeroone-dots-ai" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:9px; font-size:14px; color:var(--muted,#4A4842); text-decoration:none;" style-hover="color:#C8B6FF;"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.05-.02-2.06-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.33-1.76-1.33-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016.01 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.62-5.48 5.92.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.29 0 .32.21.7.83.58A12 12 0 0024 12.5C24 5.87 18.63.5 12 .5z"/></svg>GitHub</a>
+        <a href="https://www.youtube.com/@meetdeshani" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:9px; font-size:14px; color:var(--muted,#4A4842); text-decoration:none;" style-hover="color:#C8B6FF;"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.11-2.12C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.39.53A3 3 0 00.5 6.2 31.4 31.4 0 000 12a31.4 31.4 0 00.5 5.8 3 3 0 002.11 2.12c1.89.53 9.39.53 9.39.53s7.5 0 9.39-.53a3 3 0 002.11-2.12A31.4 31.4 0 0024 12a31.4 31.4 0 00-.5-5.8zM9.6 15.6V8.4l6.25 3.6-6.25 3.6z"/></svg>YouTube</a>
+        <a href="https://x.com/reflection11_11" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:9px; font-size:14px; color:var(--muted,#4A4842); text-decoration:none;" style-hover="color:#C8B6FF;"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>X (Twitter)</a>
+        <a href="https://www.reddit.com/user/owln1nja/" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:9px; font-size:14px; color:var(--muted,#4A4842); text-decoration:none;" style-hover="color:#C8B6FF;"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 11.78c0-1.18-.96-2.13-2.14-2.13-.57 0-1.09.22-1.47.59-1.45-1-3.43-1.65-5.63-1.73l1.15-3.62 3.13.74a1.52 1.52 0 101.5-1.66 1.52 1.52 0 00-1.36.85l-3.5-.83a.38.38 0 00-.46.26l-1.28 4.03c-2.27.05-4.31.7-5.8 1.73a2.12 2.12 0 00-1.47-.59A2.13 2.13 0 002 11.78c0 .82.47 1.53 1.15 1.88-.03.2-.05.4-.05.61 0 3.04 3.54 5.5 7.9 5.5s7.9-2.46 7.9-5.5c0-.2-.02-.4-.05-.6.69-.35 1.2-1.07 1.2-1.89zM7.4 13.3a1.52 1.52 0 113.05 0 1.52 1.52 0 01-3.05 0zm8.42 3.97c-1.04 1.04-3.03 1.12-3.82 1.12-.79 0-2.78-.08-3.82-1.12a.41.41 0 01.58-.58c.66.66 2.06.89 3.24.89 1.18 0 2.58-.23 3.24-.9a.41.41 0 11.58.59zm-.27-2.45a1.52 1.52 0 110-3.05 1.52 1.52 0 010 3.05z"/></svg>Reddit</a>
+        <a href="https://www.threads.com/@meet_ninja_here" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:9px; font-size:14px; color:var(--muted,#4A4842); text-decoration:none;" style-hover="color:#C8B6FF;"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.3 11.2c-.1-.05-.2-.09-.3-.13-.18-3.27-1.97-5.15-4.97-5.17h-.04c-1.8 0-3.29.77-4.21 2.16l1.65 1.13c.69-1.04 1.76-1.26 2.56-1.26h.03c1 .01 1.76.3 2.25.86.36.42.6.99.72 1.72-.9-.15-1.86-.2-2.9-.13-2.9.17-4.77 1.86-4.64 4.2.06 1.2.66 2.22 1.68 2.88.86.56 1.97.83 3.13.77 1.53-.08 2.73-.66 3.57-1.72.63-.8 1.04-1.85 1.21-3.16.72.43 1.25 1 1.55 1.68.5 1.16.53 3.07-1.02 4.62-1.36 1.36-3 1.95-5.48 1.96-2.74-.02-4.82-.9-6.17-2.6C2.4 17.06 1.76 15.05 1.74 12.5c.02-2.55.66-4.56 1.9-6.04C4.99 4.76 7.06 3.88 9.8 3.86c2.76.02 4.86.9 6.25 2.62.68.84 1.2 1.9 1.53 3.13l1.97-.53c-.4-1.5-1.04-2.81-1.92-3.9C15.85 3.04 13.22 1.9 9.81 1.88h-.02c-3.4.02-6 1.17-7.73 3.4C.5 7.26-.27 9.66-.3 12.49v.02c.03 2.83.8 5.23 2.36 7.21 1.73 2.23 4.33 3.38 7.73 3.4h.02c3.02-.02 5.15-.81 6.9-2.56 2.3-2.29 2.23-5.17 1.47-6.93-.54-1.27-1.57-2.3-2.98-2.99z"/></svg>Threads</a>
+      </div>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; gap:18px 28px; align-items:center; justify-content:space-between; padding:24px 0 36px; border-top:1px solid var(--border,#E8E6E0);">
+      <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint,#918D82);">© 2026 Zeroone AI Ventures Pvt Ltd · All Rights Reserved</span>
+      <div style="display:flex; align-items:center; gap:24px; font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; flex-wrap:wrap;">
+        <a href="/privacy/" style="color:var(--muted,#4A4842); text-decoration:none;" style-hover="color:#C8B6FF;">Privacy Policy</a>
+        <a href="/careers/" style="color:var(--muted,#4A4842); text-decoration:none;" style-hover="color:#C8B6FF;">Careers</a>
+        <a href="/about/" style="color:var(--muted,#4A4842); text-decoration:none;" style-hover="color:#C8B6FF;">About</a>
+        <a href="/team/" style="color:var(--muted,#4A4842); text-decoration:none;" style-hover="color:#C8B6FF;">Team</a>
+        <a href="/terms/" style="color:var(--muted,#4A4842); text-decoration:none;" style-hover="color:#C8B6FF;">Terms &amp; Conditions</a>
+      </div>
     </div>
   </div>
 </footer>
-<script>
-(function(){
-  var nav  = document.getElementById('nav');
-  var pill = nav && nav.querySelector('.nav-pill');
-  var cta  = nav && nav.querySelector('.nav-cta');
-  if (!nav) return;
-  function update(){
-    var scrolled = window.scrollY > 40;
-    nav.classList.toggle('scrolled', scrolled);
-    var y = 80;
-    var el = document.elementFromPoint(window.innerWidth / 2, y);
-    var light = false;
-    if (el) {
-      var bg = getComputedStyle(el).backgroundColor;
-      var m = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
-      if (m) {
-        var r=+m[1],g=+m[2],b=+m[3];
-        light = (r*299+g*587+b*114)/1000 > 160;
-      }
-    }
-    nav.classList.toggle('on-light', light);
-    if (pill) pill.classList.toggle('on-light', light);
-    if (cta)  cta.classList.toggle('on-light',  light);
-  }
-  window.addEventListener('scroll', update, {passive:true});
-  window.addEventListener('load', update);
-  update();
-})();
-</script>
-<script src="/assets/js/i18n.js" defer></script>
+
+</div>
+<script src="/assets/js/i18n-dict.js?v=dev" defer></script>
+<script src="/assets/js/i18n.js?v=dev" defer></script>
+<script src="/assets/js/shell.js?v=dev" defer></script>
+<!-- Privacy-friendly analytics (Plausible, no cookies). Same account/property
+     the previous dotsai.in used — reusing it keeps continuity of history.
+     Custom events are fired via the plausible-event-name=<Name> class
+     convention on key CTAs, plus one explicit call for Cal.com bookings
+     (see contact/index.html). -->
+<script async src="https://plausible.io/js/pa-1J16YIsIPX_GTbYxxXRUP.js"></script>
+
+<!-- First-party visit tracker → /api/hit (server stores funnels in Postgres and
+     nudges Telegram). Secrets live server-side; this script carries none. -->
+<script defer src="/assets/js/track.js?v=dev"></script>
+
 </body>
 </html>

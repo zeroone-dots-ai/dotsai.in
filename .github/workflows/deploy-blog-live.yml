@@ -1,0 +1,76 @@
+# Surgical production deploy for MSME blog posts only.
+# Does NOT rsync the rest of public/ — this GitHub repo is months behind live
+# dotsai.in. A full deploy.yml rsync --delete would wipe the current site.
+name: Deploy blog posts live
+
+on:
+  push:
+    branches: [content/seo-blog-posts-msme]
+    paths:
+      - 'public/blog/**'
+      - 'scripts/patch-live-blog-seo.py'
+      - '.github/workflows/deploy-blog-live.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-blog-live
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      LIVE_ROOT: /opt/services/nginx/html/dotsai.in
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Rsync three posts + blog index (no --delete)
+        run: |
+          DEST="${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:${LIVE_ROOT}"
+          RSH="ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no"
+          rsync -avz -e "$RSH" public/blog/private-ai-for-indian-msmes/ "$DEST/blog/private-ai-for-indian-msmes/"
+          rsync -avz -e "$RSH" public/blog/tally-automation-ai-msme/ "$DEST/blog/tally-automation-ai-msme/"
+          rsync -avz -e "$RSH" public/blog/whatsapp-order-automation-msme/ "$DEST/blog/whatsapp-order-automation-msme/"
+          rsync -avz -e "$RSH" public/blog/index.html "$DEST/blog/index.html"
+
+      - name: Patch live sitemap.xml and llms.txt
+        run: |
+          scp -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no \
+            scripts/patch-live-blog-seo.py \
+            ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/tmp/patch-live-blog-seo.py
+          ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no \
+            ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} \
+            python3 /tmp/patch-live-blog-seo.py
+
+      - name: Verify live URLs
+        run: |
+          sleep 2
+          fail=0
+          check() {
+            url="$1"; needle="$2"
+            body=$(curl -sL "$url")
+            code=$(curl -sL -o /dev/null -w "%{http_code}" "$url")
+            echo "$code $url"
+            if [ "$code" != "200" ] || ! echo "$body" | grep -q "$needle"; then
+              echo "FAIL expected 200 and '$needle'"
+              fail=1
+            fi
+          }
+          check "https://dotsai.in/blog/private-ai-for-indian-msmes/" "Own It, Don't Rent It"
+          check "https://dotsai.in/blog/tally-automation-ai-msme/" "Bills In, Vouchers Booked"
+          check "https://dotsai.in/blog/whatsapp-order-automation-msme/" "From Chats to a Clean Register"
+          check "https://dotsai.in/blog/" "private-ai-for-indian-msmes"
+          check "https://dotsai.in/sitemap.xml" "tally-automation-ai-msme"
+          check "https://dotsai.in/" "AI Automation Company"
+          exit $fail
+
+      - name: Cleanup SSH key
+        if: always()
+        run: rm -f ~/.ssh/id_ed25519
