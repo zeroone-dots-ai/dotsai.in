@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Patch live sitemap.xml + llms.txt with the three MSME blog URLs. Idempotent."""
+import sys
 from pathlib import Path
 
-ROOT = Path("/opt/services/nginx/html/dotsai.in")
+ROOT = Path(sys.argv[1] if len(sys.argv) > 1 else "/opt/services/nginx/html/dotsai.in")
 URLS = [
     "https://dotsai.in/blog/private-ai-for-indian-msmes/",
     "https://dotsai.in/blog/tally-automation-ai-msme/",
