@@ -9,6 +9,7 @@ on:
     paths:
       - 'public/blog/**'
       - 'scripts/patch-live-blog-seo.py'
+      - 'scripts/install-msme-blog-on-vps.sh'
       - '.github/workflows/deploy-blog-live.yml'
   workflow_dispatch:
 
@@ -19,8 +20,6 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      LIVE_ROOT: /opt/services/nginx/html/dotsai.in
     steps:
       - uses: actions/checkout@v4
 
@@ -31,90 +30,37 @@ jobs:
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts 2>/dev/null
 
-      - name: Discover live html root
-        id: root
+      - name: Upload payload and install on VPS
         run: |
-          ROOT=$(ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no \
-            ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} 'bash -s' <<'EOS'
-          set -e
-          echo "=== candidates ===" >&2
-          ls -la /opt/services/nginx/html 2>&1 | head -40 >&2 || true
-          docker ps --format '{{.Names}} {{.Image}} {{.Ports}}' 2>&1 | head -20 >&2 || true
-          for d in \
-            /opt/services/nginx/html/dotsai.in \
-            /usr/share/nginx/html/dotsai.in \
-            /var/www/dotsai.in \
-            /opt/services/nginx/html; do
-            echo "check $d" >&2
-            if [ -d "$d/blog/ai-for-textile-industry-surat" ] || [ -f "$d/blog/index.html" ]; then
-              echo "$d"
-              exit 0
-            fi
-          done
-          FOUND=$(find /opt /usr/share/nginx /var/www /home -type d -name 'ai-for-textile-industry-surat' 2>/dev/null | head -1)
-          if [ -n "$FOUND" ]; then
-            echo "found via find: $FOUND" >&2
-            dirname "$(dirname "$FOUND")"
-            exit 0
-          fi
-          if command -v docker >/dev/null; then
-            for c in nginx dotsai-nginx web; do
-              if docker exec "$c" test -d /usr/share/nginx/html/dotsai.in/blog 2>/dev/null; then
-                echo "docker:$c:/usr/share/nginx/html/dotsai.in" >&2
-                echo "DOCKER:$c:/usr/share/nginx/html/dotsai.in"
-                exit 0
-              fi
-            done
-          fi
-          echo "could not locate live blog directory" >&2
-          exit 1
-          EOS
-          )
-          echo "LIVE_ROOT=$ROOT"
-          echo "root=$ROOT" >> "$GITHUB_OUTPUT"
-
-      - name: Rsync three posts + blog index (no --delete)
-        run: |
-          LIVE_ROOT='${{ steps.root.outputs.root }}'
           RSH="ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no"
           HOST="${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}"
-          if [[ "$LIVE_ROOT" == DOCKER:* ]]; then
-            echo "Docker-only document root not yet supported: $LIVE_ROOT"
-            exit 1
-          fi
-          $RSH "$HOST" "mkdir -p '$LIVE_ROOT/blog/private-ai-for-indian-msmes' '$LIVE_ROOT/blog/tally-automation-ai-msme' '$LIVE_ROOT/blog/whatsapp-order-automation-msme'"
-          rsync -avz -e "$RSH" public/blog/private-ai-for-indian-msmes/ "$HOST:$LIVE_ROOT/blog/private-ai-for-indian-msmes/"
-          rsync -avz -e "$RSH" public/blog/tally-automation-ai-msme/ "$HOST:$LIVE_ROOT/blog/tally-automation-ai-msme/"
-          rsync -avz -e "$RSH" public/blog/whatsapp-order-automation-msme/ "$HOST:$LIVE_ROOT/blog/whatsapp-order-automation-msme/"
-          rsync -avz -e "$RSH" public/blog/index.html "$HOST:$LIVE_ROOT/blog/index.html"
-
-      - name: Patch live sitemap.xml and llms.txt
-        run: |
-          LIVE_ROOT='${{ steps.root.outputs.root }}'
+          $RSH "$HOST" "rm -rf /tmp/msme-blog-payload && mkdir -p /tmp/msme-blog-payload"
+          rsync -avz -e "$RSH" public/blog/private-ai-for-indian-msmes "$HOST:/tmp/msme-blog-payload/"
+          rsync -avz -e "$RSH" public/blog/tally-automation-ai-msme "$HOST:/tmp/msme-blog-payload/"
+          rsync -avz -e "$RSH" public/blog/whatsapp-order-automation-msme "$HOST:/tmp/msme-blog-payload/"
+          rsync -avz -e "$RSH" public/blog/index.html "$HOST:/tmp/msme-blog-payload/index.html"
           scp -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no \
-            scripts/patch-live-blog-seo.py \
-            ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/tmp/patch-live-blog-seo.py
-          ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no \
-            ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} \
-            python3 /tmp/patch-live-blog-seo.py "$LIVE_ROOT"
+            scripts/patch-live-blog-seo.py scripts/install-msme-blog-on-vps.sh \
+            "$HOST:/tmp/"
+          $RSH "$HOST" "chmod +x /tmp/install-msme-blog-on-vps.sh && bash /tmp/install-msme-blog-on-vps.sh /tmp/msme-blog-payload"
 
       - name: Verify live URLs
         run: |
-          sleep 2
+          sleep 3
           fail=0
           check() {
             url="$1"; needle="$2"
             body=$(curl -sL "$url")
             code=$(curl -sL -o /dev/null -w "%{http_code}" "$url")
             echo "$code $url"
-            if [ "$code" != "200" ] || ! echo "$body" | grep -q "$needle"; then
+            if [ "$code" != "200" ] || ! echo "$body" | grep -F -q "$needle"; then
               echo "FAIL expected 200 and '$needle'"
               fail=1
             fi
           }
-          check "https://dotsai.in/blog/private-ai-for-indian-msmes/" "Own It, Don't Rent It"
-          check "https://dotsai.in/blog/tally-automation-ai-msme/" "Bills In, Vouchers Booked"
-          check "https://dotsai.in/blog/whatsapp-order-automation-msme/" "From Chats to a Clean Register"
+          check "https://dotsai.in/blog/private-ai-for-indian-msmes/" "own it, don't rent it"
+          check "https://dotsai.in/blog/tally-automation-ai-msme/" "bills in, vouchers booked"
+          check "https://dotsai.in/blog/whatsapp-order-automation-msme/" "from chats to a clean register"
           check "https://dotsai.in/blog/" "private-ai-for-indian-msmes"
           check "https://dotsai.in/sitemap.xml" "tally-automation-ai-msme"
           check "https://dotsai.in/" "AI Automation Company"
